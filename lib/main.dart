@@ -1,3 +1,4 @@
+import 'package:fee_minimizer/util/route.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,18 +8,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Fee Minimizer',
+      routerConfig: AppRouter.router,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello, World!'),
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
+        useMaterial3: true,
       ),
     );
   }
