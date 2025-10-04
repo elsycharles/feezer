@@ -117,7 +117,7 @@ class _State extends State<NewProviderScreen> {
               decoration: BoxDecoration(
                 border: Border.all(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
                 borderRadius: BorderRadius.circular(16),
-                color: ThemeUtil.backgroundLight,
+                color: ThemeUtil.surfaceLight,
               ),
               child: Row(
                 children: [
@@ -180,7 +180,7 @@ class _State extends State<NewProviderScreen> {
               focusedBorder: _inputBorder(focused: true),
               errorBorder: _inputBorder(error: true),
               filled: true,
-              fillColor: ThemeUtil.backgroundLight,
+              fillColor: ThemeUtil.surfaceLight,
             ),
             maxLines: lines,
             minLines: lines > 1 ? 2 : 1,
