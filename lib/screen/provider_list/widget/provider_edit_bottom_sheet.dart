@@ -5,6 +5,7 @@ import '../../../styles/global.dart';
 import '../../../util/icon_util.dart';
 import '../../../util/theme_util.dart';
 import '../../../widget/bottom_sheet.dart';
+import '../../../widget/icon_picker.dart';
 import '../../../widget/primary_button.dart';
 
 /// Clean provider editor
@@ -76,7 +77,7 @@ class _State extends State<ProviderEditBottomSheet> {
           prefixIcon: Icon(icon, color: ThemeUtil.primaryColor),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           filled: true,
-          fillColor: ThemeUtil.backgroundLight,
+          fillColor: ThemeUtil.surfaceLight,
         ),
         validator: (v) => v?.trim().isEmpty == true ? 'Required' : null,
       );
@@ -88,7 +89,7 @@ class _State extends State<ProviderEditBottomSheet> {
           decoration: BoxDecoration(
             border: Border.all(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
             borderRadius: BorderRadius.circular(12),
-            color: ThemeUtil.backgroundLight,
+            color: ThemeUtil.surfaceLight,
           ),
           child: Row(
             children: [
@@ -115,63 +116,11 @@ class _State extends State<ProviderEditBottomSheet> {
         ),
       );
 
-  void _showIconPicker() {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          constraints: const BoxConstraints(maxHeight: 400),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Select Icon',
-                style: ThemeUtil.titleSmall,
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: IconUtil.availableIcons.length,
-                  itemBuilder: (_, i) {
-                    final iconName = IconUtil.availableIcons[i];
-                    final isSelected = iconName == _selectedIcon;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() => _selectedIcon = iconName);
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? ThemeUtil.primaryColor.withValues(alpha: 0.1)
-                              : ThemeUtil.backgroundLight,
-                          borderRadius: BorderRadius.circular(8),
-                          border: isSelected
-                              ? Border.all(color: ThemeUtil.primaryColor, width: 2)
-                              : null,
-                        ),
-                        child: Icon(
-                          IconUtil.getIcon(iconName),
-                          color: isSelected ? ThemeUtil.primaryColor : ThemeUtil.textSecondary,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  void _showIconPicker() => IconPicker.show(
+        context: context,
+        selected: _selectedIcon,
+        onSelected: (icon) => setState(() => _selectedIcon = icon),
+      );
 
   void _save() {
     if (_formKey.currentState!.validate()) {

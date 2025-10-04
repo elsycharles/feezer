@@ -5,6 +5,7 @@ import '../../styles/global.dart';
 import '../../util/icon_util.dart';
 import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
+import '../../widget/icon_picker.dart';
 import '../../widget/primary_button.dart';
 
 /// Clean screen for creating new providers
@@ -269,61 +270,9 @@ class _State extends State<NewProviderScreen> {
     }
   }
 
-  void _showIconPicker() {
-    showDialog(
-      context: context,
-      builder: (_) => Dialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          constraints: const BoxConstraints(maxHeight: 400),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Select Icon',
-                style: ThemeUtil.titleSmall,
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemCount: IconUtil.availableIcons.length,
-                  itemBuilder: (_, i) {
-                    final iconName = IconUtil.availableIcons[i];
-                    final isSelected = iconName == _selectedIcon;
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() => _selectedIcon = iconName);
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? ThemeUtil.primaryColor.withValues(alpha: 0.1)
-                              : ThemeUtil.backgroundLight,
-                          borderRadius: BorderRadius.circular(8),
-                          border: isSelected
-                              ? Border.all(color: ThemeUtil.primaryColor, width: 2)
-                              : null,
-                        ),
-                        child: Icon(
-                          IconUtil.getIcon(iconName),
-                          color: isSelected ? ThemeUtil.primaryColor : ThemeUtil.textSecondary,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  void _showIconPicker() => IconPicker.show(
+        context: context,
+        selected: _selectedIcon,
+        onSelected: (icon) => setState(() => _selectedIcon = icon),
+      );
 }
