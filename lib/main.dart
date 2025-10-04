@@ -1,4 +1,6 @@
-import 'package:fee_minimizer/util/route.dart';
+import 'package:fee_minimizer/util/constante_util.dart';
+import 'package:fee_minimizer/util/route_util.dart';
+import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,12 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Fee Minimizer',
+      title: ConstanteUtil.appName,
       routerConfig: AppRouter.router,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
-        useMaterial3: true,
-      ),
+      theme: ThemeUtil.lightTheme,
+      darkTheme: ThemeUtil.darkTheme,
+      themeMode: ThemeMode.system,
     );
   }
 }

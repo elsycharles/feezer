@@ -1,16 +1,17 @@
-import 'package:fee_minimizer/screen/home/home.dart';
+import 'package:fee_minimizer/screen/home/home_screen.dart';
+import 'package:fee_minimizer/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-class AppRouter {
 
-  static const String homeRoute = '/';
+class AppRouter {
+  static const String splashRoute = '/';
+  static const String homeRoute = '/home';
 
   static final GoRouter router = GoRouter(
-    initialLocation: homeRoute,
+    initialLocation: splashRoute,
     debugLogDiagnostics: true,
-
     errorBuilder: (context, state) => Scaffold(
-      appBar: AppBar(title: const Text('Erreur')),
+      appBar: AppBar(title: const Text('Error')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,8 +28,12 @@ class AppRouter {
         ),
       ),
     ),
-
     routes: [
+      GoRoute(
+        path: splashRoute,
+        name: 'splash',
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         path: homeRoute,
         name: 'home',

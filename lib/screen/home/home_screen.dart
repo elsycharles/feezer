@@ -7,17 +7,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Screen'),
-      ),
+      appBar: AppBar(title: const Text('Home Screen')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Welcome to the Home Screen!'),
+            const Text('Welcome to the Home Screen!'),
             ElevatedButton(
               onPressed: () => context.go('/providers'),
-              child: Text('Go to Providers'),
+              child: const Text('Go to Providers'),
             ),
           ],
         ),
