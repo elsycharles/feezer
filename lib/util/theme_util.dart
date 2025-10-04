@@ -34,6 +34,76 @@ class ThemeUtil {
   static const Color onboardingIllustrationBg = Color(0xFFFFFFFF);
   static const double onboardingIllustrationBgOpacity = 0.1;
 
+  // Text Styles
+  static const TextStyle titleLarge = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    color: textPrimary,
+  );
+
+  static const TextStyle titleMedium = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: textPrimary,
+  );
+
+  static const TextStyle titleSmall = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+  );
+
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+  );
+
+  static const TextStyle bodyMedium = TextStyle(
+    fontSize: 16,
+    color: textPrimary,
+  );
+
+  static const TextStyle bodySmall = TextStyle(
+    fontSize: 14,
+    color: textSecondary,
+  );
+
+  static const TextStyle labelLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: textLight,
+  );
+
+  static const TextStyle labelMedium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+  );
+
+  static const TextStyle labelSmall = TextStyle(
+    fontSize: 12,
+    color: textSecondary,
+  );
+
+  static const TextStyle displayLarge = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.bold,
+    color: textLight,
+  );
+
+  static const TextStyle displayMedium = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    color: textLight,
+  );
+
+  static const TextStyle captionLight = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+    color: textLight,
+  );
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,

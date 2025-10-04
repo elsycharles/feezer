@@ -26,17 +26,14 @@ class PrimaryButton extends StatelessWidget {
           backgroundColor: ThemeUtil.primaryColor,
           foregroundColor: ThemeUtil.textLight,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(12),
           ),
           padding: padding,
           elevation: 0,
         ),
         child: Text(
           text,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: ThemeUtil.labelLarge,
         ),
       ),
     );

@@ -48,7 +48,7 @@ class OnboardingBottomSection extends StatelessWidget {
                 elevation: 0,
                 splashFactory: NoSplash.splashFactory,
                 shape: RoundedRectangleBorder(
-                  borderRadius: Global.borderXl,
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ).copyWith(
                 overlayColor: WidgetStateProperty.all(Colors.transparent),

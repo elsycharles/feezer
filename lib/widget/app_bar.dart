@@ -26,11 +26,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: ThemeUtil.textPrimary,
-        ),
+        style: ThemeUtil.titleSmall,
       ),
       actions: actions,
       leading: leading,

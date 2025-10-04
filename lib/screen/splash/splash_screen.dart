@@ -84,12 +84,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   children: [
                     Text(
                       ConstanteUtil.appName.toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 2.0,
-                      ),
+                      style: ThemeUtil.displayLarge,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 40),
@@ -115,7 +110,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                   width: 8,
                                   height: 8,
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: ThemeUtil.textLight,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -135,11 +130,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               padding: const EdgeInsets.all(32.0),
               child: Text(
                 ConstanteUtil.appTagline,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
+                style: ThemeUtil.captionLight,
                 textAlign: TextAlign.center,
               ),
             ),

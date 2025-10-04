@@ -28,16 +28,10 @@ class SearchField extends StatelessWidget {
       child: TextField(
         controller: controller,
         onChanged: onChanged,
-        style: TextStyle(
-          color: ThemeUtil.textPrimary,
-          fontSize: 16,
-        ),
+        style: ThemeUtil.bodyMedium,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: TextStyle(
-            color: ThemeUtil.textSecondary,
-            fontSize: 16,
-          ),
+          hintStyle: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
           prefixIcon: Icon(
             Icons.search,
             color: ThemeUtil.textSecondary,

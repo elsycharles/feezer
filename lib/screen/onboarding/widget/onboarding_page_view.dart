@@ -41,7 +41,7 @@ class OnboardingPageView extends StatelessWidget {
                     height: 280,
                     decoration: BoxDecoration(
                       borderRadius: Global.borderSm,
-                      color: Colors.grey.shade100,
+                      color: ThemeUtil.backgroundLight,
                     ),
                     child: ClipRRect(
                       borderRadius: Global.borderSm,
