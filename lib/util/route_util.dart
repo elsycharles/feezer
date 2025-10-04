@@ -1,4 +1,4 @@
-import 'package:fee_minimizer/screen/home/home_screen.dart';
+import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
 import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
 import 'package:fee_minimizer/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +7,10 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   static const String splashRoute = '/';
   static const String onboardingRoute = '/onboarding';
-  static const String homeRoute = '/home';
+  static const String providersRoute = '/providers';
 
   static final GoRouter router = GoRouter(
-    initialLocation: splashRoute,
+  initialLocation: providersRoute,
     debugLogDiagnostics: true,
     errorBuilder: (context, state) => Scaffold(
       appBar: AppBar(title: const Text('Error')),
@@ -23,8 +23,8 @@ class AppRouter {
             Text('Screen ${state.uri.toString()} not found'),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => context.go(homeRoute),
-              child: const Text('Back to home'),
+              onPressed: () => context.go(providersRoute),
+              child: const Text('Back to providers'),
             ),
           ],
         ),
@@ -42,9 +42,9 @@ class AppRouter {
         builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
-        path: homeRoute,
-        name: 'home',
-        builder: (context, state) => const HomeScreen(),
+        path: providersRoute,
+        name: 'providers',
+        builder: (context, state) => const ProviderListScreen(),
       ),
     ],
   );

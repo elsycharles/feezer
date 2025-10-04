@@ -54,9 +54,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     await NavigationUtil.safeAsyncNavigate(
       context: context,
       isMounted: () => mounted,
-      getRoute: () async {
+        getRoute: () async {
         final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
-        return isFirstLaunch ? AppRouter.onboardingRoute : AppRouter.homeRoute;
+        return isFirstLaunch ? AppRouter.onboardingRoute : AppRouter.providersRoute;
       },
     );
   }

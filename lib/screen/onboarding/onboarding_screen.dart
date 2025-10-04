@@ -42,10 +42,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     await NavigationUtil.safeAsyncNavigate(
       context: context,
       isMounted: () => mounted,
-      getRoute: () async {
+        getRoute: () async {
         // Mark that onboarding is completed
         await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.homeRoute;
+          return AppRouter.providersRoute;
       },
     );
   }
