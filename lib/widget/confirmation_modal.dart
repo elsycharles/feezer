@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../util/theme_util.dart';
 
-/// Reusable confirmation modal for delete and other actions
+/// Modern confirmation modal with consistent design
 class ConfirmationModal {
   static Future<bool?> show(
     BuildContext context,
@@ -12,6 +12,7 @@ class ConfirmationModal {
   }) =>
       showDialog<bool>(
         context: context,
+        barrierDismissible: false,
         builder: (_) => _Dialog(
           title: title,
           message: message,
@@ -35,47 +36,86 @@ class _Dialog extends StatelessWidget {
   final String cancelText;
 
   @override
-  Widget build(BuildContext context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: ThemeUtil.error.withValues(alpha: 0.1),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.warning, color: ThemeUtil.error),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                title,
-                style: ThemeUtil.titleSmall,
-              ),
-            ),
-          ],
-        ),
-        content: Text(
-          message,
-          style: ThemeUtil.bodySmall,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: Text(cancelText),
+  Widget build(BuildContext context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Container(
+          padding: const EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: ThemeUtil.surfaceLight,
+            borderRadius: BorderRadius.circular(20),
           ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, true),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ThemeUtil.error,
-              foregroundColor: ThemeUtil.textLight,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildHeader(),
+              const SizedBox(height: 16),
+              _buildMessage(),
+              const SizedBox(height: 24),
+              _buildActions(context),
+            ],
+          ),
+        ),
+      );
+
+  Widget _buildHeader() => Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              color: ThemeUtil.error.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.warning_rounded,
+              color: ThemeUtil.error,
+              size: 24,
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(title, style: ThemeUtil.titleSmall),
+          ),
+        ],
+      );
+
+  Widget _buildMessage() => Text(
+        message,
+        style: ThemeUtil.bodyMedium.copyWith(
+          color: ThemeUtil.textSecondary,
+          height: 1.4,
+        ),
+        textAlign: TextAlign.left,
+      );
+
+  Widget _buildActions(BuildContext context) => Row(
+        children: [
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () => Navigator.pop(context, false),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
+              child: Text(
+                cancelText,
+                style: ThemeUtil.bodyLarge.copyWith(color: ThemeUtil.textSecondary),
               ),
             ),
-            child: Text(confirmText),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context, true),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ThemeUtil.error,
+                foregroundColor: ThemeUtil.textLight,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
+              child: Text(confirmText, style: ThemeUtil.labelLarge),
+            ),
           ),
         ],
       );
