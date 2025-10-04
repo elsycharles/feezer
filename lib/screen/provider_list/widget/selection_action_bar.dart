@@ -12,6 +12,7 @@ class SelectionActionBar extends StatefulWidget {
     required this.onDelete,
     required this.onEdit,
     required this.onDetails,
+    this.margin = EdgeInsets.zero,
   });
 
   final int selectedCount;
@@ -21,6 +22,7 @@ class SelectionActionBar extends StatefulWidget {
   final VoidCallback onDelete;
   final VoidCallback? onEdit;
   final VoidCallback? onDetails;
+  final EdgeInsetsGeometry margin;
 
   @override
   State<SelectionActionBar> createState() => _SelectionActionBarState();
@@ -62,7 +64,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
           child: Opacity(
             opacity: _opacityAnimation.value,
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
+              margin: widget.margin,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 color: ThemeUtil.primaryColor,

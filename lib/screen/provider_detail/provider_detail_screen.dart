@@ -100,17 +100,15 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
             children: [
               _buildHeader(),
               Global.gapMd,
+              _buildSearchBar(),
+              if (_selectedIds.isNotEmpty) ...[
+                Global.gapMd,
+                _buildSelectionBar(),
+              ],
+              Global.gapMd,
               Expanded(
                 child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(child: _buildSectionHeader()),
-                    SliverToBoxAdapter(child: _buildSearchBar()),
-                    if (_selectedIds.isNotEmpty) ...[
-                      SliverToBoxAdapter(child: Global.gapMd),
-                      SliverToBoxAdapter(child: _buildSelectionBar()),
-                      SliverToBoxAdapter(child: Global.gapMd),
-                    ] else
-                      SliverToBoxAdapter(child: Global.gapMd),
                     _buildIntervalSliver(),
                     SliverToBoxAdapter(child: Global.gapMd),
                     SliverToBoxAdapter(child: SizedBox(height: 80)),
@@ -170,13 +168,8 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           ),
         );
 
-  Widget _buildSectionHeader() => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Text('Fee intervals', style: ThemeUtil.titleSmall),
-      );
-
   Widget _buildSearchBar() => Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    margin: const EdgeInsets.symmetric(horizontal: 16),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: ThemeUtil.surfaceLight,

@@ -100,6 +100,7 @@ class _State extends State<ProviderListScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: ThemeUtil.backgroundLight,
         appBar: const custom.AppBar(title: 'Providers'),
         bottomNavigationBar: _selectedIds.isEmpty ? _buildAddProviderButton() : null,
         body: SafeArea(
@@ -108,34 +109,32 @@ class _State extends State<ProviderListScreen> {
               Global.gapMd,
               ProviderHeader(providerCount: _providers.length),
               Global.gapLg,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SearchField(
+                  hintText: 'Search providers...',
+                  controller: _searchController,
+                ),
+              ),
+              if (_selectedIds.isNotEmpty) ...[
+                Global.gapMd,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SelectionActionBar(
+                    selectedCount: _selectedIds.length,
+                    totalCount: _filtered.length,
+                    onSelectAll: _selectAll,
+                    onClearSelection: _clearSelection,
+                    onDelete: _deleteSelected,
+                    onEdit: _isSingleSelection ? _editSelected : null,
+                    onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                  ),
+                ),
+              ],
+              Global.gapMd,
               Expanded(
                 child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: SearchField(
-                          hintText: 'Search providers...',
-                          controller: _searchController,
-                        ),
-                      ),
-                    ),
-                    if (_selectedIds.isNotEmpty) ...[
-                      SliverToBoxAdapter(child: Global.gapMd),
-                      SliverToBoxAdapter(
-                        child: SelectionActionBar(
-                          selectedCount: _selectedIds.length,
-                          totalCount: _filtered.length,
-                          onSelectAll: _selectAll,
-                          onClearSelection: _clearSelection,
-                          onDelete: _deleteSelected,
-                          onEdit: _isSingleSelection ? _editSelected : null,
-                          onDetails: _isSingleSelection ? _showSelectedDetails : null,
-                        ),
-                      ),
-                      SliverToBoxAdapter(child: Global.gapMd),
-                    ] else
-                      SliverToBoxAdapter(child: Global.gapMd),
                     _buildProviderSliver(),
                     SliverToBoxAdapter(child: Global.gapMd),
                     SliverToBoxAdapter(child: SizedBox(height: 80)),
