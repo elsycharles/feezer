@@ -123,7 +123,7 @@ class _FeeIntervalTileState extends State<FeeIntervalTile>
         children: [
           Text(
             _formatAmountRange(),
-            style: ThemeUtil.titleMedium.copyWith(
+            style: ThemeUtil.titleSmall.copyWith(
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -149,7 +149,7 @@ class _FeeIntervalTileState extends State<FeeIntervalTile>
         ),
         child: Text(
           '${_formatFee(widget.feeInterval.fee ?? 0)} Ar',
-          style: ThemeUtil.labelLarge.copyWith(
+          style: ThemeUtil.labelMedium.copyWith(
             color: ThemeUtil.success,
             fontWeight: FontWeight.w600,
           ),
