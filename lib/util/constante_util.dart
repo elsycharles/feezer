@@ -9,10 +9,5 @@ class ConstanteUtil {
   static const Duration splashDuration = Duration(seconds: 20);
   static const Duration fadeAnimationDuration = Duration(milliseconds: 1200);
   static const Duration loadingAnimationDuration = Duration(milliseconds: 1200);
-  
-  // Messages
-  static const String errorTitle = 'Error';
-  static const String backToHomeLabel = 'Back to home';
-  static const String welcomeMessage = 'Welcome to the Home Screen!';
-  static const String goToProvidersLabel = 'Go to Providers';
+
 }
