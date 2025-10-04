@@ -5,6 +5,7 @@ import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
+import '../../widget/search_empty_state.dart';
 import '../provider_detail/provider_detail_screen.dart';
 import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
@@ -65,109 +66,107 @@ class _State extends State<ProviderListScreen> {
     );
   }
 
+  Widget _buildProviderSliver() => SliverPadding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        sliver: _filtered.isEmpty
+            ? SliverFillRemaining(
+                hasScrollBody: false,
+                child: Center(
+                  child: const SearchEmptyState(
+                    icon: Icons.search_off,
+                    title: 'No providers found',
+                  ),
+                ),
+              )
+            : SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final provider = _filtered[index];
+                    return ProviderTile(
+                      provider: provider,
+                      isSelected: _selectedIds.contains(provider.id),
+                      showSelection: _selectedIds.isNotEmpty,
+                      onSelectionChanged: (selected) => _toggleSelection(provider.id, selected),
+                      onLongPress: () => _startSelection(provider.id),
+                      onTap: _selectedIds.isNotEmpty
+                          ? () => _toggleSelection(provider.id, !_selectedIds.contains(provider.id))
+                          : () => _showProviderDetails(provider),
+                    );
+                  },
+                  childCount: _filtered.length,
+                ),
+              ),
+      );
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: const custom.AppBar(title: 'Providers'),
-        body: Column(
-          children: [
-            Global.gapMd,
-            ProviderHeader(providerCount: _providers.length),
-            Global.gapLg,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SearchField(
-                hintText: 'Search providers...',
-                controller: _searchController,
-              ),
-            ),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) => SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, -1),
-                  end: Offset.zero,
-                ).animate(CurvedAnimation(
-                  parent: animation,
-                  curve: Curves.easeOutBack,
-                )),
-                child: child,
-              ),
-              child: _selectedIds.isNotEmpty
-                  ? Column(
-                      key: const ValueKey('selection-bar'),
-                      children: [
-                        Global.gapMd,
-                        SelectionActionBar(
-                          selectedCount: _selectedIds.length,
-                          totalCount: _filtered.length,
-                          onSelectAll: _selectAll,
-                          onClearSelection: _clearSelection,
-                          onDelete: _deleteSelected,
-                          onEdit: _isSingleSelection ? _editSelected : null,
-                          onDetails: _isSingleSelection ? _showSelectedDetails : null,
-                        ),
-                      ],
-                    )
-                  : SizedBox.shrink(key: const ValueKey('empty')),
-            ),
-            Global.gapMd,
-            Expanded(
-              child: _filtered.isEmpty
-                  ? _empty()
-                  : ListView.builder(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: _filtered.length,
-                      itemBuilder: (context, index) {
-                        final provider = _filtered[index];
-                        return ProviderTile(
-                          provider: provider,
-                          isSelected: _selectedIds.contains(provider.id),
-                          showSelection: _selectedIds.isNotEmpty,
-                          onSelectionChanged: (selected) => _toggleSelection(provider.id, selected),
-                          onLongPress: () => _startSelection(provider.id),
-                          onTap: _selectedIds.isNotEmpty 
-                              ? () => _toggleSelection(provider.id, !_selectedIds.contains(provider.id))
-                              : () => _showProviderDetails(provider),
-                        );
-                      },
-                    ),
-            ),
-            if (_selectedIds.isEmpty)
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: _addProvider,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ThemeUtil.primaryColor,
-                      foregroundColor: ThemeUtil.textLight,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 0,
-                    ),
-                    icon: const Icon(Icons.add),
-                    label: Text(
-                      'Add New Provider',
-                      style: ThemeUtil.bodyLarge.copyWith(color: ThemeUtil.textLight),
-                    ),
+        bottomNavigationBar: _selectedIds.isEmpty ? _buildAddProviderButton() : null,
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: Global.gapMd),
+              SliverToBoxAdapter(child: ProviderHeader(providerCount: _providers.length)),
+              SliverToBoxAdapter(child: Global.gapLg),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SearchField(
+                    hintText: 'Search providers...',
+                    controller: _searchController,
                   ),
                 ),
               ),
-          ],
+              if (_selectedIds.isNotEmpty) ...[
+                SliverToBoxAdapter(child: Global.gapMd),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SelectionActionBar(
+                      selectedCount: _selectedIds.length,
+                      totalCount: _filtered.length,
+                      onSelectAll: _selectAll,
+                      onClearSelection: _clearSelection,
+                      onDelete: _deleteSelected,
+                      onEdit: _isSingleSelection ? _editSelected : null,
+                      onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(child: Global.gapMd),
+              ] else
+                SliverToBoxAdapter(child: Global.gapMd),
+              _buildProviderSliver(),
+              SliverToBoxAdapter(child: Global.gapMd),
+              SliverToBoxAdapter(child: SizedBox(height: 80)),
+            ],
+          ),
         ),
       );
 
-  Widget _empty() => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.search_off, size: 64, color: ThemeUtil.textSecondary),
-            const SizedBox(height: 16),
-            Text('No providers found', style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary)),
-          ],
+  Widget _buildAddProviderButton() => Container(
+        color: ThemeUtil.backgroundLight,
+        padding: const EdgeInsets.all(16),
+        child: SafeArea(
+          top: false,
+          child: SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _addProvider,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ThemeUtil.primaryColor,
+                foregroundColor: ThemeUtil.textLight,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                elevation: 0,
+              ),
+              icon: const Icon(Icons.add),
+              label: Text(
+                'Add New Provider',
+                style: ThemeUtil.bodyLarge.copyWith(color: ThemeUtil.textLight),
+              ),
+            ),
+          ),
         ),
       );
 

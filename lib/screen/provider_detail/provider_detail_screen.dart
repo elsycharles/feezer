@@ -5,6 +5,7 @@ import '../../util/theme_util.dart';
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
+import '../../widget/search_empty_state.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
@@ -93,12 +94,30 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: Column(
-          children: [
-            _buildHeader(),
-            _buildFeeIntervals(),
-            _buildAddButton(),
-          ],
+        bottomNavigationBar: _buildAddButton(),
+        body: SafeArea(
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: _buildHeader()),
+              SliverToBoxAdapter(child: Global.gapMd),
+              SliverToBoxAdapter(child: _buildSectionHeader()),
+              SliverToBoxAdapter(child: _buildSearchBar()),
+              if (_selectedIds.isNotEmpty) ...[
+                SliverToBoxAdapter(child: Global.gapMd),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: _buildSelectionBar(),
+                  ),
+                ),
+                SliverToBoxAdapter(child: Global.gapMd),
+              ] else
+                SliverToBoxAdapter(child: Global.gapMd),
+              _buildIntervalSliver(),
+              SliverToBoxAdapter(child: Global.gapMd),
+              SliverToBoxAdapter(child: SizedBox(height: 80)),
+            ],
+          ),
         ),
       );
 
@@ -119,37 +138,36 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         ),
       );
 
-  Widget _buildFeeIntervals() => Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSectionHeader(),
-            _buildSearchBar(),
-            if (_selectedIds.isNotEmpty) ...[
-              Global.gapMd,
-              _buildSelectionBar(),
-            ],
-            Global.gapMd,
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: _filteredIntervals.length,
-                itemBuilder: (context, index) {
-                  final interval = _filteredIntervals[index];
-                  return FeeIntervalTile(
-                    feeInterval: interval,
-                    isSelected: _selectedIds.contains(interval.id),
-                    showSelection: _selectedIds.isNotEmpty,
-                    onTap: () => _onIntervalTap(interval),
-                    onSelectionChanged: (selected) => _onSelectionChanged(interval.id, selected),
-                    onLongPress: () => _onIntervalLongPress(interval),
-                  );
-                },
-              ),
+  Widget _buildIntervalSliver() => _filteredIntervals.isEmpty
+      ? SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            child: const SearchEmptyState(
+              icon: Icons.search_off,
+              title: 'No fee intervals found',
+              message: 'Try adjusting your search range.',
             ),
-          ],
-        ),
-      );
+          ),
+        )
+      : SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final interval = _filteredIntervals[index];
+                return FeeIntervalTile(
+                  feeInterval: interval,
+                  isSelected: _selectedIds.contains(interval.id),
+                  showSelection: _selectedIds.isNotEmpty,
+                  onTap: () => _onIntervalTap(interval),
+                  onSelectionChanged: (selected) => _onSelectionChanged(interval.id, selected),
+                  onLongPress: () => _onIntervalLongPress(interval),
+                );
+              },
+              childCount: _filteredIntervals.length,
+            ),
+          ),
+        );
 
   Widget _buildSectionHeader() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -220,18 +238,22 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       );
 
   Widget _buildAddButton() => Container(
+        color: ThemeUtil.backgroundLight,
         padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          width: double.infinity,
-          child: ElevatedButton.icon(
-            onPressed: _addInterval,
-            icon: const Icon(Icons.add),
-            label: const Text('Add Fee Interval'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ThemeUtil.primaryColor,
-              foregroundColor: ThemeUtil.textLight,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              padding: const EdgeInsets.symmetric(vertical: 14),
+        child: SafeArea(
+          top: false,
+          child: SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _addInterval,
+              icon: const Icon(Icons.add),
+              label: const Text('Add Fee Interval'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: ThemeUtil.primaryColor,
+                foregroundColor: ThemeUtil.textLight,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+              ),
             ),
           ),
         ),
