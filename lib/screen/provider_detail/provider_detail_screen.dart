@@ -24,18 +24,24 @@ class ProviderDetailScreen extends StatefulWidget {
 
 class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   late List<FeeInterval> _feeIntervals;
+  late List<FeeInterval> _filteredIntervals;
   final Set<String> _selectedIds = {};
-  final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _feeMinController = TextEditingController();
+  final TextEditingController _feeMaxController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _feeIntervals = _generateMockIntervals();
+    _filteredIntervals = _feeIntervals;
+    _feeMinController.addListener(_filterIntervals);
+    _feeMaxController.addListener(_filterIntervals);
   }
 
   @override
   void dispose() {
-    _searchController.dispose();
+    _feeMinController.dispose();
+    _feeMaxController.dispose();
     super.dispose();
   }
 
@@ -98,7 +104,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   Widget _buildSelectionBar() => FeeIntervalSelectionActionBar(
         selectedCount: _selectedIds.length,
-        totalCount: _feeIntervals.length,
+        totalCount: _filteredIntervals.length,
         onSelectAll: _selectAll,
         onClearSelection: _clearSelection,
         onDelete: _deleteSelectedIntervals,
@@ -118,6 +124,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildSectionHeader(),
+            _buildSearchBar(),
             if (_selectedIds.isNotEmpty) ...[
               Global.gapMd,
               _buildSelectionBar(),
@@ -126,9 +133,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: _feeIntervals.length,
+                itemCount: _filteredIntervals.length,
                 itemBuilder: (context, index) {
-                  final interval = _feeIntervals[index];
+                  final interval = _filteredIntervals[index];
                   return FeeIntervalTile(
                     feeInterval: interval,
                     isSelected: _selectedIds.contains(interval.id),
@@ -147,6 +154,69 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   Widget _buildSectionHeader() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Text('Fee intervals', style: ThemeUtil.titleSmall),
+      );
+
+  Widget _buildSearchBar() => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: ThemeUtil.surfaceLight,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: ThemeUtil.textSecondary.withValues(alpha: 0.08),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.search, size: 18, color: ThemeUtil.primaryColor),
+                    const SizedBox(width: 8),
+                    Text(
+                      'Search by Fee Range',
+                      style: ThemeUtil.titleSmall.copyWith(
+                        color: ThemeUtil.primaryColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+                if (_feeMinController.text.isNotEmpty || _feeMaxController.text.isNotEmpty)
+                  GestureDetector(
+                    onTap: _clearSearch,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: ThemeUtil.textSecondary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Icon(
+                        Icons.clear,
+                        size: 16,
+                        color: ThemeUtil.textSecondary,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            Global.gapMd,
+            Row(
+              children: [
+                Expanded(child: _buildFeeMinField()),
+                const SizedBox(width: 12),
+                Expanded(child: _buildFeeMaxField()),
+              ],
+            ),
+          ],
+        ),
       );
 
   Widget _buildAddButton() => Container(
@@ -210,8 +280,75 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   void _selectAll() {
     setState(() {
-      _selectedIds.addAll(_feeIntervals.map((e) => e.id).whereType<String>());
+      _selectedIds.addAll(_filteredIntervals.map((e) => e.id).whereType<String>());
     });
+  }
+
+  Widget _buildFeeMinField() => TextField(
+        controller: _feeMinController,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          hintText: 'Min fee',
+          hintStyle: ThemeUtil.bodySmall.copyWith(color: ThemeUtil.textSecondary),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        ),
+        style: ThemeUtil.bodySmall,
+      );
+
+  Widget _buildFeeMaxField() => TextField(
+        controller: _feeMaxController,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          hintText: 'Max fee',
+          hintStyle: ThemeUtil.bodySmall.copyWith(color: ThemeUtil.textSecondary),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        ),
+        style: ThemeUtil.bodySmall,
+      );
+
+  void _filterIntervals() {
+    setState(() {
+      final feeMinText = _feeMinController.text.trim();
+      final feeMaxText = _feeMaxController.text.trim();
+      
+      if (feeMinText.isEmpty && feeMaxText.isEmpty) {
+        _filteredIntervals = _feeIntervals;
+        return;
+      }
+
+      final feeMin = double.tryParse(feeMinText) ?? 0.0;
+      final feeMax = double.tryParse(feeMaxText) ?? double.infinity;
+      
+      _filteredIntervals = _feeIntervals.where((interval) {
+        final intervalFee = interval.fee ?? 0.0;
+        return intervalFee >= feeMin && intervalFee <= feeMax;
+      }).toList();
+    });
+  }
+
+  void _clearSearch() {
+    _feeMinController.clear();
+    _feeMaxController.clear();
   }
 
   void _editInterval(FeeInterval interval) {
