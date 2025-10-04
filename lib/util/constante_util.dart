@@ -6,8 +6,8 @@ class ConstanteUtil {
   static const String appDescription = 'Mobile application built with Flutter that helps users calculate and optimize transaction fees across different financial providers';
 
   // Durations
-  static const Duration splashDuration = Duration(seconds: 20);
-  static const Duration fadeAnimationDuration = Duration(milliseconds: 1200);
+  static const Duration splashDuration = Duration(seconds: 3);
+  static const Duration fadeAnimationDuration = Duration(milliseconds: 800);
   static const Duration loadingAnimationDuration = Duration(milliseconds: 1200);
 
 }
