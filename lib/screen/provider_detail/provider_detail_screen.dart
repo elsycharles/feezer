@@ -107,7 +107,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   Widget _buildHeader() => Container(
         margin: const EdgeInsets.all(16),
-        child: ProviderHeaderCard(provider: widget.provider),
+        child: ProviderHeaderCard(
+          provider: widget.provider,
+          onOptimize: _onOptimizeFees,
+        ),
       );
 
   Widget _buildFeeIntervals() => Expanded(
@@ -223,7 +226,24 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     }
   }
 
-
+  void _onOptimizeFees() {
+    // TODO: Navigate to fee optimization screen
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Navigating to Fee Optimization...'),
+        backgroundColor: ThemeUtil.primaryColor,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+    
+    // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
+    // Navigator.push(context, MaterialPageRoute(
+    //   builder: (_) => FeeOptimizationScreen(provider: widget.provider)
+    // ));
+  }
 
   void _deleteSelectedIntervals() async {
     final count = _selectedIds.length;
