@@ -5,7 +5,7 @@ import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
-import '../../util/icon_util.dart';
+import '../provider_detail/provider_detail_screen.dart';
 import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
@@ -243,56 +243,10 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _showProviderDetails(Provider provider) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: ThemeUtil.primaryColor,
-              radius: 20,
-              child: Icon(
-                IconUtil.getIcon(provider.iconName),
-                color: ThemeUtil.textLight,
-                size: 20,
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(child: Text(provider.name)),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Description:',
-              style: ThemeUtil.bodyLarge,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              provider.description,
-              style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Created:',
-              style: ThemeUtil.bodyLarge,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '${provider.creationDatetime.day}/${provider.creationDatetime.month}/${provider.creationDatetime.year}',
-              style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
-          ),
-        ],
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ProviderDetailScreen(provider: provider),
       ),
     );
   }
