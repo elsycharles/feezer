@@ -4,8 +4,9 @@ import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/util/onboarding_util.dart';
 import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
+import 'package:fee_minimizer/util/preference_util.dart';
+import 'package:fee_minimizer/util/navigation_util.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -37,7 +38,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
-  void _goToHome() => context.go(AppRouter.homeRoute);
+  Future<void> _goToHome() async {
+    await NavigationUtil.safeAsyncNavigate(
+      context: context,
+      isMounted: () => mounted,
+      getRoute: () async {
+        // Mark that onboarding is completed
+        await PreferenceUtil.setFirstLaunchCompleted();
+        return AppRouter.homeRoute;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/util/constante_util.dart';
+import 'package:fee_minimizer/util/preference_util.dart';
+import 'package:fee_minimizer/util/navigation_util.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -46,11 +47,18 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   void _startSequence() {
     _controller.forward();
-    Future.delayed(ConstanteUtil.splashDuration, _navigateToHome);
+    Future.delayed(ConstanteUtil.splashDuration, _navigateToNextScreen);
   }
 
-  void _navigateToHome() {
-    if (mounted) context.go(AppRouter.onboardingRoute);
+  Future<void> _navigateToNextScreen() async {
+    await NavigationUtil.safeAsyncNavigate(
+      context: context,
+      isMounted: () => mounted,
+      getRoute: () async {
+        final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
+        return isFirstLaunch ? AppRouter.onboardingRoute : AppRouter.homeRoute;
+      },
+    );
   }
 
   @override
