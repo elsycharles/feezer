@@ -11,7 +11,7 @@ class AppRouter {
     initialLocation: splashRoute,
     debugLogDiagnostics: true,
     errorBuilder: (context, state) => Scaffold(
-      appBar: AppBar(title: const Text('Erreur')),
+      appBar: AppBar(title: const Text('Error')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

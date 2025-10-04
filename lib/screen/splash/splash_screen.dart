@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         opacity: _fadeAnimation,
         child: Column(
           children: [
-            // Contenu principal centré
+            // Main content centered
             Expanded(
               child: Center(
                 child: Column(
@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                     ),
                     const SizedBox(height: 40),
                     
-                    // Loading simple avec 3 points
+                    // Simple loading with 3 dots
                     AnimatedBuilder(
                       animation: _loadingAnimation,
                       builder: (context, child) {
@@ -122,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
               ),
             ),
             
-            // Description en bas
+            // Description at bottom
             Padding(
               padding: const EdgeInsets.all(32.0),
               child: Text(
