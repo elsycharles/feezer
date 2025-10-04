@@ -20,20 +20,41 @@ class OnboardingPageView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Illustration placeholder
+          // Illustration
           Container(
             width: 280,
             height: 280,
             decoration: BoxDecoration(
-              color: ThemeUtil.onboardingIllustrationBg.withValues(
-                alpha: ThemeUtil.onboardingIllustrationBgOpacity,
-              ),
               borderRadius: Global.borderXl,
             ),
-            child: Icon(
-              Icons.savings_outlined,
-              size: 120,
-              color: ThemeUtil.onboardingTextPrimary,
+            child: ClipRRect(
+              borderRadius: Global.borderXl,
+              child: Image.asset(
+                item.imagePath,
+                width: 280,
+                height: 280,
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, stackTrace) {
+                  // Fallback image if onboarding image not found
+                  return Container(
+                    width: 280,
+                    height: 280,
+                    decoration: BoxDecoration(
+                      borderRadius: Global.borderSm,
+                      color: Colors.grey.shade100,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: Global.borderSm,
+                      child: Image.asset(
+                        'assets/images/fallback.png',
+                        width: 280,
+                        height: 280,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           
