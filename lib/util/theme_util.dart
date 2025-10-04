@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ThemeUtil {
-  static const Color primaryColor = Color(0xFF2C14DD);
-  static const Color primaryLight = Color(0xFF5F47FF);
-  static const Color primaryDark = Color(0xFF1A0B99);
-  static const Color secondaryColor = Color(0xFF14DD2C);
-  static const Color secondaryLight = Color(0xFF47FF5F);
-  static const Color secondaryDark = Color(0xFF0B991A);
-  static const Color accentColor = Color(0xFFDD142C);
-  static const Color accentLight = Color(0xFFFF475F);
-  static const Color accentDark = Color(0xFF990B1A);
+  static const Color primaryColor = Color(0xFF4A6CF7);
+  static const Color primaryLight = Color(0xFF6B8EF7);
+  static const Color primaryDark = Color(0xFF2E4EF7);
+  static const Color secondaryColor = Color(0xFF8B5CF6);
+  static const Color secondaryLight = Color(0xFFA78BFA);
+  static const Color secondaryDark = Color(0xFF7C3AED);
+  static const Color accentColor = Color(0xFF06B6D4);
+  static const Color accentLight = Color(0xFF67E8F9);
+  static const Color accentDark = Color(0xFF0891B2);
   static const Color backgroundLight = Color(0xFFF8F9FF);
   static const Color backgroundDark = Color(0xFF1A1B2E);
   static const Color surfaceLight = Color(0xFFFFFFFF);
@@ -132,10 +132,9 @@ class ThemeUtil {
   }
 
   static LinearGradient get primaryGradient => const LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [primaryColor, primaryLight, secondaryColor],
-    stops: [0.0, 0.5, 1.0],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [primaryColor, primaryColor],
   );
 
   static LinearGradient get backgroundGradient => LinearGradient(
