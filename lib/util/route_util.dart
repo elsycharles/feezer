@@ -1,10 +1,12 @@
 import 'package:fee_minimizer/screen/home/home_screen.dart';
+import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
 import 'package:fee_minimizer/screen/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   static const String splashRoute = '/';
+  static const String onboardingRoute = '/onboarding';
   static const String homeRoute = '/home';
 
   static final GoRouter router = GoRouter(
@@ -33,6 +35,11 @@ class AppRouter {
         path: splashRoute,
         name: 'splash',
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: onboardingRoute,
+        name: 'onboarding',
+        builder: (context, state) => const OnboardingScreen(),
       ),
       GoRoute(
         path: homeRoute,

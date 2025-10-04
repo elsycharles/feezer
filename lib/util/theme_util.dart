@@ -22,6 +22,18 @@ class ThemeUtil {
   static const Color error = Color(0xFFEF4444);
   static const Color info = Color(0xFF3B82F6);
 
+  // Onboarding Colors
+  static const Color onboardingBackground = Color(0xFF6366F1);
+  static const Color onboardingButton = Color(0xFF4338CA);
+  static const Color onboardingTextPrimary = Color(0xFFFFFFFF);
+  static const Color onboardingTextSecondary = Color(0xFFFFFFFF);
+  static const double onboardingTextSecondaryOpacity = 0.8;
+  static const Color onboardingDotActive = Color(0xFFFFFFFF);
+  static const Color onboardingDotInactive = Color(0xFFFFFFFF);
+  static const double onboardingDotInactiveOpacity = 0.3;
+  static const Color onboardingIllustrationBg = Color(0xFFFFFFFF);
+  static const double onboardingIllustrationBgOpacity = 0.1;
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
