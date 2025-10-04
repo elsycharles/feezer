@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../model/provider_model.dart';
 import '../../../util/theme_util.dart';
-import '../../../util/icon_util.dart';
 import '../../../styles/global.dart';
+import '../../../widget/provider_brand_avatar.dart';
+import '../../../widget/provider_stat_chip.dart';
+import '../../../widget/surface_card.dart';
+import '../../../widget/primary_button.dart';
 
 /// Clean provider header card with optimize button
 class ProviderHeaderCard extends StatefulWidget {
@@ -24,20 +27,9 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
   bool _isOptimizing = false;
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: ThemeUtil.surfaceLight,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: ThemeUtil.textSecondary.withValues(alpha: 0.08),
-              blurRadius: 12,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
+  Widget build(BuildContext context) => SurfaceCard(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(),
             Global.gapLg,
@@ -48,39 +40,16 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
 
   Widget _buildHeader() => Row(
         children: [
-          _buildAvatar(),
+          ProviderBrandAvatar(iconName: widget.provider.iconName),
           const SizedBox(width: 16),
           Expanded(child: _buildProviderInfo()),
-          _buildOptimizeButton(),
-        ],
-      );
-
-  Widget _buildAvatar() => Container(
-        width: 56,
-        height: 56,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              ThemeUtil.primaryColor,
-              ThemeUtil.primaryColor.withValues(alpha: 0.8),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+          PrimaryButton(
+            text: _isOptimizing ? 'Loading...' : 'Fee Optimizer',
+            onPressed: _isOptimizing ? null : _optimizeFees,
+            isFullWidth: false,
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
           ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: ThemeUtil.primaryColor.withValues(alpha: 0.3),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Icon(
-          IconUtil.getIcon(widget.provider.iconName),
-          color: ThemeUtil.textLight,
-          size: 24,
-        ),
+        ],
       );
 
   Widget _buildProviderInfo() => Column(
@@ -100,95 +69,10 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
         ],
       );
 
-  Widget _buildStats() => _buildStatItem('Total Fee Intervals', '5', Icons.receipt_long);
-
-  Widget _buildStatItem(String label, String value, IconData icon) => Center(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          decoration: BoxDecoration(
-            color: ThemeUtil.primaryColor.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: ThemeUtil.primaryColor.withValues(alpha: 0.2),
-              width: 1,
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, size: 20, color: ThemeUtil.primaryColor),
-              const SizedBox(width: 8),
-              Text(
-                value,
-                style: ThemeUtil.titleSmall.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: ThemeUtil.primaryColor,
-                ),
-              ),
-              const SizedBox(width: 4),
-              Text(
-                label,
-                style: ThemeUtil.bodyMedium.copyWith(
-                  color: ThemeUtil.textSecondary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-
-  Widget _buildOptimizeButton() => GestureDetector(
-        onTap: _isOptimizing ? null : _optimizeFees,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            gradient: _isOptimizing ? null : LinearGradient(
-                colors: [ThemeUtil.primaryColor, ThemeUtil.primaryColor.withValues(alpha: 0.8)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            color: _isOptimizing ? ThemeUtil.textSecondary.withValues(alpha: 0.3) : null,
-            borderRadius: BorderRadius.circular(25),
-            boxShadow: _isOptimizing ? null : [
-                BoxShadow(
-                  color: ThemeUtil.primaryColor.withValues(alpha: 0.4),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (_isOptimizing) ...[
-                SizedBox(
-                  width: 16,
-                  height: 16,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation(ThemeUtil.textLight),
-                  ),
-                ),
-                const SizedBox(width: 8),
-              ] else ...[
-                Icon(
-                  Icons.auto_fix_high,
-                  size: 16,
-                  color: ThemeUtil.textLight,
-                ),
-                const SizedBox(width: 6),
-              ],
-              Text(
-                _isOptimizing ? 'Loading...' : 'Fee Optimizer',
-                style: ThemeUtil.labelLarge.copyWith(
-                  color: ThemeUtil.textLight,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
+  Widget _buildStats() => ProviderStatChip(
+        icon: Icons.receipt_long,
+        label: 'Total Fee Intervals',
+        value: '5',
       );
 
   void _optimizeFees() async {

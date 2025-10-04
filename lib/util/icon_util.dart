@@ -18,6 +18,7 @@ class IconUtil {
     'store': Icons.store,
     'local_atm': Icons.local_atm,
     'bank': Icons.account_balance,
+    'group': Icons.people_alt,
   };
 
   static IconData getIcon(String iconName) => _icons[iconName] ?? Icons.business;

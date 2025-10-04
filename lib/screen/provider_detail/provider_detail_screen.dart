@@ -353,7 +353,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   void _editInterval(FeeInterval interval) {
     // TODO: Implement edit functionality
-    print('Edit interval: ${interval.id}');
   }
 
   void _editSelectedInterval() {
