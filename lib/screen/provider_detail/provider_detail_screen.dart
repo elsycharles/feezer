@@ -39,16 +39,43 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     super.dispose();
   }
 
-  List<FeeInterval> _generateMockIntervals() => List.generate(
-        5,
-        (index) => FeeInterval(
-          id: 'interval_$index',
-          minAmount: 100,
-          maxAmount: 5000,
-          fee: 10000,
-          creationDatetime: DateTime.now().subtract(Duration(days: index)),
+  List<FeeInterval> _generateMockIntervals() => [
+        FeeInterval(
+          id: 'interval_0',
+          minAmount: 0,
+          maxAmount: 1000,
+          fee: 50,
+          creationDatetime: DateTime.now().subtract(const Duration(days: 1)),
         ),
-      );
+        FeeInterval(
+          id: 'interval_1',
+          minAmount: 1001,
+          maxAmount: 5000,
+          fee: 150,
+          creationDatetime: DateTime.now().subtract(const Duration(days: 3)),
+        ),
+        FeeInterval(
+          id: 'interval_2',
+          minAmount: 5001,
+          maxAmount: 10000,
+          fee: 300,
+          creationDatetime: DateTime.now().subtract(const Duration(days: 7)),
+        ),
+        FeeInterval(
+          id: 'interval_3',
+          minAmount: 10001,
+          maxAmount: 25000,
+          fee: 500,
+          creationDatetime: DateTime.now().subtract(const Duration(days: 14)),
+        ),
+        FeeInterval(
+          id: 'interval_4',
+          minAmount: 25001,
+          maxAmount: 50000,
+          fee: 800,
+          creationDatetime: DateTime.now().subtract(const Duration(days: 21)),
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) => Scaffold(
