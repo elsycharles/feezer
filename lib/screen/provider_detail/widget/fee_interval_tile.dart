@@ -2,16 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../model/fee_interval_model.dart';
 import '../../../util/theme_util.dart';
+import '../../../widget/interactive_surface.dart';
 
-/// Modern fee interval tile with clean design and animations
-class FeeIntervalTile extends StatefulWidget {
-  final FeeInterval feeInterval;
-  final bool isSelected;
-  final bool showSelection;
-  final ValueChanged<bool> onSelectionChanged;
-  final VoidCallback onLongPress;
-  final VoidCallback? onTap;
-
+/// Fee interval tile with subtle hover feedback
+class FeeIntervalTile extends StatelessWidget {
   const FeeIntervalTile({
     super.key,
     required this.feeInterval,
@@ -22,86 +16,60 @@ class FeeIntervalTile extends StatefulWidget {
     this.onTap,
   });
 
-  @override
-  State<FeeIntervalTile> createState() => _FeeIntervalTileState();
-}
-
-class _FeeIntervalTileState extends State<FeeIntervalTile>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-  bool _isPressed = false;
+  final FeeInterval feeInterval;
+  final bool isSelected;
+  final bool showSelection;
+  final ValueChanged<bool> onSelectionChanged;
+  final VoidCallback onLongPress;
+  final VoidCallback? onTap;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onTapDown(TapDownDetails details) {
-    setState(() => _isPressed = true);
-    _controller.forward();
-    HapticFeedback.lightImpact();
-  }
-
-  void _onTapUp(TapUpDetails details) {
-    setState(() => _isPressed = false);
-    _controller.reverse();
-  }
-
-  void _onTapCancel() {
-    setState(() => _isPressed = false);
-    _controller.reverse();
-  }
-
-  void _onLongPress() {
-    HapticFeedback.mediumImpact();
-    widget.onLongPress();
-  }
-
-  @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) => Transform.scale(
-          scale: _scaleAnimation.value,
-          child: GestureDetector(
-            onTapDown: _onTapDown,
-            onTapUp: _onTapUp,
-            onTapCancel: _onTapCancel,
-            onTap: widget.onTap,
-            onLongPress: _onLongPress,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: _getBackgroundColor(),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: _getBorderColor(),
-                  width: widget.isSelected ? 2 : 1,
+  Widget build(BuildContext context) => Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        child: InteractiveSurface(
+          onTap: () {
+            HapticFeedback.selectionClick();
+            onTap?.call();
+          },
+          onLongPress: () {
+            HapticFeedback.mediumImpact();
+            onLongPress();
+          },
+          builder: (context, hovered, pressed) => AnimatedContainer(
+            duration: const Duration(milliseconds: 120),
+            curve: Curves.easeOut,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: ThemeUtil.interactiveSurfaceColor(
+                isSelected
+                    ? ThemeUtil.primaryColor.withValues(alpha: 0.08)
+                    : ThemeUtil.surfaceLight,
+                hovered: hovered,
+                pressed: pressed,
+              ),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: isSelected
+                    ? ThemeUtil.primaryColor
+                    : ThemeUtil.textSecondary.withValues(alpha: 0.2),
+                width: isSelected ? 2 : 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: ThemeUtil.textSecondary.withValues(
+                    alpha: hovered || pressed ? 0.12 : 0.08,
+                  ),
+                  blurRadius: hovered || pressed ? 10 : 4,
+                  offset: const Offset(0, 2),
                 ),
-                boxShadow: _isPressed ? _getPressedShadow() : _getDefaultShadow(),
-              ),
-              child: Row(
-                children: [
-                  if (widget.showSelection) _buildCheckbox(),
-                  Expanded(child: _buildContent()),
-                  _buildFeeChip(),
-                ],
-              ),
+              ],
+            ),
+            child: Row(
+              children: [
+                if (showSelection) _buildCheckbox(),
+                Expanded(child: _buildContent()),
+                _buildFeeChip(),
+              ],
             ),
           ),
         ),
@@ -110,8 +78,8 @@ class _FeeIntervalTileState extends State<FeeIntervalTile>
   Widget _buildCheckbox() => Padding(
         padding: const EdgeInsets.only(right: 12),
         child: Checkbox(
-          value: widget.isSelected,
-          onChanged: (value) => widget.onSelectionChanged(value ?? false),
+          value: isSelected,
+          onChanged: (value) => onSelectionChanged(value ?? false),
           visualDensity: VisualDensity.compact,
           activeColor: ThemeUtil.primaryColor,
         ),
@@ -123,16 +91,12 @@ class _FeeIntervalTileState extends State<FeeIntervalTile>
         children: [
           Text(
             _formatAmountRange(),
-            style: ThemeUtil.titleSmall.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
+            style: ThemeUtil.titleSmall.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 4),
           Text(
-            _formatDate(widget.feeInterval.creationDatetime ?? DateTime.now()),
-            style: ThemeUtil.bodySmall.copyWith(
-              color: ThemeUtil.textSecondary,
-            ),
+            _formatDate(feeInterval.creationDatetime ?? DateTime.now()),
+            style: ThemeUtil.bodySmall.copyWith(color: ThemeUtil.textSecondary),
           ),
         ],
       );
@@ -148,7 +112,7 @@ class _FeeIntervalTileState extends State<FeeIntervalTile>
           ),
         ),
         child: Text(
-          '${_formatFee(widget.feeInterval.fee ?? 0)} Ar',
+          '${_formatFee(feeInterval.fee ?? 0)} Ar',
           style: ThemeUtil.labelMedium.copyWith(
             color: ThemeUtil.success,
             fontWeight: FontWeight.w600,
@@ -156,42 +120,13 @@ class _FeeIntervalTileState extends State<FeeIntervalTile>
         ),
       );
 
-  // Helper methods
   String _formatAmountRange() {
-    final min = (widget.feeInterval.minAmount ?? 0).toInt();
-    final max = (widget.feeInterval.maxAmount ?? 0).toInt();
+    final min = (feeInterval.minAmount ?? 0).toInt();
+    final max = (feeInterval.maxAmount ?? 0).toInt();
     return '$min - $max Ar';
   }
 
   String _formatFee(double fee) => fee.toInt().toString();
 
-  String _formatDate(DateTime date) => 
-      '${date.day}/${date.month}/${date.year}';
-
-  Color _getBackgroundColor() {
-    if (_isPressed) return ThemeUtil.primaryColor.withValues(alpha: 0.08);
-    if (widget.isSelected) return ThemeUtil.primaryColor.withValues(alpha: 0.05);
-    return ThemeUtil.surfaceLight;
-  }
-
-  Color _getBorderColor() {
-    if (_isPressed || widget.isSelected) return ThemeUtil.primaryColor;
-    return ThemeUtil.textSecondary.withValues(alpha: 0.2);
-  }
-
-  List<BoxShadow> _getDefaultShadow() => [
-        BoxShadow(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.08),
-          blurRadius: 4,
-          offset: const Offset(0, 2),
-        ),
-      ];
-
-  List<BoxShadow> _getPressedShadow() => [
-        BoxShadow(
-          color: ThemeUtil.primaryColor.withValues(alpha: 0.2),
-          blurRadius: 8,
-          offset: const Offset(0, 4),
-        ),
-      ];
+  String _formatDate(DateTime date) => '${date.day}/${date.month}/${date.year}';
 }

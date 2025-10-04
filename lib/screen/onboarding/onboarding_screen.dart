@@ -66,10 +66,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: Global.padMd,
                 child: TextButton(
                   onPressed: _goToHome,
-                  style: TextButton.styleFrom(
+                  style: ButtonStyle(
+                    overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.onboardingTextSecondary),
                     splashFactory: NoSplash.splashFactory,
-                  ).copyWith(
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
                   ),
                   child: Text(
                     'Skip',

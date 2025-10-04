@@ -126,27 +126,53 @@ class ThemeUtil {
         titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: textLight),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          foregroundColor: textLight,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          backgroundColor: interactiveBackground(primaryColor),
+          foregroundColor: WidgetStateProperty.all(textLight),
+          overlayColor: interactiveOverlay(textLight),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          elevation: WidgetStateProperty.all(0),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: primaryColor,
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryColor),
+          overlayColor: interactiveOverlay(primaryColor),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: primaryColor,
-          side: const BorderSide(color: primaryColor, width: 1.5),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryColor),
+          overlayColor: interactiveOverlay(primaryColor),
+          side: WidgetStateProperty.all(
+            const BorderSide(color: primaryColor, width: 1.5),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       cardTheme: CardThemeData(
@@ -198,12 +224,21 @@ class ThemeUtil {
         titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: textLight),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryLight,
-          foregroundColor: textLight,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          backgroundColor: interactiveBackground(primaryLight),
+          foregroundColor: WidgetStateProperty.all(textLight),
+          overlayColor: interactiveOverlay(textLight),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          elevation: WidgetStateProperty.all(0),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       cardTheme: CardThemeData(
@@ -226,6 +261,59 @@ class ThemeUtil {
     end: Alignment.bottomCenter,
     colors: [primaryColor.withValues(alpha: 0.1), backgroundLight],
   );
+
+  static WidgetStateProperty<Color?> interactiveOverlay(
+    Color color, {
+    double hoverOpacity = 0.06,
+    double pressedOpacity = 0.12,
+  }) => WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) return null;
+        if (states.contains(WidgetState.pressed)) {
+          return color.withValues(alpha: pressedOpacity);
+        }
+        if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
+          return color.withValues(alpha: hoverOpacity);
+        }
+        return null;
+      });
+
+  static WidgetStateProperty<Color?> interactiveBackground(
+    Color color, {
+    double hoverShade = 0.08,
+    double pressedShade = 0.14,
+    double disabledOpacity = 0.4,
+  }) => WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
+          return color.withValues(alpha: disabledOpacity);
+        }
+        if (states.contains(WidgetState.pressed)) {
+          return _shade(color, pressedShade);
+        }
+        if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
+          return _shade(color, hoverShade);
+        }
+        return color;
+      });
+
+  static Color interactiveSurfaceColor(
+    Color base, {
+    bool hovered = false,
+    bool pressed = false,
+    Color overlayColor = primaryColor,
+    double hoverOpacity = 0.06,
+    double pressedOpacity = 0.12,
+  }) {
+    if (pressed) {
+      return Color.alphaBlend(overlayColor.withValues(alpha: pressedOpacity), base);
+    }
+    if (hovered) {
+      return Color.alphaBlend(overlayColor.withValues(alpha: hoverOpacity), base);
+    }
+    return base;
+  }
+
+  static Color _shade(Color color, double amount) =>
+      Color.lerp(color, Colors.black, amount) ?? color;
 
   static Color getStatusColor(String status) {
     switch (status.toLowerCase()) {

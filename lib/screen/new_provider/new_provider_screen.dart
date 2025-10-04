@@ -227,15 +227,17 @@ class _State extends State<NewProviderScreen> {
             Expanded(
               child: OutlinedButton(
                 onPressed: Navigator.of(context).pop,
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: ThemeUtil.textSecondary,
-                  side: BorderSide(
-                    color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
+                style: ButtonStyle(
+                  foregroundColor: WidgetStateProperty.all(ThemeUtil.textSecondary),
+                  overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textSecondary),
+                  side: WidgetStateProperty.all(
+                    BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
+                  splashFactory: NoSplash.splashFactory,
                 ),
                 child: const Text('Cancel'),
               ),

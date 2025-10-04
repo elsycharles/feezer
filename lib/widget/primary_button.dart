@@ -22,19 +22,18 @@ class PrimaryButton extends StatelessWidget {
       width: isFullWidth ? double.infinity : null,
       child: ElevatedButton(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: ThemeUtil.primaryColor,
-          foregroundColor: ThemeUtil.textLight,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+        style: ButtonStyle(
+          backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.primaryColor),
+          foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
+          overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
-          padding: padding,
-          elevation: 0,
+          padding: WidgetStateProperty.all(padding),
+          elevation: WidgetStateProperty.all(0),
+          splashFactory: NoSplash.splashFactory,
         ),
-        child: Text(
-          text,
-          style: ThemeUtil.labelLarge,
-        ),
+        child: Text(text, style: ThemeUtil.labelLarge),
       ),
     );
   }

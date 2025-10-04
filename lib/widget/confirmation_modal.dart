@@ -93,10 +93,17 @@ class _Dialog extends StatelessWidget {
           Expanded(
             child: OutlinedButton(
               onPressed: () => Navigator.pop(context, false),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                padding: const EdgeInsets.symmetric(vertical: 14),
+              style: ButtonStyle(
+                foregroundColor: WidgetStateProperty.all(ThemeUtil.textSecondary),
+                overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textSecondary),
+                side: WidgetStateProperty.all(
+                  BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+                ),
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 14)),
+                splashFactory: NoSplash.splashFactory,
               ),
               child: Text(
                 cancelText,
@@ -108,11 +115,16 @@ class _Dialog extends StatelessWidget {
           Expanded(
             child: ElevatedButton(
               onPressed: () => Navigator.pop(context, true),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ThemeUtil.error,
-                foregroundColor: ThemeUtil.textLight,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                padding: const EdgeInsets.symmetric(vertical: 14),
+              style: ButtonStyle(
+                backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.error),
+                foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
+                overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 14)),
+                elevation: WidgetStateProperty.all(0),
+                splashFactory: NoSplash.splashFactory,
               ),
               child: Text(confirmText, style: ThemeUtil.labelLarge),
             ),

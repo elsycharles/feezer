@@ -42,16 +42,15 @@ class OnboardingBottomSection extends StatelessWidget {
             height: Global.buttonHeight,
             child: ElevatedButton(
               onPressed: onNext,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ThemeUtil.onboardingButton,
-                foregroundColor: ThemeUtil.onboardingTextPrimary,
-                elevation: 0,
+              style: ButtonStyle(
+                backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.onboardingButton),
+                foregroundColor: WidgetStateProperty.all(ThemeUtil.onboardingTextPrimary),
+                overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.onboardingTextPrimary),
+                elevation: WidgetStateProperty.all(0),
                 splashFactory: NoSplash.splashFactory,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                 ),
-              ).copyWith(
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
               ),
               child: Text(
                 isLastPage ? 'Get Started' : 'Next',

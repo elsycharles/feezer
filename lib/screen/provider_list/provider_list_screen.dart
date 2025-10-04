@@ -155,12 +155,16 @@ class _State extends State<ProviderListScreen> {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: _addProvider,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ThemeUtil.primaryColor,
-                foregroundColor: ThemeUtil.textLight,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                elevation: 0,
+              style: ButtonStyle(
+                backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.primaryColor),
+                foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
+                overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
+                padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 16)),
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                elevation: WidgetStateProperty.all(0),
+                splashFactory: NoSplash.splashFactory,
               ),
               icon: const Icon(Icons.add),
               label: Text(

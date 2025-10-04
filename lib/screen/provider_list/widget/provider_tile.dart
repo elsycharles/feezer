@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import '../../../model/provider_model.dart';
 import '../../../widget/provider_card.dart';
 
-/// Animated provider tile with tap and long press feedback
-class ProviderTile extends StatefulWidget {
+/// Provider tile with subtle hover feedback
+class ProviderTile extends StatelessWidget {
   const ProviderTile({
     super.key,
     required this.provider,
@@ -23,73 +23,22 @@ class ProviderTile extends StatefulWidget {
   final VoidCallback? onTap;
 
   @override
-  State<ProviderTile> createState() => _ProviderTileState();
-}
-
-class _ProviderTileState extends State<ProviderTile>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 150),
-      vsync: this,
-    );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _onTapDown(TapDownDetails details) {
-    _controller.forward();
-    HapticFeedback.lightImpact();
-  }
-
-  void _onTapUp(TapUpDetails details) {
-    _controller.reverse();
-  }
-
-  void _onTapCancel() {
-    _controller.reverse();
-  }
-
-  void _onLongPress() {
-    HapticFeedback.mediumImpact();
-    widget.onLongPress();
-  }
-
-  @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) => Transform.scale(
-          scale: _scaleAnimation.value,
-          child: GestureDetector(
-            onTapDown: _onTapDown,
-            onTapUp: _onTapUp,
-            onTapCancel: _onTapCancel,
-            onTap: widget.onTap,
-            onLongPress: _onLongPress,
-            child: Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              child: ProviderCard(
-                provider: widget.provider,
-                showCheckbox: widget.showSelection,
-                isSelected: widget.isSelected,
-                onSelectionChanged: widget.onSelectionChanged,
-                showDescription: true,
-              ),
-            ),
-          ),
+  Widget build(BuildContext context) => Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        child: ProviderCard(
+          provider: provider,
+          showCheckbox: showSelection,
+          isSelected: isSelected,
+          onSelectionChanged: onSelectionChanged,
+          showDescription: true,
+          onTap: () {
+            HapticFeedback.selectionClick();
+            onTap?.call();
+          },
+          onLongPress: () {
+            HapticFeedback.mediumImpact();
+            onLongPress();
+          },
         ),
       );
-
 }
