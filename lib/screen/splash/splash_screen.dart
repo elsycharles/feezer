@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
 
   void _navigateToHome() {
-    if (mounted) context.go(AppRouter.homeRoute);
+    if (mounted) context.go(AppRouter.onboardingRoute);
   }
 
   @override
