@@ -71,8 +71,8 @@ class _State extends State<ProviderListScreen> {
         sliver: _filtered.isEmpty
             ? SliverFillRemaining(
                 hasScrollBody: false,
-                child: Center(
-                  child: const SearchEmptyState(
+                child: const Center(
+                  child: SearchEmptyState(
                     icon: Icons.search_off,
                     title: 'No providers found',
                   ),
@@ -103,42 +103,45 @@ class _State extends State<ProviderListScreen> {
         appBar: const custom.AppBar(title: 'Providers'),
         bottomNavigationBar: _selectedIds.isEmpty ? _buildAddProviderButton() : null,
         body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(child: Global.gapMd),
-              SliverToBoxAdapter(child: ProviderHeader(providerCount: _providers.length)),
-              SliverToBoxAdapter(child: Global.gapLg),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SearchField(
-                    hintText: 'Search providers...',
-                    controller: _searchController,
-                  ),
+          child: Column(
+            children: [
+              Global.gapMd,
+              ProviderHeader(providerCount: _providers.length),
+              Global.gapLg,
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SearchField(
+                          hintText: 'Search providers...',
+                          controller: _searchController,
+                        ),
+                      ),
+                    ),
+                    if (_selectedIds.isNotEmpty) ...[
+                      SliverToBoxAdapter(child: Global.gapMd),
+                      SliverToBoxAdapter(
+                        child: SelectionActionBar(
+                          selectedCount: _selectedIds.length,
+                          totalCount: _filtered.length,
+                          onSelectAll: _selectAll,
+                          onClearSelection: _clearSelection,
+                          onDelete: _deleteSelected,
+                          onEdit: _isSingleSelection ? _editSelected : null,
+                          onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                        ),
+                      ),
+                      SliverToBoxAdapter(child: Global.gapMd),
+                    ] else
+                      SliverToBoxAdapter(child: Global.gapMd),
+                    _buildProviderSliver(),
+                    SliverToBoxAdapter(child: Global.gapMd),
+                    SliverToBoxAdapter(child: SizedBox(height: 80)),
+                  ],
                 ),
               ),
-              if (_selectedIds.isNotEmpty) ...[
-                SliverToBoxAdapter(child: Global.gapMd),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SelectionActionBar(
-                      selectedCount: _selectedIds.length,
-                      totalCount: _filtered.length,
-                      onSelectAll: _selectAll,
-                      onClearSelection: _clearSelection,
-                      onDelete: _deleteSelected,
-                      onEdit: _isSingleSelection ? _editSelected : null,
-                      onDetails: _isSingleSelection ? _showSelectedDetails : null,
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(child: Global.gapMd),
-              ] else
-                SliverToBoxAdapter(child: Global.gapMd),
-              _buildProviderSliver(),
-              SliverToBoxAdapter(child: Global.gapMd),
-              SliverToBoxAdapter(child: SizedBox(height: 80)),
             ],
           ),
         ),

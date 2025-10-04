@@ -96,26 +96,27 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         ),
         bottomNavigationBar: _buildAddButton(),
         body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(child: _buildHeader()),
-              SliverToBoxAdapter(child: Global.gapMd),
-              SliverToBoxAdapter(child: _buildSectionHeader()),
-              SliverToBoxAdapter(child: _buildSearchBar()),
-              if (_selectedIds.isNotEmpty) ...[
-                SliverToBoxAdapter(child: Global.gapMd),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: _buildSelectionBar(),
-                  ),
+          child: Column(
+            children: [
+              _buildHeader(),
+              Global.gapMd,
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    SliverToBoxAdapter(child: _buildSectionHeader()),
+                    SliverToBoxAdapter(child: _buildSearchBar()),
+                    if (_selectedIds.isNotEmpty) ...[
+                      SliverToBoxAdapter(child: Global.gapMd),
+                      SliverToBoxAdapter(child: _buildSelectionBar()),
+                      SliverToBoxAdapter(child: Global.gapMd),
+                    ] else
+                      SliverToBoxAdapter(child: Global.gapMd),
+                    _buildIntervalSliver(),
+                    SliverToBoxAdapter(child: Global.gapMd),
+                    SliverToBoxAdapter(child: SizedBox(height: 80)),
+                  ],
                 ),
-                SliverToBoxAdapter(child: Global.gapMd),
-              ] else
-                SliverToBoxAdapter(child: Global.gapMd),
-              _buildIntervalSliver(),
-              SliverToBoxAdapter(child: Global.gapMd),
-              SliverToBoxAdapter(child: SizedBox(height: 80)),
+              ),
             ],
           ),
         ),
