@@ -18,11 +18,31 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  bool _shouldShowOnboarding = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstLaunch();
+  }
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
+    if (!isFirstLaunch && mounted) {
+      NavigationUtil.safeAsyncNavigate(
+        context: context,
+        isMounted: () => mounted,
+        getRoute: () async => AppRouter.providersRoute,
+      );
+    } else if (mounted) {
+      setState(() => _shouldShowOnboarding = true);
+    }
   }
 
   void _onPageChanged(int index) => setState(() => _currentIndex = index);
@@ -52,6 +72,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (!_shouldShowOnboarding) {
+      return Scaffold(
+        backgroundColor: ThemeUtil.onboardingBackground,
+        body: const Center(
+          child: CircularProgressIndicator(color: ThemeUtil.primaryColor),
+        ),
+      );
+    }
+
     final theme = Theme.of(context);
 
     return Scaffold(
