@@ -1,11 +1,9 @@
 class ConstanteUtil {
   // App Information
-  static const String appName = 'Fee Minimizer';
-  static const String appTagline =
-      'Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers';
-  static const String appVersion = '1.0.0';
+  static const String appName = 'Feezer';
   static const String appDescription =
-      'Mobile application built with Flutter that helps users calculate and optimize transaction fees across different financial providers';
+      'Feezer is a mobile application that helps users calculate and optimize transaction fees across different financial providers';
+  static const String appVersion = '1.0.0';
 
   // Durations
   static const Duration splashDuration = Duration(seconds: 3);

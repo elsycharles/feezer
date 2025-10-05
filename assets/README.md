@@ -1,6 +1,6 @@
 # Assets Directory
 
-This directory contains all the assets for the Fee Minimizer Flutter application.
+This directory contains all the assets for the Feezer Flutter application.
 
 ## Structure
 
