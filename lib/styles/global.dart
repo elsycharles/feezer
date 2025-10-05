@@ -4,12 +4,12 @@ class Global {
   static const _baseUnit = 4.0;
 
   // Spacing System
-  static const double spacingXs = _baseUnit * 1;    // 4
-  static const double spacingSm = _baseUnit * 2;    // 8
-  static const double spacingMd = _baseUnit * 4;    // 16
-  static const double spacingLg = _baseUnit * 6;    // 24
-  static const double spacingXl = _baseUnit * 8;    // 32
-  static const double spacingXxl = _baseUnit * 12;  // 48
+  static const double spacingXs = _baseUnit * 1; // 4
+  static const double spacingSm = _baseUnit * 2; // 8
+  static const double spacingMd = _baseUnit * 4; // 16
+  static const double spacingLg = _baseUnit * 6; // 24
+  static const double spacingXl = _baseUnit * 8; // 32
+  static const double spacingXxl = _baseUnit * 12; // 48
 
   // Border Radius
   static const double radiusSm = 8.0;
@@ -68,11 +68,16 @@ class Global {
   static BorderRadius get borderXl => BorderRadius.circular(radiusXl);
 
   // Gap Helpers
-  static SizedBox get gapXs => const SizedBox(height: spacingXs, width: spacingXs);
-  static SizedBox get gapSm => const SizedBox(height: spacingSm, width: spacingSm);
-  static SizedBox get gapMd => const SizedBox(height: spacingMd, width: spacingMd);
-  static SizedBox get gapLg => const SizedBox(height: spacingLg, width: spacingLg);
-  static SizedBox get gapXl => const SizedBox(height: spacingXl, width: spacingXl);
+  static SizedBox get gapXs =>
+      const SizedBox(height: spacingXs, width: spacingXs);
+  static SizedBox get gapSm =>
+      const SizedBox(height: spacingSm, width: spacingSm);
+  static SizedBox get gapMd =>
+      const SizedBox(height: spacingMd, width: spacingMd);
+  static SizedBox get gapLg =>
+      const SizedBox(height: spacingLg, width: spacingLg);
+  static SizedBox get gapXl =>
+      const SizedBox(height: spacingXl, width: spacingXl);
 
   // Shadow Helpers
   static BoxShadow get shadowSm => BoxShadow(

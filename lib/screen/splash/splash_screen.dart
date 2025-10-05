@@ -12,7 +12,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
   late final AnimationController _controller;
   late final AnimationController _loadingController;
   late final Animation<double> _fadeAnimation;
@@ -30,16 +31,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       duration: ConstanteUtil.fadeAnimationDuration,
       vsync: this,
     );
-    
+
     _loadingController = AnimationController(
       duration: ConstanteUtil.loadingAnimationDuration,
       vsync: this,
     )..repeat();
-    
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-    
+
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
     _loadingAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _loadingController, curve: Curves.linear),
     );
@@ -56,7 +58,9 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       isMounted: () => mounted,
       getRoute: () async {
         final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
-        return isFirstLaunch ? AppRouter.onboardingRoute : AppRouter.homeRoute;
+        return isFirstLaunch
+            ? AppRouter.onboardingRoute
+            : AppRouter.providersRoute;
       },
     );
   }
@@ -84,16 +88,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                   children: [
                     Text(
                       ConstanteUtil.appName.toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 2.0,
-                      ),
+                      style: ThemeUtil.displayLarge,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 40),
-                    
+
                     // Simple loading with 3 dots
                     AnimatedBuilder(
                       animation: _loadingAnimation,
@@ -102,11 +101,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           mainAxisSize: MainAxisSize.min,
                           children: List.generate(3, (index) {
                             final delay = index * 0.3;
-                            final animValue = (_loadingAnimation.value + delay) % 1.0;
-                            final opacity = animValue < 0.5 
-                                ? (animValue * 2) 
+                            final animValue =
+                                (_loadingAnimation.value + delay) % 1.0;
+                            final opacity = animValue < 0.5
+                                ? (animValue * 2)
                                 : (2 - animValue * 2);
-                            
+
                             return Container(
                               margin: const EdgeInsets.symmetric(horizontal: 4),
                               child: Opacity(
@@ -115,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                                   width: 8,
                                   height: 8,
                                   decoration: const BoxDecoration(
-                                    color: Colors.white,
+                                    color: ThemeUtil.textLight,
                                     shape: BoxShape.circle,
                                   ),
                                 ),
@@ -129,17 +129,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                 ),
               ),
             ),
-            
+
             // Description at bottom
             Padding(
               padding: const EdgeInsets.all(32.0),
               child: Text(
                 ConstanteUtil.appTagline,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w300,
-                ),
+                style: ThemeUtil.captionLight,
                 textAlign: TextAlign.center,
               ),
             ),

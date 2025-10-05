@@ -33,25 +33,32 @@ class OnboardingBottomSection extends StatelessWidget {
               (index) => OnboardingPageDot(isActive: index == currentIndex),
             ),
           ),
-          
+
           Global.gapXl,
-          
+
           // Action button
           SizedBox(
             width: double.infinity,
             height: Global.buttonHeight,
             child: ElevatedButton(
               onPressed: onNext,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ThemeUtil.onboardingButton,
-                foregroundColor: ThemeUtil.onboardingTextPrimary,
-                elevation: 0,
-                splashFactory: NoSplash.splashFactory,
-                shape: RoundedRectangleBorder(
-                  borderRadius: Global.borderXl,
+              style: ButtonStyle(
+                backgroundColor: ThemeUtil.interactiveBackground(
+                  ThemeUtil.onboardingButton,
                 ),
-              ).copyWith(
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                foregroundColor: WidgetStateProperty.all(
+                  ThemeUtil.onboardingTextPrimary,
+                ),
+                overlayColor: ThemeUtil.interactiveOverlay(
+                  ThemeUtil.onboardingTextPrimary,
+                ),
+                elevation: WidgetStateProperty.all(0),
+                splashFactory: NoSplash.splashFactory,
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
               child: Text(
                 isLastPage ? 'Get Started' : 'Next',

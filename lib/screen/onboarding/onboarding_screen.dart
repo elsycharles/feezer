@@ -45,7 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       getRoute: () async {
         // Mark that onboarding is completed
         await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.homeRoute;
+        return AppRouter.providersRoute;
       },
     );
   }
@@ -53,7 +53,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Scaffold(
       backgroundColor: ThemeUtil.onboardingBackground,
       body: SafeArea(
@@ -66,10 +66,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: Global.padMd,
                 child: TextButton(
                   onPressed: _goToHome,
-                  style: TextButton.styleFrom(
+                  style: ButtonStyle(
+                    overlayColor: ThemeUtil.interactiveOverlay(
+                      ThemeUtil.onboardingTextSecondary,
+                    ),
                     splashFactory: NoSplash.splashFactory,
-                  ).copyWith(
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
                   ),
                   child: Text(
                     'Skip',
@@ -83,19 +84,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            
+
             // PageView content
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
                 onPageChanged: _onPageChanged,
                 itemCount: OnboardingUtil.items.length,
-                itemBuilder: (context, index) => OnboardingPageView(
-                  item: OnboardingUtil.items[index],
-                ),
+                itemBuilder: (context, index) =>
+                    OnboardingPageView(item: OnboardingUtil.items[index]),
               ),
             ),
-            
+
             // Bottom section
             OnboardingBottomSection(
               currentIndex: _currentIndex,

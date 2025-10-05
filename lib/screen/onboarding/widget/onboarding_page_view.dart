@@ -6,15 +6,12 @@ import 'package:flutter/material.dart';
 class OnboardingPageView extends StatelessWidget {
   final OnboardingItem item;
 
-  const OnboardingPageView({
-    super.key,
-    required this.item,
-  });
+  const OnboardingPageView({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Padding(
       padding: Global.padLg,
       child: Column(
@@ -24,9 +21,7 @@ class OnboardingPageView extends StatelessWidget {
           Container(
             width: 280,
             height: 280,
-            decoration: BoxDecoration(
-              borderRadius: Global.borderXl,
-            ),
+            decoration: BoxDecoration(borderRadius: Global.borderXl),
             child: ClipRRect(
               borderRadius: Global.borderXl,
               child: Image.asset(
@@ -41,7 +36,7 @@ class OnboardingPageView extends StatelessWidget {
                     height: 280,
                     decoration: BoxDecoration(
                       borderRadius: Global.borderSm,
-                      color: Colors.grey.shade100,
+                      color: ThemeUtil.backgroundLight,
                     ),
                     child: ClipRRect(
                       borderRadius: Global.borderSm,
@@ -57,9 +52,9 @@ class OnboardingPageView extends StatelessWidget {
               ),
             ),
           ),
-          
+
           const SizedBox(height: Global.spacingXxl),
-          
+
           // Title
           Text(
             item.title,
@@ -70,9 +65,9 @@ class OnboardingPageView extends StatelessWidget {
               height: 1.2,
             ),
           ),
-          
+
           Global.gapMd,
-          
+
           // Description
           Text(
             item.description,
