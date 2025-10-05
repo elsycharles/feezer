@@ -20,14 +20,13 @@ class Provider {
     String? description,
     String? iconName,
     DateTime? creationDatetime,
-  }) =>
-      Provider(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        description: description ?? this.description,
-        iconName: iconName ?? this.iconName,
-        creationDatetime: creationDatetime ?? this.creationDatetime,
-      );
+  }) => Provider(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    description: description ?? this.description,
+    iconName: iconName ?? this.iconName,
+    creationDatetime: creationDatetime ?? this.creationDatetime,
+  );
 
   @override
   bool operator ==(Object other) =>

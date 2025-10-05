@@ -33,9 +33,9 @@ class OnboardingBottomSection extends StatelessWidget {
               (index) => OnboardingPageDot(isActive: index == currentIndex),
             ),
           ),
-          
+
           Global.gapXl,
-          
+
           // Action button
           SizedBox(
             width: double.infinity,
@@ -43,13 +43,21 @@ class OnboardingBottomSection extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onNext,
               style: ButtonStyle(
-                backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.onboardingButton),
-                foregroundColor: WidgetStateProperty.all(ThemeUtil.onboardingTextPrimary),
-                overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.onboardingTextPrimary),
+                backgroundColor: ThemeUtil.interactiveBackground(
+                  ThemeUtil.onboardingButton,
+                ),
+                foregroundColor: WidgetStateProperty.all(
+                  ThemeUtil.onboardingTextPrimary,
+                ),
+                overlayColor: ThemeUtil.interactiveOverlay(
+                  ThemeUtil.onboardingTextPrimary,
+                ),
                 elevation: WidgetStateProperty.all(0),
                 splashFactory: NoSplash.splashFactory,
                 shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
               child: Text(

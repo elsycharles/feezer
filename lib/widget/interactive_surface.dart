@@ -10,7 +10,8 @@ class InteractiveSurface extends StatefulWidget {
     this.enableScale = true,
   });
 
-  final Widget Function(BuildContext context, bool hovered, bool pressed) builder;
+  final Widget Function(BuildContext context, bool hovered, bool pressed)
+  builder;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
   final BorderRadius borderRadius;

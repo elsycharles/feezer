@@ -24,10 +24,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
       foregroundColor: ThemeUtil.textPrimary,
       elevation: elevation,
       centerTitle: true,
-      title: Text(
-        title,
-        style: ThemeUtil.titleSmall,
-      ),
+      title: Text(title, style: ThemeUtil.titleSmall),
       actions: actions,
       leading: leading,
     );

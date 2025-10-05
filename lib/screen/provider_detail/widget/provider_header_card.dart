@@ -28,61 +28,57 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
 
   @override
   Widget build(BuildContext context) => SurfaceCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            Global.gapLg,
-            _buildStats(),
-          ],
-        ),
-      );
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [_buildHeader(), Global.gapLg, _buildStats()],
+    ),
+  );
 
   Widget _buildHeader() => Row(
-        children: [
-          ProviderBrandAvatar(iconName: widget.provider.iconName),
-          const SizedBox(width: 16),
-          Expanded(child: _buildProviderInfo()),
-          PrimaryButton(
-            text: _isOptimizing ? 'Loading...' : 'Fee Optimizer',
-            onPressed: _isOptimizing ? null : _optimizeFees,
-            isFullWidth: false,
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-          ),
-        ],
-      );
+    children: [
+      ProviderBrandAvatar(iconName: widget.provider.iconName),
+      const SizedBox(width: 16),
+      Expanded(child: _buildProviderInfo()),
+      PrimaryButton(
+        text: _isOptimizing ? 'Loading...' : 'Fee Optimizer',
+        onPressed: _isOptimizing ? null : _optimizeFees,
+        isFullWidth: false,
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      ),
+    ],
+  );
 
   Widget _buildProviderInfo() => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            widget.provider.name,
-            style: ThemeUtil.titleLarge.copyWith(fontWeight: FontWeight.w700),
-          ),
-          if (widget.provider.description.isNotEmpty) ...[
-            const SizedBox(height: 4),
-            Text(
-              widget.provider.description,
-              style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
-            ),
-          ],
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        widget.provider.name,
+        style: ThemeUtil.titleLarge.copyWith(fontWeight: FontWeight.w700),
+      ),
+      if (widget.provider.description.isNotEmpty) ...[
+        const SizedBox(height: 4),
+        Text(
+          widget.provider.description,
+          style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
+        ),
+      ],
+    ],
+  );
 
   Widget _buildStats() => ProviderStatChip(
-        icon: Icons.receipt_long,
-        label: 'Total Fee Intervals',
-        value: '5',
-      );
+    icon: Icons.receipt_long,
+    label: 'Total Fee Intervals',
+    value: '5',
+  );
 
   void _optimizeFees() async {
     if (_isOptimizing) return;
-    
+
     HapticFeedback.lightImpact();
     setState(() => _isOptimizing = true);
-    
+
     await Future.delayed(const Duration(milliseconds: 300));
-    
+
     if (mounted) {
       setState(() => _isOptimizing = false);
       widget.onOptimize?.call();

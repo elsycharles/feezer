@@ -23,7 +23,9 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.primaryColor),
+          backgroundColor: ThemeUtil.interactiveBackground(
+            ThemeUtil.primaryColor,
+          ),
           foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
           overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
           shape: WidgetStateProperty.all(

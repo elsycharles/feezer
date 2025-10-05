@@ -16,32 +16,30 @@ class ProviderStatChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        decoration: BoxDecoration(
-          color: ThemeUtil.primaryColor.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: ThemeUtil.primaryColor.withValues(alpha: 0.2),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+    decoration: BoxDecoration(
+      color: ThemeUtil.primaryColor.withValues(alpha: 0.1),
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: ThemeUtil.primaryColor.withValues(alpha: 0.2)),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, size: 20, color: ThemeUtil.primaryColor),
+        const SizedBox(width: 8),
+        Text(
+          value,
+          style: ThemeUtil.titleSmall.copyWith(
+            fontWeight: FontWeight.w600,
+            color: ThemeUtil.primaryColor,
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 20, color: ThemeUtil.primaryColor),
-            const SizedBox(width: 8),
-            Text(
-              value,
-              style: ThemeUtil.titleSmall.copyWith(
-                fontWeight: FontWeight.w600,
-                color: ThemeUtil.primaryColor,
-              ),
-            ),
-            const SizedBox(width: 4),
-            Text(
-              label,
-              style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
-            ),
-          ],
+        const SizedBox(width: 4),
+        Text(
+          label,
+          style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
         ),
-      );
+      ],
+    ),
+  );
 }

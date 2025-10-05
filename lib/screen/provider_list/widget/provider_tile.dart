@@ -24,21 +24,21 @@ class ProviderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        child: ProviderCard(
-          provider: provider,
-          showCheckbox: showSelection,
-          isSelected: isSelected,
-          onSelectionChanged: onSelectionChanged,
-          showDescription: true,
-          onTap: () {
-            HapticFeedback.selectionClick();
-            onTap?.call();
-          },
-          onLongPress: () {
-            HapticFeedback.mediumImpact();
-            onLongPress();
-          },
-        ),
-      );
+    margin: const EdgeInsets.only(bottom: 8),
+    child: ProviderCard(
+      provider: provider,
+      showCheckbox: showSelection,
+      isSelected: isSelected,
+      onSelectionChanged: onSelectionChanged,
+      showDescription: true,
+      onTap: () {
+        HapticFeedback.selectionClick();
+        onTap?.call();
+      },
+      onLongPress: () {
+        HapticFeedback.mediumImpact();
+        onLongPress();
+      },
+    ),
+  );
 }

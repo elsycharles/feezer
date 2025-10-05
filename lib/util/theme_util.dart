@@ -123,7 +123,11 @@ class ThemeUtil {
         foregroundColor: textLight,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: textLight),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: textLight,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -221,7 +225,11 @@ class ThemeUtil {
         foregroundColor: textLight,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: textLight),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: textLight,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
@@ -267,15 +275,16 @@ class ThemeUtil {
     double hoverOpacity = 0.06,
     double pressedOpacity = 0.12,
   }) => WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.disabled)) return null;
-        if (states.contains(WidgetState.pressed)) {
-          return color.withValues(alpha: pressedOpacity);
-        }
-        if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
-          return color.withValues(alpha: hoverOpacity);
-        }
-        return null;
-      });
+    if (states.contains(WidgetState.disabled)) return null;
+    if (states.contains(WidgetState.pressed)) {
+      return color.withValues(alpha: pressedOpacity);
+    }
+    if (states.contains(WidgetState.hovered) ||
+        states.contains(WidgetState.focused)) {
+      return color.withValues(alpha: hoverOpacity);
+    }
+    return null;
+  });
 
   static WidgetStateProperty<Color?> interactiveBackground(
     Color color, {
@@ -283,17 +292,18 @@ class ThemeUtil {
     double pressedShade = 0.14,
     double disabledOpacity = 0.4,
   }) => WidgetStateProperty.resolveWith((states) {
-        if (states.contains(WidgetState.disabled)) {
-          return color.withValues(alpha: disabledOpacity);
-        }
-        if (states.contains(WidgetState.pressed)) {
-          return _shade(color, pressedShade);
-        }
-        if (states.contains(WidgetState.hovered) || states.contains(WidgetState.focused)) {
-          return _shade(color, hoverShade);
-        }
-        return color;
-      });
+    if (states.contains(WidgetState.disabled)) {
+      return color.withValues(alpha: disabledOpacity);
+    }
+    if (states.contains(WidgetState.pressed)) {
+      return _shade(color, pressedShade);
+    }
+    if (states.contains(WidgetState.hovered) ||
+        states.contains(WidgetState.focused)) {
+      return _shade(color, hoverShade);
+    }
+    return color;
+  });
 
   static Color interactiveSurfaceColor(
     Color base, {
@@ -304,10 +314,16 @@ class ThemeUtil {
     double pressedOpacity = 0.12,
   }) {
     if (pressed) {
-      return Color.alphaBlend(overlayColor.withValues(alpha: pressedOpacity), base);
+      return Color.alphaBlend(
+        overlayColor.withValues(alpha: pressedOpacity),
+        base,
+      );
     }
     if (hovered) {
-      return Color.alphaBlend(overlayColor.withValues(alpha: hoverOpacity), base);
+      return Color.alphaBlend(
+        overlayColor.withValues(alpha: hoverOpacity),
+        base,
+      );
     }
     return base;
   }
@@ -317,11 +333,22 @@ class ThemeUtil {
 
   static Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
-      case 'success': case 'completed': case 'active': return success;
-      case 'warning': case 'pending': return warning;
-      case 'error': case 'failed': case 'inactive': return error;
-      case 'info': case 'processing': return info;
-      default: return primaryColor;
+      case 'success':
+      case 'completed':
+      case 'active':
+        return success;
+      case 'warning':
+      case 'pending':
+        return warning;
+      case 'error':
+      case 'failed':
+      case 'inactive':
+        return error;
+      case 'info':
+      case 'processing':
+        return info;
+      default:
+        return primaryColor;
     }
   }
 }

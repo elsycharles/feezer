@@ -21,51 +21,48 @@ class _Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        height: MediaQuery.of(context).size.height * 0.9,
-        decoration: const BoxDecoration(
-          color: ThemeUtil.surfaceLight,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    height: MediaQuery.of(context).size.height * 0.9,
+    decoration: const BoxDecoration(
+      color: ThemeUtil.surfaceLight,
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+    ),
+    child: Column(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 12, bottom: 16),
+          width: 40,
+          height: 4,
+          decoration: BoxDecoration(
+            color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
+            borderRadius: BorderRadius.circular(2),
+          ),
         ),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(top: 12, bottom: 16),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
-                borderRadius: BorderRadius.circular(2),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(title, style: ThemeUtil.titleMedium),
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(Icons.close, color: ThemeUtil.textSecondary),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    title,
-                    style: ThemeUtil.titleMedium,
-                  ),
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close, color: ThemeUtil.textSecondary),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  20,
-                  0,
-                  20,
-                  MediaQuery.of(context).viewInsets.bottom + 20,
-                ),
-                child: child,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
-      );
+        const SizedBox(height: 8),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+              20,
+              0,
+              20,
+              MediaQuery.of(context).viewInsets.bottom + 20,
+            ),
+            child: child,
+          ),
+        ),
+      ],
+    ),
+  );
 }

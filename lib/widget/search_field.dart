@@ -31,7 +31,9 @@ class SearchField extends StatelessWidget {
         style: ThemeUtil.bodyMedium,
         decoration: InputDecoration(
           hintText: hintText,
-          hintStyle: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
+          hintStyle: ThemeUtil.bodyMedium.copyWith(
+            color: ThemeUtil.textSecondary,
+          ),
           prefixIcon: Icon(
             Icons.search,
             color: ThemeUtil.textSecondary,
