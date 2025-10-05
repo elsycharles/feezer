@@ -73,10 +73,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     if (!_shouldShowOnboarding) {
+      final colorScheme = Theme.of(context).colorScheme;
       return Scaffold(
-        backgroundColor: ThemeUtil.onboardingBackground,
-        body: const Center(
-          child: CircularProgressIndicator(color: ThemeUtil.primaryColor),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Center(
+          child: CircularProgressIndicator(color: colorScheme.primary),
         ),
       );
     }
@@ -84,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: ThemeUtil.onboardingBackground,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -97,14 +98,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   onPressed: _goToHome,
                   style: ButtonStyle(
                     overlayColor: ThemeUtil.interactiveOverlay(
-                      ThemeUtil.onboardingTextSecondary,
+                      theme.colorScheme.onSurface,
                     ),
                     splashFactory: NoSplash.splashFactory,
                   ),
                   child: Text(
                     'Skip',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: ThemeUtil.onboardingTextSecondary.withValues(
+                      color: theme.colorScheme.onSurface.withValues(
                         alpha: ThemeUtil.onboardingTextSecondaryOpacity,
                       ),
                       fontWeight: FontWeight.w500,

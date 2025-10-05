@@ -19,6 +19,7 @@ class OnboardingBottomSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final isLastPage = currentIndex == OnboardingUtil.items.length - 1;
 
     return Padding(
@@ -44,13 +45,13 @@ class OnboardingBottomSection extends StatelessWidget {
               onPressed: onNext,
               style: ButtonStyle(
                 backgroundColor: ThemeUtil.interactiveBackground(
-                  ThemeUtil.onboardingButton,
+                  colorScheme.primary,
                 ),
                 foregroundColor: WidgetStateProperty.all(
-                  ThemeUtil.onboardingTextPrimary,
+                  colorScheme.onPrimary,
                 ),
                 overlayColor: ThemeUtil.interactiveOverlay(
-                  ThemeUtil.onboardingTextPrimary,
+                  colorScheme.onPrimary,
                 ),
                 elevation: WidgetStateProperty.all(0),
                 splashFactory: NoSplash.splashFactory,
@@ -64,7 +65,7 @@ class OnboardingBottomSection extends StatelessWidget {
                 isLastPage ? 'Get Started' : 'Next',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: ThemeUtil.onboardingTextPrimary,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),

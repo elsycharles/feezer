@@ -12,45 +12,52 @@ class ProviderHeader extends StatelessWidget {
   final int providerCount;
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.all(16),
-    child: SurfaceCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ProviderBrandAvatar(iconName: 'group', size: 52),
-              Global.gapMd,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Manage your providers',
-                      style: ThemeUtil.titleSmall.copyWith(
-                        fontWeight: FontWeight.w700,
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: SurfaceCard(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ProviderBrandAvatar(iconName: 'group', size: 52),
+                Global.gapMd,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Manage your providers',
+                        style: ThemeUtil.titleSmall.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      'Centralize bank and mobile money partners in one place.',
-                      style: ThemeUtil.bodySmall,
-                    ),
-                  ],
+                      const SizedBox(height: 6),
+                      Text(
+                        'Centralize bank and mobile money partners in one place.',
+                        style: ThemeUtil.bodySmall.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Global.gapLg,
-          ProviderStatChip(
-            icon: Icons.people_alt,
-            label: 'Active provider${providerCount == 1 ? '' : 's'}',
-            value: '$providerCount',
-          ),
-        ],
+              ],
+            ),
+            Global.gapLg,
+            ProviderStatChip(
+              icon: Icons.people_alt,
+              label: 'Active provider${providerCount == 1 ? '' : 's'}',
+              value: '$providerCount',
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }

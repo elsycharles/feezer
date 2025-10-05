@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
-import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
+import '../../widget/primary_button.dart';
 import '../provider_detail/provider_detail_screen.dart';
 import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
@@ -122,93 +122,78 @@ class _State extends State<ProviderListScreen> {
   );
 
   @override
-  Widget build(BuildContext context) => PopScope(
-        canPop: _selectedIds.isEmpty,
-        onPopInvokedWithResult: (didPop, result) {
-          // If we're in selection mode, clear it on back press instead of leaving the page/app
-          if (!didPop && _selectedIds.isNotEmpty) {
-            setState(() => _selectedIds.clear());
-          }
-        },
-    child: Scaffold(
-      backgroundColor: ThemeUtil.backgroundLight,
-      appBar: const custom.AppBar(title: 'Providers'),
-      bottomNavigationBar: _selectedIds.isEmpty
-          ? _buildAddProviderButton()
-          : null,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Global.gapMd,
-            ProviderHeader(providerCount: _providers.length),
-            Global.gapLg,
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SearchField(
-                hintText: 'Search providers...',
-                controller: _searchController,
-              ),
-            ),
-            if (_selectedIds.isNotEmpty) ...[
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return PopScope(
+      canPop: _selectedIds.isEmpty,
+      onPopInvokedWithResult: (didPop, result) {
+        // If we're in selection mode, clear it on back press instead of leaving the page/app
+        if (!didPop && _selectedIds.isNotEmpty) {
+          setState(() => _selectedIds.clear());
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        appBar: const custom.AppBar(title: 'Providers'),
+        bottomNavigationBar:
+            _selectedIds.isEmpty ? _buildAddProviderButton(colorScheme) : null,
+        body: SafeArea(
+          child: Column(
+            children: [
               Global.gapMd,
+              ProviderHeader(providerCount: _providers.length),
+              Global.gapLg,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SelectionActionBar(
-                  selectedCount: _selectedIds.length,
-                  totalCount: _filtered.length,
-                  onSelectAll: _selectAll,
-                  onClearSelection: _clearSelection,
-                  onDelete: _deleteSelected,
-                  onEdit: _isSingleSelection ? _editSelected : null,
-                  onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                child: SearchField(
+                  hintText: 'Search providers...',
+                  controller: _searchController,
+                ),
+              ),
+              if (_selectedIds.isNotEmpty) ...[
+                Global.gapMd,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SelectionActionBar(
+                    selectedCount: _selectedIds.length,
+                    totalCount: _filtered.length,
+                    onSelectAll: _selectAll,
+                    onClearSelection: _clearSelection,
+                    onDelete: _deleteSelected,
+                    onEdit: _isSingleSelection ? _editSelected : null,
+                    onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                  ),
+                ),
+              ],
+              Global.gapMd,
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    _buildProviderSliver(),
+                    SliverToBoxAdapter(child: Global.gapMd),
+                    SliverToBoxAdapter(child: SizedBox(height: 80)),
+                  ],
                 ),
               ),
             ],
-            Global.gapMd,
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  _buildProviderSliver(),
-                  SliverToBoxAdapter(child: Global.gapMd),
-                  SliverToBoxAdapter(child: SizedBox(height: 80)),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
-  Widget _buildAddProviderButton() => Container(
-    color: ThemeUtil.backgroundLight,
+  Widget _buildAddProviderButton(ColorScheme colorScheme) => Container(
+    color: colorScheme.surface,
     padding: const EdgeInsets.all(16),
     child: SafeArea(
       top: false,
       child: SizedBox(
         width: double.infinity,
-        child: ElevatedButton.icon(
+        child: PrimaryButton(
+          text: 'Add New Provider',
           onPressed: _addProvider,
-          style: ButtonStyle(
-            backgroundColor: ThemeUtil.interactiveBackground(
-              ThemeUtil.primaryColor,
-            ),
-            foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
-            overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
-            padding: WidgetStateProperty.all(
-              const EdgeInsets.symmetric(vertical: 16),
-            ),
-            shape: WidgetStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            elevation: WidgetStateProperty.all(0),
-            splashFactory: NoSplash.splashFactory,
-          ),
-          icon: const Icon(Icons.add),
-          label: Text(
-            'Add New Provider',
-            style: ThemeUtil.bodyLarge.copyWith(color: ThemeUtil.textLight),
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 16),
         ),
       ),
     ),

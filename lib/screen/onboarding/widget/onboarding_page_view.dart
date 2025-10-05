@@ -10,7 +10,8 @@ class OnboardingPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
 
     return Padding(
       padding: Global.padLg,
@@ -21,7 +22,10 @@ class OnboardingPageView extends StatelessWidget {
           Container(
             width: 280,
             height: 280,
-            decoration: BoxDecoration(borderRadius: Global.borderXl),
+            decoration: BoxDecoration(
+              borderRadius: Global.borderXl,
+              color: colorScheme.surface,
+            ),
             child: ClipRRect(
               borderRadius: Global.borderXl,
               child: Image.asset(
@@ -36,7 +40,7 @@ class OnboardingPageView extends StatelessWidget {
                     height: 280,
                     decoration: BoxDecoration(
                       borderRadius: Global.borderSm,
-                      color: ThemeUtil.backgroundLight,
+                      color: colorScheme.surface,
                     ),
                     child: ClipRRect(
                       borderRadius: Global.borderSm,
@@ -60,7 +64,7 @@ class OnboardingPageView extends StatelessWidget {
             item.title,
             textAlign: TextAlign.center,
             style: theme.textTheme.headlineMedium?.copyWith(
-              color: ThemeUtil.onboardingTextPrimary,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.bold,
               height: 1.2,
             ),
@@ -73,7 +77,7 @@ class OnboardingPageView extends StatelessWidget {
             item.description,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: ThemeUtil.onboardingTextSecondary.withValues(
+              color: colorScheme.onSurface.withValues(
                 alpha: ThemeUtil.onboardingTextSecondaryOpacity,
               ),
               height: 1.5,

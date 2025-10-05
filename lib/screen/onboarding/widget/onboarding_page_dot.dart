@@ -9,6 +9,8 @@ class OnboardingPageDot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return AnimatedContainer(
       duration: Global.animFast,
       margin: const EdgeInsets.symmetric(horizontal: Global.spacingXs),
@@ -16,8 +18,8 @@ class OnboardingPageDot extends StatelessWidget {
       width: isActive ? 24 : 8,
       decoration: BoxDecoration(
         color: isActive
-            ? ThemeUtil.onboardingDotActive
-            : ThemeUtil.onboardingDotInactive.withValues(
+            ? colorScheme.primary
+            : colorScheme.onSurface.withValues(
                 alpha: ThemeUtil.onboardingDotInactiveOpacity,
               ),
         borderRadius: BorderRadius.circular(4),

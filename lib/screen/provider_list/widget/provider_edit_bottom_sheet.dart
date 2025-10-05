@@ -51,61 +51,80 @@ class _State extends State<ProviderEditBottomSheet> {
   }
 
   @override
-  Widget build(BuildContext context) => Form(
-    key: _formKey,
-    child: Column(
-      children: [
-        _field('Provider Name', _nameController, Icons.business),
-        Global.gapLg,
-        _field('Description', _descController, Icons.description, lines: 4),
-        Global.gapLg,
-        _iconField(),
-        Global.gapXl,
-        PrimaryButton(text: 'Save Changes', onPressed: _save),
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          _field(
+            'Provider Name',
+            _nameController,
+            Icons.business,
+            colorScheme: colorScheme,
+          ),
+          Global.gapLg,
+          _field(
+            'Description',
+            _descController,
+            Icons.description,
+            lines: 4,
+            colorScheme: colorScheme,
+          ),
+          Global.gapLg,
+          _iconField(colorScheme),
+          Global.gapXl,
+          PrimaryButton(text: 'Save Changes', onPressed: _save),
+        ],
+      ),
+    );
+  }
 
   Widget _field(
     String label,
     TextEditingController controller,
     IconData icon, {
     int lines = 1,
+    ColorScheme? colorScheme,
   }) => TextFormField(
     controller: controller,
     maxLines: lines,
     decoration: InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, color: ThemeUtil.primaryColor),
+      prefixIcon: Icon(
+        icon,
+        color: (colorScheme ?? Theme.of(context).colorScheme).primary,
+      ),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       filled: true,
-      fillColor: ThemeUtil.surfaceLight,
+      fillColor: (colorScheme ?? Theme.of(context).colorScheme).surface,
     ),
     validator: (v) => v?.trim().isEmpty == true ? 'Required' : null,
   );
 
-  Widget _iconField() => GestureDetector(
+  Widget _iconField(ColorScheme colorScheme) => GestureDetector(
     onTap: _showIconPicker,
     child: Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
+          color: colorScheme.outlineVariant,
         ),
         borderRadius: BorderRadius.circular(12),
-        color: ThemeUtil.surfaceLight,
+        color: colorScheme.surface,
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: ThemeUtil.primaryColor.withValues(alpha: 0.1),
+              color: colorScheme.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               IconUtil.getIcon(_selectedIcon),
-              color: ThemeUtil.primaryColor,
+              color: colorScheme.primary,
             ),
           ),
           const SizedBox(width: 12),
@@ -113,7 +132,7 @@ class _State extends State<ProviderEditBottomSheet> {
             child: Text(
               'Tap to change icon',
               style: ThemeUtil.bodyMedium.copyWith(
-                color: ThemeUtil.textSecondary,
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
           ),

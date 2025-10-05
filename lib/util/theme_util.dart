@@ -207,19 +207,47 @@ class ThemeUtil {
   }
 
   static ThemeData get darkTheme {
+    final baseScheme = ColorScheme.fromSeed(
+      seedColor: primaryColor,
+      brightness: Brightness.dark,
+    );
+
+    final colorScheme = baseScheme.copyWith(
+      primary: primaryLight,
+      onPrimary: textLight,
+      primaryContainer: primaryDark,
+      onPrimaryContainer: textLight,
+      secondary: secondaryLight,
+      onSecondary: textLight,
+      secondaryContainer: secondaryDark,
+      onSecondaryContainer: textLight,
+      tertiary: accentLight,
+      onTertiary: textLight,
+      tertiaryContainer: accentDark,
+      onTertiaryContainer: textLight,
+      error: error,
+      onError: textLight,
+      errorContainer: error.withValues(alpha: 0.2),
+      onErrorContainer: error,
+  surface: surfaceDark,
+  onSurface: textLight,
+      onSurfaceVariant: textLight.withValues(alpha: 0.72),
+      outline: textLight.withValues(alpha: 0.2),
+      outlineVariant: textLight.withValues(alpha: 0.1),
+      shadow: Colors.black,
+      scrim: Colors.black,
+      inverseSurface: surfaceLight,
+      onInverseSurface: textPrimary,
+      inversePrimary: primaryColor,
+      surfaceTint: primaryLight,
+    );
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
       fontFamily: 'Inter',
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: primaryColor,
-        brightness: Brightness.dark,
-        primary: primaryLight,
-        secondary: secondaryLight,
-        tertiary: accentLight,
-        surface: surfaceDark,
-        error: error,
-      ),
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: backgroundDark,
       appBarTheme: const AppBarTheme(
         backgroundColor: backgroundDark,
         foregroundColor: textLight,
@@ -269,6 +297,16 @@ class ThemeUtil {
     end: Alignment.bottomCenter,
     colors: [primaryColor.withValues(alpha: 0.1), backgroundLight],
   );
+
+  static LinearGradient darkBackgroundGradient(ColorScheme colorScheme) =>
+      LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          colorScheme.primary.withValues(alpha: 0.15),
+          colorScheme.surface,
+        ],
+      );
 
   static WidgetStateProperty<Color?> interactiveOverlay(
     Color color, {

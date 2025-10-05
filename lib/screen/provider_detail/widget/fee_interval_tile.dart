@@ -24,87 +24,97 @@ class FeeIntervalTile extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.only(bottom: 12),
-    child: InteractiveSurface(
-      onTap: () {
-        HapticFeedback.selectionClick();
-        onTap?.call();
-      },
-      onLongPress: () {
-        HapticFeedback.mediumImpact();
-        onLongPress();
-      },
-      builder: (context, hovered, pressed) => AnimatedContainer(
-        duration: const Duration(milliseconds: 120),
-        curve: Curves.easeOut,
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: ThemeUtil.interactiveSurfaceColor(
-            isSelected
-                ? ThemeUtil.primaryColor.withValues(alpha: 0.08)
-                : ThemeUtil.surfaceLight,
-            hovered: hovered,
-            pressed: pressed,
-          ),
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isSelected
-                ? ThemeUtil.primaryColor
-                : ThemeUtil.textSecondary.withValues(alpha: 0.2),
-            width: isSelected ? 2 : 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: ThemeUtil.textSecondary.withValues(
-                alpha: hovered || pressed ? 0.12 : 0.08,
-              ),
-              blurRadius: hovered || pressed ? 10 : 4,
-              offset: const Offset(0, 2),
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: InteractiveSurface(
+        onTap: () {
+          HapticFeedback.selectionClick();
+          onTap?.call();
+        },
+        onLongPress: () {
+          HapticFeedback.mediumImpact();
+          onLongPress();
+        },
+        builder: (context, hovered, pressed) => AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          curve: Curves.easeOut,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: ThemeUtil.interactiveSurfaceColor(
+              isSelected
+                  ? colorScheme.primary.withValues(alpha: 0.12)
+                  : colorScheme.surface,
+              hovered: hovered,
+              pressed: pressed,
+              overlayColor: colorScheme.primary,
             ),
-          ],
-        ),
-        child: Row(
-          children: [
-            if (showSelection) _buildCheckbox(),
-            Expanded(child: _buildContent()),
-            _buildFeeChip(),
-          ],
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: isSelected
+                  ? colorScheme.primary
+                  : colorScheme.outlineVariant,
+              width: isSelected ? 2 : 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: colorScheme.shadow.withValues(
+                  alpha: hovered || pressed ? 0.16 : 0.08,
+                ),
+                blurRadius: hovered || pressed ? 10 : 4,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              if (showSelection) _buildCheckbox(colorScheme),
+              Expanded(child: _buildContent(colorScheme)),
+              _buildFeeChip(colorScheme),
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
-  Widget _buildCheckbox() => Padding(
+  Widget _buildCheckbox(ColorScheme colorScheme) => Padding(
     padding: const EdgeInsets.only(right: 12),
     child: Checkbox(
       value: isSelected,
       onChanged: (value) => onSelectionChanged(value ?? false),
       visualDensity: VisualDensity.compact,
-      activeColor: ThemeUtil.primaryColor,
+      activeColor: colorScheme.primary,
     ),
   );
 
-  Widget _buildContent() => Column(
+  Widget _buildContent(ColorScheme colorScheme) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
       Text(
         _formatAmountRange(),
-        style: ThemeUtil.titleSmall.copyWith(fontWeight: FontWeight.w600),
+        style: ThemeUtil.titleSmall.copyWith(
+          fontWeight: FontWeight.w600,
+          color: colorScheme.onSurface,
+        ),
       ),
       const SizedBox(height: 4),
       Text(
         _formatDate(feeInterval.creationDatetime ?? DateTime.now()),
-        style: ThemeUtil.bodySmall.copyWith(color: ThemeUtil.textSecondary),
+        style: ThemeUtil.bodySmall.copyWith(
+          color: colorScheme.onSurfaceVariant,
+        ),
       ),
     ],
   );
 
-  Widget _buildFeeChip() => Container(
+  Widget _buildFeeChip(ColorScheme colorScheme) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
     decoration: BoxDecoration(
-      color: ThemeUtil.success.withValues(alpha: 0.1),
+      color: ThemeUtil.success.withValues(alpha: 0.12),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(
         color: ThemeUtil.success.withValues(alpha: 0.3),
@@ -114,7 +124,7 @@ class FeeIntervalTile extends StatelessWidget {
     child: Text(
       '${_formatFee(feeInterval.fee ?? 0)} Ar',
       style: ThemeUtil.labelMedium.copyWith(
-        color: ThemeUtil.success,
+        color: colorScheme.onSurface,
         fontWeight: FontWeight.w600,
       ),
     ),

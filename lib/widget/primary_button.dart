@@ -18,16 +18,18 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: isFullWidth ? double.infinity : null,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor: ThemeUtil.interactiveBackground(
-            ThemeUtil.primaryColor,
+            colorScheme.primary,
           ),
-          foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
-          overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
+          foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
+          overlayColor: ThemeUtil.interactiveOverlay(colorScheme.onPrimary),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
@@ -35,7 +37,12 @@ class PrimaryButton extends StatelessWidget {
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
         ),
-        child: Text(text, style: ThemeUtil.labelLarge),
+        child: Text(
+          text,
+          style: ThemeUtil.labelLarge.copyWith(
+            color: colorScheme.onPrimary,
+          ),
+        ),
       ),
     );
   }

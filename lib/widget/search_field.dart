@@ -16,27 +16,29 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       height: 48,
       decoration: BoxDecoration(
-        color: ThemeUtil.backgroundLight,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.2),
+          color: colorScheme.outlineVariant,
         ),
       ),
       child: TextField(
         controller: controller,
         onChanged: onChanged,
-        style: ThemeUtil.bodyMedium,
+        style: ThemeUtil.bodyMedium.copyWith(color: colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: ThemeUtil.bodyMedium.copyWith(
-            color: ThemeUtil.textSecondary,
+            color: colorScheme.onSurfaceVariant,
           ),
           prefixIcon: Icon(
             Icons.search,
-            color: ThemeUtil.textSecondary,
+            color: colorScheme.onSurfaceVariant,
             size: 20,
           ),
           border: InputBorder.none,
