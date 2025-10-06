@@ -60,7 +60,7 @@ class _Content extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Expanded(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: EdgeInsets.fromLTRB(
                 20,
                 0,
