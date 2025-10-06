@@ -11,6 +11,7 @@ import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
 import '../fee_interval/new_fee_interval_screen.dart';
 import 'widget/fee_interval_edit_bottom_sheet.dart';
+import '../optimize_fee/optimize_fee_screen.dart';
 
 /// Provider details screen with fee intervals management
 class ProviderDetailScreen extends StatefulWidget {
@@ -438,13 +439,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    // TODO: Navigate to fee optimization screen
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Navigating to Fee Optimization...'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const OptimizeFeeScreen(),
       ),
     );
 
