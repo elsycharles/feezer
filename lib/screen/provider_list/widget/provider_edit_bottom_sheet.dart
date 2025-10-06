@@ -6,7 +6,7 @@ import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/icon_selector_field.dart';
 import '../../../widget/loading_widgets.dart';
-import '../../../util/theme_util.dart';
+import '../../../widget/app_toast.dart';
 
 /// Clean provider editor
 class ProviderEditBottomSheet extends StatefulWidget {
@@ -106,7 +106,7 @@ class _State extends State<ProviderEditBottomSheet> {
         if (mounted) {
           Navigator.pop(context);
           widget.onSave(provider);
-          ThemeUtil.showSuccessToast('Provider updated successfully', context: context);
+          AppToast.success(context, 'Provider updated successfully');
         }
       } finally {
         if (mounted) {

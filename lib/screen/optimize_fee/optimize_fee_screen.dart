@@ -5,6 +5,7 @@ import '../../model/optimization_result_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions.dart';
+import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
@@ -484,15 +485,15 @@ class _State extends State<OptimizeFeeScreen> {
   void _optimize() async {
     // Validation
     if (_amount <= 0) {
-      ThemeUtil.showErrorToast('Please enter a valid amount', context: context);
+      AppToast.error(context, 'Please enter a valid amount');
       return;
     }
     if (_minTransactions > _maxTransactions) {
-      ThemeUtil.showErrorToast('Min transactions cannot be greater than max', context: context);
+      AppToast.error(context, 'Min transactions cannot be greater than max');
       return;
     }
     if (_selectedProvider == null) {
-      ThemeUtil.showErrorToast('Please select a provider', context: context);
+      AppToast.error(context, 'Please select a provider');
       return;
     }
 

@@ -6,7 +6,7 @@ import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/loading_widgets.dart';
-import '../../../util/theme_util.dart';
+import '../../../widget/app_toast.dart';
 
 /// Clean fee interval editor
 class FeeIntervalEditBottomSheet extends StatefulWidget {
@@ -141,7 +141,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         if (mounted) {
           Navigator.pop(context);
           widget.onSave(feeInterval);
-          ThemeUtil.showSuccessToast('Fee interval updated successfully', context: context);
+          AppToast.success(context, 'Fee interval updated successfully');
         }
       } finally {
         if (mounted) {

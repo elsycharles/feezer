@@ -8,6 +8,7 @@ import '../../util/extensions.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
+import '../../widget/app_toast.dart';
 
 /// Clean screen for creating new fee intervals
 class NewFeeIntervalScreen extends StatefulWidget {
@@ -218,7 +219,7 @@ class _State extends State<NewFeeIntervalScreen> {
           creationDateTime: now,
         );
         widget.onFeeIntervalAdded?.call(feeInterval);
-        ThemeUtil.showSuccessToast('Fee interval created successfully', context: context);
+        AppToast.success(context, 'Fee interval created successfully');
         context.pop();
       }
     }

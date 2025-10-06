@@ -49,9 +49,9 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
           onTap: () => Navigator.of(context).maybePop(),
-          splashColor: colorScheme.onSurface.withOpacity(0.1),
-          highlightColor: colorScheme.onSurface.withOpacity(0.05),
-          hoverColor: colorScheme.onSurface.withOpacity(0.08),
+          splashColor: colorScheme.onSurface.withValues(alpha: 0.1),
+          highlightColor: colorScheme.onSurface.withValues(alpha: 0.05),
+          hoverColor: colorScheme.onSurface.withValues(alpha: 0.08),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),

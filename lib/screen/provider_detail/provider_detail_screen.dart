@@ -12,6 +12,7 @@ import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
 import '../fee_interval/new_fee_interval_screen.dart';
 import 'widget/fee_interval_edit_bottom_sheet.dart';
+import '../../widget/app_toast.dart';
 import '../optimize_fee/optimize_fee_screen.dart';
 
 /// Provider details screen with fee intervals management
@@ -540,10 +541,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           _filteredIntervals = _feeIntervals;
           _selectedIds.clear();
         });
-        ThemeUtil.showSuccessToast(
-          '$count fee interval${count > 1 ? 's' : ''} deleted successfully', 
-          context: context
-        );
+        AppToast.success(context, '$count fee interval${count > 1 ? 's' : ''} deleted successfully');
       }
     }
   }

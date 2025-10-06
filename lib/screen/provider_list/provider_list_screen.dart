@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
-import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
+import '../../widget/app_toast.dart';
 import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
 import '../provider_detail/provider_detail_screen.dart';
@@ -118,7 +118,7 @@ class _State extends State<ProviderListScreen> {
 
     if (_lastBackPressed == null || now.difference(_lastBackPressed!) > exitTimeLimit) {
       _lastBackPressed = now;
-      ThemeUtil.showInfoToast('Press again to exit', context: context);
+      AppToast.info(context, 'Press again to exit');
     } else {
       SystemNavigator.pop();
     }
@@ -309,10 +309,7 @@ class _State extends State<ProviderListScreen> {
           _providers.removeWhere((p) => _selectedIds.contains(p.id));
           _selectedIds.clear();
         });
-        ThemeUtil.showSuccessToast(
-          '$count provider${count > 1 ? 's' : ''} deleted successfully', 
-          context: context
-        );
+        AppToast.success(context, '$count provider${count > 1 ? 's' : ''} deleted successfully');
       }
     }
   }

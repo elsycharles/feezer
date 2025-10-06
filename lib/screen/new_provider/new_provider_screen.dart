@@ -8,6 +8,7 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
 import '../../widget/loading_button.dart';
+import '../../widget/app_toast.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {
@@ -182,7 +183,7 @@ class _State extends State<NewProviderScreen> {
           creationDatetime: now,
         );
         widget.onProviderAdded?.call(provider);
-        ThemeUtil.showSuccessToast('Provider created successfully', context: context);
+        AppToast.success(context, 'Provider created successfully');
         context.pop();
       }
     }
