@@ -124,9 +124,13 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 _buildSelectionBar(),
               ],
               Global.gapMd,
+              _buildIntervalsTitle(),
+              Global.gapSm,
               Expanded(
                 child: CustomScrollView(
                   slivers: [
+                    if (_filteredIntervals.isNotEmpty)
+                      SliverToBoxAdapter(child: _buildIntervalsHeaderRow()),
                     _buildIntervalSliver(),
                     SliverToBoxAdapter(child: Global.gapMd),
                     SliverToBoxAdapter(child: SizedBox(height: 80)),
@@ -185,6 +189,63 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
             }, childCount: _filteredIntervals.length),
           ),
         );
+
+  Widget _buildIntervalsTitle() => Container(
+    alignment: Alignment.centerLeft,
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: Row(
+      children: [
+        Text(
+          'Fee intervals',
+          style: ThemeUtil.titleSmall.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          '(${_filteredIntervals.length})',
+          style: ThemeUtil.labelMedium.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildIntervalsHeaderRow() => Container(
+    margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+    padding: const EdgeInsets.all(16), // Même padding que les tuiles
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      borderRadius: BorderRadius.circular(16), // Même radius que les tuiles
+      border: Border.all(
+        color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.12),
+      ),
+    ),
+    child: Row(
+      children: [
+        // Pas de checkbox dans l'en-tête, donc pas d'espace réservé
+        Expanded(
+          child: _headerCell('Fee interval', alignment: TextAlign.left),
+        ),
+        // Espace approximatif pour le chip de frais (padding + contenu)
+        Container(
+          constraints: const BoxConstraints(minWidth: 60),
+          child: _headerCell('Fee', alignment: TextAlign.center),
+        ),
+      ],
+    ),
+  );
+
+  Widget _headerCell(String text, {TextAlign alignment = TextAlign.center}) => Text(
+    text,
+    style: ThemeUtil.labelMedium.copyWith(
+      color: Theme.of(context).colorScheme.onSurfaceVariant,
+      fontWeight: FontWeight.w600,
+    ),
+    textAlign: alignment,
+  );
 
   Widget _buildSearchBar(ColorScheme colorScheme) => Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),

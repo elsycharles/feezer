@@ -6,8 +6,8 @@ import '../../styles/global.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/amount_input_widget.dart';
-import '../../widget/transaction_input_widget.dart';
+import 'widget/amount_input_widget.dart';
+import 'widget/transaction_input_widget.dart';
 
 import '../../widget/primary_button.dart';
 import '../../widget/surface_card.dart';
