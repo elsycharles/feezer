@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
-import '../../util/icon_util.dart';
 import '../../util/theme_util.dart';
+import '../../util/extensions.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/icon_picker.dart';
+import '../../widget/form_field.dart' as custom_form;
+import '../../widget/icon_selector_field.dart';
 import '../../widget/primary_button.dart';
 
 /// Clean screen for creating new providers
@@ -32,275 +33,131 @@ class _State extends State<NewProviderScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: custom.AppBar(
-        title: 'New Provider',
-        leading: IconButton(
-          onPressed: Navigator.of(context).pop,
-          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
-        ),
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: context.theme.scaffoldBackgroundColor,
+    appBar: custom.AppBar(
+      title: 'New Provider',
+      leading: IconButton(
+        onPressed: context.pop,
+        icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _buildHeader(colorScheme),
-                    Global.gapXl,
-                    _buildNameField(colorScheme),
-                    Global.gapLg,
-                    _buildDescriptionField(colorScheme),
-                    Global.gapLg,
-                    _buildIconField(colorScheme),
-                  ],
-                ),
+    ),
+    body: Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: Global.padLg,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildHeader(),
+                  Global.gapXl,
+                  _buildNameField(),
+                  Global.gapLg,
+                  _buildDescriptionField(),
+                  Global.gapLg,
+                  _buildIconField(),
+                ],
               ),
             ),
-            _buildActions(colorScheme),
-          ],
-        ),
+          ),
+          _buildActions(),
+        ],
       ),
-    );
-  }
+    ),
+  );
 
-  Widget _buildHeader(ColorScheme colorScheme) => Column(
+  Widget _buildHeader() => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         'Create New Provider',
         style: ThemeUtil.titleLarge.copyWith(
-          color: colorScheme.onSurface,
+          color: context.colorScheme.onSurface,
         ),
       ),
-      const SizedBox(height: 8),
+      Global.gapSm,
       Text(
         'Add a new financial service provider to your list',
         style: ThemeUtil.bodyMedium.copyWith(
-          color: colorScheme.onSurface.withValues(alpha: 0.7),
+          color: context.colorScheme.onSurface.withValues(alpha: 0.7),
           height: 1.4,
         ),
       ),
     ],
   );
 
-  Widget _buildNameField(ColorScheme colorScheme) =>
-      _buildField(
-    'Provider Name',
-    _nameController,
-    Icons.business,
-    'Enter provider name',
-    colorScheme: colorScheme,
+  Widget _buildNameField() => custom_form.FormField(
+    label: 'Provider Name',
+    controller: _nameController,
+    icon: Icons.business,
+    hintText: 'Enter provider name',
     required: true,
   );
 
-  Widget _buildDescriptionField(ColorScheme colorScheme) =>
-      _buildField(
-    'Description',
-    _descriptionController,
-    Icons.description,
-    'Enter description',
-    colorScheme: colorScheme,
-    lines: 4,
+  Widget _buildDescriptionField() => custom_form.FormField(
+    label: 'Description',
+    controller: _descriptionController,
+    icon: Icons.description,
+    hintText: 'Enter description',
+    maxLines: 4,
     required: true,
   );
 
-  Widget _buildIconField(ColorScheme colorScheme) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Icon',
-        style: ThemeUtil.bodyLarge.copyWith(
-          color: colorScheme.onSurface,
-        ),
-      ),
-      const SizedBox(height: 8),
-      GestureDetector(
-        onTap: _showIconPicker,
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: colorScheme.outlineVariant,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            color: colorScheme.surface,
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: colorScheme.primary.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  IconUtil.getIcon(_selectedIcon),
-                  color: colorScheme.primary,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  'Tap to select icon',
-                  style: ThemeUtil.bodyMedium.copyWith(
-                    color: colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
-                ),
-              ),
-              Icon(
-                Icons.keyboard_arrow_down,
-                color: colorScheme.onSurface.withValues(alpha: 0.7),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ],
+  Widget _buildIconField() => IconSelectorField(
+    selectedIcon: _selectedIcon,
+    onChanged: (icon) => setState(() => _selectedIcon = icon),
   );
 
-  Widget _buildField(
-    String label,
-    TextEditingController controller,
-    IconData icon,
-    String hint, {
-    int lines = 1,
-    bool required = false,
-    ColorScheme? colorScheme,
-  }) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        label,
-        style: ThemeUtil.bodyLarge.copyWith(
-          color: (colorScheme ?? Theme.of(context).colorScheme).onSurface,
-        ),
-      ),
-      const SizedBox(height: 8),
-      TextFormField(
-        controller: controller,
-        textInputAction: lines > 1
-            ? TextInputAction.newline
-            : TextInputAction.next,
-        keyboardType: lines > 1 ? TextInputType.multiline : TextInputType.text,
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: ThemeUtil.bodyMedium.copyWith(
-            color: (colorScheme ?? Theme.of(context).colorScheme)
-        .onSurface
-                .withValues(alpha: 0.6),
-          ),
-          prefixIcon: Icon(
-            icon,
-            color: (colorScheme ?? Theme.of(context).colorScheme).primary,
-          ),
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: lines > 1 ? 16 : 12,
-          ),
-          border: _inputBorder(colorScheme: colorScheme),
-          enabledBorder: _inputBorder(colorScheme: colorScheme),
-          focusedBorder: _inputBorder(focused: true, colorScheme: colorScheme),
-          errorBorder: _inputBorder(error: true, colorScheme: colorScheme),
-          filled: true,
-          fillColor:
-              (colorScheme ?? Theme.of(context).colorScheme).surface,
-        ),
-        maxLines: lines,
-        minLines: lines > 1 ? 2 : 1,
-        validator: required ? _validateRequired : null,
-      ),
-    ],
-  );
-
-  OutlineInputBorder _inputBorder({
-    bool focused = false,
-    bool error = false,
-    ColorScheme? colorScheme,
-  }) {
-    final scheme = colorScheme ?? Theme.of(context).colorScheme;
-  final baseColor = error
-    ? scheme.error
-    : focused
-      ? scheme.primary
-      : scheme.outlineVariant;
-
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(
-        color: baseColor,
-        width: focused ? 2 : 1,
-      ),
-    );
-  }
-
-  String? _validateRequired(String? value) =>
-      value?.trim().isEmpty == true ? 'This field is required' : null;
-
-  Widget _buildActions(ColorScheme colorScheme) =>
-      Container(
+  Widget _buildActions() => Container(
     padding: EdgeInsets.fromLTRB(
       20,
       20,
       20,
-      MediaQuery.of(context).padding.bottom + 20,
+      context.mediaQuery.padding.bottom + 20,
     ),
     decoration: BoxDecoration(
-      color: colorScheme.surface,
-      boxShadow: [
-        BoxShadow(
-          color: colorScheme.shadow.withValues(alpha: 0.2),
-          blurRadius: 10,
-          offset: const Offset(0, -2),
-        ),
-      ],
+      color: context.colorScheme.surface,
+      boxShadow: Global.shadowMd,
     ),
     child: Row(
       children: [
         Expanded(
           child: OutlinedButton(
-            onPressed: Navigator.of(context).pop,
+            onPressed: context.pop,
             style: ButtonStyle(
               foregroundColor: WidgetStateProperty.all(
-                colorScheme.onSurfaceVariant,
+                context.colorScheme.onSurfaceVariant,
               ),
               overlayColor: ThemeUtil.interactiveOverlay(
-                colorScheme.onSurfaceVariant,
+                context.colorScheme.onSurfaceVariant,
               ),
               side: WidgetStateProperty.all(
-                BorderSide(
-                  color: colorScheme.outlineVariant,
-                ),
+                BorderSide(color: context.colorScheme.outlineVariant),
               ),
               shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                RoundedRectangleBorder(borderRadius: Global.borderMd),
               ),
-              padding: WidgetStateProperty.all(
-                const EdgeInsets.symmetric(vertical: 16),
-              ),
+              padding: WidgetStateProperty.all(Global.padVerticalMd),
               splashFactory: NoSplash.splashFactory,
             ),
             child: Text(
               'Cancel',
               style: ThemeUtil.bodyMedium.copyWith(
-                color: colorScheme.onSurfaceVariant,
+                color: context.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
         ),
-        const SizedBox(width: 16),
+        Global.gapMd,
         Expanded(
           flex: 2,
-          child: PrimaryButton(text: 'Create Provider', onPressed: _create),
+          child: PrimaryButton(
+            text: 'Create Provider',
+            onPressed: _create,
+          ),
         ),
       ],
     ),
@@ -317,13 +174,7 @@ class _State extends State<NewProviderScreen> {
         creationDatetime: now,
       );
       widget.onProviderAdded?.call(provider);
-      Navigator.pop(context);
+      context.pop();
     }
   }
-
-  void _showIconPicker() => IconPicker.show(
-    context: context,
-    selected: _selectedIcon,
-    onSelected: (icon) => setState(() => _selectedIcon = icon),
-  );
 }

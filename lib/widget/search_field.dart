@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import '../util/theme_util.dart';
+import '../util/extensions.dart';
+import '../styles/global.dart';
 
 /// Reusable search field with icon
 class SearchField extends StatelessWidget {
-  final String hintText;
-  final ValueChanged<String>? onChanged;
-  final TextEditingController? controller;
-
   const SearchField({
     super.key,
     this.hintText = 'Search...',
@@ -14,40 +12,38 @@ class SearchField extends StatelessWidget {
     this.controller,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+  final String hintText;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
 
-    return Container(
-      height: 48,
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outlineVariant,
+  @override
+  Widget build(BuildContext context) => Container(
+    height: Global.buttonHeight,
+    decoration: BoxDecoration(
+      color: context.colorScheme.surface,
+      borderRadius: Global.borderMd,
+      border: Border.all(color: context.colorScheme.outlineVariant),
+    ),
+    child: TextField(
+      controller: controller,
+      onChanged: onChanged,
+      style: ThemeUtil.bodyMedium.copyWith(color: context.colorScheme.onSurface),
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: ThemeUtil.bodyMedium.copyWith(
+          color: context.colorScheme.onSurfaceVariant,
+        ),
+        prefixIcon: Icon(
+          Icons.search,
+          color: context.colorScheme.onSurfaceVariant,
+          size: 20,
+        ),
+        border: InputBorder.none,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
         ),
       ),
-      child: TextField(
-        controller: controller,
-        onChanged: onChanged,
-        style: ThemeUtil.bodyMedium.copyWith(color: colorScheme.onSurface),
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: ThemeUtil.bodyMedium.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-          prefixIcon: Icon(
-            Icons.search,
-            color: colorScheme.onSurfaceVariant,
-            size: 20,
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 14,
-          ),
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }

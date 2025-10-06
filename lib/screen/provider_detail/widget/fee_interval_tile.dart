@@ -95,7 +95,7 @@ class FeeIntervalTile extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       Text(
-        _formatAmountRange(),
+        feeInterval.formattedRange,
         style: ThemeUtil.titleSmall.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.onSurface,
@@ -103,7 +103,7 @@ class FeeIntervalTile extends StatelessWidget {
       ),
       const SizedBox(height: 4),
       Text(
-        _formatDate(feeInterval.creationDatetime ?? DateTime.now()),
+        _formatDate(feeInterval.creationDatetime),
         style: ThemeUtil.bodySmall.copyWith(
           color: colorScheme.onSurfaceVariant,
         ),
@@ -122,21 +122,13 @@ class FeeIntervalTile extends StatelessWidget {
       ),
     ),
     child: Text(
-      '${_formatFee(feeInterval.fee ?? 0)} Ar',
+      feeInterval.formattedFee,
       style: ThemeUtil.labelMedium.copyWith(
         color: colorScheme.onSurface,
         fontWeight: FontWeight.w600,
       ),
     ),
   );
-
-  String _formatAmountRange() {
-    final min = (feeInterval.minAmount ?? 0).toInt();
-    final max = (feeInterval.maxAmount ?? 0).toInt();
-    return '$min - $max Ar';
-  }
-
-  String _formatFee(double fee) => fee.toInt().toString();
 
   String _formatDate(DateTime date) => '${date.day}/${date.month}/${date.year}';
 }

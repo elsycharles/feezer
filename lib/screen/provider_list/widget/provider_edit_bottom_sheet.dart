@@ -2,10 +2,9 @@ import 'package:flutter/material.dart' hide BottomSheet;
 
 import '../../../model/provider_model.dart';
 import '../../../styles/global.dart';
-import '../../../util/icon_util.dart';
-import '../../../util/theme_util.dart';
 import '../../../widget/bottom_sheet.dart';
-import '../../../widget/icon_picker.dart';
+import '../../../widget/form_field.dart' as custom_form;
+import '../../../widget/icon_selector_field.dart';
 import '../../../widget/primary_button.dart';
 
 /// Clean provider editor
@@ -51,101 +50,36 @@ class _State extends State<ProviderEditBottomSheet> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          _field(
-            'Provider Name',
-            _nameController,
-            Icons.business,
-            colorScheme: colorScheme,
-          ),
-          Global.gapLg,
-          _field(
-            'Description',
-            _descController,
-            Icons.description,
-            lines: 4,
-            colorScheme: colorScheme,
-          ),
-          Global.gapLg,
-          _iconField(colorScheme),
-          Global.gapXl,
-          PrimaryButton(text: 'Save Changes', onPressed: _save),
-        ],
-      ),
-    );
-  }
-
-  Widget _field(
-    String label,
-    TextEditingController controller,
-    IconData icon, {
-    int lines = 1,
-    ColorScheme? colorScheme,
-  }) => TextFormField(
-    controller: controller,
-    maxLines: lines,
-    decoration: InputDecoration(
-      labelText: label,
-      prefixIcon: Icon(
-        icon,
-        color: (colorScheme ?? Theme.of(context).colorScheme).primary,
-      ),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-      filled: true,
-      fillColor: (colorScheme ?? Theme.of(context).colorScheme).surface,
-    ),
-    validator: (v) => v?.trim().isEmpty == true ? 'Required' : null,
-  );
-
-  Widget _iconField(ColorScheme colorScheme) => GestureDetector(
-    onTap: _showIconPicker,
-    child: Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: colorScheme.outlineVariant,
+  Widget build(BuildContext context) => Form(
+    key: _formKey,
+    child: Column(
+      children: [
+        custom_form.FormField(
+          label: 'Provider Name',
+          controller: _nameController,
+          icon: Icons.business,
+          required: true,
         ),
-        borderRadius: BorderRadius.circular(12),
-        color: colorScheme.surface,
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              IconUtil.getIcon(_selectedIcon),
-              color: colorScheme.primary,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              'Tap to change icon',
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-        ],
-      ),
+        Global.gapLg,
+        custom_form.FormField(
+          label: 'Description',
+          controller: _descController,
+          icon: Icons.description,
+          maxLines: 4,
+          required: true,
+        ),
+        Global.gapLg,
+        IconSelectorField(
+          selectedIcon: _selectedIcon,
+          onChanged: (icon) => setState(() => _selectedIcon = icon),
+        ),
+        Global.gapXl,
+        PrimaryButton(text: 'Save Changes', onPressed: _save),
+      ],
     ),
   );
 
-  void _showIconPicker() => IconPicker.show(
-    context: context,
-    selected: _selectedIcon,
-    onSelected: (icon) => setState(() => _selectedIcon = icon),
-  );
+
 
   void _save() {
     if (_formKey.currentState!.validate()) {

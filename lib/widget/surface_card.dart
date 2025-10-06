@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../styles/global.dart';
+import '../util/extensions.dart';
 
 /// Lightweight elevated surface container reused across headers
 class SurfaceCard extends StatelessWidget {
@@ -14,23 +16,13 @@ class SurfaceCard extends StatelessWidget {
   final double radius;
 
   @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      padding: padding,
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(radius),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.12),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: child,
-    );
-  }
+  Widget build(BuildContext context) => Container(
+    padding: padding,
+    decoration: BoxDecoration(
+      color: context.colorScheme.surface,
+      borderRadius: BorderRadius.circular(radius),
+      boxShadow: Global.shadowMd,
+    ),
+    child: child,
+  );
 }
