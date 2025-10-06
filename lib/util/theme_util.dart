@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+/// Enum for toast types
+enum ToastType { success, error, info, warning }
 
 class ThemeUtil {
   static const Color primaryColor = Color(0xFF4A6CF7);
@@ -390,23 +394,87 @@ class ThemeUtil {
     }
   }
 
-  /// Shows a styled SnackBar with theme colors
-  static void showSnackBar(BuildContext context, String message) {
-    final colorScheme = Theme.of(context).colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: labelMedium.copyWith(color: textLight),
-        ),
-        backgroundColor: colorScheme.onSurface.withValues(alpha: 0.9),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        margin: const EdgeInsets.all(16),
-        duration: const Duration(milliseconds: 1500),
-      ),
+  /// Shows a performant toast with theme-based styling
+  static void showToast(
+    String message, {
+    ToastType type = ToastType.info,
+    BuildContext? context,
+  }) {
+    late Color backgroundColor;
+    late Color textColor;
+
+    // Use theme colors if context is available, otherwise use default colors
+    if (context != null) {
+      final colorScheme = Theme.of(context).colorScheme;
+      final isDark = Theme.of(context).brightness == Brightness.dark;
+
+      switch (type) {
+        case ToastType.success:
+          backgroundColor = success;
+          textColor = Colors.white;
+          break;
+        case ToastType.error:
+          backgroundColor = Colors.red.shade600;
+          textColor = Colors.white;
+          break;
+        case ToastType.warning:
+          backgroundColor = Colors.orange.shade600;
+          textColor = Colors.white;
+          break;
+        case ToastType.info:
+          backgroundColor = isDark 
+              ? colorScheme.surface.withValues(alpha: 0.95) 
+              : colorScheme.onSurface.withValues(alpha: 0.9);
+          textColor = isDark ? colorScheme.onSurface : textLight;
+          break;
+      }
+    } else {
+      // Fallback colors when no context available
+      switch (type) {
+        case ToastType.success:
+          backgroundColor = success;
+          textColor = Colors.white;
+          break;
+        case ToastType.error:
+          backgroundColor = Colors.red.shade600;
+          textColor = Colors.white;
+          break;
+        case ToastType.warning:
+          backgroundColor = Colors.orange.shade600;
+          textColor = Colors.white;
+          break;
+        case ToastType.info:
+          backgroundColor = Colors.grey.shade800;
+          textColor = Colors.white;
+          break;
+      }
+    }
+
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 2,
+      backgroundColor: backgroundColor,
+      textColor: textColor,
+      fontSize: 14.0,
     );
+  }
+
+  /// Convenience methods for specific toast types
+  static void showSuccessToast(String message, {BuildContext? context}) {
+    showToast(message, type: ToastType.success, context: context);
+  }
+
+  static void showErrorToast(String message, {BuildContext? context}) {
+    showToast(message, type: ToastType.error, context: context);
+  }
+
+  static void showWarningToast(String message, {BuildContext? context}) {
+    showToast(message, type: ToastType.warning, context: context);
+  }
+
+  static void showInfoToast(String message, {BuildContext? context}) {
+    showToast(message, type: ToastType.info, context: context);
   }
 }

@@ -540,6 +540,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           _filteredIntervals = _feeIntervals;
           _selectedIds.clear();
         });
+        ThemeUtil.showSuccessToast(
+          '$count fee interval${count > 1 ? 's' : ''} deleted successfully', 
+          context: context
+        );
       }
     }
   }

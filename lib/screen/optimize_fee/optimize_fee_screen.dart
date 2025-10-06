@@ -484,15 +484,15 @@ class _State extends State<OptimizeFeeScreen> {
   void _optimize() async {
     // Validation
     if (_amount <= 0) {
-      context.showSnackBar('Please enter a valid amount');
+      ThemeUtil.showErrorToast('Please enter a valid amount', context: context);
       return;
     }
     if (_minTransactions > _maxTransactions) {
-      context.showSnackBar('Min transactions cannot be greater than max');
+      ThemeUtil.showErrorToast('Min transactions cannot be greater than max', context: context);
       return;
     }
     if (_selectedProvider == null) {
-      context.showSnackBar('Please select a provider');
+      ThemeUtil.showErrorToast('Please select a provider', context: context);
       return;
     }
 

@@ -182,6 +182,7 @@ class _State extends State<NewProviderScreen> {
           creationDatetime: now,
         );
         widget.onProviderAdded?.call(provider);
+        ThemeUtil.showSuccessToast('Provider created successfully', context: context);
         context.pop();
       }
     }

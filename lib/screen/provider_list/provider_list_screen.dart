@@ -118,7 +118,7 @@ class _State extends State<ProviderListScreen> {
 
     if (_lastBackPressed == null || now.difference(_lastBackPressed!) > exitTimeLimit) {
       _lastBackPressed = now;
-      ThemeUtil.showSnackBar(context, 'Press again to exit');
+      ThemeUtil.showInfoToast('Press again to exit', context: context);
     } else {
       SystemNavigator.pop();
     }
@@ -309,6 +309,10 @@ class _State extends State<ProviderListScreen> {
           _providers.removeWhere((p) => _selectedIds.contains(p.id));
           _selectedIds.clear();
         });
+        ThemeUtil.showSuccessToast(
+          '$count provider${count > 1 ? 's' : ''} deleted successfully', 
+          context: context
+        );
       }
     }
   }

@@ -218,6 +218,7 @@ class _State extends State<NewFeeIntervalScreen> {
           creationDateTime: now,
         );
         widget.onFeeIntervalAdded?.call(feeInterval);
+        ThemeUtil.showSuccessToast('Fee interval created successfully', context: context);
         context.pop();
       }
     }

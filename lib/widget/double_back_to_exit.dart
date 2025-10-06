@@ -35,7 +35,7 @@ class _DoubleBackToExitState extends State<DoubleBackToExit> {
 
     if (_lastPressed == null || now.difference(_lastPressed!) > exitTimeLimit) {
       _lastPressed = now;
-      ThemeUtil.showSnackBar(context, widget.message);
+      ThemeUtil.showInfoToast(widget.message, context: context);
     } else {
       SystemNavigator.pop();
     }
