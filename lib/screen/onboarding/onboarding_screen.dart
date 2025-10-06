@@ -18,11 +18,31 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  bool _shouldShowOnboarding = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstLaunch();
+  }
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
+    if (!isFirstLaunch && mounted) {
+      NavigationUtil.safeAsyncNavigate(
+        context: context,
+        isMounted: () => mounted,
+        getRoute: () async => AppRouter.providersRoute,
+      );
+    } else if (mounted) {
+      setState(() => _shouldShowOnboarding = true);
+    }
   }
 
   void _onPageChanged(int index) => setState(() => _currentIndex = index);
@@ -52,10 +72,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (!_shouldShowOnboarding) {
+      final colorScheme = Theme.of(context).colorScheme;
+      return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Center(
+          child: CircularProgressIndicator(color: colorScheme.primary),
+        ),
+      );
+    }
+
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: ThemeUtil.onboardingBackground,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -63,19 +93,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: Global.padMd,
+                padding: const EdgeInsets.all(16.0),
                 child: TextButton(
                   onPressed: _goToHome,
                   style: ButtonStyle(
                     overlayColor: ThemeUtil.interactiveOverlay(
-                      ThemeUtil.onboardingTextSecondary,
+                      theme.colorScheme.onSurface,
                     ),
                     splashFactory: NoSplash.splashFactory,
                   ),
                   child: Text(
                     'Skip',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: ThemeUtil.onboardingTextSecondary.withValues(
+                      color: theme.colorScheme.onSurface.withValues(
                         alpha: ThemeUtil.onboardingTextSecondaryOpacity,
                       ),
                       fontWeight: FontWeight.w500,

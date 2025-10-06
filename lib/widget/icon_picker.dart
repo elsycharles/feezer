@@ -12,41 +12,52 @@ class IconPicker {
     String title = 'Select Icon',
   }) => showDialog(
     context: context,
-    builder: (_) => Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(title, style: ThemeUtil.titleSmall),
-            const SizedBox(height: 16),
-            SizedBox(
-              height: 320,
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
+    builder: (_) {
+      final colorScheme = Theme.of(context).colorScheme;
+
+      return Dialog(
+        backgroundColor: colorScheme.surface,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: ThemeUtil.titleSmall.copyWith(
+                  color: colorScheme.onSurface,
                 ),
-                itemCount: IconUtil.availableIcons.length,
-                itemBuilder: (dialogContext, index) {
-                  final iconName = IconUtil.availableIcons[index];
-                  return _IconOption(
-                    iconName: iconName,
-                    selected: iconName == selected,
-                    onTap: () {
-                      onSelected(iconName);
-                      Navigator.of(dialogContext).pop();
-                    },
-                  );
-                },
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              SizedBox(
+                height: 320,
+                child: GridView.builder(
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                  ),
+                  itemCount: IconUtil.availableIcons.length,
+                  itemBuilder: (dialogContext, index) {
+                    final iconName = IconUtil.availableIcons[index];
+                    return _IconOption(
+                      iconName: iconName,
+                      selected: iconName == selected,
+                      onTap: () {
+                        onSelected(iconName);
+                        Navigator.of(dialogContext).pop();
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
 }
 
@@ -67,12 +78,14 @@ class _IconOption extends StatelessWidget {
     onTap: onTap,
     enableScale: false,
     builder: (_, hovered, pressed) {
+      final colorScheme = Theme.of(context).colorScheme;
       final color = ThemeUtil.interactiveSurfaceColor(
         selected
-            ? ThemeUtil.primaryColor.withValues(alpha: 0.12)
-            : ThemeUtil.surfaceLight,
+            ? colorScheme.primary.withValues(alpha: 0.16)
+            : colorScheme.surface,
         hovered: hovered,
         pressed: pressed,
+        overlayColor: colorScheme.primary,
       );
       final scale = pressed
           ? 0.95
@@ -91,14 +104,14 @@ class _IconOption extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: selected
-                  ? ThemeUtil.primaryColor
-                  : ThemeUtil.textSecondary.withValues(alpha: 0.12),
+                  ? colorScheme.primary
+                  : colorScheme.outlineVariant,
               width: selected ? 2 : 1,
             ),
             boxShadow: selected
                 ? [
                     BoxShadow(
-                      color: ThemeUtil.primaryColor.withValues(alpha: 0.12),
+                      color: colorScheme.primary.withValues(alpha: 0.2),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -109,8 +122,8 @@ class _IconOption extends StatelessWidget {
             child: Icon(
               IconUtil.getIcon(iconName),
               color: selected
-                  ? ThemeUtil.primaryColor
-                  : ThemeUtil.textSecondary,
+                  ? colorScheme.primary
+                  : colorScheme.onSurfaceVariant,
             ),
           ),
         ),

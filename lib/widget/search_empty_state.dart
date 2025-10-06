@@ -15,26 +15,34 @@ class SearchEmptyState extends StatelessWidget {
   final String? message;
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, size: 64, color: ThemeUtil.textSecondary),
-        const SizedBox(height: 16),
-        Text(
-          title,
-          style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
-          textAlign: TextAlign.center,
-        ),
-        if (message?.isNotEmpty == true) ...[
-          const SizedBox(height: 6),
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 64, color: colorScheme.onSurfaceVariant),
+          const SizedBox(height: 16),
           Text(
-            message!,
-            style: ThemeUtil.bodySmall,
+            title,
+            style: ThemeUtil.bodyMedium.copyWith(
+              color: colorScheme.onSurface,
+            ),
             textAlign: TextAlign.center,
           ),
+          if (message?.isNotEmpty == true) ...[
+            const SizedBox(height: 6),
+            Text(
+              message!,
+              style: ThemeUtil.bodySmall.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ],
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }

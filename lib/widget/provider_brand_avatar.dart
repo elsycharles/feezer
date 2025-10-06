@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../util/icon_util.dart';
-import '../util/theme_util.dart';
 
 /// Gradient avatar used for provider visuals across screens
 class ProviderBrandAvatar extends StatelessWidget {
@@ -14,31 +13,37 @@ class ProviderBrandAvatar extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) => Container(
-    width: size,
-    height: size,
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: [
-          ThemeUtil.primaryColor,
-          ThemeUtil.primaryColor.withValues(alpha: 0.8),
-        ],
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-      ),
-      borderRadius: BorderRadius.circular(size * 0.3),
-      boxShadow: [
-        BoxShadow(
-          color: ThemeUtil.primaryColor.withValues(alpha: 0.3),
-          blurRadius: size * 0.15,
-          offset: const Offset(0, 4),
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final primary = colorScheme.primary;
+    final highlight = Color.alphaBlend(
+      colorScheme.surface.withValues(alpha: 0.08),
+      primary,
+    );
+
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [primary, highlight],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-      ],
-    ),
-    child: Icon(
-      IconUtil.getIcon(iconName),
-      color: ThemeUtil.textLight,
-      size: size * 0.45,
-    ),
-  );
+        borderRadius: BorderRadius.circular(size * 0.3),
+        boxShadow: [
+          BoxShadow(
+            color: primary.withValues(alpha: 0.3),
+            blurRadius: size * 0.15,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Icon(
+        IconUtil.getIcon(iconName),
+        color: colorScheme.onPrimary,
+        size: size * 0.45,
+      ),
+    );
+  }
 }

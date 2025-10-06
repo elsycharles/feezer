@@ -49,89 +49,93 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       minAmount: 0,
       maxAmount: 1000,
       fee: 50,
-      creationDatetime: DateTime.now().subtract(const Duration(days: 1)),
+      creationDateTime: DateTime.now().subtract(const Duration(days: 1)),
     ),
     FeeInterval(
       id: 'interval_1',
       minAmount: 1001,
       maxAmount: 5000,
       fee: 150,
-      creationDatetime: DateTime.now().subtract(const Duration(days: 3)),
+      creationDateTime: DateTime.now().subtract(const Duration(days: 3)),
     ),
     FeeInterval(
       id: 'interval_2',
       minAmount: 5001,
       maxAmount: 10000,
       fee: 300,
-      creationDatetime: DateTime.now().subtract(const Duration(days: 7)),
+      creationDateTime: DateTime.now().subtract(const Duration(days: 7)),
     ),
     FeeInterval(
       id: 'interval_3',
       minAmount: 10001,
       maxAmount: 25000,
       fee: 500,
-      creationDatetime: DateTime.now().subtract(const Duration(days: 14)),
+      creationDateTime: DateTime.now().subtract(const Duration(days: 14)),
     ),
     FeeInterval(
       id: 'interval_4',
       minAmount: 25001,
       maxAmount: 50000,
       fee: 800,
-      creationDatetime: DateTime.now().subtract(const Duration(days: 21)),
+      creationDateTime: DateTime.now().subtract(const Duration(days: 21)),
     ),
   ];
 
   @override
-  Widget build(BuildContext context) => PopScope(
-        canPop: _selectedIds.isEmpty,
-        onPopInvokedWithResult: (didPop, result) {
-          // When selection mode is active, clear it instead of popping the route
-          if (!didPop && _selectedIds.isNotEmpty) {
-            setState(() => _selectedIds.clear());
-          }
-        },
-    child: Scaffold(
-      backgroundColor: ThemeUtil.backgroundLight,
-      appBar: custom.AppBar(
-        title: 'Provider details',
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            if (_selectedIds.isNotEmpty) {
-              // Clear selection instead of popping when in selection mode
-              setState(() => _selectedIds.clear());
-            } else {
-              Navigator.pop(context);
-            }
-          },
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return PopScope(
+      canPop: _selectedIds.isEmpty,
+      onPopInvokedWithResult: (didPop, result) {
+        // When selection mode is active, clear it instead of popping the route
+        if (!didPop && _selectedIds.isNotEmpty) {
+          setState(() => _selectedIds.clear());
+        }
+      },
+      child: Scaffold(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        appBar: custom.AppBar(
+          title: 'Provider details',
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+            onPressed: () {
+              if (_selectedIds.isNotEmpty) {
+                // Clear selection instead of popping when in selection mode
+                setState(() => _selectedIds.clear());
+              } else {
+                Navigator.pop(context);
+              }
+            },
+          ),
         ),
-      ),
-      bottomNavigationBar: _buildAddButton(),
-      body: SafeArea(
-        child: Column(
-          children: [
-            _buildHeader(),
-            Global.gapMd,
-            _buildSearchBar(),
-            if (_selectedIds.isNotEmpty) ...[
+        bottomNavigationBar: _buildAddButton(colorScheme),
+        body: SafeArea(
+          child: Column(
+            children: [
+              _buildHeader(),
               Global.gapMd,
-              _buildSelectionBar(),
-            ],
-            Global.gapMd,
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  _buildIntervalSliver(),
-                  SliverToBoxAdapter(child: Global.gapMd),
-                  SliverToBoxAdapter(child: SizedBox(height: 80)),
-                ],
+              _buildSearchBar(colorScheme),
+              if (_selectedIds.isNotEmpty) ...[
+                Global.gapMd,
+                _buildSelectionBar(),
+              ],
+              Global.gapMd,
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    _buildIntervalSliver(),
+                    SliverToBoxAdapter(child: Global.gapMd),
+                    SliverToBoxAdapter(child: SizedBox(height: 80)),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 
   Widget _buildSelectionBar() => FeeIntervalSelectionActionBar(
     selectedCount: _selectedIds.length,
@@ -179,15 +183,15 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           ),
         );
 
-  Widget _buildSearchBar() => Container(
+  Widget _buildSearchBar(ColorScheme colorScheme) => Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: ThemeUtil.surfaceLight,
+      color: colorScheme.surface,
       borderRadius: BorderRadius.circular(16),
       boxShadow: [
         BoxShadow(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.08),
+          color: colorScheme.shadow.withValues(alpha: 0.2),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
@@ -201,12 +205,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.search, size: 18, color: ThemeUtil.primaryColor),
+                Icon(Icons.search, size: 18, color: colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
                   'Search by Fee Range',
                   style: ThemeUtil.titleSmall.copyWith(
-                    color: ThemeUtil.primaryColor,
+                    color: colorScheme.primary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -219,13 +223,13 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
-                    color: ThemeUtil.textSecondary.withValues(alpha: 0.1),
+                    color: colorScheme.onSurface.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: Icon(
                     Icons.clear,
                     size: 16,
-                    color: ThemeUtil.textSecondary,
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -234,17 +238,17 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         Global.gapMd,
         Row(
           children: [
-            Expanded(child: _buildFeeMinField()),
+            Expanded(child: _buildFeeMinField(colorScheme)),
             const SizedBox(width: 12),
-            Expanded(child: _buildFeeMaxField()),
+            Expanded(child: _buildFeeMaxField(colorScheme)),
           ],
         ),
       ],
     ),
   );
 
-  Widget _buildAddButton() => Container(
-    color: ThemeUtil.backgroundLight,
+  Widget _buildAddButton(ColorScheme colorScheme) => Container(
+    color: colorScheme.surface,
     padding: const EdgeInsets.all(16),
     child: SafeArea(
       top: false,
@@ -256,16 +260,16 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           label: const Text('Add Fee Interval'),
           style: ButtonStyle(
             backgroundColor: ThemeUtil.interactiveBackground(
-              ThemeUtil.primaryColor,
+              colorScheme.primary,
             ),
-            foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
+            foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
             padding: WidgetStateProperty.all(
               const EdgeInsets.symmetric(vertical: 14),
             ),
-            overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
+            overlayColor: ThemeUtil.interactiveOverlay(colorScheme.onPrimary),
             elevation: WidgetStateProperty.all(0),
             splashFactory: NoSplash.splashFactory,
           ),
@@ -323,55 +327,61 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     });
   }
 
-  Widget _buildFeeMinField() => TextField(
-    controller: _feeMinController,
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-      hintText: 'Min fee',
-      hintStyle: ThemeUtil.bodySmall.copyWith(color: ThemeUtil.textSecondary),
-      filled: true,
-      fillColor: Colors.white,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
+  Widget _buildFeeMinField(ColorScheme colorScheme) => TextField(
+        controller: _feeMinController,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          hintText: 'Min fee',
+          hintStyle: ThemeUtil.bodySmall.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+          filled: true,
+          fillColor: colorScheme.surface,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: colorScheme.outlineVariant),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: colorScheme.outlineVariant),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: colorScheme.primary, width: 2),
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
-        ),
-      ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    ),
-    style: ThemeUtil.bodySmall,
-  );
+        style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+      );
 
-  Widget _buildFeeMaxField() => TextField(
-    controller: _feeMaxController,
-    keyboardType: TextInputType.number,
-    decoration: InputDecoration(
-      hintText: 'Max fee',
-      hintStyle: ThemeUtil.bodySmall.copyWith(color: ThemeUtil.textSecondary),
-      filled: true,
-      fillColor: Colors.white,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
+  Widget _buildFeeMaxField(ColorScheme colorScheme) => TextField(
+        controller: _feeMaxController,
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(
+          hintText: 'Max fee',
+          hintStyle: ThemeUtil.bodySmall.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+          filled: true,
+          fillColor: colorScheme.surface,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: colorScheme.outlineVariant),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: colorScheme.outlineVariant),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: colorScheme.primary, width: 2),
+          ),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
-        ),
-      ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-    ),
-    style: ThemeUtil.bodySmall,
-  );
+        style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+      );
 
   void _filterIntervals() {
     setState(() {
@@ -415,8 +425,8 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     // TODO: Navigate to fee optimization screen
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Navigating to Fee Optimization...'),
-        backgroundColor: ThemeUtil.primaryColor,
+        content: const Text('Navigating to Fee Optimization...'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),

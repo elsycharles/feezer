@@ -59,7 +59,10 @@ class _SelectionActionBarState extends State<SelectionActionBar>
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedBuilder(
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return AnimatedBuilder(
     animation: _controller,
     builder: (context, child) => Transform.scale(
       scale: _scaleAnimation.value,
@@ -69,11 +72,11 @@ class _SelectionActionBarState extends State<SelectionActionBar>
           margin: widget.margin,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
-            color: ThemeUtil.primaryColor,
+            color: colorScheme.primary,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: ThemeUtil.textPrimary.withValues(alpha: 0.1),
+                color: colorScheme.shadow.withValues(alpha: 0.2),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -83,47 +86,49 @@ class _SelectionActionBarState extends State<SelectionActionBar>
             children: [
               IconButton(
                 onPressed: widget.onClearSelection,
-                icon: const Icon(Icons.close, color: ThemeUtil.textLight),
+                icon: Icon(Icons.close, color: colorScheme.onPrimary),
                 tooltip: 'Clear selection',
               ),
               const SizedBox(width: 8),
               Text(
                 '${widget.selectedCount} selected',
-                style: ThemeUtil.labelLarge,
+                style: ThemeUtil.labelLarge.copyWith(
+                  color: colorScheme.onPrimary,
+                ),
               ),
               const Spacer(),
               if (widget.selectedCount < widget.totalCount)
                 IconButton(
                   onPressed: widget.onSelectAll,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.select_all,
-                    color: ThemeUtil.textLight,
+                    color: colorScheme.onPrimary,
                   ),
                   tooltip: 'Select all',
                 ),
               if (widget.onDetails != null)
                 IconButton(
                   onPressed: widget.onDetails,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.info_outline,
-                    color: ThemeUtil.textLight,
+                    color: colorScheme.onPrimary,
                   ),
                   tooltip: 'Details',
                 ),
               if (widget.onEdit != null)
                 IconButton(
                   onPressed: widget.onEdit,
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.edit_outlined,
-                    color: ThemeUtil.textLight,
+                    color: colorScheme.onPrimary,
                   ),
                   tooltip: 'Edit',
                 ),
               IconButton(
                 onPressed: widget.onDelete,
-                icon: const Icon(
+                icon: Icon(
                   Icons.delete_outlined,
-                  color: ThemeUtil.textLight,
+                  color: colorScheme.onPrimary,
                 ),
                 tooltip: 'Delete',
               ),
@@ -133,4 +138,5 @@ class _SelectionActionBarState extends State<SelectionActionBar>
       ),
     ),
   );
+  }
 }

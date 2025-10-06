@@ -48,22 +48,31 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
     ],
   );
 
-  Widget _buildProviderInfo() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        widget.provider.name,
-        style: ThemeUtil.titleLarge.copyWith(fontWeight: FontWeight.w700),
-      ),
-      if (widget.provider.description.isNotEmpty) ...[
-        const SizedBox(height: 4),
+  Widget _buildProviderInfo() {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
         Text(
-          widget.provider.description,
-          style: ThemeUtil.bodyMedium.copyWith(color: ThemeUtil.textSecondary),
+          widget.provider.name,
+          style: ThemeUtil.titleLarge.copyWith(
+            fontWeight: FontWeight.w700,
+            color: colorScheme.onSurface,
+          ),
         ),
+        if (widget.provider.description.isNotEmpty) ...[
+          const SizedBox(height: 4),
+          Text(
+            widget.provider.description,
+            style: ThemeUtil.bodyMedium.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
       ],
-    ],
-  );
+    );
+  }
 
   Widget _buildStats() => ProviderStatChip(
     icon: Icons.receipt_long,

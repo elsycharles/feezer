@@ -2,10 +2,9 @@ import 'package:flutter/material.dart' hide BottomSheet;
 
 import '../../../model/provider_model.dart';
 import '../../../styles/global.dart';
-import '../../../util/icon_util.dart';
-import '../../../util/theme_util.dart';
 import '../../../widget/bottom_sheet.dart';
-import '../../../widget/icon_picker.dart';
+import '../../../widget/form_field.dart' as custom_form;
+import '../../../widget/icon_selector_field.dart';
 import '../../../widget/primary_button.dart';
 
 /// Clean provider editor
@@ -55,78 +54,32 @@ class _State extends State<ProviderEditBottomSheet> {
     key: _formKey,
     child: Column(
       children: [
-        _field('Provider Name', _nameController, Icons.business),
+        custom_form.FormField(
+          label: 'Provider Name',
+          controller: _nameController,
+          icon: Icons.business,
+          required: true,
+        ),
         Global.gapLg,
-        _field('Description', _descController, Icons.description, lines: 4),
+        custom_form.FormField(
+          label: 'Description',
+          controller: _descController,
+          icon: Icons.description,
+          maxLines: 4,
+          required: true,
+        ),
         Global.gapLg,
-        _iconField(),
+        IconSelectorField(
+          selectedIcon: _selectedIcon,
+          onChanged: (icon) => setState(() => _selectedIcon = icon),
+        ),
         Global.gapXl,
         PrimaryButton(text: 'Save Changes', onPressed: _save),
       ],
     ),
   );
 
-  Widget _field(
-    String label,
-    TextEditingController controller,
-    IconData icon, {
-    int lines = 1,
-  }) => TextFormField(
-    controller: controller,
-    maxLines: lines,
-    decoration: InputDecoration(
-      labelText: label,
-      prefixIcon: Icon(icon, color: ThemeUtil.primaryColor),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-      filled: true,
-      fillColor: ThemeUtil.surfaceLight,
-    ),
-    validator: (v) => v?.trim().isEmpty == true ? 'Required' : null,
-  );
 
-  Widget _iconField() => GestureDetector(
-    onTap: _showIconPicker,
-    child: Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: ThemeUtil.textSecondary.withValues(alpha: 0.3),
-        ),
-        borderRadius: BorderRadius.circular(12),
-        color: ThemeUtil.surfaceLight,
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: ThemeUtil.primaryColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              IconUtil.getIcon(_selectedIcon),
-              color: ThemeUtil.primaryColor,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              'Tap to change icon',
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: ThemeUtil.textSecondary,
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-
-  void _showIconPicker() => IconPicker.show(
-    context: context,
-    selected: _selectedIcon,
-    onSelected: (icon) => setState(() => _selectedIcon = icon),
-  );
 
   void _save() {
     if (_formKey.currentState!.validate()) {

@@ -35,66 +35,81 @@ class _Dialog extends StatelessWidget {
   final String cancelText;
 
   @override
-  Widget build(BuildContext context) => Dialog(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    child: Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: ThemeUtil.surfaceLight,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildHeader(),
-          const SizedBox(height: 16),
-          _buildMessage(),
-          const SizedBox(height: 24),
-          _buildActions(context),
-        ],
-      ),
-    ),
-  );
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
 
-  Widget _buildHeader() => Row(
+    return Dialog(
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildHeader(colorScheme),
+            const SizedBox(height: 16),
+            _buildMessage(colorScheme),
+            const SizedBox(height: 24),
+            _buildActions(context, colorScheme),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader(ColorScheme colorScheme) => Row(
     children: [
       Container(
         width: 48,
         height: 48,
         decoration: BoxDecoration(
-          color: ThemeUtil.error.withValues(alpha: 0.1),
+          color: colorScheme.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: const Icon(
+        child: Icon(
           Icons.warning_rounded,
-          color: ThemeUtil.error,
+          color: colorScheme.error,
           size: 24,
         ),
       ),
       const SizedBox(width: 16),
-      Expanded(child: Text(title, style: ThemeUtil.titleSmall)),
+      Expanded(
+        child: Text(
+          title,
+          style: ThemeUtil.titleSmall.copyWith(
+            color: colorScheme.onSurface,
+          ),
+        ),
+      ),
     ],
   );
 
-  Widget _buildMessage() => Text(
-    message,
-    style: ThemeUtil.bodyMedium.copyWith(
-      color: ThemeUtil.textSecondary,
-      height: 1.4,
-    ),
-    textAlign: TextAlign.left,
-  );
+  Widget _buildMessage(ColorScheme colorScheme) => Text(
+        message,
+        style: ThemeUtil.bodyMedium.copyWith(
+          color: colorScheme.onSurfaceVariant,
+          height: 1.4,
+        ),
+        textAlign: TextAlign.left,
+      );
 
-  Widget _buildActions(BuildContext context) => Row(
+  Widget _buildActions(BuildContext context, ColorScheme colorScheme) => Row(
     children: [
       Expanded(
         child: OutlinedButton(
           onPressed: () => Navigator.pop(context, false),
           style: ButtonStyle(
-            foregroundColor: WidgetStateProperty.all(ThemeUtil.textSecondary),
-            overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textSecondary),
+            foregroundColor:
+                WidgetStateProperty.all(colorScheme.onSurfaceVariant),
+            overlayColor: ThemeUtil.interactiveOverlay(
+              colorScheme.onSurfaceVariant,
+            ),
             side: WidgetStateProperty.all(
-              BorderSide(color: ThemeUtil.textSecondary.withValues(alpha: 0.3)),
+              BorderSide(color: colorScheme.outlineVariant),
             ),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -106,7 +121,9 @@ class _Dialog extends StatelessWidget {
           ),
           child: Text(
             cancelText,
-            style: ThemeUtil.bodyLarge.copyWith(color: ThemeUtil.textSecondary),
+            style: ThemeUtil.bodyLarge.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
           ),
         ),
       ),
@@ -115,9 +132,9 @@ class _Dialog extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () => Navigator.pop(context, true),
           style: ButtonStyle(
-            backgroundColor: ThemeUtil.interactiveBackground(ThemeUtil.error),
-            foregroundColor: WidgetStateProperty.all(ThemeUtil.textLight),
-            overlayColor: ThemeUtil.interactiveOverlay(ThemeUtil.textLight),
+            backgroundColor: ThemeUtil.interactiveBackground(colorScheme.error),
+            foregroundColor: WidgetStateProperty.all(colorScheme.onError),
+            overlayColor: ThemeUtil.interactiveOverlay(colorScheme.onError),
             shape: WidgetStateProperty.all(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
@@ -127,7 +144,10 @@ class _Dialog extends StatelessWidget {
             elevation: WidgetStateProperty.all(0),
             splashFactory: NoSplash.splashFactory,
           ),
-          child: Text(confirmText, style: ThemeUtil.labelLarge),
+          child: Text(
+            confirmText,
+            style: ThemeUtil.labelLarge.copyWith(color: colorScheme.onError),
+          ),
         ),
       ),
     ],
