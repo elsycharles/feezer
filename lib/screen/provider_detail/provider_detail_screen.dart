@@ -9,6 +9,8 @@ import '../../widget/search_empty_state.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
+import '../fee_interval/new_fee_interval_screen.dart';
+import 'widget/fee_interval_edit_bottom_sheet.dart';
 
 /// Provider details screen with fee intervals management
 class ProviderDetailScreen extends StatefulWidget {
@@ -279,18 +281,23 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   );
 
   void _addInterval() {
-    // TODO: Navigate to add fee interval screen
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Add interval feature coming soon')),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => NewFeeIntervalScreen(
+          onFeeIntervalAdded: (feeInterval) {
+            setState(() => _feeIntervals.add(feeInterval));
+          },
+        ),
+      ),
     );
   }
 
   void _onIntervalTap(FeeInterval interval) {
     if (_selectedIds.isNotEmpty) {
       _onSelectionChanged(interval.id, !_selectedIds.contains(interval.id));
-    } else {
-      _editInterval(interval);
     }
+    // Tap functionality removed - only selection mode supported
   }
 
   void _onIntervalLongPress(FeeInterval interval) {
@@ -409,7 +416,16 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _editInterval(FeeInterval interval) {
-    // TODO: Implement edit functionality
+    FeeIntervalEditBottomSheet.show(
+      context,
+      interval,
+      (updatedInterval) {
+        setState(() {
+          final index = _feeIntervals.indexWhere((i) => i.id == interval.id);
+          if (index != -1) _feeIntervals[index] = updatedInterval;
+        });
+      },
+    );
   }
 
   void _editSelectedInterval() {
