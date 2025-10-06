@@ -6,7 +6,7 @@ import '../../../styles/global.dart';
 import '../../../widget/provider_brand_avatar.dart';
 import '../../../widget/provider_stat_chip.dart';
 import '../../../widget/surface_card.dart';
-import '../../../widget/primary_button.dart';
+import '../../../widget/loading_button.dart';
 
 /// Clean provider header card with optimize button
 class ProviderHeaderCard extends StatefulWidget {
@@ -39,9 +39,10 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
       ProviderBrandAvatar(iconName: widget.provider.iconName),
       const SizedBox(width: 16),
       Expanded(child: _buildProviderInfo()),
-      PrimaryButton(
-        text: _isOptimizing ? 'Loading...' : 'Fee Optimizer',
-        onPressed: _isOptimizing ? null : _optimizeFees,
+      LoadingButton(
+        text: 'Fee Optimizer',
+        onPressed: _optimizeFees,
+        isLoading: _isOptimizing,
         isFullWidth: false,
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
       ),

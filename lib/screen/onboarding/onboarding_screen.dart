@@ -6,6 +6,7 @@ import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/util/preference_util.dart';
 import 'package:fee_minimizer/util/navigation_util.dart';
+import 'package:fee_minimizer/widget/app_loading_page.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -73,13 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     if (!_shouldShowOnboarding) {
-      final colorScheme = Theme.of(context).colorScheme;
-      return Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: Center(
-          child: CircularProgressIndicator(color: colorScheme.primary),
-        ),
-      );
+      return const AppLoadingPage();
     }
 
     final theme = Theme.of(context);

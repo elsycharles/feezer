@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../util/theme_util.dart';
 
 /// Reusable form field with consistent styling
@@ -14,6 +15,7 @@ class FormField extends StatelessWidget {
     this.keyboardType,
     this.validator,
     this.onChanged,
+    this.inputFormatters,
   });
 
   final String label;
@@ -25,6 +27,7 @@ class FormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +47,7 @@ class FormField extends StatelessWidget {
           controller: controller,
           maxLines: maxLines,
           keyboardType: keyboardType,
+          inputFormatters: inputFormatters,
           onChanged: onChanged,
           style: ThemeUtil.bodyMedium.copyWith(
             color: colorScheme.onSurface,

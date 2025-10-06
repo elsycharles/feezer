@@ -111,23 +111,13 @@ class FeeIntervalTile extends StatelessWidget {
     ],
   );
 
-  Widget _buildFeeChip(ColorScheme colorScheme) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-    decoration: BoxDecoration(
-      color: ThemeUtil.success.withValues(alpha: 0.12),
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(
-        color: ThemeUtil.success.withValues(alpha: 0.3),
-        width: 1,
-      ),
+  Widget _buildFeeChip(ColorScheme colorScheme) => Text(
+    feeInterval.formattedFee,
+    style: ThemeUtil.bodyMedium.copyWith(
+      color: ThemeUtil.success,
+      fontWeight: FontWeight.w600,
     ),
-    child: Text(
-      feeInterval.formattedFee,
-      style: ThemeUtil.labelMedium.copyWith(
-        color: colorScheme.onSurface,
-        fontWeight: FontWeight.w600,
-      ),
-    ),
+    textAlign: TextAlign.center,
   );
 
   String _formatDate(DateTime date) => '${date.day}/${date.month}/${date.year}';
