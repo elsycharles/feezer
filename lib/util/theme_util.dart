@@ -389,4 +389,24 @@ class ThemeUtil {
         return primaryColor;
     }
   }
+
+  /// Shows a styled SnackBar with theme colors
+  static void showSnackBar(BuildContext context, String message) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: labelMedium.copyWith(color: textLight),
+        ),
+        backgroundColor: colorScheme.onSurface.withValues(alpha: 0.9),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(milliseconds: 1500),
+      ),
+    );
+  }
 }

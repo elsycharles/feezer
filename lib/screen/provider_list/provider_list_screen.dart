@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
+import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
@@ -51,6 +53,7 @@ class _State extends State<ProviderListScreen> {
   ];
 
   final _selectedIds = <String>{};
+  DateTime? _lastBackPressed;
 
   List<Provider> get _filtered {
     final query = _searchController.text.toLowerCase();
@@ -86,6 +89,25 @@ class _State extends State<ProviderListScreen> {
         ),
       ),
     );
+  }
+
+  void _handleBackPress() {
+    // If we're in selection mode, disable it first
+    if (_selectedIds.isNotEmpty) {
+      setState(() => _selectedIds.clear());
+      return;
+    }
+
+    // Logique de double retour pour quitter l'app
+    final now = DateTime.now();
+    const exitTimeLimit = Duration(seconds: 2);
+
+    if (_lastBackPressed == null || now.difference(_lastBackPressed!) > exitTimeLimit) {
+      _lastBackPressed = now;
+      ThemeUtil.showSnackBar(context, 'Press again to exit');
+    } else {
+      SystemNavigator.pop();
+    }
   }
 
   Widget _buildProviderSliver() => SliverPadding(
@@ -126,11 +148,10 @@ class _State extends State<ProviderListScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return PopScope(
-      canPop: _selectedIds.isEmpty,
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) {
-        // If we're in selection mode, clear it on back press instead of leaving the page/app
-        if (!didPop && _selectedIds.isNotEmpty) {
-          setState(() => _selectedIds.clear());
+        if (!didPop) {
+          _handleBackPress();
         }
       },
       child: Scaffold(
