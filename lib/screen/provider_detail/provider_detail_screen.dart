@@ -218,7 +218,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
     padding: const EdgeInsets.all(16), // Même padding que les tuiles
     decoration: BoxDecoration(
-      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: BorderRadius.circular(16), // Même radius que les tuiles
       border: Border.all(
         color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.12),

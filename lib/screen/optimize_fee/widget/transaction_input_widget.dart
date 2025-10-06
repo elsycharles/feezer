@@ -54,7 +54,7 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
 			decoration: BoxDecoration(
 				color: _focusNode.hasFocus
 						? Theme.of(context).colorScheme.primary.withValues(alpha: 0.08)
-						: Theme.of(context).colorScheme.surfaceContainerLow,
+						: Theme.of(context).colorScheme.surface,
 				borderRadius: Global.borderMd,
 				border: Border.all(
 					color: _focusNode.hasFocus

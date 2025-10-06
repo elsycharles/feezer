@@ -5,7 +5,7 @@ import '../../../model/fee_interval_model.dart';
 import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
-import '../../../widget/primary_button.dart';
+import '../../../widget/loading_widgets.dart';
 
 /// Clean fee interval editor
 class FeeIntervalEditBottomSheet extends StatefulWidget {
@@ -34,6 +34,7 @@ class FeeIntervalEditBottomSheet extends StatefulWidget {
 
 class _State extends State<FeeIntervalEditBottomSheet> {
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
   late final _minAmountController = TextEditingController(
     text: widget.feeInterval.minAmount?.toString() ?? '',
   );
@@ -87,7 +88,11 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           required: true,
         ),
         Global.gapXl,
-        PrimaryButton(text: 'Save Changes', onPressed: _save),
+        LoadingButton(
+          text: 'Save Changes',
+          isLoading: _isLoading,
+          onPressed: _isLoading ? null : _save,
+        ),
       ],
     ),
   );
@@ -116,17 +121,31 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     return null;
   }
 
-  void _save() {
+  void _save() async {
     if (_formKey.currentState!.validate()) {
-      final feeInterval = FeeInterval(
-        id: widget.feeInterval.id,
-        minAmount: double.parse(_minAmountController.text.trim()),
-        maxAmount: double.parse(_maxAmountController.text.trim()),
-        fee: double.parse(_feeController.text.trim()),
-        creationDateTime: widget.feeInterval.creationDatetime,
-      );
-      Navigator.pop(context);
-      widget.onSave(feeInterval);
+      setState(() => _isLoading = true);
+      
+      try {
+        final feeInterval = FeeInterval(
+          id: widget.feeInterval.id,
+          minAmount: double.parse(_minAmountController.text.trim()),
+          maxAmount: double.parse(_maxAmountController.text.trim()),
+          fee: double.parse(_feeController.text.trim()),
+          creationDateTime: widget.feeInterval.creationDatetime,
+        );
+        
+        // Simulate async operation
+        await Future.delayed(const Duration(milliseconds: 300));
+        
+        if (mounted) {
+          Navigator.pop(context);
+          widget.onSave(feeInterval);
+        }
+      } finally {
+        if (mounted) {
+          setState(() => _isLoading = false);
+        }
+      }
     }
   }
 }

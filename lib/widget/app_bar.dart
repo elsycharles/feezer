@@ -21,6 +21,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final canPop = Navigator.of(context).canPop();
 
     return material.AppBar(
       backgroundColor: colorScheme.surface,
@@ -35,7 +36,34 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
         ) ?? ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
       ),
       actions: actions,
-      leading: leading,
+      leading: leading ?? (canPop ? _buildBackButton(context, colorScheme) : null),
+      automaticallyImplyLeading: leading == null && canPop,
+    );
+  }
+
+  Widget _buildBackButton(BuildContext context, ColorScheme colorScheme) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20),
+          onTap: () => Navigator.of(context).maybePop(),
+          splashColor: colorScheme.onSurface.withOpacity(0.1),
+          highlightColor: colorScheme.onSurface.withOpacity(0.05),
+          hoverColor: colorScheme.onSurface.withOpacity(0.08),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Icon(
+              Icons.arrow_back_ios_new,
+              color: colorScheme.onSurface,
+              size: 20,
+            ),
+          ),
+        ),
+      ),
     );
   }
 

@@ -56,7 +56,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 		decoration: BoxDecoration(
 			color: _focusNode.hasFocus 
 				? Theme.of(context).colorScheme.primary.withValues(alpha: 0.05)
-				: Theme.of(context).colorScheme.surfaceContainerLow,
+				: Theme.of(context).colorScheme.surface,
 			borderRadius: Global.borderMd,
 		),
 		padding: const EdgeInsets.only(bottom: 12),
@@ -129,7 +129,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 				: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5);
 		final Color bg = enabled
 				? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
-				: Theme.of(context).colorScheme.surfaceContainerHighest;
+				: Theme.of(context).colorScheme.surface;
 
 		void tapOnce() {
 			if (!enabled) return;

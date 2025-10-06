@@ -108,7 +108,7 @@ class _State extends State<OptimizeFeeScreen> {
           Global.gapMd,
           Container(
             decoration: BoxDecoration(
-              color: context.colorScheme.surfaceContainerLow,
+              color: context.colorScheme.surface,
               borderRadius: Global.borderMd,
               border: Border.all(color: context.colorScheme.outlineVariant),
             ),
@@ -374,7 +374,7 @@ class _State extends State<OptimizeFeeScreen> {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
-          color: context.colorScheme.surfaceContainerHighest,
+          color: context.colorScheme.surface,
           borderRadius: Global.borderMd,
           border: Border.all(
             color: context.colorScheme.outline.withValues(alpha: 0.12),
@@ -395,7 +395,7 @@ class _State extends State<OptimizeFeeScreen> {
         margin: const EdgeInsets.only(bottom: 8),
         padding: Global.padMd,
         decoration: BoxDecoration(
-          color: context.colorScheme.surfaceContainerLow,
+          color: context.colorScheme.surface,
           borderRadius: Global.borderMd,
         ),
         child: Row(

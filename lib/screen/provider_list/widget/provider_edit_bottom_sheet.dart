@@ -5,7 +5,7 @@ import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/icon_selector_field.dart';
-import '../../../widget/primary_button.dart';
+import '../../../widget/loading_widgets.dart';
 
 /// Clean provider editor
 class ProviderEditBottomSheet extends StatefulWidget {
@@ -34,6 +34,7 @@ class ProviderEditBottomSheet extends StatefulWidget {
 
 class _State extends State<ProviderEditBottomSheet> {
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
   late final _nameController = TextEditingController(
     text: widget.provider.name,
   );
@@ -74,24 +75,42 @@ class _State extends State<ProviderEditBottomSheet> {
           onChanged: (icon) => setState(() => _selectedIcon = icon),
         ),
         Global.gapXl,
-        PrimaryButton(text: 'Save Changes', onPressed: _save),
+        LoadingButton(
+          text: 'Save Changes',
+          isLoading: _isLoading,
+          onPressed: _isLoading ? null : _save,
+        ),
       ],
     ),
   );
 
 
 
-  void _save() {
+  void _save() async {
     if (_formKey.currentState!.validate()) {
-      final provider = Provider(
-        id: widget.provider.id,
-        name: _nameController.text.trim(),
-        description: _descController.text.trim(),
-        iconName: _selectedIcon,
-        creationDatetime: widget.provider.creationDatetime,
-      );
-      Navigator.pop(context);
-      widget.onSave(provider);
+      setState(() => _isLoading = true);
+      
+      try {
+        final provider = Provider(
+          id: widget.provider.id,
+          name: _nameController.text.trim(),
+          description: _descController.text.trim(),
+          iconName: _selectedIcon,
+          creationDatetime: widget.provider.creationDatetime,
+        );
+        
+        // Simulate async operation
+        await Future.delayed(const Duration(milliseconds: 300));
+        
+        if (mounted) {
+          Navigator.pop(context);
+          widget.onSave(provider);
+        }
+      } finally {
+        if (mounted) {
+          setState(() => _isLoading = false);
+        }
+      }
     }
   }
 }
