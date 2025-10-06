@@ -7,7 +7,8 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
-import '../../widget/primary_button.dart';
+import '../../widget/app_loading.dart';
+import '../../widget/loading_button.dart';
 import '../provider_detail/provider_detail_screen.dart';
 import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
@@ -25,35 +26,10 @@ class ProviderListScreen extends StatefulWidget {
 
 class _State extends State<ProviderListScreen> {
   final _searchController = TextEditingController();
-  final _providers = <Provider>[
-    Provider(
-      id: '1',
-      name: 'Bank',
-      description: 'Traditional banking services',
-      iconName: 'account_balance',
-    ),
-    Provider(
-      id: '2',
-      name: 'MVola',
-      description: 'Mobile money transfer service',
-      iconName: 'phone_android',
-    ),
-    Provider(
-      id: '3',
-      name: 'Orange',
-      description: 'Telecom financial services',
-      iconName: 'mobile_friendly',
-    ),
-    Provider(
-      id: '4',
-      name: 'Airtel',
-      description: 'Mobile financial services',
-      iconName: 'phone_android',
-    ),
-  ];
-
+  final _providers = <Provider>[];
   final _selectedIds = <String>{};
   DateTime? _lastBackPressed;
+  bool _isLoading = true;
 
   List<Provider> get _filtered {
     final query = _searchController.text.toLowerCase();
@@ -70,6 +46,44 @@ class _State extends State<ProviderListScreen> {
   void initState() {
     super.initState();
     _searchController.addListener(() => setState(() {}));
+    _loadProviders();
+  }
+
+  Future<void> _loadProviders() async {
+    // Simulate loading providers from API or database
+    await Future.delayed(const Duration(milliseconds: 1200));
+    
+    if (mounted) {
+      setState(() {
+        _providers.addAll([
+          Provider(
+            id: '1',
+            name: 'Bank',
+            description: 'Traditional banking services',
+            iconName: 'account_balance',
+          ),
+          Provider(
+            id: '2',
+            name: 'MVola',
+            description: 'Mobile money transfer service',
+            iconName: 'phone_android',
+          ),
+          Provider(
+            id: '3',
+            name: 'Orange',
+            description: 'Telecom financial services',
+            iconName: 'mobile_friendly',
+          ),
+          Provider(
+            id: '4',
+            name: 'Airtel',
+            description: 'Mobile financial services',
+            iconName: 'phone_android',
+          ),
+        ]);
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -189,13 +203,15 @@ class _State extends State<ProviderListScreen> {
               ],
               Global.gapMd,
               Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    _buildProviderSliver(),
-                    SliverToBoxAdapter(child: Global.gapMd),
-                    SliverToBoxAdapter(child: SizedBox(height: 80)),
-                  ],
-                ),
+                child: _isLoading
+                    ? const AppLoading.overlay()
+                    : CustomScrollView(
+                        slivers: [
+                          _buildProviderSliver(),
+                          SliverToBoxAdapter(child: Global.gapMd),
+                          SliverToBoxAdapter(child: SizedBox(height: 80)),
+                        ],
+                      ),
               ),
             ],
           ),
@@ -211,7 +227,7 @@ class _State extends State<ProviderListScreen> {
       top: false,
       child: SizedBox(
         width: double.infinity,
-        child: PrimaryButton(
+        child: LoadingButton(
           text: 'Add New Provider',
           onPressed: _addProvider,
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -277,10 +293,23 @@ class _State extends State<ProviderListScreen> {
     );
 
     if (confirmed == true && mounted) {
-      setState(() {
-        _providers.removeWhere((p) => _selectedIds.contains(p.id));
-        _selectedIds.clear();
-      });
+      // Show loading overlay while deleting
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const AppLoading.overlay(),
+      );
+
+      // Simulate deletion process
+      await Future.delayed(const Duration(milliseconds: 800));
+
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+        setState(() {
+          _providers.removeWhere((p) => _selectedIds.contains(p.id));
+          _selectedIds.clear();
+        });
+      }
     }
   }
 

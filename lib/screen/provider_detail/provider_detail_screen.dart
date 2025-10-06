@@ -6,6 +6,7 @@ import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
+import '../../widget/app_loading.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
@@ -521,11 +522,25 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       'Are you sure you want to delete $count selected interval${count > 1 ? 's' : ''}?',
     );
 
-    if (confirmed == true) {
-      setState(() {
-        _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
-        _selectedIds.clear();
-      });
+    if (confirmed == true && mounted) {
+      // Show loading overlay
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const AppLoading.overlay(),
+      );
+
+      // Simulate deletion process
+      await Future.delayed(const Duration(milliseconds: 800));
+
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+        setState(() {
+          _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
+          _filteredIntervals = _feeIntervals;
+          _selectedIds.clear();
+        });
+      }
     }
   }
 }

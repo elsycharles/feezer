@@ -9,7 +9,7 @@ import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
 
-import '../../widget/primary_button.dart';
+import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
@@ -34,6 +34,7 @@ class _State extends State<OptimizeFeeScreen> {
   int _maxTransactions = 10;
   List<OptimizationResult> _results = [];
   bool _hasOptimized = false;
+  bool _isOptimizing = false;
 
   @override
   void initState() {
@@ -439,9 +440,10 @@ class _State extends State<OptimizeFeeScreen> {
       color: context.colorScheme.surface,
       boxShadow: Global.shadowMd,
     ),
-    child: PrimaryButton(
+    child: LoadingButton(
       text: 'Optimize',
       onPressed: _optimize,
+      isLoading: _isOptimizing,
     ),
   );
 
@@ -479,7 +481,7 @@ class _State extends State<OptimizeFeeScreen> {
     });
   }
 
-  void _optimize() {
+  void _optimize() async {
     // Validation
     if (_amount <= 0) {
       context.showSnackBar('Please enter a valid amount');
@@ -494,12 +496,15 @@ class _State extends State<OptimizeFeeScreen> {
       return;
     }
 
-    // Generate results directly without intrusive messages
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (mounted) {
-        _generateResults();
-      }
-    });
+    setState(() => _isOptimizing = true);
+
+    // Simulate optimization process
+    await Future.delayed(const Duration(milliseconds: 800));
+
+    if (mounted) {
+      _generateResults();
+      setState(() => _isOptimizing = false);
+    }
   }
 
 }

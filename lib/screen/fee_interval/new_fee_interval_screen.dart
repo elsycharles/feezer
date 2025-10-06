@@ -7,7 +7,7 @@ import '../../util/theme_util.dart';
 import '../../util/extensions.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
-import '../../widget/primary_button.dart';
+import '../../widget/loading_button.dart';
 
 /// Clean screen for creating new fee intervals
 class NewFeeIntervalScreen extends StatefulWidget {
@@ -24,6 +24,7 @@ class _State extends State<NewFeeIntervalScreen> {
   late final _minAmountController = TextEditingController();
   late final _maxAmountController = TextEditingController();
   late final _feeController = TextEditingController();
+  bool _isCreating = false;
 
   @override
   void dispose() {
@@ -166,9 +167,10 @@ class _State extends State<NewFeeIntervalScreen> {
         Global.gapMd,
         Expanded(
           flex: 2,
-          child: PrimaryButton(
+          child: LoadingButton(
             text: 'Create Interval',
             onPressed: _create,
+            isLoading: _isCreating,
           ),
         ),
       ],
@@ -199,18 +201,25 @@ class _State extends State<NewFeeIntervalScreen> {
     return null;
   }
 
-  void _create() {
+  void _create() async {
     if (_formKey.currentState!.validate()) {
-      final now = DateTime.now();
-      final feeInterval = FeeInterval(
-        id: now.millisecondsSinceEpoch.toString(),
-        minAmount: double.parse(_minAmountController.text.trim()),
-        maxAmount: double.parse(_maxAmountController.text.trim()),
-        fee: double.parse(_feeController.text.trim()),
-        creationDateTime: now,
-      );
-      widget.onFeeIntervalAdded?.call(feeInterval);
-      context.pop();
+      setState(() => _isCreating = true);
+      
+      // Simulate creation process
+      await Future.delayed(const Duration(milliseconds: 600));
+      
+      if (mounted) {
+        final now = DateTime.now();
+        final feeInterval = FeeInterval(
+          id: now.millisecondsSinceEpoch.toString(),
+          minAmount: double.parse(_minAmountController.text.trim()),
+          maxAmount: double.parse(_maxAmountController.text.trim()),
+          fee: double.parse(_feeController.text.trim()),
+          creationDateTime: now,
+        );
+        widget.onFeeIntervalAdded?.call(feeInterval);
+        context.pop();
+      }
     }
   }
 }
