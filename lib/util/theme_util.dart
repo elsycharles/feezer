@@ -34,6 +34,76 @@ class ThemeUtil {
   static const Color onboardingIllustrationBg = Color(0xFFFFFFFF);
   static const double onboardingIllustrationBgOpacity = 0.1;
 
+  // Text Styles
+  static const TextStyle titleLarge = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    color: textPrimary,
+  );
+
+  static const TextStyle titleMedium = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: textPrimary,
+  );
+
+  static const TextStyle titleSmall = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+  );
+
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+  );
+
+  static const TextStyle bodyMedium = TextStyle(
+    fontSize: 16,
+    color: textPrimary,
+  );
+
+  static const TextStyle bodySmall = TextStyle(
+    fontSize: 14,
+    color: textSecondary,
+  );
+
+  static const TextStyle labelLarge = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: textLight,
+  );
+
+  static const TextStyle labelMedium = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    color: textPrimary,
+  );
+
+  static const TextStyle labelSmall = TextStyle(
+    fontSize: 12,
+    color: textSecondary,
+  );
+
+  static const TextStyle displayLarge = TextStyle(
+    fontSize: 48,
+    fontWeight: FontWeight.bold,
+    color: textLight,
+  );
+
+  static const TextStyle displayMedium = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+    color: textLight,
+  );
+
+  static const TextStyle captionLight = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+    color: textLight,
+  );
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
@@ -53,30 +123,60 @@ class ThemeUtil {
         foregroundColor: textLight,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: textLight),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: textLight,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          foregroundColor: textLight,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          backgroundColor: interactiveBackground(primaryColor),
+          foregroundColor: WidgetStateProperty.all(textLight),
+          overlayColor: interactiveOverlay(textLight),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          elevation: WidgetStateProperty.all(0),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: primaryColor,
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryColor),
+          overlayColor: interactiveOverlay(primaryColor),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: primaryColor,
-          side: const BorderSide(color: primaryColor, width: 1.5),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryColor),
+          overlayColor: interactiveOverlay(primaryColor),
+          side: WidgetStateProperty.all(
+            const BorderSide(color: primaryColor, width: 1.5),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       cardTheme: CardThemeData(
@@ -107,33 +207,74 @@ class ThemeUtil {
   }
 
   static ThemeData get darkTheme {
+    final baseScheme = ColorScheme.fromSeed(
+      seedColor: primaryColor,
+      brightness: Brightness.dark,
+    );
+
+    final colorScheme = baseScheme.copyWith(
+      primary: primaryLight,
+      onPrimary: textLight,
+      primaryContainer: primaryDark,
+      onPrimaryContainer: textLight,
+      secondary: secondaryLight,
+      onSecondary: textLight,
+      secondaryContainer: secondaryDark,
+      onSecondaryContainer: textLight,
+      tertiary: accentLight,
+      onTertiary: textLight,
+      tertiaryContainer: accentDark,
+      onTertiaryContainer: textLight,
+      error: error,
+      onError: textLight,
+      errorContainer: error.withValues(alpha: 0.2),
+      onErrorContainer: error,
+  surface: surfaceDark,
+  onSurface: textLight,
+      onSurfaceVariant: textLight.withValues(alpha: 0.72),
+      outline: textLight.withValues(alpha: 0.2),
+      outlineVariant: textLight.withValues(alpha: 0.1),
+      shadow: Colors.black,
+      scrim: Colors.black,
+      inverseSurface: surfaceLight,
+      onInverseSurface: textPrimary,
+      inversePrimary: primaryColor,
+      surfaceTint: primaryLight,
+    );
+
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
       fontFamily: 'Inter',
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: primaryColor,
-        brightness: Brightness.dark,
-        primary: primaryLight,
-        secondary: secondaryLight,
-        tertiary: accentLight,
-        surface: surfaceDark,
-        error: error,
-      ),
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: backgroundDark,
       appBarTheme: const AppBarTheme(
         backgroundColor: backgroundDark,
         foregroundColor: textLight,
         elevation: 0,
         centerTitle: true,
-        titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: textLight),
+        titleTextStyle: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: textLight,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryLight,
-          foregroundColor: textLight,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        style: ButtonStyle(
+          backgroundColor: interactiveBackground(primaryLight),
+          foregroundColor: WidgetStateProperty.all(textLight),
+          overlayColor: interactiveOverlay(textLight),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          elevation: WidgetStateProperty.all(0),
+          splashFactory: NoSplash.splashFactory,
         ),
       ),
       cardTheme: CardThemeData(
@@ -157,13 +298,115 @@ class ThemeUtil {
     colors: [primaryColor.withValues(alpha: 0.1), backgroundLight],
   );
 
+  static LinearGradient darkBackgroundGradient(ColorScheme colorScheme) =>
+      LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          colorScheme.primary.withValues(alpha: 0.15),
+          colorScheme.surface,
+        ],
+      );
+
+  static WidgetStateProperty<Color?> interactiveOverlay(
+    Color color, {
+    double hoverOpacity = 0.06,
+    double pressedOpacity = 0.12,
+  }) => WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.disabled)) return null;
+    if (states.contains(WidgetState.pressed)) {
+      return color.withValues(alpha: pressedOpacity);
+    }
+    if (states.contains(WidgetState.hovered) ||
+        states.contains(WidgetState.focused)) {
+      return color.withValues(alpha: hoverOpacity);
+    }
+    return null;
+  });
+
+  static WidgetStateProperty<Color?> interactiveBackground(
+    Color color, {
+    double hoverShade = 0.08,
+    double pressedShade = 0.14,
+    double disabledOpacity = 0.4,
+  }) => WidgetStateProperty.resolveWith((states) {
+    if (states.contains(WidgetState.disabled)) {
+      return color.withValues(alpha: disabledOpacity);
+    }
+    if (states.contains(WidgetState.pressed)) {
+      return _shade(color, pressedShade);
+    }
+    if (states.contains(WidgetState.hovered) ||
+        states.contains(WidgetState.focused)) {
+      return _shade(color, hoverShade);
+    }
+    return color;
+  });
+
+  static Color interactiveSurfaceColor(
+    Color base, {
+    bool hovered = false,
+    bool pressed = false,
+    Color overlayColor = primaryColor,
+    double hoverOpacity = 0.06,
+    double pressedOpacity = 0.12,
+  }) {
+    if (pressed) {
+      return Color.alphaBlend(
+        overlayColor.withValues(alpha: pressedOpacity),
+        base,
+      );
+    }
+    if (hovered) {
+      return Color.alphaBlend(
+        overlayColor.withValues(alpha: hoverOpacity),
+        base,
+      );
+    }
+    return base;
+  }
+
+  static Color _shade(Color color, double amount) =>
+      Color.lerp(color, Colors.black, amount) ?? color;
+
   static Color getStatusColor(String status) {
     switch (status.toLowerCase()) {
-      case 'success': case 'completed': case 'active': return success;
-      case 'warning': case 'pending': return warning;
-      case 'error': case 'failed': case 'inactive': return error;
-      case 'info': case 'processing': return info;
-      default: return primaryColor;
+      case 'success':
+      case 'completed':
+      case 'active':
+        return success;
+      case 'warning':
+      case 'pending':
+        return warning;
+      case 'error':
+      case 'failed':
+      case 'inactive':
+        return error;
+      case 'info':
+      case 'processing':
+        return info;
+      default:
+        return primaryColor;
     }
+  }
+
+  /// Shows a styled SnackBar with theme colors
+  static void showSnackBar(BuildContext context, String message) {
+    final colorScheme = Theme.of(context).colorScheme;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: labelMedium.copyWith(color: textLight),
+        ),
+        backgroundColor: colorScheme.onSurface.withValues(alpha: 0.9),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        margin: const EdgeInsets.all(16),
+        duration: const Duration(milliseconds: 1500),
+      ),
+    );
   }
 }

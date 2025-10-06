@@ -6,15 +6,13 @@ import 'package:flutter/material.dart';
 class OnboardingPageView extends StatelessWidget {
   final OnboardingItem item;
 
-  const OnboardingPageView({
-    super.key,
-    required this.item,
-  });
+  const OnboardingPageView({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    
+  final theme = Theme.of(context);
+  final colorScheme = theme.colorScheme;
+
     return Padding(
       padding: Global.padLg,
       child: Column(
@@ -26,6 +24,7 @@ class OnboardingPageView extends StatelessWidget {
             height: 280,
             decoration: BoxDecoration(
               borderRadius: Global.borderXl,
+              color: colorScheme.surface,
             ),
             child: ClipRRect(
               borderRadius: Global.borderXl,
@@ -41,7 +40,7 @@ class OnboardingPageView extends StatelessWidget {
                     height: 280,
                     decoration: BoxDecoration(
                       borderRadius: Global.borderSm,
-                      color: Colors.grey.shade100,
+                      color: colorScheme.surface,
                     ),
                     child: ClipRRect(
                       borderRadius: Global.borderSm,
@@ -57,28 +56,28 @@ class OnboardingPageView extends StatelessWidget {
               ),
             ),
           ),
-          
+
           const SizedBox(height: Global.spacingXxl),
-          
+
           // Title
           Text(
             item.title,
             textAlign: TextAlign.center,
             style: theme.textTheme.headlineMedium?.copyWith(
-              color: ThemeUtil.onboardingTextPrimary,
+              color: colorScheme.onSurface,
               fontWeight: FontWeight.bold,
               height: 1.2,
             ),
           ),
-          
+
           Global.gapMd,
-          
+
           // Description
           Text(
             item.description,
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: ThemeUtil.onboardingTextSecondary.withValues(
+              color: colorScheme.onSurface.withValues(
                 alpha: ThemeUtil.onboardingTextSecondaryOpacity,
               ),
               height: 1.5,

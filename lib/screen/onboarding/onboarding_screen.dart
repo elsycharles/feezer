@@ -18,11 +18,31 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+  bool _shouldShowOnboarding = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkFirstLaunch();
+  }
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
+  }
+
+  Future<void> _checkFirstLaunch() async {
+    final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
+    if (!isFirstLaunch && mounted) {
+      NavigationUtil.safeAsyncNavigate(
+        context: context,
+        isMounted: () => mounted,
+        getRoute: () async => AppRouter.providersRoute,
+      );
+    } else if (mounted) {
+      setState(() => _shouldShowOnboarding = true);
+    }
   }
 
   void _onPageChanged(int index) => setState(() => _currentIndex = index);
@@ -45,17 +65,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       getRoute: () async {
         // Mark that onboarding is completed
         await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.homeRoute;
+        return AppRouter.providersRoute;
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_shouldShowOnboarding) {
+      final colorScheme = Theme.of(context).colorScheme;
+      return Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Center(
+          child: CircularProgressIndicator(color: colorScheme.primary),
+        ),
+      );
+    }
+
     final theme = Theme.of(context);
-    
+
     return Scaffold(
-      backgroundColor: ThemeUtil.onboardingBackground,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -63,18 +93,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: Global.padMd,
+                padding: const EdgeInsets.all(16.0),
                 child: TextButton(
                   onPressed: _goToHome,
-                  style: TextButton.styleFrom(
+                  style: ButtonStyle(
+                    overlayColor: ThemeUtil.interactiveOverlay(
+                      theme.colorScheme.onSurface,
+                    ),
                     splashFactory: NoSplash.splashFactory,
-                  ).copyWith(
-                    overlayColor: WidgetStateProperty.all(Colors.transparent),
                   ),
                   child: Text(
                     'Skip',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: ThemeUtil.onboardingTextSecondary.withValues(
+                      color: theme.colorScheme.onSurface.withValues(
                         alpha: ThemeUtil.onboardingTextSecondaryOpacity,
                       ),
                       fontWeight: FontWeight.w500,
@@ -83,19 +114,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            
+
             // PageView content
             Expanded(
               child: PageView.builder(
                 controller: _pageController,
                 onPageChanged: _onPageChanged,
                 itemCount: OnboardingUtil.items.length,
-                itemBuilder: (context, index) => OnboardingPageView(
-                  item: OnboardingUtil.items[index],
-                ),
+                itemBuilder: (context, index) =>
+                    OnboardingPageView(item: OnboardingUtil.items[index]),
               ),
             ),
-            
+
             // Bottom section
             OnboardingBottomSection(
               currentIndex: _currentIndex,

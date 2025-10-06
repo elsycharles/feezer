@@ -19,6 +19,7 @@ class OnboardingBottomSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     final isLastPage = currentIndex == OnboardingUtil.items.length - 1;
 
     return Padding(
@@ -33,31 +34,38 @@ class OnboardingBottomSection extends StatelessWidget {
               (index) => OnboardingPageDot(isActive: index == currentIndex),
             ),
           ),
-          
+
           Global.gapXl,
-          
+
           // Action button
           SizedBox(
             width: double.infinity,
             height: Global.buttonHeight,
             child: ElevatedButton(
               onPressed: onNext,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: ThemeUtil.onboardingButton,
-                foregroundColor: ThemeUtil.onboardingTextPrimary,
-                elevation: 0,
-                splashFactory: NoSplash.splashFactory,
-                shape: RoundedRectangleBorder(
-                  borderRadius: Global.borderXl,
+              style: ButtonStyle(
+                backgroundColor: ThemeUtil.interactiveBackground(
+                  colorScheme.primary,
                 ),
-              ).copyWith(
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
+                foregroundColor: WidgetStateProperty.all(
+                  colorScheme.onPrimary,
+                ),
+                overlayColor: ThemeUtil.interactiveOverlay(
+                  colorScheme.onPrimary,
+                ),
+                elevation: WidgetStateProperty.all(0),
+                splashFactory: NoSplash.splashFactory,
+                shape: WidgetStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
               ),
               child: Text(
                 isLastPage ? 'Get Started' : 'Next',
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: ThemeUtil.onboardingTextPrimary,
+                  color: colorScheme.onPrimary,
                 ),
               ),
             ),
