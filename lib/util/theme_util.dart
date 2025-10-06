@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ThemeUtil {
+  // Theme Colors
   static const Color primaryColor = Color(0xFF4A6CF7);
   static const Color primaryLight = Color(0xFF6B8EF7);
   static const Color primaryDark = Color(0xFF2E4EF7);
@@ -390,23 +391,4 @@ class ThemeUtil {
     }
   }
 
-  /// Shows a styled SnackBar with theme colors
-  static void showSnackBar(BuildContext context, String message) {
-    final colorScheme = Theme.of(context).colorScheme;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: labelMedium.copyWith(color: textLight),
-        ),
-        backgroundColor: colorScheme.onSurface.withValues(alpha: 0.9),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        margin: const EdgeInsets.all(16),
-        duration: const Duration(milliseconds: 1500),
-      ),
-    );
-  }
 }

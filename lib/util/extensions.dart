@@ -34,19 +34,6 @@ extension BuildContextExtensions on BuildContext {
 
   /// Push new route
   Future<T?> push<T>(Route<T> route) => Navigator.of(this).push(route);
-
-  /// Show snackbar
-  void showSnackBar(String message) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-    );
-  }
 }
 
 /// Extensions for String to simplify common operations

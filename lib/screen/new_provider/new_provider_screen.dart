@@ -7,7 +7,8 @@ import '../../util/extensions.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
-import '../../widget/primary_button.dart';
+import '../../widget/loading_button.dart';
+import '../../widget/app_toast.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _State extends State<NewProviderScreen> {
   late final _nameController = TextEditingController();
   late final _descriptionController = TextEditingController();
   String _selectedIcon = 'business';
+  bool _isCreating = false;
 
   @override
   void dispose() {
@@ -154,27 +156,36 @@ class _State extends State<NewProviderScreen> {
         Global.gapMd,
         Expanded(
           flex: 2,
-          child: PrimaryButton(
+          child: LoadingButton(
             text: 'Create Provider',
             onPressed: _create,
+            isLoading: _isCreating,
           ),
         ),
       ],
     ),
   );
 
-  void _create() {
+  void _create() async {
     if (_formKey.currentState!.validate()) {
-      final now = DateTime.now();
-      final provider = Provider(
-        id: now.millisecondsSinceEpoch.toString(),
-        name: _nameController.text.trim(),
-        description: _descriptionController.text.trim(),
-        iconName: _selectedIcon,
-        creationDatetime: now,
-      );
-      widget.onProviderAdded?.call(provider);
-      context.pop();
+      setState(() => _isCreating = true);
+      
+      // Simulate creation process
+      await Future.delayed(const Duration(milliseconds: 600));
+      
+      if (mounted) {
+        final now = DateTime.now();
+        final provider = Provider(
+          id: now.millisecondsSinceEpoch.toString(),
+          name: _nameController.text.trim(),
+          description: _descriptionController.text.trim(),
+          iconName: _selectedIcon,
+          creationDatetime: now,
+        );
+        widget.onProviderAdded?.call(provider);
+        AppToast.success(context, 'Provider created successfully');
+        context.pop();
+      }
     }
   }
 }

@@ -6,9 +6,14 @@ import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
+import '../../widget/app_loading.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
+import '../fee_interval/new_fee_interval_screen.dart';
+import 'widget/fee_interval_edit_bottom_sheet.dart';
+import '../../widget/app_toast.dart';
+import '../optimize_fee/optimize_fee_screen.dart';
 
 /// Provider details screen with fee intervals management
 class ProviderDetailScreen extends StatefulWidget {
@@ -121,9 +126,13 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 _buildSelectionBar(),
               ],
               Global.gapMd,
+              _buildIntervalsTitle(),
+              Global.gapSm,
               Expanded(
                 child: CustomScrollView(
                   slivers: [
+                    if (_filteredIntervals.isNotEmpty)
+                      SliverToBoxAdapter(child: _buildIntervalsHeaderRow()),
                     _buildIntervalSliver(),
                     SliverToBoxAdapter(child: Global.gapMd),
                     SliverToBoxAdapter(child: SizedBox(height: 80)),
@@ -182,6 +191,63 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
             }, childCount: _filteredIntervals.length),
           ),
         );
+
+  Widget _buildIntervalsTitle() => Container(
+    alignment: Alignment.centerLeft,
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: Row(
+      children: [
+        Text(
+          'Fee intervals',
+          style: ThemeUtil.titleSmall.copyWith(
+            color: Theme.of(context).colorScheme.onSurface,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          '(${_filteredIntervals.length})',
+          style: ThemeUtil.labelMedium.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildIntervalsHeaderRow() => Container(
+    margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+    padding: const EdgeInsets.all(16), // Même padding que les tuiles
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.surface,
+      borderRadius: BorderRadius.circular(16), // Même radius que les tuiles
+      border: Border.all(
+        color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.12),
+      ),
+    ),
+    child: Row(
+      children: [
+        // Pas de checkbox dans l'en-tête, donc pas d'espace réservé
+        Expanded(
+          child: _headerCell('Fee interval', alignment: TextAlign.left),
+        ),
+        // Espace approximatif pour le chip de frais (padding + contenu)
+        Container(
+          constraints: const BoxConstraints(minWidth: 60),
+          child: _headerCell('Fee', alignment: TextAlign.center),
+        ),
+      ],
+    ),
+  );
+
+  Widget _headerCell(String text, {TextAlign alignment = TextAlign.center}) => Text(
+    text,
+    style: ThemeUtil.labelMedium.copyWith(
+      color: Theme.of(context).colorScheme.onSurfaceVariant,
+      fontWeight: FontWeight.w600,
+    ),
+    textAlign: alignment,
+  );
 
   Widget _buildSearchBar(ColorScheme colorScheme) => Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -279,18 +345,23 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   );
 
   void _addInterval() {
-    // TODO: Navigate to add fee interval screen
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Add interval feature coming soon')),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => NewFeeIntervalScreen(
+          onFeeIntervalAdded: (feeInterval) {
+            setState(() => _feeIntervals.add(feeInterval));
+          },
+        ),
+      ),
     );
   }
 
   void _onIntervalTap(FeeInterval interval) {
     if (_selectedIds.isNotEmpty) {
       _onSelectionChanged(interval.id, !_selectedIds.contains(interval.id));
-    } else {
-      _editInterval(interval);
     }
+    // Tap functionality removed - only selection mode supported
   }
 
   void _onIntervalLongPress(FeeInterval interval) {
@@ -409,7 +480,16 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _editInterval(FeeInterval interval) {
-    // TODO: Implement edit functionality
+    FeeIntervalEditBottomSheet.show(
+      context,
+      interval,
+      (updatedInterval) {
+        setState(() {
+          final index = _feeIntervals.indexWhere((i) => i.id == interval.id);
+          if (index != -1) _feeIntervals[index] = updatedInterval;
+        });
+      },
+    );
   }
 
   void _editSelectedInterval() {
@@ -422,13 +502,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    // TODO: Navigate to fee optimization screen
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Navigating to Fee Optimization...'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const OptimizeFeeScreen(),
       ),
     );
 
@@ -446,11 +523,26 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       'Are you sure you want to delete $count selected interval${count > 1 ? 's' : ''}?',
     );
 
-    if (confirmed == true) {
-      setState(() {
-        _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
-        _selectedIds.clear();
-      });
+    if (confirmed == true && mounted) {
+      // Show loading overlay
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => const AppLoading.overlay(),
+      );
+
+      // Simulate deletion process
+      await Future.delayed(const Duration(milliseconds: 800));
+
+      if (mounted) {
+        Navigator.pop(context); // Close loading dialog
+        setState(() {
+          _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
+          _filteredIntervals = _feeIntervals;
+          _selectedIds.clear();
+        });
+        AppToast.success(context, '$count fee interval${count > 1 ? 's' : ''} deleted successfully');
+      }
     }
   }
 }
