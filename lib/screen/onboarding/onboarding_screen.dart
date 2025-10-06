@@ -93,7 +93,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: Padding(
-                padding: Global.padMd,
+                padding: const EdgeInsets.all(16.0),
                 child: TextButton(
                   onPressed: _goToHome,
                   style: ButtonStyle(
