@@ -21,13 +21,13 @@ class LanguageSelectionModal extends StatelessWidget {
   void _changeLanguage(BuildContext context, SupportedLocale supportedLocale) {
     final localeProvider = context.read<LocaleProvider>();
     localeProvider.setLocale(supportedLocale.locale);
-    Navigator.of(context).pop();
+    // Ne pas fermer le modal automatiquement
   }
 
   void _useSystemLanguage(BuildContext context) {
     final localeProvider = context.read<LocaleProvider>();
     localeProvider.clearLocale();
-    Navigator.of(context).pop();
+    // Ne pas fermer le modal automatiquement
   }
 
   @override
@@ -82,23 +82,29 @@ class LanguageSelectionModal extends StatelessWidget {
                     // System default option
                     _buildLanguageOption(
                       context,
-                      l10n.system,
-                      AppLocalizations.of(context).systemDefault,
-                      null,
+                      l10n.systemDefault,
                       localeProvider.locale == null,
                       () => _useSystemLanguage(context),
                     ),
                     
                     // Specific language options
-                    ...SupportedLocale.supportedLocales.map((supportedLocale) =>
-                      _buildLanguageOption(
-                        context,
-                        supportedLocale.nativeName,
-                        supportedLocale.displayName,
-                        supportedLocale.locale,
-                        localeProvider.locale?.languageCode == supportedLocale.locale.languageCode,
-                        () => _changeLanguage(context, supportedLocale),
-                      ),
+                    _buildLanguageOption(
+                      context,
+                      l10n.english,
+                      localeProvider.locale?.languageCode == 'en',
+                      () => _changeLanguage(context, SupportedLocale.supportedLocales[0]),
+                    ),
+                    _buildLanguageOption(
+                      context,
+                      l10n.french,
+                      localeProvider.locale?.languageCode == 'fr',
+                      () => _changeLanguage(context, SupportedLocale.supportedLocales[1]),
+                    ),
+                    _buildLanguageOption(
+                      context,
+                      l10n.malagasy,
+                      localeProvider.locale?.languageCode == 'mg',
+                      () => _changeLanguage(context, SupportedLocale.supportedLocales[2]),
                     ),
                   ],
                 );
@@ -115,8 +121,6 @@ class LanguageSelectionModal extends StatelessWidget {
   Widget _buildLanguageOption(
     BuildContext context,
     String primaryText,
-    String secondaryText,
-    Locale? locale,
     bool isSelected,
     VoidCallback onTap,
   ) {
@@ -131,26 +135,12 @@ class LanguageSelectionModal extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    primaryText,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                  if (secondaryText != primaryText) ...[
-                    const SizedBox(height: 2),
-                    Text(
-                      secondaryText,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurface.withValues(alpha: 0.7),
-                      ),
-                    ),
-                  ],
-                ],
+              child: Text(
+                primaryText,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurface,
+                ),
               ),
             ),
             Icon(
