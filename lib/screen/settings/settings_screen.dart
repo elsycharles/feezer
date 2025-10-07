@@ -29,13 +29,6 @@ class SettingsScreen extends StatelessWidget {
               [
                 _buildSettingTile(
                   context,
-                  'Notifications',
-                  'Manage app notifications',
-                  Icons.notifications_outlined,
-                  onTap: () => _showComingSoon(context),
-                ),
-                _buildSettingTile(
-                  context,
                   'Theme',
                   'Light, dark or automatic',
                   Icons.palette_outlined,
