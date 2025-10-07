@@ -48,16 +48,14 @@ class LanguageSelectionModal extends StatelessWidget {
             // Handle bar - tap to close
             GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              behavior: HitTestBehavior.opaque,
               child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                margin: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Container(
                   width: 32,
                   height: 4,
-                  margin: const EdgeInsets.symmetric(horizontal: 16),
                   decoration: BoxDecoration(
-                    color: colorScheme.onSurface.withValues(alpha: 0.3),
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
