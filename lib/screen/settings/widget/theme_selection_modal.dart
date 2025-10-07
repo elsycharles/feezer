@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../util/preference_util.dart';
-import '../../../util/theme_provider.dart';
+import '../../../provider/theme_provider.dart';
 import '../../../widget/interactive_surface.dart';
 import 'package:provider/provider.dart';
 

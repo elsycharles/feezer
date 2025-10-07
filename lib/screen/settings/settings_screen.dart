@@ -5,7 +5,7 @@ import '../../widget/app_toast.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
-import '../../util/theme_provider.dart';
+import '../../provider/theme_provider.dart';
 import 'widget/theme_selection_modal.dart';
 
 class SettingsScreen extends StatelessWidget {

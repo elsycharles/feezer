@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'preference_util.dart';
+import '../util/preference_util.dart';
 
 /// Provider to manage theme state across the app
 class ThemeProvider extends ChangeNotifier {

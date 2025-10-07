@@ -1,7 +1,7 @@
 import 'package:fee_minimizer/util/constante_util.dart';
 import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
-import 'package:fee_minimizer/util/theme_provider.dart';
+import 'package:fee_minimizer/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
