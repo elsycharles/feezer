@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../util/preference_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
@@ -35,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
                   builder: (context, themeProvider, child) => _buildSettingTile(
                     context,
                     AppLocalizations.of(context).theme,
-                    themeProvider.themeModeDisplayName,
+                    _getThemeModeDisplayName(context, themeProvider.themeMode),
                     Icons.palette_outlined,
                     onTap: () => ThemeSelectionModal.show(context),
                   ),
@@ -185,5 +186,14 @@ class SettingsScreen extends StatelessWidget {
     AppToast.info(context, AppLocalizations.of(context).featureComingNextVersion);
   }
 
-  
+  String _getThemeModeDisplayName(BuildContext context, AppThemeMode themeMode) {
+    switch (themeMode) {
+      case AppThemeMode.light:
+        return AppLocalizations.of(context).light;
+      case AppThemeMode.dark:
+        return AppLocalizations.of(context).dark;
+      case AppThemeMode.system:
+        return AppLocalizations.of(context).system;
+    }
+  }
 }
