@@ -422,5 +422,17 @@
   "saveChanges": "Enregistrer les modifications",
   "@saveChanges": {
     "description": "Save changes button text"
+  },
+  "minimumAmountAr": "Montant minimum (Ar)",
+  "@minimumAmountAr": {
+    "description": "Minimum amount field label with currency"
+  },
+  "maximumAmountAr": "Montant maximum (Ar)",
+  "@maximumAmountAr": {
+    "description": "Maximum amount field label with currency"
+  },
+  "feeAr": "Frais (Ar)",
+  "@feeAr": {
+    "description": "Fee field label with currency"
   }
 }

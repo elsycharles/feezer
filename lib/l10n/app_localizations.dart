@@ -951,6 +951,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save Changes'**
   String get saveChanges;
+
+  /// Minimum amount field label with currency
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum Amount (Ar)'**
+  String get minimumAmountAr;
+
+  /// Maximum amount field label with currency
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum Amount (Ar)'**
+  String get maximumAmountAr;
+
+  /// Fee field label with currency
+  ///
+  /// In en, this message translates to:
+  /// **'Fee (Ar)'**
+  String get feeAr;
 }
 
 class _AppLocalizationsDelegate

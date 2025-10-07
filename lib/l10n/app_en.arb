@@ -627,5 +627,17 @@
   "clearSelection": "Clear selection",
   "@clearSelection": {
     "description": "Clear selection tooltip"
+  },
+  "minimumAmountAr": "Minimum Amount (Ar)",
+  "@minimumAmountAr": {
+    "description": "Minimum amount field label with currency"
+  },
+  "maximumAmountAr": "Maximum Amount (Ar)",
+  "@maximumAmountAr": {
+    "description": "Maximum amount field label with currency"
+  },
+  "feeAr": "Fee (Ar)",
+  "@feeAr": {
+    "description": "Fee field label with currency"
   }
 }

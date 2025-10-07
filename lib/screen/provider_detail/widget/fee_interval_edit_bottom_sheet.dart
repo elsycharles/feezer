@@ -61,7 +61,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     child: Column(
       children: [
         custom_form.FormField(
-          label: 'Minimum Amount (Ar)',
+          label: AppLocalizations.of(context).minimumAmountAr,
           controller: _minAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -71,7 +71,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: 'Maximum Amount (Ar)',
+          label: AppLocalizations.of(context).maximumAmountAr,
           controller: _maxAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -81,7 +81,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: 'Fee (Ar)',
+          label: AppLocalizations.of(context).feeAr,
           controller: _feeController,
           icon: Icons.attach_money,
           keyboardType: TextInputType.number,

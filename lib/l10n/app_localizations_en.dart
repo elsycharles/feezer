@@ -461,4 +461,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get saveChanges => 'Save Changes';
+
+  @override
+  String get minimumAmountAr => 'Minimum Amount (Ar)';
+
+  @override
+  String get maximumAmountAr => 'Maximum Amount (Ar)';
+
+  @override
+  String get feeAr => 'Fee (Ar)';
 }

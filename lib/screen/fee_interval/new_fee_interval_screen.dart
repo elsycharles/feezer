@@ -95,7 +95,7 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMinAmountField() => custom_form.FormField(
-    label: 'Minimum Amount (Ar)',
+    label: AppLocalizations.of(context).minimumAmountAr,
     controller: _minAmountController,
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMinimumAmount,
@@ -106,7 +106,7 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMaxAmountField() => custom_form.FormField(
-    label: 'Maximum Amount (Ar)',
+    label: AppLocalizations.of(context).maximumAmountAr,
     controller: _maxAmountController,
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMaximumAmount,
@@ -117,7 +117,7 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildFeeField() => custom_form.FormField(
-    label: 'Fee (Ar)',
+    label: AppLocalizations.of(context).feeAr,
     controller: _feeController,
     icon: Icons.attach_money,
     hintText: AppLocalizations.of(context).enterFeeAmount,

@@ -394,7 +394,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get createProvider => 'Mamorona mpanome tolotra';
 
   @override
-  String get clearSelection => 'Fafao ny fifantenana';
+  String get clearSelection => 'Mamafa ny fifantenana';
 
   @override
   String get selectAll => 'Fidio daholo';
@@ -465,4 +465,13 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get saveChanges => 'Tehirizo ny fanovana';
+
+  @override
+  String get minimumAmountAr => 'Vola faran\'ny kely (Ar)';
+
+  @override
+  String get maximumAmountAr => 'Vola faran\'ny be (Ar)';
+
+  @override
+  String get feeAr => 'Sara (Ar)';
 }
