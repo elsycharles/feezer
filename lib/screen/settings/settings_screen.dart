@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
-import '../../widget/confirmation_modal.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
 import '../../provider/theme_provider.dart';
+import '../../provider/locale_provider.dart';
+import '../../l10n/app_localizations.dart';
 import 'widget/theme_selection_modal.dart';
+import 'widget/language_selection_modal.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -14,12 +16,11 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: const custom.AppBar(
-        title: 'Settings',
+      appBar: custom.AppBar(
+        title: AppLocalizations.of(context).settings,
         showSettingsButton: false, // Don't show settings button on settings page
       ),
       body: SafeArea(
@@ -28,23 +29,25 @@ class SettingsScreen extends StatelessWidget {
           children: [
             _buildSection(
               context,
-              'General',
+              'General', // Keep as hardcoded for now
               [
                 Consumer<ThemeProvider>(
                   builder: (context, themeProvider, child) => _buildSettingTile(
                     context,
-                    'Theme',
+                    AppLocalizations.of(context).theme,
                     themeProvider.themeModeDisplayName,
                     Icons.palette_outlined,
                     onTap: () => ThemeSelectionModal.show(context),
                   ),
                 ),
-                _buildSettingTile(
-                  context,
-                  'Language',
-                  'English',
-                  Icons.language_outlined,
-                  onTap: () => _showComingSoon(context),
+                Consumer<LocaleProvider>(
+                  builder: (context, localeProvider, child) => _buildSettingTile(
+                    context,
+                    AppLocalizations.of(context).language,
+                    localeProvider.currentSupportedLocale?.nativeName ?? AppLocalizations.of(context).system,
+                    Icons.language_outlined,
+                    onTap: () => LanguageSelectionModal.show(context),
+                  ),
                 ),
               ],
             ),
@@ -182,17 +185,5 @@ class SettingsScreen extends StatelessWidget {
     AppToast.info(context, 'Feature coming in the next version');
   }
 
-  void _showResetConfirmation(BuildContext context) async {
-    final confirmed = await ConfirmationModal.show(
-      context,
-      'Reset Data',
-      'This action will permanently delete all your data (providers, fees, etc.). This action is irreversible.',
-      confirmText: 'Reset',
-      cancelText: 'Cancel',
-    );
-    
-    if (confirmed == true && context.mounted) {
-      _showComingSoon(context);
-    }
-  }
+  
 }

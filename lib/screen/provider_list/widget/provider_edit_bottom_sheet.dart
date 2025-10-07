@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide BottomSheet;
 
+import '../../../l10n/app_localizations.dart';
 import '../../../model/provider_model.dart';
 import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
@@ -25,7 +26,7 @@ class ProviderEditBottomSheet extends StatefulWidget {
     Function(Provider) onSave,
   ) => BottomSheet.show(
     context,
-    'Edit Provider',
+    AppLocalizations.of(context).editProvider,
     ProviderEditBottomSheet(provider: provider, onSave: onSave),
   );
 
@@ -57,14 +58,14 @@ class _State extends State<ProviderEditBottomSheet> {
     child: Column(
       children: [
         custom_form.FormField(
-          label: 'Provider Name',
+          label: AppLocalizations.of(context).providerName,
           controller: _nameController,
           icon: Icons.business,
           required: true,
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: 'Description',
+          label: AppLocalizations.of(context).description,
           controller: _descController,
           icon: Icons.description,
           maxLines: 4,

@@ -154,15 +154,10 @@ class ThemeSelectionModal extends StatelessWidget {
                 ],
               ),
             ),
-            Radio<AppThemeMode>(
-              value: themeMode,
-              groupValue: context.watch<ThemeProvider>().themeMode,
-              onChanged: (value) {
-                if (value != null) {
-                  onTap();
-                }
-              },
-              activeColor: colorScheme.primary,
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+              color: isSelected ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.6),
+              size: 20,
             ),
           ],
         ),

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../model/provider_model.dart';
 import '../../model/optimization_result_model.dart';
-import '../../styles/global.dart';
+import 'package:fee_minimizer/styles/global.dart';
+import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
 import '../../widget/app_toast.dart';
@@ -47,7 +48,7 @@ class _State extends State<OptimizeFeeScreen> {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
-      title: 'Optimize Fee',
+      title: AppLocalizations.of(context).optimizeFee,
       leading: IconButton(
         onPressed: context.pop,
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
@@ -442,7 +443,7 @@ class _State extends State<OptimizeFeeScreen> {
       boxShadow: Global.shadowMd,
     ),
     child: LoadingButton(
-      text: 'Optimize',
+      text: AppLocalizations.of(context).optimize,
       onPressed: _optimize,
       isLoading: _isOptimizing,
     ),
@@ -485,7 +486,7 @@ class _State extends State<OptimizeFeeScreen> {
   void _optimize() async {
     // Validation
     if (_amount <= 0) {
-      AppToast.error(context, 'Please enter a valid amount');
+      AppToast.error(context, AppLocalizations.of(context).pleaseEnterValidAmount);
       return;
     }
     if (_minTransactions > _maxTransactions) {
@@ -493,7 +494,7 @@ class _State extends State<OptimizeFeeScreen> {
       return;
     }
     if (_selectedProvider == null) {
-      AppToast.error(context, 'Please select a provider');
+      AppToast.error(context, AppLocalizations.of(context).pleaseSelectProvider);
       return;
     }
 

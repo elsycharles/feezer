@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
@@ -129,10 +130,10 @@ class _State extends State<ProviderListScreen> {
     sliver: _filtered.isEmpty
         ? SliverFillRemaining(
             hasScrollBody: false,
-            child: const Center(
+            child: Center(
               child: SearchEmptyState(
                 icon: Icons.search_off,
-                title: 'No providers found',
+                title: AppLocalizations.of(context).noProvidersFound,
               ),
             ),
           )
@@ -170,7 +171,7 @@ class _State extends State<ProviderListScreen> {
       },
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: const custom.AppBar(title: 'Providers'),
+        appBar: custom.AppBar(title: AppLocalizations.of(context).providers),
         bottomNavigationBar:
             _selectedIds.isEmpty ? _buildAddProviderButton(colorScheme) : null,
         body: SafeArea(
@@ -182,7 +183,7 @@ class _State extends State<ProviderListScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: SearchField(
-                  hintText: 'Search providers...',
+                  hintText: AppLocalizations.of(context).searchProviders,
                   controller: _searchController,
                 ),
               ),
@@ -282,13 +283,14 @@ class _State extends State<ProviderListScreen> {
 
   Future<void> _deleteSelected() async {
     final count = _selectedIds.length;
+    final l10n = AppLocalizations.of(context);
     final message = count == 1
-        ? 'Delete this provider?'
-        : 'Delete $count providers?';
+        ? l10n.deleteThisProvider
+        : l10n.deleteProvidersCount(count);
 
     final confirmed = await ConfirmationModal.show(
       context,
-      'Delete Provider${count > 1 ? 's' : ''}',
+      count > 1 ? l10n.deleteProviders : l10n.deleteProvider,
       message,
     );
 
@@ -309,7 +311,7 @@ class _State extends State<ProviderListScreen> {
           _providers.removeWhere((p) => _selectedIds.contains(p.id));
           _selectedIds.clear();
         });
-        AppToast.success(context, '$count provider${count > 1 ? 's' : ''} deleted successfully');
+        AppToast.success(context, l10n.providerDeletedSuccessfully(count));
       }
     }
   }

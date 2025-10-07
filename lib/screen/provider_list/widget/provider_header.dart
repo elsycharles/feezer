@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../styles/global.dart';
 import '../../../util/theme_util.dart';
 import '../../../widget/provider_brand_avatar.dart';
@@ -31,7 +32,7 @@ class ProviderHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Manage your providers',
+                        AppLocalizations.of(context).manageYourProviders,
                         style: ThemeUtil.titleSmall.copyWith(
                           fontWeight: FontWeight.w700,
                           color: colorScheme.onSurface,
@@ -39,7 +40,7 @@ class ProviderHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 6),
                       Text(
-                        'Centralize bank and mobile money partners in one place.',
+                        AppLocalizations.of(context).centralizeProviders,
                         style: ThemeUtil.bodySmall.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
@@ -52,7 +53,9 @@ class ProviderHeader extends StatelessWidget {
             Global.gapLg,
             ProviderStatChip(
               icon: Icons.people_alt,
-              label: 'Active provider${providerCount == 1 ? '' : 's'}',
+              label: providerCount == 1 
+                  ? AppLocalizations.of(context).activeProvider
+                  : AppLocalizations.of(context).activeProviders,
               value: '$providerCount',
             ),
           ],

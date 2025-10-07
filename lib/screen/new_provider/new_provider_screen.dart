@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
@@ -38,7 +39,7 @@ class _State extends State<NewProviderScreen> {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
-      title: 'New Provider',
+      title: AppLocalizations.of(context).newProvider,
       leading: IconButton(
         onPressed: context.pop,
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
@@ -75,7 +76,7 @@ class _State extends State<NewProviderScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Create New Provider',
+        AppLocalizations.of(context).createNewProvider,
         style: ThemeUtil.titleLarge.copyWith(
           color: context.colorScheme.onSurface,
         ),
@@ -92,10 +93,10 @@ class _State extends State<NewProviderScreen> {
   );
 
   Widget _buildNameField() => custom_form.FormField(
-    label: 'Provider Name',
+    label: AppLocalizations.of(context).providerName,
     controller: _nameController,
     icon: Icons.business,
-    hintText: 'Enter provider name',
+    hintText: AppLocalizations.of(context).enterProviderName,
     required: true,
   );
 
@@ -164,7 +165,7 @@ class _State extends State<NewProviderScreen> {
           creationDatetime: now,
         );
         widget.onProviderAdded?.call(provider);
-        AppToast.success(context, 'Provider created successfully');
+        AppToast.success(context, AppLocalizations.of(context).providerCreatedSuccessfully);
         context.pop();
       }
     }
