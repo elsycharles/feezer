@@ -422,9 +422,5 @@
   "saveChanges": "Enregistrer les modifications",
   "@saveChanges": {
     "description": "Save changes button text"
-  },
-  "clearSelection": "Effacer la sélection",
-  "@clearSelection": {
-    "description": "Clear selection tooltip"
   }
 }

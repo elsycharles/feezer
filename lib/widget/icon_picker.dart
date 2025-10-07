@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
 import '../util/icon_util.dart';
 import '../util/theme_util.dart';
 import 'interactive_surface.dart';
@@ -9,7 +10,7 @@ class IconPicker {
     required BuildContext context,
     required String selected,
     required ValueChanged<String> onSelected,
-    String title = 'Select Icon',
+    String? title,
   }) => showDialog(
     context: context,
     builder: (_) {
@@ -24,7 +25,7 @@ class IconPicker {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                title,
+                title ?? AppLocalizations.of(context).selectIcon,
                 style: ThemeUtil.titleSmall.copyWith(
                   color: colorScheme.onSurface,
                 ),

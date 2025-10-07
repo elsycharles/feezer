@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../util/theme_util.dart';
 
 /// Modern confirmation modal with consistent design
@@ -7,16 +8,16 @@ class ConfirmationModal {
     BuildContext context,
     String title,
     String message, {
-    String confirmText = 'Delete',
-    String cancelText = 'Cancel',
+    String? confirmText,
+    String? cancelText,
   }) => showDialog<bool>(
     context: context,
     barrierDismissible: false,
-    builder: (_) => _Dialog(
+    builder: (ctx) => _Dialog(
       title: title,
       message: message,
-      confirmText: confirmText,
-      cancelText: cancelText,
+      confirmText: confirmText ?? AppLocalizations.of(ctx).delete,
+      cancelText: cancelText ?? AppLocalizations.of(ctx).cancel,
     ),
   );
 }

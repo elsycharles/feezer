@@ -10,12 +10,12 @@ class IconSelectorField extends StatelessWidget {
     super.key,
     required this.selectedIcon,
     required this.onChanged,
-    this.label = 'Icon',
+    this.label,
   });
 
   final String selectedIcon;
   final ValueChanged<String> onChanged;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class IconSelectorField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
+          label ?? AppLocalizations.of(context).icon,
           style: ThemeUtil.bodyLarge.copyWith(
             color: colorScheme.onSurface,
           ),

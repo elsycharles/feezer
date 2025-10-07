@@ -131,7 +131,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                   Icons.delete_outlined,
                   color: colorScheme.onPrimary,
                 ),
-                tooltip: 'Delete',
+                tooltip: AppLocalizations.of(context).delete,
               ),
             ],
           ),
