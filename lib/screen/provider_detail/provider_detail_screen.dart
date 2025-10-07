@@ -174,7 +174,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
             child: SearchEmptyState(
               icon: Icons.search_off,
               title: AppLocalizations.of(context).noFeeIntervalsFound,
-              message: 'Try adjusting your search range.',
+              message: AppLocalizations.of(context).tryAdjustingYourSearchRange,
             ),
           ),
         )

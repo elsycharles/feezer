@@ -394,7 +394,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get createProvider => 'Mamorona mpanome tolotra';
 
   @override
-  String get clearSelection => 'Mamafa ny fifantenana';
+  String get clearSelection => 'Fafao ny fifantenana';
 
   @override
   String get selectAll => 'Fidio daholo';
@@ -431,4 +431,38 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get mobileMoney => 'Vola finday';
+
+  @override
+  String get selected => 'voafidy';
+
+  @override
+  String get feeOptimizer => 'Mpampandroso sara';
+
+  @override
+  String get totalFeeIntervals => 'Totaly ny elan-toeran\'ny sara';
+
+  @override
+  String get helpAndSupport => 'Fanampiana sy fanohanana';
+
+  @override
+  String get addNewProvider => 'Hanampy mpanome tolotra vaovao';
+
+  @override
+  String get tryAdjustingYourSearchRange =>
+      'Andramo ny fanovana ny sahan-tsikarananao';
+
+  @override
+  String get chooseTheme => 'Misafidy endrika';
+
+  @override
+  String get alwaysUseLightTheme => 'Mampiasa endrika mazava foana';
+
+  @override
+  String get alwaysUseDarkTheme => 'Mampiasa endrika maizina foana';
+
+  @override
+  String get followSystemSettings => 'Manaraka ny firafitry ny rafitra';
+
+  @override
+  String get saveChanges => 'Tehirizo ny fanovana';
 }

@@ -431,4 +431,38 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get mobileMoney => 'Mobile money';
+
+  @override
+  String get selected => 'sélectionnés';
+
+  @override
+  String get feeOptimizer => 'Optimiseur de frais';
+
+  @override
+  String get totalFeeIntervals => 'Total des intervalles de frais';
+
+  @override
+  String get helpAndSupport => 'Aide et support';
+
+  @override
+  String get addNewProvider => 'Ajouter un nouveau fournisseur';
+
+  @override
+  String get tryAdjustingYourSearchRange =>
+      'Essayez d\'ajuster votre plage de recherche';
+
+  @override
+  String get chooseTheme => 'Choisir le thème';
+
+  @override
+  String get alwaysUseLightTheme => 'Toujours utiliser le thème clair';
+
+  @override
+  String get alwaysUseDarkTheme => 'Toujours utiliser le thème sombre';
+
+  @override
+  String get followSystemSettings => 'Suivre les paramètres système';
+
+  @override
+  String get saveChanges => 'Enregistrer les modifications';
 }

@@ -378,5 +378,53 @@
   "mobileFinancialServices": "Services financiers mobiles",
   "@mobileFinancialServices": {
     "description": "Mobile financial services description"
+  },
+  "selected": "sélectionnés",
+  "@selected": {
+    "description": "Selected items text"
+  },
+  "feeOptimizer": "Optimiseur de frais",
+  "@feeOptimizer": {
+    "description": "Fee optimizer button text"
+  },
+  "totalFeeIntervals": "Total des intervalles de frais",
+  "@totalFeeIntervals": {
+    "description": "Total fee intervals label"
+  },
+  "helpAndSupport": "Aide et support",
+  "@helpAndSupport": {
+    "description": "Help and support menu item"
+  },
+  "addNewProvider": "Ajouter un nouveau fournisseur",
+  "@addNewProvider": {
+    "description": "Add new provider button text"
+  },
+  "tryAdjustingYourSearchRange": "Essayez d'ajuster votre plage de recherche",
+  "@tryAdjustingYourSearchRange": {
+    "description": "Search range adjustment message"
+  },
+  "chooseTheme": "Choisir le thème",
+  "@chooseTheme": {
+    "description": "Choose theme dialog title"
+  },
+  "alwaysUseLightTheme": "Toujours utiliser le thème clair",
+  "@alwaysUseLightTheme": {
+    "description": "Light theme description"
+  },
+  "alwaysUseDarkTheme": "Toujours utiliser le thème sombre",
+  "@alwaysUseDarkTheme": {
+    "description": "Dark theme description"
+  },
+  "followSystemSettings": "Suivre les paramètres système",
+  "@followSystemSettings": {
+    "description": "System theme description"
+  },
+  "saveChanges": "Enregistrer les modifications",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "clearSelection": "Effacer la sélection",
+  "@clearSelection": {
+    "description": "Clear selection tooltip"
   }
 }

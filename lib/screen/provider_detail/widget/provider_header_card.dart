@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../model/provider_model.dart';
 import '../../../util/theme_util.dart';
 import '../../../styles/global.dart';
@@ -40,7 +41,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
       const SizedBox(width: 16),
       Expanded(child: _buildProviderInfo()),
       LoadingButton(
-        text: 'Fee Optimizer',
+        text: AppLocalizations.of(context).feeOptimizer,
         onPressed: _optimizeFees,
         isLoading: _isOptimizing,
         isFullWidth: false,
@@ -77,7 +78,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
 
   Widget _buildStats() => ProviderStatChip(
     icon: Icons.receipt_long,
-    label: 'Total Fee Intervals',
+    label: AppLocalizations.of(context).totalFeeIntervals,
     value: '5',
   );
 

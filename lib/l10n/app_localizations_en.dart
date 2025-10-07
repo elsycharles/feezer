@@ -428,4 +428,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mobileMoney => 'Mobile money';
+
+  @override
+  String get selected => 'selected';
+
+  @override
+  String get feeOptimizer => 'Fee Optimizer';
+
+  @override
+  String get totalFeeIntervals => 'Total Fee Intervals';
+
+  @override
+  String get helpAndSupport => 'Help & Support';
+
+  @override
+  String get addNewProvider => 'Add new provider';
+
+  @override
+  String get tryAdjustingYourSearchRange => 'Try adjusting your search range';
+
+  @override
+  String get chooseTheme => 'Choose Theme';
+
+  @override
+  String get alwaysUseLightTheme => 'Always use light theme';
+
+  @override
+  String get alwaysUseDarkTheme => 'Always use dark theme';
+
+  @override
+  String get followSystemSettings => 'Follow system settings';
+
+  @override
+  String get saveChanges => 'Save Changes';
 }

@@ -885,6 +885,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mobile money'**
   String get mobileMoney;
+
+  /// Selected items text
+  ///
+  /// In en, this message translates to:
+  /// **'selected'**
+  String get selected;
+
+  /// Fee optimizer button text
+  ///
+  /// In en, this message translates to:
+  /// **'Fee Optimizer'**
+  String get feeOptimizer;
+
+  /// Total fee intervals label
+  ///
+  /// In en, this message translates to:
+  /// **'Total Fee Intervals'**
+  String get totalFeeIntervals;
+
+  /// Help and support menu item
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get helpAndSupport;
+
+  /// Add new provider button text
+  ///
+  /// In en, this message translates to:
+  /// **'Add new provider'**
+  String get addNewProvider;
+
+  /// Search range adjustment message
+  ///
+  /// In en, this message translates to:
+  /// **'Try adjusting your search range'**
+  String get tryAdjustingYourSearchRange;
+
+  /// Choose theme dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Theme'**
+  String get chooseTheme;
+
+  /// Light theme description
+  ///
+  /// In en, this message translates to:
+  /// **'Always use light theme'**
+  String get alwaysUseLightTheme;
+
+  /// Dark theme description
+  ///
+  /// In en, this message translates to:
+  /// **'Always use dark theme'**
+  String get alwaysUseDarkTheme;
+
+  /// System theme description
+  ///
+  /// In en, this message translates to:
+  /// **'Follow system settings'**
+  String get followSystemSettings;
+
+  /// Save changes button text
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
 }
 
 class _AppLocalizationsDelegate

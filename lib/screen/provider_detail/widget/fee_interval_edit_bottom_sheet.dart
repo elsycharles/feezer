@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:flutter/services.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../../model/fee_interval_model.dart';
 import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
@@ -90,7 +91,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapXl,
         LoadingButton(
-          text: 'Save Changes',
+          text: AppLocalizations.of(context).saveChanges,
           isLoading: _isLoading,
           onPressed: _isLoading ? null : _save,
         ),

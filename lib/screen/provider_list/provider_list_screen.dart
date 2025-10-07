@@ -229,7 +229,7 @@ class _State extends State<ProviderListScreen> {
       child: SizedBox(
         width: double.infinity,
         child: LoadingButton(
-          text: 'Add New Provider',
+          text: AppLocalizations.of(context).addNewProvider,
           onPressed: _addProvider,
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),

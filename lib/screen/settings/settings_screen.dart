@@ -94,7 +94,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildSettingTile(
                   context,
-                  'Help & Support',
+                  AppLocalizations.of(context).helpAndSupport,
                   AppLocalizations.of(context).faqAndContact,
                   Icons.help_outline,
                   onTap: () => _showComingSoon(context),

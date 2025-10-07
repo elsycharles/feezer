@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../util/theme_util.dart';
 
 /// Animated contextual action bar for multi-selection
@@ -87,11 +88,11 @@ class _SelectionActionBarState extends State<SelectionActionBar>
               IconButton(
                 onPressed: widget.onClearSelection,
                 icon: Icon(Icons.close, color: colorScheme.onPrimary),
-                tooltip: 'Clear selection',
+                tooltip: AppLocalizations.of(context).clearSelection,
               ),
               const SizedBox(width: 8),
               Text(
-                '${widget.selectedCount} selected',
+                '${widget.selectedCount} ${AppLocalizations.of(context).selected}',
                 style: ThemeUtil.labelLarge.copyWith(
                   color: colorScheme.onPrimary,
                 ),

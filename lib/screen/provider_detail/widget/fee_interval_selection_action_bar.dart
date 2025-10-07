@@ -90,7 +90,7 @@ class _FeeIntervalSelectionActionBarState
               ),
               const SizedBox(width: 8),
               Text(
-                '${widget.selectedCount} selected',
+                '${widget.selectedCount} ${AppLocalizations.of(context).selected}',
                 style: ThemeUtil.labelLarge.copyWith(
                   color: colorScheme.onPrimary,
                 ),

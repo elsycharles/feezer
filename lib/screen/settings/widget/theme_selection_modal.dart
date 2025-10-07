@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../util/preference_util.dart';
 import '../../../provider/theme_provider.dart';
 import '../../../widget/interactive_surface.dart';
@@ -57,7 +58,7 @@ class ThemeSelectionModal extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Choose Theme',
+                AppLocalizations.of(context).chooseTheme,
                 style: theme.textTheme.titleLarge?.copyWith(
                   color: colorScheme.onSurface,
                   fontWeight: FontWeight.w600,
@@ -72,8 +73,8 @@ class ThemeSelectionModal extends StatelessWidget {
                   children: [
                     _buildThemeOption(
                       context,
-                      'Light',
-                      'Always use light theme',
+                      AppLocalizations.of(context).light,
+                      AppLocalizations.of(context).alwaysUseLightTheme,
                       Icons.light_mode,
                       AppThemeMode.light,
                       themeProvider.themeMode == AppThemeMode.light,
@@ -81,8 +82,8 @@ class ThemeSelectionModal extends StatelessWidget {
                     ),
                     _buildThemeOption(
                       context,
-                      'Dark',
-                      'Always use dark theme',
+                      AppLocalizations.of(context).dark,
+                      AppLocalizations.of(context).alwaysUseDarkTheme,
                       Icons.dark_mode,
                       AppThemeMode.dark,
                       themeProvider.themeMode == AppThemeMode.dark,
@@ -90,8 +91,8 @@ class ThemeSelectionModal extends StatelessWidget {
                     ),
                     _buildThemeOption(
                       context,
-                      'System',
-                      'Follow system settings',
+                      AppLocalizations.of(context).system,
+                      AppLocalizations.of(context).followSystemSettings,
                       Icons.settings_brightness,
                       AppThemeMode.system,
                       themeProvider.themeMode == AppThemeMode.system,

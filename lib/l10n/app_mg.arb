@@ -378,5 +378,53 @@
   "mobileFinancialServices": "Serivisy ara-bola finday",
   "@mobileFinancialServices": {
     "description": "Mobile financial services description"
+  },
+  "selected": "voafidy",
+  "@selected": {
+    "description": "Selected items text"
+  },
+  "feeOptimizer": "Mpampandroso sara",
+  "@feeOptimizer": {
+    "description": "Fee optimizer button text"
+  },
+  "totalFeeIntervals": "Totaly ny elan-toeran'ny sara",
+  "@totalFeeIntervals": {
+    "description": "Total fee intervals label"
+  },
+  "helpAndSupport": "Fanampiana sy fanohanana",
+  "@helpAndSupport": {
+    "description": "Help and support menu item"
+  },
+  "addNewProvider": "Hanampy mpanome tolotra vaovao",
+  "@addNewProvider": {
+    "description": "Add new provider button text"
+  },
+  "tryAdjustingYourSearchRange": "Andramo ny fanovana ny sahan-tsikarananao",
+  "@tryAdjustingYourSearchRange": {
+    "description": "Search range adjustment message"
+  },
+  "chooseTheme": "Misafidy endrika",
+  "@chooseTheme": {
+    "description": "Choose theme dialog title"
+  },
+  "alwaysUseLightTheme": "Mampiasa endrika mazava foana",
+  "@alwaysUseLightTheme": {
+    "description": "Light theme description"
+  },
+  "alwaysUseDarkTheme": "Mampiasa endrika maizina foana",
+  "@alwaysUseDarkTheme": {
+    "description": "Dark theme description"
+  },
+  "followSystemSettings": "Manaraka ny firafitry ny rafitra",
+  "@followSystemSettings": {
+    "description": "System theme description"
+  },
+  "saveChanges": "Tehirizo ny fanovana",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "clearSelection": "Fafao ny fifantenana",
+  "@clearSelection": {
+    "description": "Clear selection tooltip"
   }
 }

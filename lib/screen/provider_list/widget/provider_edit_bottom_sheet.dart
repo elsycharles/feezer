@@ -78,7 +78,7 @@ class _State extends State<ProviderEditBottomSheet> {
         ),
         Global.gapXl,
         LoadingButton(
-          text: 'Save Changes',
+          text: AppLocalizations.of(context).saveChanges,
           isLoading: _isLoading,
           onPressed: _isLoading ? null : _save,
         ),
