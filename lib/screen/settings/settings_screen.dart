@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
+import '../../util/theme_provider.dart';
+import 'widget/theme_selection_modal.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -27,12 +30,14 @@ class SettingsScreen extends StatelessWidget {
               context,
               'General',
               [
-                _buildSettingTile(
-                  context,
-                  'Theme',
-                  'Light, dark or automatic',
-                  Icons.palette_outlined,
-                  onTap: () => _showComingSoon(context),
+                Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, child) => _buildSettingTile(
+                    context,
+                    'Theme',
+                    themeProvider.themeModeDisplayName,
+                    Icons.palette_outlined,
+                    onTap: () => ThemeSelectionModal.show(context),
+                  ),
                 ),
                 _buildSettingTile(
                   context,
