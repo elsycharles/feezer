@@ -148,7 +148,7 @@ class _AppToastState extends State<AppToast>
     final mediaQuery = MediaQuery.of(context);
     
     return Positioned(
-      bottom: mediaQuery.padding.bottom + 100, // Au-dessus des boutons en bas
+      bottom: mediaQuery.padding.bottom + 75, // Juste 5px au-dessus du bouton add
       left: 16,
       right: 16,
       child: SlideTransition(
