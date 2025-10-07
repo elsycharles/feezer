@@ -434,5 +434,15 @@
   "feeAr": "Frais (Ar)",
   "@feeAr": {
     "description": "Fee field label with currency"
+  },
+  "confirmDeleteIntervals": "Êtes-vous sûr de vouloir supprimer {count} intervalle{count, plural, =1{} other{s}} sélectionné{count, plural, =1{} other{s}} ?",
+  "@confirmDeleteIntervals": {
+    "description": "Confirmation message for deleting fee intervals",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   }
 }

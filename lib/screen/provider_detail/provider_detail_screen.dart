@@ -501,7 +501,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     final confirmed = await ConfirmationModal.show(
       context,
       AppLocalizations.of(context).deleteFeeIntervals,
-      'Are you sure you want to delete $count selected interval${count > 1 ? 's' : ''}?',
+      AppLocalizations.of(context).confirmDeleteIntervals(count),
     );
 
     if (confirmed == true && mounted) {

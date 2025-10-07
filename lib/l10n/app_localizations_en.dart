@@ -470,4 +470,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get feeAr => 'Fee (Ar)';
+
+  @override
+  String confirmDeleteIntervals(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 's',
+      one: '',
+    );
+    return 'Are you sure you want to delete $count selected interval$_temp0?';
+  }
 }

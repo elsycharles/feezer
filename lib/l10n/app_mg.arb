@@ -434,5 +434,15 @@
   "feeAr": "Sara (Ar)",
   "@feeAr": {
     "description": "Fee field label with currency"
+  },
+  "confirmDeleteIntervals": "Tena te-hamafa ny elan-toera {count} voafidy ve ianao?",
+  "@confirmDeleteIntervals": {
+    "description": "Confirmation message for deleting fee intervals",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   }
 }

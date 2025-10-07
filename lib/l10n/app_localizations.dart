@@ -969,6 +969,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fee (Ar)'**
   String get feeAr;
+
+  /// Confirmation message for deleting fee intervals
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {count} selected interval{count, plural, =1{} other{s}}?'**
+  String confirmDeleteIntervals(int count);
 }
 
 class _AppLocalizationsDelegate

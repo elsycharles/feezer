@@ -474,4 +474,9 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get feeAr => 'Sara (Ar)';
+
+  @override
+  String confirmDeleteIntervals(int count) {
+    return 'Tena te-hamafa ny elan-toera $count voafidy ve ianao?';
+  }
 }
