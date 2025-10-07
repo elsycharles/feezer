@@ -884,9 +884,9 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Must be at least {count} characters'**
-  String mustBeAtLeastNCharacters(num count);
+  String mustBeAtLeastNCharacters(int count);
 
-  /// Validation error for number field
+  /// Validation error for numeric fields
   ///
   /// In en, this message translates to:
   /// **'Enter a valid number'**
@@ -1023,6 +1023,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete {count} selected interval{count, plural, =1{} other{s}}?'**
   String confirmDeleteIntervals(int count);
+
+  /// Validation error for required field with field name
+  ///
+  /// In en, this message translates to:
+  /// **'{fieldName} is required'**
+  String fieldIsRequired(String fieldName);
+
+  /// Validation error for positive numbers
+  ///
+  /// In en, this message translates to:
+  /// **'Must be greater than 0'**
+  String get mustBeGreaterThanZero;
+
+  /// Validation error for maximum length
+  ///
+  /// In en, this message translates to:
+  /// **'Must be less than {count} characters'**
+  String mustBeLessThanNCharacters(int count);
 }
 
 class _AppLocalizationsDelegate

@@ -101,7 +101,7 @@ class _State extends State<NewFeeIntervalScreen> {
     hintText: AppLocalizations.of(context).enterMinimumAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(value, AppLocalizations.of(context).minimumAmount),
+    validator: (value) => ValidationUtil.positiveNumber(value, context, AppLocalizations.of(context).minimumAmount),
     required: true,
   );
 
@@ -123,7 +123,7 @@ class _State extends State<NewFeeIntervalScreen> {
     hintText: AppLocalizations.of(context).enterFeeAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(value, AppLocalizations.of(context).feeAmount),
+    validator: (value) => ValidationUtil.positiveNumber(value, context, AppLocalizations.of(context).feeAmount),
     required: true,
   );
 
@@ -165,7 +165,7 @@ class _State extends State<NewFeeIntervalScreen> {
 
   String? _validateMaxAmount(String? value) {
     // First validate it's a positive number
-    final basicValidation = ValidationUtil.positiveNumber(value, AppLocalizations.of(context).maximumAmount);
+    final basicValidation = ValidationUtil.positiveNumber(value, context, AppLocalizations.of(context).maximumAmount);
     if (basicValidation != null) return basicValidation;
     
     // Then check it's greater than min amount

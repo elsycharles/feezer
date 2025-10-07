@@ -1,57 +1,67 @@
+import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
+
 /// Validation helpers for form fields
 class ValidationUtil {
   ValidationUtil._(); // Private constructor
 
   /// Validates required fields
-  static String? required(String? value, [String? fieldName]) =>
-      value?.trim().isEmpty == true 
-          ? '${fieldName ?? 'This field'} is required' 
-          : null;
+  static String? required(String? value, BuildContext context, [String? fieldName]) {
+    if (value?.trim().isEmpty != true) return null;
+    
+    if (fieldName != null) {
+      return AppLocalizations.of(context).fieldIsRequired(fieldName);
+    }
+    return AppLocalizations.of(context).thisFieldIsRequired;
+  }
 
-  /// Validates email format
-  static String? email(String? value) {
-    if (value?.trim().isEmpty == true) return 'Email is required';
+  /// Validates email format (deprecated - app has no email fields)
+  static String? email(String? value, BuildContext context) {
+    if (value?.trim().isEmpty == true) return AppLocalizations.of(context).thisFieldIsRequired;
     
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    return emailRegex.hasMatch(value!) ? null : 'Enter a valid email';
+    return emailRegex.hasMatch(value!) ? null : AppLocalizations.of(context).enterValidNumber;
   }
 
   /// Validates minimum length
-  static String? minLength(String? value, int minLength) {
-    if (value?.trim().isEmpty == true) return 'This field is required';
+  static String? minLength(String? value, int minLength, BuildContext context) {
+    if (value?.trim().isEmpty == true) return AppLocalizations.of(context).thisFieldIsRequired;
     
     return value!.trim().length >= minLength 
         ? null 
-        : 'Must be at least $minLength characters';
+        : AppLocalizations.of(context).mustBeAtLeastNCharacters(minLength);
   }
 
   /// Validates maximum length
-  static String? maxLength(String? value, int maxLength) {
+  static String? maxLength(String? value, int maxLength, BuildContext context) {
     if (value?.trim().isEmpty == true) return null; // Allow empty
     
     return value!.trim().length <= maxLength 
         ? null 
-        : 'Must be less than $maxLength characters';
+        : AppLocalizations.of(context).mustBeLessThanNCharacters(maxLength);
   }
 
   /// Validates numeric values
-  static String? numeric(String? value, [String? fieldName]) {
+  static String? numeric(String? value, BuildContext context, [String? fieldName]) {
     if (value?.trim().isEmpty == true) {
-      return '${fieldName ?? 'This field'} is required';
+      if (fieldName != null) {
+        return AppLocalizations.of(context).fieldIsRequired(fieldName);
+      }
+      return AppLocalizations.of(context).thisFieldIsRequired;
     }
     
     return double.tryParse(value!) != null 
         ? null 
-        : 'Enter a valid number';
+        : AppLocalizations.of(context).enterValidNumber;
   }
 
   /// Validates positive numbers
-  static String? positiveNumber(String? value, [String? fieldName]) {
-    final numericResult = numeric(value, fieldName);
+  static String? positiveNumber(String? value, BuildContext context, [String? fieldName]) {
+    final numericResult = numeric(value, context, fieldName);
     if (numericResult != null) return numericResult;
     
     final number = double.parse(value!);
-    return number > 0 ? null : 'Must be greater than 0';
+    return number > 0 ? null : AppLocalizations.of(context).mustBeGreaterThanZero;
   }
 
   /// Combines multiple validators

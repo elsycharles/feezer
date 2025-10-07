@@ -504,5 +504,43 @@
         "example": "3"
       }
     }
+  },
+  "fieldIsRequired": "{fieldName} est requis",
+  "@fieldIsRequired": {
+    "description": "Validation error for required field with field name",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Montant minimum"
+      }
+    }
+  },
+  "mustBeGreaterThanZero": "Doit être supérieur à 0",
+  "@mustBeGreaterThanZero": {
+    "description": "Validation error for positive numbers"
+  },
+  "enterValidNumber": "Saisissez un nombre valide",
+  "@enterValidNumber": {
+    "description": "Validation error for numeric fields"
+  },
+  "mustBeAtLeastNCharacters": "Doit contenir au moins {count} caractères",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "mustBeLessThanNCharacters": "Doit contenir moins de {count} caractères",
+  "@mustBeLessThanNCharacters": {
+    "description": "Validation error for maximum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "50"
+      }
+    }
   }
 }

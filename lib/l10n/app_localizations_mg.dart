@@ -446,17 +446,12 @@ class AppLocalizationsMg extends AppLocalizations {
   String get pleaseEnterValidFee => 'Ampidiro ny sara manan-kery azafady';
 
   @override
-  String mustBeAtLeastNCharacters(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
-    return 'Tokony ho $countString litera fara fahakeliny';
+  String mustBeAtLeastNCharacters(int count) {
+    return 'Tokony ho $count litera fara fahakeliny';
   }
 
   @override
-  String get enterValidNumber => 'Ampidiro ny isa manan-kery';
+  String get enterValidNumber => 'Ampidiro isa manan-kery';
 
   @override
   String get pleaseEnterFeeAmount => 'Ampidiro ny sara azafady';
@@ -525,5 +520,18 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String confirmDeleteIntervals(int count) {
     return 'Tena te-hamafa ny elan-toera $count voafidy ve ianao?';
+  }
+
+  @override
+  String fieldIsRequired(String fieldName) {
+    return 'Ilaina ny $fieldName';
+  }
+
+  @override
+  String get mustBeGreaterThanZero => 'Tokony ho mihoatra noho ny aotra';
+
+  @override
+  String mustBeLessThanNCharacters(int count) {
+    return 'Tokony ho latsaky ny $count litera';
   }
 }

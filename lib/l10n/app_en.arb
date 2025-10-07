@@ -705,5 +705,43 @@
         "example": "3"
       }
     }
+  },
+  "fieldIsRequired": "{fieldName} is required",
+  "@fieldIsRequired": {
+    "description": "Validation error for required field with field name",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Minimum amount"
+      }
+    }
+  },
+  "mustBeGreaterThanZero": "Must be greater than 0",
+  "@mustBeGreaterThanZero": {
+    "description": "Validation error for positive numbers"
+  },
+  "enterValidNumber": "Enter a valid number",
+  "@enterValidNumber": {
+    "description": "Validation error for numeric fields"
+  },
+  "mustBeAtLeastNCharacters": "Must be at least {count} characters",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "mustBeLessThanNCharacters": "Must be less than {count} characters",
+  "@mustBeLessThanNCharacters": {
+    "description": "Validation error for maximum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "50"
+      }
+    }
   }
 }

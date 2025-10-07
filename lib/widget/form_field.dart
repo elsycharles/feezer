@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../util/theme_util.dart';
+import '../l10n/app_localizations.dart';
 
 /// Reusable form field with consistent styling
 class FormField extends StatelessWidget {
@@ -66,7 +67,7 @@ class FormField extends StatelessWidget {
             enabledBorder: _buildBorder(colorScheme, false),
             focusedBorder: _buildBorder(colorScheme, true),
           ),
-          validator: validator ?? (required ? _defaultValidator : null),
+          validator: validator ?? (required ? (value) => _defaultValidator(value, context) : null),
         ),
       ],
     );
@@ -81,10 +82,9 @@ class FormField extends StatelessWidget {
         ),
       );
 
-  String? _defaultValidator(String? value) {
+  String? _defaultValidator(String? value, BuildContext context) {
     if (value?.trim().isEmpty == true) {
-      // Try to get context for translation, fallback to English if not available
-      return 'This field is required';
+      return AppLocalizations.of(context).thisFieldIsRequired;
     }
     return null;
   }

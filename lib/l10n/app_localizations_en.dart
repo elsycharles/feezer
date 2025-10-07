@@ -442,13 +442,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterValidFee => 'Please enter a valid fee';
 
   @override
-  String mustBeAtLeastNCharacters(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
-    return 'Must be at least $countString characters';
+  String mustBeAtLeastNCharacters(int count) {
+    return 'Must be at least $count characters';
   }
 
   @override
@@ -526,5 +521,18 @@ class AppLocalizationsEn extends AppLocalizations {
       one: '',
     );
     return 'Are you sure you want to delete $count selected interval$_temp0?';
+  }
+
+  @override
+  String fieldIsRequired(String fieldName) {
+    return '$fieldName is required';
+  }
+
+  @override
+  String get mustBeGreaterThanZero => 'Must be greater than 0';
+
+  @override
+  String mustBeLessThanNCharacters(int count) {
+    return 'Must be less than $count characters';
   }
 }
