@@ -217,21 +217,21 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   Widget _buildIntervalsHeaderRow() => Container(
     margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-    padding: const EdgeInsets.all(16), // Même padding que les tuiles
+    padding: const EdgeInsets.all(16), // Same padding as tiles
     decoration: BoxDecoration(
       color: Theme.of(context).colorScheme.surface,
-      borderRadius: BorderRadius.circular(16), // Même radius que les tuiles
+      borderRadius: BorderRadius.circular(16), // Same radius as tiles
       border: Border.all(
         color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.12),
       ),
     ),
     child: Row(
       children: [
-        // Pas de checkbox dans l'en-tête, donc pas d'espace réservé
+        // No checkbox in header, so no reserved space
         Expanded(
           child: _headerCell('Fee interval', alignment: TextAlign.left),
         ),
-        // Espace approximatif pour le chip de frais (padding + contenu)
+        // Approximate space for fee chip (padding + content)
         Container(
           constraints: const BoxConstraints(minWidth: 60),
           child: _headerCell('Fee', alignment: TextAlign.center),
