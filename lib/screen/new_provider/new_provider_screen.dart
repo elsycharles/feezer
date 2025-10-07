@@ -98,6 +98,7 @@ class _State extends State<NewProviderScreen> {
     icon: Icons.business,
     hintText: AppLocalizations.of(context).enterProviderName,
     required: true,
+    validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
   );
 
   Widget _buildDescriptionField() => custom_form.FormField(
@@ -107,6 +108,7 @@ class _State extends State<NewProviderScreen> {
     hintText: AppLocalizations.of(context).enterDescription,
     maxLines: 4,
     required: true,
+    validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
   );
 
   Widget _buildIconField() => IconSelectorField(

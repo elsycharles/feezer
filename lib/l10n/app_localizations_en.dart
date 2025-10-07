@@ -475,6 +475,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get details => 'Details';
 
   @override
+  String get emailIsRequired => 'Email is required';
+
+  @override
+  String mustBeAtLeastNCharactersShort(int count) {
+    return 'Must be at least $count characters';
+  }
+
+  @override
+  String mustBeLessThanNCharacters(int count) {
+    return 'Must be less than $count characters';
+  }
+
+  @override
+  String get mustBeGreaterThanZero => 'Must be greater than 0';
+
+  @override
   String get minimumAmount => 'Minimum amount';
 
   @override

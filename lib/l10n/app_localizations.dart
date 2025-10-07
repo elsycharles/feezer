@@ -928,6 +928,30 @@ abstract class AppLocalizations {
   /// **'Details'**
   String get details;
 
+  /// Validation error for required email field
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailIsRequired;
+
+  /// Validation error for minimum length (short version)
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least {count} characters'**
+  String mustBeAtLeastNCharactersShort(int count);
+
+  /// Validation error for maximum length
+  ///
+  /// In en, this message translates to:
+  /// **'Must be less than {count} characters'**
+  String mustBeLessThanNCharacters(int count);
+
+  /// Validation error for positive numbers
+  ///
+  /// In en, this message translates to:
+  /// **'Must be greater than 0'**
+  String get mustBeGreaterThanZero;
+
   /// Minimum amount validation field name
   ///
   /// In en, this message translates to:

@@ -479,6 +479,22 @@ class AppLocalizationsFr extends AppLocalizations {
   String get details => 'Détails';
 
   @override
+  String get emailIsRequired => 'L\'email est requis';
+
+  @override
+  String mustBeAtLeastNCharactersShort(int count) {
+    return 'Doit contenir au moins $count caractères';
+  }
+
+  @override
+  String mustBeLessThanNCharacters(int count) {
+    return 'Doit contenir moins de $count caractères';
+  }
+
+  @override
+  String get mustBeGreaterThanZero => 'Doit être supérieur à 0';
+
+  @override
   String get minimumAmount => 'Montant minimum';
 
   @override

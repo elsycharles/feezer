@@ -633,6 +633,32 @@
   "@total": {
     "description": "Total column header"
   },
+  "emailIsRequired": "Email is required",
+  "@emailIsRequired": {
+    "description": "Validation error for required email field"
+  },
+  "mustBeAtLeastNCharactersShort": "Must be at least {count} characters",
+  "@mustBeAtLeastNCharactersShort": {
+    "description": "Validation error for minimum length (short version)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mustBeLessThanNCharacters": "Must be less than {count} characters",
+  "@mustBeLessThanNCharacters": {
+    "description": "Validation error for maximum length",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mustBeGreaterThanZero": "Must be greater than 0",
+  "@mustBeGreaterThanZero": {
+    "description": "Validation error for positive numbers"
+  },
   "minimumAmount": "Minimum amount",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"

@@ -81,6 +81,11 @@ class FormField extends StatelessWidget {
         ),
       );
 
-  String? _defaultValidator(String? value) =>
-      value?.trim().isEmpty == true ? 'This field is required' : null;
+  String? _defaultValidator(String? value) {
+    if (value?.trim().isEmpty == true) {
+      // Try to get context for translation, fallback to English if not available
+      return 'This field is required';
+    }
+    return null;
+  }
 }

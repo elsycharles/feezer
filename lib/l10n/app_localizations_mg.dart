@@ -479,6 +479,22 @@ class AppLocalizationsMg extends AppLocalizations {
   String get details => 'Antsipiriany';
 
   @override
+  String get emailIsRequired => 'Ilaina ny mailaka';
+
+  @override
+  String mustBeAtLeastNCharactersShort(int count) {
+    return 'Tokony ho $count litera fara fahakeliny';
+  }
+
+  @override
+  String mustBeLessThanNCharacters(int count) {
+    return 'Tokony ho latsaky ny $count litera';
+  }
+
+  @override
+  String get mustBeGreaterThanZero => 'Tokony ho mihoatra noho ny aotra';
+
+  @override
   String get minimumAmount => 'Vola faran\'izay kely';
 
   @override

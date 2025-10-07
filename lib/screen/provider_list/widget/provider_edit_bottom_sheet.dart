@@ -62,6 +62,7 @@ class _State extends State<ProviderEditBottomSheet> {
           controller: _nameController,
           icon: Icons.business,
           required: true,
+          validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
         ),
         Global.gapLg,
         custom_form.FormField(
@@ -70,6 +71,7 @@ class _State extends State<ProviderEditBottomSheet> {
           icon: Icons.description,
           maxLines: 4,
           required: true,
+          validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
         ),
         Global.gapLg,
         IconSelectorField(

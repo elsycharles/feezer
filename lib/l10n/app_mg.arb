@@ -515,6 +515,32 @@
   "@maximumAmountAr": {
     "description": "Maximum amount field label with currency"
   },
+  "emailIsRequired": "Ilaina ny mailaka",
+  "@emailIsRequired": {
+    "description": "Validation error for required email field"
+  },
+  "mustBeAtLeastNCharactersShort": "Tokony ho {count} litera fara fahakeliny",
+  "@mustBeAtLeastNCharactersShort": {
+    "description": "Validation error for minimum length (short version)",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mustBeLessThanNCharacters": "Tokony ho latsaky ny {count} litera",
+  "@mustBeLessThanNCharacters": {
+    "description": "Validation error for maximum length",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "mustBeGreaterThanZero": "Tokony ho mihoatra noho ny aotra",
+  "@mustBeGreaterThanZero": {
+    "description": "Validation error for positive numbers"
+  },
   "feeAr": "Sara (Ar)",
   "@feeAr": {
     "description": "Fee field label with currency"
