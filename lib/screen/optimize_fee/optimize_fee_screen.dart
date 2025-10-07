@@ -4,7 +4,7 @@ import '../../model/provider_model.dart';
 import '../../model/optimization_result_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
-import '../../util/extensions.dart';
+import '../../util/extensions_util.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
