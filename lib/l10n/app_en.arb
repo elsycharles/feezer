@@ -680,10 +680,6 @@
   "@saveChanges": {
     "description": "Save changes button text"
   },
-  "clearSelection": "Clear selection",
-  "@clearSelection": {
-    "description": "Clear selection tooltip"
-  },
   "minimumAmountAr": "Minimum Amount (Ar)",
   "@minimumAmountAr": {
     "description": "Minimum amount field label with currency"
