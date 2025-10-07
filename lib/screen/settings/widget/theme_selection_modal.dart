@@ -31,14 +31,20 @@ class ThemeSelectionModal extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Handle bar
-            Container(
-              margin: const EdgeInsets.only(top: 8),
-              width: 32,
-              height: 4,
-              decoration: BoxDecoration(
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
-                borderRadius: BorderRadius.circular(2),
+            // Handle bar - tap to close
+            GestureDetector(
+              onTap: () => Navigator.of(context).pop(),
+              child: Container(
+                margin: const EdgeInsets.only(top: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Container(
+                  width: 32,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
               ),
             ),
             
@@ -111,10 +117,7 @@ class ThemeSelectionModal extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     
     return InteractiveSurface(
-      onTap: () {
-        onTap();
-        Navigator.of(context).pop();
-      },
+      onTap: onTap,
       borderRadius: BorderRadius.zero,
       builder: (context, hovered, pressed) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -152,7 +155,6 @@ class ThemeSelectionModal extends StatelessWidget {
               onChanged: (value) {
                 if (value != null) {
                   onTap();
-                  Navigator.of(context).pop();
                 }
               },
               activeColor: colorScheme.primary,
