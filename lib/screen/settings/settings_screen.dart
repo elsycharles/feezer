@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../widget/app_bar.dart' as custom;
+import '../../widget/app_toast.dart';
+import '../../widget/confirmation_modal.dart';
+import '../../widget/surface_card.dart';
+import '../../widget/interactive_surface.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -125,8 +129,8 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
         ),
-        Card(
-          margin: EdgeInsets.zero,
+        SurfaceCard(
+          padding: EdgeInsets.zero,
           child: Column(children: children),
         ),
       ],
@@ -145,68 +149,52 @@ class SettingsScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: textColor ?? colorScheme.onSurface,
-      ),
-      title: Text(
-        title,
-        style: theme.textTheme.bodyLarge?.copyWith(
+    return InteractiveSurface(
+      onTap: onTap,
+      borderRadius: BorderRadius.zero,
+      builder: (context, hovered, pressed) => ListTile(
+        leading: Icon(
+          icon,
           color: textColor ?? colorScheme.onSurface,
         ),
-      ),
-      subtitle: Text(
-        subtitle,
-        style: theme.textTheme.bodyMedium?.copyWith(
-          color: colorScheme.onSurfaceVariant,
+        title: Text(
+          title,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: textColor ?? colorScheme.onSurface,
+          ),
         ),
+        subtitle: Text(
+          subtitle,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+        ),
+        trailing: showArrow
+            ? Icon(
+                Icons.chevron_right,
+                color: colorScheme.onSurfaceVariant,
+              )
+            : null,
+        enabled: onTap != null,
       ),
-      trailing: showArrow
-          ? Icon(
-              Icons.chevron_right,
-              color: colorScheme.onSurfaceVariant,
-            )
-          : null,
-      onTap: onTap,
-      enabled: onTap != null,
     );
   }
 
   void _showComingSoon(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Fonctionnalité à venir dans une prochaine version'),
-        duration: Duration(seconds: 2),
-      ),
-    );
+    AppToast.info(context, 'Fonctionnalité à venir dans une prochaine version');
   }
 
-  void _showResetConfirmation(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Réinitialiser les données'),
-        content: const Text(
-          'Cette action effacera définitivement toutes vos données (fournisseurs, frais, etc.). Cette action est irréversible.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Annuler'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _showComingSoon(context);
-            },
-            style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).colorScheme.error,
-            ),
-            child: const Text('Réinitialiser'),
-          ),
-        ],
-      ),
+  void _showResetConfirmation(BuildContext context) async {
+    final confirmed = await ConfirmationModal.show(
+      context,
+      'Réinitialiser les données',
+      'Cette action effacera définitivement toutes vos données (fournisseurs, frais, etc.). Cette action est irréversible.',
+      confirmText: 'Réinitialiser',
+      cancelText: 'Annuler',
     );
+    
+    if (confirmed == true && context.mounted) {
+      _showComingSoon(context);
+    }
   }
 }
