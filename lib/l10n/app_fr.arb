@@ -373,6 +373,65 @@
       }
     }
   },
+  "editFeeInterval": "Modifier l'intervalle de frais",
+  "@editFeeInterval": {
+    "description": "Edit fee interval dialog title"
+  },
+  "minTransactionsCannotBeGreaterThanMax": "Le minimum de transactions ne peut pas être supérieur au maximum",
+  "@minTransactionsCannotBeGreaterThanMax": {
+    "description": "Validation error for transaction range"
+  },
+  "pleaseEnterValidFee": "Veuillez saisir des frais valides",
+  "@pleaseEnterValidFee": {
+    "description": "Validation error for fee field"
+  },
+  "enterValidEmail": "Saisissez un email valide",
+  "@enterValidEmail": {
+    "description": "Validation error for email field"
+  },
+  "mustBeAtLeastNCharacters": "Doit contenir au moins {count} caractères",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "enterValidNumber": "Saisissez un nombre valide",
+  "@enterValidNumber": {
+    "description": "Validation error for number field"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Le montant maximum doit être supérieur au montant minimum",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation error for amount range"
+  },
+  "pleaseEnterFeeAmount": "Veuillez saisir le montant des frais",
+  "@pleaseEnterFeeAmount": {
+    "description": "Validation error for fee amount field"
+  },
+  "enterLabel": "Saisir {label}",
+  "@enterLabel": {
+    "description": "Default input placeholder",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "selectAll": "Tout sélectionner",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "details": "Détails",
+  "@details": {
+    "description": "Details tooltip"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total column header"
+  },
   "minimumAmount": "Montant minimum",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"

@@ -105,7 +105,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                     Icons.select_all,
                     color: colorScheme.onPrimary,
                   ),
-                  tooltip: 'Select all',
+                  tooltip: AppLocalizations.of(context).selectAll,
                 ),
               if (widget.onDetails != null)
                 IconButton(
@@ -114,7 +114,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                     Icons.info_outline,
                     color: colorScheme.onPrimary,
                   ),
-                  tooltip: 'Details',
+                  tooltip: AppLocalizations.of(context).details,
                 ),
               if (widget.onEdit != null)
                 IconButton(
@@ -123,7 +123,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                     Icons.edit_outlined,
                     color: colorScheme.onPrimary,
                   ),
-                  tooltip: 'Edit',
+                  tooltip: AppLocalizations.of(context).edit,
                 ),
               IconButton(
                 onPressed: widget.onDelete,

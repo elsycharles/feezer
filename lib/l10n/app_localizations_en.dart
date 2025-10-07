@@ -438,6 +438,43 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get editFeeInterval => 'Edit Fee Interval';
+
+  @override
+  String get minTransactionsCannotBeGreaterThanMax =>
+      'Min transactions cannot be greater than max';
+
+  @override
+  String get pleaseEnterValidFee => 'Please enter a valid fee';
+
+  @override
+  String get enterValidEmail => 'Enter a valid email';
+
+  @override
+  String mustBeAtLeastNCharacters(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Must be at least $countString characters';
+  }
+
+  @override
+  String get enterValidNumber => 'Enter a valid number';
+
+  @override
+  String get pleaseEnterFeeAmount => 'Please enter fee amount';
+
+  @override
+  String enterLabel(String label) {
+    return 'Enter $label';
+  }
+
+  @override
+  String get details => 'Details';
+
+  @override
   String get minimumAmount => 'Minimum amount';
 
   @override

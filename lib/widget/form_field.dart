@@ -53,7 +53,7 @@ class FormField extends StatelessWidget {
             color: colorScheme.onSurface,
           ),
           decoration: InputDecoration(
-            hintText: hintText ?? 'Enter $label',
+            hintText: hintText ?? 'Enter $label', // Note: Cette ligne nécessitera un contexte pour une traduction complète
             hintStyle: ThemeUtil.bodyMedium.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),

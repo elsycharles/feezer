@@ -418,7 +418,7 @@ abstract class AppLocalizations {
   /// **'Please enter a valid fee percentage'**
   String get pleaseEnterValidFeePercentage;
 
-  /// Validation message for amount range
+  /// Validation error for amount range
   ///
   /// In en, this message translates to:
   /// **'Max amount must be greater than min amount'**
@@ -873,6 +873,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count, plural, =1{1 fee interval deleted successfully} other{{count} fee intervals deleted successfully}}'**
   String feeIntervalDeletedSuccessfully(num count);
+
+  /// Edit fee interval dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Fee Interval'**
+  String get editFeeInterval;
+
+  /// Validation error for transaction range
+  ///
+  /// In en, this message translates to:
+  /// **'Min transactions cannot be greater than max'**
+  String get minTransactionsCannotBeGreaterThanMax;
+
+  /// Validation error for fee field
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid fee'**
+  String get pleaseEnterValidFee;
+
+  /// Validation error for email field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email'**
+  String get enterValidEmail;
+
+  /// Validation error for minimum length
+  ///
+  /// In en, this message translates to:
+  /// **'Must be at least {count} characters'**
+  String mustBeAtLeastNCharacters(num count);
+
+  /// Validation error for number field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid number'**
+  String get enterValidNumber;
+
+  /// Validation error for fee amount field
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter fee amount'**
+  String get pleaseEnterFeeAmount;
+
+  /// Default input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter {label}'**
+  String enterLabel(String label);
+
+  /// Details tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get details;
 
   /// Minimum amount validation field name
   ///

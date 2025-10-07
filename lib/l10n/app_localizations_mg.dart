@@ -442,6 +442,43 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
+  String get editFeeInterval => 'Hanova ny elanelana sara';
+
+  @override
+  String get minTransactionsCannotBeGreaterThanMax =>
+      'Ny fampiasana kely indrindra dia tsy afaka mihoatra ny be indrindra';
+
+  @override
+  String get pleaseEnterValidFee => 'Ampidiro ny sara manan-kery azafady';
+
+  @override
+  String get enterValidEmail => 'Ampidiro ny mailaka manan-kery';
+
+  @override
+  String mustBeAtLeastNCharacters(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Tokony ho $countString litera fara fahakeliny';
+  }
+
+  @override
+  String get enterValidNumber => 'Ampidiro ny isa manan-kery';
+
+  @override
+  String get pleaseEnterFeeAmount => 'Ampidiro ny sara azafady';
+
+  @override
+  String enterLabel(String label) {
+    return 'Ampidiro $label';
+  }
+
+  @override
+  String get details => 'Antsipiriany';
+
+  @override
   String get minimumAmount => 'Vola faran\'izay kely';
 
   @override

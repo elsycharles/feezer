@@ -574,6 +574,65 @@
       }
     }
   },
+  "editFeeInterval": "Edit Fee Interval",
+  "@editFeeInterval": {
+    "description": "Edit fee interval dialog title"
+  },
+  "minTransactionsCannotBeGreaterThanMax": "Min transactions cannot be greater than max",
+  "@minTransactionsCannotBeGreaterThanMax": {
+    "description": "Validation error for transaction range"
+  },
+  "pleaseEnterValidFee": "Please enter a valid fee",
+  "@pleaseEnterValidFee": {
+    "description": "Validation error for fee field"
+  },
+  "enterValidEmail": "Enter a valid email",
+  "@enterValidEmail": {
+    "description": "Validation error for email field"
+  },
+  "mustBeAtLeastNCharacters": "Must be at least {count} characters",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "enterValidNumber": "Enter a valid number",
+  "@enterValidNumber": {
+    "description": "Validation error for number field"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation error for amount range"
+  },
+  "pleaseEnterFeeAmount": "Please enter fee amount",
+  "@pleaseEnterFeeAmount": {
+    "description": "Validation error for fee amount field"
+  },
+  "enterLabel": "Enter {label}",
+  "@enterLabel": {
+    "description": "Default input placeholder",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "selectAll": "Select all",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "details": "Details",
+  "@details": {
+    "description": "Details tooltip"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total column header"
+  },
   "minimumAmount": "Minimum amount",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"

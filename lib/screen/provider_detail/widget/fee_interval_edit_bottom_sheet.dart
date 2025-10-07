@@ -26,7 +26,7 @@ class FeeIntervalEditBottomSheet extends StatefulWidget {
     Function(FeeInterval) onSave,
   ) => BottomSheet.show(
     context,
-    'Edit Fee Interval',
+    AppLocalizations.of(context).editFeeInterval,
     FeeIntervalEditBottomSheet(feeInterval: feeInterval, onSave: onSave),
   );
 
@@ -100,26 +100,26 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   );
 
   String? _validateMinAmount(String? value) {
-    if (value?.isEmpty ?? true) return 'Please enter minimum amount';
+    if (value?.isEmpty ?? true) return AppLocalizations.of(context).pleaseEnterMinAmount;
     final amount = double.tryParse(value!);
-    if (amount == null || amount < 0) return 'Please enter a valid amount';
+    if (amount == null || amount < 0) return AppLocalizations.of(context).pleaseEnterValidAmount;
     return null;
   }
 
   String? _validateMaxAmount(String? value) {
-    if (value?.isEmpty ?? true) return 'Please enter maximum amount';
+    if (value?.isEmpty ?? true) return AppLocalizations.of(context).pleaseEnterMaxAmount;
     final amount = double.tryParse(value!);
-    if (amount == null || amount < 0) return 'Please enter a valid amount';
+    if (amount == null || amount < 0) return AppLocalizations.of(context).pleaseEnterValidAmount;
     
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
-    if (amount <= minAmount) return 'Max amount must be greater than min amount';
+    if (amount <= minAmount) return AppLocalizations.of(context).maxAmountMustBeGreaterThanMinAmount;
     return null;
   }
 
   String? _validateFee(String? value) {
-    if (value?.isEmpty ?? true) return 'Please enter fee amount';
+    if (value?.isEmpty ?? true) return AppLocalizations.of(context).pleaseEnterFeeAmount;
     final fee = double.tryParse(value!);
-    if (fee == null || fee < 0) return 'Please enter a valid fee';
+    if (fee == null || fee < 0) return AppLocalizations.of(context).pleaseEnterValidFee;
     return null;
   }
 

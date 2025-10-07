@@ -388,7 +388,7 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(flex: 2, child: _buildHeaderCell(AppLocalizations.of(context).interval)),
             Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
             Expanded(child: _buildHeaderCell(AppLocalizations.of(context).count)),
-            Expanded(child: _buildHeaderCell('Total')),
+            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).total)),
           ],
         ),
       ),
@@ -490,7 +490,7 @@ class _State extends State<OptimizeFeeScreen> {
       return;
     }
     if (_minTransactions > _maxTransactions) {
-      AppToast.error(context, 'Min transactions cannot be greater than max');
+      AppToast.error(context, AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax);
       return;
     }
     if (_selectedProvider == null) {

@@ -30,6 +30,65 @@
       }
     }
   },
+  "editFeeInterval": "Hanova ny elanelana sara",
+  "@editFeeInterval": {
+    "description": "Edit fee interval dialog title"
+  },
+  "minTransactionsCannotBeGreaterThanMax": "Ny fampiasana kely indrindra dia tsy afaka mihoatra ny be indrindra",
+  "@minTransactionsCannotBeGreaterThanMax": {
+    "description": "Validation error for transaction range"
+  },
+  "pleaseEnterValidFee": "Ampidiro ny sara manan-kery azafady",
+  "@pleaseEnterValidFee": {
+    "description": "Validation error for fee field"
+  },
+  "enterValidEmail": "Ampidiro ny mailaka manan-kery",
+  "@enterValidEmail": {
+    "description": "Validation error for email field"
+  },
+  "mustBeAtLeastNCharacters": "Tokony ho {count} litera fara fahakeliny",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "enterValidNumber": "Ampidiro ny isa manan-kery",
+  "@enterValidNumber": {
+    "description": "Validation error for number field"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be indrindra dia tokony ho mihoatra noho ny kely indrindra",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation error for amount range"
+  },
+  "pleaseEnterFeeAmount": "Ampidiro ny sara azafady",
+  "@pleaseEnterFeeAmount": {
+    "description": "Validation error for fee amount field"
+  },
+  "enterLabel": "Ampidiro {label}",
+  "@enterLabel": {
+    "description": "Default input placeholder",
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "selectAll": "Fidio daholo",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "details": "Antsipiriany",
+  "@details": {
+    "description": "Details tooltip"
+  },
+  "total": "Totaliny",
+  "@total": {
+    "description": "Total column header"
+  },
   "onboardingTitle3": "Mitahiry am-pahendrena, mandany tsara kokoa",
   "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
   "next": "Manaraka",

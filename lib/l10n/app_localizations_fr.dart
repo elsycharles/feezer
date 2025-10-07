@@ -175,7 +175,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get maxAmountMustBeGreaterThanMinAmount =>
-      'Le montant max doit être supérieur au montant min';
+      'Le montant maximum doit être supérieur au montant minimum';
 
   @override
   String get optimizationResults => 'Résultats d\'optimisation';
@@ -440,6 +440,43 @@ class AppLocalizationsFr extends AppLocalizations {
     );
     return '$_temp0';
   }
+
+  @override
+  String get editFeeInterval => 'Modifier l\'intervalle de frais';
+
+  @override
+  String get minTransactionsCannotBeGreaterThanMax =>
+      'Le minimum de transactions ne peut pas être supérieur au maximum';
+
+  @override
+  String get pleaseEnterValidFee => 'Veuillez saisir des frais valides';
+
+  @override
+  String get enterValidEmail => 'Saisissez un email valide';
+
+  @override
+  String mustBeAtLeastNCharacters(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    return 'Doit contenir au moins $countString caractères';
+  }
+
+  @override
+  String get enterValidNumber => 'Saisissez un nombre valide';
+
+  @override
+  String get pleaseEnterFeeAmount => 'Veuillez saisir le montant des frais';
+
+  @override
+  String enterLabel(String label) {
+    return 'Saisir $label';
+  }
+
+  @override
+  String get details => 'Détails';
 
   @override
   String get minimumAmount => 'Montant minimum';
