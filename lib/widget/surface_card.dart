@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styles/global.dart';
-import '../util/extensions.dart';
+import '../util/extensions_util.dart';
 
 /// Lightweight elevated surface container reused across headers
 class SurfaceCard extends StatelessWidget {

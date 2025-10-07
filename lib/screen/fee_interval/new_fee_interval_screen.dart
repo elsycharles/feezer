@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import '../../model/fee_interval_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
-import '../../util/extensions.dart';
+import '../../util/extensions_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../util/theme_util.dart';
-import '../util/extensions.dart';
+import '../util/extensions_util.dart';
 import '../styles/global.dart';
 
 /// Reusable search field with icon and clear functionality
