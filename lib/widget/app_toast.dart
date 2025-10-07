@@ -56,7 +56,7 @@ class AppToast extends StatefulWidget {
         icon = Icons.warning;
         break;
       case ToastType.info:
-        backgroundColor = isDark 
+        backgroundColor = isDark
             ? colorScheme.surface.withValues(alpha: 0.98)
             : colorScheme.surface.withValues(alpha: 0.98);
         textColor = colorScheme.onSurface;
@@ -123,12 +123,12 @@ class _AppToastState extends State<AppToast>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    
+
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 1),
       end: Offset.zero,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
-    
+
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -146,9 +146,9 @@ class _AppToastState extends State<AppToast>
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    
+
     return Positioned(
-      bottom: mediaQuery.padding.bottom + 75, // Juste 5px au-dessus du bouton add
+      bottom: mediaQuery.padding.bottom + 75,
       left: 16,
       right: 16,
       child: SlideTransition(
