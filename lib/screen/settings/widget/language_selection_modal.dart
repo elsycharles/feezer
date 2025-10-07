@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../provider/locale_provider.dart';
 import '../../../model/locale_model.dart';
 import '../../../widget/interactive_surface.dart';
@@ -85,6 +86,7 @@ class LanguageSelectionModal extends StatelessWidget {
                       l10n.systemDefault,
                       localeProvider.locale == null,
                       () => _useSystemLanguage(context),
+                      icon: Icons.settings_brightness,
                     ),
                     
                     // Specific language options
@@ -93,18 +95,21 @@ class LanguageSelectionModal extends StatelessWidget {
                       l10n.english,
                       localeProvider.locale?.languageCode == 'en',
                       () => _changeLanguage(context, SupportedLocale.supportedLocales[0]),
+                      svgAsset: 'assets/icons/en.svg',
                     ),
                     _buildLanguageOption(
                       context,
                       l10n.french,
                       localeProvider.locale?.languageCode == 'fr',
                       () => _changeLanguage(context, SupportedLocale.supportedLocales[1]),
+                      svgAsset: 'assets/icons/fr.svg',
                     ),
                     _buildLanguageOption(
                       context,
                       l10n.malagasy,
                       localeProvider.locale?.languageCode == 'mg',
                       () => _changeLanguage(context, SupportedLocale.supportedLocales[2]),
+                      svgAsset: 'assets/icons/mg.svg',
                     ),
                   ],
                 );
@@ -122,8 +127,10 @@ class LanguageSelectionModal extends StatelessWidget {
     BuildContext context,
     String primaryText,
     bool isSelected,
-    VoidCallback onTap,
-  ) {
+    VoidCallback onTap, {
+    IconData? icon,
+    String? svgAsset,
+  }) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -134,11 +141,27 @@ class LanguageSelectionModal extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(
           children: [
+            // Icône du langage (SVG ou Material Icon)
+            if (svgAsset != null) ...[
+              SvgPicture.asset(
+                svgAsset,
+                width: 32,
+                height: 32,
+              ),
+              const SizedBox(width: 16),
+            ] else if (icon != null) ...[
+              Icon(
+                icon,
+                size: 32,
+                color: colorScheme.onSurfaceVariant,
+              ),
+              const SizedBox(width: 16),
+            ],
             Expanded(
               child: Text(
                 primaryText,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
                   color: colorScheme.onSurface,
                 ),
               ),
