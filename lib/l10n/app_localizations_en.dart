@@ -415,6 +415,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pressAgainToExit => 'Press again to exit';
 
   @override
+  String get providerUpdatedSuccessfully => 'Provider updated successfully';
+
+  @override
+  String get feeIntervalUpdatedSuccessfully =>
+      'Fee interval updated successfully';
+
+  @override
+  String feeIntervalDeletedSuccessfully(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString fee intervals deleted successfully',
+      one: '1 fee interval deleted successfully',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get minimumAmount => 'Minimum amount';
 
   @override

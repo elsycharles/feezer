@@ -119,7 +119,7 @@ class _State extends State<ProviderListScreen> {
 
     if (_lastBackPressed == null || now.difference(_lastBackPressed!) > exitTimeLimit) {
       _lastBackPressed = now;
-      AppToast.info(context, 'Press again to exit');
+      AppToast.info(context, AppLocalizations.of(context).pressAgainToExit);
     } else {
       SystemNavigator.pop();
     }

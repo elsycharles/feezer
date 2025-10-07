@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_toast.dart';
+import '../l10n/app_localizations.dart';
 
 /// Reusable widget to handle double back press logic to exit the application
 class DoubleBackToExit extends StatefulWidget {
   final Widget child;
-  final String message;
+  final String? message;
 
   const DoubleBackToExit({
     super.key,
     required this.child,
-    this.message = 'Press again to exit',
+    this.message,
   });
 
   @override
@@ -35,7 +36,7 @@ class _DoubleBackToExitState extends State<DoubleBackToExit> {
 
     if (_lastPressed == null || now.difference(_lastPressed!) > exitTimeLimit) {
       _lastPressed = now;
-      AppToast.info(context, widget.message);
+      AppToast.info(context, widget.message ?? AppLocalizations.of(context).pressAgainToExit);
     } else {
       SystemNavigator.pop();
     }

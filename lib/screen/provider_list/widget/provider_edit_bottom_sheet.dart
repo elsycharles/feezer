@@ -107,7 +107,7 @@ class _State extends State<ProviderEditBottomSheet> {
         if (mounted) {
           Navigator.pop(context);
           widget.onSave(provider);
-          AppToast.success(context, 'Provider updated successfully');
+          AppToast.success(context, AppLocalizations.of(context).providerUpdatedSuccessfully);
         }
       } finally {
         if (mounted) {

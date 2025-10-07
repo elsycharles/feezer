@@ -856,6 +856,24 @@ abstract class AppLocalizations {
   /// **'Press again to exit'**
   String get pressAgainToExit;
 
+  /// Provider update success message
+  ///
+  /// In en, this message translates to:
+  /// **'Provider updated successfully'**
+  String get providerUpdatedSuccessfully;
+
+  /// Fee interval update success message
+  ///
+  /// In en, this message translates to:
+  /// **'Fee interval updated successfully'**
+  String get feeIntervalUpdatedSuccessfully;
+
+  /// Fee interval deletion success message
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 fee interval deleted successfully} other{{count} fee intervals deleted successfully}}'**
+  String feeIntervalDeletedSuccessfully(num count);
+
   /// Minimum amount validation field name
   ///
   /// In en, this message translates to:

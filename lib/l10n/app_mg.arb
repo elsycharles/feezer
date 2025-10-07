@@ -4,7 +4,32 @@
   "onboardingTitle1": "Mihevitra mialoha ary mitahiry vola amin'ny sara",
   "onboardingDescription1": "Kajy ny fomba mahomby indrindra hitantanana ny volanao.",
   "onboardingTitle2": "Atsikafo ny fifampiraharahanao",
-  "onboardingDescription2": "Ahena ho azy ny sara mifototra amin'ny elanelana efa voafaritra.",
+  "onboardingDescription2": "Ahena ho azy ny sara mifototra amin'ny elanelana efa voafarit",
+  "@onboardingDescription2": {
+    "description": "Onboarding description for second screen"
+  },
+  "pressAgainToExit": "Tsindrio indray hiavotr",
+  "@pressAgainToExit": {
+    "description": "Double back to exit message"
+  },
+  "providerUpdatedSuccessfully": "Mpamatsy nohavaozina soa aman-tsara",
+  "@providerUpdatedSuccessfully": {
+    "description": "Provider update success message"
+  },
+  "feeIntervalUpdatedSuccessfully": "Elanelana sara nohavaozina soa aman-tsara",
+  "@feeIntervalUpdatedSuccessfully": {
+    "description": "Fee interval update success message"
+  },
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{Elanelana sara 1 voafafa soa aman-tsara} other{Elanelana sara {count} voafafa soa aman-tsara}}",
+  "@feeIntervalDeletedSuccessfully": {
+    "description": "Fee interval deletion success message",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "onboardingTitle3": "Mitahiry am-pahendrena, mandany tsara kokoa",
   "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
   "next": "Manaraka",

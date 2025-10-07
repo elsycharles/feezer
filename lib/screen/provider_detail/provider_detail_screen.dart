@@ -522,7 +522,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           _filteredIntervals = _feeIntervals;
           _selectedIds.clear();
         });
-        AppToast.success(context, '$count fee interval${count > 1 ? 's' : ''} deleted successfully');
+        AppToast.success(context, AppLocalizations.of(context).feeIntervalDeletedSuccessfully(count));
       }
     }
   }

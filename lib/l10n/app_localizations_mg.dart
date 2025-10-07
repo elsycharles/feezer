@@ -24,7 +24,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get onboardingDescription2 =>
-      'Ahena ho azy ny sara mifototra amin\'ny elanelana efa voafaritra.';
+      'Ahena ho azy ny sara mifototra amin\'ny elanelana efa voafarit';
 
   @override
   String get onboardingTitle3 => 'Mitahiry am-pahendrena, mandany tsara kokoa';
@@ -416,6 +416,30 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get pressAgainToExit => 'Tsindrio indray mba hivoaka';
+
+  @override
+  String get providerUpdatedSuccessfully =>
+      'Mpamatsy nohavaozina soa aman-tsara';
+
+  @override
+  String get feeIntervalUpdatedSuccessfully =>
+      'Elanelana sara nohavaozina soa aman-tsara';
+
+  @override
+  String feeIntervalDeletedSuccessfully(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Elanelana sara $countString voafafa soa aman-tsara',
+      one: 'Elanelana sara 1 voafafa soa aman-tsara',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get minimumAmount => 'Vola faran\'izay kely';

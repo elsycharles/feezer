@@ -355,6 +355,24 @@
   "@pressAgainToExit": {
     "description": "Double back to exit message"
   },
+  "providerUpdatedSuccessfully": "Fournisseur mis à jour avec succès",
+  "@providerUpdatedSuccessfully": {
+    "description": "Provider update success message"
+  },
+  "feeIntervalUpdatedSuccessfully": "Intervalle de frais mis à jour avec succès",
+  "@feeIntervalUpdatedSuccessfully": {
+    "description": "Fee interval update success message"
+  },
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{1 intervalle de frais supprimé avec succès} other{{count} intervalles de frais supprimés avec succès}}",
+  "@feeIntervalDeletedSuccessfully": {
+    "description": "Fee interval deletion success message",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "minimumAmount": "Montant minimum",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"

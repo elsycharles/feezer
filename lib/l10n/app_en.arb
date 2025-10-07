@@ -556,6 +556,24 @@
   "@pressAgainToExit": {
     "description": "Double back to exit message"
   },
+  "providerUpdatedSuccessfully": "Provider updated successfully",
+  "@providerUpdatedSuccessfully": {
+    "description": "Provider update success message"
+  },
+  "feeIntervalUpdatedSuccessfully": "Fee interval updated successfully",
+  "@feeIntervalUpdatedSuccessfully": {
+    "description": "Fee interval update success message"
+  },
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{1 fee interval deleted successfully} other{{count} fee intervals deleted successfully}}",
+  "@feeIntervalDeletedSuccessfully": {
+    "description": "Fee interval deletion success message",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
   "minimumAmount": "Minimum amount",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"

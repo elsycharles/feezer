@@ -142,7 +142,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         if (mounted) {
           Navigator.pop(context);
           widget.onSave(feeInterval);
-          AppToast.success(context, 'Fee interval updated successfully');
+          AppToast.success(context, AppLocalizations.of(context).feeIntervalUpdatedSuccessfully);
         }
       } finally {
         if (mounted) {

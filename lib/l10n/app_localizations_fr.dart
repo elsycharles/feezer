@@ -418,6 +418,30 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pressAgainToExit => 'Appuyez à nouveau pour quitter';
 
   @override
+  String get providerUpdatedSuccessfully =>
+      'Fournisseur mis à jour avec succès';
+
+  @override
+  String get feeIntervalUpdatedSuccessfully =>
+      'Intervalle de frais mis à jour avec succès';
+
+  @override
+  String feeIntervalDeletedSuccessfully(num count) {
+    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
+      locale: localeName,
+    );
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString intervalles de frais supprimés avec succès',
+      one: '1 intervalle de frais supprimé avec succès',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get minimumAmount => 'Montant minimum';
 
   @override
