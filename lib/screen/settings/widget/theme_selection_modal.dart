@@ -17,6 +17,11 @@ class ThemeSelectionModal extends StatelessWidget {
     );
   }
 
+  void _changeTheme(BuildContext context, AppThemeMode newTheme) {
+    final themeProvider = context.read<ThemeProvider>();
+    themeProvider.setThemeMode(newTheme);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -72,7 +77,7 @@ class ThemeSelectionModal extends StatelessWidget {
                       Icons.light_mode,
                       AppThemeMode.light,
                       themeProvider.themeMode == AppThemeMode.light,
-                      () => themeProvider.setThemeMode(AppThemeMode.light),
+                      () => _changeTheme(context, AppThemeMode.light),
                     ),
                     _buildThemeOption(
                       context,
@@ -81,7 +86,7 @@ class ThemeSelectionModal extends StatelessWidget {
                       Icons.dark_mode,
                       AppThemeMode.dark,
                       themeProvider.themeMode == AppThemeMode.dark,
-                      () => themeProvider.setThemeMode(AppThemeMode.dark),
+                      () => _changeTheme(context, AppThemeMode.dark),
                     ),
                     _buildThemeOption(
                       context,
@@ -90,7 +95,7 @@ class ThemeSelectionModal extends StatelessWidget {
                       Icons.settings_brightness,
                       AppThemeMode.system,
                       themeProvider.themeMode == AppThemeMode.system,
-                      () => themeProvider.setThemeMode(AppThemeMode.system),
+                      () => _changeTheme(context, AppThemeMode.system),
                     ),
                   ],
                 );

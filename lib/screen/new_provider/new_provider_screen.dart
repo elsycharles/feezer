@@ -127,30 +127,11 @@ class _State extends State<NewProviderScreen> {
     child: Row(
       children: [
         Expanded(
-          child: OutlinedButton(
+          child: LoadingButton(
+            text: 'Cancel',
             onPressed: context.pop,
-            style: ButtonStyle(
-              foregroundColor: WidgetStateProperty.all(
-                context.colorScheme.onSurfaceVariant,
-              ),
-              overlayColor: ThemeUtil.interactiveOverlay(
-                context.colorScheme.onSurfaceVariant,
-              ),
-              side: WidgetStateProperty.all(
-                BorderSide(color: context.colorScheme.outlineVariant),
-              ),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(borderRadius: Global.borderMd),
-              ),
-              padding: WidgetStateProperty.all(Global.padVerticalMd),
-              splashFactory: NoSplash.splashFactory,
-            ),
-            child: Text(
-              'Cancel',
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-            ),
+            isLoading: false,
+            isOutlined: true,
           ),
         ),
         Global.gapMd,

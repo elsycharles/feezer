@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
 import '../../util/theme_util.dart';
@@ -7,6 +8,8 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_loading.dart';
+import '../../widget/loading_button.dart';
+import '../../widget/surface_card.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import 'widget/fee_interval_selection_action_bar.dart';
@@ -109,7 +112,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 // Clear selection instead of popping when in selection mode
                 setState(() => _selectedIds.clear());
               } else {
-                Navigator.pop(context);
+                context.pop();
               }
             },
           ),
@@ -251,18 +254,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   Widget _buildSearchBar(ColorScheme colorScheme) => Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: colorScheme.surface,
-      borderRadius: BorderRadius.circular(16),
-      boxShadow: [
-        BoxShadow(
-          color: colorScheme.shadow.withValues(alpha: 0.2),
-          blurRadius: 8,
-          offset: const Offset(0, 2),
-        ),
-      ],
-    ),
+    child: SurfaceCard(
+      padding: const EdgeInsets.all(16),
+      radius: 16,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -311,6 +305,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         ),
       ],
     ),
+    ),
   );
 
   Widget _buildAddButton(ColorScheme colorScheme) => Container(
@@ -320,25 +315,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       top: false,
       child: SizedBox(
         width: double.infinity,
-        child: ElevatedButton.icon(
+        child: LoadingButton(
+          text: 'Add Fee Interval',
           onPressed: _addInterval,
-          icon: const Icon(Icons.add),
-          label: const Text('Add Fee Interval'),
-          style: ButtonStyle(
-            backgroundColor: ThemeUtil.interactiveBackground(
-              colorScheme.primary,
-            ),
-            foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
-            shape: WidgetStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            ),
-            padding: WidgetStateProperty.all(
-              const EdgeInsets.symmetric(vertical: 14),
-            ),
-            overlayColor: ThemeUtil.interactiveOverlay(colorScheme.onPrimary),
-            elevation: WidgetStateProperty.all(0),
-            splashFactory: NoSplash.splashFactory,
-          ),
+          isLoading: false,
         ),
       ),
     ),
@@ -535,7 +515,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       await Future.delayed(const Duration(milliseconds: 800));
 
       if (mounted) {
-        Navigator.pop(context); // Close loading dialog
+        context.pop(); // Close loading dialog
         setState(() {
           _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
           _filteredIntervals = _feeIntervals;

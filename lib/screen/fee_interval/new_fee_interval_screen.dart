@@ -5,6 +5,7 @@ import '../../model/fee_interval_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
+import '../../util/validation_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
@@ -99,7 +100,7 @@ class _State extends State<NewFeeIntervalScreen> {
     hintText: 'Enter minimum amount',
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: _validateMinAmount,
+    validator: (value) => ValidationUtil.positiveNumber(value, 'Minimum amount'),
     required: true,
   );
 
@@ -121,7 +122,7 @@ class _State extends State<NewFeeIntervalScreen> {
     hintText: 'Enter fee amount',
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: _validateFee,
+    validator: (value) => ValidationUtil.positiveNumber(value, 'Fee amount'),
     required: true,
   );
 
@@ -139,30 +140,11 @@ class _State extends State<NewFeeIntervalScreen> {
     child: Row(
       children: [
         Expanded(
-          child: OutlinedButton(
+          child: LoadingButton(
+            text: 'Cancel',
             onPressed: context.pop,
-            style: ButtonStyle(
-              foregroundColor: WidgetStateProperty.all(
-                context.colorScheme.onSurfaceVariant,
-              ),
-              overlayColor: ThemeUtil.interactiveOverlay(
-                context.colorScheme.onSurfaceVariant,
-              ),
-              side: WidgetStateProperty.all(
-                BorderSide(color: context.colorScheme.outlineVariant),
-              ),
-              shape: WidgetStateProperty.all(
-                RoundedRectangleBorder(borderRadius: Global.borderMd),
-              ),
-              padding: WidgetStateProperty.all(Global.padVerticalMd),
-              splashFactory: NoSplash.splashFactory,
-            ),
-            child: Text(
-              'Cancel',
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-            ),
+            isLoading: false,
+            isOutlined: true,
           ),
         ),
         Global.gapMd,
@@ -178,29 +160,21 @@ class _State extends State<NewFeeIntervalScreen> {
     ),
   );
 
-  String? _validateMinAmount(String? value) {
-    if (value?.isEmpty ?? true) return 'Please enter minimum amount';
-    final amount = double.tryParse(value!);
-    if (amount == null || amount < 0) return 'Please enter a valid amount';
-    return null;
-  }
+
 
   String? _validateMaxAmount(String? value) {
-    if (value?.isEmpty ?? true) return 'Please enter maximum amount';
-    final amount = double.tryParse(value!);
-    if (amount == null || amount < 0) return 'Please enter a valid amount';
+    // First validate it's a positive number
+    final basicValidation = ValidationUtil.positiveNumber(value, 'Maximum amount');
+    if (basicValidation != null) return basicValidation;
     
+    // Then check it's greater than min amount
+    final amount = double.parse(value!);
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
     if (amount <= minAmount) return 'Max amount must be greater than min amount';
     return null;
   }
 
-  String? _validateFee(String? value) {
-    if (value?.isEmpty ?? true) return 'Please enter fee amount';
-    final fee = double.tryParse(value!);
-    if (fee == null || fee < 0) return 'Please enter a valid fee';
-    return null;
-  }
+
 
   void _create() async {
     if (_formKey.currentState!.validate()) {
