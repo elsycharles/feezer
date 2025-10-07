@@ -72,7 +72,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settings => 'Paramètres';
 
   @override
-  String get createInterval => 'Créer un Intervalle';
+  String get createInterval => 'Créer l\'intervalle';
 
   @override
   String get optimize => 'Optimiser';
@@ -84,10 +84,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get provider => 'Fournisseur';
 
   @override
-  String get minTransactions => 'Transactions Min';
+  String get minTransactions => 'Transactions min';
 
   @override
-  String get maxTransactions => 'Transactions Max';
+  String get maxTransactions => 'Transactions max';
 
   @override
   String get pleaseEnterValidAmount => 'Veuillez saisir un montant valide';
@@ -146,10 +146,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'Cette fonctionnalité sera bientôt disponible !';
 
   @override
-  String get feeIntervals => 'Intervalles de Frais';
+  String get feeIntervals => 'Intervalles de frais';
 
   @override
-  String get newFeeInterval => 'Nouvel Intervalle de Frais';
+  String get newFeeInterval => 'Nouvel intervalle de frais';
 
   @override
   String get minAmount => 'Montant Min';
@@ -178,7 +178,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le montant max doit être supérieur au montant min';
 
   @override
-  String get optimizationResults => 'Résultats d\'Optimisation';
+  String get optimizationResults => 'Résultats d\'optimisation';
 
   @override
   String get interval => 'Intervalle';
@@ -280,4 +280,155 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get providerCreatedSuccessfully => 'Fournisseur créé avec succès';
+
+  @override
+  String get systemDefault => 'Par défaut du système';
+
+  @override
+  String get general => 'Général';
+
+  @override
+  String get about => 'À propos';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get faqAndContact => 'FAQ et contact';
+
+  @override
+  String get termsOfUse => 'Conditions d\'utilisation';
+
+  @override
+  String get termsAndPrivacyPolicy =>
+      'Conditions et politique de confidentialité';
+
+  @override
+  String get featureComingNextVersion =>
+      'Fonctionnalité disponible dans la prochaine version';
+
+  @override
+  String get financialProvider => 'Fournisseur financier';
+
+  @override
+  String get chooseProviderToAnalyze =>
+      'Choisissez le fournisseur que vous souhaitez analyser';
+
+  @override
+  String get amountToOptimize => 'Montant à optimiser';
+
+  @override
+  String get enterTransactionAmountToOptimize =>
+      'Saisissez le montant de transaction que vous souhaitez optimiser';
+
+  @override
+  String get transactionRange => 'Plage de transactions';
+
+  @override
+  String get defineMinMaxTransactions =>
+      'Définissez le nombre minimum et maximum de transactions';
+
+  @override
+  String get readyToOptimize => 'Prêt à optimiser';
+
+  @override
+  String get clickOptimizeButtonToAnalyze =>
+      'Cliquez sur le bouton Optimiser pour analyser la meilleure structure de frais pour vos transactions';
+
+  @override
+  String get providerDetails => 'Détails du fournisseur';
+
+  @override
+  String get noFeeIntervalsFound => 'Aucun intervalle de frais trouvé';
+
+  @override
+  String get feeInterval => 'Intervalle de frais';
+
+  @override
+  String get searchByFeeRange => 'Rechercher par plage de frais';
+
+  @override
+  String get addFeeInterval => 'Ajouter un intervalle de frais';
+
+  @override
+  String get minFee => 'Frais min';
+
+  @override
+  String get maxFee => 'Frais max';
+
+  @override
+  String get deleteFeeIntervals => 'Supprimer les intervalles de frais';
+
+  @override
+  String get createNewFeeInterval => 'Créer un nouvel intervalle de frais';
+
+  @override
+  String get defineNewFeeStructure =>
+      'Définir une nouvelle structure de frais pour les montants de transaction';
+
+  @override
+  String get enterMinimumAmount => 'Saisissez le montant minimum';
+
+  @override
+  String get enterMaximumAmount => 'Saisissez le montant maximum';
+
+  @override
+  String get enterFeeAmount => 'Saisissez le montant des frais';
+
+  @override
+  String get maxAmountMustBeGreater =>
+      'Le montant max doit être supérieur au montant min';
+
+  @override
+  String get feeIntervalCreatedSuccessfully =>
+      'Intervalle de frais créé avec succès';
+
+  @override
+  String get addNewFinancialServiceProvider =>
+      'Ajouter un nouveau fournisseur de services financiers à votre liste';
+
+  @override
+  String get enterDescription => 'Saisissez la description';
+
+  @override
+  String get createProvider => 'Créer le fournisseur';
+
+  @override
+  String get clearSelection => 'Effacer la sélection';
+
+  @override
+  String get selectAll => 'Tout sélectionner';
+
+  @override
+  String get icon => 'Icône';
+
+  @override
+  String get tapToSelectIcon => 'Appuyez pour sélectionner l\'icône';
+
+  @override
+  String get clearSearch => 'Effacer la recherche';
+
+  @override
+  String get selectIcon => 'Sélectionner l\'icône';
+
+  @override
+  String get thisFieldIsRequired => 'Ce champ est obligatoire';
+
+  @override
+  String get pressAgainToExit => 'Appuyez à nouveau pour quitter';
+
+  @override
+  String get minimumAmount => 'Montant minimum';
+
+  @override
+  String get maximumAmount => 'Montant maximum';
+
+  @override
+  String get feeAmount => 'Montant des frais';
+
+  @override
+  String get traditionalBanking => 'Banque traditionnelle';
+
+  @override
+  String get mobileMoney => 'Mobile money';
 }

@@ -83,7 +83,7 @@ class _State extends State<NewProviderScreen> {
       ),
       Global.gapSm,
       Text(
-        'Add a new financial service provider to your list',
+        AppLocalizations.of(context).addNewFinancialServiceProvider,
         style: ThemeUtil.bodyMedium.copyWith(
           color: context.colorScheme.onSurface.withValues(alpha: 0.7),
           height: 1.4,
@@ -101,10 +101,10 @@ class _State extends State<NewProviderScreen> {
   );
 
   Widget _buildDescriptionField() => custom_form.FormField(
-    label: 'Description',
+    label: AppLocalizations.of(context).description,
     controller: _descriptionController,
     icon: Icons.description,
-    hintText: 'Enter description',
+    hintText: AppLocalizations.of(context).enterDescription,
     maxLines: 4,
     required: true,
   );
@@ -129,7 +129,7 @@ class _State extends State<NewProviderScreen> {
       children: [
         Expanded(
           child: LoadingButton(
-            text: 'Cancel',
+            text: AppLocalizations.of(context).cancel,
             onPressed: context.pop,
             isLoading: false,
             isOutlined: true,
@@ -139,7 +139,7 @@ class _State extends State<NewProviderScreen> {
         Expanded(
           flex: 2,
           child: LoadingButton(
-            text: 'Create Provider',
+            text: AppLocalizations.of(context).createProvider,
             onPressed: _create,
             isLoading: _isCreating,
           ),

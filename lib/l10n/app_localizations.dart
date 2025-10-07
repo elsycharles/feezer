@@ -220,7 +220,7 @@ abstract class AppLocalizations {
   /// **'Settings'**
   String get settings;
 
-  /// Create interval button text
+  /// Create interval button
   ///
   /// In en, this message translates to:
   /// **'Create Interval'**
@@ -364,13 +364,13 @@ abstract class AppLocalizations {
   /// **'This feature will be available soon!'**
   String get thisFeatureWillBeAvailableSoon;
 
-  /// Fee intervals title
+  /// Fee intervals section title
   ///
   /// In en, this message translates to:
-  /// **'Fee Intervals'**
+  /// **'Fee intervals'**
   String get feeIntervals;
 
-  /// New fee interval title
+  /// New fee interval screen title
   ///
   /// In en, this message translates to:
   /// **'New Fee Interval'**
@@ -603,6 +603,288 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Provider created successfully'**
   String get providerCreatedSuccessfully;
+
+  /// System default language option
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get systemDefault;
+
+  /// General settings section
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get general;
+
+  /// About section
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// Version label
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
+
+  /// FAQ and contact option
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ and contact'**
+  String get faqAndContact;
+
+  /// Terms of use option
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Use'**
+  String get termsOfUse;
+
+  /// Terms and privacy policy description
+  ///
+  /// In en, this message translates to:
+  /// **'Terms and privacy policy'**
+  String get termsAndPrivacyPolicy;
+
+  /// Message for upcoming features
+  ///
+  /// In en, this message translates to:
+  /// **'Feature coming in the next version'**
+  String get featureComingNextVersion;
+
+  /// Financial provider section title
+  ///
+  /// In en, this message translates to:
+  /// **'Financial Provider'**
+  String get financialProvider;
+
+  /// Instructions for provider selection
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the provider you want to analyze'**
+  String get chooseProviderToAnalyze;
+
+  /// Title for amount optimization section
+  ///
+  /// In en, this message translates to:
+  /// **'Amount to Optimize'**
+  String get amountToOptimize;
+
+  /// Instructions for amount input
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the transaction amount you want to optimize'**
+  String get enterTransactionAmountToOptimize;
+
+  /// Transaction range section title
+  ///
+  /// In en, this message translates to:
+  /// **'Transaction Range'**
+  String get transactionRange;
+
+  /// Instructions for transaction range
+  ///
+  /// In en, this message translates to:
+  /// **'Define the minimum and maximum number of transactions'**
+  String get defineMinMaxTransactions;
+
+  /// Ready to optimize message
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to Optimize'**
+  String get readyToOptimize;
+
+  /// Instructions for optimization
+  ///
+  /// In en, this message translates to:
+  /// **'Click the Optimize button to analyze the best fee structure for your transactions'**
+  String get clickOptimizeButtonToAnalyze;
+
+  /// Provider details screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Provider details'**
+  String get providerDetails;
+
+  /// Message when no fee intervals exist
+  ///
+  /// In en, this message translates to:
+  /// **'No fee intervals found'**
+  String get noFeeIntervalsFound;
+
+  /// Fee interval column header
+  ///
+  /// In en, this message translates to:
+  /// **'Fee interval'**
+  String get feeInterval;
+
+  /// Search by fee range placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Search by Fee Range'**
+  String get searchByFeeRange;
+
+  /// Add fee interval button
+  ///
+  /// In en, this message translates to:
+  /// **'Add Fee Interval'**
+  String get addFeeInterval;
+
+  /// Minimum fee placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Min fee'**
+  String get minFee;
+
+  /// Maximum fee placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Max fee'**
+  String get maxFee;
+
+  /// Delete fee intervals title
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Fee Intervals'**
+  String get deleteFeeIntervals;
+
+  /// Create new fee interval header
+  ///
+  /// In en, this message translates to:
+  /// **'Create New Fee Interval'**
+  String get createNewFeeInterval;
+
+  /// Fee interval creation instructions
+  ///
+  /// In en, this message translates to:
+  /// **'Define a new fee structure for transaction amounts'**
+  String get defineNewFeeStructure;
+
+  /// Minimum amount input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter minimum amount'**
+  String get enterMinimumAmount;
+
+  /// Maximum amount input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter maximum amount'**
+  String get enterMaximumAmount;
+
+  /// Fee amount input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter fee amount'**
+  String get enterFeeAmount;
+
+  /// Validation message for amount range
+  ///
+  /// In en, this message translates to:
+  /// **'Max amount must be greater than min amount'**
+  String get maxAmountMustBeGreater;
+
+  /// Success message for fee interval creation
+  ///
+  /// In en, this message translates to:
+  /// **'Fee interval created successfully'**
+  String get feeIntervalCreatedSuccessfully;
+
+  /// Description for adding new provider
+  ///
+  /// In en, this message translates to:
+  /// **'Add a new financial service provider to your list'**
+  String get addNewFinancialServiceProvider;
+
+  /// Description input placeholder
+  ///
+  /// In en, this message translates to:
+  /// **'Enter description'**
+  String get enterDescription;
+
+  /// Create provider button
+  ///
+  /// In en, this message translates to:
+  /// **'Create Provider'**
+  String get createProvider;
+
+  /// Clear selection tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Clear selection'**
+  String get clearSelection;
+
+  /// Select all tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get selectAll;
+
+  /// Icon label
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get icon;
+
+  /// Icon selection instruction
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to select icon'**
+  String get tapToSelectIcon;
+
+  /// Clear search tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Clear search'**
+  String get clearSearch;
+
+  /// Select icon dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Select Icon'**
+  String get selectIcon;
+
+  /// Required field validation message
+  ///
+  /// In en, this message translates to:
+  /// **'This field is required'**
+  String get thisFieldIsRequired;
+
+  /// Double back to exit message
+  ///
+  /// In en, this message translates to:
+  /// **'Press again to exit'**
+  String get pressAgainToExit;
+
+  /// Minimum amount validation field name
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum amount'**
+  String get minimumAmount;
+
+  /// Maximum amount validation field name
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum amount'**
+  String get maximumAmount;
+
+  /// Fee amount validation field name
+  ///
+  /// In en, this message translates to:
+  /// **'Fee amount'**
+  String get feeAmount;
+
+  /// Traditional banking description
+  ///
+  /// In en, this message translates to:
+  /// **'Traditional banking'**
+  String get traditionalBanking;
+
+  /// Mobile money description
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile money'**
+  String get mobileMoney;
 }
 
 class _AppLocalizationsDelegate

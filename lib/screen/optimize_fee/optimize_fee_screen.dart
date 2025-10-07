@@ -92,7 +92,7 @@ class _State extends State<OptimizeFeeScreen> {
               Icon(Icons.business, size: 18, color: context.colorScheme.primary),
               Global.gapSm,
               Text(
-                'Financial Provider',
+                AppLocalizations.of(context).financialProvider,
                 style: ThemeUtil.titleMedium.copyWith(
                   color: context.colorScheme.primary,
                   fontWeight: FontWeight.w600,
@@ -102,7 +102,7 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           Global.gapSm,
           Text(
-            'Choose the provider you want to analyze',
+            AppLocalizations.of(context).chooseProviderToAnalyze,
             style: ThemeUtil.bodyMedium.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -188,7 +188,7 @@ class _State extends State<OptimizeFeeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Amount to Optimize',
+            AppLocalizations.of(context).amountToOptimize,
             style: ThemeUtil.titleMedium.copyWith(
               color: context.colorScheme.onSurface,
               fontWeight: FontWeight.w700,
@@ -196,7 +196,7 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           Global.gapSm,
           Text(
-            'Enter the transaction amount you want to optimize',
+            AppLocalizations.of(context).enterTransactionAmountToOptimize,
             style: ThemeUtil.bodyMedium.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -211,7 +211,7 @@ class _State extends State<OptimizeFeeScreen> {
                 _results.clear();
               });
             },
-            label: 'Amount',
+            label: AppLocalizations.of(context).amount,
             min: 1,
             max: 9999999,
           ),
@@ -229,7 +229,7 @@ class _State extends State<OptimizeFeeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Transaction Range',
+            AppLocalizations.of(context).transactionRange,
             style: ThemeUtil.titleMedium.copyWith(
               color: context.colorScheme.onSurface,
               fontWeight: FontWeight.w700,
@@ -237,7 +237,7 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           Global.gapSm,
           Text(
-            'Define the minimum and maximum number of transactions',
+            AppLocalizations.of(context).defineMinMaxTransactions,
             style: ThemeUtil.bodyMedium.copyWith(
               color: context.colorScheme.onSurfaceVariant,
             ),
@@ -249,7 +249,7 @@ class _State extends State<OptimizeFeeScreen> {
                 child: TransactionInputWidget(
                   value: _minTransactions,
                   onChanged: (value) => setState(() => _minTransactions = value),
-                  label: 'Min Transactions',
+                  label: AppLocalizations.of(context).minTransactions,
                   min: 1,
                   max: 999,
                 ),
@@ -259,7 +259,7 @@ class _State extends State<OptimizeFeeScreen> {
                 child: TransactionInputWidget(
                   value: _maxTransactions,
                   onChanged: (value) => setState(() => _maxTransactions = value),
-                  label: 'Max Transactions',
+                  label: AppLocalizations.of(context).maxTransactions,
                   min: 1,
                   max: 999,
                 ),
@@ -286,14 +286,14 @@ class _State extends State<OptimizeFeeScreen> {
               ),
               Global.gapMd,
               Text(
-                'Ready to Optimize',
+                AppLocalizations.of(context).readyToOptimize,
                 style: ThemeUtil.titleMedium.copyWith(
                   color: context.colorScheme.onSurface,
                 ),
               ),
               Global.gapSm,
               Text(
-                'Click the Optimize button to analyze the best fee structure for your transactions',
+                AppLocalizations.of(context).clickOptimizeButtonToAnalyze,
                 style: ThemeUtil.bodyMedium.copyWith(
                   color: context.colorScheme.onSurfaceVariant,
                 ),
@@ -316,7 +316,7 @@ class _State extends State<OptimizeFeeScreen> {
                 Icon(Icons.analytics, size: 18, color: context.colorScheme.primary),
                 Global.gapSm,
                 Text(
-                  'Optimization Results',
+                  AppLocalizations.of(context).optimizationResults,
                   style: ThemeUtil.titleMedium.copyWith(
                     color: context.colorScheme.primary,
                     fontWeight: FontWeight.w600,
@@ -385,9 +385,9 @@ class _State extends State<OptimizeFeeScreen> {
         ),
         child: Row(
           children: [
-            Expanded(flex: 2, child: _buildHeaderCell('Interval')),
-            Expanded(child: _buildHeaderCell('Fee')),
-            Expanded(child: _buildHeaderCell('Count')),
+            Expanded(flex: 2, child: _buildHeaderCell(AppLocalizations.of(context).interval)),
+            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
+            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).count)),
             Expanded(child: _buildHeaderCell('Total')),
           ],
         ),

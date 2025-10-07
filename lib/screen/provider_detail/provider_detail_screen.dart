@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
 import '../../util/theme_util.dart';
@@ -104,7 +105,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       child: Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
-          title: 'Provider details',
+          title: AppLocalizations.of(context).providerDetails,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
             onPressed: () {
@@ -170,9 +171,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       ? SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-            child: const SearchEmptyState(
+            child: SearchEmptyState(
               icon: Icons.search_off,
-              title: 'No fee intervals found',
+              title: AppLocalizations.of(context).noFeeIntervalsFound,
               message: 'Try adjusting your search range.',
             ),
           ),
@@ -201,7 +202,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     child: Row(
       children: [
         Text(
-          'Fee intervals',
+          AppLocalizations.of(context).feeIntervals,
           style: ThemeUtil.titleSmall.copyWith(
             color: Theme.of(context).colorScheme.onSurface,
             fontWeight: FontWeight.w700,
@@ -232,12 +233,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       children: [
         // No checkbox in header, so no reserved space
         Expanded(
-          child: _headerCell('Fee interval', alignment: TextAlign.left),
+          child: _headerCell(AppLocalizations.of(context).feeInterval, alignment: TextAlign.left),
         ),
         // Approximate space for fee chip (padding + content)
         Container(
           constraints: const BoxConstraints(minWidth: 60),
-          child: _headerCell('Fee', alignment: TextAlign.center),
+          child: _headerCell(AppLocalizations.of(context).fee, alignment: TextAlign.center),
         ),
       ],
     ),
@@ -268,7 +269,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 Icon(Icons.search, size: 18, color: colorScheme.primary),
                 const SizedBox(width: 8),
                 Text(
-                  'Search by Fee Range',
+                  AppLocalizations.of(context).searchByFeeRange,
                   style: ThemeUtil.titleSmall.copyWith(
                     color: colorScheme.primary,
                     fontWeight: FontWeight.w600,
@@ -316,7 +317,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       child: SizedBox(
         width: double.infinity,
         child: LoadingButton(
-          text: 'Add Fee Interval',
+          text: AppLocalizations.of(context).addFeeInterval,
           onPressed: _addInterval,
           isLoading: false,
         ),
@@ -382,7 +383,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         controller: _feeMinController,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-          hintText: 'Min fee',
+          hintText: AppLocalizations.of(context).minFee,
           hintStyle: ThemeUtil.bodySmall.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -410,7 +411,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         controller: _feeMaxController,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
-          hintText: 'Max fee',
+          hintText: AppLocalizations.of(context).maxFee,
           hintStyle: ThemeUtil.bodySmall.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -499,7 +500,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     final count = _selectedIds.length;
     final confirmed = await ConfirmationModal.show(
       context,
-      'Delete Fee Intervals',
+      AppLocalizations.of(context).deleteFeeIntervals,
       'Are you sure you want to delete $count selected interval${count > 1 ? 's' : ''}?',
     );
 

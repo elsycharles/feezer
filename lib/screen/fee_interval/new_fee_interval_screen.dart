@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../model/fee_interval_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
@@ -40,7 +41,7 @@ class _State extends State<NewFeeIntervalScreen> {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
-      title: 'New Fee Interval',
+      title: AppLocalizations.of(context).newFeeInterval,
       leading: IconButton(
         onPressed: context.pop,
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
@@ -77,14 +78,14 @@ class _State extends State<NewFeeIntervalScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Create New Fee Interval',
+        AppLocalizations.of(context).createNewFeeInterval,
         style: ThemeUtil.titleLarge.copyWith(
           color: context.colorScheme.onSurface,
         ),
       ),
       Global.gapSm,
       Text(
-        'Define a new fee structure for transaction amounts',
+        AppLocalizations.of(context).defineNewFeeStructure,
         style: ThemeUtil.bodyMedium.copyWith(
           color: context.colorScheme.onSurface.withValues(alpha: 0.7),
           height: 1.4,
@@ -97,10 +98,10 @@ class _State extends State<NewFeeIntervalScreen> {
     label: 'Minimum Amount (Ar)',
     controller: _minAmountController,
     icon: Icons.money,
-    hintText: 'Enter minimum amount',
+    hintText: AppLocalizations.of(context).enterMinimumAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(value, 'Minimum amount'),
+    validator: (value) => ValidationUtil.positiveNumber(value, AppLocalizations.of(context).minimumAmount),
     required: true,
   );
 
@@ -108,7 +109,7 @@ class _State extends State<NewFeeIntervalScreen> {
     label: 'Maximum Amount (Ar)',
     controller: _maxAmountController,
     icon: Icons.money,
-    hintText: 'Enter maximum amount',
+    hintText: AppLocalizations.of(context).enterMaximumAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
     validator: _validateMaxAmount,
@@ -119,10 +120,10 @@ class _State extends State<NewFeeIntervalScreen> {
     label: 'Fee (Ar)',
     controller: _feeController,
     icon: Icons.attach_money,
-    hintText: 'Enter fee amount',
+    hintText: AppLocalizations.of(context).enterFeeAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(value, 'Fee amount'),
+    validator: (value) => ValidationUtil.positiveNumber(value, AppLocalizations.of(context).feeAmount),
     required: true,
   );
 
@@ -141,7 +142,7 @@ class _State extends State<NewFeeIntervalScreen> {
       children: [
         Expanded(
           child: LoadingButton(
-            text: 'Cancel',
+            text: AppLocalizations.of(context).cancel,
             onPressed: context.pop,
             isLoading: false,
             isOutlined: true,
@@ -151,7 +152,7 @@ class _State extends State<NewFeeIntervalScreen> {
         Expanded(
           flex: 2,
           child: LoadingButton(
-            text: 'Create Interval',
+            text: AppLocalizations.of(context).createInterval,
             onPressed: _create,
             isLoading: _isCreating,
           ),
@@ -164,13 +165,13 @@ class _State extends State<NewFeeIntervalScreen> {
 
   String? _validateMaxAmount(String? value) {
     // First validate it's a positive number
-    final basicValidation = ValidationUtil.positiveNumber(value, 'Maximum amount');
+    final basicValidation = ValidationUtil.positiveNumber(value, AppLocalizations.of(context).maximumAmount);
     if (basicValidation != null) return basicValidation;
     
     // Then check it's greater than min amount
     final amount = double.parse(value!);
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
-    if (amount <= minAmount) return 'Max amount must be greater than min amount';
+    if (amount <= minAmount) return AppLocalizations.of(context).maxAmountMustBeGreater;
     return null;
   }
 
@@ -193,7 +194,7 @@ class _State extends State<NewFeeIntervalScreen> {
           creationDateTime: now,
         );
         widget.onFeeIntervalAdded?.call(feeInterval);
-        AppToast.success(context, 'Fee interval created successfully');
+        AppToast.success(context, AppLocalizations.of(context).feeIntervalCreatedSuccessfully);
         context.pop();
       }
     }

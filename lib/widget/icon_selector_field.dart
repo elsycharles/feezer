@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../util/icon_util.dart';
 import '../util/theme_util.dart';
 import 'icon_picker.dart';
@@ -55,7 +56,7 @@ class IconSelectorField extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Tap to select icon',
+                    AppLocalizations.of(context).tapToSelectIcon,
                     style: ThemeUtil.bodyMedium.copyWith(
                       color: colorScheme.onSurface.withValues(alpha: 0.7),
                     ),

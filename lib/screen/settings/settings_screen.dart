@@ -29,7 +29,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             _buildSection(
               context,
-              'General', // Keep as hardcoded for now
+              AppLocalizations.of(context).general,
               [
                 Consumer<ThemeProvider>(
                   builder: (context, themeProvider, child) => _buildSettingTile(
@@ -83,11 +83,11 @@ class SettingsScreen extends StatelessWidget {
             // const SizedBox(height: 24),
             _buildSection(
               context,
-              'About',
+              AppLocalizations.of(context).about,
               [
                 _buildSettingTile(
                   context,
-                  'Version',
+                  AppLocalizations.of(context).version,
                   '1.0.0',
                   Icons.info_outline,
                   showArrow: false,
@@ -95,14 +95,14 @@ class SettingsScreen extends StatelessWidget {
                 _buildSettingTile(
                   context,
                   'Help & Support',
-                  'FAQ and contact',
+                  AppLocalizations.of(context).faqAndContact,
                   Icons.help_outline,
                   onTap: () => _showComingSoon(context),
                 ),
                 _buildSettingTile(
                   context,
-                  'Terms of Use',
-                  'Terms and privacy policy',
+                  AppLocalizations.of(context).termsOfUse,
+                  AppLocalizations.of(context).termsAndPrivacyPolicy,
                   Icons.description_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
@@ -182,7 +182,7 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _showComingSoon(BuildContext context) {
-    AppToast.info(context, 'Feature coming in the next version');
+    AppToast.info(context, AppLocalizations.of(context).featureComingNextVersion);
   }
 
   

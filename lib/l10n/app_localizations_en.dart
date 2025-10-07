@@ -146,7 +146,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'This feature will be available soon!';
 
   @override
-  String get feeIntervals => 'Fee Intervals';
+  String get feeIntervals => 'Fee intervals';
 
   @override
   String get newFeeInterval => 'New Fee Interval';
@@ -279,4 +279,153 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerCreatedSuccessfully => 'Provider created successfully';
+
+  @override
+  String get systemDefault => 'System default';
+
+  @override
+  String get general => 'General';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get faqAndContact => 'FAQ and contact';
+
+  @override
+  String get termsOfUse => 'Terms of Use';
+
+  @override
+  String get termsAndPrivacyPolicy => 'Terms and privacy policy';
+
+  @override
+  String get featureComingNextVersion => 'Feature coming in the next version';
+
+  @override
+  String get financialProvider => 'Financial Provider';
+
+  @override
+  String get chooseProviderToAnalyze =>
+      'Choose the provider you want to analyze';
+
+  @override
+  String get amountToOptimize => 'Amount to Optimize';
+
+  @override
+  String get enterTransactionAmountToOptimize =>
+      'Enter the transaction amount you want to optimize';
+
+  @override
+  String get transactionRange => 'Transaction Range';
+
+  @override
+  String get defineMinMaxTransactions =>
+      'Define the minimum and maximum number of transactions';
+
+  @override
+  String get readyToOptimize => 'Ready to Optimize';
+
+  @override
+  String get clickOptimizeButtonToAnalyze =>
+      'Click the Optimize button to analyze the best fee structure for your transactions';
+
+  @override
+  String get providerDetails => 'Provider details';
+
+  @override
+  String get noFeeIntervalsFound => 'No fee intervals found';
+
+  @override
+  String get feeInterval => 'Fee interval';
+
+  @override
+  String get searchByFeeRange => 'Search by Fee Range';
+
+  @override
+  String get addFeeInterval => 'Add Fee Interval';
+
+  @override
+  String get minFee => 'Min fee';
+
+  @override
+  String get maxFee => 'Max fee';
+
+  @override
+  String get deleteFeeIntervals => 'Delete Fee Intervals';
+
+  @override
+  String get createNewFeeInterval => 'Create New Fee Interval';
+
+  @override
+  String get defineNewFeeStructure =>
+      'Define a new fee structure for transaction amounts';
+
+  @override
+  String get enterMinimumAmount => 'Enter minimum amount';
+
+  @override
+  String get enterMaximumAmount => 'Enter maximum amount';
+
+  @override
+  String get enterFeeAmount => 'Enter fee amount';
+
+  @override
+  String get maxAmountMustBeGreater =>
+      'Max amount must be greater than min amount';
+
+  @override
+  String get feeIntervalCreatedSuccessfully =>
+      'Fee interval created successfully';
+
+  @override
+  String get addNewFinancialServiceProvider =>
+      'Add a new financial service provider to your list';
+
+  @override
+  String get enterDescription => 'Enter description';
+
+  @override
+  String get createProvider => 'Create Provider';
+
+  @override
+  String get clearSelection => 'Clear selection';
+
+  @override
+  String get selectAll => 'Select all';
+
+  @override
+  String get icon => 'Icon';
+
+  @override
+  String get tapToSelectIcon => 'Tap to select icon';
+
+  @override
+  String get clearSearch => 'Clear search';
+
+  @override
+  String get selectIcon => 'Select Icon';
+
+  @override
+  String get thisFieldIsRequired => 'This field is required';
+
+  @override
+  String get pressAgainToExit => 'Press again to exit';
+
+  @override
+  String get minimumAmount => 'Minimum amount';
+
+  @override
+  String get maximumAmount => 'Maximum amount';
+
+  @override
+  String get feeAmount => 'Fee amount';
+
+  @override
+  String get traditionalBanking => 'Traditional banking';
+
+  @override
+  String get mobileMoney => 'Mobile money';
 }

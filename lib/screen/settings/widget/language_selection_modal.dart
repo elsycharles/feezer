@@ -85,7 +85,7 @@ class LanguageSelectionModal extends StatelessWidget {
                     _buildLanguageOption(
                       context,
                       l10n.system,
-                      'System default',
+                      AppLocalizations.of(context).systemDefault,
                       null,
                       localeProvider.locale == null,
                       () => _useSystemLanguage(context),

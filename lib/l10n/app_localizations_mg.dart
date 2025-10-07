@@ -73,7 +73,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get settings => 'Fandrindrana';
 
   @override
-  String get createInterval => 'Mamorona Elanelana';
+  String get createInterval => 'Mamorona elanelana';
 
   @override
   String get optimize => 'Atsikafo';
@@ -85,10 +85,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get provider => 'Mpanome tolotra';
 
   @override
-  String get minTransactions => 'Fifampiraharahana Kely';
+  String get minTransactions => 'Fifampiraharahana faran\'izay kely';
 
   @override
-  String get maxTransactions => 'Fifampiraharahana Be';
+  String get maxTransactions => 'Fifampiraharahana faran\'izay lehibe';
 
   @override
   String get pleaseEnterValidAmount => 'Ampidiro ny vola manan-kery azafady';
@@ -147,10 +147,10 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ho avy tsy ho ela io endri-javatra io!';
 
   @override
-  String get feeIntervals => 'Elanelana Sara';
+  String get feeIntervals => 'Elanelam-para';
 
   @override
-  String get newFeeInterval => 'Elanelana Sara Vaovao';
+  String get newFeeInterval => 'Elanelam-para vaovao';
 
   @override
   String get minAmount => 'Vola Kely';
@@ -179,7 +179,7 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ny vola be dia tsy maintsy mihoatra ny vola kely';
 
   @override
-  String get optimizationResults => 'Valin\'ny Fanatsarana';
+  String get optimizationResults => 'Valin\'ny fanatsiana';
 
   @override
   String get interval => 'Elanelana';
@@ -281,4 +281,154 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get providerCreatedSuccessfully => 'Mpanome tolotra voaforona';
+
+  @override
+  String get systemDefault => 'Tsy miova amin\'ny rafitra';
+
+  @override
+  String get general => 'Ankapobeny';
+
+  @override
+  String get about => 'Momba';
+
+  @override
+  String get version => 'Dikan-kevitra';
+
+  @override
+  String get faqAndContact => 'Fanontaniana sy fifandraisana';
+
+  @override
+  String get termsOfUse => 'Fepetra fampiasana';
+
+  @override
+  String get termsAndPrivacyPolicy =>
+      'Fepetra sy politikan\'ny fiainana manokana';
+
+  @override
+  String get featureComingNextVersion =>
+      'Endri-javatra ho avy amin\'ny dikan-kevitra manaraka';
+
+  @override
+  String get financialProvider => 'Mpanome tolotra ara-bola';
+
+  @override
+  String get chooseProviderToAnalyze =>
+      'Safidio ny mpanome tolotra tianao hamakafaka';
+
+  @override
+  String get amountToOptimize => 'Vola hamatsiana';
+
+  @override
+  String get enterTransactionAmountToOptimize =>
+      'Ampidiro ny volan\'ny fifampiraharahana tianao hamatsiana';
+
+  @override
+  String get transactionRange => 'Elanelam-pifampiraharahana';
+
+  @override
+  String get defineMinMaxTransactions =>
+      'Farito ny isan\'ny fifampiraharahana faran\'izay kely sy lehibe';
+
+  @override
+  String get readyToOptimize => 'Vonona hamatsiana';
+
+  @override
+  String get clickOptimizeButtonToAnalyze =>
+      'Tsindrio ny bokotra Hamatsiana mba hamakafaka ny firafitry ny sara tsara indrindra ho an\'ny fifampiraharahanao';
+
+  @override
+  String get providerDetails => 'Antsipirian\'ny mpanome tolotra';
+
+  @override
+  String get noFeeIntervalsFound => 'Tsy misy elanelam-para hita';
+
+  @override
+  String get feeInterval => 'Elanelam-para';
+
+  @override
+  String get searchByFeeRange => 'Mitady amin\'ny elanelam-para';
+
+  @override
+  String get addFeeInterval => 'Manampy elanelam-para';
+
+  @override
+  String get minFee => 'Sara faran\'izay kely';
+
+  @override
+  String get maxFee => 'Sara faran\'izay lehibe';
+
+  @override
+  String get deleteFeeIntervals => 'Mamafa elanelam-para';
+
+  @override
+  String get createNewFeeInterval => 'Mamorona elanelam-para vaovao';
+
+  @override
+  String get defineNewFeeStructure =>
+      'Mamaritra firafitra sara vaovao ho an\'ny volan\'ny fifampiraharahana';
+
+  @override
+  String get enterMinimumAmount => 'Ampidiro ny vola faran\'izay kely';
+
+  @override
+  String get enterMaximumAmount => 'Ampidiro ny vola faran\'izay lehibe';
+
+  @override
+  String get enterFeeAmount => 'Ampidiro ny volan\'ny sara';
+
+  @override
+  String get maxAmountMustBeGreater =>
+      'Ny vola lehibe dia tsy maintsy mihoatra ny vola kely';
+
+  @override
+  String get feeIntervalCreatedSuccessfully => 'Elanelam-para voaforona';
+
+  @override
+  String get addNewFinancialServiceProvider =>
+      'Manampy mpanome serivisy ara-bola vaovao amin\'ny lisitrao';
+
+  @override
+  String get enterDescription => 'Ampidiro ny famaritana';
+
+  @override
+  String get createProvider => 'Mamorona mpanome tolotra';
+
+  @override
+  String get clearSelection => 'Mamafa ny fifantenana';
+
+  @override
+  String get selectAll => 'Fidio daholo';
+
+  @override
+  String get icon => 'Sary';
+
+  @override
+  String get tapToSelectIcon => 'Tsindrio mba hisafidy sary';
+
+  @override
+  String get clearSearch => 'Mamafa ny fikarohana';
+
+  @override
+  String get selectIcon => 'Misafidy sary';
+
+  @override
+  String get thisFieldIsRequired => 'Ilaina ity saha ity';
+
+  @override
+  String get pressAgainToExit => 'Tsindrio indray mba hivoaka';
+
+  @override
+  String get minimumAmount => 'Vola faran\'izay kely';
+
+  @override
+  String get maximumAmount => 'Vola faran\'izay lehibe';
+
+  @override
+  String get feeAmount => 'Volan\'ny sara';
+
+  @override
+  String get traditionalBanking => 'Banky nentim-paharazana';
+
+  @override
+  String get mobileMoney => 'Vola finday';
 }

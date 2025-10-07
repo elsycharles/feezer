@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../util/theme_util.dart';
 
 /// Selection action bar for fee intervals
@@ -85,7 +86,7 @@ class _FeeIntervalSelectionActionBarState
               IconButton(
                 onPressed: widget.onClearSelection,
                 icon: Icon(Icons.close, color: colorScheme.onPrimary),
-                tooltip: 'Clear selection',
+                tooltip: AppLocalizations.of(context).clearSelection,
               ),
               const SizedBox(width: 8),
               Text(
@@ -102,7 +103,7 @@ class _FeeIntervalSelectionActionBarState
                     Icons.select_all,
                     color: colorScheme.onPrimary,
                   ),
-                  tooltip: 'Select all',
+                  tooltip: AppLocalizations.of(context).selectAll,
                 ),
               if (widget.onEdit != null)
                 IconButton(
@@ -111,7 +112,7 @@ class _FeeIntervalSelectionActionBarState
                     Icons.edit_outlined,
                     color: colorScheme.onPrimary,
                   ),
-                  tooltip: 'Edit',
+                  tooltip: AppLocalizations.of(context).edit,
                 ),
               IconButton(
                 onPressed: widget.onDelete,
@@ -119,7 +120,7 @@ class _FeeIntervalSelectionActionBarState
                   Icons.delete_outlined,
                   color: colorScheme.onPrimary,
                 ),
-                tooltip: 'Delete',
+                tooltip: AppLocalizations.of(context).delete,
               ),
             ],
           ),

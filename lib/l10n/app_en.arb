@@ -347,5 +347,237 @@
   "providerCreatedSuccessfully": "Provider created successfully",
   "@providerCreatedSuccessfully": {
     "description": "Success message when a provider is created"
+  },
+  "systemDefault": "System default",
+  "@systemDefault": {
+    "description": "System default language option"
+  },
+  "general": "General",
+  "@general": {
+    "description": "General settings section"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+  "faqAndContact": "FAQ and contact",
+  "@faqAndContact": {
+    "description": "FAQ and contact option"
+  },
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Terms of use option"
+  },
+  "termsAndPrivacyPolicy": "Terms and privacy policy",
+  "@termsAndPrivacyPolicy": {
+    "description": "Terms and privacy policy description"
+  },
+  "featureComingNextVersion": "Feature coming in the next version",
+  "@featureComingNextVersion": {
+    "description": "Message for upcoming features"
+  },
+  "financialProvider": "Financial Provider",
+  "@financialProvider": {
+    "description": "Financial provider section title"
+  },
+  "chooseProviderToAnalyze": "Choose the provider you want to analyze",
+  "@chooseProviderToAnalyze": {
+    "description": "Instructions for provider selection"
+  },
+  "amountToOptimize": "Amount to Optimize",
+  "@amountToOptimize": {
+    "description": "Title for amount optimization section"
+  },
+  "enterTransactionAmountToOptimize": "Enter the transaction amount you want to optimize",
+  "@enterTransactionAmountToOptimize": {
+    "description": "Instructions for amount input"
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "transactionRange": "Transaction Range",
+  "@transactionRange": {
+    "description": "Transaction range section title"
+  },
+  "defineMinMaxTransactions": "Define the minimum and maximum number of transactions",
+  "@defineMinMaxTransactions": {
+    "description": "Instructions for transaction range"
+  },
+  "minTransactions": "Min Transactions",
+  "@minTransactions": {
+    "description": "Minimum transactions label"
+  },
+  "maxTransactions": "Max Transactions",
+  "@maxTransactions": {
+    "description": "Maximum transactions label"
+  },
+  "readyToOptimize": "Ready to Optimize",
+  "@readyToOptimize": {
+    "description": "Ready to optimize message"
+  },
+  "clickOptimizeButtonToAnalyze": "Click the Optimize button to analyze the best fee structure for your transactions",
+  "@clickOptimizeButtonToAnalyze": {
+    "description": "Instructions for optimization"
+  },
+  "optimizationResults": "Optimization Results",
+  "@optimizationResults": {
+    "description": "Optimization results title"
+  },
+  "interval": "Interval",
+  "@interval": {
+    "description": "Interval column header"
+  },
+  "fee": "Fee",
+  "@fee": {
+    "description": "Fee column header"
+  },
+  "count": "Count",
+  "@count": {
+    "description": "Count column header"
+  },
+  "providerDetails": "Provider details",
+  "@providerDetails": {
+    "description": "Provider details screen title"
+  },
+  "noFeeIntervalsFound": "No fee intervals found",
+  "@noFeeIntervalsFound": {
+    "description": "Message when no fee intervals exist"
+  },
+  "feeIntervals": "Fee intervals",
+  "@feeIntervals": {
+    "description": "Fee intervals section title"
+  },
+  "feeInterval": "Fee interval",
+  "@feeInterval": {
+    "description": "Fee interval column header"
+  },
+  "searchByFeeRange": "Search by Fee Range",
+  "@searchByFeeRange": {
+    "description": "Search by fee range placeholder"
+  },
+  "addFeeInterval": "Add Fee Interval",
+  "@addFeeInterval": {
+    "description": "Add fee interval button"
+  },
+  "minFee": "Min fee",
+  "@minFee": {
+    "description": "Minimum fee placeholder"
+  },
+  "maxFee": "Max fee",
+  "@maxFee": {
+    "description": "Maximum fee placeholder"
+  },
+  "deleteFeeIntervals": "Delete Fee Intervals",
+  "@deleteFeeIntervals": {
+    "description": "Delete fee intervals title"
+  },
+  "newFeeInterval": "New Fee Interval",
+  "@newFeeInterval": {
+    "description": "New fee interval screen title"
+  },
+  "createNewFeeInterval": "Create New Fee Interval",
+  "@createNewFeeInterval": {
+    "description": "Create new fee interval header"
+  },
+  "defineNewFeeStructure": "Define a new fee structure for transaction amounts",
+  "@defineNewFeeStructure": {
+    "description": "Fee interval creation instructions"
+  },
+  "enterMinimumAmount": "Enter minimum amount",
+  "@enterMinimumAmount": {
+    "description": "Minimum amount input placeholder"
+  },
+  "enterMaximumAmount": "Enter maximum amount",
+  "@enterMaximumAmount": {
+    "description": "Maximum amount input placeholder"
+  },
+  "enterFeeAmount": "Enter fee amount",
+  "@enterFeeAmount": {
+    "description": "Fee amount input placeholder"
+  },
+  "createInterval": "Create Interval",
+  "@createInterval": {
+    "description": "Create interval button"
+  },
+  "maxAmountMustBeGreater": "Max amount must be greater than min amount",
+  "@maxAmountMustBeGreater": {
+    "description": "Validation message for amount range"
+  },
+  "feeIntervalCreatedSuccessfully": "Fee interval created successfully",
+  "@feeIntervalCreatedSuccessfully": {
+    "description": "Success message for fee interval creation"
+  },
+  "addNewFinancialServiceProvider": "Add a new financial service provider to your list",
+  "@addNewFinancialServiceProvider": {
+    "description": "Description for adding new provider"
+  },
+  "enterDescription": "Enter description",
+  "@enterDescription": {
+    "description": "Description input placeholder"
+  },
+  "createProvider": "Create Provider",
+  "@createProvider": {
+    "description": "Create provider button"
+  },
+  "clearSelection": "Clear selection",
+  "@clearSelection": {
+    "description": "Clear selection tooltip"
+  },
+  "selectAll": "Select all",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "icon": "Icon",
+  "@icon": {
+    "description": "Icon label"
+  },
+  "tapToSelectIcon": "Tap to select icon",
+  "@tapToSelectIcon": {
+    "description": "Icon selection instruction"
+  },
+  "clearSearch": "Clear search",
+  "@clearSearch": {
+    "description": "Clear search tooltip"
+  },
+  "selectIcon": "Select Icon",
+  "@selectIcon": {
+    "description": "Select icon dialog title"
+  },
+  "thisFieldIsRequired": "This field is required",
+  "@thisFieldIsRequired": {
+    "description": "Required field validation message"
+  },
+  "pressAgainToExit": "Press again to exit",
+  "@pressAgainToExit": {
+    "description": "Double back to exit message"
+  },
+  "minimumAmount": "Minimum amount",
+  "@minimumAmount": {
+    "description": "Minimum amount validation field name"
+  },
+  "maximumAmount": "Maximum amount",
+  "@maximumAmount": {
+    "description": "Maximum amount validation field name"
+  },
+  "feeAmount": "Fee amount",
+  "@feeAmount": {
+    "description": "Fee amount validation field name"
+  },
+  "traditionalBanking": "Traditional banking",
+  "@traditionalBanking": {
+    "description": "Traditional banking description"
+  },
+  "mobileMoney": "Mobile money",
+  "@mobileMoney": {
+    "description": "Mobile money description"
+  },
+  "mobileFinancialServices": "Mobile financial services",
+  "@mobileFinancialServices": {
+    "description": "Mobile financial services description"
   }
 }

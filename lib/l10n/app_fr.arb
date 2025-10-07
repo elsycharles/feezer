@@ -146,5 +146,237 @@
   "providerCreatedSuccessfully": "Fournisseur créé avec succès",
   "@providerCreatedSuccessfully": {
     "description": "Success message when a provider is created"
+  },
+  "systemDefault": "Par défaut du système",
+  "@systemDefault": {
+    "description": "System default language option"
+  },
+  "general": "Général",
+  "@general": {
+    "description": "General settings section"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "About section"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+  "faqAndContact": "FAQ et contact",
+  "@faqAndContact": {
+    "description": "FAQ and contact option"
+  },
+  "termsOfUse": "Conditions d'utilisation",
+  "@termsOfUse": {
+    "description": "Terms of use option"
+  },
+  "termsAndPrivacyPolicy": "Conditions et politique de confidentialité",
+  "@termsAndPrivacyPolicy": {
+    "description": "Terms and privacy policy description"
+  },
+  "featureComingNextVersion": "Fonctionnalité disponible dans la prochaine version",
+  "@featureComingNextVersion": {
+    "description": "Message for upcoming features"
+  },
+  "financialProvider": "Fournisseur financier",
+  "@financialProvider": {
+    "description": "Financial provider section title"
+  },
+  "chooseProviderToAnalyze": "Choisissez le fournisseur que vous souhaitez analyser",
+  "@chooseProviderToAnalyze": {
+    "description": "Instructions for provider selection"
+  },
+  "amountToOptimize": "Montant à optimiser",
+  "@amountToOptimize": {
+    "description": "Title for amount optimization section"
+  },
+  "enterTransactionAmountToOptimize": "Saisissez le montant de transaction que vous souhaitez optimiser",
+  "@enterTransactionAmountToOptimize": {
+    "description": "Instructions for amount input"
+  },
+  "amount": "Montant",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "transactionRange": "Plage de transactions",
+  "@transactionRange": {
+    "description": "Transaction range section title"
+  },
+  "defineMinMaxTransactions": "Définissez le nombre minimum et maximum de transactions",
+  "@defineMinMaxTransactions": {
+    "description": "Instructions for transaction range"
+  },
+  "minTransactions": "Transactions min",
+  "@minTransactions": {
+    "description": "Minimum transactions label"
+  },
+  "maxTransactions": "Transactions max",
+  "@maxTransactions": {
+    "description": "Maximum transactions label"
+  },
+  "readyToOptimize": "Prêt à optimiser",
+  "@readyToOptimize": {
+    "description": "Ready to optimize message"
+  },
+  "clickOptimizeButtonToAnalyze": "Cliquez sur le bouton Optimiser pour analyser la meilleure structure de frais pour vos transactions",
+  "@clickOptimizeButtonToAnalyze": {
+    "description": "Instructions for optimization"
+  },
+  "optimizationResults": "Résultats d'optimisation",
+  "@optimizationResults": {
+    "description": "Optimization results title"
+  },
+  "interval": "Intervalle",
+  "@interval": {
+    "description": "Interval column header"
+  },
+  "fee": "Frais",
+  "@fee": {
+    "description": "Fee column header"
+  },
+  "count": "Nombre",
+  "@count": {
+    "description": "Count column header"
+  },
+  "providerDetails": "Détails du fournisseur",
+  "@providerDetails": {
+    "description": "Provider details screen title"
+  },
+  "noFeeIntervalsFound": "Aucun intervalle de frais trouvé",
+  "@noFeeIntervalsFound": {
+    "description": "Message when no fee intervals exist"
+  },
+  "feeIntervals": "Intervalles de frais",
+  "@feeIntervals": {
+    "description": "Fee intervals section title"
+  },
+  "feeInterval": "Intervalle de frais",
+  "@feeInterval": {
+    "description": "Fee interval column header"
+  },
+  "searchByFeeRange": "Rechercher par plage de frais",
+  "@searchByFeeRange": {
+    "description": "Search by fee range placeholder"
+  },
+  "addFeeInterval": "Ajouter un intervalle de frais",
+  "@addFeeInterval": {
+    "description": "Add fee interval button"
+  },
+  "minFee": "Frais min",
+  "@minFee": {
+    "description": "Minimum fee placeholder"
+  },
+  "maxFee": "Frais max",
+  "@maxFee": {
+    "description": "Maximum fee placeholder"
+  },
+  "deleteFeeIntervals": "Supprimer les intervalles de frais",
+  "@deleteFeeIntervals": {
+    "description": "Delete fee intervals title"
+  },
+  "newFeeInterval": "Nouvel intervalle de frais",
+  "@newFeeInterval": {
+    "description": "New fee interval screen title"
+  },
+  "createNewFeeInterval": "Créer un nouvel intervalle de frais",
+  "@createNewFeeInterval": {
+    "description": "Create new fee interval header"
+  },
+  "defineNewFeeStructure": "Définir une nouvelle structure de frais pour les montants de transaction",
+  "@defineNewFeeStructure": {
+    "description": "Fee interval creation instructions"
+  },
+  "enterMinimumAmount": "Saisissez le montant minimum",
+  "@enterMinimumAmount": {
+    "description": "Minimum amount input placeholder"
+  },
+  "enterMaximumAmount": "Saisissez le montant maximum",
+  "@enterMaximumAmount": {
+    "description": "Maximum amount input placeholder"
+  },
+  "enterFeeAmount": "Saisissez le montant des frais",
+  "@enterFeeAmount": {
+    "description": "Fee amount input placeholder"
+  },
+  "createInterval": "Créer l'intervalle",
+  "@createInterval": {
+    "description": "Create interval button"
+  },
+  "maxAmountMustBeGreater": "Le montant max doit être supérieur au montant min",
+  "@maxAmountMustBeGreater": {
+    "description": "Validation message for amount range"
+  },
+  "feeIntervalCreatedSuccessfully": "Intervalle de frais créé avec succès",
+  "@feeIntervalCreatedSuccessfully": {
+    "description": "Success message for fee interval creation"
+  },
+  "addNewFinancialServiceProvider": "Ajouter un nouveau fournisseur de services financiers à votre liste",
+  "@addNewFinancialServiceProvider": {
+    "description": "Description for adding new provider"
+  },
+  "enterDescription": "Saisissez la description",
+  "@enterDescription": {
+    "description": "Description input placeholder"
+  },
+  "createProvider": "Créer le fournisseur",
+  "@createProvider": {
+    "description": "Create provider button"
+  },
+  "clearSelection": "Effacer la sélection",
+  "@clearSelection": {
+    "description": "Clear selection tooltip"
+  },
+  "selectAll": "Tout sélectionner",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "icon": "Icône",
+  "@icon": {
+    "description": "Icon label"
+  },
+  "tapToSelectIcon": "Appuyez pour sélectionner l'icône",
+  "@tapToSelectIcon": {
+    "description": "Icon selection instruction"
+  },
+  "clearSearch": "Effacer la recherche",
+  "@clearSearch": {
+    "description": "Clear search tooltip"
+  },
+  "selectIcon": "Sélectionner l'icône",
+  "@selectIcon": {
+    "description": "Select icon dialog title"
+  },
+  "thisFieldIsRequired": "Ce champ est obligatoire",
+  "@thisFieldIsRequired": {
+    "description": "Required field validation message"
+  },
+  "pressAgainToExit": "Appuyez à nouveau pour quitter",
+  "@pressAgainToExit": {
+    "description": "Double back to exit message"
+  },
+  "minimumAmount": "Montant minimum",
+  "@minimumAmount": {
+    "description": "Minimum amount validation field name"
+  },
+  "maximumAmount": "Montant maximum",
+  "@maximumAmount": {
+    "description": "Maximum amount validation field name"
+  },
+  "feeAmount": "Montant des frais",
+  "@feeAmount": {
+    "description": "Fee amount validation field name"
+  },
+  "traditionalBanking": "Banque traditionnelle",
+  "@traditionalBanking": {
+    "description": "Traditional banking description"
+  },
+  "mobileMoney": "Mobile money",
+  "@mobileMoney": {
+    "description": "Mobile money description"
+  },
+  "mobileFinancialServices": "Services financiers mobiles",
+  "@mobileFinancialServices": {
+    "description": "Mobile financial services description"
   }
 }
