@@ -1,0 +1,150 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Feezer",
+  "onboardingTitle1": "Planifiez et économisez sur les frais",
+  "onboardingDescription1": "Calculez le moyen le plus rentable de gérer votre argent.",
+  "onboardingTitle2": "Optimisez vos transactions",
+  "onboardingDescription2": "Minimisez automatiquement les frais basés sur des intervalles prédéfinis.",
+  "onboardingTitle3": "Économisez intelligemment, dépensez mieux",
+  "onboardingDescription3": "Obtenez des recommandations personnalisées et prenez des décisions financières éclairées instantanément.",
+  "next": "Suivant",
+  "skip": "Ignorer",
+  "getStarted": "Commencer",
+  "back": "Retour",
+  "cancel": "Annuler",
+  "save": "Enregistrer",
+  "delete": "Supprimer",
+  "edit": "Modifier",
+  "create": "Créer",
+  "confirm": "Confirmer",
+  "optimizeFee": "Optimiser les Frais",
+  "providers": "Fournisseurs",
+  "settings": "Paramètres",
+  "createInterval": "Créer un Intervalle",
+  "optimize": "Optimiser",
+  "amount": "Montant",
+  "provider": "Fournisseur",
+  "minTransactions": "Transactions Min",
+  "maxTransactions": "Transactions Max",
+  "pleaseEnterValidAmount": "Veuillez saisir un montant valide",
+  "pleaseSelectProvider": "Veuillez sélectionner un fournisseur",
+  "invalidTransactionRange": "Les transactions min doivent être inférieures aux transactions max",
+  "mvola": "MVola",
+  "orangeMoney": "Orange Money",
+  "airtelMoney": "Airtel Money",
+  "mobileFinancialServices": "Services financiers mobiles",
+  "appearance": "Apparence",
+  "theme": "Thème",
+  "language": "Langue",
+  "english": "Anglais",
+  "french": "Français",
+  "malagasy": "Malgache",
+  "system": "Système",
+  "light": "Clair",
+  "dark": "Sombre",
+  "comingSoon": "Bientôt Disponible",
+  "thisFeatureWillBeAvailableSoon": "Cette fonctionnalité sera bientôt disponible !",
+  "feeIntervals": "Intervalles de Frais",
+  "newFeeInterval": "Nouvel Intervalle de Frais",
+  "minAmount": "Montant Min",
+  "maxAmount": "Montant Max",
+  "feePercentage": "Pourcentage de Frais",
+  "fixedFee": "Frais Fixes",
+  "pleaseEnterMinAmount": "Veuillez saisir le montant minimum",
+  "pleaseEnterMaxAmount": "Veuillez saisir le montant maximum",
+  "pleaseEnterValidFeePercentage": "Veuillez saisir un pourcentage de frais valide",
+  "maxAmountMustBeGreaterThanMinAmount": "Le montant max doit être supérieur au montant min",
+  "optimizationResults": "Résultats d'Optimisation",
+  "interval": "Intervalle",
+  "fee": "Frais",
+  "count": "Nombre",
+  "total": "Total",
+  "noResultsYet": "Aucun résultat pour l'instant",
+  "tapOptimizeToSeeResults": "Appuyez sur 'Optimiser' pour voir les résultats",
+  "error": "Erreur",
+  "screenNotFound": "Écran {route} introuvable",
+  "goHome": "Accueil",
+  "currency": "Ar",
+  "demo": "Démo",
+  "@demo": {
+    "description": "Demo screen title"
+  },
+  "noProvidersFound": "Aucun fournisseur trouvé",
+  "@noProvidersFound": {
+    "description": "Message shown when no providers are available"
+  },
+  "searchProviders": "Rechercher des fournisseurs...",
+  "@searchProviders": {
+    "description": "Placeholder text for provider search field"
+  },
+  "manageYourProviders": "Gérer vos fournisseurs",
+  "@manageYourProviders": {
+    "description": "Header title for provider management section"
+  },
+  "centralizeProviders": "Centralisez les partenaires bancaires et de mobile money en un seul endroit.",
+  "@centralizeProviders": {
+    "description": "Description for provider management functionality"
+  },
+  "activeProvider": "Fournisseur actif",
+  "@activeProvider": {
+    "description": "Label for single active provider count"
+  },
+  "activeProviders": "Fournisseurs actifs",
+  "@activeProviders": {
+    "description": "Label for multiple active providers count"
+  },
+  "deleteThisProvider": "Supprimer ce fournisseur ?",
+  "@deleteThisProvider": {
+    "description": "Confirmation message for deleting a single provider"
+  },
+  "deleteProvidersCount": "Supprimer {count} fournisseurs ?",
+  "@deleteProvidersCount": {
+    "description": "Confirmation message for deleting multiple providers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "deleteProvider": "Supprimer le fournisseur",
+  "@deleteProvider": {
+    "description": "Title for delete provider dialog"
+  },
+  "deleteProviders": "Supprimer les fournisseurs",
+  "@deleteProviders": {
+    "description": "Title for delete multiple providers dialog"
+  },
+  "providerDeletedSuccessfully": "{count, plural, =1{1 fournisseur supprimé avec succès} other{{count} fournisseurs supprimés avec succès}}",
+  "@providerDeletedSuccessfully": {
+    "description": "Success message after deleting provider(s)"
+  },
+  "editProvider": "Modifier le fournisseur",
+  "@editProvider": {
+    "description": "Title for edit provider bottom sheet"
+  },
+  "providerName": "Nom du fournisseur",
+  "@providerName": {
+    "description": "Label for provider name field"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Label for description field"
+  },
+  "newProvider": "Nouveau fournisseur",
+  "@newProvider": {
+    "description": "Title for new provider screen"
+  },
+  "createNewProvider": "Créer un nouveau fournisseur",
+  "@createNewProvider": {
+    "description": "Header title for creating a new provider"
+  },
+  "enterProviderName": "Saisissez le nom du fournisseur",
+  "@enterProviderName": {
+    "description": "Hint text for provider name field"
+  },
+  "providerCreatedSuccessfully": "Fournisseur créé avec succès",
+  "@providerCreatedSuccessfully": {
+    "description": "Success message when a provider is created"
+  }
+}

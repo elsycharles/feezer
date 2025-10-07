@@ -1,0 +1,150 @@
+{
+  "@@locale": "mg",
+  "appTitle": "Feezer",
+  "onboardingTitle1": "Mihevitra mialoha ary mitahiry vola amin'ny sara",
+  "onboardingDescription1": "Kajy ny fomba mahomby indrindra hitantanana ny volanao.",
+  "onboardingTitle2": "Atsikafo ny fifampiraharahanao",
+  "onboardingDescription2": "Ahena ho azy ny sara mifototra amin'ny elanelana efa voafaritra.",
+  "onboardingTitle3": "Mitahiry am-pahendrena, mandany tsara kokoa",
+  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
+  "next": "Manaraka",
+  "skip": "Dingana",
+  "getStarted": "Hanomboka",
+  "back": "Hiverina",
+  "cancel": "Aoka ihany",
+  "save": "Tahiry",
+  "delete": "Fafao",
+  "edit": "Ovay",
+  "create": "Mamorona",
+  "confirm": "Hamafy",
+  "optimizeFee": "Hanatsara ny Sara",
+  "providers": "Mpanome tolotra",
+  "settings": "Fandrindrana",
+  "createInterval": "Mamorona Elanelana",
+  "optimize": "Atsikafo",
+  "amount": "Vola",
+  "provider": "Mpanome tolotra",
+  "minTransactions": "Fifampiraharahana Kely",
+  "maxTransactions": "Fifampiraharahana Be",
+  "pleaseEnterValidAmount": "Ampidiro ny vola manan-kery azafady",
+  "pleaseSelectProvider": "Fidio ny mpanome tolotra azafady",
+  "invalidTransactionRange": "Ny fifampiraharahana kely dia tsy maintsy latsaky ny fifampiraharahana be",
+  "mvola": "MVola",
+  "orangeMoney": "Orange Money",
+  "airtelMoney": "Airtel Money",
+  "mobileFinancialServices": "Serivisy ara-bola finday",
+  "appearance": "Fisehoana",
+  "theme": "Loko",
+  "language": "Fiteny",
+  "english": "Anglisy",
+  "french": "Frantsay",
+  "malagasy": "Malagasy",
+  "system": "Rafitra",
+  "light": "Mazava",
+  "dark": "Maizina",
+  "comingSoon": "Ho Avy Tsy Ho Ela",
+  "thisFeatureWillBeAvailableSoon": "Ho avy tsy ho ela io endri-javatra io!",
+  "feeIntervals": "Elanelana Sara",
+  "newFeeInterval": "Elanelana Sara Vaovao",
+  "minAmount": "Vola Kely",
+  "maxAmount": "Vola Be",
+  "feePercentage": "Isan-jaton'ny Sara",
+  "fixedFee": "Sara Raikitra",
+  "pleaseEnterMinAmount": "Ampidiro ny vola kely azafady",
+  "pleaseEnterMaxAmount": "Ampidiro ny vola be azafady",
+  "pleaseEnterValidFeePercentage": "Ampidiro ny isan-jaton'ny sara manan-kery azafady",
+  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be dia tsy maintsy mihoatra ny vola kely",
+  "optimizationResults": "Valin'ny Fanatsarana",
+  "interval": "Elanelana",
+  "fee": "Sara",
+  "count": "Isa",
+  "total": "Totalin'ny",
+  "noResultsYet": "Mbola tsy misy valiny",
+  "tapOptimizeToSeeResults": "Tsindrio ny 'Atsikafo' hahitana ny valiny",
+  "error": "Diso",
+  "screenNotFound": "Tsy hita ny écran {route}",
+  "goHome": "Hody",
+  "currency": "Ar",
+  "demo": "Demo",
+  "@demo": {
+    "description": "Demo screen title"
+  },
+  "noProvidersFound": "Tsy misy mpanome tolotra hita",
+  "@noProvidersFound": {
+    "description": "Message shown when no providers are available"
+  },
+  "searchProviders": "Mitady mpanome tolotra...",
+  "@searchProviders": {
+    "description": "Placeholder text for provider search field"
+  },
+  "manageYourProviders": "Mitantana ny mpanome tolotra",
+  "@manageYourProviders": {
+    "description": "Header title for provider management section"
+  },
+  "centralizeProviders": "Atambaro eo amin'ny toerana iray ny mpiara-miasa banky sy mobile money.",
+  "@centralizeProviders": {
+    "description": "Description for provider management functionality"
+  },
+  "activeProvider": "Mpanome tolotra mavitrika",
+  "@activeProvider": {
+    "description": "Label for single active provider count"
+  },
+  "activeProviders": "Mpanome tolotra mavitrika",
+  "@activeProviders": {
+    "description": "Label for multiple active providers count"
+  },
+  "deleteThisProvider": "Hofafana ve ity mpanome tolotra ity?",
+  "@deleteThisProvider": {
+    "description": "Confirmation message for deleting a single provider"
+  },
+  "deleteProvidersCount": "Hofafana ve ny mpanome tolotra {count}?",
+  "@deleteProvidersCount": {
+    "description": "Confirmation message for deleting multiple providers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "deleteProvider": "Mamafa mpanome tolotra",
+  "@deleteProvider": {
+    "description": "Title for delete provider dialog"
+  },
+  "deleteProviders": "Mamafa mpanome tolotra",
+  "@deleteProviders": {
+    "description": "Title for delete multiple providers dialog"
+  },
+  "providerDeletedSuccessfully": "{count, plural, =1{Mpanome tolotra 1 voafafa} other{Mpanome tolotra {count} voafafa}}",
+  "@providerDeletedSuccessfully": {
+    "description": "Success message after deleting provider(s)"
+  },
+  "editProvider": "Manova mpanome tolotra",
+  "@editProvider": {
+    "description": "Title for edit provider bottom sheet"
+  },
+  "providerName": "Anaran'ny mpanome tolotra",
+  "@providerName": {
+    "description": "Label for provider name field"
+  },
+  "description": "Famaritana",
+  "@description": {
+    "description": "Label for description field"
+  },
+  "newProvider": "Mpanome tolotra vaovao",
+  "@newProvider": {
+    "description": "Title for new provider screen"
+  },
+  "createNewProvider": "Mamorona mpanome tolotra vaovao",
+  "@createNewProvider": {
+    "description": "Header title for creating a new provider"
+  },
+  "enterProviderName": "Ampidiro ny anaran'ny mpanome tolotra",
+  "@enterProviderName": {
+    "description": "Hint text for provider name field"
+  },
+  "providerCreatedSuccessfully": "Mpanome tolotra voaforona",
+  "@providerCreatedSuccessfully": {
+    "description": "Success message when a provider is created"
+  }
+}

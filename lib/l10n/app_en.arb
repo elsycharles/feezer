@@ -1,0 +1,351 @@
+{
+  "@@locale": "en",
+  "appTitle": "Feezer",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "onboardingTitle1": "Plan ahead and save on fees",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "Calculate the most cost-efficient way to handle your money.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Optimize your transactions",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Minimize fees automatically based on predefined intervals.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Save smart, spend better",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Get personalized recommendations and make informed financial decisions instantly.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next button text"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button text"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Back button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Create button text"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
+  },
+  "optimizeFee": "Optimize Fee",
+  "@optimizeFee": {
+    "description": "Optimize fee screen title"
+  },
+  "providers": "Providers",
+  "@providers": {
+    "description": "Providers screen title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "createInterval": "Create Interval",
+  "@createInterval": {
+    "description": "Create interval button text"
+  },
+  "optimize": "Optimize",
+  "@optimize": {
+    "description": "Optimize button text"
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "provider": "Provider",
+  "@provider": {
+    "description": "Provider label"
+  },
+  "minTransactions": "Min Transactions",
+  "@minTransactions": {
+    "description": "Minimum transactions label"
+  },
+  "maxTransactions": "Max Transactions",
+  "@maxTransactions": {
+    "description": "Maximum transactions label"
+  },
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "@pleaseEnterValidAmount": {
+    "description": "Error message for invalid amount"
+  },
+  "pleaseSelectProvider": "Please select a provider",
+  "@pleaseSelectProvider": {
+    "description": "Error message when no provider is selected"
+  },
+  "invalidTransactionRange": "Min transactions must be less than max transactions",
+  "@invalidTransactionRange": {
+    "description": "Error message for invalid transaction range"
+  },
+  "mvola": "MVola",
+  "@mvola": {
+    "description": "MVola provider name"
+  },
+  "orangeMoney": "Orange Money",
+  "@orangeMoney": {
+    "description": "Orange Money provider name"
+  },
+  "airtelMoney": "Airtel Money",
+  "@airtelMoney": {
+    "description": "Airtel Money provider name"
+  },
+  "mobileFinancialServices": "Mobile financial services",
+  "@mobileFinancialServices": {
+    "description": "Mobile financial services description"
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance section title"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "french": "French",
+  "@french": {
+    "description": "French language option"
+  },
+  "malagasy": "Malagasy",
+  "@malagasy": {
+    "description": "Malagasy language option"
+  },
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  "comingSoon": "Coming Soon",
+  "@comingSoon": {
+    "description": "Coming soon message"
+  },
+  "thisFeatureWillBeAvailableSoon": "This feature will be available soon!",
+  "@thisFeatureWillBeAvailableSoon": {
+    "description": "Coming soon feature message"
+  },
+  "feeIntervals": "Fee Intervals",
+  "@feeIntervals": {
+    "description": "Fee intervals title"
+  },
+  "newFeeInterval": "New Fee Interval",
+  "@newFeeInterval": {
+    "description": "New fee interval title"
+  },
+  "minAmount": "Min Amount",
+  "@minAmount": {
+    "description": "Minimum amount label"
+  },
+  "maxAmount": "Max Amount",
+  "@maxAmount": {
+    "description": "Maximum amount label"
+  },
+  "feePercentage": "Fee Percentage",
+  "@feePercentage": {
+    "description": "Fee percentage label"
+  },
+  "fixedFee": "Fixed Fee",
+  "@fixedFee": {
+    "description": "Fixed fee label"
+  },
+  "pleaseEnterMinAmount": "Please enter minimum amount",
+  "@pleaseEnterMinAmount": {
+    "description": "Validation message for minimum amount"
+  },
+  "pleaseEnterMaxAmount": "Please enter maximum amount",
+  "@pleaseEnterMaxAmount": {
+    "description": "Validation message for maximum amount"
+  },
+  "pleaseEnterValidFeePercentage": "Please enter a valid fee percentage",
+  "@pleaseEnterValidFeePercentage": {
+    "description": "Validation message for fee percentage"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation message for amount range"
+  },
+  "optimizationResults": "Optimization Results",
+  "@optimizationResults": {
+    "description": "Optimization results title"
+  },
+  "interval": "Interval",
+  "@interval": {
+    "description": "Interval column header"
+  },
+  "fee": "Fee",
+  "@fee": {
+    "description": "Fee column header"
+  },
+  "count": "Count",
+  "@count": {
+    "description": "Count column header"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total column header"
+  },
+  "noResultsYet": "No results yet",
+  "@noResultsYet": {
+    "description": "Message when no optimization results"
+  },
+  "tapOptimizeToSeeResults": "Tap 'Optimize' to see results",
+  "@tapOptimizeToSeeResults": {
+    "description": "Instructions for getting results"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error title"
+  },
+  "screenNotFound": "Screen {route} not found",
+  "@screenNotFound": {
+    "description": "Error message for route not found",
+    "placeholders": {
+      "route": {
+        "type": "String",
+        "example": "/settings"
+      }
+    }
+  },
+  "goHome": "Go Home",
+  "@goHome": {
+    "description": "Go to home screen button"
+  },
+  "currency": "Ar",
+  "@currency": {
+    "description": "Malagasy Ariary currency symbol"
+  },
+  "demo": "Demo",
+  "@demo": {
+    "description": "Demo screen title"
+  },
+  "noProvidersFound": "No providers found",
+  "@noProvidersFound": {
+    "description": "Message shown when no providers are available"
+  },
+  "searchProviders": "Search providers...",
+  "@searchProviders": {
+    "description": "Placeholder text for provider search field"
+  },
+  "manageYourProviders": "Manage your providers",
+  "@manageYourProviders": {
+    "description": "Header title for provider management section"
+  },
+  "centralizeProviders": "Centralize bank and mobile money partners in one place.",
+  "@centralizeProviders": {
+    "description": "Description for provider management functionality"
+  },
+  "activeProvider": "Active provider",
+  "@activeProvider": {
+    "description": "Label for single active provider count"
+  },
+  "activeProviders": "Active providers",
+  "@activeProviders": {
+    "description": "Label for multiple active providers count"
+  },
+  "deleteThisProvider": "Delete this provider?",
+  "@deleteThisProvider": {
+    "description": "Confirmation message for deleting a single provider"
+  },
+  "deleteProvidersCount": "Delete {count} providers?",
+  "@deleteProvidersCount": {
+    "description": "Confirmation message for deleting multiple providers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "deleteProvider": "Delete Provider",
+  "@deleteProvider": {
+    "description": "Title for delete provider dialog"
+  },
+  "deleteProviders": "Delete Providers",
+  "@deleteProviders": {
+    "description": "Title for delete multiple providers dialog"
+  },
+  "providerDeletedSuccessfully": "{count, plural, =1{1 provider deleted successfully} other{{count} providers deleted successfully}}",
+  "@providerDeletedSuccessfully": {
+    "description": "Success message after deleting provider(s)"
+  },
+  "editProvider": "Edit Provider",
+  "@editProvider": {
+    "description": "Title for edit provider bottom sheet"
+  },
+  "providerName": "Provider Name",
+  "@providerName": {
+    "description": "Label for provider name field"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Label for description field"
+  },
+  "newProvider": "New Provider",
+  "@newProvider": {
+    "description": "Title for new provider screen"
+  },
+  "createNewProvider": "Create New Provider",
+  "@createNewProvider": {
+    "description": "Header title for creating a new provider"
+  },
+  "enterProviderName": "Enter provider name",
+  "@enterProviderName": {
+    "description": "Hint text for provider name field"
+  },
+  "providerCreatedSuccessfully": "Provider created successfully",
+  "@providerCreatedSuccessfully": {
+    "description": "Success message when a provider is created"
+  }
+}
