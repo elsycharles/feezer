@@ -16,7 +16,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: const custom.AppBar(
-        title: 'Paramètres',
+        title: 'Settings',
         showSettingsButton: false, // Don't show settings button on settings page
       ),
       body: SafeArea(
@@ -25,26 +25,26 @@ class SettingsScreen extends StatelessWidget {
           children: [
             _buildSection(
               context,
-              'Général',
+              'General',
               [
                 _buildSettingTile(
                   context,
                   'Notifications',
-                  'Gérer les notifications de l\'application',
+                  'Manage app notifications',
                   Icons.notifications_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
                 _buildSettingTile(
                   context,
-                  'Thème',
-                  'Clair, sombre ou automatique',
+                  'Theme',
+                  'Light, dark or automatic',
                   Icons.palette_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
                 _buildSettingTile(
                   context,
-                  'Langue',
-                  'Français',
+                  'Language',
+                  'English',
                   Icons.language_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
@@ -53,26 +53,26 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 24),
             _buildSection(
               context,
-              'Données',
+              'Data',
               [
                 _buildSettingTile(
                   context,
-                  'Exporter les données',
-                  'Sauvegarder vos fournisseurs et frais',
+                  'Export data',
+                  'Backup your providers and fees',
                   Icons.file_download_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
                 _buildSettingTile(
                   context,
-                  'Importer les données',
-                  'Restaurer depuis une sauvegarde',
+                  'Import data',
+                  'Restore from backup',
                   Icons.file_upload_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
                 _buildSettingTile(
                   context,
-                  'Réinitialiser',
-                  'Effacer toutes les données',
+                  'Reset',
+                  'Clear all data',
                   Icons.delete_outline,
                   onTap: () => _showResetConfirmation(context),
                   textColor: colorScheme.error,
@@ -82,7 +82,7 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 24),
             _buildSection(
               context,
-              'À propos',
+              'About',
               [
                 _buildSettingTile(
                   context,
@@ -93,15 +93,15 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 _buildSettingTile(
                   context,
-                  'Aide et support',
-                  'FAQ et contact',
+                  'Help & Support',
+                  'FAQ and contact',
                   Icons.help_outline,
                   onTap: () => _showComingSoon(context),
                 ),
                 _buildSettingTile(
                   context,
-                  'Conditions d\'utilisation',
-                  'Termes et politique de confidentialité',
+                  'Terms of Use',
+                  'Terms and privacy policy',
                   Icons.description_outlined,
                   onTap: () => _showComingSoon(context),
                 ),
@@ -181,16 +181,16 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _showComingSoon(BuildContext context) {
-    AppToast.info(context, 'Fonctionnalité à venir dans une prochaine version');
+    AppToast.info(context, 'Feature coming in the next version');
   }
 
   void _showResetConfirmation(BuildContext context) async {
     final confirmed = await ConfirmationModal.show(
       context,
-      'Réinitialiser les données',
-      'Cette action effacera définitivement toutes vos données (fournisseurs, frais, etc.). Cette action est irréversible.',
-      confirmText: 'Réinitialiser',
-      cancelText: 'Annuler',
+      'Reset Data',
+      'This action will permanently delete all your data (providers, fees, etc.). This action is irreversible.',
+      confirmText: 'Reset',
+      cancelText: 'Cancel',
     );
     
     if (confirmed == true && context.mounted) {
