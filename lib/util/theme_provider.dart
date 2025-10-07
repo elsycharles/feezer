@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'preference_util.dart';
+
+/// Provider to manage theme state across the app
+class ThemeProvider extends ChangeNotifier {
+  AppThemeMode _themeMode = AppThemeMode.system;
+  
+  AppThemeMode get themeMode => _themeMode;
+  
+  ThemeMode get flutterThemeMode => PreferenceUtil.convertToFlutterThemeMode(_themeMode);
+  
+  String get themeModeDisplayName {
+    switch (_themeMode) {
+      case AppThemeMode.light:
+        return 'Light';
+      case AppThemeMode.dark:
+        return 'Dark';
+      case AppThemeMode.system:
+        return 'System';
+    }
+  }
+
+  /// Initialize theme from saved preferences
+  Future<void> initializeTheme() async {
+    _themeMode = await PreferenceUtil.getThemeMode();
+    notifyListeners();
+  }
+
+  /// Changes the theme mode and saves preference
+  Future<void> setThemeMode(AppThemeMode newThemeMode) async {
+    if (_themeMode != newThemeMode) {
+      _themeMode = newThemeMode;
+      await PreferenceUtil.setThemeMode(newThemeMode);
+      notifyListeners();
+    }
+  }
+}
