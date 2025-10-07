@@ -212,12 +212,6 @@ class AppLocalizationsMg extends AppLocalizations {
   String get goHome => 'Hody';
 
   @override
-  String get currency => 'Ar';
-
-  @override
-  String get demo => 'Demo';
-
-  @override
   String get noProvidersFound => 'Tsy misy mpanome tolotra hita';
 
   @override
@@ -452,9 +446,6 @@ class AppLocalizationsMg extends AppLocalizations {
   String get pleaseEnterValidFee => 'Ampidiro ny sara manan-kery azafady';
 
   @override
-  String get enterValidEmail => 'Ampidiro ny mailaka manan-kery';
-
-  @override
   String mustBeAtLeastNCharacters(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
@@ -471,28 +462,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get pleaseEnterFeeAmount => 'Ampidiro ny sara azafady';
 
   @override
-  String enterLabel(String label) {
-    return 'Ampidiro $label';
-  }
-
-  @override
   String get details => 'Antsipiriany';
-
-  @override
-  String get emailIsRequired => 'Ilaina ny mailaka';
-
-  @override
-  String mustBeAtLeastNCharactersShort(int count) {
-    return 'Tokony ho $count litera fara fahakeliny';
-  }
-
-  @override
-  String mustBeLessThanNCharacters(int count) {
-    return 'Tokony ho latsaky ny $count litera';
-  }
-
-  @override
-  String get mustBeGreaterThanZero => 'Tokony ho mihoatra noho ny aotra';
 
   @override
   String get minimumAmount => 'Vola faran\'izay kely';

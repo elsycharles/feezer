@@ -484,18 +484,6 @@ abstract class AppLocalizations {
   /// **'Go Home'**
   String get goHome;
 
-  /// Malagasy Ariary currency symbol
-  ///
-  /// In en, this message translates to:
-  /// **'Ar'**
-  String get currency;
-
-  /// Demo screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Demo'**
-  String get demo;
-
   /// Message shown when no providers are available
   ///
   /// In en, this message translates to:
@@ -892,12 +880,6 @@ abstract class AppLocalizations {
   /// **'Please enter a valid fee'**
   String get pleaseEnterValidFee;
 
-  /// Validation error for email field
-  ///
-  /// In en, this message translates to:
-  /// **'Enter a valid email'**
-  String get enterValidEmail;
-
   /// Validation error for minimum length
   ///
   /// In en, this message translates to:
@@ -916,41 +898,11 @@ abstract class AppLocalizations {
   /// **'Please enter fee amount'**
   String get pleaseEnterFeeAmount;
 
-  /// Default input placeholder
-  ///
-  /// In en, this message translates to:
-  /// **'Enter {label}'**
-  String enterLabel(String label);
-
   /// Details tooltip
   ///
   /// In en, this message translates to:
   /// **'Details'**
   String get details;
-
-  /// Validation error for required email field
-  ///
-  /// In en, this message translates to:
-  /// **'Email is required'**
-  String get emailIsRequired;
-
-  /// Validation error for minimum length (short version)
-  ///
-  /// In en, this message translates to:
-  /// **'Must be at least {count} characters'**
-  String mustBeAtLeastNCharactersShort(int count);
-
-  /// Validation error for maximum length
-  ///
-  /// In en, this message translates to:
-  /// **'Must be less than {count} characters'**
-  String mustBeLessThanNCharacters(int count);
-
-  /// Validation error for positive numbers
-  ///
-  /// In en, this message translates to:
-  /// **'Must be greater than 0'**
-  String get mustBeGreaterThanZero;
 
   /// Minimum amount validation field name
   ///

@@ -210,12 +210,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goHome => 'Go Home';
 
   @override
-  String get currency => 'Ar';
-
-  @override
-  String get demo => 'Demo';
-
-  @override
   String get noProvidersFound => 'No providers found';
 
   @override
@@ -448,9 +442,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterValidFee => 'Please enter a valid fee';
 
   @override
-  String get enterValidEmail => 'Enter a valid email';
-
-  @override
   String mustBeAtLeastNCharacters(num count) {
     final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
       locale: localeName,
@@ -467,28 +458,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterFeeAmount => 'Please enter fee amount';
 
   @override
-  String enterLabel(String label) {
-    return 'Enter $label';
-  }
-
-  @override
   String get details => 'Details';
-
-  @override
-  String get emailIsRequired => 'Email is required';
-
-  @override
-  String mustBeAtLeastNCharactersShort(int count) {
-    return 'Must be at least $count characters';
-  }
-
-  @override
-  String mustBeLessThanNCharacters(int count) {
-    return 'Must be less than $count characters';
-  }
-
-  @override
-  String get mustBeGreaterThanZero => 'Must be greater than 0';
 
   @override
   String get minimumAmount => 'Minimum amount';

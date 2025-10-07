@@ -64,11 +64,7 @@
   "error": "Erreur",
   "screenNotFound": "Écran {route} introuvable",
   "goHome": "Accueil",
-  "currency": "Ar",
-  "demo": "Démo",
-  "@demo": {
-    "description": "Demo screen title"
-  },
+
   "noProvidersFound": "Aucun fournisseur trouvé",
   "@noProvidersFound": {
     "description": "Message shown when no providers are available"
@@ -385,10 +381,6 @@
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
   },
-  "enterValidEmail": "Saisissez un email valide",
-  "@enterValidEmail": {
-    "description": "Validation error for email field"
-  },
   "mustBeAtLeastNCharacters": "Doit contenir au moins {count} caractères",
   "@mustBeAtLeastNCharacters": {
     "description": "Validation error for minimum length",
@@ -410,15 +402,6 @@
   "pleaseEnterFeeAmount": "Veuillez saisir le montant des frais",
   "@pleaseEnterFeeAmount": {
     "description": "Validation error for fee amount field"
-  },
-  "enterLabel": "Saisir {label}",
-  "@enterLabel": {
-    "description": "Default input placeholder",
-    "placeholders": {
-      "label": {
-        "type": "String"
-      }
-    }
   },
   "selectAll": "Tout sélectionner",
   "@selectAll": {
@@ -507,32 +490,6 @@
   "maximumAmountAr": "Montant maximum (Ar)",
   "@maximumAmountAr": {
     "description": "Maximum amount field label with currency"
-  },
-  "emailIsRequired": "L'email est requis",
-  "@emailIsRequired": {
-    "description": "Validation error for required email field"
-  },
-  "mustBeAtLeastNCharactersShort": "Doit contenir au moins {count} caractères",
-  "@mustBeAtLeastNCharactersShort": {
-    "description": "Validation error for minimum length (short version)",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "mustBeLessThanNCharacters": "Doit contenir moins de {count} caractères",
-  "@mustBeLessThanNCharacters": {
-    "description": "Validation error for maximum length",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "mustBeGreaterThanZero": "Doit être supérieur à 0",
-  "@mustBeGreaterThanZero": {
-    "description": "Validation error for positive numbers"
   },
   "feeAr": "Frais (Ar)",
   "@feeAr": {

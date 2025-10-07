@@ -262,14 +262,6 @@
   "@goHome": {
     "description": "Go to home screen button"
   },
-  "currency": "Ar",
-  "@currency": {
-    "description": "Malagasy Ariary currency symbol"
-  },
-  "demo": "Demo",
-  "@demo": {
-    "description": "Demo screen title"
-  },
   "noProvidersFound": "No providers found",
   "@noProvidersFound": {
     "description": "Message shown when no providers are available"
@@ -586,10 +578,6 @@
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
   },
-  "enterValidEmail": "Enter a valid email",
-  "@enterValidEmail": {
-    "description": "Validation error for email field"
-  },
   "mustBeAtLeastNCharacters": "Must be at least {count} characters",
   "@mustBeAtLeastNCharacters": {
     "description": "Validation error for minimum length",
@@ -612,15 +600,6 @@
   "@pleaseEnterFeeAmount": {
     "description": "Validation error for fee amount field"
   },
-  "enterLabel": "Enter {label}",
-  "@enterLabel": {
-    "description": "Default input placeholder",
-    "placeholders": {
-      "label": {
-        "type": "String"
-      }
-    }
-  },
   "selectAll": "Select all",
   "@selectAll": {
     "description": "Select all tooltip"
@@ -632,32 +611,6 @@
   "total": "Total",
   "@total": {
     "description": "Total column header"
-  },
-  "emailIsRequired": "Email is required",
-  "@emailIsRequired": {
-    "description": "Validation error for required email field"
-  },
-  "mustBeAtLeastNCharactersShort": "Must be at least {count} characters",
-  "@mustBeAtLeastNCharactersShort": {
-    "description": "Validation error for minimum length (short version)",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "mustBeLessThanNCharacters": "Must be less than {count} characters",
-  "@mustBeLessThanNCharacters": {
-    "description": "Validation error for maximum length",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "mustBeGreaterThanZero": "Must be greater than 0",
-  "@mustBeGreaterThanZero": {
-    "description": "Validation error for positive numbers"
   },
   "minimumAmount": "Minimum amount",
   "@minimumAmount": {
