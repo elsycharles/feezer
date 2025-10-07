@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
 import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
 import 'package:fee_minimizer/screen/settings/settings_screen.dart';
+import 'package:fee_minimizer/l10n/app_localizations.dart';
 
 class AppRouter {
   static const String onboardingRoute = '/';
@@ -14,8 +15,11 @@ class AppRouter {
     debugLogDiagnostics: false,
     errorBuilder: (context, state) {
       final colorScheme = Theme.of(context).colorScheme;
+      final currentLocation = state.uri.toString();
+      final isOnHomePage = currentLocation == providersRoute || currentLocation == onboardingRoute;
+      
       return Scaffold(
-        appBar: AppBar(title: const Text('Error')),
+        appBar: AppBar(title: Text(AppLocalizations.of(context).error)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -26,12 +30,14 @@ class AppRouter {
                 color: colorScheme.error,
               ),
               const SizedBox(height: 16),
-              Text('Screen ${state.uri.toString()} not found'),
+              Text(AppLocalizations.of(context).screenNotFound(state.uri.toString())),
               const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => context.go(providersRoute),
-                child: const Text('Back to providers'),
-              ),
+              // Only show navigation button if not already on home page
+              if (!isOnHomePage)
+                ElevatedButton(
+                  onPressed: () => context.go(providersRoute),
+                  child: Text(AppLocalizations.of(context).goHome),
+                ),
             ],
           ),
         ),
