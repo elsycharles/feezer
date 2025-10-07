@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
   go_router: ^16.2.4
   shared_preferences: ^2.3.4
   provider: ^6.1.2
@@ -56,6 +59,7 @@ flutter_launcher_icons:
   image_path: "assets/images/icon.png"
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
