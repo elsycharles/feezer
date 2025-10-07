@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
 import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
+import 'package:fee_minimizer/screen/settings/settings_screen.dart';
 
 class AppRouter {
   static const String onboardingRoute = '/';
   static const String providersRoute = '/providers';
+  static const String settingsRoute = '/settings';
 
   static final GoRouter router = GoRouter(
     initialLocation: onboardingRoute,
@@ -45,6 +47,11 @@ class AppRouter {
         path: providersRoute,
         name: 'providers',
         builder: (_, __) => const ProviderListScreen(),
+      ),
+      GoRoute(
+        path: settingsRoute,
+        name: 'settings',
+        builder: (_, __) => const SettingsScreen(),
       ),
     ],
   );
