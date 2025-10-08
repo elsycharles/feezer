@@ -10,6 +10,7 @@ import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
+import '../new_provider/new_provider_screen.dart';
 
 import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
@@ -45,6 +46,14 @@ class _State extends State<OptimizeFeeScreen> {
       iconName: 'mobile_friendly',
     ),
   ];
+
+  // Special provider to represent the "Add new provider" action
+  static final _addNewProviderAction = Provider(
+    id: '__add_new_provider__',
+    name: '',
+    description: '',
+    iconName: 'add',
+  );
 
   Provider? _selectedProvider;
   int _amount = 10000;
@@ -122,60 +131,114 @@ class _State extends State<OptimizeFeeScreen> {
               Icons.keyboard_arrow_down,
               color: context.colorScheme.onSurfaceVariant,
             ),
-            items: _providers
-                .map(
-                  (provider) => DropdownMenuItem(
-                    value: provider,
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: context.colorScheme.primary.withValues(
-                              alpha: 0.1,
+            items: [
+              // Regular provider items
+              ..._providers.map(
+                (provider) => DropdownMenuItem(
+                  value: provider,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.primary.withValues(
+                            alpha: 0.1,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          Icons.business,
+                          color: context.colorScheme.primary,
+                          size: 18,
+                        ),
+                      ),
+                      Global.gapMd,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              provider.name,
+                              style: ThemeUtil.bodyLarge.copyWith(
+                                color: context.colorScheme.onSurface,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Icon(
-                            Icons.business,
-                            color: context.colorScheme.primary,
-                            size: 18,
-                          ),
-                        ),
-                        Global.gapMd,
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                provider.name,
-                                style: ThemeUtil.bodyLarge.copyWith(
-                                  color: context.colorScheme.onSurface,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                            Text(
+                              provider.description,
+                              style: ThemeUtil.bodySmall.copyWith(
+                                color: context.colorScheme.onSurfaceVariant,
                               ),
-                              Text(
-                                provider.description,
-                                style: ThemeUtil.bodySmall.copyWith(
-                                  color: context.colorScheme.onSurfaceVariant,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              // Add new provider action item
+              DropdownMenuItem(
+                value: _addNewProviderAction,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.primary.withValues(
+                          alpha: 0.1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(
+                        Icons.add,
+                        color: context.colorScheme.primary,
+                        size: 18,
+                      ),
+                    ),
+                    Global.gapMd,
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context).addNewProvider,
+                        style: ThemeUtil.bodyLarge.copyWith(
+                          color: context.colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            onChanged: (provider) {
+              if (provider == _addNewProviderAction) {
+                // Navigate to NewProviderScreen when "Add new provider" is selected
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => NewProviderScreen(
+                      onProviderAdded: (newProvider) {
+                        // Add the new provider to the list and select it
+                        setState(() {
+                          _providers.add(newProvider);
+                          _selectedProvider = newProvider;
+                          _hasOptimized = false;
+                          _results.clear();
+                        });
+                      },
                     ),
                   ),
-                )
-                .toList(),
-            onChanged: (provider) {
-              setState(() {
-                _selectedProvider = provider;
-                _hasOptimized = false;
-                _results.clear();
-              });
+                );
+              } else {
+                setState(() {
+                  _selectedProvider = provider;
+                  _hasOptimized = false;
+                  _results.clear();
+                });
+              }
             },
           ),
         ),
