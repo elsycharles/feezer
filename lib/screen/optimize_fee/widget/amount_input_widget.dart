@@ -58,6 +58,12 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
           ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.05)
           : Theme.of(context).colorScheme.surface,
       borderRadius: Global.borderMd,
+      border: Border.all(
+        color: _focusNode.hasFocus
+            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
+            : Theme.of(context).colorScheme.outline.withValues(alpha: 0.12),
+        width: _focusNode.hasFocus ? 1.5 : 0.8,
+      ),
     ),
     padding: const EdgeInsets.only(bottom: 12),
     child: Column(
@@ -69,13 +75,18 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
             children: [
               Text(
                 widget.label,
-                style: ThemeUtil.labelMedium.copyWith(
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ) ?? ThemeUtil.labelMedium.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               Text(
                 widget.currency,
-                style: ThemeUtil.labelMedium.copyWith(
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ) ?? ThemeUtil.labelMedium.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w600,
                 ),
@@ -106,7 +117,10 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                       FilteringTextInputFormatter.digitsOnly,
                       LengthLimitingTextInputFormatter(7),
                     ],
-                    style: ThemeUtil.titleLarge.copyWith(
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.w600,
+                    ) ?? ThemeUtil.titleLarge.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.w600,
                     ),

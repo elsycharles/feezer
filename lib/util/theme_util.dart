@@ -287,6 +287,56 @@ class ThemeUtil {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         margin: const EdgeInsets.all(8),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: surfaceDark,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: primaryLight),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: primaryLight.withValues(alpha: 0.3)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: primaryLight, width: 2),
+        ),
+        labelStyle: TextStyle(color: textLight.withValues(alpha: 0.7)),
+        hintStyle: TextStyle(color: textLight.withValues(alpha: 0.5)),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryLight),
+          overlayColor: interactiveOverlay(primaryLight),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          ),
+          splashFactory: NoSplash.splashFactory,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryLight),
+          overlayColor: interactiveOverlay(primaryLight),
+          side: WidgetStateProperty.all(
+            const BorderSide(color: primaryLight, width: 1.5),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          splashFactory: NoSplash.splashFactory,
+        ),
+      ),
     );
   }
 
@@ -392,5 +442,30 @@ class ThemeUtil {
       default:
         return primaryColor;
     }
+  }
+
+  /// Get the appropriate surface color based on theme
+  static Color getSurfaceColor(BuildContext context) {
+    return Theme.of(context).colorScheme.surface;
+  }
+
+  /// Get the appropriate outline color based on theme
+  static Color getOutlineColor(BuildContext context, {double alpha = 0.12}) {
+    return Theme.of(context).colorScheme.outline.withValues(alpha: alpha);
+  }
+
+  /// Get the appropriate primary color based on theme
+  static Color getPrimaryColor(BuildContext context) {
+    return Theme.of(context).colorScheme.primary;
+  }
+
+  /// Get the appropriate text color for labels based on theme
+  static Color getLabelColor(BuildContext context) {
+    return Theme.of(context).colorScheme.onSurfaceVariant;
+  }
+
+  /// Get the appropriate text color based on theme
+  static Color getTextColor(BuildContext context) {
+    return Theme.of(context).colorScheme.onSurface;
   }
 }
