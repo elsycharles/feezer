@@ -267,6 +267,15 @@ class _State extends State<OptimizeFeeScreen> {
                     _hasOptimized = false;
                     _results.clear();
                   });
+                  
+                  // Automatically redirect to Provider Details to complete the setup
+                  if (mounted) {
+                    await NavigationUtil.pushTo(
+                      context, 
+                      '${AppRouter.providerDetailRoute}/${result.id}',
+                      extra: result,
+                    );
+                  }
                 }
               } else {
                 setState(() {
