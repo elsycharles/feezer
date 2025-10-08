@@ -10,7 +10,7 @@ import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
-import '../../widget/surface_card.dart';
+import '../../widget/collapsible_card.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import '../../widget/selection_action_bar.dart';
@@ -265,60 +265,44 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         textAlign: alignment,
       );
 
-  Widget _buildSearchBar(ColorScheme colorScheme) => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      padding: const EdgeInsets.all(16),
-      radius: 16,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildSearchBar(ColorScheme colorScheme) => CollapsibleCard(
+    title: AppLocalizations.of(context).searchByFeeRange,
+    icon: Icons.search,
+    isInitiallyExpanded: false,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.search, size: 18, color: colorScheme.primary),
-                  const SizedBox(width: 8),
-                  Text(
-                    AppLocalizations.of(context).searchByFeeRange,
-                    style: ThemeUtil.titleSmall.copyWith(
-                      color: colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              if (_feeMinController.text.isNotEmpty ||
-                  _feeMaxController.text.isNotEmpty)
-                GestureDetector(
-                  onTap: _clearSearch,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: colorScheme.onSurface.withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Icon(
-                      Icons.clear,
-                      size: 16,
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(child: _buildFeeMinField(colorScheme)),
+                const SizedBox(width: 12),
+                Expanded(child: _buildFeeMaxField(colorScheme)),
+              ],
+            ),
+          ),
+          if (_feeMinController.text.isNotEmpty ||
+              _feeMaxController.text.isNotEmpty)
+            GestureDetector(
+              onTap: _clearSearch,
+              child: Container(
+                margin: const EdgeInsets.only(left: 12),
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: colorScheme.onSurface.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(4),
                 ),
-            ],
-          ),
-          Global.gapMd,
-          Row(
-            children: [
-              Expanded(child: _buildFeeMinField(colorScheme)),
-              const SizedBox(width: 12),
-              Expanded(child: _buildFeeMaxField(colorScheme)),
-            ],
-          ),
+                child: Icon(
+                  Icons.clear,
+                  size: 16,
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ),
         ],
       ),
-    ),
+    ],
   );
 
   Widget _buildAddButton(ColorScheme colorScheme) => Container(
