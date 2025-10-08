@@ -7,6 +7,7 @@ import '../../util/navigation_util.dart';
 import '../../util/route_util.dart'; // For AppRouter routes
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
+import '../../widget/app_back_button.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_loading.dart';
@@ -105,8 +106,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).providerDetails,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
+          leading: AppBackButton(
             onPressed: () {
               if (_selectedIds.isNotEmpty) {
                 // Clear selection instead of popping when in selection mode

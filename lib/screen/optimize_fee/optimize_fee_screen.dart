@@ -11,13 +11,13 @@ import '../../util/route_util.dart'; // For AppRouter routes
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
 
 import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
-import '../../widget/app_menu_button.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
@@ -75,64 +75,64 @@ class _State extends State<OptimizeFeeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => PopScope(
-    canPop: false,
-    onPopInvokedWithResult: (didPop, result) {
-      if (!didPop) {
-        _handleBackPress();
-      }
-    },
-    child: Scaffold(
-    backgroundColor: context.theme.scaffoldBackgroundColor,
-    appBar: custom.AppBar(
-      title: AppLocalizations.of(context).optimizeFee,
-      leading: null, // Remove back button for home screen
-      actions: [
-        AppMenuButton(
-          excludeRoutes: [AppRouter.optimizeFeeRoute],
-          iconColor: context.colorScheme.onSurface,
+  Widget build(BuildContext context) {
+    final canNavigateBack = GoRouter.of(context).canPop();
+
+    return PopScope(
+      canPop: canNavigateBack,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop && !canNavigateBack) {
+          _handleBackPress();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: context.theme.scaffoldBackgroundColor,
+        appBar: custom.AppBar(
+          title: AppLocalizations.of(context).optimizeFee,
+          leading: null, // Remove back button for home screen
+          menuExcludeRoutes: const [AppRouter.optimizeFeeRoute],
+          menuIconColor: context.colorScheme.onSurface,
         ),
-      ],
-    ),
-    body: Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            // Use BouncingScrollPhysics for better UX and international standards
-            physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
-            ),
-            // Add proper padding for RTL support and accessibility
-            padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 12 : 0,
-            ),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  Global.gapMd,
-                  _buildProviderSection(),
-                  Global.gapLg,
-                  _buildAmountSection(),
-                  Global.gapLg,
-                  _buildTransactionSection(),
-                  Global.gapLg,
-                  _buildResultsSection(),
-                  Global.gapXl,
-                  // Increased bottom padding for better accessibility
-                  const SizedBox(height: 100),
-                ],
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                // Use BouncingScrollPhysics for better UX and international standards
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                // Add proper padding for RTL support and accessibility
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 12 : 0,
+                ),
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      Global.gapMd,
+                      _buildProviderSection(),
+                      Global.gapLg,
+                      _buildAmountSection(),
+                      Global.gapLg,
+                      _buildTransactionSection(),
+                      Global.gapLg,
+                      _buildResultsSection(),
+                      Global.gapXl,
+                      // Increased bottom padding for better accessibility
+                      const SizedBox(height: 100),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
+            SafeArea(
+              top: false,
+              child: _buildOptimizeButton(),
+            ),
+          ],
         ),
-        SafeArea(
-          top: false,
-          child: _buildOptimizeButton(),
-        ),
-      ],
-    ),
-  )
-  );
+      ),
+    );
+  }
 
   void _handleBackPress() {
     // Double back logic to exit the app

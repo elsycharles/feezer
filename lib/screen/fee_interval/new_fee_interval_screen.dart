@@ -9,6 +9,7 @@ import '../../util/navigation_util.dart';
 import '../../util/extensions_util.dart';
 import '../../util/validation_util.dart';
 import '../../widget/app_bar.dart' as custom;
+import '../../widget/app_back_button.dart';
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
@@ -43,10 +44,7 @@ class _State extends State<NewFeeIntervalScreen> {
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).newFeeInterval,
-      leading: IconButton(
-        onPressed: () => NavigationUtil.safeBack(context),
-        icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
-      ),
+      leading: const AppBackButton(),
     ),
     body: Form(
       key: _formKey,

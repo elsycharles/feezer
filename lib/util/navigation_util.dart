@@ -25,7 +25,7 @@ class NavigationUtil {
     if (GoRouter.of(context).canPop()) {
       GoRouter.of(context).pop();
     } else {
-      context.go(fallbackRoute ?? AppRouter.providersRoute);
+      context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
     }
   }
 
@@ -38,7 +38,7 @@ class NavigationUtil {
     if (GoRouter.of(context).canPop()) {
       GoRouter.of(context).pop(result);
     } else {
-      context.go(fallbackRoute ?? AppRouter.providersRoute);
+      context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
     }
   }
 

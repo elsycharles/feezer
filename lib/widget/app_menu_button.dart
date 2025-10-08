@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../l10n/app_localizations.dart';
+import '../styles/global.dart';
 import '../util/extensions_util.dart';
 import '../util/navigation_util.dart';
 import '../util/route_util.dart';
+import '../util/theme_util.dart';
 
 /// Réutilisable PopupMenuButton pour la navigation entre les écrans principaux
 class AppMenuButton extends StatelessWidget {
@@ -23,11 +26,18 @@ class AppMenuButton extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    final colorScheme = context.colorScheme;
+
     return PopupMenuButton<String>(
       icon: Icon(
         Icons.menu,
-        color: iconColor ?? context.colorScheme.onSurface,
+        color: iconColor ?? colorScheme.onSurface,
       ),
+      tooltip: MaterialLocalizations.of(context).moreButtonTooltip,
+      color: colorScheme.surface,
+      surfaceTintColor: colorScheme.surface,
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: Global.borderMd),
       onSelected: (value) => _handleMenuSelection(context, value),
       itemBuilder: (context) => menuItems,
     );
@@ -76,17 +86,7 @@ class AppMenuButton extends StatelessWidget {
   }
 
   void _handleMenuSelection(BuildContext context, String route) {
-    switch (route) {
-      case '/optimize-fee':
-        NavigationUtil.pushTo(context, AppRouter.optimizeFeeRoute);
-        break;
-      case '/providers':
-        NavigationUtil.pushTo(context, AppRouter.providersRoute);
-        break;
-      case '/settings':
-        NavigationUtil.pushTo(context, AppRouter.settingsRoute);
-        break;
-    }
+    NavigationUtil.goTo(context, route);
   }
 }
 
@@ -107,7 +107,12 @@ class _MenuItem extends StatelessWidget {
       children: [
         Icon(icon, color: context.colorScheme.onSurface),
         const SizedBox(width: 12),
-        Text(text),
+        Text(
+          text,
+          style: ThemeUtil.bodyMedium.copyWith(
+            color: context.colorScheme.onSurface,
+          ),
+        ),
       ],
     );
   }

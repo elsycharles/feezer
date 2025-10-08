@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../util/preference_util.dart';
+import '../../util/route_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
@@ -22,8 +23,7 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: custom.AppBar(
         title: AppLocalizations.of(context).settings,
-        showSettingsButton:
-            false, // Don't show settings button on settings page
+        menuExcludeRoutes: const [AppRouter.settingsRoute],
       ),
       body: SafeArea(
         child: ListView(

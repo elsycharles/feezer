@@ -40,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       NavigationUtil.safeAsyncNavigate(
         context: context,
         isMounted: () => mounted,
-        getRoute: () async => AppRouter.providersRoute,
+        getRoute: () async => AppRouter.optimizeFeeRoute,
       );
     } else if (mounted) {
       setState(() => _shouldShowOnboarding = true);

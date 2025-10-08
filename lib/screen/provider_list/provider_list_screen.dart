@@ -15,7 +15,6 @@ import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
-import '../../widget/app_menu_button.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {
@@ -141,11 +140,7 @@ class _State extends State<ProviderListScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).providers,
-          actions: [
-            AppMenuButton(
-              excludeRoutes: [AppRouter.providersRoute],
-            ),
-          ],
+          menuExcludeRoutes: const [AppRouter.providersRoute],
         ),
         bottomNavigationBar: _selectedIds.isEmpty
             ? _buildAddProviderButton(colorScheme)
