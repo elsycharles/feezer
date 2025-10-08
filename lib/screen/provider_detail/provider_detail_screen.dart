@@ -203,7 +203,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
               final interval = _filteredIntervals[index];
               return Padding(
                 // Add proper spacing between items for better touch targets
-                padding: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom: 4),
                 child: FeeIntervalTile(
                   feeInterval: interval,
                   isSelected: _selectedIds.contains(interval.id),

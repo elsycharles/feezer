@@ -447,50 +447,32 @@ class _State extends State<OptimizeFeeScreen> {
           ],
         ),
       ),
-      // Data rows - flexible height with proper scroll physics
-      ConstrainedBox(
-        constraints: BoxConstraints(
-          // More flexible height calculation based on content and screen size
-          maxHeight: MediaQuery.of(context).size.height * 0.35,
-          minHeight: 120, // Minimum height for better UX
-        ),
-        child: ListView.builder(
-          shrinkWrap: true,
-          // Use BouncingScrollPhysics for international design standards
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          // Add padding for better touch targets on accessibility
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 16 : 8,
-          ),
-          itemCount: _results.length,
-          itemBuilder: (context, index) {
-            final result = _results[index];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: Global.padMd,
-              // Add minimum height for accessibility
-              constraints: const BoxConstraints(minHeight: 56),
-              decoration: BoxDecoration(
-                color: context.colorScheme.surface,
-                borderRadius: Global.borderMd,
-                // Add subtle border for better visual separation
-                border: Border.all(
-                  color: context.colorScheme.outline.withValues(alpha: 0.08),
-                ),
+      // Data rows - display all results without scroll
+      Column(
+        children: _results.map((result) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: Global.padMd,
+            // Add minimum height for accessibility
+            constraints: const BoxConstraints(minHeight: 56),
+            decoration: BoxDecoration(
+              color: context.colorScheme.surface,
+              borderRadius: Global.borderMd,
+              // Add subtle border for better visual separation
+              border: Border.all(
+                color: context.colorScheme.outline.withValues(alpha: 0.08),
               ),
-              child: Row(
-                children: [
-                  Expanded(flex: 2, child: _buildTableCell(result.interval)),
-                  Expanded(child: _buildTableCell(result.fee, isGreen: true)),
-                  Expanded(child: _buildTableCell(result.count.toString())),
-                  Expanded(child: _buildTableCell(result.total, isGreen: true)),
-                ],
-              ),
-            );
-          },
-        ),
+            ),
+            child: Row(
+              children: [
+                Expanded(flex: 2, child: _buildTableCell(result.interval)),
+                Expanded(child: _buildTableCell(result.fee, isGreen: true)),
+                Expanded(child: _buildTableCell(result.count.toString())),
+                Expanded(child: _buildTableCell(result.total, isGreen: true)),
+              ],
+            ),
+          );
+        }).toList(),
       ),
     ],
   );

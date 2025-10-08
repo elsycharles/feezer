@@ -28,7 +28,7 @@ class FeeIntervalTile extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 6),
       child: InteractiveSurface(
         onTap: () {
           HapticFeedback.selectionClick();
