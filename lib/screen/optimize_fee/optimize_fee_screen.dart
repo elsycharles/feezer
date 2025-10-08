@@ -351,7 +351,7 @@ class _State extends State<OptimizeFeeScreen> {
       // Header row
       Container(
         margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: Global.padMd,
         decoration: BoxDecoration(
           color: context.colorScheme.surface,
           borderRadius: Global.borderMd,
@@ -364,14 +364,14 @@ class _State extends State<OptimizeFeeScreen> {
           children: [
             Expanded(
               flex: 2,
-              child: _buildHeaderCell(AppLocalizations.of(context).interval, TextAlign.left),
+              child: _buildHeaderCell(AppLocalizations.of(context).interval),
             ),
-            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee, TextAlign.right)),
+            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
             Expanded(
-              child: _buildHeaderCell(AppLocalizations.of(context).count, TextAlign.center),
+              child: _buildHeaderCell(AppLocalizations.of(context).count),
             ),
             Expanded(
-              child: _buildHeaderCell(AppLocalizations.of(context).total, TextAlign.right),
+              child: _buildHeaderCell(AppLocalizations.of(context).total),
             ),
           ],
         ),
@@ -387,10 +387,10 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           child: Row(
             children: [
-              Expanded(flex: 2, child: _buildTableCell(result.interval, textAlign: TextAlign.left)),
-              Expanded(child: _buildTableCell(result.fee, isGreen: true, textAlign: TextAlign.right)),
-              Expanded(child: _buildTableCell(result.count.toString(), textAlign: TextAlign.center)),
-              Expanded(child: _buildTableCell(result.total, isGreen: true, textAlign: TextAlign.right)),
+              Expanded(flex: 2, child: _buildTableCell(result.interval)),
+              Expanded(child: _buildTableCell(result.fee, isGreen: true)),
+              Expanded(child: _buildTableCell(result.count.toString())),
+              Expanded(child: _buildTableCell(result.total, isGreen: true)),
             ],
           ),
         ),
@@ -400,23 +400,23 @@ class _State extends State<OptimizeFeeScreen> {
 
 
 
-  Widget _buildHeaderCell(String text, [TextAlign textAlign = TextAlign.center]) => Text(
+  Widget _buildHeaderCell(String text) => Text(
     text,
     style: ThemeUtil.labelMedium.copyWith(
       color: context.colorScheme.onSurfaceVariant,
       fontWeight: FontWeight.w600,
       letterSpacing: 0.2,
     ),
-    textAlign: textAlign,
+    textAlign: TextAlign.center,
   );
 
-  Widget _buildTableCell(String text, {bool isGreen = false, TextAlign textAlign = TextAlign.center}) => Text(
+  Widget _buildTableCell(String text, {bool isGreen = false}) => Text(
     text,
     style: ThemeUtil.bodyMedium.copyWith(
       color: isGreen ? ThemeUtil.success : context.colorScheme.onSurface,
       fontWeight: isGreen ? FontWeight.w600 : FontWeight.normal,
     ),
-    textAlign: textAlign,
+    textAlign: TextAlign.center,
   );
 
   Widget _buildOptimizeButton() => Container(
