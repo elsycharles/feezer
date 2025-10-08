@@ -52,6 +52,11 @@ class _State extends State<OptimizeFeeScreen> {
   List<OptimizationResult> _results = [];
   bool _hasOptimized = false;
   bool _isOptimizing = false;
+  
+  // Collapsible sections state
+  bool _isProviderSectionExpanded = true;
+  bool _isAmountSectionExpanded = true;
+  bool _isTransactionSectionExpanded = true;
 
   @override
   void initState() {
@@ -102,32 +107,42 @@ class _State extends State<OptimizeFeeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Icon(
-                Icons.business,
-                size: 18,
-                color: context.colorScheme.primary,
-              ),
-              Global.gapSm,
-              Text(
-                AppLocalizations.of(context).financialProvider,
-                style: ThemeUtil.titleMedium.copyWith(
+          GestureDetector(
+            onTap: () => setState(() => _isProviderSectionExpanded = !_isProviderSectionExpanded),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.business,
+                  size: 18,
                   color: context.colorScheme.primary,
-                  fontWeight: FontWeight.w600,
                 ),
-              ),
-            ],
-          ),
-          Global.gapSm,
-          Text(
-            AppLocalizations.of(context).chooseProviderToAnalyze,
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
+                Global.gapSm,
+                Expanded(
+                  child: Text(
+                    AppLocalizations.of(context).financialProvider,
+                    style: ThemeUtil.titleMedium.copyWith(
+                      color: context.colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Icon(
+                  _isProviderSectionExpanded ? Icons.expand_less : Icons.expand_more,
+                  color: context.colorScheme.primary,
+                ),
+              ],
             ),
           ),
-          Global.gapMd,
-          Container(
+          if (_isProviderSectionExpanded) ...[
+            Global.gapSm,
+            Text(
+              AppLocalizations.of(context).chooseProviderToAnalyze,
+              style: ThemeUtil.bodyMedium.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+            ),
+            Global.gapMd,
+            Container(
             decoration: BoxDecoration(
               color: context.colorScheme.surface,
               borderRadius: Global.borderMd,
@@ -201,6 +216,7 @@ class _State extends State<OptimizeFeeScreen> {
               ),
             ),
           ),
+          ],
         ],
       ),
     ),
@@ -213,35 +229,50 @@ class _State extends State<OptimizeFeeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            AppLocalizations.of(context).amountToOptimize,
-            style: ThemeUtil.titleMedium.copyWith(
-              color: context.colorScheme.onSurface,
-              fontWeight: FontWeight.w700,
+          GestureDetector(
+            onTap: () => setState(() => _isAmountSectionExpanded = !_isAmountSectionExpanded),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    AppLocalizations.of(context).amountToOptimize,
+                    style: ThemeUtil.titleMedium.copyWith(
+                      color: context.colorScheme.onSurface,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Icon(
+                  _isAmountSectionExpanded ? Icons.expand_less : Icons.expand_more,
+                  color: context.colorScheme.onSurface,
+                ),
+              ],
             ),
           ),
-          Global.gapSm,
-          Text(
-            AppLocalizations.of(context).enterTransactionAmountToOptimize,
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
+          if (_isAmountSectionExpanded) ...[
+            Global.gapSm,
+            Text(
+              AppLocalizations.of(context).enterTransactionAmountToOptimize,
+              style: ThemeUtil.bodyMedium.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
             ),
-          ),
-          Global.gapLg,
-          AmountInputWidget(
-            value: _amount,
-            onChanged: (value) {
-              setState(() {
-                _amount = value;
-                _hasOptimized = false;
-                _results.clear();
-              });
-            },
-            label: AppLocalizations.of(context).amount,
-            min: 1,
-            max: 9999999,
-          ),
-          Global.gapLg,
+            Global.gapLg,
+            AmountInputWidget(
+              value: _amount,
+              onChanged: (value) {
+                setState(() {
+                  _amount = value;
+                  _hasOptimized = false;
+                  _results.clear();
+                });
+              },
+              label: AppLocalizations.of(context).amount,
+              min: 1,
+              max: 9999999,
+            ),
+            Global.gapLg,
+          ],
         ],
       ),
     ),
@@ -254,47 +285,62 @@ class _State extends State<OptimizeFeeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            AppLocalizations.of(context).transactionRange,
-            style: ThemeUtil.titleMedium.copyWith(
-              color: context.colorScheme.onSurface,
-              fontWeight: FontWeight.w700,
+          GestureDetector(
+            onTap: () => setState(() => _isTransactionSectionExpanded = !_isTransactionSectionExpanded),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    AppLocalizations.of(context).transactionRange,
+                    style: ThemeUtil.titleMedium.copyWith(
+                      color: context.colorScheme.onSurface,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Icon(
+                  _isTransactionSectionExpanded ? Icons.expand_less : Icons.expand_more,
+                  color: context.colorScheme.onSurface,
+                ),
+              ],
             ),
           ),
-          Global.gapSm,
-          Text(
-            AppLocalizations.of(context).defineMinMaxTransactions,
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
+          if (_isTransactionSectionExpanded) ...[
+            Global.gapSm,
+            Text(
+              AppLocalizations.of(context).defineMinMaxTransactions,
+              style: ThemeUtil.bodyMedium.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
             ),
-          ),
-          Global.gapLg,
-          Row(
-            children: [
-              Expanded(
-                child: TransactionInputWidget(
-                  value: _minTransactions,
-                  onChanged: (value) =>
-                      setState(() => _minTransactions = value),
-                  label: AppLocalizations.of(context).minTransactions,
-                  min: 1,
-                  max: 999,
+            Global.gapLg,
+            Row(
+              children: [
+                Expanded(
+                  child: TransactionInputWidget(
+                    value: _minTransactions,
+                    onChanged: (value) =>
+                        setState(() => _minTransactions = value),
+                    label: AppLocalizations.of(context).minTransactions,
+                    min: 1,
+                    max: 999,
+                  ),
                 ),
-              ),
-              Global.gapLg,
-              Expanded(
-                child: TransactionInputWidget(
-                  value: _maxTransactions,
-                  onChanged: (value) =>
-                      setState(() => _maxTransactions = value),
-                  label: AppLocalizations.of(context).maxTransactions,
-                  min: 1,
-                  max: 999,
+                Global.gapLg,
+                Expanded(
+                  child: TransactionInputWidget(
+                    value: _maxTransactions,
+                    onChanged: (value) =>
+                        setState(() => _maxTransactions = value),
+                    label: AppLocalizations.of(context).maxTransactions,
+                    min: 1,
+                    max: 999,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          Global.gapMd,
+              ],
+            ),
+            Global.gapMd,
+          ],
         ],
       ),
     ),
