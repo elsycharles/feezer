@@ -79,11 +79,11 @@ class _State extends State<OptimizeFeeScreen> {
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
       ),
     ),
-    body: SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
+    body: Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: SafeArea(
               child: Column(
                 children: [
                   Global.gapMd,
@@ -100,9 +100,12 @@ class _State extends State<OptimizeFeeScreen> {
               ),
             ),
           ),
-          _buildOptimizeButton(),
-        ],
-      ),
+        ),
+        SafeArea(
+          top: false,
+          child: _buildOptimizeButton(),
+        ),
+      ],
     ),
   );
 
@@ -405,6 +408,7 @@ class _State extends State<OptimizeFeeScreen> {
   }
 
   Widget _buildResultsTable() => Column(
+    mainAxisSize: MainAxisSize.min,
     children: [
       // Header row
       Container(
@@ -434,23 +438,34 @@ class _State extends State<OptimizeFeeScreen> {
           ],
         ),
       ),
-      // Data rows
-      ..._results.map(
-        (result) => Container(
-          margin: const EdgeInsets.only(bottom: 8),
-          padding: Global.padMd,
-          decoration: BoxDecoration(
-            color: context.colorScheme.surface,
-            borderRadius: Global.borderMd,
-          ),
-          child: Row(
-            children: [
-              Expanded(flex: 2, child: _buildTableCell(result.interval)),
-              Expanded(child: _buildTableCell(result.fee, isGreen: true)),
-              Expanded(child: _buildTableCell(result.count.toString())),
-              Expanded(child: _buildTableCell(result.total, isGreen: true)),
-            ],
-          ),
+      // Data rows - limit height and make scrollable if needed
+      ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.4, // Max 40% of screen height
+        ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          itemCount: _results.length,
+          itemBuilder: (context, index) {
+            final result = _results[index];
+            return Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: Global.padMd,
+              decoration: BoxDecoration(
+                color: context.colorScheme.surface,
+                borderRadius: Global.borderMd,
+              ),
+              child: Row(
+                children: [
+                  Expanded(flex: 2, child: _buildTableCell(result.interval)),
+                  Expanded(child: _buildTableCell(result.fee, isGreen: true)),
+                  Expanded(child: _buildTableCell(result.count.toString())),
+                  Expanded(child: _buildTableCell(result.total, isGreen: true)),
+                ],
+              ),
+            );
+          },
         ),
       ),
     ],

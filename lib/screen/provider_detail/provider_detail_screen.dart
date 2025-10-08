@@ -117,33 +117,44 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           ),
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
-        body: SafeArea(
-          child: Column(
-            children: [
-              _buildHeader(),
-              Global.gapMd,
-              _buildSearchBar(colorScheme),
-              if (_selectedIds.isNotEmpty) ...[
-                Global.gapMd,
-                _buildSelectionBar(),
-              ],
-              Global.gapMd,
-              _buildIntervalsTitle(),
-              Global.gapSm,
-              // Fixed header outside of scroll view
-              if (_filteredIntervals.isNotEmpty)
-                _buildIntervalsHeaderRow(),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    _buildIntervalSliver(),
-                    SliverToBoxAdapter(child: Global.gapMd),
-                    SliverToBoxAdapter(child: SizedBox(height: 80)),
-                  ],
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      _buildHeader(),
+                      Global.gapMd,
+                      _buildSearchBar(colorScheme),
+                      if (_selectedIds.isNotEmpty) ...[
+                        Global.gapMd,
+                        _buildSelectionBar(),
+                      ],
+                      Global.gapMd,
+                      _buildIntervalsTitle(),
+                      Global.gapSm,
+                      // Fixed header outside of scroll view
+                      if (_filteredIntervals.isNotEmpty)
+                        _buildIntervalsHeaderRow(),
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height * 0.4,
+                        ),
+                        child: CustomScrollView(
+                          slivers: [
+                            _buildIntervalSliver(),
+                            SliverToBoxAdapter(child: Global.gapMd),
+                            SliverToBoxAdapter(child: SizedBox(height: 80)),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
