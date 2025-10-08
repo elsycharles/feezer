@@ -73,21 +73,38 @@ class _State extends State<OptimizeFeeScreen> {
       child: Column(
         children: [
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Global.gapMd,
-                  _buildProviderSection(),
-                  Global.gapLg,
-                  _buildAmountSection(),
-                  Global.gapLg,
-                  _buildTransactionSection(),
-                  Global.gapLg,
-                  _buildResultsSection(),
-                  Global.gapXl,
-                  SizedBox(height: 80), // Bottom padding for button
+            child: Column(
+              children: [
+                // Scrollable input sections
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Global.gapMd,
+                        _buildProviderSection(),
+                        Global.gapLg,
+                        _buildAmountSection(),
+                        Global.gapLg,
+                        _buildTransactionSection(),
+                        Global.gapLg,
+                        _buildResultsSection(),
+                        Global.gapXl,
+                      ],
+                    ),
+                  ),
+                ),
+                // Fixed header and scrollable results (only when there are results)
+                if (_hasOptimized && _results.isNotEmpty) ...[
+                  _buildResultsTableHeader(),
+                  SizedBox(
+                    height: 200, // Fixed height for the scrollable results
+                    child: SingleChildScrollView(
+                      child: _buildResultsTableData(),
+                    ),
+                  ),
                 ],
-              ),
+                SizedBox(height: 80), // Bottom padding for button
+              ],
             ),
           ),
           _buildOptimizeButton(),
@@ -397,48 +414,47 @@ class _State extends State<OptimizeFeeScreen> {
                   ],
                 ),
               )
-            else
-              _buildResultsTable(),
+            // Results table is now shown separately below with fixed header
           ],
         ),
       ),
     );
   }
 
-  Widget _buildResultsTable() => Column(
-    children: [
-      // Header row
-      Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: BoxDecoration(
-          color: context.colorScheme.surface,
-          borderRadius: Global.borderMd,
-          border: Border.all(
-            color: context.colorScheme.outline.withValues(alpha: 0.12),
-            width: 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: _buildHeaderCell(AppLocalizations.of(context).interval),
-            ),
-            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
-            Expanded(
-              child: _buildHeaderCell(AppLocalizations.of(context).count),
-            ),
-            Expanded(
-              child: _buildHeaderCell(AppLocalizations.of(context).total),
-            ),
-          ],
-        ),
+  Widget _buildResultsTableHeader() => Container(
+    margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+    decoration: BoxDecoration(
+      color: context.colorScheme.surface,
+      borderRadius: Global.borderMd,
+      border: Border.all(
+        color: context.colorScheme.outline.withValues(alpha: 0.12),
+        width: 1,
       ),
+    ),
+    child: Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: _buildHeaderCell(AppLocalizations.of(context).interval),
+        ),
+        Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
+        Expanded(
+          child: _buildHeaderCell(AppLocalizations.of(context).count),
+        ),
+        Expanded(
+          child: _buildHeaderCell(AppLocalizations.of(context).total),
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildResultsTableData() => Column(
+    children: [
       // Data rows
       ..._results.map(
         (result) => Container(
-          margin: const EdgeInsets.only(bottom: 8),
+          margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16),
           padding: Global.padMd,
           decoration: BoxDecoration(
             color: context.colorScheme.surface,

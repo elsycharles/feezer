@@ -132,11 +132,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
               Global.gapMd,
               _buildIntervalsTitle(),
               Global.gapSm,
+              // Fixed header outside of scroll view
+              if (_filteredIntervals.isNotEmpty)
+                _buildIntervalsHeaderRow(),
               Expanded(
                 child: CustomScrollView(
                   slivers: [
-                    if (_filteredIntervals.isNotEmpty)
-                      SliverToBoxAdapter(child: _buildIntervalsHeaderRow()),
                     _buildIntervalSliver(),
                     SliverToBoxAdapter(child: Global.gapMd),
                     SliverToBoxAdapter(child: SizedBox(height: 80)),
