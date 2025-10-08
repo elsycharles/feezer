@@ -68,7 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       getRoute: () async {
         // Mark that onboarding is completed
         await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.providersRoute;
+        return AppRouter.optimizeFeeRoute;
       },
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
@@ -16,6 +15,7 @@ import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
+import '../../widget/app_menu_button.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {
@@ -29,7 +29,6 @@ class _State extends State<ProviderListScreen> {
   final _searchController = TextEditingController();
   final _providers = <Provider>[];
   final _selectedIds = <String>{};
-  DateTime? _lastBackPressed;
   bool _isLoading = true;
 
   List<Provider> get _filtered {
@@ -101,26 +100,6 @@ class _State extends State<ProviderListScreen> {
     }
   }
 
-  void _handleBackPress() {
-    // If we're in selection mode, disable it first
-    if (_selectedIds.isNotEmpty) {
-      setState(() => _selectedIds.clear());
-      return;
-    }
-
-    // Double back logic to exit the app
-    final now = DateTime.now();
-    const exitTimeLimit = Duration(seconds: 2);
-
-    if (_lastBackPressed == null ||
-        now.difference(_lastBackPressed!) > exitTimeLimit) {
-      _lastBackPressed = now;
-      AppToast.info(context, AppLocalizations.of(context).pressAgainToExit);
-    } else {
-      SystemNavigator.pop();
-    }
-  }
-
   Widget _buildProviderSliver() => SliverPadding(
     padding: const EdgeInsets.symmetric(horizontal: 16),
     sliver: _filtered.isEmpty
@@ -158,16 +137,16 @@ class _State extends State<ProviderListScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop) {
-          _handleBackPress();
-        }
-      },
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: custom.AppBar(title: AppLocalizations.of(context).providers),
+        appBar: custom.AppBar(
+          title: AppLocalizations.of(context).providers,
+          actions: [
+            AppMenuButton(
+              excludeRoutes: [AppRouter.providersRoute],
+            ),
+          ],
+        ),
         bottomNavigationBar: _selectedIds.isEmpty
             ? _buildAddProviderButton(colorScheme)
             : null,
@@ -215,7 +194,6 @@ class _State extends State<ProviderListScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 

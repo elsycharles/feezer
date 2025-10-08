@@ -10,12 +10,14 @@ import '../../util/navigation_util.dart';
 import '../../util/route_util.dart'; // For AppRouter routes
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
+import 'package:flutter/services.dart';
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
 
 import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
+import '../../widget/app_menu_button.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
@@ -26,6 +28,8 @@ class OptimizeFeeScreen extends StatefulWidget {
 }
 
 class _State extends State<OptimizeFeeScreen> {
+  DateTime? _lastBackPressed;
+  
   // Sample providers - replace with actual data
   final _providers = [
     Provider(
@@ -71,14 +75,24 @@ class _State extends State<OptimizeFeeScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => PopScope(
+    canPop: false,
+    onPopInvokedWithResult: (didPop, result) {
+      if (!didPop) {
+        _handleBackPress();
+      }
+    },
+    child: Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).optimizeFee,
-      leading: IconButton(
-        onPressed: () => NavigationUtil.safeBack(context),
-        icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
-      ),
+      leading: null, // Remove back button for home screen
+      actions: [
+        AppMenuButton(
+          excludeRoutes: [AppRouter.optimizeFeeRoute],
+          iconColor: context.colorScheme.onSurface,
+        ),
+      ],
     ),
     body: Column(
       children: [
@@ -117,7 +131,22 @@ class _State extends State<OptimizeFeeScreen> {
         ),
       ],
     ),
+  )
   );
+
+  void _handleBackPress() {
+    // Double back logic to exit the app
+    final now = DateTime.now();
+    const exitTimeLimit = Duration(seconds: 2);
+
+    if (_lastBackPressed == null ||
+        now.difference(_lastBackPressed!) > exitTimeLimit) {
+      _lastBackPressed = now;
+      AppToast.info(context, AppLocalizations.of(context).pressAgainToExit);
+    } else {
+      SystemNavigator.pop();
+    }
+  }
 
   Widget _buildProviderSection() => CollapsibleCard(
     title: AppLocalizations.of(context).financialProvider,

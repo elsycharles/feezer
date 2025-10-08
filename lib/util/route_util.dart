@@ -20,13 +20,13 @@ class AppRouter {
   static const String newFeeIntervalRoute = '/new-fee-interval';
 
   static final GoRouter router = GoRouter(
-    initialLocation: onboardingRoute,
+    initialLocation: optimizeFeeRoute,
     debugLogDiagnostics: false,
     errorBuilder: (context, state) {
       final colorScheme = Theme.of(context).colorScheme;
       final currentLocation = state.uri.toString();
       final isOnHomePage =
-          currentLocation == providersRoute ||
+          currentLocation == optimizeFeeRoute ||
           currentLocation == onboardingRoute;
 
       return Scaffold(
@@ -46,7 +46,7 @@ class AppRouter {
               // Only show navigation button if not already on home page
               if (!isOnHomePage)
                 ElevatedButton(
-                  onPressed: () => context.go(providersRoute),
+                  onPressed: () => context.go(optimizeFeeRoute),
                   child: Text(AppLocalizations.of(context).goHome),
                 ),
             ],
