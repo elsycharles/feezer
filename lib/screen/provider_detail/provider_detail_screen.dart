@@ -278,9 +278,13 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   Widget _buildSearchBar(ColorScheme colorScheme) => CollapsibleCard(
     title: AppLocalizations.of(context).searchByFeeRange,
     icon: Icons.search,
-    iconColor: ThemeUtil.textPrimary,
+    iconColor: Theme.of(context).brightness == Brightness.dark
+        ? ThemeUtil.textLight
+        : ThemeUtil.textPrimary,
     titleStyle: ThemeUtil.titleMedium.copyWith(
-      color: ThemeUtil.textPrimary,
+      color: Theme.of(context).brightness == Brightness.dark
+          ? ThemeUtil.textLight
+          : ThemeUtil.textPrimary,
       fontWeight: FontWeight.w600,
     ),
     isInitiallyExpanded: true,
@@ -389,9 +393,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).minFee,
-      hintStyle: ThemeUtil.bodySmall.copyWith(
-        color: colorScheme.onSurfaceVariant,
-      ),
+      hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
       filled: true,
       fillColor: colorScheme.surface,
       border: OutlineInputBorder(
@@ -408,7 +410,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
-    style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurface) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
   );
 
   Widget _buildFeeMaxField(ColorScheme colorScheme) => TextField(
@@ -416,9 +418,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).maxFee,
-      hintStyle: ThemeUtil.bodySmall.copyWith(
-        color: colorScheme.onSurfaceVariant,
-      ),
+      hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
       filled: true,
       fillColor: colorScheme.surface,
       border: OutlineInputBorder(
@@ -435,7 +435,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
-    style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurface) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
   );
 
   void _filterIntervals() {
