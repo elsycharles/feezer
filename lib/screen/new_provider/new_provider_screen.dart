@@ -41,7 +41,7 @@ class _State extends State<NewProviderScreen> {
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).newProvider,
       leading: IconButton(
-        onPressed: context.pop,
+        onPressed: () => Navigator.of(context).pop(),
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
       ),
     ),
@@ -175,7 +175,7 @@ class _State extends State<NewProviderScreen> {
           context,
           AppLocalizations.of(context).providerCreatedSuccessfully,
         );
-        context.pop();
+        Navigator.of(context).pop(provider);
       }
     }
   }

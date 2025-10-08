@@ -3,12 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
 import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
 import 'package:fee_minimizer/screen/settings/settings_screen.dart';
+import 'package:fee_minimizer/screen/new_provider/new_provider_screen.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 
 class AppRouter {
   static const String onboardingRoute = '/';
   static const String providersRoute = '/providers';
   static const String settingsRoute = '/settings';
+  static const String newProviderRoute = '/new-provider';
 
   static final GoRouter router = GoRouter(
     initialLocation: onboardingRoute,
@@ -60,6 +62,11 @@ class AppRouter {
         path: settingsRoute,
         name: 'settings',
         builder: (_, __) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: newProviderRoute,
+        name: 'newProvider',
+        builder: (_, __) => const NewProviderScreen(),
       ),
     ],
   );
