@@ -77,6 +77,10 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final defaultIconColor = widget.iconColor ?? colorScheme.primary;
+    
+    // Utiliser la couleur du titre pour l'icône de collapse
+    final titleColor = widget.titleStyle?.color ?? colorScheme.onSurface;
+    final collapseIconColor = titleColor;
 
     return Container(
       margin: widget.margin,
@@ -128,7 +132,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                     ),
                     Icon(
                       _isExpanded ? Icons.expand_less : Icons.expand_more,
-                      color: defaultIconColor,
+                      color: collapseIconColor,
                     ),
                   ],
                 ),
