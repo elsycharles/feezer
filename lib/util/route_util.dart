@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
 import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
@@ -8,7 +7,7 @@ import 'package:fee_minimizer/screen/provider_detail/provider_detail_screen.dart
 import 'package:fee_minimizer/screen/optimize_fee/optimize_fee_screen.dart';
 import 'package:fee_minimizer/screen/fee_interval/new_fee_interval_screen.dart';
 import 'package:fee_minimizer/model/provider_model.dart';
-import 'package:fee_minimizer/l10n/app_localizations.dart';
+import 'package:fee_minimizer/widget/error_widget.dart';
 
 /// Centralized router configuration using GoRouter for clean navigation
 class AppRouter {
@@ -26,7 +25,7 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: homeRoute,
     debugLogDiagnostics: false,
-    errorBuilder: (context, state) => _ErrorScreen(state: state),
+    errorBuilder: (context, state) => ErrorScreen(state: state),
     routes: [
       // Home route (Fee Optimization)
       GoRoute(
@@ -95,45 +94,4 @@ class AppRouter {
       ),
     ],
   );
-}
-
-/// Error screen displayed when a route is not found
-class _ErrorScreen extends StatelessWidget {
-  final GoRouterState state;
-
-  const _ErrorScreen({required this.state});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final currentLocation = state.uri.toString();
-    final isOnHomePage = currentLocation == AppRouter.homeRoute || currentLocation == AppRouter.onboardingRoute;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context).error),
-        backgroundColor: colorScheme.surface,
-        foregroundColor: colorScheme.onSurface,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error_outline, size: 64, color: colorScheme.error),
-            const SizedBox(height: 16),
-            Text(
-              AppLocalizations.of(context).screenNotFound(state.uri.toString()),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 16),
-            if (!isOnHomePage)
-              ElevatedButton(
-                onPressed: () => context.go(AppRouter.homeRoute),
-                child: Text(AppLocalizations.of(context).goHome),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
 }
