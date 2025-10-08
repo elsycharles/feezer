@@ -22,13 +22,7 @@ class AppBackButton extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: onPressed ?? () {
-            final router = GoRouter.of(context);
-            // Only pop if there's something to pop
-            if (router.canPop()) {
-              router.pop();
-            }
-          },
+          onTap: onPressed ?? () => GoRouter.of(context).pop(),
           splashColor: colorScheme.onSurface.withValues(alpha: 0.1),
           highlightColor: colorScheme.onSurface.withValues(alpha: 0.05),
           hoverColor: colorScheme.onSurface.withValues(alpha: 0.08),

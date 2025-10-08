@@ -20,28 +20,28 @@ class NavigationUtil {
   /// Safely navigates back using GoRouter. If no pages to pop, navigates to fallback route.
   /// 
   /// [context] - BuildContext for navigation
-  /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to providers route)
+  /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to home route)
   static Future<void> safeBack(BuildContext context, {String? fallbackRoute}) async {
     final router = GoRouter.of(context);
     if (router.canPop()) {
       router.pop();
       return;
     }
-    context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
+    context.go(fallbackRoute ?? AppRouter.homeRoute);
   }
 
   /// Safely pops with a result using GoRouter. If no pages to pop, navigates to fallback route.
   /// 
   /// [context] - BuildContext for navigation
   /// [result] - Result to return when popping
-  /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to providers route)
+  /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to home route)
   static void safeBackWithResult<T>(BuildContext context, T result, {String? fallbackRoute}) {
     final router = GoRouter.of(context);
     if (router.canPop()) {
       router.pop<T>(result);
       return;
     }
-    context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
+    context.go(fallbackRoute ?? AppRouter.homeRoute);
   }
 
 

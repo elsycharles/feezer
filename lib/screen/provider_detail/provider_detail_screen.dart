@@ -5,11 +5,9 @@ import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
 import '../../util/theme_util.dart';
-import '../../util/navigation_util.dart';
-import '../../util/route_util.dart'; // For AppRouter routes
+import '../../util/route_util.dart';
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/app_back_button.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_loading.dart';
@@ -108,16 +106,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).providerDetails,
-          leading: AppBackButton(
-            onPressed: () {
-              if (_selectedIds.isNotEmpty) {
-                // Clear selection instead of popping when in selection mode
-                setState(() => _selectedIds.clear());
-              } else {
-                NavigationUtil.safeBack(context);
-              }
-            },
-          ),
+          leading: _selectedIds.isNotEmpty 
+            ? IconButton(
+                icon: const Icon(Icons.clear),
+                onPressed: () => setState(() => _selectedIds.clear()),
+              )
+            : null, // Let GoRouter handle the back button
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
         body: SafeArea(
@@ -350,8 +344,8 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   );
 
   void _addInterval() async {
-    final result = await NavigationUtil.pushTo(context, AppRouter.newFeeIntervalRoute);
-    if (result != null && result is FeeInterval) {
+    final result = await GoRouter.of(context).push<FeeInterval>(AppRouter.newFeeIntervalRoute);
+    if (result != null) {
       setState(() => _feeIntervals.add(result));
     }
   }
@@ -491,10 +485,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-  NavigationUtil.pushTo(context, AppRouter.optimizeFeeRoute);
+    GoRouter.of(context).push(AppRouter.homeRoute);
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
-    // NavigationUtil.pushOptimizeFee(context, extra: widget.provider);
+    // Could pass provider data via extra: widget.provider
   }
 
   void _deleteSelectedIntervals() async {

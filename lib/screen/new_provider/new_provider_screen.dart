@@ -5,10 +5,8 @@ import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
-import '../../util/navigation_util.dart';
 import '../../util/extensions_util.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/app_back_button.dart';
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
 import '../../widget/loading_button.dart';
@@ -43,7 +41,6 @@ class _State extends State<NewProviderScreen> {
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).newProvider,
-      leading: const AppBackButton(),
     ),
     body: Form(
       key: _formKey,
@@ -136,7 +133,7 @@ class _State extends State<NewProviderScreen> {
         Expanded(
           child: LoadingButton(
             text: AppLocalizations.of(context).cancel,
-            onPressed: () => NavigationUtil.safeBack(context),
+            onPressed: () => GoRouter.of(context).pop(),
             isLoading: false,
             isOutlined: true,
           ),

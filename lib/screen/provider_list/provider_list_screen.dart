@@ -4,8 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
-import '../../util/navigation_util.dart';
-import '../../util/route_util.dart'; // For AppRouter routes
+import '../../util/route_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
@@ -94,9 +93,9 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _addProvider() async {
-  final result = await NavigationUtil.pushTo(context, AppRouter.newProviderRoute);
+    final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
     
-    if (result != null && result is Provider) {
+    if (result != null) {
       setState(() => _providers.add(result));
     }
   }
@@ -297,9 +296,8 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _showProviderDetails(Provider provider) {
-    NavigationUtil.goTo(
-      context,
-      NavigationUtil.buildIdRoute(AppRouter.providerDetailRoute, provider.id),
+    GoRouter.of(context).go(
+      '${AppRouter.providerDetailRoute}/${provider.id}',
       extra: provider,
     );
   }

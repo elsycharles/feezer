@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart' hide AppBar;
-import 'package:go_router/go_router.dart';
 
 import '../util/theme_util.dart';
-import 'app_back_button.dart';
 import 'app_menu_button.dart';
 
 /// Simple and reusable white AppBar with centered title
@@ -29,10 +27,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-  final theme = Theme.of(context);
-  final colorScheme = theme.colorScheme;
-  final canPop = GoRouter.of(context).canPop();
-  final backSemantics = MaterialLocalizations.of(context).backButtonTooltip;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return material.AppBar(
       backgroundColor: colorScheme.surface,
@@ -41,16 +37,15 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style:
-            theme.textTheme.titleMedium?.copyWith(
+        style: theme.textTheme.titleMedium?.copyWith(
               color: colorScheme.onSurface,
               fontWeight: FontWeight.w600,
             ) ??
             ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
       ),
       actions: _buildActions(context, colorScheme),
-  leading: leading ?? (canPop ? AppBackButton(semanticLabel: backSemantics) : null),
-  automaticallyImplyLeading: leading == null && canPop,
+      leading: leading, // Use native GoRouter back button behavior
+      automaticallyImplyLeading: leading == null, // Let GoRouter handle back button
     );
   }
 

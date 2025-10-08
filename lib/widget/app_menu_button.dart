@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../l10n/app_localizations.dart';
 import '../styles/global.dart';
 import '../util/extensions_util.dart';
-import '../util/navigation_util.dart';
 import '../util/route_util.dart';
 import '../util/theme_util.dart';
 
@@ -47,9 +47,9 @@ class AppMenuButton extends StatelessWidget {
     final items = <PopupMenuEntry<String>>[];
     
     // Fee Optimizer (Home)
-    if (!excludeRoutes.contains(AppRouter.optimizeFeeRoute)) {
+    if (!excludeRoutes.contains(AppRouter.homeRoute)) {
       items.add(PopupMenuItem(
-        value: AppRouter.optimizeFeeRoute,
+        value: AppRouter.homeRoute,
         child: _MenuItem(
           icon: Icons.analytics,
           text: AppLocalizations.of(context).optimizeFee,
@@ -86,7 +86,7 @@ class AppMenuButton extends StatelessWidget {
   }
 
   void _handleMenuSelection(BuildContext context, String route) {
-    NavigationUtil.goTo(context, route);
+    GoRouter.of(context).go(route);
   }
 }
 
