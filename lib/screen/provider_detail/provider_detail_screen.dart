@@ -4,6 +4,7 @@ import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
 import '../../util/theme_util.dart';
 import '../../util/navigation_util.dart';
+import '../../util/route_util.dart'; // For AppRouter routes
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
@@ -336,8 +337,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   );
 
   void _addInterval() async {
-    final result = await NavigationUtil.pushNewFeeInterval(context);
-    
+    final result = await NavigationUtil.pushTo(context, AppRouter.newFeeIntervalRoute);
     if (result != null && result is FeeInterval) {
       setState(() => _feeIntervals.add(result));
     }
@@ -482,7 +482,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    NavigationUtil.pushOptimizeFee(context);
+  NavigationUtil.pushTo(context, AppRouter.optimizeFeeRoute);
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
     // NavigationUtil.pushOptimizeFee(context, extra: widget.provider);

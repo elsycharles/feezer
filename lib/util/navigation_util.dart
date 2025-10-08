@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../model/provider_model.dart';
 import 'route_util.dart';
 
 /// Navigation utilities for safe and consistent navigation throughout the app
@@ -43,49 +42,19 @@ class NavigationUtil {
     }
   }
 
-  // Provider navigation helpers
-  /// Navigate to provider detail screen with provider object
-  static void goToProviderDetail(BuildContext context, Provider provider) {
-    context.go(providerDetailPath(provider.id), extra: provider);
-  }
-  
-  /// Push provider detail screen and return result
-  static Future<T?> pushProviderDetail<T>(BuildContext context, Provider provider) {
-    return context.push(providerDetailPath(provider.id), extra: provider);
+
+  NavigationUtil._();
+
+  /// Navigate (replace) to [route]
+  static void goTo(BuildContext context, String route, {Object? extra}) {
+    context.go(route, extra: extra);
   }
 
-  /// Generate provider detail path with ID
-  static String providerDetailPath(String providerId) => 
-    '${AppRouter.providerDetailRoute}/$providerId';
-
-  // Common navigation actions
-  /// Navigate to new provider screen
-  static Future<T?> pushNewProvider<T>(BuildContext context) {
-    return context.push(AppRouter.newProviderRoute);
+  /// Push [route] on stack and optionally return a result
+  static Future<T?> pushTo<T>(BuildContext context, String route, {Object? extra}) {
+    return context.push<T>(route, extra: extra);
   }
 
-  /// Navigate to optimize fee screen
-  static Future<T?> pushOptimizeFee<T>(BuildContext context) {
-    return context.push(AppRouter.optimizeFeeRoute);
-  }
-
-  /// Navigate to new fee interval screen
-  static Future<T?> pushNewFeeInterval<T>(BuildContext context) {
-    return context.push(AppRouter.newFeeIntervalRoute);
-  }
-
-  /// Navigate to providers list
-  static void goToProviders(BuildContext context) {
-    context.go(AppRouter.providersRoute);
-  }
-
-  /// Navigate to settings
-  static void goToSettings(BuildContext context) {
-    context.go(AppRouter.settingsRoute);
-  }
-
-  /// Navigate to onboarding
-  static void goToOnboarding(BuildContext context) {
-    context.go(AppRouter.onboardingRoute);
-  }
+  /// Build route with id: baseRoute + '/' + id
+  static String buildIdRoute(String baseRoute, String id) => '$baseRoute/$id';
 }

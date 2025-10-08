@@ -7,6 +7,7 @@ import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
 import '../../util/navigation_util.dart';
+import '../../util/route_util.dart'; // For AppRouter routes
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
@@ -219,8 +220,7 @@ class _State extends State<OptimizeFeeScreen> {
             onChanged: (provider) async {
               if (provider == _addNewProviderAction) {
                 // Navigate to NewProviderScreen when "Add new provider" is selected
-                final result = await NavigationUtil.pushNewProvider(context);
-                
+                final result = await NavigationUtil.pushTo(context, AppRouter.newProviderRoute);
                 // If a new provider was created (returned as result), add it to the list
                 if (result != null && result is Provider) {
                   setState(() {
