@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
 import '../../util/theme_util.dart';
+import '../../util/navigation_util.dart';
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
@@ -14,10 +14,8 @@ import '../../widget/collapsible_card.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
 import '../../widget/selection_action_bar.dart';
-import '../fee_interval/new_fee_interval_screen.dart';
 import 'widget/fee_interval_edit_bottom_sheet.dart';
 import '../../widget/app_toast.dart';
-import '../optimize_fee/optimize_fee_screen.dart';
 
 /// Provider details screen with fee intervals management
 class ProviderDetailScreen extends StatefulWidget {
@@ -113,7 +111,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 // Clear selection instead of popping when in selection mode
                 setState(() => _selectedIds.clear());
               } else {
-                context.pop();
+                NavigationUtil.safeBack(context);
               }
             },
           ),
@@ -326,17 +324,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     ),
   );
 
-  void _addInterval() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => NewFeeIntervalScreen(
-          onFeeIntervalAdded: (feeInterval) {
-            setState(() => _feeIntervals.add(feeInterval));
-          },
-        ),
-      ),
-    );
+  void _addInterval() async {
+    final result = await NavigationUtil.pushNewFeeInterval(context);
+    
+    if (result != null && result is FeeInterval) {
+      setState(() => _feeIntervals.add(result));
+    }
   }
 
   void _onIntervalTap(FeeInterval interval) {
@@ -478,15 +471,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => const OptimizeFeeScreen()),
-    );
+    NavigationUtil.pushOptimizeFee(context);
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
-    // Navigator.push(context, MaterialPageRoute(
-    //   builder: (_) => FeeOptimizationScreen(provider: widget.provider)
-    // ));
+    // NavigationUtil.pushOptimizeFee(context, extra: widget.provider);
   }
 
   void _deleteSelectedIntervals() async {
@@ -509,7 +497,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       await Future.delayed(const Duration(milliseconds: 800));
 
       if (mounted) {
-        context.pop(); // Close loading dialog
+        Navigator.of(context).pop(); // Close loading dialog
         setState(() {
           _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
           _filteredIntervals = _feeIntervals;

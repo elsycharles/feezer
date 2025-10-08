@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
+import '../../util/navigation_util.dart';
 import '../../util/extensions_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
@@ -41,7 +42,7 @@ class _State extends State<NewProviderScreen> {
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).newProvider,
       leading: IconButton(
-        onPressed: () => Navigator.of(context).pop(),
+        onPressed: () => NavigationUtil.safeBack(context),
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
       ),
     ),
@@ -136,7 +137,7 @@ class _State extends State<NewProviderScreen> {
         Expanded(
           child: LoadingButton(
             text: AppLocalizations.of(context).cancel,
-            onPressed: context.pop,
+            onPressed: () => NavigationUtil.safeBack(context),
             isLoading: false,
             isOutlined: true,
           ),

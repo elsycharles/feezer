@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../model/provider_model.dart';
 import '../../model/optimization_result_model.dart';
@@ -7,7 +6,7 @@ import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
-import '../../util/route_util.dart';
+import '../../util/navigation_util.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
@@ -76,7 +75,7 @@ class _State extends State<OptimizeFeeScreen> {
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).optimizeFee,
       leading: IconButton(
-        onPressed: () => GoRouter.of(context).pop(),
+        onPressed: () => NavigationUtil.safeBack(context),
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
       ),
     ),
@@ -217,7 +216,7 @@ class _State extends State<OptimizeFeeScreen> {
             onChanged: (provider) async {
               if (provider == _addNewProviderAction) {
                 // Navigate to NewProviderScreen when "Add new provider" is selected
-                final result = await GoRouter.of(context).push(AppRouter.newProviderRoute);
+                final result = await NavigationUtil.pushNewProvider(context);
                 
                 // If a new provider was created (returned as result), add it to the list
                 if (result != null && result is Provider) {

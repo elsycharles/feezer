@@ -5,6 +5,7 @@ import '../../l10n/app_localizations.dart';
 import '../../model/fee_interval_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
+import '../../util/navigation_util.dart';
 import '../../util/extensions_util.dart';
 import '../../util/validation_util.dart';
 import '../../widget/app_bar.dart' as custom;
@@ -43,7 +44,7 @@ class _State extends State<NewFeeIntervalScreen> {
     appBar: custom.AppBar(
       title: AppLocalizations.of(context).newFeeInterval,
       leading: IconButton(
-        onPressed: context.pop,
+        onPressed: () => NavigationUtil.safeBack(context),
         icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
       ),
     ),
@@ -151,7 +152,7 @@ class _State extends State<NewFeeIntervalScreen> {
         Expanded(
           child: LoadingButton(
             text: AppLocalizations.of(context).cancel,
-            onPressed: context.pop,
+            onPressed: () => NavigationUtil.safeBack(context),
             isLoading: false,
             isOutlined: true,
           ),
@@ -208,7 +209,7 @@ class _State extends State<NewFeeIntervalScreen> {
           context,
           AppLocalizations.of(context).feeIntervalCreatedSuccessfully,
         );
-        context.pop();
+        Navigator.of(context).pop(feeInterval);
       }
     }
   }

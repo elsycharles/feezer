@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
+import '../../util/navigation_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
@@ -10,8 +11,6 @@ import '../../widget/search_empty_state.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
-import '../provider_detail/provider_detail_screen.dart';
-import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
@@ -93,17 +92,12 @@ class _State extends State<ProviderListScreen> {
     super.dispose();
   }
 
-  void _addProvider() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => NewProviderScreen(
-          onProviderAdded: (provider) {
-            setState(() => _providers.add(provider));
-          },
-        ),
-      ),
-    );
+  void _addProvider() async {
+    final result = await NavigationUtil.pushNewProvider(context);
+    
+    if (result != null && result is Provider) {
+      setState(() => _providers.add(result));
+    }
   }
 
   void _handleBackPress() {
@@ -327,11 +321,6 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _showProviderDetails(Provider provider) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ProviderDetailScreen(provider: provider),
-      ),
-    );
+    NavigationUtil.goToProviderDetail(context, provider);
   }
 }
