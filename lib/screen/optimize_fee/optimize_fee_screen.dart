@@ -11,6 +11,7 @@ import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
 
+import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
 
@@ -52,11 +53,6 @@ class _State extends State<OptimizeFeeScreen> {
   List<OptimizationResult> _results = [];
   bool _hasOptimized = false;
   bool _isOptimizing = false;
-  
-  // Collapsible sections state
-  bool _isProviderSectionExpanded = true;
-  bool _isAmountSectionExpanded = true;
-  bool _isTransactionSectionExpanded = true;
 
   @override
   void initState() {
@@ -101,249 +97,146 @@ class _State extends State<OptimizeFeeScreen> {
     ),
   );
 
-  Widget _buildProviderSection() => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () => setState(() => _isProviderSectionExpanded = !_isProviderSectionExpanded),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.business,
-                  size: 18,
-                  color: context.colorScheme.primary,
-                ),
-                Global.gapSm,
-                Expanded(
-                  child: Text(
-                    AppLocalizations.of(context).financialProvider,
-                    style: ThemeUtil.titleMedium.copyWith(
-                      color: context.colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Icon(
-                  _isProviderSectionExpanded ? Icons.expand_less : Icons.expand_more,
-                  color: context.colorScheme.primary,
-                ),
-              ],
+  Widget _buildProviderSection() => CollapsibleCard(
+    title: AppLocalizations.of(context).financialProvider,
+    subtitle: AppLocalizations.of(context).chooseProviderToAnalyze,
+    icon: Icons.business,
+    iconColor: context.colorScheme.primary,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: context.colorScheme.primary,
+      fontWeight: FontWeight.w600,
+    ),
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          color: context.colorScheme.surface,
+          borderRadius: Global.borderMd,
+          border: Border.all(color: context.colorScheme.outlineVariant),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<Provider>(
+            value: _selectedProvider,
+            isExpanded: true,
+            padding: Global.padMd,
+            icon: Icon(
+              Icons.keyboard_arrow_down,
+              color: context.colorScheme.onSurfaceVariant,
             ),
-          ),
-          if (_isProviderSectionExpanded) ...[
-            Global.gapSm,
-            Text(
-              AppLocalizations.of(context).chooseProviderToAnalyze,
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-            ),
-            Global.gapMd,
-            Container(
-            decoration: BoxDecoration(
-              color: context.colorScheme.surface,
-              borderRadius: Global.borderMd,
-              border: Border.all(color: context.colorScheme.outlineVariant),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<Provider>(
-                value: _selectedProvider,
-                isExpanded: true,
-                padding: Global.padMd,
-                icon: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-                items: _providers
-                    .map(
-                      (provider) => DropdownMenuItem(
-                        value: provider,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: context.colorScheme.primary.withValues(
-                                  alpha: 0.1,
-                                ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Icon(
-                                Icons.business,
-                                color: context.colorScheme.primary,
-                                size: 20,
-                              ),
+            items: _providers
+                .map(
+                  (provider) => DropdownMenuItem(
+                    value: provider,
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: context.colorScheme.primary.withValues(
+                              alpha: 0.1,
                             ),
-                            Global.gapMd,
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    provider.name,
-                                    style: ThemeUtil.bodyLarge.copyWith(
-                                      color: context.colorScheme.onSurface,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                  Text(
-                                    provider.description,
-                                    style: ThemeUtil.bodySmall.copyWith(
-                                      color:
-                                          context.colorScheme.onSurfaceVariant,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(
+                            Icons.business,
+                            color: context.colorScheme.primary,
+                            size: 20,
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (provider) {
-                  setState(() {
-                    _selectedProvider = provider;
-                    _hasOptimized = false;
-                    _results.clear();
-                  });
-                },
-              ),
-            ),
-          ),
-          ],
-        ],
-      ),
-    ),
-  );
-
-  Widget _buildAmountSection() => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () => setState(() => _isAmountSectionExpanded = !_isAmountSectionExpanded),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    AppLocalizations.of(context).amountToOptimize,
-                    style: ThemeUtil.titleMedium.copyWith(
-                      color: context.colorScheme.onSurface,
-                      fontWeight: FontWeight.w700,
+                        Global.gapMd,
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                provider.name,
+                                style: ThemeUtil.bodyLarge.copyWith(
+                                  color: context.colorScheme.onSurface,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                provider.description,
+                                style: ThemeUtil.bodySmall.copyWith(
+                                  color: context.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                Icon(
-                  _isAmountSectionExpanded ? Icons.expand_less : Icons.expand_more,
-                  color: context.colorScheme.onSurface,
-                ),
-              ],
-            ),
+                )
+                .toList(),
+            onChanged: (provider) {
+              setState(() {
+                _selectedProvider = provider;
+                _hasOptimized = false;
+                _results.clear();
+              });
+            },
           ),
-          if (_isAmountSectionExpanded) ...[
-            Global.gapSm,
-            Text(
-              AppLocalizations.of(context).enterTransactionAmountToOptimize,
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
-            ),
-            Global.gapLg,
-            AmountInputWidget(
-              value: _amount,
-              onChanged: (value) {
-                setState(() {
-                  _amount = value;
-                  _hasOptimized = false;
-                  _results.clear();
-                });
-              },
-              label: AppLocalizations.of(context).amount,
+        ),
+      ),
+    ],
+  );  Widget _buildAmountSection() => CollapsibleCard(
+    title: AppLocalizations.of(context).amountToOptimize,
+    subtitle: AppLocalizations.of(context).enterTransactionAmountToOptimize,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: context.colorScheme.onSurface,
+      fontWeight: FontWeight.w700,
+    ),
+    children: [
+      AmountInputWidget(
+        value: _amount,
+        onChanged: (value) {
+          setState(() {
+            _amount = value;
+            _hasOptimized = false;
+            _results.clear();
+          });
+        },
+        label: AppLocalizations.of(context).amount,
+        min: 1,
+        max: 9999999,
+      ),
+    ],
+  );
+
+  Widget _buildTransactionSection() => CollapsibleCard(
+    title: AppLocalizations.of(context).transactionRange,
+    subtitle: AppLocalizations.of(context).defineMinMaxTransactions,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: context.colorScheme.onSurface,
+      fontWeight: FontWeight.w700,
+    ),
+    children: [
+      Row(
+        children: [
+          Expanded(
+            child: TransactionInputWidget(
+              value: _minTransactions,
+              onChanged: (value) => setState(() => _minTransactions = value),
+              label: AppLocalizations.of(context).minTransactions,
               min: 1,
-              max: 9999999,
-            ),
-            Global.gapLg,
-          ],
-        ],
-      ),
-    ),
-  );
-
-  Widget _buildTransactionSection() => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          GestureDetector(
-            onTap: () => setState(() => _isTransactionSectionExpanded = !_isTransactionSectionExpanded),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    AppLocalizations.of(context).transactionRange,
-                    style: ThemeUtil.titleMedium.copyWith(
-                      color: context.colorScheme.onSurface,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Icon(
-                  _isTransactionSectionExpanded ? Icons.expand_less : Icons.expand_more,
-                  color: context.colorScheme.onSurface,
-                ),
-              ],
+              max: 999,
             ),
           ),
-          if (_isTransactionSectionExpanded) ...[
-            Global.gapSm,
-            Text(
-              AppLocalizations.of(context).defineMinMaxTransactions,
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: context.colorScheme.onSurfaceVariant,
-              ),
+          Global.gapLg,
+          Expanded(
+            child: TransactionInputWidget(
+              value: _maxTransactions,
+              onChanged: (value) => setState(() => _maxTransactions = value),
+              label: AppLocalizations.of(context).maxTransactions,
+              min: 1,
+              max: 999,
             ),
-            Global.gapLg,
-            Row(
-              children: [
-                Expanded(
-                  child: TransactionInputWidget(
-                    value: _minTransactions,
-                    onChanged: (value) =>
-                        setState(() => _minTransactions = value),
-                    label: AppLocalizations.of(context).minTransactions,
-                    min: 1,
-                    max: 999,
-                  ),
-                ),
-                Global.gapLg,
-                Expanded(
-                  child: TransactionInputWidget(
-                    value: _maxTransactions,
-                    onChanged: (value) =>
-                        setState(() => _maxTransactions = value),
-                    label: AppLocalizations.of(context).maxTransactions,
-                    min: 1,
-                    max: 999,
-                  ),
-                ),
-              ],
-            ),
-            Global.gapMd,
-          ],
+          ),
         ],
       ),
-    ),
+    ],
   );
 
   Widget _buildResultsSection() {
