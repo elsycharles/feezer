@@ -22,13 +22,13 @@ class LanguageSelectionModal extends StatelessWidget {
   void _changeLanguage(BuildContext context, SupportedLocale supportedLocale) {
     final localeProvider = context.read<LocaleProvider>();
     localeProvider.setLocale(supportedLocale.locale);
-    // Ne pas fermer le modal automatiquement
+    // Do not close modal automatically
   }
 
   void _useSystemLanguage(BuildContext context) {
     final localeProvider = context.read<LocaleProvider>();
     localeProvider.clearLocale();
-    // Ne pas fermer le modal automatiquement
+    // Do not close modal automatically
   }
 
   @override
@@ -150,7 +150,7 @@ class LanguageSelectionModal extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(
           children: [
-            // Icône du langage (SVG ou Material Icon)
+            // Language icon (SVG or Material Icon)
             if (svgAsset != null) ...[
               SvgPicture.asset(svgAsset, width: 32, height: 32),
               const SizedBox(width: 16),

@@ -52,7 +52,7 @@ class FormField extends StatelessWidget {
           decoration: InputDecoration(
             hintText:
                 hintText ??
-                'Enter $label', // Note: Cette ligne nécessitera un contexte pour une traduction complète
+                'Enter $label', // Note: This line will require context for complete translation
             hintStyle: ThemeUtil.bodyMedium.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),

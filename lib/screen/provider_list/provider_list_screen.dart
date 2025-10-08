@@ -113,7 +113,7 @@ class _State extends State<ProviderListScreen> {
       return;
     }
 
-    // Logique de double retour pour quitter l'app
+    // Double back logic to exit the app
     final now = DateTime.now();
     const exitTimeLimit = Duration(seconds: 2);
 

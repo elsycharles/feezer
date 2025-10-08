@@ -78,7 +78,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
     final colorScheme = Theme.of(context).colorScheme;
     final defaultIconColor = widget.iconColor ?? colorScheme.primary;
     
-    // Utiliser la couleur du titre pour l'icône de collapse
+    // Use title color for collapse icon
     final titleColor = widget.titleStyle?.color ?? colorScheme.onSurface;
     final collapseIconColor = titleColor;
 
@@ -146,7 +146,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                   left: widget.padding.left,
                   right: widget.padding.right,
                   bottom: widget.padding.bottom,
-                  top: 8, // Espacement réduit en haut car le header a déjà du padding
+                  top: 8, // Reduced top spacing since header already has padding
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
