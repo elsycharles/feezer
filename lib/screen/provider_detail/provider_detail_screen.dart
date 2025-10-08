@@ -118,44 +118,41 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           ),
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
-        body: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: SafeArea(
-                  child: Column(
-                    children: [
-                      _buildHeader(),
+        body: SafeArea(
+          child: CustomScrollView(
+            // Use BouncingScrollPhysics for better UX on all platforms
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            slivers: [
+              // Header section
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    _buildHeader(),
+                    Global.gapMd,
+                    _buildSearchBar(colorScheme),
+                    if (_selectedIds.isNotEmpty) ...[
                       Global.gapMd,
-                      _buildSearchBar(colorScheme),
-                      if (_selectedIds.isNotEmpty) ...[
-                        Global.gapMd,
-                        _buildSelectionBar(),
-                      ],
-                      Global.gapMd,
-                      _buildIntervalsTitle(),
-                      Global.gapSm,
-                      // Fixed header outside of scroll view
-                      if (_filteredIntervals.isNotEmpty)
-                        _buildIntervalsHeaderRow(),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: MediaQuery.of(context).size.height * 0.4,
-                        ),
-                        child: CustomScrollView(
-                          slivers: [
-                            _buildIntervalSliver(),
-                            SliverToBoxAdapter(child: Global.gapMd),
-                            SliverToBoxAdapter(child: SizedBox(height: 80)),
-                          ],
-                        ),
-                      ),
+                      _buildSelectionBar(),
                     ],
-                  ),
+                    Global.gapMd,
+                    _buildIntervalsTitle(),
+                    Global.gapSm,
+                    // Fixed header for intervals
+                    if (_filteredIntervals.isNotEmpty)
+                      _buildIntervalsHeaderRow(),
+                  ],
                 ),
               ),
-            ),
-          ],
+              // Intervals list - now properly integrated in the main scroll
+              _buildIntervalSliver(),
+              // Bottom padding for FAB
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 100),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -185,7 +182,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   Widget _buildIntervalSliver() => _filteredIntervals.isEmpty
       ? SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 48 : 32,
+            ),
             child: SearchEmptyState(
               icon: Icons.search_off,
               title: AppLocalizations.of(context).noFeeIntervalsFound,
@@ -194,18 +194,25 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           ),
         )
       : SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 8 : 4,
+          ),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               final interval = _filteredIntervals[index];
-              return FeeIntervalTile(
-                feeInterval: interval,
-                isSelected: _selectedIds.contains(interval.id),
-                showSelection: _selectedIds.isNotEmpty,
-                onTap: () => _onIntervalTap(interval),
-                onSelectionChanged: (selected) =>
-                    _onSelectionChanged(interval.id, selected),
-                onLongPress: () => _onIntervalLongPress(interval),
+              return Padding(
+                // Add proper spacing between items for better touch targets
+                padding: const EdgeInsets.only(bottom: 8),
+                child: FeeIntervalTile(
+                  feeInterval: interval,
+                  isSelected: _selectedIds.contains(interval.id),
+                  showSelection: _selectedIds.isNotEmpty,
+                  onTap: () => _onIntervalTap(interval),
+                  onSelectionChanged: (selected) =>
+                      _onSelectionChanged(interval.id, selected),
+                  onLongPress: () => _onIntervalLongPress(interval),
+                ),
               );
             }, childCount: _filteredIntervals.length),
           ),

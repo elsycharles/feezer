@@ -84,6 +84,14 @@ class _State extends State<OptimizeFeeScreen> {
       children: [
         Expanded(
           child: SingleChildScrollView(
+            // Use BouncingScrollPhysics for better UX and international standards
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            // Add proper padding for RTL support and accessibility
+            padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 12 : 0,
+            ),
             child: SafeArea(
               child: Column(
                 children: [
@@ -96,7 +104,8 @@ class _State extends State<OptimizeFeeScreen> {
                   Global.gapLg,
                   _buildResultsSection(),
                   Global.gapXl,
-                  SizedBox(height: 80), // Bottom padding for button
+                  // Increased bottom padding for better accessibility
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
@@ -438,23 +447,38 @@ class _State extends State<OptimizeFeeScreen> {
           ],
         ),
       ),
-      // Data rows - limit height and make scrollable if needed
+      // Data rows - flexible height with proper scroll physics
       ConstrainedBox(
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.4, // Max 40% of screen height
+          // More flexible height calculation based on content and screen size
+          maxHeight: MediaQuery.of(context).size.height * 0.35,
+          minHeight: 120, // Minimum height for better UX
         ),
         child: ListView.builder(
           shrinkWrap: true,
-          physics: const ClampingScrollPhysics(),
+          // Use BouncingScrollPhysics for international design standards
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          // Add padding for better touch targets on accessibility
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 16 : 8,
+          ),
           itemCount: _results.length,
           itemBuilder: (context, index) {
             final result = _results[index];
             return Container(
               margin: const EdgeInsets.only(bottom: 8),
               padding: Global.padMd,
+              // Add minimum height for accessibility
+              constraints: const BoxConstraints(minHeight: 56),
               decoration: BoxDecoration(
                 color: context.colorScheme.surface,
                 borderRadius: Global.borderMd,
+                // Add subtle border for better visual separation
+                border: Border.all(
+                  color: context.colorScheme.outline.withValues(alpha: 0.08),
+                ),
               ),
               child: Row(
                 children: [

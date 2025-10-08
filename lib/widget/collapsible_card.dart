@@ -106,6 +106,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                     ],
                     Expanded(
                       child: Column(
+                        // Support RTL layouts properly
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -116,6 +117,8 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                                 color: colorScheme.onSurface,
                                 fontWeight: FontWeight.w700,
                               ),
+                            // Add textDirection for better RTL support
+                            textDirection: TextDirection.ltr,
                           ),
                           if (widget.subtitle != null) ...[
                             const SizedBox(height: 6),
@@ -125,6 +128,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                                 ThemeUtil.bodyMedium.copyWith(
                                   color: colorScheme.onSurfaceVariant,
                                 ),
+                              textDirection: TextDirection.ltr,
                             ),
                           ],
                         ],

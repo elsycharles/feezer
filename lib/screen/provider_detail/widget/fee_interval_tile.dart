@@ -42,6 +42,8 @@ class FeeIntervalTile extends StatelessWidget {
           duration: const Duration(milliseconds: 120),
           curve: Curves.easeOut,
           padding: const EdgeInsets.all(16),
+          // Ensure minimum height for accessibility
+          constraints: const BoxConstraints(minHeight: 72),
           decoration: BoxDecoration(
             color: ThemeUtil.interactiveSurfaceColor(
               isSelected
