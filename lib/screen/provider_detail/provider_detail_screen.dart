@@ -268,7 +268,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   Widget _buildSearchBar(ColorScheme colorScheme) => CollapsibleCard(
     title: AppLocalizations.of(context).searchByFeeRange,
     icon: Icons.search,
-    isInitiallyExpanded: false,
+    iconColor: colorScheme.primary,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: colorScheme.primary,
+      fontWeight: FontWeight.w600,
+    ),
+    isInitiallyExpanded: true,
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
