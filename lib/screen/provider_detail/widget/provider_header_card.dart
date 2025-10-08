@@ -36,10 +36,12 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
   );
 
   Widget _buildHeader() => Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       ProviderBrandAvatar(iconName: widget.provider.iconName),
       const SizedBox(width: 16),
       Expanded(child: _buildProviderInfo()),
+      const SizedBox(width: 12),
       LoadingButton(
         text: AppLocalizations.of(context).feeOptimizer,
         onPressed: _optimizeFees,
@@ -55,6 +57,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           widget.provider.name,
@@ -64,7 +67,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
           ),
         ),
         if (widget.provider.description.isNotEmpty) ...[
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             widget.provider.description,
             style: ThemeUtil.bodyMedium.copyWith(
