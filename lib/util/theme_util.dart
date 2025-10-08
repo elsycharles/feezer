@@ -230,8 +230,8 @@ class ThemeUtil {
       onError: textLight,
       errorContainer: error.withValues(alpha: 0.2),
       onErrorContainer: error,
-  surface: surfaceDark,
-  onSurface: textLight,
+      surface: surfaceDark,
+      onSurface: textLight,
       onSurfaceVariant: textLight.withValues(alpha: 0.72),
       outline: textLight.withValues(alpha: 0.2),
       outlineVariant: textLight.withValues(alpha: 0.1),
@@ -390,5 +390,4 @@ class ThemeUtil {
         return primaryColor;
     }
   }
-
 }

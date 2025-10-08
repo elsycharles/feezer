@@ -98,7 +98,9 @@ class _State extends State<NewProviderScreen> {
     icon: Icons.business,
     hintText: AppLocalizations.of(context).enterProviderName,
     required: true,
-    validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
+    validator: (value) => value?.trim().isEmpty == true
+        ? AppLocalizations.of(context).thisFieldIsRequired
+        : null,
   );
 
   Widget _buildDescriptionField() => custom_form.FormField(
@@ -108,7 +110,9 @@ class _State extends State<NewProviderScreen> {
     hintText: AppLocalizations.of(context).enterDescription,
     maxLines: 4,
     required: true,
-    validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
+    validator: (value) => value?.trim().isEmpty == true
+        ? AppLocalizations.of(context).thisFieldIsRequired
+        : null,
   );
 
   Widget _buildIconField() => IconSelectorField(
@@ -153,10 +157,10 @@ class _State extends State<NewProviderScreen> {
   void _create() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isCreating = true);
-      
+
       // Simulate creation process
       await Future.delayed(const Duration(milliseconds: 600));
-      
+
       if (mounted) {
         final now = DateTime.now();
         final provider = Provider(
@@ -167,7 +171,10 @@ class _State extends State<NewProviderScreen> {
           creationDatetime: now,
         );
         widget.onProviderAdded?.call(provider);
-        AppToast.success(context, AppLocalizations.of(context).providerCreatedSuccessfully);
+        AppToast.success(
+          context,
+          AppLocalizations.of(context).providerCreatedSuccessfully,
+        );
         context.pop();
       }
     }

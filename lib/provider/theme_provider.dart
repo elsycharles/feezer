@@ -4,11 +4,12 @@ import '../util/preference_util.dart';
 /// Provider to manage theme state across the app
 class ThemeProvider extends ChangeNotifier {
   AppThemeMode _themeMode = AppThemeMode.system;
-  
+
   AppThemeMode get themeMode => _themeMode;
-  
-  ThemeMode get flutterThemeMode => PreferenceUtil.convertToFlutterThemeMode(_themeMode);
-  
+
+  ThemeMode get flutterThemeMode =>
+      PreferenceUtil.convertToFlutterThemeMode(_themeMode);
+
   String get themeModeDisplayName {
     switch (_themeMode) {
       case AppThemeMode.light:

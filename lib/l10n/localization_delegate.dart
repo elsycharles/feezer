@@ -5,7 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 /// Custom localization delegate that provides fallback for unsupported locales
 /// This ensures Material and Cupertino components work with Malagasy (mg) locale
 /// by falling back to English when Material/Cupertino delegates don't support the locale
-class FallbackMaterialLocalizationsDelegate extends LocalizationsDelegate<MaterialLocalizations> {
+class FallbackMaterialLocalizationsDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
   const FallbackMaterialLocalizationsDelegate();
 
   @override
@@ -20,7 +21,7 @@ class FallbackMaterialLocalizationsDelegate extends LocalizationsDelegate<Materi
     if (GlobalMaterialLocalizations.delegate.isSupported(locale)) {
       return await GlobalMaterialLocalizations.delegate.load(locale);
     }
-    
+
     // Otherwise, fall back to English
     return await GlobalMaterialLocalizations.delegate.load(const Locale('en'));
   }
@@ -30,7 +31,8 @@ class FallbackMaterialLocalizationsDelegate extends LocalizationsDelegate<Materi
 }
 
 /// Custom Cupertino localization delegate with fallback
-class FallbackCupertinoLocalizationsDelegate extends LocalizationsDelegate<CupertinoLocalizations> {
+class FallbackCupertinoLocalizationsDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
   const FallbackCupertinoLocalizationsDelegate();
 
   @override
@@ -45,7 +47,7 @@ class FallbackCupertinoLocalizationsDelegate extends LocalizationsDelegate<Cuper
     if (GlobalCupertinoLocalizations.delegate.isSupported(locale)) {
       return await GlobalCupertinoLocalizations.delegate.load(locale);
     }
-    
+
     // Otherwise, fall back to English
     return await GlobalCupertinoLocalizations.delegate.load(const Locale('en'));
   }

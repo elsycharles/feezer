@@ -25,9 +25,24 @@ class OptimizeFeeScreen extends StatefulWidget {
 class _State extends State<OptimizeFeeScreen> {
   // Sample providers - replace with actual data
   final _providers = [
-    Provider(id: '1', name: 'Kuda Bank', description: 'Traditional banking', iconName: 'account_balance'),
-    Provider(id: '2', name: 'MVola', description: 'Mobile money', iconName: 'phone_android'),
-    Provider(id: '3', name: 'Orange Money', description: 'Mobile financial services', iconName: 'mobile_friendly'),
+    Provider(
+      id: '1',
+      name: 'Kuda Bank',
+      description: 'Traditional banking',
+      iconName: 'account_balance',
+    ),
+    Provider(
+      id: '2',
+      name: 'MVola',
+      description: 'Mobile money',
+      iconName: 'phone_android',
+    ),
+    Provider(
+      id: '3',
+      name: 'Orange Money',
+      description: 'Mobile financial services',
+      iconName: 'mobile_friendly',
+    ),
   ];
 
   Provider? _selectedProvider;
@@ -89,7 +104,11 @@ class _State extends State<OptimizeFeeScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.business, size: 18, color: context.colorScheme.primary),
+              Icon(
+                Icons.business,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).financialProvider,
@@ -123,48 +142,55 @@ class _State extends State<OptimizeFeeScreen> {
                   Icons.keyboard_arrow_down,
                   color: context.colorScheme.onSurfaceVariant,
                 ),
-                items: _providers.map((provider) => DropdownMenuItem(
-                  value: provider,
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: context.colorScheme.primary.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Icon(
-                          Icons.business,
-                          color: context.colorScheme.primary,
-                          size: 20,
-                        ),
-                      ),
-                      Global.gapMd,
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
+                items: _providers
+                    .map(
+                      (provider) => DropdownMenuItem(
+                        value: provider,
+                        child: Row(
                           children: [
-                            Text(
-                              provider.name,
-                              style: ThemeUtil.bodyLarge.copyWith(
-                                color: context.colorScheme.onSurface,
-                                fontWeight: FontWeight.w600,
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: context.colorScheme.primary.withValues(
+                                  alpha: 0.1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Icon(
+                                Icons.business,
+                                color: context.colorScheme.primary,
+                                size: 20,
                               ),
                             ),
-                            Text(
-                              provider.description,
-                              style: ThemeUtil.bodySmall.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
+                            Global.gapMd,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    provider.name,
+                                    style: ThemeUtil.bodyLarge.copyWith(
+                                      color: context.colorScheme.onSurface,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    provider.description,
+                                    style: ThemeUtil.bodySmall.copyWith(
+                                      color:
+                                          context.colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                )).toList(),
+                    )
+                    .toList(),
                 onChanged: (provider) {
                   setState(() {
                     _selectedProvider = provider;
@@ -248,7 +274,8 @@ class _State extends State<OptimizeFeeScreen> {
               Expanded(
                 child: TransactionInputWidget(
                   value: _minTransactions,
-                  onChanged: (value) => setState(() => _minTransactions = value),
+                  onChanged: (value) =>
+                      setState(() => _minTransactions = value),
                   label: AppLocalizations.of(context).minTransactions,
                   min: 1,
                   max: 999,
@@ -258,7 +285,8 @@ class _State extends State<OptimizeFeeScreen> {
               Expanded(
                 child: TransactionInputWidget(
                   value: _maxTransactions,
-                  onChanged: (value) => setState(() => _maxTransactions = value),
+                  onChanged: (value) =>
+                      setState(() => _maxTransactions = value),
                   label: AppLocalizations.of(context).maxTransactions,
                   min: 1,
                   max: 999,
@@ -282,7 +310,9 @@ class _State extends State<OptimizeFeeScreen> {
               Icon(
                 Icons.analytics_outlined,
                 size: 48,
-                color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                color: context.colorScheme.onSurfaceVariant.withValues(
+                  alpha: 0.6,
+                ),
               ),
               Global.gapMd,
               Text(
@@ -313,7 +343,11 @@ class _State extends State<OptimizeFeeScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.analytics, size: 18, color: context.colorScheme.primary),
+                Icon(
+                  Icons.analytics,
+                  size: 18,
+                  color: context.colorScheme.primary,
+                ),
                 Global.gapSm,
                 Text(
                   AppLocalizations.of(context).optimizationResults,
@@ -336,7 +370,9 @@ class _State extends State<OptimizeFeeScreen> {
               Container(
                 padding: Global.padMd,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.errorContainer.withValues(alpha: 0.1),
+                  color: context.colorScheme.errorContainer.withValues(
+                    alpha: 0.1,
+                  ),
                   borderRadius: Global.borderMd,
                   border: Border.all(
                     color: context.colorScheme.error.withValues(alpha: 0.3),
@@ -385,30 +421,39 @@ class _State extends State<OptimizeFeeScreen> {
         ),
         child: Row(
           children: [
-            Expanded(flex: 2, child: _buildHeaderCell(AppLocalizations.of(context).interval)),
+            Expanded(
+              flex: 2,
+              child: _buildHeaderCell(AppLocalizations.of(context).interval),
+            ),
             Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
-            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).count)),
-            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).total)),
+            Expanded(
+              child: _buildHeaderCell(AppLocalizations.of(context).count),
+            ),
+            Expanded(
+              child: _buildHeaderCell(AppLocalizations.of(context).total),
+            ),
           ],
         ),
       ),
       // Data rows
-      ..._results.map((result) => Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: Global.padMd,
-        decoration: BoxDecoration(
-          color: context.colorScheme.surface,
-          borderRadius: Global.borderMd,
+      ..._results.map(
+        (result) => Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: Global.padMd,
+          decoration: BoxDecoration(
+            color: context.colorScheme.surface,
+            borderRadius: Global.borderMd,
+          ),
+          child: Row(
+            children: [
+              Expanded(flex: 2, child: _buildTableCell(result.interval)),
+              Expanded(child: _buildTableCell(result.fee, isGreen: true)),
+              Expanded(child: _buildTableCell(result.count.toString())),
+              Expanded(child: _buildTableCell(result.total, isGreen: true)),
+            ],
+          ),
         ),
-        child: Row(
-          children: [
-            Expanded(flex: 2, child: _buildTableCell(result.interval)),
-            Expanded(child: _buildTableCell(result.fee, isGreen: true)),
-            Expanded(child: _buildTableCell(result.count.toString())),
-            Expanded(child: _buildTableCell(result.total, isGreen: true)),
-          ],
-        ),
-      )),
+      ),
     ],
   );
 
@@ -451,7 +496,9 @@ class _State extends State<OptimizeFeeScreen> {
 
   void _generateResults() {
     // Enhanced optimization logic
-    if (_selectedProvider == null || _amount <= 0 || _minTransactions > _maxTransactions) {
+    if (_selectedProvider == null ||
+        _amount <= 0 ||
+        _minTransactions > _maxTransactions) {
       setState(() {
         _results = [];
         _hasOptimized = true;
@@ -486,15 +533,24 @@ class _State extends State<OptimizeFeeScreen> {
   void _optimize() async {
     // Validation
     if (_amount <= 0) {
-      AppToast.error(context, AppLocalizations.of(context).pleaseEnterValidAmount);
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).pleaseEnterValidAmount,
+      );
       return;
     }
     if (_minTransactions > _maxTransactions) {
-      AppToast.error(context, AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax);
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax,
+      );
       return;
     }
     if (_selectedProvider == null) {
-      AppToast.error(context, AppLocalizations.of(context).pleaseSelectProvider);
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).pleaseSelectProvider,
+      );
       return;
     }
 
@@ -508,5 +564,4 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() => _isOptimizing = false);
     }
   }
-
 }

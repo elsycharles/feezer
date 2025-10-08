@@ -4,7 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/search_field.dart';
+import 'widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_toast.dart';
@@ -15,7 +15,7 @@ import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
-import 'widget/selection_action_bar.dart';
+import '../../widget/selection_action_bar.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class _State extends State<ProviderListScreen> {
   Future<void> _loadProviders() async {
     // Simulate loading providers from API or database
     await Future.delayed(const Duration(milliseconds: 1200));
-    
+
     if (mounted) {
       setState(() {
         _providers.addAll([
@@ -117,7 +117,8 @@ class _State extends State<ProviderListScreen> {
     final now = DateTime.now();
     const exitTimeLimit = Duration(seconds: 2);
 
-    if (_lastBackPressed == null || now.difference(_lastBackPressed!) > exitTimeLimit) {
+    if (_lastBackPressed == null ||
+        now.difference(_lastBackPressed!) > exitTimeLimit) {
       _lastBackPressed = now;
       AppToast.info(context, AppLocalizations.of(context).pressAgainToExit);
     } else {
@@ -172,8 +173,9 @@ class _State extends State<ProviderListScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(title: AppLocalizations.of(context).providers),
-        bottomNavigationBar:
-            _selectedIds.isEmpty ? _buildAddProviderButton(colorScheme) : null,
+        bottomNavigationBar: _selectedIds.isEmpty
+            ? _buildAddProviderButton(colorScheme)
+            : null,
         body: SafeArea(
           child: Column(
             children: [
@@ -199,6 +201,7 @@ class _State extends State<ProviderListScreen> {
                     onDelete: _deleteSelected,
                     onEdit: _isSingleSelection ? _editSelected : null,
                     onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                    margin: EdgeInsets.zero,
                   ),
                 ),
               ],

@@ -36,7 +36,7 @@ class LanguageSelectionModal extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
-    
+
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -62,7 +62,7 @@ class LanguageSelectionModal extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // Title
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
@@ -88,34 +88,43 @@ class LanguageSelectionModal extends StatelessWidget {
                       () => _useSystemLanguage(context),
                       icon: Icons.settings_brightness,
                     ),
-                    
+
                     // Specific language options
                     _buildLanguageOption(
                       context,
                       l10n.english,
                       localeProvider.locale?.languageCode == 'en',
-                      () => _changeLanguage(context, SupportedLocale.supportedLocales[0]),
+                      () => _changeLanguage(
+                        context,
+                        SupportedLocale.supportedLocales[0],
+                      ),
                       svgAsset: 'assets/icons/en.svg',
                     ),
                     _buildLanguageOption(
                       context,
                       l10n.french,
                       localeProvider.locale?.languageCode == 'fr',
-                      () => _changeLanguage(context, SupportedLocale.supportedLocales[1]),
+                      () => _changeLanguage(
+                        context,
+                        SupportedLocale.supportedLocales[1],
+                      ),
                       svgAsset: 'assets/icons/fr.svg',
                     ),
                     _buildLanguageOption(
                       context,
                       l10n.malagasy,
                       localeProvider.locale?.languageCode == 'mg',
-                      () => _changeLanguage(context, SupportedLocale.supportedLocales[2]),
+                      () => _changeLanguage(
+                        context,
+                        SupportedLocale.supportedLocales[2],
+                      ),
                       svgAsset: 'assets/icons/mg.svg',
                     ),
                   ],
                 );
               },
             ),
-            
+
             const SizedBox(height: 16),
           ],
         ),
@@ -143,18 +152,10 @@ class LanguageSelectionModal extends StatelessWidget {
           children: [
             // Icône du langage (SVG ou Material Icon)
             if (svgAsset != null) ...[
-              SvgPicture.asset(
-                svgAsset,
-                width: 32,
-                height: 32,
-              ),
+              SvgPicture.asset(svgAsset, width: 32, height: 32),
               const SizedBox(width: 16),
             ] else if (icon != null) ...[
-              Icon(
-                icon,
-                size: 32,
-                color: colorScheme.onSurfaceVariant,
-              ),
+              Icon(icon, size: 32, color: colorScheme.onSurfaceVariant),
               const SizedBox(width: 16),
             ],
             Expanded(
@@ -167,8 +168,12 @@ class LanguageSelectionModal extends StatelessWidget {
               ),
             ),
             Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-              color: isSelected ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.6),
+              isSelected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: isSelected
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.6),
               size: 20,
             ),
           ],

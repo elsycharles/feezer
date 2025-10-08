@@ -36,13 +36,16 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: Text(
         title,
-        style: theme.textTheme.titleMedium?.copyWith(
-          color: colorScheme.onSurface,
-          fontWeight: FontWeight.w600,
-        ) ?? ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
+        style:
+            theme.textTheme.titleMedium?.copyWith(
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ) ??
+            ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
       ),
       actions: _buildActions(context, colorScheme),
-      leading: leading ?? (canPop ? _buildBackButton(context, colorScheme) : null),
+      leading:
+          leading ?? (canPop ? _buildBackButton(context, colorScheme) : null),
       automaticallyImplyLeading: leading == null && canPop,
     );
   }
@@ -59,9 +62,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
           highlightColor: colorScheme.onSurface.withValues(alpha: 0.05),
           hoverColor: colorScheme.onSurface.withValues(alpha: 0.08),
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             child: Icon(
               Icons.arrow_back_ios_new,
               color: colorScheme.onSurface,
@@ -75,17 +76,17 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
 
   List<Widget>? _buildActions(BuildContext context, ColorScheme colorScheme) {
     final List<Widget> allActions = [];
-    
+
     // Add custom actions if provided
     if (actions != null) {
       allActions.addAll(actions!);
     }
-    
+
     // Add settings button if enabled
     if (showSettingsButton) {
       allActions.add(_buildSettingsButton(context, colorScheme));
     }
-    
+
     return allActions.isEmpty ? null : allActions;
   }
 
@@ -102,14 +103,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
           hoverColor: colorScheme.onSurface.withValues(alpha: 0.08),
           child: Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Icon(
-              Icons.settings,
-              color: colorScheme.onSurface,
-              size: 20,
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            child: Icon(Icons.settings, color: colorScheme.onSurface, size: 20),
           ),
         ),
       ),

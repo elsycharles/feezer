@@ -28,7 +28,7 @@ extension BuildContextExtensions on BuildContext {
 
   /// Quick navigation
   NavigatorState get navigator => Navigator.of(this);
-  
+
   /// Pop current route
   void pop<T>([T? result]) => Navigator.of(this).pop(result);
 
@@ -42,29 +42,23 @@ extension StringExtensions on String {
   bool get isNullOrEmpty => trim().isEmpty;
 
   /// Capitalize first letter
-  String get capitalize => isEmpty 
-      ? this 
-      : '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  String get capitalize =>
+      isEmpty ? this : '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
 
   /// Truncate string with ellipsis
-  String truncate(int length) => this.length <= length 
-      ? this 
-      : '${substring(0, length)}...';
+  String truncate(int length) =>
+      this.length <= length ? this : '${substring(0, length)}...';
 }
 
 /// Extensions for Widget to simplify common operations
 extension WidgetExtensions on Widget {
   /// Add padding to widget
-  Widget padding(EdgeInsetsGeometry padding) => Padding(
-    padding: padding,
-    child: this,
-  );
+  Widget padding(EdgeInsetsGeometry padding) =>
+      Padding(padding: padding, child: this);
 
   /// Add margin to widget using Container
-  Widget margin(EdgeInsetsGeometry margin) => Container(
-    margin: margin,
-    child: this,
-  );
+  Widget margin(EdgeInsetsGeometry margin) =>
+      Container(margin: margin, child: this);
 
   /// Center widget
   Widget get center => Center(child: this);
@@ -76,16 +70,10 @@ extension WidgetExtensions on Widget {
   Widget flex(int flex) => Expanded(flex: flex, child: this);
 
   /// Add visibility to widget
-  Widget visible(bool visible) => Visibility(
-    visible: visible,
-    child: this,
-  );
+  Widget visible(bool visible) => Visibility(visible: visible, child: this);
 
   /// Add opacity to widget
-  Widget opacity(double opacity) => Opacity(
-    opacity: opacity,
-    child: this,
-  );
+  Widget opacity(double opacity) => Opacity(opacity: opacity, child: this);
 }
 
 /// Extensions for List of Widget to simplify common operations
@@ -93,7 +81,7 @@ extension WidgetListExtensions on List<Widget> {
   /// Add gaps between widgets
   List<Widget> separated(Widget separator) {
     if (isEmpty) return this;
-    
+
     final result = <Widget>[];
     for (int i = 0; i < length; i++) {
       result.add(this[i]);

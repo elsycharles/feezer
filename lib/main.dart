@@ -11,28 +11,25 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize providers
   final themeProvider = ThemeProvider();
   final localeProvider = LocaleProvider();
-  
+
   await Future.wait([
     themeProvider.initializeTheme(),
     localeProvider.initializeLocale(),
   ]);
-  
-  runApp(MyApp(
-    themeProvider: themeProvider,
-    localeProvider: localeProvider,
-  ));
+
+  runApp(MyApp(themeProvider: themeProvider, localeProvider: localeProvider));
 }
 
 class MyApp extends StatelessWidget {
   final ThemeProvider themeProvider;
   final LocaleProvider localeProvider;
-  
+
   const MyApp({
-    super.key, 
+    super.key,
     required this.themeProvider,
     required this.localeProvider,
   });

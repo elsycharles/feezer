@@ -26,20 +26,14 @@ class AppLoading extends StatelessWidget {
        backgroundColor = null;
 
   /// Inline loading without background
-  const AppLoading.inline({
-    super.key,
-    this.size = 24.0,
-    this.strokeWidth = 2.5,
-  }) : showBackground = false,
-       backgroundColor = null;
+  const AppLoading.inline({super.key, this.size = 24.0, this.strokeWidth = 2.5})
+    : showBackground = false,
+      backgroundColor = null;
 
   /// Small loading indicator for buttons or compact spaces
-  const AppLoading.small({
-    super.key,
-    this.size = 20.0,
-    this.strokeWidth = 2.0,
-  }) : showBackground = false,
-       backgroundColor = null;
+  const AppLoading.small({super.key, this.size = 20.0, this.strokeWidth = 2.0})
+    : showBackground = false,
+      backgroundColor = null;
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +55,11 @@ class AppLoading extends StatelessWidget {
     }
 
     return Container(
-      color: backgroundColor ?? 
-             (isDark 
-               ? ThemeUtil.backgroundDark.withValues(alpha: 0.9)
-               : ThemeUtil.backgroundLight.withValues(alpha: 0.9)),
+      color:
+          backgroundColor ??
+          (isDark
+              ? ThemeUtil.backgroundDark.withValues(alpha: 0.9)
+              : ThemeUtil.backgroundLight.withValues(alpha: 0.9)),
       child: Center(child: loadingWidget),
     );
   }

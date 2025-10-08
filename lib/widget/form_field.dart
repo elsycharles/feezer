@@ -39,9 +39,7 @@ class FormField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: ThemeUtil.bodyLarge.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: ThemeUtil.bodyLarge.copyWith(color: colorScheme.onSurface),
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -50,11 +48,11 @@ class FormField extends StatelessWidget {
           keyboardType: keyboardType,
           inputFormatters: inputFormatters,
           onChanged: onChanged,
-          style: ThemeUtil.bodyMedium.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: ThemeUtil.bodyMedium.copyWith(color: colorScheme.onSurface),
           decoration: InputDecoration(
-            hintText: hintText ?? 'Enter $label', // Note: Cette ligne nécessitera un contexte pour une traduction complète
+            hintText:
+                hintText ??
+                'Enter $label', // Note: Cette ligne nécessitera un contexte pour une traduction complète
             hintStyle: ThemeUtil.bodyMedium.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -67,7 +65,9 @@ class FormField extends StatelessWidget {
             enabledBorder: _buildBorder(colorScheme, false),
             focusedBorder: _buildBorder(colorScheme, true),
           ),
-          validator: validator ?? (required ? (value) => _defaultValidator(value, context) : null),
+          validator:
+              validator ??
+              (required ? (value) => _defaultValidator(value, context) : null),
         ),
       ],
     );

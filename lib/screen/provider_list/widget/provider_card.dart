@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../model/provider_model.dart';
-import '../util/theme_util.dart';
-import '../util/icon_util.dart';
-import '../styles/global.dart';
-import 'interactive_surface.dart';
+import '../../../model/provider_model.dart';
+import '../../../util/theme_util.dart';
+import '../../../util/icon_util.dart';
+import '../../../styles/global.dart';
+import '../../../widget/interactive_surface.dart';
 
 /// Reusable provider card widget for consistent styling
 class ProviderCard extends StatelessWidget {
@@ -82,11 +82,7 @@ class ProviderCard extends StatelessWidget {
     );
   }
 
-  Color _backgroundColor(
-    ColorScheme colorScheme,
-    bool hovered,
-    bool pressed,
-  ) {
+  Color _backgroundColor(ColorScheme colorScheme, bool hovered, bool pressed) {
     final base = isSelected
         ? colorScheme.primary.withValues(alpha: 0.12)
         : colorScheme.surface;
@@ -104,42 +100,42 @@ class ProviderCard extends StatelessWidget {
   }
 
   Widget _buildIcon(ColorScheme colorScheme) => Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Center(
-          child: Icon(
-            IconUtil.getIcon(provider.iconName),
-            color: colorScheme.primary,
-            size: 24,
-          ),
-        ),
-      );
+    width: 48,
+    height: 48,
+    decoration: BoxDecoration(
+      color: colorScheme.primary.withValues(alpha: 0.12),
+      borderRadius: BorderRadius.circular(12),
+    ),
+    child: Center(
+      child: Icon(
+        IconUtil.getIcon(provider.iconName),
+        color: colorScheme.primary,
+        size: 24,
+      ),
+    ),
+  );
 
   Widget _buildContent(ColorScheme colorScheme) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            provider.name,
-            style: ThemeUtil.titleSmall.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
-            ),
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        provider.name,
+        style: ThemeUtil.titleSmall.copyWith(
+          fontWeight: FontWeight.w600,
+          color: colorScheme.onSurface,
+        ),
+      ),
+      if (showDescription && provider.description.isNotEmpty) ...[
+        const SizedBox(height: 4),
+        Text(
+          provider.description,
+          style: ThemeUtil.bodySmall.copyWith(
+            color: colorScheme.onSurfaceVariant,
           ),
-          if (showDescription && provider.description.isNotEmpty) ...[
-            const SizedBox(height: 4),
-            Text(
-              provider.description,
-              style: ThemeUtil.bodySmall.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
-        ],
-      );
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    ],
+  );
 }

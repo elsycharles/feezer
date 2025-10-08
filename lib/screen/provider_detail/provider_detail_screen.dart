@@ -13,7 +13,7 @@ import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
 import 'widget/provider_header_card.dart';
 import 'widget/fee_interval_tile.dart';
-import 'widget/fee_interval_selection_action_bar.dart';
+import '../../widget/selection_action_bar.dart';
 import '../fee_interval/new_fee_interval_screen.dart';
 import 'widget/fee_interval_edit_bottom_sheet.dart';
 import '../../widget/app_toast.dart';
@@ -103,7 +103,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         }
       },
       child: Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).providerDetails,
           leading: IconButton(
@@ -150,13 +150,17 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     );
   }
 
-  Widget _buildSelectionBar() => FeeIntervalSelectionActionBar(
-    selectedCount: _selectedIds.length,
-    totalCount: _filteredIntervals.length,
-    onSelectAll: _selectAll,
-    onClearSelection: _clearSelection,
-    onDelete: _deleteSelectedIntervals,
-    onEdit: _selectedIds.length == 1 ? () => _editSelectedInterval() : null,
+  Widget _buildSelectionBar() => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: SelectionActionBar(
+      selectedCount: _selectedIds.length,
+      totalCount: _filteredIntervals.length,
+      onSelectAll: _selectAll,
+      onClearSelection: _clearSelection,
+      onDelete: _deleteSelectedIntervals,
+      onEdit: _selectedIds.length == 1 ? () => _editSelectedInterval() : null,
+      margin: EdgeInsets.zero,
+    ),
   );
 
   Widget _buildHeader() => Container(
@@ -233,79 +237,86 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       children: [
         // No checkbox in header, so no reserved space
         Expanded(
-          child: _headerCell(AppLocalizations.of(context).feeInterval, alignment: TextAlign.left),
+          child: _headerCell(
+            AppLocalizations.of(context).feeInterval,
+            alignment: TextAlign.left,
+          ),
         ),
         // Approximate space for fee chip (padding + content)
         Container(
           constraints: const BoxConstraints(minWidth: 60),
-          child: _headerCell(AppLocalizations.of(context).fee, alignment: TextAlign.center),
+          child: _headerCell(
+            AppLocalizations.of(context).fee,
+            alignment: TextAlign.center,
+          ),
         ),
       ],
     ),
   );
 
-  Widget _headerCell(String text, {TextAlign alignment = TextAlign.center}) => Text(
-    text,
-    style: ThemeUtil.labelMedium.copyWith(
-      color: Theme.of(context).colorScheme.onSurfaceVariant,
-      fontWeight: FontWeight.w600,
-    ),
-    textAlign: alignment,
-  );
+  Widget _headerCell(String text, {TextAlign alignment = TextAlign.center}) =>
+      Text(
+        text,
+        style: ThemeUtil.labelMedium.copyWith(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          fontWeight: FontWeight.w600,
+        ),
+        textAlign: alignment,
+      );
 
   Widget _buildSearchBar(ColorScheme colorScheme) => Container(
     margin: const EdgeInsets.symmetric(horizontal: 16),
     child: SurfaceCard(
       padding: const EdgeInsets.all(16),
       radius: 16,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(Icons.search, size: 18, color: colorScheme.primary),
-                const SizedBox(width: 8),
-                Text(
-                  AppLocalizations.of(context).searchByFeeRange,
-                  style: ThemeUtil.titleSmall.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.w600,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.search, size: 18, color: colorScheme.primary),
+                  const SizedBox(width: 8),
+                  Text(
+                    AppLocalizations.of(context).searchByFeeRange,
+                    style: ThemeUtil.titleSmall.copyWith(
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            if (_feeMinController.text.isNotEmpty ||
-                _feeMaxController.text.isNotEmpty)
-              GestureDetector(
-                onTap: _clearSearch,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: colorScheme.onSurface.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                  child: Icon(
-                    Icons.clear,
-                    size: 16,
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                ),
+                ],
               ),
-          ],
-        ),
-        Global.gapMd,
-        Row(
-          children: [
-            Expanded(child: _buildFeeMinField(colorScheme)),
-            const SizedBox(width: 12),
-            Expanded(child: _buildFeeMaxField(colorScheme)),
-          ],
-        ),
-      ],
-    ),
+              if (_feeMinController.text.isNotEmpty ||
+                  _feeMaxController.text.isNotEmpty)
+                GestureDetector(
+                  onTap: _clearSearch,
+                  child: Container(
+                    padding: const EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: colorScheme.onSurface.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Icon(
+                      Icons.clear,
+                      size: 16,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          Global.gapMd,
+          Row(
+            children: [
+              Expanded(child: _buildFeeMinField(colorScheme)),
+              const SizedBox(width: 12),
+              Expanded(child: _buildFeeMaxField(colorScheme)),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 
@@ -380,60 +391,58 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   Widget _buildFeeMinField(ColorScheme colorScheme) => TextField(
-        controller: _feeMinController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          hintText: AppLocalizations.of(context).minFee,
-          hintStyle: ThemeUtil.bodySmall.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-          filled: true,
-          fillColor: colorScheme.surface,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: colorScheme.outlineVariant),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: colorScheme.outlineVariant),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: colorScheme.primary, width: 2),
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        ),
-        style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
-      );
+    controller: _feeMinController,
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+      hintText: AppLocalizations.of(context).minFee,
+      hintStyle: ThemeUtil.bodySmall.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
+      filled: true,
+      fillColor: colorScheme.surface,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.primary, width: 2),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    ),
+    style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+  );
 
   Widget _buildFeeMaxField(ColorScheme colorScheme) => TextField(
-        controller: _feeMaxController,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          hintText: AppLocalizations.of(context).maxFee,
-          hintStyle: ThemeUtil.bodySmall.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-          filled: true,
-          fillColor: colorScheme.surface,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: colorScheme.outlineVariant),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: colorScheme.outlineVariant),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(color: colorScheme.primary, width: 2),
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        ),
-        style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
-      );
+    controller: _feeMaxController,
+    keyboardType: TextInputType.number,
+    decoration: InputDecoration(
+      hintText: AppLocalizations.of(context).maxFee,
+      hintStyle: ThemeUtil.bodySmall.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
+      filled: true,
+      fillColor: colorScheme.surface,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.outlineVariant),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.primary, width: 2),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    ),
+    style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+  );
 
   void _filterIntervals() {
     setState(() {
@@ -461,16 +470,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _editInterval(FeeInterval interval) {
-    FeeIntervalEditBottomSheet.show(
-      context,
-      interval,
-      (updatedInterval) {
-        setState(() {
-          final index = _feeIntervals.indexWhere((i) => i.id == interval.id);
-          if (index != -1) _feeIntervals[index] = updatedInterval;
-        });
-      },
-    );
+    FeeIntervalEditBottomSheet.show(context, interval, (updatedInterval) {
+      setState(() {
+        final index = _feeIntervals.indexWhere((i) => i.id == interval.id);
+        if (index != -1) _feeIntervals[index] = updatedInterval;
+      });
+    });
   }
 
   void _editSelectedInterval() {
@@ -485,9 +490,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   void _onOptimizeFees() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => const OptimizeFeeScreen(),
-      ),
+      MaterialPageRoute(builder: (_) => const OptimizeFeeScreen()),
     );
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
@@ -522,7 +525,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           _filteredIntervals = _feeIntervals;
           _selectedIds.clear();
         });
-        AppToast.success(context, AppLocalizations.of(context).feeIntervalDeletedSuccessfully(count));
+        AppToast.success(
+          context,
+          AppLocalizations.of(context).feeIntervalDeletedSuccessfully(count),
+        );
       }
     }
   }

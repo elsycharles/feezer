@@ -48,7 +48,9 @@ class LoadingButton extends StatelessWidget {
                   ),
                 ),
                 shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 padding: WidgetStateProperty.all(padding),
                 splashFactory: NoSplash.splashFactory,
@@ -61,7 +63,8 @@ class LoadingButton extends StatelessWidget {
                         text,
                         key: ValueKey(text),
                         style: ThemeUtil.labelLarge.copyWith(
-                          color: foregroundColor ?? colorScheme.onSurfaceVariant,
+                          color:
+                              foregroundColor ?? colorScheme.onSurfaceVariant,
                         ),
                       ),
               ),
@@ -79,7 +82,9 @@ class LoadingButton extends StatelessWidget {
                   foregroundColor ?? colorScheme.onPrimary,
                 ),
                 shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 padding: WidgetStateProperty.all(padding),
                 elevation: WidgetStateProperty.all(0),

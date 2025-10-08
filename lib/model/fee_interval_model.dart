@@ -56,5 +56,6 @@ class FeeInterval {
   int get hashCode => id.hashCode;
 
   @override
-  String toString() => 'FeeInterval(id: $id, range: $formattedRange, fee: $formattedFee)';
+  String toString() =>
+      'FeeInterval(id: $id, range: $formattedRange, fee: $formattedFee)';
 }

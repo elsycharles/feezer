@@ -27,7 +27,7 @@ class ThemeSelectionModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -53,7 +53,7 @@ class ThemeSelectionModal extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // Title
             Padding(
               padding: const EdgeInsets.all(20),
@@ -65,7 +65,7 @@ class ThemeSelectionModal extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // Theme options
             Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
@@ -102,14 +102,14 @@ class ThemeSelectionModal extends StatelessWidget {
                 );
               },
             ),
-            
+
             const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
-  
+
   Widget _buildThemeOption(
     BuildContext context,
     String title,
@@ -121,7 +121,7 @@ class ThemeSelectionModal extends StatelessWidget {
   ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return InteractiveSurface(
       onTap: onTap,
       borderRadius: BorderRadius.zero,
@@ -142,8 +142,12 @@ class ThemeSelectionModal extends StatelessWidget {
                   Text(
                     title,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: isSelected ? colorScheme.primary : colorScheme.onSurface,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.onSurface,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
                     ),
                   ),
                   Text(
@@ -156,8 +160,12 @@ class ThemeSelectionModal extends StatelessWidget {
               ),
             ),
             Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-              color: isSelected ? colorScheme.primary : colorScheme.onSurface.withValues(alpha: 0.6),
+              isSelected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: isSelected
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.6),
               size: 20,
             ),
           ],

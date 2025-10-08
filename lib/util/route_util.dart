@@ -16,21 +16,23 @@ class AppRouter {
     errorBuilder: (context, state) {
       final colorScheme = Theme.of(context).colorScheme;
       final currentLocation = state.uri.toString();
-      final isOnHomePage = currentLocation == providersRoute || currentLocation == onboardingRoute;
-      
+      final isOnHomePage =
+          currentLocation == providersRoute ||
+          currentLocation == onboardingRoute;
+
       return Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).error)),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.error_outline,
-                size: 64,
-                color: colorScheme.error,
-              ),
+              Icon(Icons.error_outline, size: 64, color: colorScheme.error),
               const SizedBox(height: 16),
-              Text(AppLocalizations.of(context).screenNotFound(state.uri.toString())),
+              Text(
+                AppLocalizations.of(
+                  context,
+                ).screenNotFound(state.uri.toString()),
+              ),
               const SizedBox(height: 16),
               // Only show navigation button if not already on home page
               if (!isOnHomePage)

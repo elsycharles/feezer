@@ -71,32 +71,26 @@ class _Dialog extends StatelessWidget {
           color: colorScheme.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Icon(
-          Icons.warning_rounded,
-          color: colorScheme.error,
-          size: 24,
-        ),
+        child: Icon(Icons.warning_rounded, color: colorScheme.error, size: 24),
       ),
       const SizedBox(width: 16),
       Expanded(
         child: Text(
           title,
-          style: ThemeUtil.titleSmall.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
         ),
       ),
     ],
   );
 
   Widget _buildMessage(ColorScheme colorScheme) => Text(
-        message,
-        style: ThemeUtil.bodyMedium.copyWith(
-          color: colorScheme.onSurfaceVariant,
-          height: 1.4,
-        ),
-        textAlign: TextAlign.left,
-      );
+    message,
+    style: ThemeUtil.bodyMedium.copyWith(
+      color: colorScheme.onSurfaceVariant,
+      height: 1.4,
+    ),
+    textAlign: TextAlign.left,
+  );
 
   Widget _buildActions(BuildContext context, ColorScheme colorScheme) => Row(
     children: [
@@ -104,8 +98,9 @@ class _Dialog extends StatelessWidget {
         child: OutlinedButton(
           onPressed: () => Navigator.pop(context, false),
           style: ButtonStyle(
-            foregroundColor:
-                WidgetStateProperty.all(colorScheme.onSurfaceVariant),
+            foregroundColor: WidgetStateProperty.all(
+              colorScheme.onSurfaceVariant,
+            ),
             overlayColor: ThemeUtil.interactiveOverlay(
               colorScheme.onSurfaceVariant,
             ),

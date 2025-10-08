@@ -50,9 +50,7 @@ class OnboardingBottomSection extends StatelessWidget {
                 backgroundColor: ThemeUtil.interactiveBackground(
                   colorScheme.primary,
                 ),
-                foregroundColor: WidgetStateProperty.all(
-                  colorScheme.onPrimary,
-                ),
+                foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
                 overlayColor: ThemeUtil.interactiveOverlay(
                   colorScheme.onPrimary,
                 ),

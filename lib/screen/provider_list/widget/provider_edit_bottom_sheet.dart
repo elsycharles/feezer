@@ -6,7 +6,7 @@ import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/icon_selector_field.dart';
-import '../../../widget/loading_widgets.dart';
+import '../../../widget/loading_button.dart';
 import '../../../widget/app_toast.dart';
 
 /// Clean provider editor
@@ -62,7 +62,9 @@ class _State extends State<ProviderEditBottomSheet> {
           controller: _nameController,
           icon: Icons.business,
           required: true,
-          validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
+          validator: (value) => value?.trim().isEmpty == true
+              ? AppLocalizations.of(context).thisFieldIsRequired
+              : null,
         ),
         Global.gapLg,
         custom_form.FormField(
@@ -71,7 +73,9 @@ class _State extends State<ProviderEditBottomSheet> {
           icon: Icons.description,
           maxLines: 4,
           required: true,
-          validator: (value) => value?.trim().isEmpty == true ? AppLocalizations.of(context).thisFieldIsRequired : null,
+          validator: (value) => value?.trim().isEmpty == true
+              ? AppLocalizations.of(context).thisFieldIsRequired
+              : null,
         ),
         Global.gapLg,
         IconSelectorField(
@@ -88,12 +92,10 @@ class _State extends State<ProviderEditBottomSheet> {
     ),
   );
 
-
-
   void _save() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      
+
       try {
         final provider = Provider(
           id: widget.provider.id,
@@ -102,14 +104,17 @@ class _State extends State<ProviderEditBottomSheet> {
           iconName: _selectedIcon,
           creationDatetime: widget.provider.creationDatetime,
         );
-        
+
         // Simulate async operation
         await Future.delayed(const Duration(milliseconds: 300));
-        
+
         if (mounted) {
           Navigator.pop(context);
           widget.onSave(provider);
-          AppToast.success(context, AppLocalizations.of(context).providerUpdatedSuccessfully);
+          AppToast.success(
+            context,
+            AppLocalizations.of(context).providerUpdatedSuccessfully,
+          );
         }
       } finally {
         if (mounted) {

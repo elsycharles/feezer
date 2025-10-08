@@ -26,9 +26,7 @@ class IconSelectorField extends StatelessWidget {
       children: [
         Text(
           label ?? AppLocalizations.of(context).icon,
-          style: ThemeUtil.bodyLarge.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: ThemeUtil.bodyLarge.copyWith(color: colorScheme.onSurface),
         ),
         const SizedBox(height: 8),
         GestureDetector(

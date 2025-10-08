@@ -26,9 +26,7 @@ class SearchEmptyState extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             title,
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: colorScheme.onSurface,
-            ),
+            style: ThemeUtil.bodyMedium.copyWith(color: colorScheme.onSurface),
             textAlign: TextAlign.center,
           ),
           if (message?.isNotEmpty == true) ...[

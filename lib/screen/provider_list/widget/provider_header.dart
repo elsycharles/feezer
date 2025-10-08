@@ -53,7 +53,7 @@ class ProviderHeader extends StatelessWidget {
             Global.gapLg,
             ProviderStatChip(
               icon: Icons.people_alt,
-              label: providerCount == 1 
+              label: providerCount == 1
                   ? AppLocalizations.of(context).activeProvider
                   : AppLocalizations.of(context).activeProviders,
               value: '$providerCount',

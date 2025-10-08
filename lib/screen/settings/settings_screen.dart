@@ -22,36 +22,34 @@ class SettingsScreen extends StatelessWidget {
       backgroundColor: theme.scaffoldBackgroundColor,
       appBar: custom.AppBar(
         title: AppLocalizations.of(context).settings,
-        showSettingsButton: false, // Don't show settings button on settings page
+        showSettingsButton:
+            false, // Don't show settings button on settings page
       ),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            _buildSection(
-              context,
-              AppLocalizations.of(context).general,
-              [
-                Consumer<ThemeProvider>(
-                  builder: (context, themeProvider, child) => _buildSettingTile(
-                    context,
-                    AppLocalizations.of(context).theme,
-                    _getThemeModeDisplayName(context, themeProvider.themeMode),
-                    Icons.palette_outlined,
-                    onTap: () => ThemeSelectionModal.show(context),
-                  ),
+            _buildSection(context, AppLocalizations.of(context).general, [
+              Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) => _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).theme,
+                  _getThemeModeDisplayName(context, themeProvider.themeMode),
+                  Icons.palette_outlined,
+                  onTap: () => ThemeSelectionModal.show(context),
                 ),
-                Consumer<LocaleProvider>(
-                  builder: (context, localeProvider, child) => _buildSettingTile(
-                    context,
-                    AppLocalizations.of(context).language,
-                    localeProvider.currentSupportedLocale?.nativeName ?? AppLocalizations.of(context).system,
-                    Icons.language_outlined,
-                    onTap: () => LanguageSelectionModal.show(context),
-                  ),
+              ),
+              Consumer<LocaleProvider>(
+                builder: (context, localeProvider, child) => _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).language,
+                  localeProvider.currentSupportedLocale?.nativeName ??
+                      AppLocalizations.of(context).system,
+                  Icons.language_outlined,
+                  onTap: () => LanguageSelectionModal.show(context),
                 ),
-              ],
-            ),
+              ),
+            ]),
             const SizedBox(height: 24),
             // _buildSection(
             //   context,
@@ -82,42 +80,42 @@ class SettingsScreen extends StatelessWidget {
             //   ],
             // ),
             // const SizedBox(height: 24),
-            _buildSection(
-              context,
-              AppLocalizations.of(context).about,
-              [
-                _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).version,
-                  '1.0.0',
-                  Icons.info_outline,
-                  showArrow: false,
-                ),
-                _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).helpAndSupport,
-                  AppLocalizations.of(context).faqAndContact,
-                  Icons.help_outline,
-                  onTap: () => _showComingSoon(context),
-                ),
-                _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).termsOfUse,
-                  AppLocalizations.of(context).termsAndPrivacyPolicy,
-                  Icons.description_outlined,
-                  onTap: () => _showComingSoon(context),
-                ),
-              ],
-            ),
+            _buildSection(context, AppLocalizations.of(context).about, [
+              _buildSettingTile(
+                context,
+                AppLocalizations.of(context).version,
+                '1.0.0',
+                Icons.info_outline,
+                showArrow: false,
+              ),
+              _buildSettingTile(
+                context,
+                AppLocalizations.of(context).helpAndSupport,
+                AppLocalizations.of(context).faqAndContact,
+                Icons.help_outline,
+                onTap: () => _showComingSoon(context),
+              ),
+              _buildSettingTile(
+                context,
+                AppLocalizations.of(context).termsOfUse,
+                AppLocalizations.of(context).termsAndPrivacyPolicy,
+                Icons.description_outlined,
+                onTap: () => _showComingSoon(context),
+              ),
+            ]),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSection(BuildContext context, String title, List<Widget> children) {
+  Widget _buildSection(
+    BuildContext context,
+    String title,
+    List<Widget> children,
+  ) {
     final theme = Theme.of(context);
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -155,10 +153,7 @@ class SettingsScreen extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.zero,
       builder: (context, hovered, pressed) => ListTile(
-        leading: Icon(
-          icon,
-          color: textColor ?? colorScheme.onSurface,
-        ),
+        leading: Icon(icon, color: textColor ?? colorScheme.onSurface),
         title: Text(
           title,
           style: theme.textTheme.bodyLarge?.copyWith(
@@ -172,10 +167,7 @@ class SettingsScreen extends StatelessWidget {
           ),
         ),
         trailing: showArrow
-            ? Icon(
-                Icons.chevron_right,
-                color: colorScheme.onSurfaceVariant,
-              )
+            ? Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant)
             : null,
         enabled: onTap != null,
       ),
@@ -183,10 +175,16 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void _showComingSoon(BuildContext context) {
-    AppToast.info(context, AppLocalizations.of(context).featureComingNextVersion);
+    AppToast.info(
+      context,
+      AppLocalizations.of(context).featureComingNextVersion,
+    );
   }
 
-  String _getThemeModeDisplayName(BuildContext context, AppThemeMode themeMode) {
+  String _getThemeModeDisplayName(
+    BuildContext context,
+    AppThemeMode themeMode,
+  ) {
     switch (themeMode) {
       case AppThemeMode.light:
         return AppLocalizations.of(context).light;
