@@ -132,7 +132,7 @@ class ThemeSelectionModal extends StatelessWidget {
             Icon(
               icon,
               color: isSelected ? colorScheme.primary : colorScheme.onSurface,
-              size: 24,
+              size: 20,
             ),
             const SizedBox(width: 16),
             Expanded(

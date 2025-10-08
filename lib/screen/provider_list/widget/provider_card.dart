@@ -110,7 +110,7 @@ class ProviderCard extends StatelessWidget {
       child: Icon(
         IconUtil.getIcon(provider.iconName),
         color: colorScheme.primary,
-        size: 24,
+        size: 20,
       ),
     ),
   );

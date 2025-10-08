@@ -155,7 +155,7 @@ class LanguageSelectionModal extends StatelessWidget {
               SvgPicture.asset(svgAsset, width: 32, height: 32),
               const SizedBox(width: 16),
             ] else if (icon != null) ...[
-              Icon(icon, size: 32, color: colorScheme.onSurfaceVariant),
+              Icon(icon, size: 24, color: colorScheme.onSurfaceVariant),
               const SizedBox(width: 16),
             ],
             Expanded(

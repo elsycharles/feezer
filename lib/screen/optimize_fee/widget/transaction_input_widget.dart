@@ -83,10 +83,8 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(7),
             ],
-            style: ThemeUtil.titleLarge.copyWith(
+            style: ThemeUtil.titleMedium.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
-              fontSize: 18,
             ),
             decoration: const InputDecoration(
               border: InputBorder.none,

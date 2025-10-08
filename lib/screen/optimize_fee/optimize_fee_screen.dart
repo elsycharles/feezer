@@ -140,7 +140,7 @@ class _State extends State<OptimizeFeeScreen> {
                           child: Icon(
                             Icons.business,
                             color: context.colorScheme.primary,
-                            size: 20,
+                            size: 18,
                           ),
                         ),
                         Global.gapMd,
@@ -249,7 +249,7 @@ class _State extends State<OptimizeFeeScreen> {
             children: [
               Icon(
                 Icons.analytics_outlined,
-                size: 48,
+                size: 40,
                 color: context.colorScheme.onSurfaceVariant.withValues(
                   alpha: 0.6,
                 ),
@@ -324,7 +324,7 @@ class _State extends State<OptimizeFeeScreen> {
                     Icon(
                       Icons.warning_outlined,
                       color: context.colorScheme.error,
-                      size: 20,
+                      size: 18,
                     ),
                     Global.gapSm,
                     Expanded(
