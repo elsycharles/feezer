@@ -73,38 +73,21 @@ class _State extends State<OptimizeFeeScreen> {
       child: Column(
         children: [
           Expanded(
-            child: Column(
-              children: [
-                // Scrollable input sections
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Global.gapMd,
-                        _buildProviderSection(),
-                        Global.gapLg,
-                        _buildAmountSection(),
-                        Global.gapLg,
-                        _buildTransactionSection(),
-                        Global.gapLg,
-                        _buildResultsSection(),
-                        Global.gapXl,
-                      ],
-                    ),
-                  ),
-                ),
-                // Fixed header and scrollable results (only when there are results)
-                if (_hasOptimized && _results.isNotEmpty) ...[
-                  _buildResultsTableHeader(),
-                  SizedBox(
-                    height: 200, // Fixed height for the scrollable results
-                    child: SingleChildScrollView(
-                      child: _buildResultsTableData(),
-                    ),
-                  ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Global.gapMd,
+                  _buildProviderSection(),
+                  Global.gapLg,
+                  _buildAmountSection(),
+                  Global.gapLg,
+                  _buildTransactionSection(),
+                  Global.gapLg,
+                  _buildResultsSection(),
+                  Global.gapXl,
+                  SizedBox(height: 80), // Bottom padding for button
                 ],
-                SizedBox(height: 80), // Bottom padding for button
-              ],
+              ),
             ),
           ),
           _buildOptimizeButton(),
@@ -323,6 +306,7 @@ class _State extends State<OptimizeFeeScreen> {
         margin: const EdgeInsets.symmetric(horizontal: 16),
         child: SurfaceCard(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.analytics_outlined,
@@ -337,6 +321,7 @@ class _State extends State<OptimizeFeeScreen> {
                 style: ThemeUtil.titleMedium.copyWith(
                   color: context.colorScheme.onSurface,
                 ),
+                textAlign: TextAlign.center,
               ),
               Global.gapSm,
               Text(
@@ -414,47 +399,48 @@ class _State extends State<OptimizeFeeScreen> {
                   ],
                 ),
               )
-            // Results table is now shown separately below with fixed header
+            else
+              _buildResultsTable(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildResultsTableHeader() => Container(
-    margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16),
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-    decoration: BoxDecoration(
-      color: context.colorScheme.surface,
-      borderRadius: Global.borderMd,
-      border: Border.all(
-        color: context.colorScheme.outline.withValues(alpha: 0.12),
-        width: 1,
-      ),
-    ),
-    child: Row(
-      children: [
-        Expanded(
-          flex: 2,
-          child: _buildHeaderCell(AppLocalizations.of(context).interval),
-        ),
-        Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
-        Expanded(
-          child: _buildHeaderCell(AppLocalizations.of(context).count),
-        ),
-        Expanded(
-          child: _buildHeaderCell(AppLocalizations.of(context).total),
-        ),
-      ],
-    ),
-  );
-
-  Widget _buildResultsTableData() => Column(
+  Widget _buildResultsTable() => Column(
     children: [
+      // Header row
+      Container(
+        margin: const EdgeInsets.only(bottom: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: context.colorScheme.surface,
+          borderRadius: Global.borderMd,
+          border: Border.all(
+            color: context.colorScheme.outline.withValues(alpha: 0.12),
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: _buildHeaderCell(AppLocalizations.of(context).interval),
+            ),
+            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
+            Expanded(
+              child: _buildHeaderCell(AppLocalizations.of(context).count),
+            ),
+            Expanded(
+              child: _buildHeaderCell(AppLocalizations.of(context).total),
+            ),
+          ],
+        ),
+      ),
       // Data rows
       ..._results.map(
         (result) => Container(
-          margin: const EdgeInsets.only(bottom: 8, left: 16, right: 16),
+          margin: const EdgeInsets.only(bottom: 8),
           padding: Global.padMd,
           decoration: BoxDecoration(
             color: context.colorScheme.surface,
@@ -472,6 +458,8 @@ class _State extends State<OptimizeFeeScreen> {
       ),
     ],
   );
+
+
 
   Widget _buildHeaderCell(String text) => Text(
     text,
@@ -541,6 +529,60 @@ class _State extends State<OptimizeFeeScreen> {
           fee: '${(optimizedFee * 1.2).round().toString()} Ar',
           count: (_maxTransactions * 0.8).round(),
           total: '${(totalCost * 0.9).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: '${(_amount * 1).round()} - ${(_amount * 3).round()}',
+          fee: '${(optimizedFee * 1.5).round().toString()} Ar',
+          count: (_maxTransactions * 0.6).round(),
+          total: '${(totalCost * 0.85).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: '${(_amount * 1.5).round()} - ${(_amount * 4).round()}',
+          fee: '${(optimizedFee * 1.8).round().toString()} Ar',
+          count: (_maxTransactions * 0.4).round(),
+          total: '${(totalCost * 0.8).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: '${(_amount * 2).round()} - ${(_amount * 5).round()}',
+          fee: '${(optimizedFee * 2).round().toString()} Ar',
+          count: (_maxTransactions * 0.2).round(),
+          total: '${(totalCost * 0.75).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: '> ${(_amount * 5).round()}',
+          fee: '${(optimizedFee * 2.5).round().toString()} Ar',
+          count: 1,
+          total: '${(totalCost * 0.7).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: 'Custom',
+          fee: '${(optimizedFee * 3).round().toString()} Ar',
+          count: 1,
+          total: '${(totalCost * 0.65).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: 'Special',
+          fee: '${(optimizedFee * 4).round().toString()} Ar',
+          count: 1,
+          total: '${(totalCost * 0.6).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: 'Exclusive',
+          fee: '${(optimizedFee * 5).round().toString()} Ar',
+          count: 1,
+          total: '${(totalCost * 0.55).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: 'Premium',
+          fee: '${(optimizedFee * 6).round().toString()} Ar',
+          count: 1,
+          total: '${(totalCost * 0.5).round().toString()} Ar',
+        ),
+        OptimizationResult(
+          interval: 'Ultimate',
+          fee: '${(optimizedFee * 7).round().toString()} Ar',
+          count: 1,
+          total: '${(totalCost * 0.45).round().toString()} Ar',
         ),
       ];
     });
