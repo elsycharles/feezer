@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 /// Extensions for BuildContext to simplify common operations
 extension BuildContextExtensions on BuildContext {
@@ -26,14 +27,14 @@ extension BuildContextExtensions on BuildContext {
   /// Check if keyboard is visible
   bool get isKeyboardVisible => MediaQuery.of(this).viewInsets.bottom > 0;
 
-  /// Quick navigation
-  NavigatorState get navigator => Navigator.of(this);
+  /// Quick access to GoRouter
+  GoRouter get router => GoRouter.of(this);
 
-  /// Pop current route
-  void pop<T>([T? result]) => Navigator.of(this).pop(result);
+  /// Pop current route using GoRouter
+  void pop<T>([T? result]) => GoRouter.of(this).pop(result);
 
-  /// Push new route
-  Future<T?> push<T>(Route<T> route) => Navigator.of(this).push(route);
+  /// Push new route using GoRouter path
+  Future<T?> push<T>(String path, {Object? extra}) => GoRouter.of(this).push<T>(path, extra: extra);
 }
 
 /// Extensions for String to simplify common operations

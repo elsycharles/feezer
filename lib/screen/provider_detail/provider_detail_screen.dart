@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
@@ -515,7 +517,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       await Future.delayed(const Duration(milliseconds: 800));
 
       if (mounted) {
-        Navigator.of(context).pop(); // Close loading dialog
+        GoRouter.of(context).pop(); // Close loading dialog
         setState(() {
           _feeIntervals.removeWhere((item) => _selectedIds.contains(item.id));
           _filteredIntervals = _feeIntervals;

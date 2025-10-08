@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
@@ -174,7 +175,7 @@ class _State extends State<NewProviderScreen> {
           context,
           AppLocalizations.of(context).providerCreatedSuccessfully,
         );
-        Navigator.of(context).pop(provider);
+        GoRouter.of(context).pop(provider);
       }
     }
   }

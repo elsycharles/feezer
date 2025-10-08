@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter/material.dart' hide AppBar;
+import 'package:go_router/go_router.dart';
 
 import '../util/theme_util.dart';
 import 'app_back_button.dart';
@@ -30,7 +31,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
   final theme = Theme.of(context);
   final colorScheme = theme.colorScheme;
-  final canPop = Navigator.of(context).canPop();
+  final canPop = GoRouter.of(context).canPop();
   final backSemantics = MaterialLocalizations.of(context).backButtonTooltip;
 
     return material.AppBar(
@@ -48,8 +49,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
             ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
       ),
       actions: _buildActions(context, colorScheme),
-      leading: leading ?? (canPop ? AppBackButton(semanticLabel: backSemantics) : null),
-      automaticallyImplyLeading: leading == null && canPop,
+  leading: leading ?? (canPop ? AppBackButton(semanticLabel: backSemantics) : null),
+  automaticallyImplyLeading: leading == null && canPop,
     );
   }
 

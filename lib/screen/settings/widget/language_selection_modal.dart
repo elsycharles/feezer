@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../provider/locale_provider.dart';
@@ -48,7 +49,7 @@ class LanguageSelectionModal extends StatelessWidget {
           children: [
             // Handle bar - tap to close
             GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () => GoRouter.of(context).pop(),
               child: Container(
                 margin: const EdgeInsets.only(top: 8),
                 padding: const EdgeInsets.symmetric(vertical: 8),

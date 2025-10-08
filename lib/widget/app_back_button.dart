@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../util/navigation_util.dart';
+import 'package:go_router/go_router.dart';
 
 /// Consistent back button used across the application.
 class AppBackButton extends StatelessWidget {
@@ -23,7 +22,13 @@ class AppBackButton extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(20),
-          onTap: onPressed ?? () => NavigationUtil.safeBack(context),
+          onTap: onPressed ?? () {
+            final router = GoRouter.of(context);
+            // Only pop if there's something to pop
+            if (router.canPop()) {
+              router.pop();
+            }
+          },
           splashColor: colorScheme.onSurface.withValues(alpha: 0.1),
           highlightColor: colorScheme.onSurface.withValues(alpha: 0.05),
           hoverColor: colorScheme.onSurface.withValues(alpha: 0.08),

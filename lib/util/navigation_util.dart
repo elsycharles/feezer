@@ -21,12 +21,13 @@ class NavigationUtil {
   /// 
   /// [context] - BuildContext for navigation
   /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to providers route)
-  static void safeBack(BuildContext context, {String? fallbackRoute}) {
-    if (GoRouter.of(context).canPop()) {
-      GoRouter.of(context).pop();
-    } else {
-      context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
+  static Future<void> safeBack(BuildContext context, {String? fallbackRoute}) async {
+    final router = GoRouter.of(context);
+    if (router.canPop()) {
+      router.pop();
+      return;
     }
+    context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
   }
 
   /// Safely pops with a result using GoRouter. If no pages to pop, navigates to fallback route.
@@ -35,11 +36,12 @@ class NavigationUtil {
   /// [result] - Result to return when popping
   /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to providers route)
   static void safeBackWithResult<T>(BuildContext context, T result, {String? fallbackRoute}) {
-    if (GoRouter.of(context).canPop()) {
-      GoRouter.of(context).pop(result);
-    } else {
-      context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
+    final router = GoRouter.of(context);
+    if (router.canPop()) {
+      router.pop<T>(result);
+      return;
     }
+    context.go(fallbackRoute ?? AppRouter.optimizeFeeRoute);
   }
 
 

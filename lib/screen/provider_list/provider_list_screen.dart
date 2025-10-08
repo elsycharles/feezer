@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
@@ -277,7 +279,7 @@ class _State extends State<ProviderListScreen> {
       await Future.delayed(const Duration(milliseconds: 800));
 
       if (mounted) {
-        Navigator.pop(context); // Close loading dialog
+        GoRouter.of(context).pop(); // Close loading dialog
         setState(() {
           _providers.removeWhere((p) => _selectedIds.contains(p.id));
           _selectedIds.clear();
