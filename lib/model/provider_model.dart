@@ -3,7 +3,7 @@ class Provider {
   Provider({
     required this.id,
     required this.name,
-    required this.description,
+  this.description = '',
     this.iconName = 'business',
     DateTime? creationDatetime,
   }) : creationDatetime = creationDatetime ?? DateTime.now();
@@ -16,9 +16,8 @@ class Provider {
 
   /// Checks if provider data is valid
   bool get isValid =>
-      id.trim().isNotEmpty &&
-      name.trim().isNotEmpty &&
-      description.trim().isNotEmpty;
+  id.trim().isNotEmpty &&
+  name.trim().isNotEmpty;
 
   /// Gets display name (truncated if too long)
   String get displayName =>

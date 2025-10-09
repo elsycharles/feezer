@@ -73,10 +73,8 @@ class _State extends State<ProviderEditBottomSheet> {
           controller: _descController,
           icon: Icons.description,
           maxLines: 4,
-          required: true,
-          validator: (value) => value?.trim().isEmpty == true
-              ? AppLocalizations.of(context).thisFieldIsRequired
-              : null,
+          required: false,
+          validator: null,
         ),
         Global.gapLg,
         IconSelectorField(

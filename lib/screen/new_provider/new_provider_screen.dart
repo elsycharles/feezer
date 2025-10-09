@@ -103,15 +103,13 @@ class _State extends State<NewProviderScreen> {
   );
 
   Widget _buildDescriptionField() => custom_form.FormField(
-    label: AppLocalizations.of(context).description,
-    controller: _descriptionController,
-    icon: Icons.description,
-    hintText: AppLocalizations.of(context).enterDescription,
-    maxLines: 4,
-    required: true,
-    validator: (value) => value?.trim().isEmpty == true
-        ? AppLocalizations.of(context).thisFieldIsRequired
-        : null,
+  label: AppLocalizations.of(context).description,
+  controller: _descriptionController,
+  icon: Icons.description,
+  hintText: AppLocalizations.of(context).enterDescription,
+  maxLines: 4,
+  required: false,
+  validator: null,
   );
 
   Widget _buildIconField() => IconSelectorField(
