@@ -91,6 +91,25 @@ class DatabaseUtil {
     return await db.query(table, where: where, whereArgs: whereArgs);
   }
 
+  Future<int> delete(
+    String table, {
+    String? where,
+    List<dynamic>? whereArgs,
+  }) async {
+    final db = await database;
+    return await db.delete(table, where: where, whereArgs: whereArgs);
+  }
+
+  Future<int> update(
+    String table,
+    Map<String, dynamic> values, {
+    String? where,
+    List<dynamic>? whereArgs,
+  }) async {
+    final db = await database;
+    return await db.update(table, values, where: where, whereArgs: whereArgs);
+  }
+
   Future<void> close() async {
     final db = await database;
     db.close();
