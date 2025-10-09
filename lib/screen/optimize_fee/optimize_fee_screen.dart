@@ -197,12 +197,13 @@ class _State extends State<OptimizeFeeScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Text(
-                              provider.description,
-                              style: ThemeUtil.bodySmall.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
+                            if (provider.description.isNotEmpty)
+                              Text(
+                                provider.description,
+                                style: ThemeUtil.bodySmall.copyWith(
+                                  color: context.colorScheme.onSurfaceVariant,
+                                ),
                               ),
-                            ),
                           ],
                         ),
                       ),
