@@ -16,6 +16,8 @@ import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
+import '../../sandbox/util/database_util.dart';
+import '../../sandbox/util/constant_util.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {
@@ -50,37 +52,15 @@ class _State extends State<ProviderListScreen> {
   }
 
   Future<void> _loadProviders() async {
-    // Simulate loading providers from API or database
-    await Future.delayed(const Duration(milliseconds: 1200));
-
+    setState(() => _isLoading = true);
+    final db = DatabaseUtil();
+    final providerMaps = await db.query(ConstantUtil.tableProviders);
+    final loadedProviders = providerMaps.map((map) => Provider.fromMap(map)).toList();
     if (mounted) {
       setState(() {
-        _providers.addAll([
-          Provider(
-            id: '1',
-            name: 'Bank',
-            description: 'Traditional banking services',
-            iconName: 'account_balance',
-          ),
-          Provider(
-            id: '2',
-            name: 'MVola',
-            description: 'Mobile money transfer service',
-            iconName: 'phone_android',
-          ),
-          Provider(
-            id: '3',
-            name: 'Orange',
-            description: 'Telecom financial services',
-            iconName: 'mobile_friendly',
-          ),
-          Provider(
-            id: '4',
-            name: 'Airtel',
-            description: 'Mobile financial services',
-            iconName: 'phone_android',
-          ),
-        ]);
+        _providers
+          ..clear()
+          ..addAll(loadedProviders);
         _isLoading = false;
       });
     }
@@ -94,9 +74,10 @@ class _State extends State<ProviderListScreen> {
 
   void _addProvider() async {
     final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
-    
     if (result != null) {
-      setState(() => _providers.add(result));
+      final db = DatabaseUtil();
+      await db.insert(ConstantUtil.tableProviders, Provider.toMap(result));
+      await _loadProviders();
     }
   }
 
@@ -267,32 +248,38 @@ class _State extends State<ProviderListScreen> {
     );
 
     if (confirmed == true && mounted) {
-      // Show loading overlay while deleting
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (_) => const AppLoading.overlay(),
       );
-
-      // Simulate deletion process
-      await Future.delayed(const Duration(milliseconds: 800));
-
-      if (mounted) {
-        GoRouter.of(context).pop(); // Close loading dialog
-        setState(() {
-          _providers.removeWhere((p) => _selectedIds.contains(p.id));
-          _selectedIds.clear();
+      final db = DatabaseUtil();
+      for (final id in _selectedIds) {
+        await db.database.then((database) {
+          database.delete(ConstantUtil.tableProviders, where: '${ConstantUtil.columnId} = ?', whereArgs: [int.tryParse(id)]);
         });
+      }
+      await Future.delayed(const Duration(milliseconds: 400));
+      if (mounted) {
+        GoRouter.of(context).pop();
+        await _loadProviders();
+        setState(() => _selectedIds.clear());
         AppToast.success(context, l10n.providerDeletedSuccessfully(count));
       }
     }
   }
 
-  void _editProvider(Provider provider) {
-    setState(() {
-      final index = _providers.indexWhere((p) => p.id == provider.id);
-      if (index != -1) _providers[index] = provider;
+  void _editProvider(Provider provider) async {
+    final db = DatabaseUtil();
+    await db.database.then((database) {
+      database.update(
+        ConstantUtil.tableProviders,
+        Provider.toMap(provider),
+        where: '${ConstantUtil.columnId} = ?',
+        whereArgs: [int.tryParse(provider.id)],
+      );
     });
+    await _loadProviders();
   }
 
   void _showProviderDetails(Provider provider) {
@@ -302,3 +289,5 @@ class _State extends State<ProviderListScreen> {
     );
   }
 }
+
+// All test data removed. Provider list is now fully dynamic from DB.

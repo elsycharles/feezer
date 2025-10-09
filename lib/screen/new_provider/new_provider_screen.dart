@@ -11,6 +11,8 @@ import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
+import '../../sandbox/util/database_util.dart';
+import '../../sandbox/util/constant_util.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {
@@ -154,26 +156,22 @@ class _State extends State<NewProviderScreen> {
   void _create() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isCreating = true);
-
-      // Simulate creation process
-      await Future.delayed(const Duration(milliseconds: 600));
-
-      if (mounted) {
-        final now = DateTime.now();
-        final provider = Provider(
-          id: now.millisecondsSinceEpoch.toString(),
-          name: _nameController.text.trim(),
-          description: _descriptionController.text.trim(),
-          iconName: _selectedIcon,
-          creationDatetime: now,
-        );
-        widget.onProviderAdded?.call(provider);
-        AppToast.success(
-          context,
-          AppLocalizations.of(context).providerCreatedSuccessfully,
-        );
-        GoRouter.of(context).pop(provider);
-      }
+      final now = DateTime.now();
+      final provider = Provider(
+        id: now.millisecondsSinceEpoch.toString(),
+        name: _nameController.text.trim(),
+        description: _descriptionController.text.trim(),
+        iconName: _selectedIcon,
+        creationDatetime: now,
+      );
+      final db = DatabaseUtil();
+      await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
+      widget.onProviderAdded?.call(provider);
+      AppToast.success(
+        context,
+        AppLocalizations.of(context).providerCreatedSuccessfully,
+      );
+      GoRouter.of(context).pop(provider);
     }
   }
 }

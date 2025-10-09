@@ -59,6 +59,28 @@ class Provider {
     creationDatetime: creationDatetime ?? this.creationDatetime,
   );
 
+  static Provider fromMap(Map<String, dynamic> map) {
+    return Provider(
+      id: map['id'].toString(),
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      iconName: map['icon_name'] ?? 'business',
+      creationDatetime: DateTime.fromMillisecondsSinceEpoch(
+        map['creation_datetime'] ?? DateTime.now().millisecondsSinceEpoch,
+      ),
+    );
+  }
+
+  static Map<String, dynamic> toMap(Provider provider) {
+    return {
+      'id': int.tryParse(provider.id),
+      'name': provider.name,
+      'description': provider.description,
+      'icon_name': provider.iconName,
+      'creation_datetime': provider.creationDatetime.millisecondsSinceEpoch,
+    };
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
