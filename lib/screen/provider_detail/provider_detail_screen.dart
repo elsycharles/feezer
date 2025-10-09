@@ -18,8 +18,8 @@ import 'widget/fee_interval_tile.dart';
 import '../../widget/selection_action_bar.dart';
 import 'widget/fee_interval_edit_bottom_sheet.dart';
 import '../../widget/app_toast.dart';
-import '../../sandbox/util/database_util.dart';
-import '../../sandbox/util/constant_util.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
 
 /// Provider details screen with fee intervals management
 class ProviderDetailScreen extends StatefulWidget {

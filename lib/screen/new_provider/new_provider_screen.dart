@@ -11,8 +11,8 @@ import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
-import '../../sandbox/util/database_util.dart';
-import '../../sandbox/util/constant_util.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {

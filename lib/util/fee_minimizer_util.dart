@@ -1,7 +1,7 @@
 import 'dart:math';
-import '../../model/fee_interval_model.dart';
-import '../../model/fee_minimizer_result_model.dart';
-import '../../model/fee_minimizer_detail_model.dart';
+import '../model/fee_interval_model.dart';
+import '../model/fee_minimizer_result_model.dart';
+import '../model/fee_minimizer_detail_model.dart';
 import 'constant_util.dart';
 
 class FeeOptimizerUtil {

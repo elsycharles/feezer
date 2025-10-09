@@ -18,9 +18,9 @@ import 'widget/transaction_input_widget.dart';
 import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
-import '../../sandbox/util/database_util.dart';
-import '../../sandbox/util/constant_util.dart';
-import '../../sandbox/util/fee_minimizer_util.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
+import '../../util/fee_minimizer_util.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {

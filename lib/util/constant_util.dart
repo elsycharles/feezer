@@ -1,4 +1,14 @@
+import 'package:fee_minimizer/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
 class ConstantUtil {
+  // App Information
+  static const String appName = 'Feezer';
+
+  // Get localized app title
+  static String getAppTitle(BuildContext context) {
+    return AppLocalizations.of(context).appTitle;
+  }
   // Configuration base de données
   static const String databaseName = 'fee_optimizer.db';
   static const int databaseVersion = 1;

@@ -16,8 +16,8 @@ import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
-import '../../sandbox/util/database_util.dart';
-import '../../sandbox/util/constant_util.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:fee_minimizer/util/constante_util.dart';
+import 'package:fee_minimizer/util/constant_util.dart';
 import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/provider/theme_provider.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       child: Consumer2<ThemeProvider, LocaleProvider>(
         builder: (context, themeProvider, localeProvider, child) {
           return MaterialApp.router(
-            title: ConstanteUtil.appName,
+            title: ConstantUtil.appName,
             routerConfig: AppRouter.router,
             theme: ThemeUtil.lightTheme,
             darkTheme: ThemeUtil.darkTheme,
