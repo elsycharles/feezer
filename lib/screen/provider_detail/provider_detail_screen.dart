@@ -489,7 +489,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    GoRouter.of(context).push(AppRouter.homeRoute);
+    GoRouter.of(context).push(AppRouter.homeRoute, extra: widget.provider);
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
     // Could pass provider data via extra: widget.provider

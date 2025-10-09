@@ -24,7 +24,9 @@ import '../../util/fee_minimizer_util.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
-  const OptimizeFeeScreen({super.key});
+  const OptimizeFeeScreen({super.key, this.defaultProvider});
+
+  final Provider? defaultProvider;
 
   @override
   State<OptimizeFeeScreen> createState() => _State();
@@ -58,7 +60,11 @@ class _State extends State<OptimizeFeeScreen> {
         _providers
           ..clear()
           ..addAll(loadedProviders);
-        _selectedProvider = _providers.isNotEmpty ? _providers.first : null;
+        _selectedProvider = _providers.isNotEmpty 
+          ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider) 
+              ? widget.defaultProvider 
+              : _providers.first) 
+          : null;
       });
     }
   }

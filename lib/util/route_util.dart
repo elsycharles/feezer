@@ -31,7 +31,10 @@ class AppRouter {
       GoRoute(
         path: homeRoute,
         name: 'home',
-        builder: (_, __) => const OptimizeFeeScreen(),
+        builder: (context, state) {
+          final defaultProvider = state.extra as Provider?;
+          return OptimizeFeeScreen(defaultProvider: defaultProvider);
+        },
       ),
       
       // Onboarding
