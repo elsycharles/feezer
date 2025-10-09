@@ -262,9 +262,9 @@ class _State extends State<ProviderListScreen> {
       await Future.delayed(const Duration(milliseconds: 400));
       if (mounted) {
         GoRouter.of(context).pop();
+        AppToast.success(context, l10n.providerDeletedSuccessfully(count));
         await _loadProviders();
         setState(() => _selectedIds.clear());
-        AppToast.success(context, l10n.providerDeletedSuccessfully(count));
       }
     }
   }

@@ -165,11 +165,13 @@ class _State extends State<NewProviderScreen> {
       final db = DatabaseUtil();
       await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
       widget.onProviderAdded?.call(provider);
-      AppToast.success(
-        context,
-        AppLocalizations.of(context).providerCreatedSuccessfully,
-      );
-      GoRouter.of(context).pop(provider);
+      if (mounted) {
+        AppToast.success(
+          context,
+          AppLocalizations.of(context).providerCreatedSuccessfully,
+        );
+        GoRouter.of(context).pop(provider);
+      }
     }
   }
 }

@@ -523,12 +523,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
         if (mounted) {
           GoRouter.of(context).pop(); // Close loading dialog
-          await _loadFeeIntervals(); // Reload from DB
-          _selectedIds.clear();
           AppToast.success(
             context,
             AppLocalizations.of(context).feeIntervalDeletedSuccessfully(count),
           );
+          await _loadFeeIntervals(); // Reload from DB
+          _selectedIds.clear();
         }
       } catch (e) {
         if (mounted) {

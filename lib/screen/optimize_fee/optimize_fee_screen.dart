@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../model/provider_model.dart';
 import '../../model/optimization_result_model.dart';
+import '../../model/fee_interval_model.dart';
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/theme_util.dart';
@@ -17,6 +18,9 @@ import 'widget/transaction_input_widget.dart';
 import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
+import '../../sandbox/util/database_util.dart';
+import '../../sandbox/util/constant_util.dart';
+import '../../sandbox/util/fee_minimizer_util.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
@@ -29,35 +33,7 @@ class OptimizeFeeScreen extends StatefulWidget {
 class _State extends State<OptimizeFeeScreen> {
   DateTime? _lastBackPressed;
   
-  // Sample providers - replace with actual data
-  final _providers = [
-    Provider(
-      id: '1',
-      name: 'Kuda Bank',
-      description: 'Traditional banking',
-      iconName: 'account_balance',
-    ),
-    Provider(
-      id: '2',
-      name: 'MVola',
-      description: 'Mobile money',
-      iconName: 'phone_android',
-    ),
-    Provider(
-      id: '3',
-      name: 'Orange Money',
-      description: 'Mobile financial services',
-      iconName: 'mobile_friendly',
-    ),
-  ];
-
-  // Special provider to represent the "Add new provider" action
-  static final _addNewProviderAction = Provider(
-    id: '__add_new_provider__',
-    name: '',
-    description: '',
-    iconName: 'add',
-  );
+  final _providers = <Provider>[];
 
   Provider? _selectedProvider;
   int _amount = 10000;
@@ -70,7 +46,21 @@ class _State extends State<OptimizeFeeScreen> {
   @override
   void initState() {
     super.initState();
-    _selectedProvider = _providers.first;
+    _loadProviders();
+  }
+
+  Future<void> _loadProviders() async {
+    final db = DatabaseUtil();
+    final providerMaps = await db.query(ConstantUtil.tableProviders);
+    final loadedProviders = providerMaps.map((map) => Provider.fromMap(map)).toList();
+    if (mounted) {
+      setState(() {
+        _providers
+          ..clear()
+          ..addAll(loadedProviders);
+        _selectedProvider = _providers.isNotEmpty ? _providers.first : null;
+      });
+    }
   }
 
   @override
@@ -220,9 +210,9 @@ class _State extends State<OptimizeFeeScreen> {
                   ),
                 ),
               ),
-              // Add new provider action item
-              DropdownMenuItem(
-                value: _addNewProviderAction,
+              // Add new provider option
+              DropdownMenuItem<Provider>(
+                value: null, // Special value to indicate "add new"
                 child: Row(
                   children: [
                     Container(
@@ -255,7 +245,7 @@ class _State extends State<OptimizeFeeScreen> {
               ),
             ],
             onChanged: (provider) async {
-              if (provider == _addNewProviderAction) {
+              if (provider == null) {
                 // Navigate to NewProviderScreen when "Add new provider" is selected
                 final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
                 // If a new provider was created (returned as result), add it to the list
@@ -552,8 +542,8 @@ class _State extends State<OptimizeFeeScreen> {
     ),
   );
 
-  void _generateResults() {
-    // Enhanced optimization logic
+  void _generateResults() async {
+    // Validation
     if (_selectedProvider == null ||
         _amount <= 0 ||
         _minTransactions > _maxTransactions) {
@@ -564,82 +554,68 @@ class _State extends State<OptimizeFeeScreen> {
       return;
     }
 
-    // Simulate optimization calculation
-    final baseRate = _amount * 0.02; // 2% base rate
-    final optimizedFee = (baseRate * _minTransactions).round();
-    final totalCost = optimizedFee * _maxTransactions;
+    try {
+      // Load fee intervals for the selected provider
+      final db = DatabaseUtil();
+      final feeIntervalMaps = await db.query(
+        ConstantUtil.tableFeeIntervals,
+        where: '${ConstantUtil.columnProviderId} = ?',
+        whereArgs: [int.tryParse(_selectedProvider!.id)],
+      );
+      final intervals = feeIntervalMaps.map((map) => FeeInterval.fromMap(map)).toList();
 
-    setState(() {
-      _hasOptimized = true;
-      _results = [
-        OptimizationResult(
-          interval: '${(_amount * 0.2).round()} - ${(_amount * 1.5).round()}',
-          fee: '${optimizedFee.toString()} Ar',
-          count: _maxTransactions,
-          total: '${totalCost.toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: '${(_amount * 0.5).round()} - ${(_amount * 2).round()}',
-          fee: '${(optimizedFee * 1.2).round().toString()} Ar',
-          count: (_maxTransactions * 0.8).round(),
-          total: '${(totalCost * 0.9).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: '${(_amount * 1).round()} - ${(_amount * 3).round()}',
-          fee: '${(optimizedFee * 1.5).round().toString()} Ar',
-          count: (_maxTransactions * 0.6).round(),
-          total: '${(totalCost * 0.85).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: '${(_amount * 1.5).round()} - ${(_amount * 4).round()}',
-          fee: '${(optimizedFee * 1.8).round().toString()} Ar',
-          count: (_maxTransactions * 0.4).round(),
-          total: '${(totalCost * 0.8).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: '${(_amount * 2).round()} - ${(_amount * 5).round()}',
-          fee: '${(optimizedFee * 2).round().toString()} Ar',
-          count: (_maxTransactions * 0.2).round(),
-          total: '${(totalCost * 0.75).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: '> ${(_amount * 5).round()}',
-          fee: '${(optimizedFee * 2.5).round().toString()} Ar',
-          count: 1,
-          total: '${(totalCost * 0.7).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: 'Custom',
-          fee: '${(optimizedFee * 3).round().toString()} Ar',
-          count: 1,
-          total: '${(totalCost * 0.65).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: 'Special',
-          fee: '${(optimizedFee * 4).round().toString()} Ar',
-          count: 1,
-          total: '${(totalCost * 0.6).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: 'Exclusive',
-          fee: '${(optimizedFee * 5).round().toString()} Ar',
-          count: 1,
-          total: '${(totalCost * 0.55).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: 'Premium',
-          fee: '${(optimizedFee * 6).round().toString()} Ar',
-          count: 1,
-          total: '${(totalCost * 0.5).round().toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: 'Ultimate',
-          fee: '${(optimizedFee * 7).round().toString()} Ar',
-          count: 1,
-          total: '${(totalCost * 0.45).round().toString()} Ar',
-        ),
-      ];
-    });
+      if (intervals.isEmpty) {
+        setState(() {
+          _results = [];
+          _hasOptimized = true;
+        });
+        if (mounted) {
+          AppToast.info(context, AppLocalizations.of(context).noProvidersFound);
+        }
+        return;
+      }
+
+      // Calculate optimal operations
+      final optimizationResult = FeeOptimizerUtil.calculateOptimalOperations(
+        _amount.toDouble(),
+        intervals,
+        maxOperations: _maxTransactions,
+        minOperations: _minTransactions,
+      );
+
+      // Convert to OptimizationResult format for display
+      final results = optimizationResult.details.map((detail) {
+        final interval = intervals.firstWhere(
+          (interval) => interval.minAmount == detail.amount && interval.fee == detail.fee,
+          orElse: () => FeeInterval(
+            id: '',
+            minAmount: detail.amount,
+            maxAmount: detail.amount,
+            fee: detail.fee,
+          ),
+        );
+
+        return OptimizationResult(
+          interval: interval.id!.isEmpty ? '${detail.amount.toInt()} Ar' : interval.formattedRange,
+          fee: '${detail.fee.toInt()} Ar',
+          count: detail.count,
+          total: '${(detail.amount * detail.count).toInt()} Ar',
+        );
+      }).toList();
+
+      setState(() {
+        _results = results;
+        _hasOptimized = true;
+      });
+    } catch (e) {
+      if (mounted) {
+        AppToast.error(context, 'Failed to calculate optimization');
+      }
+      setState(() {
+        _results = [];
+        _hasOptimized = true;
+      });
+    }
   }
 
   void _optimize() async {

@@ -1,7 +1,7 @@
 import 'dart:math';
-import '../model/fee_interval_model.dart';
-import '../model/fee_minimizer_result_model.dart';
-import '../model/fee_minimizer_detail_model.dart';
+import '../../model/fee_interval_model.dart';
+import '../../model/fee_minimizer_result_model.dart';
+import '../../model/fee_minimizer_detail_model.dart';
 import 'constant_util.dart';
 
 class FeeOptimizerUtil {
@@ -326,7 +326,9 @@ class FeeOptimizerUtil {
       if (curr.netAmount == best.netAmount && curr.totalFees < best.totalFees) return curr;
       if (curr.netAmount == best.netAmount && 
           curr.totalFees == best.totalFees && 
-          curr.remaining < best.remaining) return curr;
+          curr.remaining < best.remaining) {
+        return curr;
+      }
       return best;
     });
   }
