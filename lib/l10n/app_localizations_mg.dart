@@ -197,6 +197,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get noResultsYet => 'Mbola tsy misy valiny';
 
   @override
+  String get noOptimizationResultsFound =>
+      'Tsy misy valin\'ny fanatsarana hita. Azafady, hamarino ny parametatra nampidirinao.';
+
+  @override
   String get tapOptimizeToSeeResults =>
       'Tsindrio ny \'Atsikafo\' hahitana ny valiny';
 

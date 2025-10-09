@@ -426,7 +426,7 @@ class _State extends State<OptimizeFeeScreen> {
                     Global.gapSm,
                     Expanded(
                       child: Text(
-                        'No optimization results found. Please check your input parameters.',
+                        AppLocalizations.of(context).noOptimizationResultsFound,
                         style: ThemeUtil.bodyMedium.copyWith(
                           color: context.colorScheme.error,
                         ),

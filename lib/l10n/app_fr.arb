@@ -60,6 +60,7 @@
   "count": "Nombre",
   "total": "Total",
   "noResultsYet": "Aucun résultat pour l'instant",
+  "noOptimizationResultsFound": "Aucun résultat d'optimisation trouvé. Veuillez vérifier vos paramètres d'entrée.",
   "tapOptimizeToSeeResults": "Appuyez sur 'Optimiser' pour voir les résultats",
   "error": "Erreur",
   "screenNotFound": "Écran {route} introuvable",

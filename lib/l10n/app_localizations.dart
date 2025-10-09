@@ -460,6 +460,12 @@ abstract class AppLocalizations {
   /// **'No results yet'**
   String get noResultsYet;
 
+  /// Message when no optimization results are found for the given parameters
+  ///
+  /// In en, this message translates to:
+  /// **'No optimization results found. Please check your input parameters.'**
+  String get noOptimizationResultsFound;
+
   /// Instructions for getting results
   ///
   /// In en, this message translates to:

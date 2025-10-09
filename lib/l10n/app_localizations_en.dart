@@ -196,6 +196,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noResultsYet => 'No results yet';
 
   @override
+  String get noOptimizationResultsFound =>
+      'No optimization results found. Please check your input parameters.';
+
+  @override
   String get tapOptimizeToSeeResults => 'Tap \'Optimize\' to see results';
 
   @override

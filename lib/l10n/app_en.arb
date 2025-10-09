@@ -240,6 +240,10 @@
   "@noResultsYet": {
     "description": "Message when no optimization results"
   },
+  "noOptimizationResultsFound": "No optimization results found. Please check your input parameters.",
+  "@noOptimizationResultsFound": {
+    "description": "Message when no optimization results are found for the given parameters"
+  },
   "tapOptimizeToSeeResults": "Tap 'Optimize' to see results",
   "@tapOptimizeToSeeResults": {
     "description": "Instructions for getting results"

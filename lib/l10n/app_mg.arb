@@ -131,6 +131,7 @@
   "count": "Isa",
   "total": "Totalin'ny",
   "noResultsYet": "Mbola tsy misy valiny",
+  "noOptimizationResultsFound": "Tsy misy valin'ny fanatsarana hita. Azafady, hamarino ny parametatra nampidirinao.",
   "tapOptimizeToSeeResults": "Tsindrio ny 'Atsikafo' hahitana ny valiny",
   "error": "Diso",
   "screenNotFound": "Tsy hita ny écran {route}",
