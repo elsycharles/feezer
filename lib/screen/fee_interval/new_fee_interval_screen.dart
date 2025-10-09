@@ -98,7 +98,7 @@ class _State extends State<NewFeeIntervalScreen> {
     hintText: AppLocalizations.of(context).enterMinimumAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(
+    validator: (value) => ValidationUtil.nonNegativeNumber(
       value,
       context,
       AppLocalizations.of(context).minimumAmount,

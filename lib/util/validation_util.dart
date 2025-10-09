@@ -84,6 +84,21 @@ class ValidationUtil {
         : AppLocalizations.of(context).mustBeGreaterThanZero;
   }
 
+  /// Validates non-negative numbers (allows 0)
+  static String? nonNegativeNumber(
+    String? value,
+    BuildContext context, [
+    String? fieldName,
+  ]) {
+    final numericResult = numeric(value, context, fieldName);
+    if (numericResult != null) return numericResult;
+
+    final number = double.parse(value!);
+    return number >= 0
+        ? null
+        : AppLocalizations.of(context).mustBeGreaterThanZero;
+  }
+
   /// Combines multiple validators
   static String? Function(String?) combine(
     List<String? Function(String?)> validators,
