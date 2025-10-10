@@ -156,7 +156,7 @@ class _State extends State<NewProviderScreen> {
       setState(() => _isCreating = true);
       final now = DateTime.now();
       final provider = Provider(
-        id: now.millisecondsSinceEpoch.toString(),
+        id: now.microsecondsSinceEpoch.toString(),
         name: _nameController.text.trim(),
         description: _descriptionController.text.trim(),
         iconName: _selectedIcon,
