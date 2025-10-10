@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../l10n/app_localizations.dart';
 import '../../../util/preference_util.dart';
 import '../../../provider/theme_provider.dart';
 import '../../../widget/interactive_surface.dart';
@@ -26,7 +29,7 @@ class ThemeSelectionModal extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.surface,
@@ -38,7 +41,7 @@ class ThemeSelectionModal extends StatelessWidget {
           children: [
             // Handle bar - tap to close
             GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
+              onTap: () => GoRouter.of(context).pop(),
               child: Container(
                 margin: const EdgeInsets.only(top: 8),
                 padding: const EdgeInsets.symmetric(vertical: 8),
@@ -52,19 +55,19 @@ class ThemeSelectionModal extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             // Title
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Choose Theme',
+                AppLocalizations.of(context).chooseTheme,
                 style: theme.textTheme.titleLarge?.copyWith(
                   color: colorScheme.onSurface,
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-            
+
             // Theme options
             Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
@@ -72,8 +75,8 @@ class ThemeSelectionModal extends StatelessWidget {
                   children: [
                     _buildThemeOption(
                       context,
-                      'Light',
-                      'Always use light theme',
+                      AppLocalizations.of(context).light,
+                      AppLocalizations.of(context).alwaysUseLightTheme,
                       Icons.light_mode,
                       AppThemeMode.light,
                       themeProvider.themeMode == AppThemeMode.light,
@@ -81,8 +84,8 @@ class ThemeSelectionModal extends StatelessWidget {
                     ),
                     _buildThemeOption(
                       context,
-                      'Dark',
-                      'Always use dark theme',
+                      AppLocalizations.of(context).dark,
+                      AppLocalizations.of(context).alwaysUseDarkTheme,
                       Icons.dark_mode,
                       AppThemeMode.dark,
                       themeProvider.themeMode == AppThemeMode.dark,
@@ -90,8 +93,8 @@ class ThemeSelectionModal extends StatelessWidget {
                     ),
                     _buildThemeOption(
                       context,
-                      'System',
-                      'Follow system settings',
+                      AppLocalizations.of(context).system,
+                      AppLocalizations.of(context).followSystemSettings,
                       Icons.settings_brightness,
                       AppThemeMode.system,
                       themeProvider.themeMode == AppThemeMode.system,
@@ -101,14 +104,14 @@ class ThemeSelectionModal extends StatelessWidget {
                 );
               },
             ),
-            
+
             const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
-  
+
   Widget _buildThemeOption(
     BuildContext context,
     String title,
@@ -120,7 +123,7 @@ class ThemeSelectionModal extends StatelessWidget {
   ) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return InteractiveSurface(
       onTap: onTap,
       borderRadius: BorderRadius.zero,
@@ -131,7 +134,7 @@ class ThemeSelectionModal extends StatelessWidget {
             Icon(
               icon,
               color: isSelected ? colorScheme.primary : colorScheme.onSurface,
-              size: 24,
+              size: 20,
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -141,8 +144,12 @@ class ThemeSelectionModal extends StatelessWidget {
                   Text(
                     title,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: isSelected ? colorScheme.primary : colorScheme.onSurface,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                      color: isSelected
+                          ? colorScheme.primary
+                          : colorScheme.onSurface,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
                     ),
                   ),
                   Text(
@@ -154,15 +161,14 @@ class ThemeSelectionModal extends StatelessWidget {
                 ],
               ),
             ),
-            Radio<AppThemeMode>(
-              value: themeMode,
-              groupValue: context.watch<ThemeProvider>().themeMode,
-              onChanged: (value) {
-                if (value != null) {
-                  onTap();
-                }
-              },
-              activeColor: colorScheme.primary,
+            Icon(
+              isSelected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: isSelected
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.6),
+              size: 20,
             ),
           ],
         ),

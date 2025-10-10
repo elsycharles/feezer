@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart' hide BottomSheet;
+import 'package:go_router/go_router.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../../model/provider_model.dart';
 import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/icon_selector_field.dart';
-import '../../../widget/loading_widgets.dart';
+import '../../../widget/loading_button.dart';
 import '../../../widget/app_toast.dart';
 
 /// Clean provider editor
@@ -25,7 +27,7 @@ class ProviderEditBottomSheet extends StatefulWidget {
     Function(Provider) onSave,
   ) => BottomSheet.show(
     context,
-    'Edit Provider',
+    AppLocalizations.of(context).editProvider,
     ProviderEditBottomSheet(provider: provider, onSave: onSave),
   );
 
@@ -57,18 +59,22 @@ class _State extends State<ProviderEditBottomSheet> {
     child: Column(
       children: [
         custom_form.FormField(
-          label: 'Provider Name',
+          label: AppLocalizations.of(context).providerName,
           controller: _nameController,
           icon: Icons.business,
           required: true,
+          validator: (value) => value?.trim().isEmpty == true
+              ? AppLocalizations.of(context).thisFieldIsRequired
+              : null,
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: 'Description',
+          label: AppLocalizations.of(context).description,
           controller: _descController,
           icon: Icons.description,
           maxLines: 4,
-          required: true,
+          required: false,
+          validator: null,
         ),
         Global.gapLg,
         IconSelectorField(
@@ -77,7 +83,7 @@ class _State extends State<ProviderEditBottomSheet> {
         ),
         Global.gapXl,
         LoadingButton(
-          text: 'Save Changes',
+          text: AppLocalizations.of(context).saveChanges,
           isLoading: _isLoading,
           onPressed: _isLoading ? null : _save,
         ),
@@ -85,12 +91,10 @@ class _State extends State<ProviderEditBottomSheet> {
     ),
   );
 
-
-
   void _save() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      
+
       try {
         final provider = Provider(
           id: widget.provider.id,
@@ -99,14 +103,17 @@ class _State extends State<ProviderEditBottomSheet> {
           iconName: _selectedIcon,
           creationDatetime: widget.provider.creationDatetime,
         );
-        
+
         // Simulate async operation
         await Future.delayed(const Duration(milliseconds: 300));
-        
+
         if (mounted) {
-          Navigator.pop(context);
+          GoRouter.of(context).pop();
           widget.onSave(provider);
-          AppToast.success(context, 'Provider updated successfully');
+          AppToast.success(
+            context,
+            AppLocalizations.of(context).providerUpdatedSuccessfully,
+          );
         }
       } finally {
         if (mounted) {

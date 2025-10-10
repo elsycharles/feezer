@@ -1,0 +1,591 @@
+{
+  "@@locale": "mg",
+  "appTitle": "Feezer",
+  "onboardingTitle1": "Mihevitra mialoha ary mitahiry vola amin'ny sara",
+  "onboardingDescription1": "Kajy ny fomba mahomby indrindra hitantanana ny volanao.",
+  "onboardingTitle2": "Atsikafo ny fifampiraharahanao",
+  "onboardingDescription2": "Ahena ho azy ny sara mifototra amin'ny elanelana efa voafarit",
+  "@onboardingDescription2": {
+    "description": "Onboarding description for second screen"
+  },
+  "onboardingTitle3": "Mitahiry am-pahendrena, mandany tsara kokoa",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
+  },
+  "@pressAgainToExit": {
+    "description": "Double back to exit message"
+  },
+  "providerUpdatedSuccessfully": "Mpamatsy nohavaozina soa aman-tsara",
+  "@providerUpdatedSuccessfully": {
+    "description": "Provider update success message"
+  },
+  "feeIntervalUpdatedSuccessfully": "Elanelana sara nohavaozina soa aman-tsara",
+  "@feeIntervalUpdatedSuccessfully": {
+    "description": "Fee interval update success message"
+  },
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{Elanelana sara 1 voafafa soa aman-tsara} other{Elanelana sara {count} voafafa soa aman-tsara}}",
+  "@feeIntervalDeletedSuccessfully": {
+    "description": "Fee interval deletion success message",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "editFeeInterval": "Hanova ny elanelana sara",
+  "@editFeeInterval": {
+    "description": "Edit fee interval dialog title"
+  },
+  "minTransactionsCannotBeGreaterThanMax": "Ny fampiasana kely indrindra dia tsy afaka mihoatra ny be indrindra",
+  "@minTransactionsCannotBeGreaterThanMax": {
+    "description": "Validation error for transaction range"
+  },
+  "pleaseEnterValidFee": "Ampidiro ny sara manan-kery azafady",
+  "@pleaseEnterValidFee": {
+    "description": "Validation error for fee field"
+  },
+  "mustBeAtLeastNCharacters": "Tokony ho {count} litera fara fahakeliny",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "enterValidNumber": "Ampidiro ny isa manan-kery",
+  "@enterValidNumber": {
+    "description": "Validation error for number field"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be indrindra dia tokony ho mihoatra noho ny kely indrindra",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation error for amount range"
+  },
+  "pleaseEnterFeeAmount": "Ampidiro ny sara azafady",
+  "@pleaseEnterFeeAmount": {
+    "description": "Validation error for fee amount field"
+  },
+  "selectAll": "Fidio daholo",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "details": "Antsipiriany",
+  "@details": {
+    "description": "Details tooltip"
+  },
+  "total": "Totaliny",
+  "@total": {
+    "description": "Total column header"
+  },
+  "transactionDetails": "Antsipirian'ny fifampiraharahana",
+  "@transactionDetails": {
+    "description": "Transaction details section title"
+  },
+  "currencySymbol": "Ar",
+  "@currencySymbol": {
+    "description": "Currency symbol for Ariary"
+  },
+  "totalAmount": "Totalin'ny vola",
+  "@totalAmount": {
+    "description": "Total amount metric title"
+  },
+  "netAmount": "Vola madio",
+  "@netAmount": {
+    "description": "Net amount after fees metric title"
+  },
+  "totalFees": "Totalin'ny sara",
+  "@totalFees": {
+    "description": "Total fees metric title"
+  },
+  "efficiency": "Fahombiazana",
+  "@efficiency": {
+    "description": "Optimization efficiency metric title"
+  },
+  "operations": "Asa",
+  "@operations": {
+    "description": "Number of operations metric title"
+  },
+  "remaining": "Sisa",
+  "@remaining": {
+    "description": "Remaining amount metric title"
+  },
+  "next": "Manaraka",
+  "skip": "Dingana",
+  "getStarted": "Hanomboka",
+  "back": "Hiverina",
+  "cancel": "Aoka ihany",
+  "save": "Tahiry",
+  "delete": "Fafao",
+  "edit": "Ovay",
+  "create": "Mamorona",
+  "confirm": "Hamafy",
+  "optimizeFee": "Hanatsara ny Sara",
+  "providers": "Mpanome tolotra",
+  "settings": "Fandrindrana",
+  "createInterval": "Mamorona Elanelana",
+  "optimize": "Atsikafo",
+  "amount": "Vola",
+  "provider": "Mpanome tolotra",
+  "minTransactions": "Fifampiraharahana Kely",
+  "maxTransactions": "Fifampiraharahana Be",
+  "pleaseEnterValidAmount": "Ampidiro ny vola manan-kery azafady",
+  "pleaseSelectProvider": "Fidio ny mpanome tolotra azafady",
+  "invalidTransactionRange": "Ny fifampiraharahana kely dia tsy maintsy latsaky ny fifampiraharahana be",
+  "mvola": "MVola",
+  "orangeMoney": "Orange Money",
+  "airtelMoney": "Airtel Money",
+  "mobileFinancialServices": "Serivisy ara-bola finday",
+  "appearance": "Fisehoana",
+  "theme": "Loko",
+  "language": "Fiteny",
+  "english": "Anglisy",
+  "french": "Frantsay",
+  "malagasy": "Malagasy",
+  "system": "Rafitra",
+  "light": "Mazava",
+  "dark": "Maizina",
+  "comingSoon": "Ho Avy Tsy Ho Ela",
+  "thisFeatureWillBeAvailableSoon": "Ho avy tsy ho ela io endri-javatra io!",
+  "feeIntervals": "Elanelana Sara",
+  "newFeeInterval": "Elanelana Sara Vaovao",
+  "minAmount": "Vola Kely",
+  "maxAmount": "Vola Be",
+  "feePercentage": "Isan-jaton'ny Sara",
+  "fixedFee": "Sara Raikitra",
+  "pleaseEnterMinAmount": "Ampidiro ny vola kely azafady",
+  "pleaseEnterMaxAmount": "Ampidiro ny vola be azafady",
+  "pleaseEnterValidFeePercentage": "Ampidiro ny isan-jaton'ny sara manan-kery azafady",
+  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be dia tsy maintsy mihoatra ny vola kely",
+  "optimizationResults": "Valin'ny Fanatsarana",
+  "interval": "Elanelana",
+  "fee": "Sara",
+  "count": "Isa",
+  "total": "Totalin'ny",
+  "noResultsYet": "Mbola tsy misy valiny",
+  "noOptimizationResultsFound": "Tsy misy valin'ny fanatsarana hita. Azafady, hamarino ny parametatra nampidirinao.",
+  "tapOptimizeToSeeResults": "Tsindrio ny 'Atsikafo' hahitana ny valiny",
+  "error": "Diso",
+  "screenNotFound": "Tsy hita ny écran {route}",
+  "goHome": "Hody",
+
+  "noProvidersFound": "Tsy misy mpanome tolotra hita",
+  "@noProvidersFound": {
+    "description": "Message shown when no providers are available"
+  },
+  "searchProviders": "Mitady mpanome tolotra...",
+  "@searchProviders": {
+    "description": "Placeholder text for provider search field"
+  },
+  "manageYourProviders": "Mitantana ny mpanome tolotra",
+  "@manageYourProviders": {
+    "description": "Header title for provider management section"
+  },
+  "centralizeProviders": "Atambaro eo amin'ny toerana iray ny mpiara-miasa banky sy mobile money.",
+  "@centralizeProviders": {
+    "description": "Description for provider management functionality"
+  },
+  "activeProvider": "Mpanome tolotra mavitrika",
+  "@activeProvider": {
+    "description": "Label for single active provider count"
+  },
+  "activeProviders": "Mpanome tolotra mavitrika",
+  "@activeProviders": {
+    "description": "Label for multiple active providers count"
+  },
+  "deleteThisProvider": "Hofafana ve ity mpanome tolotra ity?",
+  "@deleteThisProvider": {
+    "description": "Confirmation message for deleting a single provider"
+  },
+  "deleteProvidersCount": "Hofafana ve ny mpanome tolotra {count}?",
+  "@deleteProvidersCount": {
+    "description": "Confirmation message for deleting multiple providers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "deleteProvider": "Mamafa mpanome tolotra",
+  "@deleteProvider": {
+    "description": "Title for delete provider dialog"
+  },
+  "deleteProviders": "Mamafa mpanome tolotra",
+  "@deleteProviders": {
+    "description": "Title for delete multiple providers dialog"
+  },
+  "providerDeletedSuccessfully": "{count, plural, =1{Mpanome tolotra 1 voafafa} other{Mpanome tolotra {count} voafafa}}",
+  "@providerDeletedSuccessfully": {
+    "description": "Success message after deleting provider(s)"
+  },
+  "editProvider": "Manova mpanome tolotra",
+  "@editProvider": {
+    "description": "Title for edit provider bottom sheet"
+  },
+  "providerName": "Anaran'ny mpanome tolotra",
+  "@providerName": {
+    "description": "Label for provider name field"
+  },
+  "description": "Famaritana",
+  "@description": {
+    "description": "Label for description field"
+  },
+  "newProvider": "Mpanome tolotra vaovao",
+  "@newProvider": {
+    "description": "Title for new provider screen"
+  },
+  "createNewProvider": "Mamorona mpanome tolotra vaovao",
+  "@createNewProvider": {
+    "description": "Header title for creating a new provider"
+  },
+  "enterProviderName": "Ampidiro ny anaran'ny mpanome tolotra",
+  "@enterProviderName": {
+    "description": "Hint text for provider name field"
+  },
+  "providerCreatedSuccessfully": "Mpanome tolotra voaforona",
+  "@providerCreatedSuccessfully": {
+    "description": "Success message when a provider is created"
+  },
+  "systemDefault": "Tsy miova amin'ny rafitra",
+  "@systemDefault": {
+    "description": "System default language option"
+  },
+  "general": "Ankapobeny",
+  "@general": {
+    "description": "General settings section"
+  },
+  "about": "Momba",
+  "@about": {
+    "description": "About section"
+  },
+  "version": "Dikan-kevitra",
+  "@version": {
+    "description": "Version label"
+  },
+  "faqAndContact": "Fanontaniana sy fifandraisana",
+  "@faqAndContact": {
+    "description": "FAQ and contact option"
+  },
+  "termsOfUse": "Fepetra fampiasana",
+  "@termsOfUse": {
+    "description": "Terms of use option"
+  },
+  "termsAndPrivacyPolicy": "Fepetra sy politikan'ny fiainana manokana",
+  "@termsAndPrivacyPolicy": {
+    "description": "Terms and privacy policy description"
+  },
+  "featureComingNextVersion": "Endri-javatra ho avy amin'ny dikan-kevitra manaraka",
+  "@featureComingNextVersion": {
+    "description": "Message for upcoming features"
+  },
+  "financialProvider": "Mpanome tolotra ara-bola",
+  "@financialProvider": {
+    "description": "Financial provider section title"
+  },
+  "chooseProviderToAnalyze": "Safidio ny mpanome tolotra tianao hamakafaka",
+  "@chooseProviderToAnalyze": {
+    "description": "Instructions for provider selection"
+  },
+  "amountToOptimize": "Vola hamatsiana",
+  "@amountToOptimize": {
+    "description": "Title for amount optimization section"
+  },
+  "enterTransactionAmountToOptimize": "Ampidiro ny volan'ny fifampiraharahana tianao hamatsiana",
+  "@enterTransactionAmountToOptimize": {
+    "description": "Instructions for amount input"
+  },
+  "amount": "Vola",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "transactionRange": "Elanelam-pifampiraharahana",
+  "@transactionRange": {
+    "description": "Transaction range section title"
+  },
+  "defineMinMaxTransactions": "Farito ny isan'ny fifampiraharahana faran'izay kely sy lehibe",
+  "@defineMinMaxTransactions": {
+    "description": "Instructions for transaction range"
+  },
+  "minTransactions": "Fifampiraharahana faran'izay kely",
+  "@minTransactions": {
+    "description": "Minimum transactions label"
+  },
+  "maxTransactions": "Fifampiraharahana faran'izay lehibe",
+  "@maxTransactions": {
+    "description": "Maximum transactions label"
+  },
+  "readyToOptimize": "Vonona hamatsiana",
+  "@readyToOptimize": {
+    "description": "Ready to optimize message"
+  },
+  "clickOptimizeButtonToAnalyze": "Tsindrio ny bokotra Hamatsiana mba hamakafaka ny firafitry ny sara tsara indrindra ho an'ny fifampiraharahanao",
+  "@clickOptimizeButtonToAnalyze": {
+    "description": "Instructions for optimization"
+  },
+  "optimizationResults": "Valin'ny fanatsiana",
+  "@optimizationResults": {
+    "description": "Optimization results title"
+  },
+  "interval": "Elanelana",
+  "@interval": {
+    "description": "Interval column header"
+  },
+  "fee": "Sara",
+  "@fee": {
+    "description": "Fee column header"
+  },
+  "count": "Isa",
+  "@count": {
+    "description": "Count column header"
+  },
+  "providerDetails": "Antsipirian'ny mpanome tolotra",
+  "@providerDetails": {
+    "description": "Provider details screen title"
+  },
+  "noFeeIntervalsFound": "Tsy misy elanelam-para hita",
+  "@noFeeIntervalsFound": {
+    "description": "Message when no fee intervals exist"
+  },
+  "feeIntervals": "Elanelam-para",
+  "@feeIntervals": {
+    "description": "Fee intervals section title"
+  },
+  "feeInterval": "Elanelam-para",
+  "@feeInterval": {
+    "description": "Fee interval column header"
+  },
+  "searchByFeeRange": "Mitady amin'ny elanelam-para",
+  "@searchByFeeRange": {
+    "description": "Search by fee range placeholder"
+  },
+  "addFeeInterval": "Manampy elanelam-para",
+  "@addFeeInterval": {
+    "description": "Add fee interval button"
+  },
+  "minFee": "Sara faran'izay kely",
+  "@minFee": {
+    "description": "Minimum fee placeholder"
+  },
+  "maxFee": "Sara faran'izay lehibe",
+  "@maxFee": {
+    "description": "Maximum fee placeholder"
+  },
+  "deleteFeeIntervals": "Mamafa elanelam-para",
+  "@deleteFeeIntervals": {
+    "description": "Delete fee intervals title"
+  },
+  "newFeeInterval": "Elanelam-para vaovao",
+  "@newFeeInterval": {
+    "description": "New fee interval screen title"
+  },
+  "createNewFeeInterval": "Mamorona elanelam-para vaovao",
+  "@createNewFeeInterval": {
+    "description": "Create new fee interval header"
+  },
+  "defineNewFeeStructure": "Mamaritra firafitra sara vaovao ho an'ny volan'ny fifampiraharahana",
+  "@defineNewFeeStructure": {
+    "description": "Fee interval creation instructions"
+  },
+  "enterMinimumAmount": "Ampidiro ny vola faran'izay kely",
+  "@enterMinimumAmount": {
+    "description": "Minimum amount input placeholder"
+  },
+  "enterMaximumAmount": "Ampidiro ny vola faran'izay lehibe",
+  "@enterMaximumAmount": {
+    "description": "Maximum amount input placeholder"
+  },
+  "enterFeeAmount": "Ampidiro ny volan'ny sara",
+  "@enterFeeAmount": {
+    "description": "Fee amount input placeholder"
+  },
+  "createInterval": "Mamorona elanelana",
+  "@createInterval": {
+    "description": "Create interval button"
+  },
+  "maxAmountMustBeGreater": "Ny vola lehibe dia tsy maintsy mihoatra ny vola kely",
+  "@maxAmountMustBeGreater": {
+    "description": "Validation message for amount range"
+  },
+  "feeIntervalCreatedSuccessfully": "Elanelam-para voaforona",
+  "@feeIntervalCreatedSuccessfully": {
+    "description": "Success message for fee interval creation"
+  },
+  "addNewFinancialServiceProvider": "Manampy mpanome serivisy ara-bola vaovao amin'ny lisitrao",
+  "@addNewFinancialServiceProvider": {
+    "description": "Description for adding new provider"
+  },
+  "enterDescription": "Ampidiro ny famaritana",
+  "@enterDescription": {
+    "description": "Description input placeholder"
+  },
+  "createProvider": "Mamorona mpanome tolotra",
+  "@createProvider": {
+    "description": "Create provider button"
+  },
+  "clearSelection": "Mamafa ny fifantenana",
+  "@clearSelection": {
+    "description": "Clear selection tooltip"
+  },
+  "selectAll": "Fidio daholo",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "icon": "Sary",
+  "@icon": {
+    "description": "Icon label"
+  },
+  "tapToSelectIcon": "Tsindrio mba hisafidy sary",
+  "@tapToSelectIcon": {
+    "description": "Icon selection instruction"
+  },
+  "clearSearch": "Mamafa ny fikarohana",
+  "@clearSearch": {
+    "description": "Clear search tooltip"
+  },
+  "selectIcon": "Misafidy sary",
+  "@selectIcon": {
+    "description": "Select icon dialog title"
+  },
+  "thisFieldIsRequired": "Ilaina ity saha ity",
+  "@thisFieldIsRequired": {
+    "description": "Required field validation message"
+  },
+  "pressAgainToExit": "Tsindrio indray mba hivoaka",
+  "@pressAgainToExit": {
+    "description": "Double back to exit message"
+  },
+  "minimumAmount": "Vola faran'izay kely",
+  "@minimumAmount": {
+    "description": "Minimum amount validation field name"
+  },
+  "maximumAmount": "Vola faran'izay lehibe",
+  "@maximumAmount": {
+    "description": "Maximum amount validation field name"
+  },
+  "feeAmount": "Volan'ny sara",
+  "@feeAmount": {
+    "description": "Fee amount validation field name"
+  },
+  "traditionalBanking": "Banky nentim-paharazana",
+  "@traditionalBanking": {
+    "description": "Traditional banking description"
+  },
+  "mobileMoney": "Vola finday",
+  "@mobileMoney": {
+    "description": "Mobile money description"
+  },
+  "mobileFinancialServices": "Serivisy ara-bola finday",
+  "@mobileFinancialServices": {
+    "description": "Mobile financial services description"
+  },
+  "selected": "voafidy",
+  "@selected": {
+    "description": "Selected items text"
+  },
+  "feeOptimizer": "Mpampandroso sara",
+  "@feeOptimizer": {
+    "description": "Fee optimizer button text"
+  },
+  "totalFeeIntervals": "Totaly ny elan-toeran'ny sara",
+  "@totalFeeIntervals": {
+    "description": "Total fee intervals label"
+  },
+  "helpAndSupport": "Fanampiana sy fanohanana",
+  "@helpAndSupport": {
+    "description": "Help and support menu item"
+  },
+  "addNewProvider": "Hanampy mpanome tolotra vaovao",
+  "@addNewProvider": {
+    "description": "Add new provider button text"
+  },
+  "tryAdjustingYourSearchRange": "Andramo ny fanovana ny sahan-tsikarananao",
+  "@tryAdjustingYourSearchRange": {
+    "description": "Search range adjustment message"
+  },
+  "chooseTheme": "Misafidy endrika",
+  "@chooseTheme": {
+    "description": "Choose theme dialog title"
+  },
+  "alwaysUseLightTheme": "Mampiasa endrika mazava foana",
+  "@alwaysUseLightTheme": {
+    "description": "Light theme description"
+  },
+  "alwaysUseDarkTheme": "Mampiasa endrika maizina foana",
+  "@alwaysUseDarkTheme": {
+    "description": "Dark theme description"
+  },
+  "followSystemSettings": "Manaraka ny firafitry ny rafitra",
+  "@followSystemSettings": {
+    "description": "System theme description"
+  },
+    "saveChanges": "Tehirizo ny fanovana",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "minimumAmountAr": "Vola faran'ny kely (Ar)",
+  "@minimumAmountAr": {
+    "description": "Minimum amount field label with currency"
+  },
+  "maximumAmountAr": "Vola faran'ny be (Ar)",
+  "@maximumAmountAr": {
+    "description": "Maximum amount field label with currency"
+  },
+  "feeAr": "Sara (Ar)",
+  "@feeAr": {
+    "description": "Fee field label with currency"
+  },
+  "confirmDeleteIntervals": "Tena te-hamafa ny elan-toera {count} voafidy ve ianao?",
+  "@confirmDeleteIntervals": {
+    "description": "Confirmation message for deleting fee intervals",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "fieldIsRequired": "Ilaina ny {fieldName}",
+  "@fieldIsRequired": {
+    "description": "Validation error for required field with field name",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Vola kely indrindra"
+      }
+    }
+  },
+  "mustBeGreaterThanZero": "Tokony ho mihoatra noho ny aotra",
+  "@mustBeGreaterThanZero": {
+    "description": "Validation error for positive numbers"
+  },
+  "enterValidNumber": "Ampidiro isa manan-kery",
+  "@enterValidNumber": {
+    "description": "Validation error for numeric fields"
+  },
+  "mustBeAtLeastNCharacters": "Tokony ho {count} litera fara fahakeliny",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "mustBeLessThanNCharacters": "Tokony ho latsaky ny {count} litera",
+  "@mustBeLessThanNCharacters": {
+    "description": "Validation error for maximum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "50"
+      }
+    }
+  }
+}

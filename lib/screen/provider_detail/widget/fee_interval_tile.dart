@@ -28,7 +28,7 @@ class FeeIntervalTile extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 6),
       child: InteractiveSurface(
         onTap: () {
           HapticFeedback.selectionClick();
@@ -42,6 +42,8 @@ class FeeIntervalTile extends StatelessWidget {
           duration: const Duration(milliseconds: 120),
           curve: Curves.easeOut,
           padding: const EdgeInsets.all(16),
+          // Ensure minimum height for accessibility
+          constraints: const BoxConstraints(minHeight: 72),
           decoration: BoxDecoration(
             color: ThemeUtil.interactiveSurfaceColor(
               isSelected

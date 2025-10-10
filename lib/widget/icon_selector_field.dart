@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
 import '../util/icon_util.dart';
 import '../util/theme_util.dart';
 import 'icon_picker.dart';
@@ -9,12 +10,12 @@ class IconSelectorField extends StatelessWidget {
     super.key,
     required this.selectedIcon,
     required this.onChanged,
-    this.label = 'Icon',
+    this.label,
   });
 
   final String selectedIcon;
   final ValueChanged<String> onChanged;
-  final String label;
+  final String? label;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,8 @@ class IconSelectorField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          label,
-          style: ThemeUtil.bodyLarge.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          label ?? AppLocalizations.of(context).icon,
+          style: ThemeUtil.bodyLarge.copyWith(color: colorScheme.onSurface),
         ),
         const SizedBox(height: 8),
         GestureDetector(
@@ -55,7 +54,7 @@ class IconSelectorField extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Tap to select icon',
+                    AppLocalizations.of(context).tapToSelectIcon,
                     style: ThemeUtil.bodyMedium.copyWith(
                       color: colorScheme.onSurface.withValues(alpha: 0.7),
                     ),

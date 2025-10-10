@@ -162,10 +162,7 @@ class _AppToastState extends State<AppToast>
               decoration: BoxDecoration(
                 color: widget.backgroundColor,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: widget.borderColor,
-                  width: 1.5,
-                ),
+                border: Border.all(color: widget.borderColor, width: 1.5),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.1),
@@ -181,11 +178,7 @@ class _AppToastState extends State<AppToast>
               ),
               child: Row(
                 children: [
-                  Icon(
-                    widget.icon,
-                    color: widget.textColor,
-                    size: 20,
-                  ),
+                  Icon(widget.icon, color: widget.textColor, size: 20),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(

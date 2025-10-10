@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../model/provider_model.dart';
 import '../../../util/theme_util.dart';
 import '../../../styles/global.dart';
@@ -35,12 +36,14 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
   );
 
   Widget _buildHeader() => Row(
+    crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       ProviderBrandAvatar(iconName: widget.provider.iconName),
       const SizedBox(width: 16),
       Expanded(child: _buildProviderInfo()),
+      const SizedBox(width: 12),
       LoadingButton(
-        text: 'Fee Optimizer',
+        text: AppLocalizations.of(context).feeOptimizer,
         onPressed: _optimizeFees,
         isLoading: _isOptimizing,
         isFullWidth: false,
@@ -54,6 +57,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           widget.provider.name,
@@ -63,7 +67,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
           ),
         ),
         if (widget.provider.description.isNotEmpty) ...[
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             widget.provider.description,
             style: ThemeUtil.bodyMedium.copyWith(
@@ -77,7 +81,7 @@ class _ProviderHeaderCardState extends State<ProviderHeaderCard> {
 
   Widget _buildStats() => ProviderStatChip(
     icon: Icons.receipt_long,
-    label: 'Total Fee Intervals',
+    label: AppLocalizations.of(context).totalFeeIntervals,
     value: '5',
   );
 

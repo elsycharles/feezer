@@ -1,0 +1,778 @@
+{
+  "@@locale": "en",
+  "appTitle": "Feezer",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "onboardingTitle1": "Plan ahead and save on fees",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
+  },
+  "onboardingDescription1": "Calculate the most cost-efficient way to handle your money.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Optimize your transactions",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Minimize fees automatically based on predefined intervals.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Save smart, spend better",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Get personalized recommendations and make informed financial decisions instantly.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Next button text"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "getStarted": "Get Started",
+  "@getStarted": {
+    "description": "Get started button text"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Back button text"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button text"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button text"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit button text"
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Create button text"
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "description": "Confirm button text"
+  },
+  "optimizeFee": "Optimize Fee",
+  "@optimizeFee": {
+    "description": "Optimize fee screen title"
+  },
+  "providers": "Providers",
+  "@providers": {
+    "description": "Providers screen title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "createInterval": "Create Interval",
+  "@createInterval": {
+    "description": "Create interval button text"
+  },
+  "optimize": "Optimize",
+  "@optimize": {
+    "description": "Optimize button text"
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "provider": "Provider",
+  "@provider": {
+    "description": "Provider label"
+  },
+  "minTransactions": "Min Transactions",
+  "@minTransactions": {
+    "description": "Minimum transactions label"
+  },
+  "maxTransactions": "Max Transactions",
+  "@maxTransactions": {
+    "description": "Maximum transactions label"
+  },
+  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "@pleaseEnterValidAmount": {
+    "description": "Error message for invalid amount"
+  },
+  "pleaseSelectProvider": "Please select a provider",
+  "@pleaseSelectProvider": {
+    "description": "Error message when no provider is selected"
+  },
+  "invalidTransactionRange": "Min transactions must be less than max transactions",
+  "@invalidTransactionRange": {
+    "description": "Error message for invalid transaction range"
+  },
+  "mvola": "MVola",
+  "@mvola": {
+    "description": "MVola provider name"
+  },
+  "orangeMoney": "Orange Money",
+  "@orangeMoney": {
+    "description": "Orange Money provider name"
+  },
+  "airtelMoney": "Airtel Money",
+  "@airtelMoney": {
+    "description": "Airtel Money provider name"
+  },
+  "mobileFinancialServices": "Mobile financial services",
+  "@mobileFinancialServices": {
+    "description": "Mobile financial services description"
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance section title"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme setting"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language setting"
+  },
+  "english": "English",
+  "@english": {
+    "description": "English language option"
+  },
+  "french": "French",
+  "@french": {
+    "description": "French language option"
+  },
+  "malagasy": "Malagasy",
+  "@malagasy": {
+    "description": "Malagasy language option"
+  },
+  "system": "System",
+  "@system": {
+    "description": "System theme option"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light theme option"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark theme option"
+  },
+  "comingSoon": "Coming Soon",
+  "@comingSoon": {
+    "description": "Coming soon message"
+  },
+  "thisFeatureWillBeAvailableSoon": "This feature will be available soon!",
+  "@thisFeatureWillBeAvailableSoon": {
+    "description": "Coming soon feature message"
+  },
+  "feeIntervals": "Fee Intervals",
+  "@feeIntervals": {
+    "description": "Fee intervals title"
+  },
+  "newFeeInterval": "New Fee Interval",
+  "@newFeeInterval": {
+    "description": "New fee interval title"
+  },
+  "minAmount": "Min Amount",
+  "@minAmount": {
+    "description": "Minimum amount label"
+  },
+  "maxAmount": "Max Amount",
+  "@maxAmount": {
+    "description": "Maximum amount label"
+  },
+  "feePercentage": "Fee Percentage",
+  "@feePercentage": {
+    "description": "Fee percentage label"
+  },
+  "fixedFee": "Fixed Fee",
+  "@fixedFee": {
+    "description": "Fixed fee label"
+  },
+  "pleaseEnterMinAmount": "Please enter minimum amount",
+  "@pleaseEnterMinAmount": {
+    "description": "Validation message for minimum amount"
+  },
+  "pleaseEnterMaxAmount": "Please enter maximum amount",
+  "@pleaseEnterMaxAmount": {
+    "description": "Validation message for maximum amount"
+  },
+  "pleaseEnterValidFeePercentage": "Please enter a valid fee percentage",
+  "@pleaseEnterValidFeePercentage": {
+    "description": "Validation message for fee percentage"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation message for amount range"
+  },
+  "optimizationResults": "Optimization Results",
+  "@optimizationResults": {
+    "description": "Optimization results title"
+  },
+  "interval": "Interval",
+  "@interval": {
+    "description": "Interval column header"
+  },
+  "fee": "Fee",
+  "@fee": {
+    "description": "Fee column header"
+  },
+  "count": "Count",
+  "@count": {
+    "description": "Count column header"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total column header"
+  },
+  "transactionDetails": "Transaction Details",
+  "@transactionDetails": {
+    "description": "Transaction details section title"
+  },
+  "currencySymbol": "Ar",
+  "@currencySymbol": {
+    "description": "Currency symbol for Ariary"
+  },
+  "totalAmount": "Total Amount",
+  "@totalAmount": {
+    "description": "Total amount metric title"
+  },
+  "netAmount": "Net Amount",
+  "@netAmount": {
+    "description": "Net amount after fees metric title"
+  },
+  "totalFees": "Total Fees",
+  "@totalFees": {
+    "description": "Total fees metric title"
+  },
+  "efficiency": "Efficiency",
+  "@efficiency": {
+    "description": "Optimization efficiency metric title"
+  },
+  "operations": "Operations",
+  "@operations": {
+    "description": "Number of operations metric title"
+  },
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining amount metric title"
+  },
+  "@noResultsYet": {
+    "description": "Message when no optimization results"
+  },
+  "noOptimizationResultsFound": "No optimization results found. Please check your input parameters.",
+  "@noOptimizationResultsFound": {
+    "description": "Message when no optimization results are found for the given parameters"
+  },
+  "tapOptimizeToSeeResults": "Tap 'Optimize' to see results",
+  "@tapOptimizeToSeeResults": {
+    "description": "Instructions for getting results"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error title"
+  },
+  "screenNotFound": "Screen {route} not found",
+  "@screenNotFound": {
+    "description": "Error message for route not found",
+    "placeholders": {
+      "route": {
+        "type": "String",
+        "example": "/settings"
+      }
+    }
+  },
+  "goHome": "Go Home",
+  "@goHome": {
+    "description": "Go to home screen button"
+  },
+  "noProvidersFound": "No providers found",
+  "@noProvidersFound": {
+    "description": "Message shown when no providers are available"
+  },
+  "searchProviders": "Search providers...",
+  "@searchProviders": {
+    "description": "Placeholder text for provider search field"
+  },
+  "manageYourProviders": "Manage your providers",
+  "@manageYourProviders": {
+    "description": "Header title for provider management section"
+  },
+  "centralizeProviders": "Centralize bank and mobile money partners in one place.",
+  "@centralizeProviders": {
+    "description": "Description for provider management functionality"
+  },
+  "activeProvider": "Active provider",
+  "@activeProvider": {
+    "description": "Label for single active provider count"
+  },
+  "activeProviders": "Active providers",
+  "@activeProviders": {
+    "description": "Label for multiple active providers count"
+  },
+  "deleteThisProvider": "Delete this provider?",
+  "@deleteThisProvider": {
+    "description": "Confirmation message for deleting a single provider"
+  },
+  "deleteProvidersCount": "Delete {count} providers?",
+  "@deleteProvidersCount": {
+    "description": "Confirmation message for deleting multiple providers",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "deleteProvider": "Delete Provider",
+  "@deleteProvider": {
+    "description": "Title for delete provider dialog"
+  },
+  "deleteProviders": "Delete Providers",
+  "@deleteProviders": {
+    "description": "Title for delete multiple providers dialog"
+  },
+  "providerDeletedSuccessfully": "{count, plural, =1{1 provider deleted successfully} other{{count} providers deleted successfully}}",
+  "@providerDeletedSuccessfully": {
+    "description": "Success message after deleting provider(s)"
+  },
+  "editProvider": "Edit Provider",
+  "@editProvider": {
+    "description": "Title for edit provider bottom sheet"
+  },
+  "providerName": "Provider Name",
+  "@providerName": {
+    "description": "Label for provider name field"
+  },
+  "description": "Description",
+  "@description": {
+    "description": "Label for description field"
+  },
+  "newProvider": "New Provider",
+  "@newProvider": {
+    "description": "Title for new provider screen"
+  },
+  "createNewProvider": "Create New Provider",
+  "@createNewProvider": {
+    "description": "Header title for creating a new provider"
+  },
+  "enterProviderName": "Enter provider name",
+  "@enterProviderName": {
+    "description": "Hint text for provider name field"
+  },
+  "providerCreatedSuccessfully": "Provider created successfully",
+  "@providerCreatedSuccessfully": {
+    "description": "Success message when a provider is created"
+  },
+  "systemDefault": "System default",
+  "@systemDefault": {
+    "description": "System default language option"
+  },
+  "general": "General",
+  "@general": {
+    "description": "General settings section"
+  },
+  "about": "About",
+  "@about": {
+    "description": "About section"
+  },
+  "version": "Version",
+  "@version": {
+    "description": "Version label"
+  },
+  "faqAndContact": "FAQ and contact",
+  "@faqAndContact": {
+    "description": "FAQ and contact option"
+  },
+  "termsOfUse": "Terms of Use",
+  "@termsOfUse": {
+    "description": "Terms of use option"
+  },
+  "termsAndPrivacyPolicy": "Terms and privacy policy",
+  "@termsAndPrivacyPolicy": {
+    "description": "Terms and privacy policy description"
+  },
+  "featureComingNextVersion": "Feature coming in the next version",
+  "@featureComingNextVersion": {
+    "description": "Message for upcoming features"
+  },
+  "financialProvider": "Financial Provider",
+  "@financialProvider": {
+    "description": "Financial provider section title"
+  },
+  "chooseProviderToAnalyze": "Choose the provider you want to analyze",
+  "@chooseProviderToAnalyze": {
+    "description": "Instructions for provider selection"
+  },
+  "amountToOptimize": "Amount to Optimize",
+  "@amountToOptimize": {
+    "description": "Title for amount optimization section"
+  },
+  "enterTransactionAmountToOptimize": "Enter the transaction amount you want to optimize",
+  "@enterTransactionAmountToOptimize": {
+    "description": "Instructions for amount input"
+  },
+  "amount": "Amount",
+  "@amount": {
+    "description": "Amount label"
+  },
+  "transactionRange": "Transaction Range",
+  "@transactionRange": {
+    "description": "Transaction range section title"
+  },
+  "defineMinMaxTransactions": "Define the minimum and maximum number of transactions",
+  "@defineMinMaxTransactions": {
+    "description": "Instructions for transaction range"
+  },
+  "minTransactions": "Min Transactions",
+  "@minTransactions": {
+    "description": "Minimum transactions label"
+  },
+  "maxTransactions": "Max Transactions",
+  "@maxTransactions": {
+    "description": "Maximum transactions label"
+  },
+  "readyToOptimize": "Ready to Optimize",
+  "@readyToOptimize": {
+    "description": "Ready to optimize message"
+  },
+  "clickOptimizeButtonToAnalyze": "Click the Optimize button to analyze the best fee structure for your transactions",
+  "@clickOptimizeButtonToAnalyze": {
+    "description": "Instructions for optimization"
+  },
+  "optimizationResults": "Optimization Results",
+  "@optimizationResults": {
+    "description": "Optimization results title"
+  },
+  "interval": "Interval",
+  "@interval": {
+    "description": "Interval column header"
+  },
+  "fee": "Fee",
+  "@fee": {
+    "description": "Fee column header"
+  },
+  "count": "Count",
+  "@count": {
+    "description": "Count column header"
+  },
+  "providerDetails": "Provider details",
+  "@providerDetails": {
+    "description": "Provider details screen title"
+  },
+  "noFeeIntervalsFound": "No fee intervals found",
+  "@noFeeIntervalsFound": {
+    "description": "Message when no fee intervals exist"
+  },
+  "feeIntervals": "Fee intervals",
+  "@feeIntervals": {
+    "description": "Fee intervals section title"
+  },
+  "feeInterval": "Fee interval",
+  "@feeInterval": {
+    "description": "Fee interval column header"
+  },
+  "searchByFeeRange": "Search by Fee Range",
+  "@searchByFeeRange": {
+    "description": "Search by fee range placeholder"
+  },
+  "addFeeInterval": "Add Fee Interval",
+  "@addFeeInterval": {
+    "description": "Add fee interval button"
+  },
+  "minFee": "Min fee",
+  "@minFee": {
+    "description": "Minimum fee placeholder"
+  },
+  "maxFee": "Max fee",
+  "@maxFee": {
+    "description": "Maximum fee placeholder"
+  },
+  "deleteFeeIntervals": "Delete Fee Intervals",
+  "@deleteFeeIntervals": {
+    "description": "Delete fee intervals title"
+  },
+  "newFeeInterval": "New Fee Interval",
+  "@newFeeInterval": {
+    "description": "New fee interval screen title"
+  },
+  "createNewFeeInterval": "Create New Fee Interval",
+  "@createNewFeeInterval": {
+    "description": "Create new fee interval header"
+  },
+  "defineNewFeeStructure": "Define a new fee structure for transaction amounts",
+  "@defineNewFeeStructure": {
+    "description": "Fee interval creation instructions"
+  },
+  "enterMinimumAmount": "Enter minimum amount",
+  "@enterMinimumAmount": {
+    "description": "Minimum amount input placeholder"
+  },
+  "enterMaximumAmount": "Enter maximum amount",
+  "@enterMaximumAmount": {
+    "description": "Maximum amount input placeholder"
+  },
+  "enterFeeAmount": "Enter fee amount",
+  "@enterFeeAmount": {
+    "description": "Fee amount input placeholder"
+  },
+  "createInterval": "Create Interval",
+  "@createInterval": {
+    "description": "Create interval button"
+  },
+  "maxAmountMustBeGreater": "Max amount must be greater than min amount",
+  "@maxAmountMustBeGreater": {
+    "description": "Validation message for amount range"
+  },
+  "feeIntervalCreatedSuccessfully": "Fee interval created successfully",
+  "@feeIntervalCreatedSuccessfully": {
+    "description": "Success message for fee interval creation"
+  },
+  "addNewFinancialServiceProvider": "Add a new financial service provider to your list",
+  "@addNewFinancialServiceProvider": {
+    "description": "Description for adding new provider"
+  },
+  "enterDescription": "Enter description",
+  "@enterDescription": {
+    "description": "Description input placeholder"
+  },
+  "createProvider": "Create Provider",
+  "@createProvider": {
+    "description": "Create provider button"
+  },
+  "clearSelection": "Clear selection",
+  "@clearSelection": {
+    "description": "Clear selection tooltip"
+  },
+  "selectAll": "Select all",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "icon": "Icon",
+  "@icon": {
+    "description": "Icon label"
+  },
+  "tapToSelectIcon": "Tap to select icon",
+  "@tapToSelectIcon": {
+    "description": "Icon selection instruction"
+  },
+  "clearSearch": "Clear search",
+  "@clearSearch": {
+    "description": "Clear search tooltip"
+  },
+  "selectIcon": "Select Icon",
+  "@selectIcon": {
+    "description": "Select icon dialog title"
+  },
+  "thisFieldIsRequired": "This field is required",
+  "@thisFieldIsRequired": {
+    "description": "Required field validation message"
+  },
+  "pressAgainToExit": "Press again to exit",
+  "@pressAgainToExit": {
+    "description": "Double back to exit message"
+  },
+  "providerUpdatedSuccessfully": "Provider updated successfully",
+  "@providerUpdatedSuccessfully": {
+    "description": "Provider update success message"
+  },
+  "feeIntervalUpdatedSuccessfully": "Fee interval updated successfully",
+  "@feeIntervalUpdatedSuccessfully": {
+    "description": "Fee interval update success message"
+  },
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{1 fee interval deleted successfully} other{{count} fee intervals deleted successfully}}",
+  "@feeIntervalDeletedSuccessfully": {
+    "description": "Fee interval deletion success message",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "editFeeInterval": "Edit Fee Interval",
+  "@editFeeInterval": {
+    "description": "Edit fee interval dialog title"
+  },
+  "minTransactionsCannotBeGreaterThanMax": "Min transactions cannot be greater than max",
+  "@minTransactionsCannotBeGreaterThanMax": {
+    "description": "Validation error for transaction range"
+  },
+  "pleaseEnterValidFee": "Please enter a valid fee",
+  "@pleaseEnterValidFee": {
+    "description": "Validation error for fee field"
+  },
+  "mustBeAtLeastNCharacters": "Must be at least {count} characters",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "num",
+        "format": "compact"
+      }
+    }
+  },
+  "enterValidNumber": "Enter a valid number",
+  "@enterValidNumber": {
+    "description": "Validation error for number field"
+  },
+  "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
+  "@maxAmountMustBeGreaterThanMinAmount": {
+    "description": "Validation error for amount range"
+  },
+  "pleaseEnterFeeAmount": "Please enter fee amount",
+  "@pleaseEnterFeeAmount": {
+    "description": "Validation error for fee amount field"
+  },
+  "selectAll": "Select all",
+  "@selectAll": {
+    "description": "Select all tooltip"
+  },
+  "details": "Details",
+  "@details": {
+    "description": "Details tooltip"
+  },
+  "total": "Total",
+  "@total": {
+    "description": "Total column header"
+  },
+  "minimumAmount": "Minimum amount",
+  "@minimumAmount": {
+    "description": "Minimum amount validation field name"
+  },
+  "maximumAmount": "Maximum amount",
+  "@maximumAmount": {
+    "description": "Maximum amount validation field name"
+  },
+  "feeAmount": "Fee amount",
+  "@feeAmount": {
+    "description": "Fee amount validation field name"
+  },
+  "traditionalBanking": "Traditional banking",
+  "@traditionalBanking": {
+    "description": "Traditional banking description"
+  },
+  "mobileMoney": "Mobile money",
+  "@mobileMoney": {
+    "description": "Mobile money description"
+  },
+  "mobileFinancialServices": "Mobile financial services",
+  "@mobileFinancialServices": {
+    "description": "Mobile financial services description"
+  },
+  "selected": "selected",
+  "@selected": {
+    "description": "Selected items text"
+  },
+  "feeOptimizer": "Fee Optimizer",
+  "@feeOptimizer": {
+    "description": "Fee optimizer button text"
+  },
+  "totalFeeIntervals": "Total Fee Intervals",
+  "@totalFeeIntervals": {
+    "description": "Total fee intervals label"
+  },
+  "helpAndSupport": "Help & Support",
+  "@helpAndSupport": {
+    "description": "Help and support menu item"
+  },
+  "addNewProvider": "Add new provider",
+  "@addNewProvider": {
+    "description": "Add new provider button text"
+  },
+  "tryAdjustingYourSearchRange": "Try adjusting your search range",
+  "@tryAdjustingYourSearchRange": {
+    "description": "Search range adjustment message"
+  },
+  "chooseTheme": "Choose Theme",
+  "@chooseTheme": {
+    "description": "Choose theme dialog title"
+  },
+  "alwaysUseLightTheme": "Always use light theme",
+  "@alwaysUseLightTheme": {
+    "description": "Light theme description"
+  },
+  "alwaysUseDarkTheme": "Always use dark theme",
+  "@alwaysUseDarkTheme": {
+    "description": "Dark theme description"
+  },
+  "followSystemSettings": "Follow system settings",
+  "@followSystemSettings": {
+    "description": "System theme description"
+  },
+  "saveChanges": "Save Changes",
+  "@saveChanges": {
+    "description": "Save changes button text"
+  },
+  "minimumAmountAr": "Minimum Amount (Ar)",
+  "@minimumAmountAr": {
+    "description": "Minimum amount field label with currency"
+  },
+  "maximumAmountAr": "Maximum Amount (Ar)",
+  "@maximumAmountAr": {
+    "description": "Maximum amount field label with currency"
+  },
+  "feeAr": "Fee (Ar)",
+  "@feeAr": {
+    "description": "Fee field label with currency"
+  },
+  "confirmDeleteIntervals": "Are you sure you want to delete {count} selected interval{count, plural, =1{} other{s}}?",
+  "@confirmDeleteIntervals": {
+    "description": "Confirmation message for deleting fee intervals",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "fieldIsRequired": "{fieldName} is required",
+  "@fieldIsRequired": {
+    "description": "Validation error for required field with field name",
+    "placeholders": {
+      "fieldName": {
+        "type": "String",
+        "example": "Minimum amount"
+      }
+    }
+  },
+  "mustBeGreaterThanZero": "Must be greater than 0",
+  "@mustBeGreaterThanZero": {
+    "description": "Validation error for positive numbers"
+  },
+  "enterValidNumber": "Enter a valid number",
+  "@enterValidNumber": {
+    "description": "Validation error for numeric fields"
+  },
+  "mustBeAtLeastNCharacters": "Must be at least {count} characters",
+  "@mustBeAtLeastNCharacters": {
+    "description": "Validation error for minimum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "mustBeLessThanNCharacters": "Must be less than {count} characters",
+  "@mustBeLessThanNCharacters": {
+    "description": "Validation error for maximum length",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "50"
+      }
+    }
+  }
+}

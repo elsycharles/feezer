@@ -1,128 +1,177 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../model/provider_model.dart';
-import '../../model/optimization_result_model.dart';
-import '../../styles/global.dart';
+import '../../model/fee_minimizer_result_model.dart';
+import '../../model/fee_interval_model.dart';
+import 'package:fee_minimizer/styles/global.dart';
+import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
+import '../../util/route_util.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
 import 'widget/transaction_input_widget.dart';
 
+import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
+import '../../util/fee_minimizer_util.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
-  const OptimizeFeeScreen({super.key});
+  const OptimizeFeeScreen({super.key, this.defaultProvider});
+
+  final Provider? defaultProvider;
 
   @override
   State<OptimizeFeeScreen> createState() => _State();
 }
 
 class _State extends State<OptimizeFeeScreen> {
-  // Sample providers - replace with actual data
-  final _providers = [
-    Provider(id: '1', name: 'Kuda Bank', description: 'Traditional banking', iconName: 'account_balance'),
-    Provider(id: '2', name: 'MVola', description: 'Mobile money', iconName: 'phone_android'),
-    Provider(id: '3', name: 'Orange Money', description: 'Mobile financial services', iconName: 'mobile_friendly'),
-  ];
+  DateTime? _lastBackPressed;
+  
+  final _providers = <Provider>[];
 
   Provider? _selectedProvider;
   int _amount = 10000;
-  int _minTransactions = 1;
-  int _maxTransactions = 10;
-  List<OptimizationResult> _results = [];
+  int _minTransactions = 0;
+  int _maxTransactions = 0;
+  FeeOptimizerResult? _result;
   bool _hasOptimized = false;
   bool _isOptimizing = false;
 
   @override
   void initState() {
     super.initState();
-    _selectedProvider = _providers.first;
+    _loadProviders();
+  }
+
+  Future<void> _loadProviders() async {
+    final db = DatabaseUtil();
+    final providerMaps = await db.query(ConstantUtil.tableProviders);
+    final loadedProviders = providerMaps.map((map) => Provider.fromMap(map)).toList();
+    if (mounted) {
+      setState(() {
+        _providers
+          ..clear()
+          ..addAll(loadedProviders);
+        _selectedProvider = _providers.isNotEmpty 
+          ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider) 
+              ? widget.defaultProvider 
+              : _providers.first) 
+          : null;
+      });
+    }
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: context.theme.scaffoldBackgroundColor,
-    appBar: custom.AppBar(
-      title: 'Optimize Fee',
-      leading: IconButton(
-        onPressed: context.pop,
-        icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
-      ),
-    ),
-    body: SafeArea(
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Global.gapMd,
-                  _buildProviderSection(),
-                  Global.gapLg,
-                  _buildAmountSection(),
-                  Global.gapLg,
-                  _buildTransactionSection(),
-                  Global.gapLg,
-                  _buildResultsSection(),
-                  Global.gapXl,
-                  SizedBox(height: 80), // Bottom padding for button
-                ],
-              ),
-            ),
-          ),
-          _buildOptimizeButton(),
-        ],
-      ),
-    ),
-  );
+  Widget build(BuildContext context) {
+    final canNavigateBack = GoRouter.of(context).canPop();
 
-  Widget _buildProviderSection() => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.business, size: 18, color: context.colorScheme.primary),
-              Global.gapSm,
-              Text(
-                'Financial Provider',
-                style: ThemeUtil.titleMedium.copyWith(
-                  color: context.colorScheme.primary,
-                  fontWeight: FontWeight.w600,
+    return PopScope(
+      canPop: canNavigateBack,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop && !canNavigateBack) {
+          _handleBackPress();
+        }
+      },
+      child: Scaffold(
+        backgroundColor: context.theme.scaffoldBackgroundColor,
+        appBar: custom.AppBar(
+          title: AppLocalizations.of(context).optimizeFee,
+          leading: null, // Home screen - no back button needed
+          menuExcludeRoutes: const [AppRouter.homeRoute],
+          menuIconColor: context.colorScheme.onSurface,
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                // Use BouncingScrollPhysics for better UX and international standards
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                // Add proper padding for RTL support and accessibility
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 12 : 0,
+                ),
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      Global.gapMd,
+                      _buildProviderSection(),
+                      Global.gapLg,
+                      _buildAmountSection(),
+                      Global.gapLg,
+                      _buildTransactionSection(),
+                      Global.gapLg,
+                      _buildResultsSection(),
+                      Global.gapXl,
+                      // Increased bottom padding for better accessibility
+                      const SizedBox(height: 100),
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
-          Global.gapSm,
-          Text(
-            'Choose the provider you want to analyze',
-            style: ThemeUtil.bodyMedium.copyWith(
+            ),
+            SafeArea(
+              top: false,
+              child: _buildOptimizeButton(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _handleBackPress() {
+    // Double back logic to exit the app
+    final now = DateTime.now();
+    const exitTimeLimit = Duration(seconds: 2);
+
+    if (_lastBackPressed == null ||
+        now.difference(_lastBackPressed!) > exitTimeLimit) {
+      _lastBackPressed = now;
+      AppToast.info(context, AppLocalizations.of(context).pressAgainToExit);
+    } else {
+      SystemNavigator.pop();
+    }
+  }
+
+  Widget _buildProviderSection() => CollapsibleCard(
+    title: AppLocalizations.of(context).financialProvider,
+    subtitle: AppLocalizations.of(context).chooseProviderToAnalyze,
+    icon: Icons.business,
+    iconColor: context.colorScheme.primary,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: context.colorScheme.primary,
+      fontWeight: FontWeight.w600,
+    ),
+    children: [
+      Container(
+        decoration: BoxDecoration(
+          color: context.colorScheme.surface,
+          borderRadius: Global.borderMd,
+          border: Border.all(color: context.colorScheme.outlineVariant),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<Provider>(
+            value: _selectedProvider,
+            isExpanded: true,
+            padding: Global.padMd,
+            icon: Icon(
+              Icons.keyboard_arrow_down,
               color: context.colorScheme.onSurfaceVariant,
             ),
-          ),
-          Global.gapMd,
-          Container(
-            decoration: BoxDecoration(
-              color: context.colorScheme.surface,
-              borderRadius: Global.borderMd,
-              border: Border.all(color: context.colorScheme.outlineVariant),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<Provider>(
-                value: _selectedProvider,
-                isExpanded: true,
-                padding: Global.padMd,
-                icon: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: context.colorScheme.onSurfaceVariant,
-                ),
-                items: _providers.map((provider) => DropdownMenuItem(
+            items: [
+              // Regular provider items
+              ..._providers.map(
+                (provider) => DropdownMenuItem(
                   value: provider,
                   child: Row(
                     children: [
@@ -130,13 +179,15 @@ class _State extends State<OptimizeFeeScreen> {
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: context.colorScheme.primary.withValues(alpha: 0.1),
+                          color: context.colorScheme.primary.withValues(
+                            alpha: 0.1,
+                          ),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
                           Icons.business,
                           color: context.colorScheme.primary,
-                          size: 20,
+                          size: 18,
                         ),
                       ),
                       Global.gapMd,
@@ -152,123 +203,143 @@ class _State extends State<OptimizeFeeScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Text(
-                              provider.description,
-                              style: ThemeUtil.bodySmall.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
+                            if (provider.description.isNotEmpty)
+                              Text(
+                                provider.description,
+                                style: ThemeUtil.bodySmall.copyWith(
+                                  color: context.colorScheme.onSurfaceVariant,
+                                ),
                               ),
-                            ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                )).toList(),
-                onChanged: (provider) {
-                  setState(() {
-                    _selectedProvider = provider;
-                    _hasOptimized = false;
-                    _results.clear();
-                  });
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-
-  Widget _buildAmountSection() => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Amount to Optimize',
-            style: ThemeUtil.titleMedium.copyWith(
-              color: context.colorScheme.onSurface,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Global.gapSm,
-          Text(
-            'Enter the transaction amount you want to optimize',
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          Global.gapLg,
-          AmountInputWidget(
-            value: _amount,
-            onChanged: (value) {
-              setState(() {
-                _amount = value;
-                _hasOptimized = false;
-                _results.clear();
-              });
-            },
-            label: 'Amount',
-            min: 1,
-            max: 9999999,
-          ),
-          Global.gapLg,
-        ],
-      ),
-    ),
-  );
-
-  Widget _buildTransactionSection() => Container(
-    margin: const EdgeInsets.symmetric(horizontal: 16),
-    child: SurfaceCard(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Transaction Range',
-            style: ThemeUtil.titleMedium.copyWith(
-              color: context.colorScheme.onSurface,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Global.gapSm,
-          Text(
-            'Define the minimum and maximum number of transactions',
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          Global.gapLg,
-          Row(
-            children: [
-              Expanded(
-                child: TransactionInputWidget(
-                  value: _minTransactions,
-                  onChanged: (value) => setState(() => _minTransactions = value),
-                  label: 'Min Transactions',
-                  min: 1,
-                  max: 999,
                 ),
               ),
-              Global.gapLg,
-              Expanded(
-                child: TransactionInputWidget(
-                  value: _maxTransactions,
-                  onChanged: (value) => setState(() => _maxTransactions = value),
-                  label: 'Max Transactions',
-                  min: 1,
-                  max: 999,
+              // Add new provider option
+              DropdownMenuItem<Provider>(
+                value: null, // Special value to indicate "add new"
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: context.colorScheme.primary.withValues(
+                          alpha: 0.1,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Icon(
+                        Icons.add,
+                        color: context.colorScheme.primary,
+                        size: 18,
+                      ),
+                    ),
+                    Global.gapMd,
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context).addNewProvider,
+                        style: ThemeUtil.bodyLarge.copyWith(
+                          color: context.colorScheme.primary,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
+            onChanged: (provider) async {
+              if (provider == null) {
+                // Navigate to NewProviderScreen when "Add new provider" is selected
+                final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
+                // If a new provider was created (returned as result), add it to the list
+                if (result != null) {
+                  setState(() {
+                    _providers.add(result);
+                    _selectedProvider = result;
+                    _hasOptimized = false;
+                    _result = null;
+                  });
+                  
+                  // Automatically redirect to Provider Details to complete the setup
+                  if (mounted) {
+                    await GoRouter.of(context).push(
+                      '${AppRouter.providerDetailRoute}/${result.id}',
+                      extra: result,
+                    );
+                  }
+                }
+              } else {
+                setState(() {
+                  _selectedProvider = provider;
+                  _hasOptimized = false;
+                  _result = null;
+                });
+              }
+            },
           ),
-          Global.gapMd,
+        ),
+      ),
+    ],
+  );  Widget _buildAmountSection() => CollapsibleCard(
+    title: AppLocalizations.of(context).amountToOptimize,
+    subtitle: AppLocalizations.of(context).enterTransactionAmountToOptimize,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: context.colorScheme.onSurface,
+      fontWeight: FontWeight.w700,
+    ),
+    children: [
+      AmountInputWidget(
+        value: _amount,
+        onChanged: (value) {
+          setState(() {
+            _amount = value;
+            _hasOptimized = false;
+            _result = null;
+          });
+        },
+        label: AppLocalizations.of(context).amount,
+        min: 1,
+        max: 9999999,
+      ),
+    ],
+  );
+
+  Widget _buildTransactionSection() => CollapsibleCard(
+    title: AppLocalizations.of(context).transactionRange,
+    subtitle: AppLocalizations.of(context).defineMinMaxTransactions,
+    titleStyle: ThemeUtil.titleMedium.copyWith(
+      color: context.colorScheme.onSurface,
+      fontWeight: FontWeight.w700,
+    ),
+    children: [
+      Row(
+        children: [
+          Expanded(
+            child: TransactionInputWidget(
+              value: _minTransactions,
+              onChanged: (value) => setState(() => _minTransactions = value),
+              label: AppLocalizations.of(context).minTransactions,
+              min: 1,
+              max: 999,
+            ),
+          ),
+          Global.gapLg,
+          Expanded(
+            child: TransactionInputWidget(
+              value: _maxTransactions,
+              onChanged: (value) => setState(() => _maxTransactions = value),
+              label: AppLocalizations.of(context).maxTransactions,
+              min: 1,
+              max: 999,
+            ),
+          ),
         ],
       ),
-    ),
+    ],
   );
 
   Widget _buildResultsSection() {
@@ -277,22 +348,26 @@ class _State extends State<OptimizeFeeScreen> {
         margin: const EdgeInsets.symmetric(horizontal: 16),
         child: SurfaceCard(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(
                 Icons.analytics_outlined,
-                size: 48,
-                color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                size: 40,
+                color: context.colorScheme.onSurfaceVariant.withValues(
+                  alpha: 0.6,
+                ),
               ),
               Global.gapMd,
               Text(
-                'Ready to Optimize',
+                AppLocalizations.of(context).readyToOptimize,
                 style: ThemeUtil.titleMedium.copyWith(
                   color: context.colorScheme.onSurface,
                 ),
+                textAlign: TextAlign.center,
               ),
               Global.gapSm,
               Text(
-                'Click the Optimize button to analyze the best fee structure for your transactions',
+                AppLocalizations.of(context).clickOptimizeButtonToAnalyze,
                 style: ThemeUtil.bodyMedium.copyWith(
                   color: context.colorScheme.onSurfaceVariant,
                 ),
@@ -312,10 +387,14 @@ class _State extends State<OptimizeFeeScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.analytics, size: 18, color: context.colorScheme.primary),
+                Icon(
+                  Icons.analytics,
+                  size: 18,
+                  color: context.colorScheme.primary,
+                ),
                 Global.gapSm,
                 Text(
-                  'Optimization Results',
+                  AppLocalizations.of(context).optimizationResults,
                   style: ThemeUtil.titleMedium.copyWith(
                     color: context.colorScheme.primary,
                     fontWeight: FontWeight.w600,
@@ -323,7 +402,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 const Spacer(),
                 Text(
-                  '${_results.length} results',
+                  '${_result?.details.length ?? 0} operations',
                   style: ThemeUtil.bodyMedium.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -331,11 +410,13 @@ class _State extends State<OptimizeFeeScreen> {
               ],
             ),
             Global.gapMd,
-            if (_results.isEmpty)
+            if (_result == null || _result!.details.isEmpty)
               Container(
                 padding: Global.padMd,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.errorContainer.withValues(alpha: 0.1),
+                  color: context.colorScheme.errorContainer.withValues(
+                    alpha: 0.1,
+                  ),
                   borderRadius: Global.borderMd,
                   border: Border.all(
                     color: context.colorScheme.error.withValues(alpha: 0.3),
@@ -346,12 +427,12 @@ class _State extends State<OptimizeFeeScreen> {
                     Icon(
                       Icons.warning_outlined,
                       color: context.colorScheme.error,
-                      size: 20,
+                      size: 18,
                     ),
                     Global.gapSm,
                     Expanded(
                       child: Text(
-                        'No optimization results found. Please check your input parameters.',
+                        AppLocalizations.of(context).noOptimizationResultsFound,
                         style: ThemeUtil.bodyMedium.copyWith(
                           color: context.colorScheme.error,
                         ),
@@ -361,55 +442,228 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
               )
             else
-              _buildResultsTable(),
+              _buildResultsDisplay(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildResultsTable() => Column(
-    children: [
-      // Header row
-      Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: BoxDecoration(
-          color: context.colorScheme.surface,
-          borderRadius: Global.borderMd,
-          border: Border.all(
-            color: context.colorScheme.outline.withValues(alpha: 0.12),
-            width: 1,
+  Widget _buildResultsDisplay() {
+    if (_result == null) return const SizedBox.shrink();
+
+    return Column(
+      children: [
+        // Global metrics cards
+        _buildGlobalMetricsCards(),
+        Global.gapMd,
+        // Operations details
+        _buildOperationsDetails(),
+      ],
+    );
+  }
+
+  Widget _buildGlobalMetricsCards() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: _buildMetricCard(
+                title: AppLocalizations.of(context).totalAmount,
+                value: '${_result!.totalAmount.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                icon: Icons.account_balance_wallet,
+                color: context.colorScheme.primary,
+              ),
+            ),
+            Global.gapMd,
+            Expanded(
+              child: _buildMetricCard(
+                title: AppLocalizations.of(context).netAmount,
+                value: '${_result!.netAmount.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                icon: Icons.savings,
+                color: Colors.green,
+              ),
+            ),
+          ],
+        ),
+        Global.gapMd,
+        Row(
+          children: [
+            Expanded(
+              child: _buildMetricCard(
+                title: AppLocalizations.of(context).totalFees,
+                value: '${_result!.totalFees.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                icon: Icons.money_off,
+                color: Colors.red,
+              ),
+            ),
+            Global.gapMd,
+            Expanded(
+              child: _buildMetricCard(
+                title: AppLocalizations.of(context).efficiency,
+                value: '${_result!.efficiency.toStringAsFixed(1)}%',
+                icon: Icons.trending_up,
+                color: _result!.efficiency >= 95 ? Colors.green : _result!.efficiency >= 90 ? Colors.orange : Colors.red,
+              ),
+            ),
+          ],
+        ),
+        Global.gapMd,
+        Row(
+          children: [
+            Expanded(
+              child: _buildMetricCard(
+                title: AppLocalizations.of(context).operations,
+                value: '${_result!.totalOperations}',
+                icon: Icons.repeat,
+                color: context.colorScheme.secondary,
+              ),
+            ),
+            Global.gapMd,
+            Expanded(
+              child: _buildMetricCard(
+                title: AppLocalizations.of(context).remaining,
+                value: '${_result!.remaining.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                icon: Icons.pending,
+                color: context.colorScheme.tertiary,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMetricCard({
+    required String title,
+    required String value,
+    required IconData icon,
+    required Color color,
+  }) {
+    return Container(
+      padding: Global.padMd,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        borderRadius: Global.borderMd,
+        border: Border.all(
+          color: context.colorScheme.outline.withValues(alpha: 0.12),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: context.colorScheme.shadow.withValues(alpha: 0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
           ),
-        ),
-        child: Row(
-          children: [
-            Expanded(flex: 2, child: _buildHeaderCell('Interval')),
-            Expanded(child: _buildHeaderCell('Fee')),
-            Expanded(child: _buildHeaderCell('Count')),
-            Expanded(child: _buildHeaderCell('Total')),
-          ],
-        ),
+        ],
       ),
-      // Data rows
-      ..._results.map((result) => Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: Global.padMd,
-        decoration: BoxDecoration(
-          color: context.colorScheme.surface,
-          borderRadius: Global.borderMd,
-        ),
-        child: Row(
-          children: [
-            Expanded(flex: 2, child: _buildTableCell(result.interval)),
-            Expanded(child: _buildTableCell(result.fee, isGreen: true)),
-            Expanded(child: _buildTableCell(result.count.toString())),
-            Expanded(child: _buildTableCell(result.total, isGreen: true)),
-          ],
-        ),
-      )),
-    ],
-  );
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                icon,
+                size: 20,
+                color: color,
+              ),
+              Global.gapSm,
+              Expanded(
+                child: Text(
+                  title,
+                  style: ThemeUtil.labelMedium.copyWith(
+                    color: context.colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Global.gapSm,
+          Text(
+            value,
+            style: ThemeUtil.bodyLarge.copyWith(
+              color: context.colorScheme.onSurface,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOperationsDetails() {
+    return SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.list_alt,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
+              Global.gapSm,
+              Text(
+                AppLocalizations.of(context).transactionDetails,
+                style: ThemeUtil.titleMedium.copyWith(
+                  color: context.colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          Global.gapMd,
+          // Header row
+          Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: context.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+              borderRadius: Global.borderMd,
+            ),
+            child: Row(
+              children: [
+                Expanded(flex: 2, child: _buildHeaderCell(AppLocalizations.of(context).amount)),
+                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
+                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).count)),
+                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).total)),
+              ],
+            ),
+          ),
+          // Data rows
+          Column(
+            children: _result!.details.map((detail) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: Global.padMd,
+                constraints: const BoxConstraints(minHeight: 56),
+                decoration: BoxDecoration(
+                  color: context.colorScheme.surface,
+                  borderRadius: Global.borderMd,
+                  border: Border.all(
+                    color: context.colorScheme.outline.withValues(alpha: 0.08),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(flex: 2, child: _buildTableCell('${detail.amount.toInt()} ${AppLocalizations.of(context).currencySymbol}')),
+                    Expanded(child: _buildTableCell('${detail.fee.toInt()} ${AppLocalizations.of(context).currencySymbol}', isGreen: false)),
+                    Expanded(child: _buildTableCell(detail.count.toString())),
+                    Expanded(child: _buildTableCell('${detail.totalCost.toInt()} ${AppLocalizations.of(context).currencySymbol}', isGreen: true)),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+
 
   Widget _buildHeaderCell(String text) => Text(
     text,
@@ -442,58 +696,89 @@ class _State extends State<OptimizeFeeScreen> {
       boxShadow: Global.shadowMd,
     ),
     child: LoadingButton(
-      text: 'Optimize',
+      text: AppLocalizations.of(context).optimize,
       onPressed: _optimize,
       isLoading: _isOptimizing,
     ),
   );
 
-  void _generateResults() {
-    // Enhanced optimization logic
-    if (_selectedProvider == null || _amount <= 0 || _minTransactions > _maxTransactions) {
+  void _generateResults() async {
+    // Validation
+    if (_selectedProvider == null ||
+        _amount <= 0 ||
+        _minTransactions > _maxTransactions) {
       setState(() {
-        _results = [];
+        _result = null;
         _hasOptimized = true;
       });
       return;
     }
 
-    // Simulate optimization calculation
-    final baseRate = _amount * 0.02; // 2% base rate
-    final optimizedFee = (baseRate * _minTransactions).round();
-    final totalCost = optimizedFee * _maxTransactions;
+    try {
+      // Load fee intervals for the selected provider
+      final db = DatabaseUtil();
+      final feeIntervalMaps = await db.query(
+        ConstantUtil.tableFeeIntervals,
+        where: '${ConstantUtil.columnProviderId} = ?',
+        whereArgs: [int.tryParse(_selectedProvider!.id)],
+      );
+      final intervals = feeIntervalMaps.map((map) => FeeInterval.fromMap(map)).toList();
 
-    setState(() {
-      _hasOptimized = true;
-      _results = [
-        OptimizationResult(
-          interval: '${(_amount * 0.2).round()} - ${(_amount * 1.5).round()}',
-          fee: '${optimizedFee.toString()} Ar',
-          count: _maxTransactions,
-          total: '${totalCost.toString()} Ar',
-        ),
-        OptimizationResult(
-          interval: '${(_amount * 0.5).round()} - ${(_amount * 2).round()}',
-          fee: '${(optimizedFee * 1.2).round().toString()} Ar',
-          count: (_maxTransactions * 0.8).round(),
-          total: '${(totalCost * 0.9).round().toString()} Ar',
-        ),
-      ];
-    });
+      if (intervals.isEmpty) {
+        setState(() {
+          _result = null;
+          _hasOptimized = true;
+        });
+        if (mounted) {
+          AppToast.info(context, AppLocalizations.of(context).noProvidersFound);
+        }
+        return;
+      }
+
+      // Calculate optimal operations
+      final optimizationResult = FeeOptimizerUtil.calculateOptimalOperations(
+        _amount.toDouble(),
+        intervals,
+        maxOperations: _maxTransactions,
+        minOperations: _minTransactions,
+      );
+
+      setState(() {
+        _result = optimizationResult;
+        _hasOptimized = true;
+      });
+    } catch (e) {
+      if (mounted) {
+        AppToast.error(context, 'Failed to calculate optimization');
+      }
+      setState(() {
+        _result = null;
+        _hasOptimized = true;
+      });
+    }
   }
 
   void _optimize() async {
     // Validation
     if (_amount <= 0) {
-      AppToast.error(context, 'Please enter a valid amount');
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).pleaseEnterValidAmount,
+      );
       return;
     }
     if (_minTransactions > _maxTransactions) {
-      AppToast.error(context, 'Min transactions cannot be greater than max');
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax,
+      );
       return;
     }
     if (_selectedProvider == null) {
-      AppToast.error(context, 'Please select a provider');
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).pleaseSelectProvider,
+      );
       return;
     }
 
@@ -507,5 +792,4 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() => _isOptimizing = false);
     }
   }
-
 }

@@ -39,5 +39,6 @@ class OptimizationResult {
   int get hashCode => Object.hash(interval, fee, count, total);
 
   @override
-  String toString() => 'OptimizationResult(interval: $interval, fee: $fee, count: $count, total: $total)';
+  String toString() =>
+      'OptimizationResult(interval: $interval, fee: $fee, count: $count, total: $total)';
 }

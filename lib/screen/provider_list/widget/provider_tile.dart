@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../model/provider_model.dart';
-import '../../../widget/provider_card.dart';
+import 'provider_card.dart';
 
 /// Provider tile with subtle hover feedback
 class ProviderTile extends StatelessWidget {

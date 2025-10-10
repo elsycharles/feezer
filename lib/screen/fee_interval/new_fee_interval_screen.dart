@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../model/fee_interval_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
@@ -40,11 +42,7 @@ class _State extends State<NewFeeIntervalScreen> {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
-      title: 'New Fee Interval',
-      leading: IconButton(
-        onPressed: context.pop,
-        icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
-      ),
+      title: AppLocalizations.of(context).newFeeInterval,
     ),
     body: Form(
       key: _formKey,
@@ -77,14 +75,14 @@ class _State extends State<NewFeeIntervalScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Create New Fee Interval',
+        AppLocalizations.of(context).createNewFeeInterval,
         style: ThemeUtil.titleLarge.copyWith(
           color: context.colorScheme.onSurface,
         ),
       ),
       Global.gapSm,
       Text(
-        'Define a new fee structure for transaction amounts',
+        AppLocalizations.of(context).defineNewFeeStructure,
         style: ThemeUtil.bodyMedium.copyWith(
           color: context.colorScheme.onSurface.withValues(alpha: 0.7),
           height: 1.4,
@@ -94,21 +92,25 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMinAmountField() => custom_form.FormField(
-    label: 'Minimum Amount (Ar)',
+    label: AppLocalizations.of(context).minimumAmountAr,
     controller: _minAmountController,
     icon: Icons.money,
-    hintText: 'Enter minimum amount',
+    hintText: AppLocalizations.of(context).enterMinimumAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(value, 'Minimum amount'),
+    validator: (value) => ValidationUtil.nonNegativeNumber(
+      value,
+      context,
+      AppLocalizations.of(context).minimumAmount,
+    ),
     required: true,
   );
 
   Widget _buildMaxAmountField() => custom_form.FormField(
-    label: 'Maximum Amount (Ar)',
+    label: AppLocalizations.of(context).maximumAmountAr,
     controller: _maxAmountController,
     icon: Icons.money,
-    hintText: 'Enter maximum amount',
+    hintText: AppLocalizations.of(context).enterMaximumAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
     validator: _validateMaxAmount,
@@ -116,13 +118,17 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildFeeField() => custom_form.FormField(
-    label: 'Fee (Ar)',
+    label: AppLocalizations.of(context).feeAr,
     controller: _feeController,
     icon: Icons.attach_money,
-    hintText: 'Enter fee amount',
+    hintText: AppLocalizations.of(context).enterFeeAmount,
     keyboardType: TextInputType.number,
     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(value, 'Fee amount'),
+    validator: (value) => ValidationUtil.positiveNumber(
+      value,
+      context,
+      AppLocalizations.of(context).feeAmount,
+    ),
     required: true,
   );
 
@@ -141,8 +147,8 @@ class _State extends State<NewFeeIntervalScreen> {
       children: [
         Expanded(
           child: LoadingButton(
-            text: 'Cancel',
-            onPressed: context.pop,
+            text: AppLocalizations.of(context).cancel,
+            onPressed: () => GoRouter.of(context).pop(),
             isLoading: false,
             isOutlined: true,
           ),
@@ -151,7 +157,7 @@ class _State extends State<NewFeeIntervalScreen> {
         Expanded(
           flex: 2,
           child: LoadingButton(
-            text: 'Create Interval',
+            text: AppLocalizations.of(context).createInterval,
             onPressed: _create,
             isLoading: _isCreating,
           ),
@@ -160,29 +166,31 @@ class _State extends State<NewFeeIntervalScreen> {
     ),
   );
 
-
-
   String? _validateMaxAmount(String? value) {
     // First validate it's a positive number
-    final basicValidation = ValidationUtil.positiveNumber(value, 'Maximum amount');
+    final basicValidation = ValidationUtil.positiveNumber(
+      value,
+      context,
+      AppLocalizations.of(context).maximumAmount,
+    );
     if (basicValidation != null) return basicValidation;
-    
+
     // Then check it's greater than min amount
     final amount = double.parse(value!);
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
-    if (amount <= minAmount) return 'Max amount must be greater than min amount';
+    if (amount <= minAmount) {
+      return AppLocalizations.of(context).maxAmountMustBeGreater;
+    }
     return null;
   }
-
-
 
   void _create() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isCreating = true);
-      
+
       // Simulate creation process
       await Future.delayed(const Duration(milliseconds: 600));
-      
+
       if (mounted) {
         final now = DateTime.now();
         final feeInterval = FeeInterval(
@@ -193,8 +201,11 @@ class _State extends State<NewFeeIntervalScreen> {
           creationDateTime: now,
         );
         widget.onFeeIntervalAdded?.call(feeInterval);
-        AppToast.success(context, 'Fee interval created successfully');
-        context.pop();
+        AppToast.success(
+          context,
+          AppLocalizations.of(context).feeIntervalCreatedSuccessfully,
+        );
+        GoRouter.of(context).pop(feeInterval);
       }
     }
   }
