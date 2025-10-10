@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../model/provider_model.dart';
-import '../../model/optimization_result_model.dart';
+import '../../model/fee_minimizer_result_model.dart';
 import '../../model/fee_interval_model.dart';
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
@@ -41,7 +41,7 @@ class _State extends State<OptimizeFeeScreen> {
   int _amount = 10000;
   int _minTransactions = 1;
   int _maxTransactions = 10;
-  List<OptimizationResult> _results = [];
+  FeeOptimizerResult? _result;
   bool _hasOptimized = false;
   bool _isOptimizing = false;
 
@@ -261,7 +261,7 @@ class _State extends State<OptimizeFeeScreen> {
                     _providers.add(result);
                     _selectedProvider = result;
                     _hasOptimized = false;
-                    _results.clear();
+                    _result = null;
                   });
                   
                   // Automatically redirect to Provider Details to complete the setup
@@ -276,7 +276,7 @@ class _State extends State<OptimizeFeeScreen> {
                 setState(() {
                   _selectedProvider = provider;
                   _hasOptimized = false;
-                  _results.clear();
+                  _result = null;
                 });
               }
             },
@@ -298,7 +298,7 @@ class _State extends State<OptimizeFeeScreen> {
           setState(() {
             _amount = value;
             _hasOptimized = false;
-            _results.clear();
+            _result = null;
           });
         },
         label: AppLocalizations.of(context).amount,
@@ -402,7 +402,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 const Spacer(),
                 Text(
-                  '${_results.length} results',
+                  '${_result?.details.length ?? 0} operations',
                   style: ThemeUtil.bodyMedium.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -410,7 +410,7 @@ class _State extends State<OptimizeFeeScreen> {
               ],
             ),
             Global.gapMd,
-            if (_results.isEmpty)
+            if (_result == null || _result!.details.isEmpty)
               Container(
                 padding: Global.padMd,
                 decoration: BoxDecoration(
@@ -442,73 +442,226 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
               )
             else
-              _buildResultsTable(),
+              _buildResultsDisplay(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildResultsTable() => Column(
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      // Header row
-      Container(
-        margin: const EdgeInsets.only(bottom: 8),
-        padding: Global.padMd,
-        decoration: BoxDecoration(
-          color: context.colorScheme.surface,
-          borderRadius: Global.borderMd,
-          border: Border.all(
-            color: context.colorScheme.outline.withValues(alpha: 0.12),
-            width: 1,
-          ),
-        ),
-        child: Row(
+  Widget _buildResultsDisplay() {
+    if (_result == null) return const SizedBox.shrink();
+
+    return Column(
+      children: [
+        // Global metrics cards
+        _buildGlobalMetricsCards(),
+        Global.gapMd,
+        // Operations details
+        _buildOperationsDetails(),
+      ],
+    );
+  }
+
+  Widget _buildGlobalMetricsCards() {
+    return Column(
+      children: [
+        Row(
           children: [
             Expanded(
-              flex: 2,
-              child: _buildHeaderCell(AppLocalizations.of(context).interval),
+              child: _buildMetricCard(
+                title: 'Total Amount',
+                value: '${_result!.totalAmount.toInt()} Ar',
+                icon: Icons.account_balance_wallet,
+                color: context.colorScheme.primary,
+              ),
             ),
-            Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
+            Global.gapMd,
             Expanded(
-              child: _buildHeaderCell(AppLocalizations.of(context).count),
-            ),
-            Expanded(
-              child: _buildHeaderCell(AppLocalizations.of(context).total),
+              child: _buildMetricCard(
+                title: 'Net Amount',
+                value: '${_result!.netAmount.toInt()} Ar',
+                icon: Icons.savings,
+                color: Colors.green,
+              ),
             ),
           ],
         ),
+        Global.gapMd,
+        Row(
+          children: [
+            Expanded(
+              child: _buildMetricCard(
+                title: 'Total Fees',
+                value: '${_result!.totalFees.toInt()} Ar',
+                icon: Icons.money_off,
+                color: Colors.red,
+              ),
+            ),
+            Global.gapMd,
+            Expanded(
+              child: _buildMetricCard(
+                title: 'Efficiency',
+                value: '${_result!.efficiency.toStringAsFixed(1)}%',
+                icon: Icons.trending_up,
+                color: _result!.efficiency >= 95 ? Colors.green : _result!.efficiency >= 90 ? Colors.orange : Colors.red,
+              ),
+            ),
+          ],
+        ),
+        Global.gapMd,
+        Row(
+          children: [
+            Expanded(
+              child: _buildMetricCard(
+                title: 'Operations',
+                value: '${_result!.totalOperations}',
+                icon: Icons.repeat,
+                color: context.colorScheme.secondary,
+              ),
+            ),
+            Global.gapMd,
+            Expanded(
+              child: _buildMetricCard(
+                title: 'Remaining',
+                value: '${_result!.remaining.toInt()} Ar',
+                icon: Icons.pending,
+                color: context.colorScheme.tertiary,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildMetricCard({
+    required String title,
+    required String value,
+    required IconData icon,
+    required Color color,
+  }) {
+    return Container(
+      padding: Global.padMd,
+      decoration: BoxDecoration(
+        color: context.colorScheme.surface,
+        borderRadius: Global.borderMd,
+        border: Border.all(
+          color: context.colorScheme.outline.withValues(alpha: 0.12),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: context.colorScheme.shadow.withValues(alpha: 0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      // Data rows - display all results without scroll
-      Column(
-        children: _results.map((result) {
-          return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                icon,
+                size: 20,
+                color: color,
+              ),
+              Global.gapSm,
+              Expanded(
+                child: Text(
+                  title,
+                  style: ThemeUtil.labelMedium.copyWith(
+                    color: context.colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Global.gapSm,
+          Text(
+            value,
+            style: ThemeUtil.bodyLarge.copyWith(
+              color: context.colorScheme.onSurface,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOperationsDetails() {
+    return SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.list_alt,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
+              Global.gapSm,
+              Text(
+                'Transaction Details',
+                style: ThemeUtil.titleMedium.copyWith(
+                  color: context.colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          Global.gapMd,
+          // Header row
+          Container(
             margin: const EdgeInsets.only(bottom: 8),
             padding: Global.padMd,
-            // Add minimum height for accessibility
-            constraints: const BoxConstraints(minHeight: 56),
             decoration: BoxDecoration(
-              color: context.colorScheme.surface,
+              color: context.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
               borderRadius: Global.borderMd,
-              // Add subtle border for better visual separation
-              border: Border.all(
-                color: context.colorScheme.outline.withValues(alpha: 0.08),
-              ),
             ),
             child: Row(
               children: [
-                Expanded(flex: 2, child: _buildTableCell(result.interval)),
-                Expanded(child: _buildTableCell(result.fee, isGreen: true)),
-                Expanded(child: _buildTableCell(result.count.toString())),
-                Expanded(child: _buildTableCell(result.total, isGreen: true)),
+                Expanded(flex: 2, child: _buildHeaderCell('Amount')),
+                Expanded(child: _buildHeaderCell('Fee')),
+                Expanded(child: _buildHeaderCell('Count')),
+                Expanded(child: _buildHeaderCell('Total')),
               ],
             ),
-          );
-        }).toList(),
+          ),
+          // Data rows
+          Column(
+            children: _result!.details.map((detail) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: Global.padMd,
+                constraints: const BoxConstraints(minHeight: 56),
+                decoration: BoxDecoration(
+                  color: context.colorScheme.surface,
+                  borderRadius: Global.borderMd,
+                  border: Border.all(
+                    color: context.colorScheme.outline.withValues(alpha: 0.08),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(flex: 2, child: _buildTableCell('${detail.amount.toInt()} Ar')),
+                    Expanded(child: _buildTableCell('${detail.fee.toInt()} Ar', isGreen: false)),
+                    Expanded(child: _buildTableCell(detail.count.toString())),
+                    Expanded(child: _buildTableCell('${detail.totalCost.toInt()} Ar', isGreen: true)),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
       ),
-    ],
-  );
+    );
+  }
 
 
 
@@ -555,7 +708,7 @@ class _State extends State<OptimizeFeeScreen> {
         _amount <= 0 ||
         _minTransactions > _maxTransactions) {
       setState(() {
-        _results = [];
+        _result = null;
         _hasOptimized = true;
       });
       return;
@@ -573,7 +726,7 @@ class _State extends State<OptimizeFeeScreen> {
 
       if (intervals.isEmpty) {
         setState(() {
-          _results = [];
+          _result = null;
           _hasOptimized = true;
         });
         if (mounted) {
@@ -590,28 +743,8 @@ class _State extends State<OptimizeFeeScreen> {
         minOperations: _minTransactions,
       );
 
-      // Convert to OptimizationResult format for display
-      final results = optimizationResult.details.map((detail) {
-        final interval = intervals.firstWhere(
-          (interval) => interval.minAmount == detail.amount && interval.fee == detail.fee,
-          orElse: () => FeeInterval(
-            id: '',
-            minAmount: detail.amount,
-            maxAmount: detail.amount,
-            fee: detail.fee,
-          ),
-        );
-
-        return OptimizationResult(
-          interval: interval.id!.isEmpty ? '${detail.amount.toInt()} Ar' : interval.formattedRange,
-          fee: '${detail.fee.toInt()} Ar',
-          count: detail.count,
-          total: '${(detail.amount * detail.count).toInt()} Ar',
-        );
-      }).toList();
-
       setState(() {
-        _results = results;
+        _result = optimizationResult;
         _hasOptimized = true;
       });
     } catch (e) {
@@ -619,7 +752,7 @@ class _State extends State<OptimizeFeeScreen> {
         AppToast.error(context, 'Failed to calculate optimization');
       }
       setState(() {
-        _results = [];
+        _result = null;
         _hasOptimized = true;
       });
     }
