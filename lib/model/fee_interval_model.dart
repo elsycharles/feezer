@@ -45,6 +45,29 @@ class FeeInterval {
   /// Gets formatted fee
   String get formattedFee => '${(fee ?? 0).toInt()} Ar';
 
+  static FeeInterval fromMap(Map<String, dynamic> map) {
+    return FeeInterval(
+      id: map['id'].toString(),
+      minAmount: map['min_amount']?.toDouble(),
+      maxAmount: map['max_amount']?.toDouble(),
+      fee: map['fee']?.toDouble(),
+      creationDateTime: DateTime.fromMillisecondsSinceEpoch(
+        map['creation_datetime'] ?? DateTime.now().millisecondsSinceEpoch,
+      ),
+    );
+  }
+
+  static Map<String, dynamic> toMap(FeeInterval interval, String providerId) {
+    return {
+      'id': interval.id != null ? int.tryParse(interval.id!) : null,
+      'provider_id': int.tryParse(providerId),
+      'min_amount': interval.minAmount,
+      'max_amount': interval.maxAmount,
+      'fee': interval.fee,
+      'creation_datetime': interval.creationDatetime.millisecondsSinceEpoch,
+    };
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -56,5 +79,6 @@ class FeeInterval {
   int get hashCode => id.hashCode;
 
   @override
-  String toString() => 'FeeInterval(id: $id, range: $formattedRange, fee: $formattedFee)';
+  String toString() =>
+      'FeeInterval(id: $id, range: $formattedRange, fee: $formattedFee)';
 }

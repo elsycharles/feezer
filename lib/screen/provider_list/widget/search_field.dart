@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../util/theme_util.dart';
-import '../util/extensions_util.dart';
-import '../styles/global.dart';
+import '../../../util/theme_util.dart';
+import '../../../util/extensions_util.dart';
+import '../../../styles/global.dart';
 
 /// Reusable search field with icon and clear functionality
 class SearchField extends StatefulWidget {
@@ -66,7 +66,9 @@ class _SearchFieldState extends State<SearchField> {
     child: TextField(
       controller: _controller,
       onChanged: (value) => widget.onChanged?.call(value),
-      style: ThemeUtil.bodyMedium.copyWith(color: context.colorScheme.onSurface),
+      style: ThemeUtil.bodyMedium.copyWith(
+        color: context.colorScheme.onSurface,
+      ),
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: ThemeUtil.bodyMedium.copyWith(

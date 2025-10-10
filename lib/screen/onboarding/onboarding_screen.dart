@@ -2,6 +2,7 @@ import 'package:fee_minimizer/screen/onboarding/widget/onboarding_bottom_section
 import 'package:fee_minimizer/screen/onboarding/widget/onboarding_page_view.dart';
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/util/onboarding_util.dart';
+import 'package:fee_minimizer/l10n/app_localizations.dart';
 import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/util/preference_util.dart';
@@ -39,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       NavigationUtil.safeAsyncNavigate(
         context: context,
         isMounted: () => mounted,
-        getRoute: () async => AppRouter.providersRoute,
+        getRoute: () async => AppRouter.optimizeFeeRoute,
       );
     } else if (mounted) {
       setState(() => _shouldShowOnboarding = true);
@@ -49,7 +50,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   void _onPageChanged(int index) => setState(() => _currentIndex = index);
 
   void _nextPage() {
-    if (_currentIndex < OnboardingUtil.items.length - 1) {
+    final items = OnboardingUtil.items(context);
+    if (_currentIndex < items.length - 1) {
       _pageController.nextPage(
         duration: Global.animMedium,
         curve: Curves.easeInOut,
@@ -66,7 +68,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       getRoute: () async {
         // Mark that onboarding is completed
         await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.providersRoute;
+        return AppRouter.optimizeFeeRoute;
       },
     );
   }
@@ -98,7 +100,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     splashFactory: NoSplash.splashFactory,
                   ),
                   child: Text(
-                    'Skip',
+                    AppLocalizations.of(context).skip,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurface.withValues(
                         alpha: ThemeUtil.onboardingTextSecondaryOpacity,
@@ -112,12 +114,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             // PageView content
             Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                onPageChanged: _onPageChanged,
-                itemCount: OnboardingUtil.items.length,
-                itemBuilder: (context, index) =>
-                    OnboardingPageView(item: OnboardingUtil.items[index]),
+              child: Builder(
+                builder: (context) {
+                  final items = OnboardingUtil.items(context);
+                  return PageView.builder(
+                    controller: _pageController,
+                    onPageChanged: _onPageChanged,
+                    itemCount: items.length,
+                    itemBuilder: (context, index) =>
+                        OnboardingPageView(item: items[index]),
+                  );
+                },
               ),
             ),
 

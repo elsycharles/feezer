@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
@@ -9,6 +11,8 @@ import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {
@@ -38,11 +42,7 @@ class _State extends State<NewProviderScreen> {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
     appBar: custom.AppBar(
-      title: 'New Provider',
-      leading: IconButton(
-        onPressed: context.pop,
-        icon: Icon(Icons.arrow_back, color: context.colorScheme.onSurface),
-      ),
+      title: AppLocalizations.of(context).newProvider,
     ),
     body: Form(
       key: _formKey,
@@ -75,14 +75,14 @@ class _State extends State<NewProviderScreen> {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
-        'Create New Provider',
+        AppLocalizations.of(context).createNewProvider,
         style: ThemeUtil.titleLarge.copyWith(
           color: context.colorScheme.onSurface,
         ),
       ),
       Global.gapSm,
       Text(
-        'Add a new financial service provider to your list',
+        AppLocalizations.of(context).addNewFinancialServiceProvider,
         style: ThemeUtil.bodyMedium.copyWith(
           color: context.colorScheme.onSurface.withValues(alpha: 0.7),
           height: 1.4,
@@ -92,20 +92,24 @@ class _State extends State<NewProviderScreen> {
   );
 
   Widget _buildNameField() => custom_form.FormField(
-    label: 'Provider Name',
+    label: AppLocalizations.of(context).providerName,
     controller: _nameController,
     icon: Icons.business,
-    hintText: 'Enter provider name',
+    hintText: AppLocalizations.of(context).enterProviderName,
     required: true,
+    validator: (value) => value?.trim().isEmpty == true
+        ? AppLocalizations.of(context).thisFieldIsRequired
+        : null,
   );
 
   Widget _buildDescriptionField() => custom_form.FormField(
-    label: 'Description',
-    controller: _descriptionController,
-    icon: Icons.description,
-    hintText: 'Enter description',
-    maxLines: 4,
-    required: true,
+  label: AppLocalizations.of(context).description,
+  controller: _descriptionController,
+  icon: Icons.description,
+  hintText: AppLocalizations.of(context).enterDescription,
+  maxLines: 4,
+  required: false,
+  validator: null,
   );
 
   Widget _buildIconField() => IconSelectorField(
@@ -128,8 +132,8 @@ class _State extends State<NewProviderScreen> {
       children: [
         Expanded(
           child: LoadingButton(
-            text: 'Cancel',
-            onPressed: context.pop,
+            text: AppLocalizations.of(context).cancel,
+            onPressed: () => GoRouter.of(context).pop(),
             isLoading: false,
             isOutlined: true,
           ),
@@ -138,7 +142,7 @@ class _State extends State<NewProviderScreen> {
         Expanded(
           flex: 2,
           child: LoadingButton(
-            text: 'Create Provider',
+            text: AppLocalizations.of(context).createProvider,
             onPressed: _create,
             isLoading: _isCreating,
           ),
@@ -150,22 +154,23 @@ class _State extends State<NewProviderScreen> {
   void _create() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isCreating = true);
-      
-      // Simulate creation process
-      await Future.delayed(const Duration(milliseconds: 600));
-      
+      final now = DateTime.now();
+      final provider = Provider(
+        id: now.millisecondsSinceEpoch.toString(),
+        name: _nameController.text.trim(),
+        description: _descriptionController.text.trim(),
+        iconName: _selectedIcon,
+        creationDatetime: now,
+      );
+      final db = DatabaseUtil();
+      await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
+      widget.onProviderAdded?.call(provider);
       if (mounted) {
-        final now = DateTime.now();
-        final provider = Provider(
-          id: now.millisecondsSinceEpoch.toString(),
-          name: _nameController.text.trim(),
-          description: _descriptionController.text.trim(),
-          iconName: _selectedIcon,
-          creationDatetime: now,
+        AppToast.success(
+          context,
+          AppLocalizations.of(context).providerCreatedSuccessfully,
         );
-        widget.onProviderAdded?.call(provider);
-        AppToast.success(context, 'Provider created successfully');
-        context.pop();
+        GoRouter.of(context).pop(provider);
       }
     }
   }

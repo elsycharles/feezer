@@ -3,7 +3,7 @@ class Provider {
   Provider({
     required this.id,
     required this.name,
-    required this.description,
+  this.description = '',
     this.iconName = 'business',
     DateTime? creationDatetime,
   }) : creationDatetime = creationDatetime ?? DateTime.now();
@@ -15,33 +15,31 @@ class Provider {
   final DateTime creationDatetime;
 
   /// Checks if provider data is valid
-  bool get isValid => 
-      id.trim().isNotEmpty && 
-      name.trim().isNotEmpty && 
-      description.trim().isNotEmpty;
+  bool get isValid =>
+  id.trim().isNotEmpty &&
+  name.trim().isNotEmpty;
 
   /// Gets display name (truncated if too long)
-  String get displayName => name.length > 25 ? '${name.substring(0, 25)}...' : name;
+  String get displayName =>
+      name.length > 25 ? '${name.substring(0, 25)}...' : name;
 
   /// Gets short description
-  String get shortDescription => 
-      description.length > 50 
-          ? '${description.substring(0, 50)}...' 
-          : description;
+  String get shortDescription => description.length > 50
+      ? '${description.substring(0, 50)}...'
+      : description;
 
   /// Checks if provider was created recently (within 7 days)
-  bool get isRecent => 
-      DateTime.now().difference(creationDatetime).inDays <= 7;
+  bool get isRecent => DateTime.now().difference(creationDatetime).inDays <= 7;
 
   /// Gets formatted creation date
   String get formattedCreationDate {
     final now = DateTime.now();
     final difference = now.difference(creationDatetime);
-    
+
     if (difference.inDays == 0) return 'Today';
     if (difference.inDays == 1) return 'Yesterday';
     if (difference.inDays < 7) return '${difference.inDays} days ago';
-    
+
     return '${creationDatetime.day}/${creationDatetime.month}/${creationDatetime.year}';
   }
 
@@ -60,12 +58,32 @@ class Provider {
     creationDatetime: creationDatetime ?? this.creationDatetime,
   );
 
+  static Provider fromMap(Map<String, dynamic> map) {
+    return Provider(
+      id: map['id'].toString(),
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      iconName: map['icon_name'] ?? 'business',
+      creationDatetime: DateTime.fromMillisecondsSinceEpoch(
+        map['creation_datetime'] ?? DateTime.now().millisecondsSinceEpoch,
+      ),
+    );
+  }
+
+  static Map<String, dynamic> toMap(Provider provider) {
+    return {
+      'id': int.tryParse(provider.id),
+      'name': provider.name,
+      'description': provider.description,
+      'icon_name': provider.iconName,
+      'creation_datetime': provider.creationDatetime.millisecondsSinceEpoch,
+    };
+  }
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Provider &&
-          runtimeType == other.runtimeType &&
-          id == other.id;
+      other is Provider && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;

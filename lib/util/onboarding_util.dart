@@ -1,23 +1,26 @@
+import 'package:flutter/material.dart';
 import 'package:fee_minimizer/model/onboarding_model.dart';
+import 'package:fee_minimizer/l10n/app_localizations.dart';
 
 class OnboardingUtil {
-  static const List<OnboardingItem> items = [
-    OnboardingItem(
-      title: 'Plan ahead and save on fees',
-      description:
-          'Calculate the most cost-efficient way to handle your money.',
-      imagePath: 'assets/images/onboarding_1.png',
-    ),
-    OnboardingItem(
-      title: 'Optimize your transactions',
-      description: 'Minimize fees automatically based on predefined intervals.',
-      imagePath: 'assets/images/onboarding_2.png',
-    ),
-    OnboardingItem(
-      title: 'Save smart, spend better',
-      description:
-          'Get personalized recommendations and make informed financial decisions instantly.',
-      imagePath: 'assets/images/onboarding_3.png',
-    ),
-  ];
+  static List<OnboardingItem> items(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return [
+      OnboardingItem(
+        title: l10n.onboardingTitle1,
+        description: l10n.onboardingDescription1,
+        imagePath: 'assets/images/onboarding_1.png',
+      ),
+      OnboardingItem(
+        title: l10n.onboardingTitle2,
+        description: l10n.onboardingDescription2,
+        imagePath: 'assets/images/onboarding_2.png',
+      ),
+      OnboardingItem(
+        title: l10n.onboardingTitle3,
+        description: l10n.onboardingDescription3,
+        imagePath: 'assets/images/onboarding_3.png',
+      ),
+    ];
+  }
 }

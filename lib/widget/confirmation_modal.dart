@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import '../l10n/app_localizations.dart';
 import '../util/theme_util.dart';
 
 /// Modern confirmation modal with consistent design
@@ -7,16 +10,16 @@ class ConfirmationModal {
     BuildContext context,
     String title,
     String message, {
-    String confirmText = 'Delete',
-    String cancelText = 'Cancel',
+    String? confirmText,
+    String? cancelText,
   }) => showDialog<bool>(
     context: context,
     barrierDismissible: false,
-    builder: (_) => _Dialog(
+    builder: (ctx) => _Dialog(
       title: title,
       message: message,
-      confirmText: confirmText,
-      cancelText: cancelText,
+      confirmText: confirmText ?? AppLocalizations.of(ctx).delete,
+      cancelText: cancelText ?? AppLocalizations.of(ctx).cancel,
     ),
   );
 }
@@ -70,41 +73,36 @@ class _Dialog extends StatelessWidget {
           color: colorScheme.error.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Icon(
-          Icons.warning_rounded,
-          color: colorScheme.error,
-          size: 24,
-        ),
+        child: Icon(Icons.warning_rounded, color: colorScheme.error, size: 24),
       ),
       const SizedBox(width: 16),
       Expanded(
         child: Text(
           title,
-          style: ThemeUtil.titleSmall.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: ThemeUtil.titleSmall.copyWith(color: colorScheme.onSurface),
         ),
       ),
     ],
   );
 
   Widget _buildMessage(ColorScheme colorScheme) => Text(
-        message,
-        style: ThemeUtil.bodyMedium.copyWith(
-          color: colorScheme.onSurfaceVariant,
-          height: 1.4,
-        ),
-        textAlign: TextAlign.left,
-      );
+    message,
+    style: ThemeUtil.bodyMedium.copyWith(
+      color: colorScheme.onSurfaceVariant,
+      height: 1.4,
+    ),
+    textAlign: TextAlign.left,
+  );
 
   Widget _buildActions(BuildContext context, ColorScheme colorScheme) => Row(
     children: [
       Expanded(
         child: OutlinedButton(
-          onPressed: () => Navigator.pop(context, false),
+          onPressed: () => GoRouter.of(context).pop(false),
           style: ButtonStyle(
-            foregroundColor:
-                WidgetStateProperty.all(colorScheme.onSurfaceVariant),
+            foregroundColor: WidgetStateProperty.all(
+              colorScheme.onSurfaceVariant,
+            ),
             overlayColor: ThemeUtil.interactiveOverlay(
               colorScheme.onSurfaceVariant,
             ),
@@ -130,7 +128,7 @@ class _Dialog extends StatelessWidget {
       const SizedBox(width: 12),
       Expanded(
         child: ElevatedButton(
-          onPressed: () => Navigator.pop(context, true),
+          onPressed: () => GoRouter.of(context).pop(true),
           style: ButtonStyle(
             backgroundColor: ThemeUtil.interactiveBackground(colorScheme.error),
             foregroundColor: WidgetStateProperty.all(colorScheme.onError),

@@ -44,14 +44,20 @@ class Global {
   static EdgeInsets get padXxl => const EdgeInsets.all(spacingXxl);
 
   // Horizontal Padding
-  static EdgeInsets get padHorizontalMd => const EdgeInsets.symmetric(horizontal: spacingMd);
-  static EdgeInsets get padHorizontalLg => const EdgeInsets.symmetric(horizontal: spacingLg);
-  static EdgeInsets get padHorizontalXl => const EdgeInsets.symmetric(horizontal: spacingXl);
+  static EdgeInsets get padHorizontalMd =>
+      const EdgeInsets.symmetric(horizontal: spacingMd);
+  static EdgeInsets get padHorizontalLg =>
+      const EdgeInsets.symmetric(horizontal: spacingLg);
+  static EdgeInsets get padHorizontalXl =>
+      const EdgeInsets.symmetric(horizontal: spacingXl);
 
   // Vertical Padding
-  static EdgeInsets get padVerticalMd => const EdgeInsets.symmetric(vertical: spacingMd);
-  static EdgeInsets get padVerticalLg => const EdgeInsets.symmetric(vertical: spacingLg);
-  static EdgeInsets get padVerticalXl => const EdgeInsets.symmetric(vertical: spacingXl);
+  static EdgeInsets get padVerticalMd =>
+      const EdgeInsets.symmetric(vertical: spacingMd);
+  static EdgeInsets get padVerticalLg =>
+      const EdgeInsets.symmetric(vertical: spacingLg);
+  static EdgeInsets get padVerticalXl =>
+      const EdgeInsets.symmetric(vertical: spacingXl);
 
   // Border Radius Helpers
   static BorderRadius get borderXs => BorderRadius.circular(radiusXs);
@@ -61,12 +67,18 @@ class Global {
   static BorderRadius get borderXl => BorderRadius.circular(radiusXl);
 
   // Gap Helpers
-  static SizedBox get gapXs => const SizedBox(height: spacingXs, width: spacingXs);
-  static SizedBox get gapSm => const SizedBox(height: spacingSm, width: spacingSm);
-  static SizedBox get gapMd => const SizedBox(height: spacingMd, width: spacingMd);
-  static SizedBox get gapLg => const SizedBox(height: spacingLg, width: spacingLg);
-  static SizedBox get gapXl => const SizedBox(height: spacingXl, width: spacingXl);
-  static SizedBox get gapXxl => const SizedBox(height: spacingXxl, width: spacingXxl);
+  static SizedBox get gapXs =>
+      const SizedBox(height: spacingXs, width: spacingXs);
+  static SizedBox get gapSm =>
+      const SizedBox(height: spacingSm, width: spacingSm);
+  static SizedBox get gapMd =>
+      const SizedBox(height: spacingMd, width: spacingMd);
+  static SizedBox get gapLg =>
+      const SizedBox(height: spacingLg, width: spacingLg);
+  static SizedBox get gapXl =>
+      const SizedBox(height: spacingXl, width: spacingXl);
+  static SizedBox get gapXxl =>
+      const SizedBox(height: spacingXxl, width: spacingXxl);
 
   // Custom Gap Helpers
   static SizedBox gapH(double width) => SizedBox(width: width);

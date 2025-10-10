@@ -35,72 +35,75 @@ class ThemeUtil {
   static const Color onboardingIllustrationBg = Color(0xFFFFFFFF);
   static const double onboardingIllustrationBgOpacity = 0.1;
 
-  // Text Styles
+  // Text Styles - Optimized for smaller, more readable sizes
   static const TextStyle titleLarge = TextStyle(
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: FontWeight.bold,
     color: textPrimary,
   );
 
   static const TextStyle titleMedium = TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.bold,
-    color: textPrimary,
-  );
-
-  static const TextStyle titleSmall = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
     color: textPrimary,
   );
 
-  static const TextStyle bodyLarge = TextStyle(
+  static const TextStyle titleSmall = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: textPrimary,
   );
 
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    color: textPrimary,
+  );
+
   static const TextStyle bodyMedium = TextStyle(
-    fontSize: 16,
+    fontSize: 14,
+    fontWeight: FontWeight.normal,
     color: textPrimary,
   );
 
   static const TextStyle bodySmall = TextStyle(
-    fontSize: 14,
+    fontSize: 13,
+    fontWeight: FontWeight.normal,
     color: textSecondary,
   );
 
   static const TextStyle labelLarge = TextStyle(
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
     color: textLight,
   );
 
   static const TextStyle labelMedium = TextStyle(
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
     color: textPrimary,
   );
 
   static const TextStyle labelSmall = TextStyle(
-    fontSize: 12,
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
     color: textSecondary,
   );
 
   static const TextStyle displayLarge = TextStyle(
-    fontSize: 48,
-    fontWeight: FontWeight.bold,
-    color: textLight,
-  );
-
-  static const TextStyle displayMedium = TextStyle(
     fontSize: 32,
     fontWeight: FontWeight.bold,
     color: textLight,
   );
 
+  static const TextStyle displayMedium = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: textLight,
+  );
+
   static const TextStyle captionLight = TextStyle(
-    fontSize: 16,
+    fontSize: 13,
     fontWeight: FontWeight.w300,
     color: textLight,
   );
@@ -125,7 +128,7 @@ class ThemeUtil {
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 17,
           fontWeight: FontWeight.w600,
           color: textLight,
         ),
@@ -139,10 +142,10 @@ class ThemeUtil {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           padding: WidgetStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
@@ -153,10 +156,10 @@ class ThemeUtil {
           foregroundColor: WidgetStateProperty.all(primaryColor),
           overlayColor: interactiveOverlay(primaryColor),
           padding: WidgetStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
           ),
           splashFactory: NoSplash.splashFactory,
         ),
@@ -169,10 +172,10 @@ class ThemeUtil {
             const BorderSide(color: primaryColor, width: 1.5),
           ),
           padding: WidgetStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -230,8 +233,8 @@ class ThemeUtil {
       onError: textLight,
       errorContainer: error.withValues(alpha: 0.2),
       onErrorContainer: error,
-  surface: surfaceDark,
-  onSurface: textLight,
+      surface: surfaceDark,
+      onSurface: textLight,
       onSurfaceVariant: textLight.withValues(alpha: 0.72),
       outline: textLight.withValues(alpha: 0.2),
       outlineVariant: textLight.withValues(alpha: 0.1),
@@ -255,7 +258,7 @@ class ThemeUtil {
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 17,
           fontWeight: FontWeight.w600,
           color: textLight,
         ),
@@ -269,10 +272,10 @@ class ThemeUtil {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           padding: WidgetStateProperty.all(
-            const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
           ),
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
@@ -283,6 +286,56 @@ class ThemeUtil {
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         margin: const EdgeInsets.all(8),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: surfaceDark,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: primaryLight),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: primaryLight.withValues(alpha: 0.3)),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: primaryLight, width: 2),
+        ),
+        labelStyle: TextStyle(color: textLight.withValues(alpha: 0.7)),
+        hintStyle: TextStyle(color: textLight.withValues(alpha: 0.5)),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryLight),
+          overlayColor: interactiveOverlay(primaryLight),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+          ),
+          splashFactory: NoSplash.splashFactory,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(primaryLight),
+          overlayColor: interactiveOverlay(primaryLight),
+          side: WidgetStateProperty.all(
+            const BorderSide(color: primaryLight, width: 1.5),
+          ),
+          padding: WidgetStateProperty.all(
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          ),
+          textStyle: WidgetStateProperty.all(
+            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          ),
+          shape: WidgetStateProperty.all(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          ),
+          splashFactory: NoSplash.splashFactory,
+        ),
       ),
     );
   }
@@ -391,4 +444,28 @@ class ThemeUtil {
     }
   }
 
+  /// Get the appropriate surface color based on theme
+  static Color getSurfaceColor(BuildContext context) {
+    return Theme.of(context).colorScheme.surface;
+  }
+
+  /// Get the appropriate outline color based on theme
+  static Color getOutlineColor(BuildContext context, {double alpha = 0.12}) {
+    return Theme.of(context).colorScheme.outline.withValues(alpha: alpha);
+  }
+
+  /// Get the appropriate primary color based on theme
+  static Color getPrimaryColor(BuildContext context) {
+    return Theme.of(context).colorScheme.primary;
+  }
+
+  /// Get the appropriate text color for labels based on theme
+  static Color getLabelColor(BuildContext context) {
+    return Theme.of(context).colorScheme.onSurfaceVariant;
+  }
+
+  /// Get the appropriate text color based on theme
+  static Color getTextColor(BuildContext context) {
+    return Theme.of(context).colorScheme.onSurface;
+  }
 }

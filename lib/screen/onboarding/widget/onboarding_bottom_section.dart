@@ -2,6 +2,7 @@ import 'package:fee_minimizer/screen/onboarding/widget/onboarding_page_dot.dart'
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/util/onboarding_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
+import 'package:fee_minimizer/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingBottomSection extends StatelessWidget {
@@ -20,7 +21,9 @@ class OnboardingBottomSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final isLastPage = currentIndex == OnboardingUtil.items.length - 1;
+    final l10n = AppLocalizations.of(context);
+    final items = OnboardingUtil.items(context);
+    final isLastPage = currentIndex == items.length - 1;
 
     return Padding(
       padding: Global.padXl,
@@ -30,7 +33,7 @@ class OnboardingBottomSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-              OnboardingUtil.items.length,
+              items.length,
               (index) => OnboardingPageDot(isActive: index == currentIndex),
             ),
           ),
@@ -47,9 +50,7 @@ class OnboardingBottomSection extends StatelessWidget {
                 backgroundColor: ThemeUtil.interactiveBackground(
                   colorScheme.primary,
                 ),
-                foregroundColor: WidgetStateProperty.all(
-                  colorScheme.onPrimary,
-                ),
+                foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
                 overlayColor: ThemeUtil.interactiveOverlay(
                   colorScheme.onPrimary,
                 ),
@@ -62,7 +63,7 @@ class OnboardingBottomSection extends StatelessWidget {
                 ),
               ),
               child: Text(
-                isLastPage ? 'Get Started' : 'Next',
+                isLastPage ? l10n.getStarted : l10n.next,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: colorScheme.onPrimary,

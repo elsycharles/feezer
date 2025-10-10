@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
+import '../../util/route_util.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/search_field.dart';
+import 'widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
-import '../provider_detail/provider_detail_screen.dart';
-import '../new_provider/new_provider_screen.dart';
 import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
-import 'widget/selection_action_bar.dart';
+import '../../widget/selection_action_bar.dart';
+import '../../util/database_util.dart';
+import '../../util/constant_util.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {
@@ -28,7 +31,6 @@ class _State extends State<ProviderListScreen> {
   final _searchController = TextEditingController();
   final _providers = <Provider>[];
   final _selectedIds = <String>{};
-  DateTime? _lastBackPressed;
   bool _isLoading = true;
 
   List<Provider> get _filtered {
@@ -50,37 +52,15 @@ class _State extends State<ProviderListScreen> {
   }
 
   Future<void> _loadProviders() async {
-    // Simulate loading providers from API or database
-    await Future.delayed(const Duration(milliseconds: 1200));
-    
+    setState(() => _isLoading = true);
+    final db = DatabaseUtil();
+    final providerMaps = await db.query(ConstantUtil.tableProviders);
+    final loadedProviders = providerMaps.map((map) => Provider.fromMap(map)).toList();
     if (mounted) {
       setState(() {
-        _providers.addAll([
-          Provider(
-            id: '1',
-            name: 'Bank',
-            description: 'Traditional banking services',
-            iconName: 'account_balance',
-          ),
-          Provider(
-            id: '2',
-            name: 'MVola',
-            description: 'Mobile money transfer service',
-            iconName: 'phone_android',
-          ),
-          Provider(
-            id: '3',
-            name: 'Orange',
-            description: 'Telecom financial services',
-            iconName: 'mobile_friendly',
-          ),
-          Provider(
-            id: '4',
-            name: 'Airtel',
-            description: 'Mobile financial services',
-            iconName: 'phone_android',
-          ),
-        ]);
+        _providers
+          ..clear()
+          ..addAll(loadedProviders);
         _isLoading = false;
       });
     }
@@ -92,35 +72,12 @@ class _State extends State<ProviderListScreen> {
     super.dispose();
   }
 
-  void _addProvider() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => NewProviderScreen(
-          onProviderAdded: (provider) {
-            setState(() => _providers.add(provider));
-          },
-        ),
-      ),
-    );
-  }
-
-  void _handleBackPress() {
-    // If we're in selection mode, disable it first
-    if (_selectedIds.isNotEmpty) {
-      setState(() => _selectedIds.clear());
-      return;
-    }
-
-    // Logique de double retour pour quitter l'app
-    final now = DateTime.now();
-    const exitTimeLimit = Duration(seconds: 2);
-
-    if (_lastBackPressed == null || now.difference(_lastBackPressed!) > exitTimeLimit) {
-      _lastBackPressed = now;
-      AppToast.info(context, 'Press again to exit');
-    } else {
-      SystemNavigator.pop();
+  void _addProvider() async {
+    final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
+    if (result != null) {
+      final db = DatabaseUtil();
+      await db.insert(ConstantUtil.tableProviders, Provider.toMap(result));
+      await _loadProviders();
     }
   }
 
@@ -129,10 +86,10 @@ class _State extends State<ProviderListScreen> {
     sliver: _filtered.isEmpty
         ? SliverFillRemaining(
             hasScrollBody: false,
-            child: const Center(
+            child: Center(
               child: SearchEmptyState(
                 icon: Icons.search_off,
-                title: 'No providers found',
+                title: AppLocalizations.of(context).noProvidersFound,
               ),
             ),
           )
@@ -161,18 +118,15 @@ class _State extends State<ProviderListScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) {
-        if (!didPop) {
-          _handleBackPress();
-        }
-      },
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: const custom.AppBar(title: 'Providers'),
-        bottomNavigationBar:
-            _selectedIds.isEmpty ? _buildAddProviderButton(colorScheme) : null,
+        appBar: custom.AppBar(
+          title: AppLocalizations.of(context).providers,
+          menuExcludeRoutes: const [AppRouter.providersRoute],
+        ),
+        bottomNavigationBar: _selectedIds.isEmpty
+            ? _buildAddProviderButton(colorScheme)
+            : null,
         body: SafeArea(
           child: Column(
             children: [
@@ -182,7 +136,7 @@ class _State extends State<ProviderListScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: SearchField(
-                  hintText: 'Search providers...',
+                  hintText: AppLocalizations.of(context).searchProviders,
                   controller: _searchController,
                 ),
               ),
@@ -198,6 +152,7 @@ class _State extends State<ProviderListScreen> {
                     onDelete: _deleteSelected,
                     onEdit: _isSingleSelection ? _editSelected : null,
                     onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                    margin: EdgeInsets.zero,
                   ),
                 ),
               ],
@@ -216,7 +171,6 @@ class _State extends State<ProviderListScreen> {
             ],
           ),
         ),
-      ),
     );
   }
 
@@ -228,7 +182,7 @@ class _State extends State<ProviderListScreen> {
       child: SizedBox(
         width: double.infinity,
         child: LoadingButton(
-          text: 'Add New Provider',
+          text: AppLocalizations.of(context).addNewProvider,
           onPressed: _addProvider,
           padding: const EdgeInsets.symmetric(vertical: 16),
         ),
@@ -282,51 +236,58 @@ class _State extends State<ProviderListScreen> {
 
   Future<void> _deleteSelected() async {
     final count = _selectedIds.length;
+    final l10n = AppLocalizations.of(context);
     final message = count == 1
-        ? 'Delete this provider?'
-        : 'Delete $count providers?';
+        ? l10n.deleteThisProvider
+        : l10n.deleteProvidersCount(count);
 
     final confirmed = await ConfirmationModal.show(
       context,
-      'Delete Provider${count > 1 ? 's' : ''}',
+      count > 1 ? l10n.deleteProviders : l10n.deleteProvider,
       message,
     );
 
     if (confirmed == true && mounted) {
-      // Show loading overlay while deleting
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (_) => const AppLoading.overlay(),
       );
-
-      // Simulate deletion process
-      await Future.delayed(const Duration(milliseconds: 800));
-
-      if (mounted) {
-        Navigator.pop(context); // Close loading dialog
-        setState(() {
-          _providers.removeWhere((p) => _selectedIds.contains(p.id));
-          _selectedIds.clear();
+      final db = DatabaseUtil();
+      for (final id in _selectedIds) {
+        await db.database.then((database) {
+          database.delete(ConstantUtil.tableProviders, where: '${ConstantUtil.columnId} = ?', whereArgs: [int.tryParse(id)]);
         });
-        AppToast.success(context, '$count provider${count > 1 ? 's' : ''} deleted successfully');
+      }
+      await Future.delayed(const Duration(milliseconds: 400));
+      if (mounted) {
+        GoRouter.of(context).pop();
+        AppToast.success(context, l10n.providerDeletedSuccessfully(count));
+        await _loadProviders();
+        setState(() => _selectedIds.clear());
       }
     }
   }
 
-  void _editProvider(Provider provider) {
-    setState(() {
-      final index = _providers.indexWhere((p) => p.id == provider.id);
-      if (index != -1) _providers[index] = provider;
+  void _editProvider(Provider provider) async {
+    final db = DatabaseUtil();
+    await db.database.then((database) {
+      database.update(
+        ConstantUtil.tableProviders,
+        Provider.toMap(provider),
+        where: '${ConstantUtil.columnId} = ?',
+        whereArgs: [int.tryParse(provider.id)],
+      );
     });
+    await _loadProviders();
   }
 
   void _showProviderDetails(Provider provider) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ProviderDetailScreen(provider: provider),
-      ),
+    GoRouter.of(context).go(
+      '${AppRouter.providerDetailRoute}/${provider.id}',
+      extra: provider,
     );
   }
 }
+
+// All test data removed. Provider list is now fully dynamic from DB.
