@@ -8,6 +8,7 @@ import 'package:fee_minimizer/screen/optimize_fee/optimize_fee_screen.dart';
 import 'package:fee_minimizer/screen/fee_interval/new_fee_interval_screen.dart';
 import 'package:fee_minimizer/model/provider_model.dart';
 import 'package:fee_minimizer/widget/error_widget.dart';
+import 'package:fee_minimizer/util/preference_util.dart';
 
 /// Centralized router configuration using GoRouter for clean navigation
 class AppRouter {
@@ -25,6 +26,13 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: homeRoute,
     debugLogDiagnostics: false,
+    redirect: (context, state) async {
+      final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
+      if (isFirstLaunch && state.uri.toString() != onboardingRoute) {
+        return onboardingRoute;
+      }
+      return null;
+    },
     errorBuilder: (context, state) => ErrorScreen(state: state),
     routes: [
       // Home route (Fee Optimization)
