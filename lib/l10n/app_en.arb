@@ -236,7 +236,38 @@
   "@total": {
     "description": "Total column header"
   },
-  "noResultsYet": "No results yet",
+  "transactionDetails": "Transaction Details",
+  "@transactionDetails": {
+    "description": "Transaction details section title"
+  },
+  "currencySymbol": "Ar",
+  "@currencySymbol": {
+    "description": "Currency symbol for Ariary"
+  },
+  "totalAmount": "Total Amount",
+  "@totalAmount": {
+    "description": "Total amount metric title"
+  },
+  "netAmount": "Net Amount",
+  "@netAmount": {
+    "description": "Net amount after fees metric title"
+  },
+  "totalFees": "Total Fees",
+  "@totalFees": {
+    "description": "Total fees metric title"
+  },
+  "efficiency": "Efficiency",
+  "@efficiency": {
+    "description": "Optimization efficiency metric title"
+  },
+  "operations": "Operations",
+  "@operations": {
+    "description": "Number of operations metric title"
+  },
+  "remaining": "Remaining",
+  "@remaining": {
+    "description": "Remaining amount metric title"
+  },
   "@noResultsYet": {
     "description": "Message when no optimization results"
   },

@@ -193,7 +193,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get total => 'Total';
 
   @override
-  String get noResultsYet => 'No results yet';
+  String get transactionDetails => 'Transaction Details';
+
+  @override
+  String get currencySymbol => 'Ar';
+
+  @override
+  String get totalAmount => 'Total Amount';
+
+  @override
+  String get netAmount => 'Net Amount';
+
+  @override
+  String get totalFees => 'Total Fees';
+
+  @override
+  String get efficiency => 'Efficiency';
+
+  @override
+  String get operations => 'Operations';
+
+  @override
+  String get remaining => 'Remaining';
 
   @override
   String get noOptimizationResultsFound =>

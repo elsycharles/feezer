@@ -454,11 +454,53 @@ abstract class AppLocalizations {
   /// **'Total'**
   String get total;
 
-  /// Message when no optimization results
+  /// Transaction details section title
   ///
   /// In en, this message translates to:
-  /// **'No results yet'**
-  String get noResultsYet;
+  /// **'Transaction Details'**
+  String get transactionDetails;
+
+  /// Currency symbol for Ariary
+  ///
+  /// In en, this message translates to:
+  /// **'Ar'**
+  String get currencySymbol;
+
+  /// Total amount metric title
+  ///
+  /// In en, this message translates to:
+  /// **'Total Amount'**
+  String get totalAmount;
+
+  /// Net amount after fees metric title
+  ///
+  /// In en, this message translates to:
+  /// **'Net Amount'**
+  String get netAmount;
+
+  /// Total fees metric title
+  ///
+  /// In en, this message translates to:
+  /// **'Total Fees'**
+  String get totalFees;
+
+  /// Optimization efficiency metric title
+  ///
+  /// In en, this message translates to:
+  /// **'Efficiency'**
+  String get efficiency;
+
+  /// Number of operations metric title
+  ///
+  /// In en, this message translates to:
+  /// **'Operations'**
+  String get operations;
+
+  /// Remaining amount metric title
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get remaining;
 
   /// Message when no optimization results are found for the given parameters
   ///

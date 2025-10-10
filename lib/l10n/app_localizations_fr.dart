@@ -193,11 +193,32 @@ class AppLocalizationsFr extends AppLocalizations {
   String get total => 'Total';
 
   @override
-  String get noResultsYet => 'Aucun résultat pour l\'instant';
+  String get transactionDetails => 'Détails de Transaction';
+
+  @override
+  String get currencySymbol => 'Ar';
+
+  @override
+  String get totalAmount => 'Montant Total';
+
+  @override
+  String get netAmount => 'Montant Net';
+
+  @override
+  String get totalFees => 'Frais Totaux';
+
+  @override
+  String get efficiency => 'Efficacité';
+
+  @override
+  String get operations => 'Opérations';
+
+  @override
+  String get remaining => 'Restant';
 
   @override
   String get noOptimizationResultsFound =>
-      'Aucun résultat d\'optimisation trouvé. Veuillez vérifier vos paramètres d\'entrée.';
+      'No optimization results found. Please check your input parameters.';
 
   @override
   String get tapOptimizeToSeeResults =>

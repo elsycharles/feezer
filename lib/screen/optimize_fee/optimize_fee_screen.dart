@@ -470,8 +470,8 @@ class _State extends State<OptimizeFeeScreen> {
           children: [
             Expanded(
               child: _buildMetricCard(
-                title: 'Total Amount',
-                value: '${_result!.totalAmount.toInt()} Ar',
+                title: AppLocalizations.of(context).totalAmount,
+                value: '${_result!.totalAmount.toInt()} ${AppLocalizations.of(context).currencySymbol}',
                 icon: Icons.account_balance_wallet,
                 color: context.colorScheme.primary,
               ),
@@ -479,8 +479,8 @@ class _State extends State<OptimizeFeeScreen> {
             Global.gapMd,
             Expanded(
               child: _buildMetricCard(
-                title: 'Net Amount',
-                value: '${_result!.netAmount.toInt()} Ar',
+                title: AppLocalizations.of(context).netAmount,
+                value: '${_result!.netAmount.toInt()} ${AppLocalizations.of(context).currencySymbol}',
                 icon: Icons.savings,
                 color: Colors.green,
               ),
@@ -492,8 +492,8 @@ class _State extends State<OptimizeFeeScreen> {
           children: [
             Expanded(
               child: _buildMetricCard(
-                title: 'Total Fees',
-                value: '${_result!.totalFees.toInt()} Ar',
+                title: AppLocalizations.of(context).totalFees,
+                value: '${_result!.totalFees.toInt()} ${AppLocalizations.of(context).currencySymbol}',
                 icon: Icons.money_off,
                 color: Colors.red,
               ),
@@ -501,7 +501,7 @@ class _State extends State<OptimizeFeeScreen> {
             Global.gapMd,
             Expanded(
               child: _buildMetricCard(
-                title: 'Efficiency',
+                title: AppLocalizations.of(context).efficiency,
                 value: '${_result!.efficiency.toStringAsFixed(1)}%',
                 icon: Icons.trending_up,
                 color: _result!.efficiency >= 95 ? Colors.green : _result!.efficiency >= 90 ? Colors.orange : Colors.red,
@@ -514,7 +514,7 @@ class _State extends State<OptimizeFeeScreen> {
           children: [
             Expanded(
               child: _buildMetricCard(
-                title: 'Operations',
+                title: AppLocalizations.of(context).operations,
                 value: '${_result!.totalOperations}',
                 icon: Icons.repeat,
                 color: context.colorScheme.secondary,
@@ -523,8 +523,8 @@ class _State extends State<OptimizeFeeScreen> {
             Global.gapMd,
             Expanded(
               child: _buildMetricCard(
-                title: 'Remaining',
-                value: '${_result!.remaining.toInt()} Ar',
+                title: AppLocalizations.of(context).remaining,
+                value: '${_result!.remaining.toInt()} ${AppLocalizations.of(context).currencySymbol}',
                 icon: Icons.pending,
                 color: context.colorScheme.tertiary,
               ),
@@ -607,7 +607,7 @@ class _State extends State<OptimizeFeeScreen> {
               ),
               Global.gapSm,
               Text(
-                'Transaction Details',
+                AppLocalizations.of(context).transactionDetails,
                 style: ThemeUtil.titleMedium.copyWith(
                   color: context.colorScheme.primary,
                   fontWeight: FontWeight.w600,
@@ -626,10 +626,10 @@ class _State extends State<OptimizeFeeScreen> {
             ),
             child: Row(
               children: [
-                Expanded(flex: 2, child: _buildHeaderCell('Amount')),
-                Expanded(child: _buildHeaderCell('Fee')),
-                Expanded(child: _buildHeaderCell('Count')),
-                Expanded(child: _buildHeaderCell('Total')),
+                Expanded(flex: 2, child: _buildHeaderCell(AppLocalizations.of(context).amount)),
+                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
+                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).count)),
+                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).total)),
               ],
             ),
           ),
@@ -649,10 +649,10 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 child: Row(
                   children: [
-                    Expanded(flex: 2, child: _buildTableCell('${detail.amount.toInt()} Ar')),
-                    Expanded(child: _buildTableCell('${detail.fee.toInt()} Ar', isGreen: false)),
+                    Expanded(flex: 2, child: _buildTableCell('${detail.amount.toInt()} ${AppLocalizations.of(context).currencySymbol}')),
+                    Expanded(child: _buildTableCell('${detail.fee.toInt()} ${AppLocalizations.of(context).currencySymbol}', isGreen: false)),
                     Expanded(child: _buildTableCell(detail.count.toString())),
-                    Expanded(child: _buildTableCell('${detail.totalCost.toInt()} Ar', isGreen: true)),
+                    Expanded(child: _buildTableCell('${detail.totalCost.toInt()} ${AppLocalizations.of(context).currencySymbol}', isGreen: true)),
                   ],
                 ),
               );

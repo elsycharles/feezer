@@ -27,11 +27,11 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ahena ho azy ny sara mifototra amin\'ny elanelana efa voafarit';
 
   @override
-  String get onboardingTitle3 => 'Mitahiry am-pahendrena, mandany tsara kokoa';
+  String get onboardingTitle3 => 'Save smart, spend better';
 
   @override
   String get onboardingDescription3 =>
-      'Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin\'izay.';
+      'Get personalized recommendations and make informed financial decisions instantly.';
 
   @override
   String get next => 'Manaraka';
@@ -194,7 +194,28 @@ class AppLocalizationsMg extends AppLocalizations {
   String get total => 'Totalin\'ny';
 
   @override
-  String get noResultsYet => 'Mbola tsy misy valiny';
+  String get transactionDetails => 'Antsipirian\'ny fifampiraharahana';
+
+  @override
+  String get currencySymbol => 'Ar';
+
+  @override
+  String get totalAmount => 'Totalin\'ny vola';
+
+  @override
+  String get netAmount => 'Vola madio';
+
+  @override
+  String get totalFees => 'Totalin\'ny sara';
+
+  @override
+  String get efficiency => 'Fahombiazana';
+
+  @override
+  String get operations => 'Asa';
+
+  @override
+  String get remaining => 'Sisa';
 
   @override
   String get noOptimizationResultsFound =>
