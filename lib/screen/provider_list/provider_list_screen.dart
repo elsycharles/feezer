@@ -75,8 +75,6 @@ class _State extends State<ProviderListScreen> {
   void _addProvider() async {
     final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
     if (result != null) {
-      final db = DatabaseUtil();
-      await db.insert(ConstantUtil.tableProviders, Provider.toMap(result));
       await _loadProviders();
     }
   }
