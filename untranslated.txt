@@ -1,10 +1,1 @@
-{
-  "fr": [
-    "noOptimizationResultsFound"
-  ],
-
-  "mg": [
-    "onboardingTitle3",
-    "onboardingDescription3"
-  ]
-}
+{}

@@ -218,7 +218,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get noOptimizationResultsFound =>
-      'No optimization results found. Please check your input parameters.';
+      'Aucun résultat d\'optimisation trouvé. Veuillez vérifier vos paramètres d\'entrée.';
 
   @override
   String get tapOptimizeToSeeResults =>

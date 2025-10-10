@@ -8,7 +8,14 @@
   "@onboardingDescription2": {
     "description": "Onboarding description for second screen"
   },
-  "pressAgainToExit": "Tsindrio indray hiavotr",
+  "onboardingTitle3": "Mitahiry am-pahendrena, mandany tsara kokoa",
+  "@onboardingTitle3": {
+    "description": "Third onboarding screen title"
+  },
+  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
+  },
   "@pressAgainToExit": {
     "description": "Double back to exit message"
   },

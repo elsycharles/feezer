@@ -27,11 +27,11 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ahena ho azy ny sara mifototra amin\'ny elanelana efa voafarit';
 
   @override
-  String get onboardingTitle3 => 'Save smart, spend better';
+  String get onboardingTitle3 => 'Mitahiry am-pahendrena, mandany tsara kokoa';
 
   @override
   String get onboardingDescription3 =>
-      'Get personalized recommendations and make informed financial decisions instantly.';
+      'Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin\'izay.';
 
   @override
   String get next => 'Manaraka';

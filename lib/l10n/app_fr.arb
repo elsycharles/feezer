@@ -91,7 +91,14 @@
   "@remaining": {
     "description": "Remaining amount metric title"
   },
+  "noOptimizationResultsFound": "Aucun résultat d'optimisation trouvé. Veuillez vérifier vos paramètres d'entrée.",
+  "@noOptimizationResultsFound": {
+    "description": "Message when no optimization results are found for the given parameters"
+  },
   "tapOptimizeToSeeResults": "Appuyez sur 'Optimiser' pour voir les résultats",
+  "@tapOptimizeToSeeResults": {
+    "description": "Instructions for getting results"
+  },
   "error": "Erreur",
   "screenNotFound": "Écran {route} introuvable",
   "goHome": "Accueil",
