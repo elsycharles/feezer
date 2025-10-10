@@ -39,8 +39,8 @@ class _State extends State<OptimizeFeeScreen> {
 
   Provider? _selectedProvider;
   int _amount = 10000;
-  int _minTransactions = 1;
-  int _maxTransactions = 10;
+  int _minTransactions = 0;
+  int _maxTransactions = 0;
   FeeOptimizerResult? _result;
   bool _hasOptimized = false;
   bool _isOptimizing = false;
