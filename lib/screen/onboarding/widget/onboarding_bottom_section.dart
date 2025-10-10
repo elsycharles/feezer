@@ -1,20 +1,22 @@
 import 'package:fee_minimizer/screen/onboarding/widget/onboarding_page_dot.dart';
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/util/onboarding_util.dart';
-import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
+import 'package:fee_minimizer/widget/loading_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingBottomSection extends StatelessWidget {
   final int currentIndex;
   final VoidCallback onNext;
   final VoidCallback onSkip;
+  final bool isLoading;
 
   const OnboardingBottomSection({
     super.key,
     required this.currentIndex,
     required this.onNext,
     required this.onSkip,
+    this.isLoading = false,
   });
 
   @override
@@ -41,35 +43,12 @@ class OnboardingBottomSection extends StatelessWidget {
           Global.gapXl,
 
           // Action button
-          SizedBox(
-            width: double.infinity,
-            height: Global.buttonHeight,
-            child: ElevatedButton(
-              onPressed: onNext,
-              style: ButtonStyle(
-                backgroundColor: ThemeUtil.interactiveBackground(
-                  colorScheme.primary,
-                ),
-                foregroundColor: WidgetStateProperty.all(colorScheme.onPrimary),
-                overlayColor: ThemeUtil.interactiveOverlay(
-                  colorScheme.onPrimary,
-                ),
-                elevation: WidgetStateProperty.all(0),
-                splashFactory: NoSplash.splashFactory,
-                shape: WidgetStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              child: Text(
-                isLastPage ? l10n.getStarted : l10n.next,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onPrimary,
-                ),
-              ),
-            ),
+          LoadingButton(
+            text: isLastPage ? l10n.getStarted : l10n.next,
+            onPressed: onNext,
+            isLoading: isLoading,
+            backgroundColor: colorScheme.primary,
+            foregroundColor: colorScheme.onPrimary,
           ),
         ],
       ),

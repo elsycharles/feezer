@@ -21,6 +21,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   bool _shouldShowOnboarding = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -57,8 +58,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      _goToHome();
+      _startLoadingAndGoHome();
     }
+  }
+
+  Future<void> _startLoadingAndGoHome() async {
+    setState(() => _isLoading = true);
+    await _goToHome();
+    // No need to set false since we navigate away
   }
 
   Future<void> _goToHome() async {
@@ -133,6 +140,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               currentIndex: _currentIndex,
               onNext: _nextPage,
               onSkip: _goToHome,
+              isLoading: _isLoading,
             ),
           ],
         ),
