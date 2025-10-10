@@ -115,7 +115,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                     keyboardType: TextInputType.number,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(7),
+                      LengthLimitingTextInputFormatter(11)
                     ],
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
