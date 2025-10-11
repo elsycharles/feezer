@@ -32,6 +32,22 @@ class _State extends State<NewProviderScreen> {
   bool _isCreating = false;
 
   @override
+  void initState() {
+    super.initState();
+    // Reset loading state in case screen is reused
+    _isCreating = false;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reset loading state when screen becomes visible again
+    if (mounted && _isCreating) {
+      setState(() => _isCreating = false);
+    }
+  }
+
+  @override
   void dispose() {
     _nameController.dispose();
     _descriptionController.dispose();
@@ -166,20 +182,21 @@ class _State extends State<NewProviderScreen> {
         final db = DatabaseUtil();
         await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
         widget.onProviderAdded?.call(provider);
+        
+        // Ensure loading is visible for at least 800ms for better UX
+        await Future.delayed(const Duration(milliseconds: 800));
+        
         if (mounted) {
           AppToast.success(
             context,
             AppLocalizations.of(context).providerCreatedSuccessfully,
           );
-          // Stop loading before navigation
-          setState(() => _isCreating = false);
-          // Navigate directly to provider detail instead of popping
+          // Keep loading visible during navigation transition
           await NavigationUtil.pushTo(
             context,
             NavigationUtil.providerDetailRoute,
             extra: provider,
           );
-          // Don't pop - let the navigation stack handle the return
         }
       } catch (e) {
         // Stop loading on error
