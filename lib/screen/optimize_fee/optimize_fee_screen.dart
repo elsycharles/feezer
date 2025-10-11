@@ -50,6 +50,13 @@ class _State extends State<OptimizeFeeScreen> {
     _loadProviders();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reload providers when screen becomes visible again (e.g., after adding provider via menu)
+    _loadProviders();
+  }
+
   Future<void> _loadProviders() async {
     final db = DatabaseUtil();
     final providerMaps = await db.query(ConstantUtil.tableProviders);
