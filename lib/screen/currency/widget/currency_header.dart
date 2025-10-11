@@ -21,9 +21,9 @@ class CurrencyHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return SurfaceCard(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: SurfaceCard(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -67,7 +67,7 @@ class CurrencyHeader extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            Global.gapLg,
             Row(
               children: [
                 _buildStatChip(

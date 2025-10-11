@@ -643,10 +643,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get codeMustBe3Characters => 'Kaody tsy maintsy 3 litera';
 
   @override
-  String get invalidRate => 'Taux tsy mety';
+  String get invalidRate => 'Tahan’ny fifanakalozam-bola tsy mety';
 
   @override
-  String get rateLabel => 'Taux :';
+  String get rateLabel => 'Tahan’ny fifanakalozam-bola :';
 
   @override
   String confirmDeleteCurrencies(int count) {

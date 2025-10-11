@@ -692,11 +692,11 @@
   "@codeMustBe3Characters": {
     "description": "Short validation message for currency code length"
   },
-  "invalidRate": "Taux tsy mety",
+  "invalidRate": "Tahan’ny fifanakalozam-bola tsy mety",
   "@invalidRate": {
     "description": "Validation message for invalid exchange rate"
   },
-  "rateLabel": "Taux :",
+  "rateLabel": "Tahan’ny fifanakalozam-bola :",
   "@rateLabel": {
     "description": "Label for exchange rate display in currency card"
   },
