@@ -20,6 +20,7 @@ import '../../widget/surface_card.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
 import '../../util/fee_minimizer_util.dart';
+import '../../util/icon_util.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
@@ -192,7 +193,7 @@ class _State extends State<OptimizeFeeScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
-                          Icons.business,
+                          IconUtil.getIcon(provider.iconName),
                           color: context.colorScheme.primary,
                           size: 18,
                         ),
