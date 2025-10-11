@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../l10n/app_localizations.dart';
 import '../util/theme_util.dart';
@@ -98,7 +97,7 @@ class _Dialog extends StatelessWidget {
     children: [
       Expanded(
         child: OutlinedButton(
-          onPressed: () => GoRouter.of(context).pop(false),
+          onPressed: () => Navigator.of(context).pop(false),
           style: ButtonStyle(
             foregroundColor: WidgetStateProperty.all(
               colorScheme.onSurfaceVariant,
@@ -128,7 +127,7 @@ class _Dialog extends StatelessWidget {
       const SizedBox(width: 12),
       Expanded(
         child: ElevatedButton(
-          onPressed: () => GoRouter.of(context).pop(true),
+          onPressed: () => Navigator.of(context).pop(true),
           style: ButtonStyle(
             backgroundColor: ThemeUtil.interactiveBackground(colorScheme.error),
             foregroundColor: WidgetStateProperty.all(colorScheme.onError),

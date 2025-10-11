@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/fee_interval_model.dart';
@@ -148,7 +147,7 @@ class _State extends State<NewFeeIntervalScreen> {
         Expanded(
           child: LoadingButton(
             text: AppLocalizations.of(context).cancel,
-            onPressed: () => GoRouter.of(context).pop(),
+            onPressed: () => Navigator.of(context).pop(),
             isLoading: false,
             isOutlined: true,
           ),
@@ -205,7 +204,7 @@ class _State extends State<NewFeeIntervalScreen> {
           context,
           AppLocalizations.of(context).feeIntervalCreatedSuccessfully,
         );
-        GoRouter.of(context).pop(feeInterval);
+        Navigator.of(context).pop(feeInterval);
       }
     }
   }

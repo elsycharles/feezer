@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../styles/global.dart';
-import '../../util/route_util.dart';
+import '../../util/navigation_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
@@ -73,7 +72,7 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _addProvider() async {
-    final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
+    final result = await NavigationUtil.pushTo<Provider>(context, NavigationUtil.newProviderRoute);
     if (result != null) {
       await _loadProviders();
     }
@@ -120,7 +119,7 @@ class _State extends State<ProviderListScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).providers,
-          menuExcludeRoutes: const [AppRouter.providersRoute],
+          menuExcludeRoutes: [NavigationUtil.providersRoute],
         ),
         bottomNavigationBar: _selectedIds.isEmpty
             ? _buildAddProviderButton(colorScheme)
@@ -259,7 +258,7 @@ class _State extends State<ProviderListScreen> {
       }
       await Future.delayed(const Duration(milliseconds: 400));
       if (mounted) {
-        GoRouter.of(context).pop();
+        Navigator.of(context).pop();
         AppToast.success(context, l10n.providerDeletedSuccessfully(count));
         await _loadProviders();
         setState(() => _selectedIds.clear());
@@ -281,10 +280,7 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _showProviderDetails(Provider provider) {
-    GoRouter.of(context).go(
-      '${AppRouter.providerDetailRoute}/${provider.id}',
-      extra: provider,
-    );
+    NavigationUtil.pushTo(context, NavigationUtil.providerDetailRoute, extra: provider);
   }
 }
 

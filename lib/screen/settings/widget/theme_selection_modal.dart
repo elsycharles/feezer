@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../util/preference_util.dart';
@@ -41,7 +40,7 @@ class ThemeSelectionModal extends StatelessWidget {
           children: [
             // Handle bar - tap to close
             GestureDetector(
-              onTap: () => GoRouter.of(context).pop(),
+              onTap: () => Navigator.of(context).pop(),
               child: Container(
                 margin: const EdgeInsets.only(top: 8),
                 padding: const EdgeInsets.symmetric(vertical: 8),

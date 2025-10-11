@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../l10n/app_localizations.dart';
-import '../util/route_util.dart';
+import '../util/navigation_util.dart';
 
 /// Error screen displayed when a route is not found
 class ErrorScreen extends StatelessWidget {
-  final GoRouterState state;
+  final String? errorMessage;
 
-  const ErrorScreen({super.key, required this.state});
+  const ErrorScreen({super.key, this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final currentLocation = state.uri.toString();
-    final isOnHomePage = currentLocation == AppRouter.homeRoute || currentLocation == AppRouter.onboardingRoute;
 
     return Scaffold(
       appBar: AppBar(
@@ -28,15 +25,14 @@ class ErrorScreen extends StatelessWidget {
             Icon(Icons.error_outline, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context).screenNotFound(state.uri.toString()),
+              errorMessage ?? AppLocalizations.of(context).screenNotFound('Unknown'),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            if (!isOnHomePage)
-              ElevatedButton(
-                onPressed: () => context.go(AppRouter.homeRoute),
-                child: Text(AppLocalizations.of(context).goHome),
-              ),
+            ElevatedButton(
+              onPressed: () => NavigationUtil.goTo(context, NavigationUtil.homeRoute),
+              child: Text(AppLocalizations.of(context).goHome),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../util/theme_util.dart';
 
 /// Ultra-fast bottom sheet
@@ -53,7 +52,7 @@ class _Content extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () => GoRouter.of(context).pop(),
+                  onPressed: () => Navigator.of(context).pop(),
                   icon: Icon(Icons.close, color: colorScheme.onSurfaceVariant),
                 ),
               ],

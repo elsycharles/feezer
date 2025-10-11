@@ -3,7 +3,6 @@ import 'package:fee_minimizer/screen/onboarding/widget/onboarding_page_view.dart
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/util/onboarding_util.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
-import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/util/preference_util.dart';
 import 'package:fee_minimizer/util/navigation_util.dart';
@@ -41,7 +40,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       NavigationUtil.safeAsyncNavigate(
         context: context,
         isMounted: () => mounted,
-        getRoute: () async => AppRouter.optimizeFeeRoute,
+        getRoute: () async => NavigationUtil.homeRoute,
       );
     } else if (mounted) {
       setState(() => _shouldShowOnboarding = true);
@@ -75,7 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       getRoute: () async {
         // Mark that onboarding is completed
         await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.optimizeFeeRoute;
+        return NavigationUtil.homeRoute;
       },
     );
   }

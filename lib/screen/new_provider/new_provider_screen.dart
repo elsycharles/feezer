@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
@@ -13,6 +12,7 @@ import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
+import '../../util/navigation_util.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {
@@ -133,7 +133,7 @@ class _State extends State<NewProviderScreen> {
         Expanded(
           child: LoadingButton(
             text: AppLocalizations.of(context).cancel,
-            onPressed: () => GoRouter.of(context).pop(),
+            onPressed: () => Navigator.of(context).pop(),
             isLoading: false,
             isOutlined: true,
           ),
@@ -170,7 +170,12 @@ class _State extends State<NewProviderScreen> {
           context,
           AppLocalizations.of(context).providerCreatedSuccessfully,
         );
-        GoRouter.of(context).pop(provider);
+        // Navigate directly to provider detail instead of popping
+        await NavigationUtil.pushTo(
+          context,
+          NavigationUtil.providerDetailRoute,
+          extra: provider,
+        );
       }
     }
   }
