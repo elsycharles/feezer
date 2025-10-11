@@ -74,11 +74,14 @@ class _State extends State<OptimizeFeeScreen> {
     if (_previousCurrency != null && _previousCurrency != currencyProvider.selectedCurrency) {
       // Convert from previous currency to new currency
       final amountInAriary = _previousCurrency!.rate * _amount;
-      _amount = amountInAriary / currencyProvider.selectedCurrency!.rate;
+      final newAmount = ((amountInAriary / currencyProvider.selectedCurrency!.rate) * 100).round() / 100;
       
       // Reset optimization results when currency changes
-      _result = null;
-      _hasOptimized = false;
+      setState(() {
+        _amount = newAmount;
+        _result = null;
+        _hasOptimized = false;
+      });
     }
     
     _previousCurrency = currencyProvider.selectedCurrency;
