@@ -774,5 +774,81 @@
         "example": "50"
       }
     }
+  },
+  "deleteCurrencies": "Delete Currencies",
+  "@deleteCurrencies": {
+    "description": "Title for delete currencies confirmation dialog"
+  },
+  "currencyDeletedSuccessfully": "Currency deleted successfully",
+  "@currencyDeletedSuccessfully": {
+    "description": "Success message when currency is deleted"
+  },
+  "currencies": "Currencies",
+  "@currencies": {
+    "description": "Title for currencies screen"
+  },
+  "searchCurrencies": "Search currencies...",
+  "@searchCurrencies": {
+    "description": "Placeholder text for currency search field"
+  },
+  "noCurrenciesFound": "No currencies found",
+  "@noCurrenciesFound": {
+    "description": "Message when no currencies are found"
+  },
+  "centralizeCurrencies": "Centralize your currencies in one place",
+  "@centralizeCurrencies": {
+    "description": "Description text for empty currencies state"
+  },
+  "addNewCurrency": "Add new currency",
+  "@addNewCurrency": {
+    "description": "Button text to add a new currency"
+  },
+  "newCurrency": "New Currency",
+  "@newCurrency": {
+    "description": "Title for new currency screen"
+  },
+  "createNewCurrency": "Create New Currency",
+  "@createNewCurrency": {
+    "description": "Header text for new currency creation"
+  },
+  "currencyCode": "Currency Code",
+  "@currencyCode": {
+    "description": "Label for currency code field"
+  },
+  "currencyName": "Currency Name",
+  "@currencyName": {
+    "description": "Label for currency name field"
+  },
+  "currencySymbolLabel": "Currency Symbol",
+  "@currencySymbolLabel": {
+    "description": "Label for currency symbol field"
+  },
+  "exchangeRate": "Exchange Rate",
+  "@exchangeRate": {
+    "description": "Label for exchange rate field"
+  },
+  "currencyCreatedSuccessfully": "Currency created successfully",
+  "@currencyCreatedSuccessfully": {
+    "description": "Success message when currency is created"
+  },
+  "manageYourCurrencies": "Manage your currencies",
+  "@manageYourCurrencies": {
+    "description": "Header text for currency management"
+  },
+  "totalCurrencies": "Total Currencies",
+  "@totalCurrencies": {
+    "description": "Label for total currencies count"
+  },
+  "activeCurrencies": "Active Currencies",
+  "@activeCurrencies": {
+    "description": "Label for active currencies count"
+  },
+  "editCurrency": "Edit Currency",
+  "@editCurrency": {
+    "description": "Title for edit currency bottom sheet"
+  },
+  "currencyUpdatedSuccessfully": "Currency updated successfully",
+  "@currencyUpdatedSuccessfully": {
+    "description": "Success message when currency is updated"
   }
 }

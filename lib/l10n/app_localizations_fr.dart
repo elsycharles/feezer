@@ -571,4 +571,62 @@ class AppLocalizationsFr extends AppLocalizations {
   String mustBeLessThanNCharacters(int count) {
     return 'Doit contenir moins de $count caractères';
   }
+
+  @override
+  String get deleteCurrencies => 'Supprimer les devises';
+
+  @override
+  String get currencyDeletedSuccessfully => 'Devise supprimée avec succès';
+
+  @override
+  String get currencies => 'Devises';
+
+  @override
+  String get searchCurrencies => 'Rechercher des devises...';
+
+  @override
+  String get noCurrenciesFound => 'Aucune devise trouvée';
+
+  @override
+  String get centralizeCurrencies =>
+      'Centralisez vos devises en un seul endroit';
+
+  @override
+  String get addNewCurrency => 'Ajouter une nouvelle devise';
+
+  @override
+  String get newCurrency => 'Nouvelle devise';
+
+  @override
+  String get createNewCurrency => 'Créer une nouvelle devise';
+
+  @override
+  String get currencyCode => 'Code de la devise';
+
+  @override
+  String get currencyName => 'Nom de la devise';
+
+  @override
+  String get currencySymbolLabel => 'Symbole de la devise';
+
+  @override
+  String get exchangeRate => 'Taux de change';
+
+  @override
+  String get currencyCreatedSuccessfully => 'Devise créée avec succès';
+
+  @override
+  String get manageYourCurrencies => 'Gérez vos devises';
+
+  @override
+  String get totalCurrencies => 'Total des devises';
+
+  @override
+  String get activeCurrencies => 'Devises actives';
+
+  @override
+  String get editCurrency => 'Modifier la devise';
+
+  @override
+  String get currencyUpdatedSuccessfully => 'Devise mise à jour avec succès';
 }

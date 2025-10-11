@@ -11,11 +11,12 @@ class ConstantUtil {
   }
   // Configuration base de données
   static const String databaseName = 'fee_optimizer.db';
-  static const int databaseVersion = 1;
+  static const int databaseVersion = 2;
 
   // Tables
   static const String tableFeeIntervals = 'fee_intervals';
   static const String tableProviders = 'providers';
+  static const String tableCurrencies = 'currencies';
   static const String tableOptimizationResults = 'optimization_results';
   static const String tableOptimizationDetails = 'optimization_details';
 
@@ -33,6 +34,11 @@ class ConstantUtil {
   static const String columnName = 'name';
   static const String columnDescription = 'description';
   static const String columnIconName = 'icon_name';
+
+  // Currency columns
+  static const String columnCode = 'code';
+  static const String columnSymbol = 'symbol';
+  static const String columnRate = 'rate';
 
   // Optimization columns
   static const String columnTotalAmount = 'total_amount';

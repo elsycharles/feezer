@@ -587,5 +587,81 @@
         "example": "50"
       }
     }
+  },
+  "deleteCurrencies": "Hamafa vola",
+  "@deleteCurrencies": {
+    "description": "Title for delete currencies confirmation dialog"
+  },
+  "currencyDeletedSuccessfully": "Vola voafafa soamantsara",
+  "@currencyDeletedSuccessfully": {
+    "description": "Success message when currency is deleted"
+  },
+  "currencies": "Vola",
+  "@currencies": {
+    "description": "Title for currencies screen"
+  },
+  "searchCurrencies": "Karohy vola...",
+  "@searchCurrencies": {
+    "description": "Placeholder text for currency search field"
+  },
+  "noCurrenciesFound": "Tsy misy vola hita",
+  "@noCurrenciesFound": {
+    "description": "Message when no currencies are found"
+  },
+  "centralizeCurrencies": "Ampifandrary ny volanao amin'ny toerana iray",
+  "@centralizeCurrencies": {
+    "description": "Description text for empty currencies state"
+  },
+  "addNewCurrency": "Ampiditra vola vaovao",
+  "@addNewCurrency": {
+    "description": "Button text to add a new currency"
+  },
+  "newCurrency": "Vola vaovao",
+  "@newCurrency": {
+    "description": "Title for new currency screen"
+  },
+  "createNewCurrency": "Mamorona vola vaovao",
+  "@createNewCurrency": {
+    "description": "Header text for new currency creation"
+  },
+  "currencyCode": "Kaody vola",
+  "@currencyCode": {
+    "description": "Label for currency code field"
+  },
+  "currencyName": "Anarana vola",
+  "@currencyName": {
+    "description": "Label for currency name field"
+  },
+  "currencySymbolLabel": "Famantarana vola",
+  "@currencySymbolLabel": {
+    "description": "Label for currency symbol field"
+  },
+  "exchangeRate": "Tahan'ny fifanakalo",
+  "@exchangeRate": {
+    "description": "Label for exchange rate field"
+  },
+  "currencyCreatedSuccessfully": "Vola voaforona soamantsara",
+  "@currencyCreatedSuccessfully": {
+    "description": "Success message when currency is created"
+  },
+  "manageYourCurrencies": "Tantano ny volanao",
+  "@manageYourCurrencies": {
+    "description": "Header text for currency management"
+  },
+  "totalCurrencies": "Total vola",
+  "@totalCurrencies": {
+    "description": "Label for total currencies count"
+  },
+  "activeCurrencies": "Vola mavitrika",
+  "@activeCurrencies": {
+    "description": "Label for active currencies count"
+  },
+  "editCurrency": "Hanova vola",
+  "@editCurrency": {
+    "description": "Title for edit currency bottom sheet"
+  },
+  "currencyUpdatedSuccessfully": "Vola voaova soamantsara",
+  "@currencyUpdatedSuccessfully": {
+    "description": "Success message when currency is updated"
   }
 }

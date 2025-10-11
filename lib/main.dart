@@ -11,7 +11,10 @@ import 'package:fee_minimizer/screen/new_provider/new_provider_screen.dart';
 import 'package:fee_minimizer/screen/provider_detail/provider_detail_screen.dart';
 import 'package:fee_minimizer/screen/optimize_fee/optimize_fee_screen.dart';
 import 'package:fee_minimizer/screen/fee_interval/new_fee_interval_screen.dart';
+import 'package:fee_minimizer/screen/currency/currency_list_screen.dart';
+import 'package:fee_minimizer/screen/currency/new_currency_screen.dart';
 import 'package:fee_minimizer/model/provider_model.dart' as model;
+import 'package:fee_minimizer/model/currency_model.dart';
 import 'package:fee_minimizer/model/fee_interval_model.dart';
 import 'package:fee_minimizer/util/preference_util.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +63,7 @@ class MyApp extends StatelessWidget {
     '/onboarding': (_) => const OnboardingScreen(),
     '/providers': (_) => const ProviderListScreen(),
     '/settings': (_) => const SettingsScreen(),
+    '/currencies': (_) => const CurrencyListScreen(),
     '/provider': (context) {
       final args = ModalRoute.of(context)?.settings.arguments as model.Provider?;
       if (args != null) {
@@ -88,6 +92,11 @@ class MyApp extends StatelessWidget {
           builder: (_) => const NewFeeIntervalScreen(),
           settings: settings,
         );
+      case '/new-currency':
+        return MaterialPageRoute<Currency>(
+          builder: (_) => const NewCurrencyScreen(),
+          settings: settings,
+        );
       default:
         return null;
     }
@@ -105,6 +114,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp(
             title: ConstantUtil.appName,
             routes: routes,
+            onGenerateRoute: onGenerateRoute,
             initialRoute: initialRoute,
             theme: ThemeUtil.lightTheme,
             darkTheme: ThemeUtil.darkTheme,

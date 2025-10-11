@@ -580,5 +580,81 @@
         "example": "50"
       }
     }
+  },
+  "deleteCurrencies": "Supprimer les devises",
+  "@deleteCurrencies": {
+    "description": "Title for delete currencies confirmation dialog"
+  },
+  "currencyDeletedSuccessfully": "Devise supprimée avec succès",
+  "@currencyDeletedSuccessfully": {
+    "description": "Success message when currency is deleted"
+  },
+  "currencies": "Devises",
+  "@currencies": {
+    "description": "Title for currencies screen"
+  },
+  "searchCurrencies": "Rechercher des devises...",
+  "@searchCurrencies": {
+    "description": "Placeholder text for currency search field"
+  },
+  "noCurrenciesFound": "Aucune devise trouvée",
+  "@noCurrenciesFound": {
+    "description": "Message when no currencies are found"
+  },
+  "centralizeCurrencies": "Centralisez vos devises en un seul endroit",
+  "@centralizeCurrencies": {
+    "description": "Description text for empty currencies state"
+  },
+  "addNewCurrency": "Ajouter une nouvelle devise",
+  "@addNewCurrency": {
+    "description": "Button text to add a new currency"
+  },
+  "newCurrency": "Nouvelle devise",
+  "@newCurrency": {
+    "description": "Title for new currency screen"
+  },
+  "createNewCurrency": "Créer une nouvelle devise",
+  "@createNewCurrency": {
+    "description": "Header text for new currency creation"
+  },
+  "currencyCode": "Code de la devise",
+  "@currencyCode": {
+    "description": "Label for currency code field"
+  },
+  "currencyName": "Nom de la devise",
+  "@currencyName": {
+    "description": "Label for currency name field"
+  },
+  "currencySymbolLabel": "Symbole de la devise",
+  "@currencySymbolLabel": {
+    "description": "Label for currency symbol field"
+  },
+  "exchangeRate": "Taux de change",
+  "@exchangeRate": {
+    "description": "Label for exchange rate field"
+  },
+  "currencyCreatedSuccessfully": "Devise créée avec succès",
+  "@currencyCreatedSuccessfully": {
+    "description": "Success message when currency is created"
+  },
+  "manageYourCurrencies": "Gérez vos devises",
+  "@manageYourCurrencies": {
+    "description": "Header text for currency management"
+  },
+  "totalCurrencies": "Total des devises",
+  "@totalCurrencies": {
+    "description": "Label for total currencies count"
+  },
+  "activeCurrencies": "Devises actives",
+  "@activeCurrencies": {
+    "description": "Label for active currencies count"
+  },
+  "editCurrency": "Modifier la devise",
+  "@editCurrency": {
+    "description": "Title for edit currency bottom sheet"
+  },
+  "currencyUpdatedSuccessfully": "Devise mise à jour avec succès",
+  "@currencyUpdatedSuccessfully": {
+    "description": "Success message when currency is updated"
   }
 }

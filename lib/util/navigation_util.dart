@@ -11,6 +11,8 @@ class NavigationUtil {
   static const String newProviderRoute = '/new-provider';
   static const String providerDetailRoute = '/provider';
   static const String newFeeIntervalRoute = '/new-fee-interval';
+  static const String currenciesRoute = '/currencies';
+  static const String newCurrencyRoute = '/new-currency';
   /// Safe async navigation - captures context before async operation
   static Future<void> safeAsyncNavigate({
     required BuildContext context,

@@ -559,4 +559,62 @@ class AppLocalizationsMg extends AppLocalizations {
   String mustBeLessThanNCharacters(int count) {
     return 'Tokony ho latsaky ny $count litera';
   }
+
+  @override
+  String get deleteCurrencies => 'Hamafa vola';
+
+  @override
+  String get currencyDeletedSuccessfully => 'Vola voafafa soamantsara';
+
+  @override
+  String get currencies => 'Vola';
+
+  @override
+  String get searchCurrencies => 'Karohy vola...';
+
+  @override
+  String get noCurrenciesFound => 'Tsy misy vola hita';
+
+  @override
+  String get centralizeCurrencies =>
+      'Ampifandrary ny volanao amin\'ny toerana iray';
+
+  @override
+  String get addNewCurrency => 'Ampiditra vola vaovao';
+
+  @override
+  String get newCurrency => 'Vola vaovao';
+
+  @override
+  String get createNewCurrency => 'Mamorona vola vaovao';
+
+  @override
+  String get currencyCode => 'Kaody vola';
+
+  @override
+  String get currencyName => 'Anarana vola';
+
+  @override
+  String get currencySymbolLabel => 'Famantarana vola';
+
+  @override
+  String get exchangeRate => 'Tahan\'ny fifanakalo';
+
+  @override
+  String get currencyCreatedSuccessfully => 'Vola voaforona soamantsara';
+
+  @override
+  String get manageYourCurrencies => 'Tantano ny volanao';
+
+  @override
+  String get totalCurrencies => 'Total vola';
+
+  @override
+  String get activeCurrencies => 'Vola mavitrika';
+
+  @override
+  String get editCurrency => 'Hanova vola';
+
+  @override
+  String get currencyUpdatedSuccessfully => 'Vola voaova soamantsara';
 }

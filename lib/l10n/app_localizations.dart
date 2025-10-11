@@ -1089,6 +1089,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Must be less than {count} characters'**
   String mustBeLessThanNCharacters(int count);
+
+  /// Title for delete currencies confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Currencies'**
+  String get deleteCurrencies;
+
+  /// Success message when currency is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Currency deleted successfully'**
+  String get currencyDeletedSuccessfully;
+
+  /// Title for currencies screen
+  ///
+  /// In en, this message translates to:
+  /// **'Currencies'**
+  String get currencies;
+
+  /// Placeholder text for currency search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search currencies...'**
+  String get searchCurrencies;
+
+  /// Message when no currencies are found
+  ///
+  /// In en, this message translates to:
+  /// **'No currencies found'**
+  String get noCurrenciesFound;
+
+  /// Description text for empty currencies state
+  ///
+  /// In en, this message translates to:
+  /// **'Centralize your currencies in one place'**
+  String get centralizeCurrencies;
+
+  /// Button text to add a new currency
+  ///
+  /// In en, this message translates to:
+  /// **'Add new currency'**
+  String get addNewCurrency;
+
+  /// Title for new currency screen
+  ///
+  /// In en, this message translates to:
+  /// **'New Currency'**
+  String get newCurrency;
+
+  /// Header text for new currency creation
+  ///
+  /// In en, this message translates to:
+  /// **'Create New Currency'**
+  String get createNewCurrency;
+
+  /// Label for currency code field
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Code'**
+  String get currencyCode;
+
+  /// Label for currency name field
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Name'**
+  String get currencyName;
+
+  /// Label for currency symbol field
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Symbol'**
+  String get currencySymbolLabel;
+
+  /// Label for exchange rate field
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange Rate'**
+  String get exchangeRate;
+
+  /// Success message when currency is created
+  ///
+  /// In en, this message translates to:
+  /// **'Currency created successfully'**
+  String get currencyCreatedSuccessfully;
+
+  /// Header text for currency management
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your currencies'**
+  String get manageYourCurrencies;
+
+  /// Label for total currencies count
+  ///
+  /// In en, this message translates to:
+  /// **'Total Currencies'**
+  String get totalCurrencies;
+
+  /// Label for active currencies count
+  ///
+  /// In en, this message translates to:
+  /// **'Active Currencies'**
+  String get activeCurrencies;
+
+  /// Title for edit currency bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Currency'**
+  String get editCurrency;
+
+  /// Success message when currency is updated
+  ///
+  /// In en, this message translates to:
+  /// **'Currency updated successfully'**
+  String get currencyUpdatedSuccessfully;
 }
 
 class _AppLocalizationsDelegate

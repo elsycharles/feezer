@@ -69,6 +69,18 @@ class AppMenuButton extends StatelessWidget {
       ));
     }
 
+    // Currencies
+    if (!excludeRoutes.contains(NavigationUtil.currenciesRoute)) {
+      items.add(PopupMenuItem(
+        value: NavigationUtil.currenciesRoute,
+        child: _MenuItem(
+          icon: Icons.currency_exchange,
+          text: AppLocalizations.of(context).currencies,
+          context: context,
+        ),
+      ));
+    }
+
     // Settings
     if (!excludeRoutes.contains(NavigationUtil.settingsRoute)) {
       items.add(PopupMenuItem(

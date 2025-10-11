@@ -560,4 +560,61 @@ class AppLocalizationsEn extends AppLocalizations {
   String mustBeLessThanNCharacters(int count) {
     return 'Must be less than $count characters';
   }
+
+  @override
+  String get deleteCurrencies => 'Delete Currencies';
+
+  @override
+  String get currencyDeletedSuccessfully => 'Currency deleted successfully';
+
+  @override
+  String get currencies => 'Currencies';
+
+  @override
+  String get searchCurrencies => 'Search currencies...';
+
+  @override
+  String get noCurrenciesFound => 'No currencies found';
+
+  @override
+  String get centralizeCurrencies => 'Centralize your currencies in one place';
+
+  @override
+  String get addNewCurrency => 'Add new currency';
+
+  @override
+  String get newCurrency => 'New Currency';
+
+  @override
+  String get createNewCurrency => 'Create New Currency';
+
+  @override
+  String get currencyCode => 'Currency Code';
+
+  @override
+  String get currencyName => 'Currency Name';
+
+  @override
+  String get currencySymbolLabel => 'Currency Symbol';
+
+  @override
+  String get exchangeRate => 'Exchange Rate';
+
+  @override
+  String get currencyCreatedSuccessfully => 'Currency created successfully';
+
+  @override
+  String get manageYourCurrencies => 'Manage your currencies';
+
+  @override
+  String get totalCurrencies => 'Total Currencies';
+
+  @override
+  String get activeCurrencies => 'Active Currencies';
+
+  @override
+  String get editCurrency => 'Edit Currency';
+
+  @override
+  String get currencyUpdatedSuccessfully => 'Currency updated successfully';
 }
