@@ -688,5 +688,19 @@
   "invalidRate": "Taux invalide",
   "@invalidRate": {
     "description": "Validation message for invalid exchange rate"
+  },
+  "rateLabel": "Taux :",
+  "@rateLabel": {
+    "description": "Label for exchange rate display in currency card"
+  },
+  "confirmDeleteCurrencies": "Êtes-vous sûr de vouloir supprimer {count} devises ?",
+  "@confirmDeleteCurrencies": {
+    "description": "Confirmation message for deleting currencies",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   }
 }

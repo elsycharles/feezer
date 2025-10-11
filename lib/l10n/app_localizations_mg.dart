@@ -644,4 +644,12 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get invalidRate => 'Taux tsy mety';
+
+  @override
+  String get rateLabel => 'Taux :';
+
+  @override
+  String confirmDeleteCurrencies(int count) {
+    return 'Tena te hanala $count vola ve ianao ?';
+  }
 }

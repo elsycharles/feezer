@@ -657,4 +657,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get invalidRate => 'Taux invalide';
+
+  @override
+  String get rateLabel => 'Taux :';
+
+  @override
+  String confirmDeleteCurrencies(int count) {
+    return 'Êtes-vous sûr de vouloir supprimer $count devises ?';
+  }
 }

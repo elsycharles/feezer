@@ -645,4 +645,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get invalidRate => 'Invalid rate';
+
+  @override
+  String get rateLabel => 'Rate:';
+
+  @override
+  String confirmDeleteCurrencies(int count) {
+    return 'Are you sure you want to delete $count currencies?';
+  }
 }

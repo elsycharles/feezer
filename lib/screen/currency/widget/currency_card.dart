@@ -3,6 +3,7 @@ import '../../../model/currency_model.dart';
 import '../../../util/theme_util.dart';
 import '../../../styles/global.dart';
 import '../../../widget/interactive_surface.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// Reusable currency card widget for consistent styling
 class CurrencyCard extends StatelessWidget {
@@ -120,7 +121,7 @@ class CurrencyCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Rate: ${currency.rate}',
+                    '${AppLocalizations.of(context).rateLabel} ${currency.rate}',
                     style: ThemeUtil.bodySmall.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),

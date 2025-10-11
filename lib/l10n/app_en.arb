@@ -882,5 +882,19 @@
   "invalidRate": "Invalid rate",
   "@invalidRate": {
     "description": "Validation message for invalid exchange rate"
+  },
+  "rateLabel": "Rate:",
+  "@rateLabel": {
+    "description": "Label for exchange rate display in currency card"
+  },
+  "confirmDeleteCurrencies": "Are you sure you want to delete {count} currencies?",
+  "@confirmDeleteCurrencies": {
+    "description": "Confirmation message for deleting currencies",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
   }
 }

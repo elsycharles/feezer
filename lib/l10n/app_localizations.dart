@@ -1251,6 +1251,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid rate'**
   String get invalidRate;
+
+  /// Label for exchange rate display in currency card
+  ///
+  /// In en, this message translates to:
+  /// **'Rate:'**
+  String get rateLabel;
+
+  /// Confirmation message for deleting currencies
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {count} currencies?'**
+  String confirmDeleteCurrencies(int count);
 }
 
 class _AppLocalizationsDelegate
