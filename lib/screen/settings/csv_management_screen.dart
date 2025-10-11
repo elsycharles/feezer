@@ -160,7 +160,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
           ),
         ),
         SurfaceCard(
-          padding: EdgeInsets.zero,
+          padding: Global.padMd,
           child: Column(children: children),
         ),
       ],
@@ -255,14 +255,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         children: [
           Row(
             children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(icon, color: colorScheme.onSurface, size: 22),
-              ),
+              Icon(icon, color: colorScheme.onSurface, size: 22),
               Global.gapMd,
               Expanded(
                 child: Column(
