@@ -272,6 +272,10 @@
   "@providerDeletedSuccessfully": {
     "description": "Success message after deleting provider(s)"
   },
+  "deleteProviderWarning": "Hofafana koa ny intervalle sara rehetra mifandraika.",
+  "@deleteProviderWarning": {
+    "description": "Warning message when deleting providers about fee intervals"
+  },
   "editProvider": "Manova mpanome tolotra",
   "@editProvider": {
     "description": "Title for edit provider bottom sheet"
@@ -825,5 +829,225 @@
   "minOperationsCannotBeGreaterThanMaxOperations": "minOperations tsy afaka mihoatra ny maxOperations",
   "@minOperationsCannotBeGreaterThanMaxOperations": {
     "description": "Message d'erreur lorsque minOperations est supérieur à maxOperations"
+  },
+  "csvManagement": "Fitantanana CSV",
+  "@csvManagement": {
+    "description": "Title for CSV management screen"
+  },
+  "importExportData": "Ampidiro/Hampidino angona",
+  "@importExportData": {
+    "description": "Description for CSV import/export functionality"
+  },
+  "importData": "Ampidiro angona",
+  "@importData": {
+    "description": "Import data section title"
+  },
+  "exportData": "Hampidino angona",
+  "@exportData": {
+    "description": "Export data section title"
+  },
+  "importAllData": "Ampidiro angona rehetra",
+  "@importAllData": {
+    "description": "Import all data button text"
+  },
+  "exportAllData": "Hampidino angona rehetra",
+  "@exportAllData": {
+    "description": "Export all data button text"
+  },
+  "downloadTemplate": "Hampidino modely",
+  "@downloadTemplate": {
+    "description": "Download template button text"
+  },
+  "selectFile": "Misafidy rakitra",
+  "@selectFile": {
+    "description": "Select file button text"
+  },
+  "importingData": "Ampidirina ny angona...",
+  "@importingData": {
+    "description": "Importing data progress message"
+  },
+  "exportingData": "Ampidinina ny angona...",
+  "@exportingData": {
+    "description": "Exporting data progress message"
+  },
+  "importSuccessful": "Nahomby ny fampidirana",
+  "@importSuccessful": {
+    "description": "Import success message"
+  },
+  "exportSuccessful": "Nahomby ny fampidinana",
+  "@exportSuccessful": {
+    "description": "Export success message"
+  },
+  "importFailed": "Tsy nahomby ny fampidirana",
+  "@importFailed": {
+    "description": "Import failed message"
+  },
+  "exportFailed": "Tsy nahomby ny fampidinana",
+  "@exportFailed": {
+    "description": "Export failed message"
+  },
+  "providersImportedSuccessfully": "{count, plural, =1{Mpanome tolotra 1 voampiditra soa aman-tsara} other{Mpanome tolotra {count} voampiditra soa aman-tsara}}",
+  "@providersImportedSuccessfully": {
+    "description": "Success message for providers import",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "feeIntervalsImportedSuccessfully": "{count, plural, =1{Elanelam-para 1 voampiditra soa aman-tsara} other{Elanelam-para {count} voampiditra soa aman-tsara}}",
+  "@feeIntervalsImportedSuccessfully": {
+    "description": "Success message for fee intervals import",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "dataImportedSuccessfully": "Angona voampiditra soa aman-tsara",
+  "@dataImportedSuccessfully": {
+    "description": "Success message for general data import"
+  },
+  "noDataToExport": "Tsy misy angona hampidina",
+  "@noDataToExport": {
+    "description": "Message when no data is available for export"
+  },
+  "invalidCsvFormat": "Tsy mety ny endrika CSV",
+  "@invalidCsvFormat": {
+    "description": "Error message for invalid CSV format"
+  },
+  "csvFileNotFound": "Tsy hita ny rakitra CSV",
+  "@csvFileNotFound": {
+    "description": "Error message when CSV file is not found"
+  },
+  "errorReadingFile": "Diso amin'ny famakiana rakitra",
+  "@errorReadingFile": {
+    "description": "Error message when file reading fails"
+  },
+  "errorWritingFile": "Diso amin'ny fanoratana rakitra",
+  "@errorWritingFile": {
+    "description": "Error message when file writing fails"
+  },
+  "permissionDenied": "Tsy nomena alalana",
+  "@permissionDenied": {
+    "description": "Error message for permission denied"
+  },
+  "fileTooLarge": "Lehibe loatra ny rakitra",
+  "@fileTooLarge": {
+    "description": "Error message for file too large"
+  },
+  "unsupportedFileType": "Karazana rakitra tsy raisina",
+  "@unsupportedFileType": {
+    "description": "Error message for unsupported file type"
+  },
+  "dataValidationError": "Diso amin'ny fanamarinana angona",
+  "@dataValidationError": {
+    "description": "Error message for data validation failure"
+  },
+  "duplicateDataFound": "Angona mifangaro hita",
+  "@duplicateDataFound": {
+    "description": "Error message for duplicate data found"
+  },
+  "missingRequiredFields": "Misy saha ilaina tsy hita",
+  "@missingRequiredFields": {
+    "description": "Error message for missing required fields"
+  },
+  "invalidDataFormat": "Tsy mety ny endrika angona",
+  "@invalidDataFormat": {
+    "description": "Error message for invalid data format"
+  },
+  "providersTemplate": "Modely mpanome tolotra",
+  "@providersTemplate": {
+    "description": "Providers template file name"
+  },
+  "feeIntervalsTemplate": "Modely elanelam-para",
+  "@feeIntervalsTemplate": {
+    "description": "Fee intervals template file name"
+  },
+  "allDataTemplate": "Modely angona rehetra",
+  "@allDataTemplate": {
+    "description": "All data template file name"
+  },
+  "providersData": "Angon'ny mpanome tolotra",
+  "@providersData": {
+    "description": "Providers data file name"
+  },
+  "feeIntervalsData": "Angon'ny elanelam-para",
+  "@feeIntervalsData": {
+    "description": "Fee intervals data file name"
+  },
+  "allData": "Angona rehetra",
+  "@allData": {
+    "description": "All data file name"
+  },
+  "csvImportExportDescription": "Ampidiro na hampidino angona amin'ny alalan'ny rakitra CSV. Azonao atao ny mampiasa modely ho an'ny fanombohana.",
+  "@csvImportExportDescription": {
+    "description": "Description for CSV import/export functionality"
+  },
+  "templateDescription": "Hampidino modely CSV miaraka amin'ny lohateny mety mba hanampy amin'ny fampidirana angona.",
+  "@templateDescription": {
+    "description": "Description for template download"
+  },
+  "importDescription": "Misafidy rakitra CSV avy amin'ny fitaovanao mba hampidirana angona.",
+  "@importDescription": {
+    "description": "Description for data import"
+  },
+  "exportDescription": "Hampidino angona amin'ny rakitra CSV azo zaraina.",
+  "@exportDescription": {
+    "description": "Description for data export"
+  },
+  "backupYourData": "Tahirizo ny angonao",
+  "@backupYourData": {
+    "description": "Backup data description"
+  },
+  "restoreYourData": "Avereno ny angonao",
+  "@restoreYourData": {
+    "description": "Restore data description"
+  },
+  "shareData": "Zarao angona",
+  "@shareData": {
+    "description": "Share data description"
+  },
+  "dataManagement": "Fitantanana angona",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  "csvManagement": "Fitantanana CSV",
+  "@csvManagement": {
+    "description": "Title for CSV management screen"
+  },
+  "previewTemplate": "Jereo modely",
+  "@previewTemplate": {
+    "description": "Preview template button text"
+  },
+  "preview": "Jereo",
+  "@preview": {
+    "description": "Preview button text"
+  },
+  "download": "Hampidino",
+  "@download": {
+    "description": "Download button text"
+  },
+  "templatePreview": "Jereo modely",
+  "@templatePreview": {
+    "description": "Template preview dialog title"
+  },
+  "close": "Hidio",
+  "@close": {
+    "description": "Close button text"
+  },
+  "dataManagement": "Fitantanana angona",
+  "@dataManagement": {
+    "description": "Titre de la section de gestion des données"
+  },
+  "importDataDescription": "Ampidiro ny mpanome sy ny intervalle sara avy amin'ny rakitra CSV. Hahalalala ho azy ny rafitra ny karazana angona araka ny tsanganana.",
+  "@importDataDescription": {
+    "description": "Description de l'action d'importation des données"
+  },
+  "exportDataDescription": "Avoao daholo ny mpanome sy ny intervalle sarany amin'ny rakitra CSV mifangaro.",
+  "@exportDataDescription": {
+    "description": "Description de l'action d'exportation des données"
   }
 }

@@ -279,6 +279,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get deleteProviderWarning =>
+      'This will also delete all associated fee intervals.';
+
+  @override
   String get editProvider => 'Edit Provider';
 
   @override
@@ -706,4 +710,140 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get minOperationsCannotBeGreaterThanMaxOperations =>
       'minOperations cannot be greater than maxOperations';
+
+  @override
+  String get importExportData => 'Import/Export Data';
+
+  @override
+  String get csvImportExportInfo => 'CSV Data Management';
+
+  @override
+  String get csvImportExportDescription =>
+      'Import or export your providers and fee intervals using CSV files';
+
+  @override
+  String get importData => 'Import Data';
+
+  @override
+  String get exportData => 'Export Data';
+
+  @override
+  String get templates => 'CSV Templates';
+
+  @override
+  String get exportCombined => 'Export Combined';
+
+  @override
+  String get exportCombinedDescription =>
+      'Export providers with their fee intervals';
+
+  @override
+  String get downloadProviderTemplate => 'Provider Template';
+
+  @override
+  String get csvTemplateForProviders =>
+      'Download CSV template for importing providers';
+
+  @override
+  String get downloadFeeTemplate => 'Fee Intervals Template';
+
+  @override
+  String get csvTemplateForFees => 'Download CSV template for importing fees';
+
+  @override
+  String get downloadCombinedTemplate => 'Combined Template';
+
+  @override
+  String get csvTemplateForCombined =>
+      'Download CSV template for combined import';
+
+  @override
+  String get importSuccessful => 'Import Successful';
+
+  @override
+  String get importFailed => 'Import Failed';
+
+  @override
+  String get exportSuccessful => 'Export Successful';
+
+  @override
+  String get exportFailed => 'Export Failed';
+
+  @override
+  String get templateDownloaded => 'Template Downloaded';
+
+  @override
+  String get failedToDownloadTemplate => 'Failed to download template';
+
+  @override
+  String get failedToReadFile => 'Failed to read file';
+
+  @override
+  String providersImported(int count) {
+    return '$count provider(s) imported';
+  }
+
+  @override
+  String feeIntervalsImported(int count) {
+    return '$count fee interval(s) imported';
+  }
+
+  @override
+  String errorsEncountered(int count) {
+    return '$count error(s) encountered';
+  }
+
+  @override
+  String get dataManagement => 'Data Management';
+
+  @override
+  String get backup => 'Backup';
+
+  @override
+  String get backupYourData => 'Backup your providers and fees';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get clearAllData => 'Clear all data';
+
+  @override
+  String get confirmReset => 'Confirm Reset';
+
+  @override
+  String get resetWarningMessage =>
+      'This will permanently delete all your providers and fee intervals. This action cannot be undone.';
+
+  @override
+  String get dataResetSuccessful => 'Data reset successful';
+
+  @override
+  String get resetFailed => 'Reset failed';
+
+  @override
+  String get csvManagement => 'CSV Management';
+
+  @override
+  String get previewTemplate => 'Preview Template';
+
+  @override
+  String get preview => 'Preview';
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get templatePreview => 'Template Preview';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get importDataDescription =>
+      'Import providers and fee intervals from CSV file. The system will automatically detect the data type based on columns.';
+
+  @override
+  String get exportDataDescription =>
+      'Export all providers and their fee intervals to a combined CSV file.';
 }

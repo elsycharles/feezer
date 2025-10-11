@@ -234,8 +234,8 @@ class _State extends State<ProviderListScreen> {
     final count = _selectedIds.length;
     final l10n = AppLocalizations.of(context);
     final message = count == 1
-        ? l10n.deleteThisProvider
-        : l10n.deleteProvidersCount(count);
+        ? '${l10n.deleteThisProvider}\n\n${l10n.deleteProviderWarning}'
+        : '${l10n.deleteProvidersCount(count)}\n\n${l10n.deleteProviderWarning}';
 
     final confirmed = await ConfirmationModal.show(
       context,
@@ -251,8 +251,19 @@ class _State extends State<ProviderListScreen> {
       );
       final db = DatabaseUtil();
       for (final id in _selectedIds) {
-        await db.database.then((database) {
-          database.delete(ConstantUtil.tableProviders, where: '${ConstantUtil.columnId} = ?', whereArgs: [int.tryParse(id)]);
+        await db.database.then((database) async {
+          // First delete all fee intervals associated with this provider
+          await database.delete(
+            ConstantUtil.tableFeeIntervals,
+            where: '${ConstantUtil.columnProviderId} = ?',
+            whereArgs: [int.tryParse(id)],
+          );
+          // Then delete the provider
+          await database.delete(
+            ConstantUtil.tableProviders,
+            where: '${ConstantUtil.columnId} = ?',
+            whereArgs: [int.tryParse(id)],
+          );
         });
       }
       await Future.delayed(const Duration(milliseconds: 400));

@@ -1,1 +1,27 @@
-{}
+{
+  "mg": [
+    "csvImportExportInfo",
+    "templates",
+    "exportCombined",
+    "exportCombinedDescription",
+    "downloadProviderTemplate",
+    "csvTemplateForProviders",
+    "downloadFeeTemplate",
+    "csvTemplateForFees",
+    "downloadCombinedTemplate",
+    "csvTemplateForCombined",
+    "templateDownloaded",
+    "failedToDownloadTemplate",
+    "failedToReadFile",
+    "providersImported",
+    "feeIntervalsImported",
+    "errorsEncountered",
+    "backup",
+    "reset",
+    "clearAllData",
+    "confirmReset",
+    "resetWarningMessage",
+    "dataResetSuccessful",
+    "resetFailed"
+  ]
+}

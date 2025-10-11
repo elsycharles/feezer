@@ -347,6 +347,10 @@
   "@providerDeletedSuccessfully": {
     "description": "Success message after deleting provider(s)"
   },
+  "deleteProviderWarning": "This will also delete all associated fee intervals.",
+  "@deleteProviderWarning": {
+    "description": "Warning message when deleting providers about fee intervals"
+  },
   "editProvider": "Edit Provider",
   "@editProvider": {
     "description": "Title for edit provider bottom sheet"
@@ -974,5 +978,195 @@
   "minOperationsCannotBeGreaterThanMaxOperations": "minOperations cannot be greater than maxOperations",
   "@minOperationsCannotBeGreaterThanMaxOperations": {
     "description": "Error message when minOperations is greater than maxOperations"
+  },
+  "importExportData": "Import/Export Data",
+  "@importExportData": {
+    "description": "Import/Export data menu title"
+  },
+  "csvImportExportInfo": "CSV Data Management",
+  "@csvImportExportInfo": {
+    "description": "CSV import/export information title"
+  },
+  "csvImportExportDescription": "Import or export your providers and fee intervals using CSV files",
+  "@csvImportExportDescription": {
+    "description": "Description of CSV import/export functionality"
+  },
+  "importData": "Import Data",
+  "@importData": {
+    "description": "Import data section title"
+  },
+  "exportData": "Export Data",
+  "@exportData": {
+    "description": "Export data section title"
+  },
+  "templates": "CSV Templates",
+  "@templates": {
+    "description": "CSV templates section title"
+  },
+  "exportCombined": "Export Combined",
+  "@exportCombined": {
+    "description": "Export combined data option title"
+  },
+  "exportCombinedDescription": "Export providers with their fee intervals",
+  "@exportCombinedDescription": {
+    "description": "Description for exporting combined data"
+  },
+  "downloadProviderTemplate": "Provider Template",
+  "@downloadProviderTemplate": {
+    "description": "Download provider CSV template option"
+  },
+  "csvTemplateForProviders": "Download CSV template for importing providers",
+  "@csvTemplateForProviders": {
+    "description": "Description for provider template download"
+  },
+  "downloadFeeTemplate": "Fee Intervals Template",
+  "@downloadFeeTemplate": {
+    "description": "Download fee intervals CSV template option"
+  },
+  "csvTemplateForFees": "Download CSV template for importing fees",
+  "@csvTemplateForFees": {
+    "description": "Description for fee intervals template download"
+  },
+  "downloadCombinedTemplate": "Combined Template",
+  "@downloadCombinedTemplate": {
+    "description": "Download combined CSV template option"
+  },
+  "csvTemplateForCombined": "Download CSV template for combined import",
+  "@csvTemplateForCombined": {
+    "description": "Description for combined template download"
+  },
+  "importSuccessful": "Import Successful",
+  "@importSuccessful": {
+    "description": "Import success message title"
+  },
+  "importFailed": "Import Failed",
+  "@importFailed": {
+    "description": "Import failure message title"
+  },
+  "exportSuccessful": "Export Successful",
+  "@exportSuccessful": {
+    "description": "Export success message"
+  },
+  "exportFailed": "Export Failed",
+  "@exportFailed": {
+    "description": "Export failure message"
+  },
+  "templateDownloaded": "Template Downloaded",
+  "@templateDownloaded": {
+    "description": "Template download success message"
+  },
+  "failedToDownloadTemplate": "Failed to download template",
+  "@failedToDownloadTemplate": {
+    "description": "Template download failure message"
+  },
+  "failedToReadFile": "Failed to read file",
+  "@failedToReadFile": {
+    "description": "File reading failure message"
+  },
+  "providersImported": "{count} provider(s) imported",
+  "@providersImported": {
+    "description": "Message showing number of providers imported",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "feeIntervalsImported": "{count} fee interval(s) imported",
+  "@feeIntervalsImported": {
+    "description": "Message showing number of fee intervals imported",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "errorsEncountered": "{count} error(s) encountered",
+  "@errorsEncountered": {
+    "description": "Message showing number of errors encountered",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  "backup": "Backup",
+  "@backup": {
+    "description": "Backup option title"
+  },
+  "backupYourData": "Backup your providers and fees",
+  "@backupYourData": {
+    "description": "Description for backup functionality"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset option title"
+  },
+  "clearAllData": "Clear all data",
+  "@clearAllData": {
+    "description": "Description for reset functionality"
+  },
+  "confirmReset": "Confirm Reset",
+  "@confirmReset": {
+    "description": "Reset confirmation dialog title"
+  },
+  "resetWarningMessage": "This will permanently delete all your providers and fee intervals. This action cannot be undone.",
+  "@resetWarningMessage": {
+    "description": "Warning message for data reset"
+  },
+  "dataResetSuccessful": "Data reset successful",
+  "@dataResetSuccessful": {
+    "description": "Success message for data reset"
+  },
+  "resetFailed": "Reset failed",
+  "@resetFailed": {
+    "description": "Failure message for data reset"
+  },
+  "csvManagement": "CSV Management",
+  "@csvManagement": {
+    "description": "Title for CSV management screen"
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  "previewTemplate": "Preview Template",
+  "@previewTemplate": {
+    "description": "Preview template button text"
+  },
+  "preview": "Preview",
+  "@preview": {
+    "description": "Preview button text"
+  },
+  "download": "Download",
+  "@download": {
+    "description": "Download button text"
+  },
+  "templatePreview": "Template Preview",
+  "@templatePreview": {
+    "description": "Template preview dialog title"
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Close button text"
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  "importDataDescription": "Import providers and fee intervals from CSV file. The system will automatically detect the data type based on columns.",
+  "@importDataDescription": {
+    "description": "Description for import data action"
+  },
+  "exportDataDescription": "Export all providers and their fee intervals to a combined CSV file.",
+  "@exportDataDescription": {
+    "description": "Description for export data action"
   }
 }

@@ -62,35 +62,20 @@ class SettingsScreen extends StatelessWidget {
               ),
             ]),
             const SizedBox(height: 24),
-            // _buildSection(
-            //   context,
-            //   'Data',
-            //   [
-            //     _buildSettingTile(
-            //       context,
-            //       'Export data',
-            //       'Backup your providers and fees',
-            //       Icons.file_download_outlined,
-            //       onTap: () => _showComingSoon(context),
-            //     ),
-            //     _buildSettingTile(
-            //       context,
-            //       'Import data',
-            //       'Restore from backup',
-            //       Icons.file_upload_outlined,
-            //       onTap: () => _showComingSoon(context),
-            //     ),
-            //     _buildSettingTile(
-            //       context,
-            //       'Reset',
-            //       'Clear all data',
-            //       Icons.delete_outline,
-            //       onTap: () => _showResetConfirmation(context),
-            //       textColor: colorScheme.error,
-            //     ),
-            //   ],
-            // ),
-            // const SizedBox(height: 24),
+            _buildSection(
+              context,
+              AppLocalizations.of(context).dataManagement,
+              [
+                _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).csvManagement,
+                  AppLocalizations.of(context).importExportData,
+                  Icons.file_download_outlined,
+                  onTap: () => Navigator.of(context).pushNamed(NavigationUtil.csvManagementRoute),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
             _buildSection(context, AppLocalizations.of(context).about, [
               _buildSettingTile(
                 context,
