@@ -850,5 +850,37 @@
   "currencyUpdatedSuccessfully": "Currency updated successfully",
   "@currencyUpdatedSuccessfully": {
     "description": "Success message when currency is updated"
+  },
+  "addNewCurrencyDescription": "Add a new currency to your collection",
+  "@addNewCurrencyDescription": {
+    "description": "Description text for adding new currency"
+  },
+  "currencyCodeMustBe3Characters": "Currency code must be exactly 3 characters",
+  "@currencyCodeMustBe3Characters": {
+    "description": "Validation message for currency code length"
+  },
+  "currencyCodeMustContainOnlyUppercase": "Currency code must contain only uppercase letters",
+  "@currencyCodeMustContainOnlyUppercase": {
+    "description": "Validation message for currency code format"
+  },
+  "pleaseEnterValidPositiveRate": "Please enter a valid positive rate",
+  "@pleaseEnterValidPositiveRate": {
+    "description": "Validation message for exchange rate"
+  },
+  "failedToCreateCurrency": "Failed to create currency",
+  "@failedToCreateCurrency": {
+    "description": "Error message when currency creation fails"
+  },
+  "failedToUpdateCurrency": "Failed to update currency",
+  "@failedToUpdateCurrency": {
+    "description": "Error message when currency update fails"
+  },
+  "codeMustBe3Characters": "Code must be 3 characters",
+  "@codeMustBe3Characters": {
+    "description": "Short validation message for currency code length"
+  },
+  "invalidRate": "Invalid rate",
+  "@invalidRate": {
+    "description": "Validation message for invalid exchange rate"
   }
 }

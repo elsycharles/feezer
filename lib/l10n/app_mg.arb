@@ -663,5 +663,37 @@
   "currencyUpdatedSuccessfully": "Vola voaova soamantsara",
   "@currencyUpdatedSuccessfully": {
     "description": "Success message when currency is updated"
+  },
+  "addNewCurrencyDescription": "Ampiditra vola vaovao ao amin'ny fanangonanao",
+  "@addNewCurrencyDescription": {
+    "description": "Description text for adding new currency"
+  },
+  "currencyCodeMustBe3Characters": "Ny kaody vola tsy maintsy misy litera 3 ihany",
+  "@currencyCodeMustBe3Characters": {
+    "description": "Validation message for currency code length"
+  },
+  "currencyCodeMustContainOnlyUppercase": "Ny kaody vola tsy maintsy misy litera majuscule ihany",
+  "@currencyCodeMustContainOnlyUppercase": {
+    "description": "Validation message for currency code format"
+  },
+  "pleaseEnterValidPositiveRate": "Ampidiro isa tsara sy positive",
+  "@pleaseEnterValidPositiveRate": {
+    "description": "Validation message for exchange rate"
+  },
+  "failedToCreateCurrency": "Tsy nahavita namorona vola",
+  "@failedToCreateCurrency": {
+    "description": "Error message when currency creation fails"
+  },
+  "failedToUpdateCurrency": "Tsy nahavita nanova vola",
+  "@failedToUpdateCurrency": {
+    "description": "Error message when currency update fails"
+  },
+  "codeMustBe3Characters": "Kaody tsy maintsy 3 litera",
+  "@codeMustBe3Characters": {
+    "description": "Short validation message for currency code length"
+  },
+  "invalidRate": "Taux tsy mety",
+  "@invalidRate": {
+    "description": "Validation message for invalid exchange rate"
   }
 }

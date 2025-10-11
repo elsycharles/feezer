@@ -629,4 +629,32 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get currencyUpdatedSuccessfully => 'Devise mise à jour avec succès';
+
+  @override
+  String get addNewCurrencyDescription =>
+      'Ajoutez une nouvelle devise à votre collection';
+
+  @override
+  String get currencyCodeMustBe3Characters =>
+      'Le code de devise doit contenir exactement 3 caractères';
+
+  @override
+  String get currencyCodeMustContainOnlyUppercase =>
+      'Le code de devise ne doit contenir que des lettres majuscules';
+
+  @override
+  String get pleaseEnterValidPositiveRate =>
+      'Veuillez saisir un taux positif valide';
+
+  @override
+  String get failedToCreateCurrency => 'Échec de la création de la devise';
+
+  @override
+  String get failedToUpdateCurrency => 'Échec de la mise à jour de la devise';
+
+  @override
+  String get codeMustBe3Characters => 'Le code doit contenir 3 caractères';
+
+  @override
+  String get invalidRate => 'Taux invalide';
 }

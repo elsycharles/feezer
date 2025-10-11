@@ -617,4 +617,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get currencyUpdatedSuccessfully => 'Currency updated successfully';
+
+  @override
+  String get addNewCurrencyDescription =>
+      'Add a new currency to your collection';
+
+  @override
+  String get currencyCodeMustBe3Characters =>
+      'Currency code must be exactly 3 characters';
+
+  @override
+  String get currencyCodeMustContainOnlyUppercase =>
+      'Currency code must contain only uppercase letters';
+
+  @override
+  String get pleaseEnterValidPositiveRate =>
+      'Please enter a valid positive rate';
+
+  @override
+  String get failedToCreateCurrency => 'Failed to create currency';
+
+  @override
+  String get failedToUpdateCurrency => 'Failed to update currency';
+
+  @override
+  String get codeMustBe3Characters => 'Code must be 3 characters';
+
+  @override
+  String get invalidRate => 'Invalid rate';
 }

@@ -1203,6 +1203,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Currency updated successfully'**
   String get currencyUpdatedSuccessfully;
+
+  /// Description text for adding new currency
+  ///
+  /// In en, this message translates to:
+  /// **'Add a new currency to your collection'**
+  String get addNewCurrencyDescription;
+
+  /// Validation message for currency code length
+  ///
+  /// In en, this message translates to:
+  /// **'Currency code must be exactly 3 characters'**
+  String get currencyCodeMustBe3Characters;
+
+  /// Validation message for currency code format
+  ///
+  /// In en, this message translates to:
+  /// **'Currency code must contain only uppercase letters'**
+  String get currencyCodeMustContainOnlyUppercase;
+
+  /// Validation message for exchange rate
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid positive rate'**
+  String get pleaseEnterValidPositiveRate;
+
+  /// Error message when currency creation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create currency'**
+  String get failedToCreateCurrency;
+
+  /// Error message when currency update fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update currency'**
+  String get failedToUpdateCurrency;
+
+  /// Short validation message for currency code length
+  ///
+  /// In en, this message translates to:
+  /// **'Code must be 3 characters'**
+  String get codeMustBe3Characters;
+
+  /// Validation message for invalid exchange rate
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid rate'**
+  String get invalidRate;
 }
 
 class _AppLocalizationsDelegate

@@ -617,4 +617,31 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get currencyUpdatedSuccessfully => 'Vola voaova soamantsara';
+
+  @override
+  String get addNewCurrencyDescription =>
+      'Ampiditra vola vaovao ao amin\'ny fanangonanao';
+
+  @override
+  String get currencyCodeMustBe3Characters =>
+      'Ny kaody vola tsy maintsy misy litera 3 ihany';
+
+  @override
+  String get currencyCodeMustContainOnlyUppercase =>
+      'Ny kaody vola tsy maintsy misy litera majuscule ihany';
+
+  @override
+  String get pleaseEnterValidPositiveRate => 'Ampidiro isa tsara sy positive';
+
+  @override
+  String get failedToCreateCurrency => 'Tsy nahavita namorona vola';
+
+  @override
+  String get failedToUpdateCurrency => 'Tsy nahavita nanova vola';
+
+  @override
+  String get codeMustBe3Characters => 'Kaody tsy maintsy 3 litera';
+
+  @override
+  String get invalidRate => 'Taux tsy mety';
 }

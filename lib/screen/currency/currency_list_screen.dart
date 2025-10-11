@@ -79,15 +79,30 @@ class _State extends State<CurrencyListScreen> {
   }
 
   void _editCurrency(Currency currency) async {
-    final result = await showModalBottomSheet<bool>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => CurrencyEditBottomSheet(currency: currency),
+    await CurrencyEditBottomSheet.show(
+      context,
+      currency,
+      _updateCurrency,
     );
+  }
 
-    if (result == true && mounted) {
-      await _loadCurrencies();
+  void _updateCurrency(Currency updatedCurrency) async {
+    try {
+      final db = DatabaseUtil();
+      await db.update(
+        ConstantUtil.tableCurrencies,
+        updatedCurrency.toMap(),
+        where: '${ConstantUtil.columnId} = ?',
+        whereArgs: [updatedCurrency.id],
+      );
+
+      if (mounted) {
+        await _loadCurrencies();
+      }
+    } catch (e) {
+      if (mounted) {
+        AppToast.error(context, AppLocalizations.of(context).failedToUpdateCurrency);
+      }
     }
   }
 

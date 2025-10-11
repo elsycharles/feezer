@@ -82,7 +82,7 @@ class _State extends State<NewCurrencyScreen> {
                     ),
                     Global.gapMd,
                     Text(
-                      'Add a new currency to your collection',
+                      AppLocalizations.of(context).addNewCurrencyDescription,
                       style: ThemeUtil.bodyMedium.copyWith(
                         color: context.colorScheme.onSurfaceVariant,
                       ),
@@ -97,13 +97,13 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'This field is required';
+                          return AppLocalizations.of(context).thisFieldIsRequired;
                         }
                         if (value!.length != 3) {
-                          return 'Currency code must be exactly 3 characters';
+                          return AppLocalizations.of(context).currencyCodeMustBe3Characters;
                         }
                         if (!RegExp(r'^[A-Z]{3}$').hasMatch(value)) {
-                          return 'Currency code must contain only uppercase letters';
+                          return AppLocalizations.of(context).currencyCodeMustContainOnlyUppercase;
                         }
                         return null;
                       },
@@ -116,7 +116,7 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'This field is required';
+                          return AppLocalizations.of(context).thisFieldIsRequired;
                         }
                         return null;
                       },
@@ -129,7 +129,7 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'This field is required';
+                          return AppLocalizations.of(context).thisFieldIsRequired;
                         }
                         return null;
                       },
@@ -143,11 +143,11 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return 'This field is required';
+                          return AppLocalizations.of(context).thisFieldIsRequired;
                         }
                         final rate = double.tryParse(value!);
                         if (rate == null || rate <= 0) {
-                          return 'Please enter a valid positive rate';
+                          return AppLocalizations.of(context).pleaseEnterValidPositiveRate;
                         }
                         return null;
                       },
@@ -197,7 +197,7 @@ class _State extends State<NewCurrencyScreen> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, 'Failed to create currency');
+        AppToast.error(context, AppLocalizations.of(context).failedToCreateCurrency);
         setState(() => _isCreating = false);
       }
     }
