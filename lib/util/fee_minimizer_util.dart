@@ -72,7 +72,7 @@ class FeeOptimizerUtil {
     }
     
     // Pour les montants moyens à élevés
-    if (totalAmount > 1e8) {
+    if (totalAmount > 1e9) {
       return _highAmountStrategy(totalAmount, options, precision, maxOperations, minOperations);
     }
     
@@ -440,7 +440,6 @@ class FeeOptimizerUtil {
     double budget = totalAmount;
     int totalOps = 0;
     
-    // Remplir avec les meilleures options
     for (final opt in options) {
       if (budget <= 0) break;
       if (maxOperations > 0 && totalOps >= maxOperations) break;
@@ -451,14 +450,13 @@ class FeeOptimizerUtil {
           : (budget / cost).floor();
       
       if (maxCount > 0) {
-        final count = min(maxCount, 1000); // Limiter pour éviter les overflow
+        final count = min(maxCount, _maxSafeOperations - totalOps);
         counts['${opt.max}-${opt.fee}'] = count;
         budget -= cost * count;
         totalOps += count;
       }
     }
     
-    // S'assurer qu'on respecte minOperations
     while (totalOps < minOperations && budget > 0) {
       final best = _findBestOperationFast(budget, options, precision);
       if (best == null) break;
