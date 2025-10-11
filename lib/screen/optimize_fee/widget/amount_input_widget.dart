@@ -54,18 +54,28 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onFocusChanged() {
     if (!_focusNode.hasFocus) {
-      // When focus is lost, reset typing flag
+      // Quand le focus est perdu, formater proprement la valeur
       _isUserTyping = false;
+      _controller.text = _formatValue(widget.value);
     }
   }
 
   @override
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
-    // Only update controller text if the value changed externally (not from user typing)
-    if (old.value != widget.value && !_isUserTyping) {
-      _controller.text = widget.value.toString();
+    // Ne pas mettre à jour si l'utilisateur a le focus OU est en train de taper
+    if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
+      _controller.text = _formatValue(widget.value);
     }
+  }
+
+  // Nouvelle méthode pour formater la valeur
+  String _formatValue(double value) {
+    // Si c'est un nombre entier, on n'affiche pas le .0
+    if (value == value.toInt()) {
+      return value.toInt().toString();
+    }
+    return value.toString();
   }
 
   @override
@@ -227,11 +237,6 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);
     }
-    // Reset the flag after a short delay to allow external updates again
-    Future.delayed(const Duration(milliseconds: 100), () {
-      if (mounted) {
-        _isUserTyping = false;
-      }
-    });
+    // Pas besoin de remettre à false ici, on laisse le onFocusChanged s'en charger
   }
 }
