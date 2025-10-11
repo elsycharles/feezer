@@ -9,6 +9,7 @@ class CurrencyTile extends StatelessWidget {
     super.key,
     required this.currency,
     required this.isSelected,
+    required this.showSelection,
     required this.onSelectionChanged,
     required this.onLongPress,
     this.onTap,
@@ -16,6 +17,7 @@ class CurrencyTile extends StatelessWidget {
 
   final Currency currency;
   final bool isSelected;
+  final bool showSelection;
   final ValueChanged<bool> onSelectionChanged;
   final VoidCallback onLongPress;
   final VoidCallback? onTap;
@@ -25,7 +27,7 @@ class CurrencyTile extends StatelessWidget {
     margin: const EdgeInsets.only(bottom: 8),
     child: CurrencyCard(
       currency: currency,
-      showCheckbox: isSelected,
+      showCheckbox: showSelection,
       isSelected: isSelected,
       onSelectionChanged: onSelectionChanged,
       onTap: () {

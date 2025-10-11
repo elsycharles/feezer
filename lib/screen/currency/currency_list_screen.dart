@@ -144,12 +144,19 @@ class _State extends State<CurrencyListScreen> {
     }
   }
 
-  void _toggleSelection(String id) {
+  void _startSelection(String id) {
     setState(() {
-      if (_selectedIds.contains(id)) {
-        _selectedIds.remove(id);
-      } else {
+      _selectedIds.clear();
+      _selectedIds.add(id);
+    });
+  }
+
+  void _toggleSelection(String id, [bool? selected]) {
+    setState(() {
+      if (selected ?? !_selectedIds.contains(id)) {
         _selectedIds.add(id);
+      } else {
+        _selectedIds.remove(id);
       }
     });
   }
@@ -181,48 +188,42 @@ class _State extends State<CurrencyListScreen> {
           : null,
       body: _isLoading
           ? const AppLoading()
-          : CustomScrollView(
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  sliver: SliverToBoxAdapter(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Global.gapMd,
-                        SearchField(
-                          controller: _searchController,
-                          hintText: AppLocalizations.of(context).searchCurrencies,
-                        ),
-                        Global.gapMd,
-                        CurrencyHeader(
-                          totalCount: _currencies.length,
-                          filteredCount: _filtered.length,
-                          selectedCount: _selectedIds.length,
-                        ),
-                        if (_selectedIds.isNotEmpty) ...[
-                          Global.gapMd,
-                          SelectionActionBar(
-                            selectedCount: _selectedIds.length,
-                            totalCount: _filtered.length,
-                            onSelectAll: _selectAll,
-                            onClearSelection: _clearSelection,
-                            onDelete: _deleteCurrencies,
-                            onEdit: _selectedIds.length == 1 ? () => _editCurrency(_filtered.firstWhere((c) => c.id == _selectedIds.first)) : null,
-                            margin: EdgeInsets.zero,
-                          ),
-                        ],
-                        Global.gapMd,
-                      ],
+          : SafeArea(
+              child: Column(
+                children: [
+                  Global.gapMd,
+                  CurrencyHeader(
+                    totalCount: _currencies.length,
+                    filteredCount: _filtered.length,
+                    selectedCount: _selectedIds.length,
+                  ),
+                  Global.gapLg,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SearchField(
+                      controller: _searchController,
+                      hintText: AppLocalizations.of(context).searchCurrencies,
                     ),
                   ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  sliver: _filtered.isEmpty
-                      ? SliverFillRemaining(
-                          hasScrollBody: false,
-                          child: Center(
+                  if (_selectedIds.isNotEmpty) ...[
+                    Global.gapMd,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: SelectionActionBar(
+                        selectedCount: _selectedIds.length,
+                        totalCount: _filtered.length,
+                        onSelectAll: _selectAll,
+                        onClearSelection: _clearSelection,
+                        onDelete: _deleteCurrencies,
+                        onEdit: _selectedIds.length == 1 ? () => _editCurrency(_filtered.firstWhere((c) => c.id == _selectedIds.first)) : null,
+                        margin: EdgeInsets.zero,
+                      ),
+                    ),
+                  ],
+                  Global.gapMd,
+                  Expanded(
+                    child: _filtered.isEmpty
+                        ? Center(
                             child: SearchEmptyState(
                               icon: Icons.currency_exchange,
                               title: _searchController.text.isEmpty
@@ -232,29 +233,31 @@ class _State extends State<CurrencyListScreen> {
                                   ? AppLocalizations.of(context).centralizeCurrencies
                                   : null,
                             ),
-                          ),
-                        )
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
+                          )
+                        : ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            itemCount: _filtered.length,
+                            itemBuilder: (context, index) {
                               final currency = _filtered[index];
                               return CurrencyTile(
                                 currency: currency,
                                 isSelected: _selectedIds.contains(currency.id),
-                                onTap: () => _editCurrency(currency),
-                                onLongPress: () => _toggleSelection(currency.id),
-                                onSelectionChanged: (selected) {
-                                  if (selected) {
-                                    _toggleSelection(currency.id);
-                                  }
-                                },
+                                showSelection: _selectedIds.isNotEmpty,
+                                onSelectionChanged: (selected) =>
+                                    _toggleSelection(currency.id, selected),
+                                onLongPress: () => _startSelection(currency.id),
+                                onTap: _selectedIds.isNotEmpty
+                                    ? () => _toggleSelection(
+                                        currency.id,
+                                        !_selectedIds.contains(currency.id),
+                                      )
+                                    : () => _editCurrency(currency),
                               );
                             },
-                            childCount: _filtered.length,
                           ),
-                        ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
     );
   }

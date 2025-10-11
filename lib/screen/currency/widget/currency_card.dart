@@ -53,6 +53,20 @@ class CurrencyCard extends StatelessWidget {
         ),
         child: Row(
           children: [
+            if (showCheckbox) ...[
+              Transform.scale(
+                scale: 0.8,
+                child: Checkbox(
+                  value: isSelected,
+                  onChanged: onSelectionChanged != null
+                      ? (value) => onSelectionChanged!(value ?? false)
+                      : null,
+                  visualDensity: VisualDensity.compact,
+                  activeColor: colorScheme.primary,
+                ),
+              ),
+              const SizedBox(width: 8),
+            ],
             // Currency icon
             Container(
               width: 48,
@@ -115,16 +129,8 @@ class CurrencyCard extends StatelessWidget {
               ),
             ),
 
-            // Checkbox or trailing widget
-            if (showCheckbox) ...[
-              Checkbox(
-                value: isSelected,
-                onChanged: (value) => onSelectionChanged?.call(value ?? false),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-            ] else if (trailing != null) ...[
+            // Trailing widget (if no checkbox)
+            if (!showCheckbox && trailing != null) ...[
               trailing!,
             ],
           ],
