@@ -83,8 +83,8 @@ class _State extends State<OptimizeFeeScreen> {
         backgroundColor: context.theme.scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).optimizeFee,
-          leading: null, // Home screen - no back button needed
-          automaticallyImplyLeading: false, // Explicitly disable automatic back button
+          leading: null, // Will be handled by automaticallyImplyLeading
+          automaticallyImplyLeading: ModalRoute.of(context)?.canPop ?? false, // Show back button only when can pop
           menuExcludeRoutes: [NavigationUtil.homeRoute],
           menuIconColor: context.colorScheme.onSurface,
         ),
