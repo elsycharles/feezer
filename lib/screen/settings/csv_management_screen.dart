@@ -36,8 +36,6 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       appBar: custom.AppBar(
         title: AppLocalizations.of(context).importExportData,
         menuExcludeRoutes: [NavigationUtil.csvManagementRoute],
-        borderRadius: 16,
-        elevation: 2,
       ),
       body: SafeArea(
         child: Stack(
@@ -95,17 +93,10 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     return SurfaceCard(
       child: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              Icons.info_outline,
-              color: colorScheme.onPrimaryContainer,
-              size: 24,
-            ),
+          Icon(
+            Icons.info_outline,
+            color: colorScheme.primary,
+            size: 24,
           ),
           Global.gapMd,
           Expanded(
