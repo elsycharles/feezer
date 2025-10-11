@@ -848,6 +848,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Export all providers and their fee intervals to a combined CSV file.';
 
   @override
+  String get csvContentCannotBeEmpty => 'CSV content cannot be empty';
+
+  @override
+  String get clickImportToSelectFile =>
+      'Click on \"Import\" to select a CSV file';
+
+  @override
   String get copy => 'Copy';
 
   @override

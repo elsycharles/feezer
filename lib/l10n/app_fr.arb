@@ -992,5 +992,13 @@
   "copiedToClipboard": "Copié dans le presse-papiers",
   "@copiedToClipboard": {
     "description": "Message affiché lorsque le contenu est copié dans le presse-papiers"
+  },
+  "csvContentCannotBeEmpty": "Le contenu CSV ne peut pas être vide",
+  "@csvContentCannotBeEmpty": {
+    "description": "Message d'erreur lorsque le texte CSV saisi est vide"
+  },
+  "clickImportToSelectFile": "Cliquez sur \"Importer\" pour sélectionner un fichier CSV",
+  "@clickImportToSelectFile": {
+    "description": "Texte d'instruction pour l'option d'importation de fichier"
   }
 }

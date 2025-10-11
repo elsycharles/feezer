@@ -1166,8 +1166,16 @@
     "description": "Description for import data action"
   },
   "exportDataDescription": "Export all providers and their fee intervals to a combined CSV file.",
-  "@exportDataDescription": {
+    "@exportDataDescription": {
     "description": "Description for export data action"
+  },
+  "csvContentCannotBeEmpty": "CSV content cannot be empty",
+  "@csvContentCannotBeEmpty": {
+    "description": "Error message when CSV text input is empty"
+  },
+  "clickImportToSelectFile": "Click on \"Import\" to select a CSV file",
+  "@clickImportToSelectFile": {
+    "description": "Instruction text for file import option"
   },
   "copy": "Copy",
   "@copy": {

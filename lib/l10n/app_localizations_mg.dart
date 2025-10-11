@@ -848,6 +848,14 @@ class AppLocalizationsMg extends AppLocalizations {
       'Avoao daholo ny mpanome sy ny intervalle sarany amin\'ny rakitra CSV mifangaro.';
 
   @override
+  String get csvContentCannotBeEmpty =>
+      'Tsy azo atao ho foana ny votoatin\'ny CSV';
+
+  @override
+  String get clickImportToSelectFile =>
+      'Tsindrio \"Ampidiro\" raha hanapaka rakitra CSV';
+
+  @override
   String get copy => 'Adikao';
 
   @override

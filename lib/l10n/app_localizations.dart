@@ -1600,6 +1600,18 @@ abstract class AppLocalizations {
   /// **'Export all providers and their fee intervals to a combined CSV file.'**
   String get exportDataDescription;
 
+  /// Error message when CSV text input is empty
+  ///
+  /// In en, this message translates to:
+  /// **'CSV content cannot be empty'**
+  String get csvContentCannotBeEmpty;
+
+  /// Instruction text for file import option
+  ///
+  /// In en, this message translates to:
+  /// **'Click on \"Import\" to select a CSV file'**
+  String get clickImportToSelectFile;
+
   /// Button text for copying content
   ///
   /// In en, this message translates to:

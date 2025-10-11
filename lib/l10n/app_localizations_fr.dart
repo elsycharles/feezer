@@ -862,6 +862,13 @@ class AppLocalizationsFr extends AppLocalizations {
       'Exporter tous les fournisseurs et leurs intervalles de frais vers un fichier CSV combiné.';
 
   @override
+  String get csvContentCannotBeEmpty => 'Le contenu CSV ne peut pas être vide';
+
+  @override
+  String get clickImportToSelectFile =>
+      'Cliquez sur \"Importer\" pour sélectionner un fichier CSV';
+
+  @override
   String get copy => 'Copier';
 
   @override

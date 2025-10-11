@@ -57,7 +57,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
                         AppLocalizations.of(context).importData,
                         AppLocalizations.of(context).importDataDescription,
                         Icons.file_upload_outlined,
-                        _importCsv,
+                        _showImportDialog,
                       ),
                       _buildActionTile(
                         context,
@@ -344,6 +344,157 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       // Import data (auto-detect type)
       final importResult = await CsvUtil.importFromCsv(csvContent);
+
+      setState(() => _isProcessing = false);
+
+      if (!mounted) return;
+
+      // Show result
+      if (importResult.success) {
+        _showImportResultDialog(importResult);
+      } else {
+        AppToast.error(context, importResult.message ?? AppLocalizations.of(context).importFailed);
+      }
+    } catch (e) {
+      setState(() => _isProcessing = false);
+      if (mounted) {
+        AppToast.error(context, '${AppLocalizations.of(context).importFailed}: ${e.toString()}');
+      }
+    }
+  }
+
+  Future<void> _showImportDialog() async {
+    final colorScheme = Theme.of(context).colorScheme;
+    String csvText = '';
+    bool useTextInput = false;
+
+    await showDialog(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          backgroundColor: colorScheme.surface,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: Text(
+            AppLocalizations.of(context).importData,
+            style: TextStyle(color: colorScheme.onSurface),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Toggle between file import and text input
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => setState(() => useTextInput = false),
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: !useTextInput
+                            ? colorScheme.primaryContainer
+                            : Colors.transparent,
+                        side: BorderSide(
+                          color: !useTextInput
+                              ? colorScheme.primary
+                              : colorScheme.outline,
+                        ),
+                      ),
+                      child: Text(
+                        'Fichier',
+                        style: TextStyle(
+                          color: !useTextInput
+                              ? colorScheme.onPrimaryContainer
+                              : colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () => setState(() => useTextInput = true),
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: useTextInput
+                            ? colorScheme.primaryContainer
+                            : Colors.transparent,
+                        side: BorderSide(
+                          color: useTextInput
+                              ? colorScheme.primary
+                              : colorScheme.outline,
+                        ),
+                      ),
+                      child: Text(
+                        'Texte',
+                        style: TextStyle(
+                          color: useTextInput
+                              ? colorScheme.onPrimaryContainer
+                              : colorScheme.onSurface,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              if (useTextInput)
+                TextField(
+                  maxLines: 8,
+                  decoration: InputDecoration(
+                    hintText: 'Collez votre contenu CSV ici...',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    filled: true,
+                    fillColor: colorScheme.surfaceContainerHighest,
+                  ),
+                  onChanged: (value) => csvText = value,
+                )
+              else
+                Text(
+                  AppLocalizations.of(context).clickImportToSelectFile,
+                  style: TextStyle(color: colorScheme.onSurfaceVariant),
+                  textAlign: TextAlign.center,
+                ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(
+                'Annuler',
+                style: TextStyle(color: colorScheme.onSurfaceVariant),
+              ),
+            ),
+            FilledButton(
+              onPressed: () async {
+                Navigator.of(dialogContext).pop();
+                if (useTextInput) {
+                  await _importFromText(csvText);
+                } else {
+                  await _importCsv();
+                }
+              },
+              child: Text('Importer'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _importFromText(String csvText) async {
+    if (csvText.trim().isEmpty) {
+      if (mounted) {
+        AppToast.error(context, AppLocalizations.of(context).csvContentCannotBeEmpty);
+      }
+      return;
+    }
+
+    try {
+      setState(() => _isProcessing = true);
+
+      // Import data from text
+      final importResult = await CsvUtil.importFromCsv(csvText);
 
       setState(() => _isProcessing = false);
 

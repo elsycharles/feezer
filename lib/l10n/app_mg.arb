@@ -1057,5 +1057,13 @@
   "copiedToClipboard": "Voarakitra ao amin'ny fanindriana",
   "@copiedToClipboard": {
     "description": "Message affiché lorsque le contenu est copié dans le presse-papiers"
+  },
+  "csvContentCannotBeEmpty": "Tsy azo atao ho foana ny votoatin'ny CSV",
+  "@csvContentCannotBeEmpty": {
+    "description": "Message d'erreur lorsque le texte CSV saisi est vide"
+  },
+  "clickImportToSelectFile": "Tsindrio \"Ampidiro\" raha hanapaka rakitra CSV",
+  "@clickImportToSelectFile": {
+    "description": "Texte d'instruction pour l'option d'importation de fichier"
   }
 }
