@@ -81,8 +81,8 @@ class AppToast extends StatefulWidget {
 
     overlay.insert(overlayEntry);
 
-    // Auto dismiss after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
+    // Auto dismiss after 5 seconds
+    Future.delayed(const Duration(seconds: 5), () {
       if (overlayEntry.mounted) {
         overlayEntry.remove();
       }
