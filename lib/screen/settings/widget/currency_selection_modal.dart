@@ -108,11 +108,11 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
                 builder: (context, currencyProvider, child) {
                   return Column(
                     children: [
-                      // System default option (no currency selected)
+                      // System default option (Ariary)
                       _buildCurrencyOption(
                         context,
-                        l10n.systemDefault,
-                        currencyProvider.selectedCurrency == null,
+                        'Ariary (Ar)', // Always show Ariary as the system default
+                        currencyProvider.selectedCurrency == null || currencyProvider.selectedCurrency?.code == 'MGA',
                         () {
                           final currencyProvider = context.read<CurrencyProvider>();
                           currencyProvider.clearSelectedCurrency();
@@ -120,8 +120,8 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
                         icon: Icons.settings_brightness,
                       ),
 
-                      // Currency options
-                      ..._currencies.map((currency) => _buildCurrencyOption(
+                      // Currency options (excluding Ariary since it's the system default)
+                      ..._currencies.where((currency) => currency.code != 'MGA').map((currency) => _buildCurrencyOption(
                         context,
                         currency.displayName,
                         currencyProvider.selectedCurrency?.id == currency.id,

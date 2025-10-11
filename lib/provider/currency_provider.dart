@@ -122,14 +122,42 @@ class CurrencyProvider extends ChangeNotifier {
     }
   }
 
-  /// Load the first available currency as default
+  /// Load Ariary currency specifically
+  Future<void> _loadAriaryCurrency() async {
+    try {
+      final db = DatabaseUtil();
+      final currencyMaps = await db.query(
+        ConstantUtil.tableCurrencies,
+        where: '${ConstantUtil.columnCode} = ?',
+        whereArgs: ['MGA'],
+      );
+
+      if (currencyMaps.isNotEmpty) {
+        _selectedCurrency = Currency.fromMap(currencyMaps.first);
+      } else {
+        // If Ariary doesn't exist, fall back to default loading
+        await _loadDefaultCurrency();
+      }
+    } catch (e) {
+      // If loading fails, fall back to default loading
+      await _loadDefaultCurrency();
+    }
+  }
+
+  /// Load the first available currency as default, preferring Ariary (MGA)
   Future<void> _loadDefaultCurrency() async {
     try {
       final db = DatabaseUtil();
       final currencyMaps = await db.query(ConstantUtil.tableCurrencies);
 
       if (currencyMaps.isNotEmpty) {
-        _selectedCurrency = Currency.fromMap(currencyMaps.first);
+        // First try to find Ariary (MGA) as the default currency
+        final ariaryMap = currencyMaps.firstWhere(
+          (map) => map[ConstantUtil.columnCode] == 'MGA',
+          orElse: () => currencyMaps.first,
+        );
+
+        _selectedCurrency = Currency.fromMap(ariaryMap);
         // Save this as the selected currency
         await _saveSelectedCurrencyId(_selectedCurrency!.id);
       }
@@ -154,12 +182,12 @@ class CurrencyProvider extends ChangeNotifier {
     await prefs.setString(_selectedCurrencyIdKey, currencyId);
   }
 
-  /// Clear selected currency (reset to default)
+  /// Clear selected currency (reset to Ariary as system default)
   Future<void> clearSelectedCurrency() async {
-    _selectedCurrency = null;
+    // Always reset to Ariary (MGA) as the system default
+    await _loadAriaryCurrency();
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_selectedCurrencyIdKey);
-    await _loadDefaultCurrency();
     notifyListeners();
   }
 
