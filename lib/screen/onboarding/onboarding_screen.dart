@@ -37,11 +37,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _checkFirstLaunch() async {
     final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
     if (!isFirstLaunch && mounted) {
-      NavigationUtil.safeAsyncNavigate(
-        context: context,
-        isMounted: () => mounted,
-        getRoute: () async => NavigationUtil.homeRoute,
-      );
+      // Not first launch, go directly to home (replace onboarding)
+      NavigationUtil.goTo(context, NavigationUtil.homeRoute);
     } else if (mounted) {
       setState(() => _shouldShowOnboarding = true);
     }
@@ -68,15 +65,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _goToHome() async {
-    await NavigationUtil.safeAsyncNavigate(
-      context: context,
-      isMounted: () => mounted,
-      getRoute: () async {
-        // Mark that onboarding is completed
-        await PreferenceUtil.setFirstLaunchCompleted();
-        return NavigationUtil.homeRoute;
-      },
-    );
+    // Mark that onboarding is completed
+    await PreferenceUtil.setFirstLaunchCompleted();
+    // Replace onboarding with home screen (no back navigation)
+    if (mounted) {
+      NavigationUtil.goTo(context, NavigationUtil.homeRoute);
+    }
   }
 
   @override
