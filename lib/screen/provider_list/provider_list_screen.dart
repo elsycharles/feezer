@@ -72,10 +72,9 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _addProvider() async {
-    final result = await NavigationUtil.pushTo<Provider>(context, NavigationUtil.newProviderRoute);
-    if (result != null) {
-      await _loadProviders();
-    }
+    await NavigationUtil.pushTo(context, NavigationUtil.newProviderRoute);
+    // Always reload providers after returning from new provider screen
+    await _loadProviders();
   }
 
   Widget _buildProviderSliver() => SliverPadding(

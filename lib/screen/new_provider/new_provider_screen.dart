@@ -154,28 +154,39 @@ class _State extends State<NewProviderScreen> {
   void _create() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isCreating = true);
-      final now = DateTime.now();
-      final provider = Provider(
-        id: now.microsecondsSinceEpoch.toString(),
-        name: _nameController.text.trim(),
-        description: _descriptionController.text.trim(),
-        iconName: _selectedIcon,
-        creationDatetime: now,
-      );
-      final db = DatabaseUtil();
-      await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
-      widget.onProviderAdded?.call(provider);
-      if (mounted) {
-        AppToast.success(
-          context,
-          AppLocalizations.of(context).providerCreatedSuccessfully,
+      try {
+        final now = DateTime.now();
+        final provider = Provider(
+          id: now.microsecondsSinceEpoch.toString(),
+          name: _nameController.text.trim(),
+          description: _descriptionController.text.trim(),
+          iconName: _selectedIcon,
+          creationDatetime: now,
         );
-        // Navigate directly to provider detail instead of popping
-        await NavigationUtil.pushTo(
-          context,
-          NavigationUtil.providerDetailRoute,
-          extra: provider,
-        );
+        final db = DatabaseUtil();
+        await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
+        widget.onProviderAdded?.call(provider);
+        if (mounted) {
+          AppToast.success(
+            context,
+            AppLocalizations.of(context).providerCreatedSuccessfully,
+          );
+          // Stop loading before navigation
+          setState(() => _isCreating = false);
+          // Navigate directly to provider detail instead of popping
+          await NavigationUtil.pushTo(
+            context,
+            NavigationUtil.providerDetailRoute,
+            extra: provider,
+          );
+          // Don't pop - let the navigation stack handle the return
+        }
+      } catch (e) {
+        // Stop loading on error
+        if (mounted) {
+          setState(() => _isCreating = false);
+          AppToast.error(context, 'Failed to create provider: $e');
+        }
       }
     }
   }

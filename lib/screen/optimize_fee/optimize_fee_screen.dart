@@ -254,16 +254,9 @@ class _State extends State<OptimizeFeeScreen> {
             onChanged: (provider) async {
               if (provider == null) {
                 // Navigate to NewProviderScreen when "Add new provider" is selected
-                final result = await NavigationUtil.pushTo<Provider>(context, NavigationUtil.newProviderRoute);
-                // If a new provider was created (returned as result), add it to the list
-                if (result != null) {
-                  setState(() {
-                    _providers.add(result);
-                    _selectedProvider = result;
-                    _hasOptimized = false;
-                    _result = null;
-                  });
-                }
+                await NavigationUtil.pushTo(context, NavigationUtil.newProviderRoute);
+                // Reload providers list after returning from new provider screen
+                await _loadProviders();
               } else {
                 setState(() {
                   _selectedProvider = provider;
