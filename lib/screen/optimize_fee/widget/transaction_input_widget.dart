@@ -9,7 +9,7 @@ class TransactionInputWidget extends StatefulWidget {
     required this.label,
     required this.value,
     required this.onChanged,
-    this.min = 1,
+    this.min = 0,
     this.max = 999999,
   });
 
@@ -25,26 +25,40 @@ class TransactionInputWidget extends StatefulWidget {
 class _TransactionInputWidgetState extends State<TransactionInputWidget> {
   late final TextEditingController _controller;
   late FocusNode _focusNode;
+  bool _isUserTyping = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: widget.value.toString());
+    _controller = TextEditingController(
+      text: widget.value == 0 ? '' : widget.value.toString()
+    );
     _focusNode = FocusNode();
+    _focusNode.addListener(_onFocusChanged);
   }
 
   @override
   void dispose() {
+    _focusNode.removeListener(_onFocusChanged);
     _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 
+  void _onFocusChanged() {
+    if (!_focusNode.hasFocus) {
+      _isUserTyping = false;
+      setState(() {
+        _controller.text = widget.value == 0 ? '' : widget.value.toString();
+      });
+    }
+  }
+
   @override
   void didUpdateWidget(TransactionInputWidget old) {
     super.didUpdateWidget(old);
-    if (old.value != widget.value) {
-      _controller.text = widget.value.toString();
+    if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
+      _controller.text = widget.value == 0 ? '' : widget.value.toString();
     }
   }
 
@@ -91,24 +105,33 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
             ) ?? ThemeUtil.titleMedium.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               border: InputBorder.none,
               isDense: false,
-              contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              hintText: '0',
+              hintStyle: TextStyle(
+                color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              ),
             ),
-            onChanged: (value) {
-              final intValue = int.tryParse(value);
-              if (intValue != null &&
-                  intValue >= widget.min &&
-                  intValue <= widget.max) {
-                widget.onChanged(intValue);
-              } else if (value.isEmpty) {
-                widget.onChanged(widget.min);
-              }
-            },
+            onChanged: _onTextChanged,
           ),
         ],
       ),
     );
+  }
+
+  void _onTextChanged(String value) {
+    _isUserTyping = true;
+    
+    if (value.isEmpty) {
+      widget.onChanged(0);
+      return;
+    }
+    
+    final intValue = int.tryParse(value);
+    if (intValue != null && intValue >= widget.min && intValue <= widget.max) {
+      widget.onChanged(intValue);
+    }
   }
 }

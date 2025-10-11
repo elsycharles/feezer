@@ -362,7 +362,7 @@ class _State extends State<OptimizeFeeScreen> {
               value: _minTransactions,
               onChanged: (value) => setState(() => _minTransactions = value),
               label: AppLocalizations.of(context).minTransactions,
-              min: 1,
+              min: 0,
               max: 999,
             ),
           ),
@@ -372,7 +372,7 @@ class _State extends State<OptimizeFeeScreen> {
               value: _maxTransactions,
               onChanged: (value) => setState(() => _maxTransactions = value),
               label: AppLocalizations.of(context).maxTransactions,
-              min: 1,
+              min: 0,
               max: 999,
             ),
           ),
@@ -724,11 +724,26 @@ class _State extends State<OptimizeFeeScreen> {
   );
 
   void _generateResults() async {
-    if (_selectedProvider == null || _amount <= 0 || _minTransactions > _maxTransactions) {
+    if (_selectedProvider == null || _amount <= 0) {
       setState(() {
         _result = null;
         _hasOptimized = true;
       });
+      return;
+    }
+
+    if (_minTransactions > 0 && _maxTransactions > 0 && _minTransactions > _maxTransactions) {
+      setState(() {
+        _result = null;
+        _hasOptimized = true;
+      });
+      if (mounted) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            AppToast.error(context, AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax);
+          }
+        });
+      }
       return;
     }
 
