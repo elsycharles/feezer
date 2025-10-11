@@ -102,7 +102,7 @@ class FeeIntervalTile extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       Text(
-        feeInterval.formattedRangeWithSymbol(currencyProvider.currencySymbol),
+        feeInterval.formattedRangeWithSymbol(currencyProvider.currencySymbol, currencyProvider.exchangeRate),
         style: ThemeUtil.titleSmall.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.onSurface,
@@ -119,7 +119,7 @@ class FeeIntervalTile extends StatelessWidget {
   );
 
   Widget _buildFeeChip(ColorScheme colorScheme, CurrencyProvider currencyProvider) => Text(
-    feeInterval.formattedFeeWithSymbol(currencyProvider.currencySymbol),
+    feeInterval.formattedFeeWithSymbol(currencyProvider.currencySymbol, currencyProvider.exchangeRate),
     style: ThemeUtil.bodyMedium.copyWith(
       color: ThemeUtil.success,
       fontWeight: FontWeight.w600,

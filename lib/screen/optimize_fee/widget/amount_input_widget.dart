@@ -5,21 +5,22 @@ import 'package:provider/provider.dart';
 import '../../../util/theme_util.dart';
 import '../../../styles/global.dart';
 import '../../../provider/currency_provider.dart';
+import '../../../util/constant_util.dart';
 
 class AmountInputWidget extends StatefulWidget {
   const AmountInputWidget({
     super.key,
     required this.value,
     required this.onChanged,
-    this.min = 0,
-    this.max = 999999,
-    this.step = 1,
+    this.min = 0.0,
+    this.max = 999999.0,
+    this.step = 1.0,
     this.label = 'Amount',
   });
 
-  final int value;
-  final ValueChanged<int> onChanged;
-  final int min, max, step;
+  final double value;
+  final ValueChanged<double> onChanged;
+  final double min, max, step;
   final String label;
 
   @override
@@ -30,26 +31,41 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   late final TextEditingController _controller;
   late FocusNode _focusNode;
   Timer? _repeatTimer;
+  bool _isUserTyping = false;
 
   @override
   void initState() {
     super.initState();
+    // Initialize with raw value, no formatting
     _controller = TextEditingController(text: widget.value.toString());
     _focusNode = FocusNode();
+    // Add focus listeners to manage typing state
+    _focusNode.addListener(_onFocusChanged);
   }
 
   @override
   void dispose() {
     _repeatTimer?.cancel();
+    _focusNode.removeListener(_onFocusChanged);
     _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 
+  void _onFocusChanged() {
+    if (!_focusNode.hasFocus) {
+      // When focus is lost, reset typing flag
+      _isUserTyping = false;
+    }
+  }
+
   @override
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
-    if (old.value != widget.value) _controller.text = widget.value.toString();
+    // Only update controller text if the value changed externally (not from user typing)
+    if (old.value != widget.value && !_isUserTyping) {
+      _controller.text = widget.value.toString();
+    }
   }
 
   @override
@@ -200,15 +216,22 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
     );
   }
 
-  int _clamp(int v) => v.clamp(widget.min, widget.max);
+  double _clamp(double v) => v.clamp(widget.min, widget.max);
   void _increment() => widget.onChanged(_clamp(widget.value + widget.step));
   void _decrement() => widget.onChanged(_clamp(widget.value - widget.step));
   void _onTextChanged(String value) {
-    final intValue = int.tryParse(value);
-    if (intValue != null && intValue >= widget.min && intValue <= widget.max) {
-      widget.onChanged(intValue);
+    _isUserTyping = true;
+    final doubleValue = ConstantUtil.parseLocalizedNumber(value);
+    if (doubleValue != null && doubleValue >= widget.min && doubleValue <= widget.max) {
+      widget.onChanged(doubleValue);
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);
     }
+    // Reset the flag after a short delay to allow external updates again
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (mounted) {
+        _isUserTyping = false;
+      }
+    });
   }
 }

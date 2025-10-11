@@ -8,6 +8,7 @@ import '../../styles/global.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
 import '../../util/validation_util.dart';
+import '../../util/constant_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
@@ -177,7 +178,10 @@ class _State extends State<NewFeeIntervalScreen> {
     if (basicValidation != null) return basicValidation;
 
     // Then check it's greater than min amount
-    final amount = double.parse(value!);
+    final amount = ConstantUtil.parseLocalizedNumber(value!);
+    if (amount == null) {
+      return 'Montant invalide';
+    }
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
     if (amount <= minAmount) {
       return AppLocalizations.of(context).maxAmountMustBeGreater;
@@ -196,9 +200,9 @@ class _State extends State<NewFeeIntervalScreen> {
         final now = DateTime.now();
         final feeInterval = FeeInterval(
           id: now.millisecondsSinceEpoch.toString(),
-          minAmount: double.parse(_minAmountController.text.trim()),
-          maxAmount: double.parse(_maxAmountController.text.trim()),
-          fee: double.parse(_feeController.text.trim()),
+          minAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_minAmountController.text.trim()) ?? 0),
+          maxAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_maxAmountController.text.trim()) ?? 0),
+          fee: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
           creationDateTime: now,
         );
         widget.onFeeIntervalAdded?.call(feeInterval);
