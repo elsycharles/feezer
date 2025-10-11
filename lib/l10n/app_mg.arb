@@ -1049,5 +1049,13 @@
   "exportDataDescription": "Avoao daholo ny mpanome sy ny intervalle sarany amin'ny rakitra CSV mifangaro.",
   "@exportDataDescription": {
     "description": "Description de l'action d'exportation des données"
+  },
+  "copy": "Adikao",
+  "@copy": {
+    "description": "Texte du bouton pour copier le contenu"
+  },
+  "copiedToClipboard": "Voarakitra ao amin'ny fanindriana",
+  "@copiedToClipboard": {
+    "description": "Message affiché lorsque le contenu est copié dans le presse-papiers"
   }
 }

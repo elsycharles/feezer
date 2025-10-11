@@ -1599,6 +1599,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Export all providers and their fee intervals to a combined CSV file.'**
   String get exportDataDescription;
+
+  /// Button text for copying content
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
+  /// Message shown when content is copied to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get copiedToClipboard;
 }
 
 class _AppLocalizationsDelegate

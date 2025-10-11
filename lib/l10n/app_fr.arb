@@ -984,5 +984,13 @@
   "exportDataDescription": "Exporter tous les fournisseurs et leurs intervalles de frais vers un fichier CSV combiné.",
   "@exportDataDescription": {
     "description": "Description de l'action d'exportation des données"
+  },
+  "copy": "Copier",
+  "@copy": {
+    "description": "Texte du bouton pour copier le contenu"
+  },
+  "copiedToClipboard": "Copié dans le presse-papiers",
+  "@copiedToClipboard": {
+    "description": "Message affiché lorsque le contenu est copié dans le presse-papiers"
   }
 }

@@ -1168,5 +1168,13 @@
   "exportDataDescription": "Export all providers and their fee intervals to a combined CSV file.",
   "@exportDataDescription": {
     "description": "Description for export data action"
+  },
+  "copy": "Copy",
+  "@copy": {
+    "description": "Button text for copying content"
+  },
+  "copiedToClipboard": "Copied to clipboard",
+  "@copiedToClipboard": {
+    "description": "Message shown when content is copied to clipboard"
   }
 }

@@ -846,4 +846,10 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get exportDataDescription =>
       'Avoao daholo ny mpanome sy ny intervalle sarany amin\'ny rakitra CSV mifangaro.';
+
+  @override
+  String get copy => 'Adikao';
+
+  @override
+  String get copiedToClipboard => 'Voarakitra ao amin\'ny fanindriana';
 }

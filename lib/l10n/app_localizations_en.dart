@@ -846,4 +846,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get exportDataDescription =>
       'Export all providers and their fee intervals to a combined CSV file.';
+
+  @override
+  String get copy => 'Copy';
+
+  @override
+  String get copiedToClipboard => 'Copied to clipboard';
 }

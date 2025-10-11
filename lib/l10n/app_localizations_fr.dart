@@ -860,4 +860,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get exportDataDescription =>
       'Exporter tous les fournisseurs et leurs intervalles de frais vers un fichier CSV combiné.';
+
+  @override
+  String get copy => 'Copier';
+
+  @override
+  String get copiedToClipboard => 'Copié dans le presse-papiers';
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -35,6 +36,8 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       appBar: custom.AppBar(
         title: AppLocalizations.of(context).importExportData,
         menuExcludeRoutes: [NavigationUtil.csvManagementRoute],
+        borderRadius: 16,
+        elevation: 2,
       ),
       body: SafeArea(
         child: Stack(
@@ -285,13 +288,16 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton.icon(
+              OutlinedButton.icon(
                 onPressed: _isProcessing ? null : _previewTemplate,
                 icon: const Icon(Icons.visibility_outlined, size: 18),
                 label: Text(AppLocalizations.of(context).preview),
-                style: TextButton.styleFrom(
-                  foregroundColor: colorScheme.primary,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: ThemeUtil.primaryColor),
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Global.radiusSm),
+                  ),
                 ),
               ),
               const SizedBox(width: 8),
@@ -303,7 +309,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
                   backgroundColor: colorScheme.primary,
                   foregroundColor: colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Global.radiusSm),
+                  ),
                 ),
               ),
             ],
@@ -680,23 +688,51 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     ),
   );
 
-  Widget _buildPreviewActions(BuildContext context, ColorScheme colorScheme) => Row(
+  Widget _buildPreviewActions(BuildContext context, ColorScheme colorScheme, String template) => Column(
     children: [
-      Expanded(
-        child: OutlinedButton(
-          onPressed: () => Navigator.of(context).pop(),
-          style: OutlinedButton.styleFrom(
-            side: BorderSide(color: ThemeUtil.primaryColor),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Global.radiusSm),
+      Row(
+        children: [
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: ThemeUtil.primaryColor),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Global.radiusSm),
+                ),
+              ),
+              child: Text(AppLocalizations.of(context).close),
             ),
           ),
-          child: Text(AppLocalizations.of(context).close),
-        ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: OutlinedButton.icon(
+              onPressed: () async {
+                await Clipboard.setData(ClipboardData(text: template));
+                if (context.mounted) {
+                  AppToast.success(
+                    context,
+                    AppLocalizations.of(context).copiedToClipboard,
+                  );
+                }
+              },
+              icon: const Icon(Icons.copy, size: 18),
+              label: Text(AppLocalizations.of(context).copy),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: ThemeUtil.primaryColor),
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Global.radiusSm),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
-      const SizedBox(width: 12),
-      Expanded(
+      const SizedBox(height: 12),
+      SizedBox(
+        width: double.infinity,
         child: FilledButton.icon(
           onPressed: () {
             Navigator.of(context).pop();
@@ -743,7 +779,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
                 const SizedBox(height: 16),
                 _buildPreviewContent(template, colorScheme),
                 const SizedBox(height: 24),
-                _buildPreviewActions(context, colorScheme),
+                _buildPreviewActions(context, colorScheme, template),
               ],
             ),
           ),
