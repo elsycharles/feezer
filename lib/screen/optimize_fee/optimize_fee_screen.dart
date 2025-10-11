@@ -787,11 +787,25 @@ class _State extends State<OptimizeFeeScreen> {
         minOperations: _minTransactions,
       );
 
+      final coveragePercentage = (optimizationResult.netAmount / amountInAriary) * 100;
+      final hasLowCoverage = coveragePercentage < 80.0;
+
       if (optimizationResult.details.isEmpty && amountInAriary > 0) {
         if (mounted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
               AppToast.error(context, 'Optimization failed: No valid solution found');
+            }
+          });
+        }
+      } else if (hasLowCoverage && optimizationResult.details.isNotEmpty) {
+        if (mounted) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) {
+              AppToast.warning(
+                context,
+                'Optimization incomplete: Only ${coveragePercentage.toStringAsFixed(1)}% of amount covered. Consider adjusting transaction limits or fee intervals.'
+              );
             }
           });
         }
