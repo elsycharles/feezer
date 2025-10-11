@@ -22,6 +22,7 @@ class DatabaseUtil {
       path,
       version: ConstantUtil.databaseVersion,
       onCreate: _createTables,
+      onUpgrade: _upgradeDatabase,
     );
   }
 
@@ -74,6 +75,33 @@ class DatabaseUtil {
         ON DELETE CASCADE
       )
     ''');
+
+    await db.execute('''
+      CREATE TABLE ${ConstantUtil.tableCurrencies} (
+        ${ConstantUtil.columnId} TEXT PRIMARY KEY,
+        ${ConstantUtil.columnCode} TEXT NOT NULL UNIQUE,
+        ${ConstantUtil.columnName} TEXT NOT NULL,
+        ${ConstantUtil.columnSymbol} TEXT NOT NULL,
+        ${ConstantUtil.columnRate} REAL NOT NULL,
+        ${ConstantUtil.columnCreationDatetime} INTEGER NOT NULL
+      )
+    ''');
+  }
+
+  Future<void> _upgradeDatabase(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      // Migration vers la version 2 : ajout de la table currencies
+      await db.execute('''
+        CREATE TABLE ${ConstantUtil.tableCurrencies} (
+          ${ConstantUtil.columnId} TEXT PRIMARY KEY,
+          ${ConstantUtil.columnCode} TEXT NOT NULL UNIQUE,
+          ${ConstantUtil.columnName} TEXT NOT NULL,
+          ${ConstantUtil.columnSymbol} TEXT NOT NULL,
+          ${ConstantUtil.columnRate} REAL NOT NULL,
+          ${ConstantUtil.columnCreationDatetime} INTEGER NOT NULL
+        )
+      ''');
+    }
   }
 
   // Méthodes génériques de base de données

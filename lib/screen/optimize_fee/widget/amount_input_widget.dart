@@ -1,25 +1,27 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../../../util/theme_util.dart';
 import '../../../styles/global.dart';
+import '../../../provider/currency_provider.dart';
+import '../../../util/constant_util.dart';
 
 class AmountInputWidget extends StatefulWidget {
   const AmountInputWidget({
     super.key,
     required this.value,
     required this.onChanged,
-    this.min = 0,
-    this.max = 999999,
-    this.step = 1,
+    this.min = 0.0,
+    this.max = 999999.0,
+    this.step = 1.0,
     this.label = 'Amount',
-    this.currency = 'Ar',
   });
 
-  final int value;
-  final ValueChanged<int> onChanged;
-  final int min, max, step;
-  final String label, currency;
+  final double value;
+  final ValueChanged<double> onChanged;
+  final double min, max, step;
+  final String label;
 
   @override
   State<AmountInputWidget> createState() => _AmountInputWidgetState();
@@ -29,26 +31,51 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   late final TextEditingController _controller;
   late FocusNode _focusNode;
   Timer? _repeatTimer;
+  bool _isUserTyping = false;
 
   @override
   void initState() {
     super.initState();
+    // Initialize with raw value, no formatting
     _controller = TextEditingController(text: widget.value.toString());
     _focusNode = FocusNode();
+    // Add focus listeners to manage typing state
+    _focusNode.addListener(_onFocusChanged);
   }
 
   @override
   void dispose() {
     _repeatTimer?.cancel();
+    _focusNode.removeListener(_onFocusChanged);
     _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }
 
+  void _onFocusChanged() {
+    if (!_focusNode.hasFocus) {
+      // Quand le focus est perdu, formater proprement la valeur
+      _isUserTyping = false;
+      _controller.text = _formatValue(widget.value);
+    }
+  }
+
   @override
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
-    if (old.value != widget.value) _controller.text = widget.value.toString();
+    // Ne pas mettre à jour si l'utilisateur a le focus OU est en train de taper
+    if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
+      _controller.text = _formatValue(widget.value);
+    }
+  }
+
+  // Nouvelle méthode pour formater la valeur
+  String _formatValue(double value) {
+    // Si c'est un nombre entier, on n'affiche pas le .0
+    if (value == value.toInt()) {
+      return value.toInt().toString();
+    }
+    return value.toString();
   }
 
   @override
@@ -82,7 +109,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                 ),
               ),
               Text(
-                widget.currency,
+                context.read<CurrencyProvider>().currencySymbol,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w600,
@@ -112,9 +139,9 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                     focusNode: _focusNode,
                     textAlign: TextAlign.center,
                     textAlignVertical: TextAlignVertical.center,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       LengthLimitingTextInputFormatter(11)
                     ],
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -199,15 +226,17 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
     );
   }
 
-  int _clamp(int v) => v.clamp(widget.min, widget.max);
+  double _clamp(double v) => v.clamp(widget.min, widget.max);
   void _increment() => widget.onChanged(_clamp(widget.value + widget.step));
   void _decrement() => widget.onChanged(_clamp(widget.value - widget.step));
   void _onTextChanged(String value) {
-    final intValue = int.tryParse(value);
-    if (intValue != null && intValue >= widget.min && intValue <= widget.max) {
-      widget.onChanged(intValue);
+    _isUserTyping = true;
+    final doubleValue = ConstantUtil.parseLocalizedNumber(value);
+    if (doubleValue != null && doubleValue >= widget.min && doubleValue <= widget.max) {
+      widget.onChanged(doubleValue);
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);
     }
+    // Pas besoin de remettre à false ici, on laisse le onFocusChanged s'en charger
   }
 }

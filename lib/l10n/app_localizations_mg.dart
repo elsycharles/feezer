@@ -31,7 +31,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get onboardingDescription3 =>
-      'Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin\'izay.';
+      'Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsy tapaka.';
 
   @override
   String get next => 'Manaraka';
@@ -559,4 +559,151 @@ class AppLocalizationsMg extends AppLocalizations {
   String mustBeLessThanNCharacters(int count) {
     return 'Tokony ho latsaky ny $count litera';
   }
+
+  @override
+  String get deleteCurrencies => 'Hamafa vola';
+
+  @override
+  String get currencyDeletedSuccessfully => 'Vola voafafa soamantsara';
+
+  @override
+  String get currencies => 'Vola';
+
+  @override
+  String get searchCurrencies => 'Karohy vola...';
+
+  @override
+  String get noCurrenciesFound => 'Tsy misy vola hita';
+
+  @override
+  String get centralizeCurrencies =>
+      'Ampifandrary ny volanao amin\'ny toerana iray';
+
+  @override
+  String get addNewCurrency => 'Ampiditra vola vaovao';
+
+  @override
+  String get newCurrency => 'Vola vaovao';
+
+  @override
+  String get createNewCurrency => 'Mamorona vola vaovao';
+
+  @override
+  String get currencyCode => 'Kaody vola';
+
+  @override
+  String get currencyName => 'Anarana vola';
+
+  @override
+  String get currencySymbolLabel => 'Famantarana vola';
+
+  @override
+  String get exchangeRate => 'Tahan\'ny fifanakalo';
+
+  @override
+  String get currencyCreatedSuccessfully => 'Vola voaforona soamantsara';
+
+  @override
+  String get manageYourCurrencies => 'Tantano ny volanao';
+
+  @override
+  String get totalCurrencies => 'Total vola';
+
+  @override
+  String get activeCurrencies => 'Vola mavitrika';
+
+  @override
+  String get editCurrency => 'Hanova vola';
+
+  @override
+  String get currencyUpdatedSuccessfully => 'Vola voaova soamantsara';
+
+  @override
+  String get addNewCurrencyDescription =>
+      'Ampiditra vola vaovao ao amin\'ny fanangonanao';
+
+  @override
+  String get currencyCodeMustBe3Characters =>
+      'Ny kaody vola tsy maintsy misy litera 3 ihany';
+
+  @override
+  String get currencyCodeMustContainOnlyUppercase =>
+      'Ny kaody vola tsy maintsy misy litera majuscule ihany';
+
+  @override
+  String get pleaseEnterValidPositiveRate => 'Ampidiro isa tsara sy positive';
+
+  @override
+  String get failedToCreateCurrency => 'Tsy nahavita namorona vola';
+
+  @override
+  String get failedToUpdateCurrency => 'Tsy nahavita nanova vola';
+
+  @override
+  String get codeMustBe3Characters => 'Kaody tsy maintsy 3 litera';
+
+  @override
+  String get invalidRate => 'Tahan’ny fifanakalozam-bola tsy mety';
+
+  @override
+  String get rateLabel => 'Tahan’ny fifanakalozam-bola :';
+
+  @override
+  String confirmDeleteCurrencies(int count) {
+    return 'Tena te hanala $count vola ve ianao ?';
+  }
+
+  @override
+  String operationCount(int count) {
+    return '$count asa';
+  }
+
+  @override
+  String get optimizationFailedNoValidSolution =>
+      'Tsy nahomby ny fanatsarana : Tsy misy vahaolana mety hita';
+
+  @override
+  String optimizationIncomplete(String percentage) {
+    return 'Tsy feno ny fanatsarana : $percentage% amin\'ny vola ihany no voarakotra. Diniho ny fanovana ny fetran\'ny fifampiraharahana na ny elanelam-pandoavam-bola.';
+  }
+
+  @override
+  String amountExceedsMaximumLimit(String amount, String currency) {
+    return 'Mihoatra ny fetra ambony indrindra ny vola ($amount $currency)';
+  }
+
+  @override
+  String get failedToCalculateOptimization =>
+      'Tsy nahomby ny fanisana ny fanatsarana';
+
+  @override
+  String get amountExceedsMaximumAllowedLimit =>
+      'Mihoatra ny fetra ambony indrindra azo ekena ny vola';
+
+  @override
+  String get invalidTransactionRangeConstraints =>
+      'Tsy mety ny fetran\'ny fifampiraharahana';
+
+  @override
+  String get noValidFeeIntervalsAvailable =>
+      'Tsy misy elanelam-pandoavam-bola mety';
+
+  @override
+  String get amountMustBePositive => 'Tsara raha mihoatra ny aotra ny vola';
+
+  @override
+  String get amountTooHigh => 'Mihoatra loatra ny vola';
+
+  @override
+  String get noOptionsAvailable => 'Tsy misy safidy misy';
+
+  @override
+  String get maxOperationsMustBePositive => 'maxOperations tsara raha >= 0';
+
+  @override
+  String get minOperationsMustBePositive => 'minOperations tsara raha >= 0';
+
+  @override
+  String get minOperationsCannotBeGreaterThanMaxOperations =>
+      'minOperations tsy afaka mihoatra ny maxOperations';
 }

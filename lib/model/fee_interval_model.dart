@@ -1,3 +1,5 @@
+import '../util/constant_util.dart';
+
 /// Comprehensive FeeInterval model with validation and serialization
 class FeeInterval {
   FeeInterval({
@@ -35,15 +37,16 @@ class FeeInterval {
       (maxAmount ?? 0) > (minAmount ?? 0) &&
       (fee ?? 0) >= 0;
 
-  /// Gets formatted amount range
-  String get formattedRange {
-    final min = (minAmount ?? 0).toInt();
-    final max = (maxAmount ?? 0).toInt();
-    return '$min - $max Ar';
+  /// Gets formatted amount range with currency symbol and exchange rate conversion
+  String formattedRangeWithSymbol(String currencySymbol, [double exchangeRate = 1.0]) {
+    final min = (minAmount ?? 0) / exchangeRate;
+    final max = (maxAmount ?? 0) / exchangeRate;
+    return '${ConstantUtil.formatCurrencyAmount(min)} - ${ConstantUtil.formatCurrencyAmount(max)} $currencySymbol';
   }
 
-  /// Gets formatted fee
-  String get formattedFee => '${(fee ?? 0).toInt()} Ar';
+  /// Gets formatted fee with currency symbol and exchange rate conversion
+  String formattedFeeWithSymbol(String currencySymbol, [double exchangeRate = 1.0]) =>
+      '${ConstantUtil.formatCurrencyAmount((fee ?? 0) / exchangeRate)} $currencySymbol';
 
   static FeeInterval fromMap(Map<String, dynamic> map) {
     return FeeInterval(
@@ -80,5 +83,5 @@ class FeeInterval {
 
   @override
   String toString() =>
-      'FeeInterval(id: $id, range: $formattedRange, fee: $formattedFee)';
+      'FeeInterval(id: $id, range: ${formattedRangeWithSymbol('Ar')}, fee: ${formattedFeeWithSymbol('Ar')})';
 }

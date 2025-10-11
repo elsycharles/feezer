@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/fee_interval_model.dart';
 import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
-import '../../../widget/loading_button.dart';
+import '../../../util/constant_util.dart';
 import '../../../widget/app_toast.dart';
+import '../../../widget/loading_button.dart';
+import '../../../provider/currency_provider.dart';
 
 /// Clean fee interval editor
 class FeeIntervalEditBottomSheet extends StatefulWidget {
@@ -38,13 +41,19 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   late final _minAmountController = TextEditingController(
-    text: widget.feeInterval.minAmount?.toString() ?? '',
+    text: widget.feeInterval.minAmount != null
+        ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.minAmount!))
+        : '',
   );
   late final _maxAmountController = TextEditingController(
-    text: widget.feeInterval.maxAmount?.toString() ?? '',
+    text: widget.feeInterval.maxAmount != null
+        ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.maxAmount!))
+        : '',
   );
   late final _feeController = TextEditingController(
-    text: widget.feeInterval.fee?.toString() ?? '',
+    text: widget.feeInterval.fee != null
+        ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.fee!))
+        : '',
   );
 
   @override
@@ -61,7 +70,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     child: Column(
       children: [
         custom_form.FormField(
-          label: AppLocalizations.of(context).minimumAmountAr,
+          label: '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _minAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -71,7 +80,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: AppLocalizations.of(context).maximumAmountAr,
+          label: '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _maxAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -81,7 +90,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: AppLocalizations.of(context).feeAr,
+          label: '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _feeController,
           icon: Icons.attach_money,
           keyboardType: TextInputType.number,
@@ -144,9 +153,9 @@ class _State extends State<FeeIntervalEditBottomSheet> {
       try {
         final feeInterval = FeeInterval(
           id: widget.feeInterval.id,
-          minAmount: double.parse(_minAmountController.text.trim()),
-          maxAmount: double.parse(_maxAmountController.text.trim()),
-          fee: double.parse(_feeController.text.trim()),
+          minAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_minAmountController.text.trim()) ?? 0),
+          maxAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_maxAmountController.text.trim()) ?? 0),
+          fee: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
           creationDateTime: widget.feeInterval.creationDatetime,
         );
 

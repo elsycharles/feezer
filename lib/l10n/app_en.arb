@@ -774,5 +774,205 @@
         "example": "50"
       }
     }
+  },
+  "deleteCurrencies": "Delete Currencies",
+  "@deleteCurrencies": {
+    "description": "Title for delete currencies confirmation dialog"
+  },
+  "currencyDeletedSuccessfully": "Currency deleted successfully",
+  "@currencyDeletedSuccessfully": {
+    "description": "Success message when currency is deleted"
+  },
+  "currencies": "Currencies",
+  "@currencies": {
+    "description": "Title for currencies screen"
+  },
+  "searchCurrencies": "Search currencies...",
+  "@searchCurrencies": {
+    "description": "Placeholder text for currency search field"
+  },
+  "noCurrenciesFound": "No currencies found",
+  "@noCurrenciesFound": {
+    "description": "Message when no currencies are found"
+  },
+  "centralizeCurrencies": "Centralize your currencies in one place",
+  "@centralizeCurrencies": {
+    "description": "Description text for empty currencies state"
+  },
+  "addNewCurrency": "Add new currency",
+  "@addNewCurrency": {
+    "description": "Button text to add a new currency"
+  },
+  "newCurrency": "New Currency",
+  "@newCurrency": {
+    "description": "Title for new currency screen"
+  },
+  "createNewCurrency": "Create New Currency",
+  "@createNewCurrency": {
+    "description": "Header text for new currency creation"
+  },
+  "currencyCode": "Currency Code",
+  "@currencyCode": {
+    "description": "Label for currency code field"
+  },
+  "currencyName": "Currency Name",
+  "@currencyName": {
+    "description": "Label for currency name field"
+  },
+  "currencySymbolLabel": "Currency Symbol",
+  "@currencySymbolLabel": {
+    "description": "Label for currency symbol field"
+  },
+  "exchangeRate": "Exchange Rate",
+  "@exchangeRate": {
+    "description": "Label for exchange rate field"
+  },
+  "currencyCreatedSuccessfully": "Currency created successfully",
+  "@currencyCreatedSuccessfully": {
+    "description": "Success message when currency is created"
+  },
+  "manageYourCurrencies": "Manage your currencies",
+  "@manageYourCurrencies": {
+    "description": "Header text for currency management"
+  },
+  "totalCurrencies": "Total Currencies",
+  "@totalCurrencies": {
+    "description": "Label for total currencies count"
+  },
+  "activeCurrencies": "Active Currencies",
+  "@activeCurrencies": {
+    "description": "Label for active currencies count"
+  },
+  "editCurrency": "Edit Currency",
+  "@editCurrency": {
+    "description": "Title for edit currency bottom sheet"
+  },
+  "currencyUpdatedSuccessfully": "Currency updated successfully",
+  "@currencyUpdatedSuccessfully": {
+    "description": "Success message when currency is updated"
+  },
+  "addNewCurrencyDescription": "Add a new currency to your collection",
+  "@addNewCurrencyDescription": {
+    "description": "Description text for adding new currency"
+  },
+  "currencyCodeMustBe3Characters": "Currency code must be exactly 3 characters",
+  "@currencyCodeMustBe3Characters": {
+    "description": "Validation message for currency code length"
+  },
+  "currencyCodeMustContainOnlyUppercase": "Currency code must contain only uppercase letters",
+  "@currencyCodeMustContainOnlyUppercase": {
+    "description": "Validation message for currency code format"
+  },
+  "pleaseEnterValidPositiveRate": "Please enter a valid positive rate",
+  "@pleaseEnterValidPositiveRate": {
+    "description": "Validation message for exchange rate"
+  },
+  "failedToCreateCurrency": "Failed to create currency",
+  "@failedToCreateCurrency": {
+    "description": "Error message when currency creation fails"
+  },
+  "failedToUpdateCurrency": "Failed to update currency",
+  "@failedToUpdateCurrency": {
+    "description": "Error message when currency update fails"
+  },
+  "codeMustBe3Characters": "Code must be 3 characters",
+  "@codeMustBe3Characters": {
+    "description": "Short validation message for currency code length"
+  },
+  "invalidRate": "Invalid rate",
+  "@invalidRate": {
+    "description": "Validation message for invalid exchange rate"
+  },
+  "rateLabel": "Rate:",
+  "@rateLabel": {
+    "description": "Label for exchange rate display in currency card"
+  },
+  "confirmDeleteCurrencies": "Are you sure you want to delete {count} currencies?",
+  "@confirmDeleteCurrencies": {
+    "description": "Confirmation message for deleting currencies",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "operationCount": "{count} operations",
+  "@operationCount": {
+    "description": "Display text for number of operations with count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "optimizationFailedNoValidSolution": "Optimization failed: No valid solution found",
+  "@optimizationFailedNoValidSolution": {
+    "description": "Error message when optimization fails to find a valid solution"
+  },
+  "optimizationIncomplete": "Optimization incomplete: Only {percentage}% of amount covered. Consider adjusting transaction limits or fee intervals.",
+  "@optimizationIncomplete": {
+    "description": "Warning message when optimization covers less than expected amount",
+    "placeholders": {
+      "percentage": {
+        "type": "String",
+        "example": "75.5"
+      }
+    }
+  },
+  "amountExceedsMaximumLimit": "Amount exceeds maximum limit ({amount} {currency})",
+  "@amountExceedsMaximumLimit": {
+    "description": "Error message when amount exceeds the maximum allowed limit",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1,000,000"
+      },
+      "currency": {
+        "type": "String",
+        "example": "EUR"
+      }
+    }
+  },
+  "failedToCalculateOptimization": "Failed to calculate optimization",
+  "@failedToCalculateOptimization": {
+    "description": "Generic error message when optimization calculation fails"
+  },
+  "amountExceedsMaximumAllowedLimit": "Amount exceeds maximum allowed limit",
+  "@amountExceedsMaximumAllowedLimit": {
+    "description": "Error message for amount exceeding maximum allowed limit"
+  },
+  "invalidTransactionRangeConstraints": "Invalid transaction range constraints",
+  "@invalidTransactionRangeConstraints": {
+    "description": "Error message for invalid transaction range constraints"
+  },
+  "noValidFeeIntervalsAvailable": "No valid fee intervals available",
+  "@noValidFeeIntervalsAvailable": {
+    "description": "Error message when no valid fee intervals are available for the provider"
+  },
+  "amountMustBePositive": "Amount must be positive",
+  "@amountMustBePositive": {
+    "description": "Error message when amount is not positive"
+  },
+  "amountTooHigh": "Amount too high",
+  "@amountTooHigh": {
+    "description": "Error message when amount exceeds maximum allowed limit"
+  },
+  "noOptionsAvailable": "No options available",
+  "@noOptionsAvailable": {
+    "description": "Error message when no fee options are available"
+  },
+  "maxOperationsMustBePositive": "maxOperations must be >= 0",
+  "@maxOperationsMustBePositive": {
+    "description": "Error message when maxOperations is negative"
+  },
+  "minOperationsMustBePositive": "minOperations must be >= 0",
+  "@minOperationsMustBePositive": {
+    "description": "Error message when minOperations is negative"
+  },
+  "minOperationsCannotBeGreaterThanMaxOperations": "minOperations cannot be greater than maxOperations",
+  "@minOperationsCannotBeGreaterThanMaxOperations": {
+    "description": "Error message when minOperations is greater than maxOperations"
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../../../model/fee_interval_model.dart';
 import '../../../util/theme_util.dart';
 import '../../../widget/interactive_surface.dart';
+import '../../../provider/currency_provider.dart';
 
 /// Fee interval tile with subtle hover feedback
 class FeeIntervalTile extends StatelessWidget {
@@ -27,55 +29,58 @@ class FeeIntervalTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 6),
-      child: InteractiveSurface(
-        onTap: () {
-          HapticFeedback.selectionClick();
-          onTap?.call();
-        },
-        onLongPress: () {
-          HapticFeedback.mediumImpact();
-          onLongPress();
-        },
-        builder: (context, hovered, pressed) => AnimatedContainer(
-          duration: const Duration(milliseconds: 120),
-          curve: Curves.easeOut,
-          padding: const EdgeInsets.all(16),
-          // Ensure minimum height for accessibility
-          constraints: const BoxConstraints(minHeight: 72),
-          decoration: BoxDecoration(
-            color: ThemeUtil.interactiveSurfaceColor(
-              isSelected
-                  ? colorScheme.primary.withValues(alpha: 0.12)
-                  : colorScheme.surface,
-              hovered: hovered,
-              pressed: pressed,
-              overlayColor: colorScheme.primary,
-            ),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isSelected
-                  ? colorScheme.primary
-                  : colorScheme.outlineVariant,
-              width: isSelected ? 2 : 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: colorScheme.shadow.withValues(
-                  alpha: hovered || pressed ? 0.16 : 0.08,
-                ),
-                blurRadius: hovered || pressed ? 10 : 4,
-                offset: const Offset(0, 2),
+    return Consumer<CurrencyProvider>(
+      builder: (context, currencyProvider, child) => Container(
+        margin: const EdgeInsets.only(bottom: 6),
+        child: InteractiveSurface(
+          onTap: () {
+            HapticFeedback.selectionClick();
+            onTap?.call();
+          },
+          onLongPress: () {
+            HapticFeedback.mediumImpact();
+            onLongPress();
+          },
+          builder: (context, hovered, pressed) => AnimatedContainer(
+            duration: const Duration(milliseconds: 120),
+            curve: Curves.easeOut,
+            padding: const EdgeInsets.all(16),
+            // Ensure minimum height for accessibility
+            constraints: const BoxConstraints(minHeight: 72),
+            decoration: BoxDecoration(
+              color: ThemeUtil.interactiveSurfaceColor(
+                isSelected
+                    ? colorScheme.primary.withValues(alpha: 0.12)
+                    : colorScheme.surface,
+                hovered: hovered,
+                pressed: pressed,
+                overlayColor: colorScheme.primary,
               ),
-            ],
-          ),
-          child: Row(
-            children: [
-              if (showSelection) _buildCheckbox(colorScheme),
-              Expanded(child: _buildContent(colorScheme)),
-              _buildFeeChip(colorScheme),
-            ],
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: isSelected
+                    ? colorScheme.primary
+                    : colorScheme.outlineVariant,
+                width: isSelected ? 2 : 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: colorScheme.shadow.withValues(
+                    alpha: hovered || pressed ? 0.16 : 0.08,
+                  ),
+                  blurRadius: hovered || pressed ? 10 : 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                if (showSelection) _buildCheckbox(colorScheme),
+                Expanded(child: _buildContent(colorScheme, currencyProvider)),
+                const SizedBox(width: 12),
+                _buildFeeChip(colorScheme, currencyProvider),
+              ],
+            ),
           ),
         ),
       ),
@@ -92,12 +97,12 @@ class FeeIntervalTile extends StatelessWidget {
     ),
   );
 
-  Widget _buildContent(ColorScheme colorScheme) => Column(
+  Widget _buildContent(ColorScheme colorScheme, CurrencyProvider currencyProvider) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
       Text(
-        feeInterval.formattedRange,
+        feeInterval.formattedRangeWithSymbol(currencyProvider.currencySymbol, currencyProvider.exchangeRate),
         style: ThemeUtil.titleSmall.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.onSurface,
@@ -113,8 +118,8 @@ class FeeIntervalTile extends StatelessWidget {
     ],
   );
 
-  Widget _buildFeeChip(ColorScheme colorScheme) => Text(
-    feeInterval.formattedFee,
+  Widget _buildFeeChip(ColorScheme colorScheme, CurrencyProvider currencyProvider) => Text(
+    feeInterval.formattedFeeWithSymbol(currencyProvider.currencySymbol, currencyProvider.exchangeRate),
     style: ThemeUtil.bodyMedium.copyWith(
       color: ThemeUtil.success,
       fontWeight: FontWeight.w600,

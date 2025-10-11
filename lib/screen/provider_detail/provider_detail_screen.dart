@@ -346,8 +346,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   void _onIntervalTap(FeeInterval interval) {
     if (_selectedIds.isNotEmpty) {
       _onSelectionChanged(interval.id, !_selectedIds.contains(interval.id));
+    } else {
+      _editInterval(interval);
     }
-    // Tap functionality removed - only selection mode supported
   }
 
   void _onIntervalLongPress(FeeInterval interval) {
