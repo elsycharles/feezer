@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../model/provider_model.dart';
 import '../../model/fee_minimizer_result_model.dart';
@@ -9,7 +8,7 @@ import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
-import '../../util/route_util.dart';
+import '../../util/navigation_util.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/app_bar.dart' as custom;
 import 'widget/amount_input_widget.dart';
@@ -21,6 +20,7 @@ import '../../widget/surface_card.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
 import '../../util/fee_minimizer_util.dart';
+import '../../util/icon_util.dart';
 
 /// Screen for optimizing fees based on transaction amounts and ranges
 class OptimizeFeeScreen extends StatefulWidget {
@@ -51,6 +51,13 @@ class _State extends State<OptimizeFeeScreen> {
     _loadProviders();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reload providers when screen becomes visible again (e.g., after adding provider via menu)
+    _loadProviders();
+  }
+
   Future<void> _loadProviders() async {
     final db = DatabaseUtil();
     final providerMaps = await db.query(ConstantUtil.tableProviders);
@@ -71,7 +78,7 @@ class _State extends State<OptimizeFeeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final canNavigateBack = GoRouter.of(context).canPop();
+    final canNavigateBack = Navigator.of(context).canPop();
 
     return PopScope(
       canPop: canNavigateBack,
@@ -84,8 +91,9 @@ class _State extends State<OptimizeFeeScreen> {
         backgroundColor: context.theme.scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).optimizeFee,
-          leading: null, // Home screen - no back button needed
-          menuExcludeRoutes: const [AppRouter.homeRoute],
+          leading: null, // Will be handled by automaticallyImplyLeading
+          automaticallyImplyLeading: ModalRoute.of(context)?.canPop ?? false, // Show back button only when can pop
+          menuExcludeRoutes: [NavigationUtil.homeRoute],
           menuIconColor: context.colorScheme.onSurface,
         ),
         body: Column(
@@ -185,7 +193,7 @@ class _State extends State<OptimizeFeeScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
-                          Icons.business,
+                          IconUtil.getIcon(provider.iconName),
                           color: context.colorScheme.primary,
                           size: 18,
                         ),
@@ -254,24 +262,9 @@ class _State extends State<OptimizeFeeScreen> {
             onChanged: (provider) async {
               if (provider == null) {
                 // Navigate to NewProviderScreen when "Add new provider" is selected
-                final result = await GoRouter.of(context).push<Provider>(AppRouter.newProviderRoute);
-                // If a new provider was created (returned as result), add it to the list
-                if (result != null) {
-                  setState(() {
-                    _providers.add(result);
-                    _selectedProvider = result;
-                    _hasOptimized = false;
-                    _result = null;
-                  });
-                  
-                  // Automatically redirect to Provider Details to complete the setup
-                  if (mounted) {
-                    await GoRouter.of(context).push(
-                      '${AppRouter.providerDetailRoute}/${result.id}',
-                      extra: result,
-                    );
-                  }
-                }
+                await NavigationUtil.pushTo(context, NavigationUtil.newProviderRoute);
+                // Reload providers list after returning from new provider screen
+                await _loadProviders();
               } else {
                 setState(() {
                   _selectedProvider = provider;
@@ -730,7 +723,7 @@ class _State extends State<OptimizeFeeScreen> {
           _hasOptimized = true;
         });
         if (mounted) {
-          AppToast.info(context, AppLocalizations.of(context).noProvidersFound);
+          AppToast.info(context, AppLocalizations.of(context).noFeeIntervalsFound);
         }
         return;
       }

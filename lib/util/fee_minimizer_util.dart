@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:collection';
 import '../../model/fee_interval_model.dart';
 import '../../model/fee_minimizer_result_model.dart';
 import '../../model/fee_minimizer_detail_model.dart';
@@ -647,7 +646,7 @@ class FeeOptimizerUtil {
 // Cache LRU simple et efficace
 class LRUCache<K, V> {
   final int capacity;
-  final _cache = LinkedHashMap<K, V>();
+  final _cache = <K, V>{};
 
   LRUCache(this.capacity);
 

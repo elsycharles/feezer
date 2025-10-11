@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
 import '../../model/fee_interval_model.dart';
 import '../../util/theme_util.dart';
-import '../../util/route_util.dart';
+import '../../util/navigation_util.dart';
 import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
@@ -97,7 +96,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                 icon: const Icon(Icons.clear),
                 onPressed: () => setState(() => _selectedIds.clear()),
               )
-            : null, // Let GoRouter handle the back button
+            : null, // Let Navigator handle the back button
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
         body: SafeArea(
@@ -332,7 +331,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   );
 
   void _addInterval() async {
-    final result = await GoRouter.of(context).push<FeeInterval>(AppRouter.newFeeIntervalRoute);
+    final result = await NavigationUtil.pushTo<FeeInterval>(context, NavigationUtil.newFeeIntervalRoute);
     if (result != null) {
       final db = DatabaseUtil();
       final insertedId = await db.insert(
@@ -489,7 +488,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    GoRouter.of(context).push(AppRouter.homeRoute, extra: widget.provider);
+    NavigationUtil.pushTo(context, NavigationUtil.homeRoute, extra: widget.provider);
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
     // Could pass provider data via extra: widget.provider
@@ -522,7 +521,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         }
 
         if (mounted) {
-          GoRouter.of(context).pop(); // Close loading dialog
+          Navigator.of(context).pop(); // Close loading dialog
           AppToast.success(
             context,
             AppLocalizations.of(context).feeIntervalDeletedSuccessfully(count),
@@ -532,7 +531,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         }
       } catch (e) {
         if (mounted) {
-          GoRouter.of(context).pop(); // Close loading dialog
+          Navigator.of(context).pop(); // Close loading dialog
           AppToast.error(context, 'Failed to delete fee intervals');
         }
       }

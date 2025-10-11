@@ -3,7 +3,6 @@ import 'package:fee_minimizer/screen/onboarding/widget/onboarding_page_view.dart
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/util/onboarding_util.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
-import 'package:fee_minimizer/util/route_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/util/preference_util.dart';
 import 'package:fee_minimizer/util/navigation_util.dart';
@@ -21,6 +20,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   bool _shouldShowOnboarding = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -37,11 +37,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> _checkFirstLaunch() async {
     final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
     if (!isFirstLaunch && mounted) {
-      NavigationUtil.safeAsyncNavigate(
-        context: context,
-        isMounted: () => mounted,
-        getRoute: () async => AppRouter.optimizeFeeRoute,
-      );
+      // Not first launch, go directly to home (replace onboarding)
+      NavigationUtil.goTo(context, NavigationUtil.homeRoute);
     } else if (mounted) {
       setState(() => _shouldShowOnboarding = true);
     }
@@ -57,20 +54,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      _goToHome();
+      _startLoadingAndGoHome();
     }
   }
 
+  Future<void> _startLoadingAndGoHome() async {
+    setState(() => _isLoading = true);
+    await _goToHome();
+    // No need to set false since we navigate away
+  }
+
   Future<void> _goToHome() async {
-    await NavigationUtil.safeAsyncNavigate(
-      context: context,
-      isMounted: () => mounted,
-      getRoute: () async {
-        // Mark that onboarding is completed
-        await PreferenceUtil.setFirstLaunchCompleted();
-        return AppRouter.optimizeFeeRoute;
-      },
-    );
+    // Mark that onboarding is completed
+    await PreferenceUtil.setFirstLaunchCompleted();
+    // Replace onboarding with home screen (no back navigation)
+    if (mounted) {
+      NavigationUtil.goTo(context, NavigationUtil.homeRoute);
+    }
   }
 
   @override
@@ -133,6 +133,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               currentIndex: _currentIndex,
               onNext: _nextPage,
               onSkip: _goToHome,
+              isLoading: _isLoading,
             ),
           ],
         ),

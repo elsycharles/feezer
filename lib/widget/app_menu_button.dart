@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../l10n/app_localizations.dart';
 import '../styles/global.dart';
 import '../util/extensions_util.dart';
-import '../util/route_util.dart';
+import '../util/navigation_util.dart';
 import '../util/theme_util.dart';
 
 /// Réutilisable PopupMenuButton pour la navigation entre les écrans principaux
@@ -47,9 +46,9 @@ class AppMenuButton extends StatelessWidget {
     final items = <PopupMenuEntry<String>>[];
     
     // Fee Optimizer (Home)
-    if (!excludeRoutes.contains(AppRouter.homeRoute)) {
+    if (!excludeRoutes.contains(NavigationUtil.homeRoute)) {
       items.add(PopupMenuItem(
-        value: AppRouter.homeRoute,
+        value: NavigationUtil.homeRoute,
         child: _MenuItem(
           icon: Icons.analytics,
           text: AppLocalizations.of(context).optimizeFee,
@@ -59,9 +58,9 @@ class AppMenuButton extends StatelessWidget {
     }
 
     // Providers
-    if (!excludeRoutes.contains(AppRouter.providersRoute)) {
+    if (!excludeRoutes.contains(NavigationUtil.providersRoute)) {
       items.add(PopupMenuItem(
-        value: AppRouter.providersRoute,
+        value: NavigationUtil.providersRoute,
         child: _MenuItem(
           icon: Icons.business,
           text: AppLocalizations.of(context).providers,
@@ -71,9 +70,9 @@ class AppMenuButton extends StatelessWidget {
     }
 
     // Settings
-    if (!excludeRoutes.contains(AppRouter.settingsRoute)) {
+    if (!excludeRoutes.contains(NavigationUtil.settingsRoute)) {
       items.add(PopupMenuItem(
-        value: AppRouter.settingsRoute,
+        value: NavigationUtil.settingsRoute,
         child: _MenuItem(
           icon: Icons.settings,
           text: AppLocalizations.of(context).settings,
@@ -86,7 +85,7 @@ class AppMenuButton extends StatelessWidget {
   }
 
   void _handleMenuSelection(BuildContext context, String route) {
-    GoRouter.of(context).go(route);
+    NavigationUtil.pushTo(context, route);
   }
 }
 

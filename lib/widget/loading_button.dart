@@ -58,7 +58,7 @@ class LoadingButton extends StatelessWidget {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
                 child: isLoading
-                    ? const AppLoading.small()
+                    ? const AppLoading.small(key: ValueKey('loading'))
                     : Text(
                         text,
                         key: ValueKey(text),
@@ -93,7 +93,7 @@ class LoadingButton extends StatelessWidget {
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
                 child: isLoading
-                    ? const AppLoading.small()
+                    ? const AppLoading.small(key: ValueKey('loading'))
                     : Text(
                         text,
                         key: ValueKey(text),
