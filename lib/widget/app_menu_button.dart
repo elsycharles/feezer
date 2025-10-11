@@ -85,7 +85,7 @@ class AppMenuButton extends StatelessWidget {
   }
 
   void _handleMenuSelection(BuildContext context, String route) {
-    NavigationUtil.goTo(context, route);
+    NavigationUtil.pushTo(context, route);
   }
 }
 
