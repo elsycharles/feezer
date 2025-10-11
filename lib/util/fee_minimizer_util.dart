@@ -5,10 +5,10 @@ import '../../model/fee_minimizer_detail_model.dart';
 import '../../util/constant_util.dart';
 
 class FeeOptimizerUtil {
-  // Cache pour mémoriser les résultats récents
+  // Cache to memorize recent results
   static final _cache = LRUCache<String, FeeOptimizerResult>(100);
   
-  // Limites de sécurité pour éviter les crashs
+  // Safety limits to avoid crashes
   static const int _maxSafeOperations = 50000;
   static const double _maxSafeAmount = 1e15; // Quadrillion
   
@@ -19,15 +19,15 @@ class FeeOptimizerUtil {
     int maxOperations = 0,
     int minOperations = 0,
   }) {
-    // Validation et normalisation des entrées
+    // Validation and normalization of inputs
     totalAmount = min(totalAmount, _maxSafeAmount);
     maxOperations = maxOperations > 0 ? min(maxOperations, _maxSafeOperations) : 0;
     minOperations = minOperations > 0 ? min(minOperations, maxOperations > 0 ? maxOperations : _maxSafeOperations) : 0;
     
-    // Génération de la clé de cache
+    // Cache key generation
     final cacheKey = _generateCacheKey(totalAmount, intervals, precision, maxOperations, minOperations);
     
-    // Vérifier le cache
+    // Check cache
     final cached = _cache.get(cacheKey);
     if (cached != null) return cached;
     
@@ -39,7 +39,7 @@ class FeeOptimizerUtil {
         return _buildResult(totalAmount, 0, 0, totalAmount, {});
       }
       
-      // Stratégie adaptative selon le montant
+      // Adaptive strategy based on amount
       final result = _computeOptimalStrategy(
         totalAmount, 
         options, 
@@ -48,12 +48,12 @@ class FeeOptimizerUtil {
         minOperations
       );
       
-      // Mettre en cache le résultat
+      // Cache the result
       _cache.put(cacheKey, result);
       
       return result;
     } catch (e) {
-      // En cas d'erreur, retourner un résultat vide mais valide
+      // In case of error, return an empty but valid result
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
   }
@@ -65,17 +65,17 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Pour les très gros montants, utiliser une approche simplifiée
+    // For very large amounts, use a simplified approach
     if (totalAmount > 1e12) {
       return _ultraHighAmountStrategy(totalAmount, options, precision, maxOperations, minOperations);
     }
     
-    // Pour les montants moyens à élevés
+    // For medium to high amounts
     if (totalAmount > 1e9) {
       return _highAmountStrategy(totalAmount, options, precision, maxOperations, minOperations);
     }
     
-    // Pour les petits montants, approche exhaustive
+    // For small amounts, exhaustive approach
     final unlimitedResult = totalAmount <= ConstantUtil.threshold
         ? _selectBest([
             _greedyOptimizedFast(totalAmount, options, precision),
@@ -98,12 +98,12 @@ class FeeOptimizerUtil {
   ) {
     final actualCount = unlimitedResult.totalOperations;
 
-    // Pas de contraintes
+    // No constraints
     if (maxOperations == 0 && minOperations == 0) {
       return unlimitedResult;
     }
 
-    // Seulement maxOperations
+    // Only maxOperations
     if (maxOperations > 0 && minOperations == 0) {
       if (actualCount <= maxOperations) {
         return unlimitedResult;
@@ -111,7 +111,7 @@ class FeeOptimizerUtil {
       return _constrainedOperationsFast(totalAmount, options, precision, maxOperations, 0);
     }
 
-    // Seulement minOperations
+    // Only minOperations
     if (minOperations > 0 && maxOperations == 0) {
       if (actualCount >= minOperations) {
         return unlimitedResult;
@@ -119,7 +119,7 @@ class FeeOptimizerUtil {
       return _minConstrainedOperationsFast(totalAmount, options, precision, minOperations, 0);
     }
 
-    // Les deux contraintes
+    // Both constraints
     if (actualCount >= minOperations && actualCount <= maxOperations) {
       return unlimitedResult;
     }
@@ -141,7 +141,7 @@ class FeeOptimizerUtil {
     final results = <FeeOptimizerResult>[];
     final end = maxOperations > 0 ? min(maxOperations, 100) : 100;
 
-    // Tester plusieurs nombres d'opérations à partir du minimum
+    // Test several numbers of operations starting from minimum
     for (int numOperations = minOperations; numOperations <= end; numOperations++) {
       final result = _distributeOptimallyFast(totalAmount, options, precision, numOperations);
       if (result != null) {
@@ -153,7 +153,7 @@ class FeeOptimizerUtil {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
 
-    // Sélectionner le meilleur résultat
+    // Select the best result
     return results.reduce((best, curr) {
       if (curr.netAmount > best.netAmount) return curr;
       if (curr.netAmount < best.netAmount) return best;
@@ -188,10 +188,7 @@ class FeeOptimizerUtil {
     double totalNet = 0;
     double totalFees = 0;
     
-    // Calculer le montant moyen par opération
-    final avgPerOperation = totalAmount / targetCount;
-    
-    // Stratégie : distribuer les opérations de manière équilibrée
+    // Strategy: distribute operations evenly
     for (int i = 0; i < targetCount; i++) {
       if (budget <= 0) break;
       
@@ -205,7 +202,7 @@ class FeeOptimizerUtil {
         final maxAmount = min(opt.max, remaining - opt.fee);
         if (maxAmount < opt.min) continue;
         
-        // Chercher un montant proche du montant cible
+        // Find an amount close to the target amount
         double amount = min(maxAmount, max(opt.min, targetAmount - opt.fee));
         amount = (amount / precision).floor() * precision;
         
@@ -214,7 +211,7 @@ class FeeOptimizerUtil {
         }
         if (amount > maxAmount) continue;
         
-        // Score basé sur l'efficience et la proximité du montant cible
+        // Score based on efficiency and proximity to target amount
         final efficiency = amount / opt.fee;
         final proximity = 1 / (1 + (amount - targetAmount).abs());
         final score = efficiency * 10 + proximity * amount;
