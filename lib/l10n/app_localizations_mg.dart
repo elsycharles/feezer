@@ -31,7 +31,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get onboardingDescription3 =>
-      'Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin\'izay.';
+      'Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsy tapaka.';
 
   @override
   String get next => 'Manaraka';
@@ -652,4 +652,39 @@ class AppLocalizationsMg extends AppLocalizations {
   String confirmDeleteCurrencies(int count) {
     return 'Tena te hanala $count vola ve ianao ?';
   }
+
+  @override
+  String operationCount(int count) {
+    return '$count asa';
+  }
+
+  @override
+  String get optimizationFailedNoValidSolution =>
+      'Tsy nahomby ny fanatsarana : Tsy misy vahaolana mety hita';
+
+  @override
+  String optimizationIncomplete(String percentage) {
+    return 'Tsy feno ny fanatsarana : $percentage% amin\'ny vola ihany no voarakotra. Diniho ny fanovana ny fetran\'ny fifampiraharahana na ny elanelam-pandoavam-bola.';
+  }
+
+  @override
+  String amountExceedsMaximumLimit(String amount, String currency) {
+    return 'Mihoatra ny fetra ambony indrindra ny vola ($amount $currency)';
+  }
+
+  @override
+  String get failedToCalculateOptimization =>
+      'Tsy nahomby ny fanisana ny fanatsarana';
+
+  @override
+  String get amountExceedsMaximumAllowedLimit =>
+      'Mihoatra ny fetra ambony indrindra azo ekena ny vola';
+
+  @override
+  String get invalidTransactionRangeConstraints =>
+      'Tsy mety ny fetran\'ny fifampiraharahana';
+
+  @override
+  String get noValidFeeIntervalsAvailable =>
+      'Tsy misy elanelam-pandoavam-bola mety';
 }

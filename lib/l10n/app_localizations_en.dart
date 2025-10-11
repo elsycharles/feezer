@@ -653,4 +653,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String confirmDeleteCurrencies(int count) {
     return 'Are you sure you want to delete $count currencies?';
   }
+
+  @override
+  String operationCount(int count) {
+    return '$count operations';
+  }
+
+  @override
+  String get optimizationFailedNoValidSolution =>
+      'Optimization failed: No valid solution found';
+
+  @override
+  String optimizationIncomplete(String percentage) {
+    return 'Optimization incomplete: Only $percentage% of amount covered. Consider adjusting transaction limits or fee intervals.';
+  }
+
+  @override
+  String amountExceedsMaximumLimit(String amount, String currency) {
+    return 'Amount exceeds maximum limit ($amount $currency)';
+  }
+
+  @override
+  String get failedToCalculateOptimization =>
+      'Failed to calculate optimization';
+
+  @override
+  String get amountExceedsMaximumAllowedLimit =>
+      'Amount exceeds maximum allowed limit';
+
+  @override
+  String get invalidTransactionRangeConstraints =>
+      'Invalid transaction range constraints';
+
+  @override
+  String get noValidFeeIntervalsAvailable => 'No valid fee intervals available';
 }

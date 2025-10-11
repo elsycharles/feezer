@@ -439,7 +439,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 const Spacer(),
                 Text(
-                  '${_convertedResult?.details.length ?? 0} operations',
+                  AppLocalizations.of(context).operationCount(_convertedResult?.details.length ?? 0),
                   style: ThemeUtil.bodyMedium.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -768,7 +768,10 @@ class _State extends State<OptimizeFeeScreen> {
             if (mounted) {
               AppToast.error(
                 context, 
-                'Amount exceeds maximum limit (${ConstantUtil.formatCurrencyAmount(currencyProvider.convertFromAriary(maxSafeAmount))} ${currencyProvider.currencySymbol})'
+                AppLocalizations.of(context).amountExceedsMaximumLimit(
+                  ConstantUtil.formatCurrencyAmount(currencyProvider.convertFromAriary(maxSafeAmount)),
+                  currencyProvider.currencySymbol
+                )
               );
             }
           });
@@ -794,7 +797,7 @@ class _State extends State<OptimizeFeeScreen> {
         if (mounted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
-              AppToast.error(context, 'Optimization failed: No valid solution found');
+            AppToast.error(context, AppLocalizations.of(context).optimizationFailedNoValidSolution);
             }
           });
         }
@@ -804,7 +807,7 @@ class _State extends State<OptimizeFeeScreen> {
             if (mounted) {
               AppToast.warning(
                 context,
-                'Optimization incomplete: Only ${coveragePercentage.toStringAsFixed(1)}% of amount covered. Consider adjusting transaction limits or fee intervals.'
+                AppLocalizations.of(context).optimizationIncomplete(coveragePercentage.toStringAsFixed(1))
               );
             }
           });
@@ -819,14 +822,14 @@ class _State extends State<OptimizeFeeScreen> {
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
-            String errorMessage = 'Failed to calculate optimization';
+            String errorMessage = AppLocalizations.of(context).failedToCalculateOptimization;
             
             if (e.toString().contains('Montant trop élevé')) {
-              errorMessage = 'Amount exceeds maximum allowed limit';
+              errorMessage = AppLocalizations.of(context).amountExceedsMaximumAllowedLimit;
             } else if (e.toString().contains('minOperations')) {
-              errorMessage = 'Invalid transaction range constraints';
+              errorMessage = AppLocalizations.of(context).invalidTransactionRangeConstraints;
             } else if (e.toString().contains('Aucune option')) {
-              errorMessage = 'No valid fee intervals available';
+              errorMessage = AppLocalizations.of(context).noValidFeeIntervalsAvailable;
             }
             
             AppToast.error(context, errorMessage);

@@ -896,5 +896,59 @@
         "example": "3"
       }
     }
+  },
+  "operationCount": "{count} operations",
+  "@operationCount": {
+    "description": "Display text for number of operations with count",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "optimizationFailedNoValidSolution": "Optimization failed: No valid solution found",
+  "@optimizationFailedNoValidSolution": {
+    "description": "Error message when optimization fails to find a valid solution"
+  },
+  "optimizationIncomplete": "Optimization incomplete: Only {percentage}% of amount covered. Consider adjusting transaction limits or fee intervals.",
+  "@optimizationIncomplete": {
+    "description": "Warning message when optimization covers less than expected amount",
+    "placeholders": {
+      "percentage": {
+        "type": "String",
+        "example": "75.5"
+      }
+    }
+  },
+  "amountExceedsMaximumLimit": "Amount exceeds maximum limit ({amount} {currency})",
+  "@amountExceedsMaximumLimit": {
+    "description": "Error message when amount exceeds the maximum allowed limit",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1,000,000"
+      },
+      "currency": {
+        "type": "String",
+        "example": "EUR"
+      }
+    }
+  },
+  "failedToCalculateOptimization": "Failed to calculate optimization",
+  "@failedToCalculateOptimization": {
+    "description": "Generic error message when optimization calculation fails"
+  },
+  "amountExceedsMaximumAllowedLimit": "Amount exceeds maximum allowed limit",
+  "@amountExceedsMaximumAllowedLimit": {
+    "description": "Error message for amount exceeding maximum allowed limit"
+  },
+  "invalidTransactionRangeConstraints": "Invalid transaction range constraints",
+  "@invalidTransactionRangeConstraints": {
+    "description": "Error message for invalid transaction range constraints"
+  },
+  "noValidFeeIntervalsAvailable": "No valid fee intervals available",
+  "@noValidFeeIntervalsAvailable": {
+    "description": "Error message when no valid fee intervals are available for the provider"
   }
 }

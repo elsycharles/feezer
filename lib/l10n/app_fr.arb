@@ -13,6 +13,26 @@
   "back": "Retour",
   "cancel": "Annuler",
   "save": "Enregistrer",
+  "confirmDeleteCurrencies": "Êtes-vous sûr de vouloir supprimer {count} devises ?",
+  "@confirmDeleteCurrencies": {
+    "description": "Message de confirmation pour la suppression de devises",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "operationCount": "{count} opérations",
+  "@operationCount": {
+    "description": "Texte d'affichage pour le nombre d'opérations avec le compte",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
   "delete": "Supprimer",
   "edit": "Modifier",
   "create": "Créer",
@@ -702,5 +722,49 @@
         "example": "3"
       }
     }
+  },
+  "optimizationFailedNoValidSolution": "Optimisation échouée : Aucune solution valide trouvée",
+  "@optimizationFailedNoValidSolution": {
+    "description": "Message d'erreur lorsque l'optimisation ne trouve pas de solution valide"
+  },
+  "optimizationIncomplete": "Optimisation incomplète : Seulement {percentage}% du montant couvert. Envisagez d'ajuster les limites de transaction ou les intervalles de frais.",
+  "@optimizationIncomplete": {
+    "description": "Message d'avertissement lorsque l'optimisation couvre moins que le montant attendu",
+    "placeholders": {
+      "percentage": {
+        "type": "String",
+        "example": "75.5"
+      }
+    }
+  },
+  "amountExceedsMaximumLimit": "Le montant dépasse la limite maximale ({amount} {currency})",
+  "@amountExceedsMaximumLimit": {
+    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1 000 000"
+      },
+      "currency": {
+        "type": "String",
+        "example": "EUR"
+      }
+    }
+  },
+  "failedToCalculateOptimization": "Échec du calcul de l'optimisation",
+  "@failedToCalculateOptimization": {
+    "description": "Message d'erreur générique lorsque le calcul d'optimisation échoue"
+  },
+  "amountExceedsMaximumAllowedLimit": "Le montant dépasse la limite maximale autorisée",
+  "@amountExceedsMaximumAllowedLimit": {
+    "description": "Message d'erreur pour le montant dépassant la limite maximale autorisée"
+  },
+  "invalidTransactionRangeConstraints": "Contraintes de plage de transaction invalides",
+  "@invalidTransactionRangeConstraints": {
+    "description": "Message d'erreur pour les contraintes de plage de transaction invalides"
+  },
+  "noValidFeeIntervalsAvailable": "Aucun intervalle de frais valide disponible",
+  "@noValidFeeIntervalsAvailable": {
+    "description": "Message d'erreur lorsqu'aucun intervalle de frais valide n'est disponible pour le fournisseur"
   }
 }

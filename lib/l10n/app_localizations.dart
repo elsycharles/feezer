@@ -1263,6 +1263,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to delete {count} currencies?'**
   String confirmDeleteCurrencies(int count);
+
+  /// Display text for number of operations with count
+  ///
+  /// In en, this message translates to:
+  /// **'{count} operations'**
+  String operationCount(int count);
+
+  /// Error message when optimization fails to find a valid solution
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization failed: No valid solution found'**
+  String get optimizationFailedNoValidSolution;
+
+  /// Warning message when optimization covers less than expected amount
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization incomplete: Only {percentage}% of amount covered. Consider adjusting transaction limits or fee intervals.'**
+  String optimizationIncomplete(String percentage);
+
+  /// Error message when amount exceeds the maximum allowed limit
+  ///
+  /// In en, this message translates to:
+  /// **'Amount exceeds maximum limit ({amount} {currency})'**
+  String amountExceedsMaximumLimit(String amount, String currency);
+
+  /// Generic error message when optimization calculation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to calculate optimization'**
+  String get failedToCalculateOptimization;
+
+  /// Error message for amount exceeding maximum allowed limit
+  ///
+  /// In en, this message translates to:
+  /// **'Amount exceeds maximum allowed limit'**
+  String get amountExceedsMaximumAllowedLimit;
+
+  /// Error message for invalid transaction range constraints
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid transaction range constraints'**
+  String get invalidTransactionRangeConstraints;
+
+  /// Error message when no valid fee intervals are available for the provider
+  ///
+  /// In en, this message translates to:
+  /// **'No valid fee intervals available'**
+  String get noValidFeeIntervalsAvailable;
 }
 
 class _AppLocalizationsDelegate

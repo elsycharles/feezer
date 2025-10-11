@@ -12,7 +12,55 @@
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
+  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsy tapaka.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
+  },
+  "next": "Manaraka",
+  "@next": {
+    "description": "Next button text"
+  },
+  "skip": "Halevina",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "getStarted": "Manomboka",
+  "@getStarted": {
+    "description": "Get started button text"
+  },
+  "back": "Miverina",
+  "@back": {
+    "description": "Back button text"
+  },
+  "cancel": "Hanafoana",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "save": "Tehirizina",
+  "@save": {
+    "description": "Save button text"
+  },
+  "confirmDeleteCurrencies": "Tianao ve ny hamafa {count} vola ?",
+  "@confirmDeleteCurrencies": {
+    "description": "Hafatra fanamafisana ny famafana vola",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "operationCount": "{count} asa",
+  "@operationCount": {
+    "description": "Soratra aseho ny isan'ny asa miaraka amin'ny isa",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "delete": "Hamafa",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },
@@ -709,5 +757,49 @@
         "example": "3"
       }
     }
+  },
+  "optimizationFailedNoValidSolution": "Tsy nahomby ny fanatsarana : Tsy misy vahaolana mety hita",
+  "@optimizationFailedNoValidSolution": {
+    "description": "Message d'erreur lorsque l'optimisation ne trouve pas de solution valide"
+  },
+  "optimizationIncomplete": "Tsy feno ny fanatsarana : {percentage}% amin'ny vola ihany no voarakotra. Diniho ny fanovana ny fetran'ny fifampiraharahana na ny elanelam-pandoavam-bola.",
+  "@optimizationIncomplete": {
+    "description": "Message d'avertissement lorsque l'optimisation couvre moins que le montant attendu",
+    "placeholders": {
+      "percentage": {
+        "type": "String",
+        "example": "75.5"
+      }
+    }
+  },
+  "amountExceedsMaximumLimit": "Mihoatra ny fetra ambony indrindra ny vola ({amount} {currency})",
+  "@amountExceedsMaximumLimit": {
+    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1 000 000"
+      },
+      "currency": {
+        "type": "String",
+        "example": "EUR"
+      }
+    }
+  },
+  "failedToCalculateOptimization": "Tsy nahomby ny fanisana ny fanatsarana",
+  "@failedToCalculateOptimization": {
+    "description": "Message d'erreur générique lorsque le calcul d'optimisation échoue"
+  },
+  "amountExceedsMaximumAllowedLimit": "Mihoatra ny fetra ambony indrindra azo ekena ny vola",
+  "@amountExceedsMaximumAllowedLimit": {
+    "description": "Message d'erreur pour le montant dépassant la limite maximale autorisée"
+  },
+  "invalidTransactionRangeConstraints": "Tsy mety ny fetran'ny fifampiraharahana",
+  "@invalidTransactionRangeConstraints": {
+    "description": "Message d'erreur pour les contraintes de plage de transaction invalides"
+  },
+  "noValidFeeIntervalsAvailable": "Tsy misy elanelam-pandoavam-bola mety",
+  "@noValidFeeIntervalsAvailable": {
+    "description": "Message d'erreur lorsqu'aucun intervalle de frais valide n'est disponible pour le fournisseur"
   }
 }
