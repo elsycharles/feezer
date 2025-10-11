@@ -79,12 +79,20 @@ class _State extends State<OptimizeFeeScreen> {
   @override
   Widget build(BuildContext context) {
     final canNavigateBack = Navigator.of(context).canPop();
+    final currentRoute = ModalRoute.of(context)?.settings.name;
+    final isHomeRoute = currentRoute == NavigationUtil.homeRoute;
 
     return PopScope(
-      canPop: canNavigateBack,
+      canPop: canNavigateBack && !isHomeRoute, // Allow natural pop unless on home route
       onPopInvokedWithResult: (didPop, result) {
-        if (!didPop && !canNavigateBack) {
-          _handleBackPress();
+        if (!didPop) {
+          if (isHomeRoute) {
+            // Handle double back to exit on home route
+            _handleBackPress();
+          } else if (!canNavigateBack) {
+            // Fallback for other cases where we can't pop
+            _handleBackPress();
+          }
         }
       },
       child: Scaffold(
