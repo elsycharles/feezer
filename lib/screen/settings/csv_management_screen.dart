@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../util/csv_util.dart';
 import '../../util/navigation_util.dart';
+import '../../util/theme_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
@@ -180,24 +181,16 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       onTap: _isProcessing ? null : onTap,
       borderRadius: BorderRadius.zero,
       builder: (context, hovered, pressed) => ListTile(
-        leading: Container(
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Icon(icon, color: colorScheme.onSurface, size: 24),
-        ),
+        leading: Icon(icon, color: colorScheme.onSurface),
         title: Text(
           title,
           style: theme.textTheme.bodyLarge?.copyWith(
-            fontWeight: FontWeight.w600,
             color: colorScheme.onSurface,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: theme.textTheme.bodySmall?.copyWith(
+          style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
         ),
@@ -594,7 +587,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
             foregroundColor: colorScheme.onPrimary,
             padding: const EdgeInsets.symmetric(vertical: 12),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Global.radiusSm),
             ),
           ),
           child: Text(AppLocalizations.of(context).confirm),
@@ -700,10 +693,10 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         child: OutlinedButton(
           onPressed: () => Navigator.of(context).pop(),
           style: OutlinedButton.styleFrom(
-            side: BorderSide(color: colorScheme.outline),
+            side: BorderSide(color: ThemeUtil.primaryColor),
             padding: const EdgeInsets.symmetric(vertical: 12),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Global.radiusSm),
             ),
           ),
           child: Text(AppLocalizations.of(context).close),
@@ -723,7 +716,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
             foregroundColor: colorScheme.onPrimary,
             padding: const EdgeInsets.symmetric(vertical: 12),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(Global.radiusSm),
             ),
           ),
         ),
