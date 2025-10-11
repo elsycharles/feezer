@@ -3,6 +3,7 @@ import '../../model/fee_interval_model.dart';
 import '../../model/fee_minimizer_result_model.dart';
 import '../../model/fee_minimizer_detail_model.dart';
 import '../../util/constant_util.dart';
+import '../../l10n/app_localizations.dart';
 
 class FeeOptimizerUtil {
   // Cache to memorize recent results
@@ -18,6 +19,7 @@ class FeeOptimizerUtil {
     double precision = ConstantUtil.defaultPrecision,
     int maxOperations = 0,
     int minOperations = 0,
+    AppLocalizations? localizations,
   }) {
     // Validation and normalization of inputs
     totalAmount = min(totalAmount, _maxSafeAmount);
@@ -32,7 +34,18 @@ class FeeOptimizerUtil {
     if (cached != null) return cached;
     
     try {
-      _validateInput(totalAmount, intervals, maxOperations, minOperations);
+      _validateInput(
+        totalAmount, 
+        intervals, 
+        maxOperations, 
+        minOperations,
+        amountMustBePositive: localizations?.amountMustBePositive ?? 'Le montant doit être positif',
+        amountTooHigh: localizations?.amountTooHigh ?? 'Montant trop élevé',
+        noOptionsAvailable: localizations?.noOptionsAvailable ?? 'Aucune option disponible',
+        maxOperationsMustBePositive: localizations?.maxOperationsMustBePositive ?? 'maxOperations doit être >= 0',
+        minOperationsMustBePositive: localizations?.minOperationsMustBePositive ?? 'minOperations doit être >= 0',
+        minOperationsCannotBeGreaterThanMaxOperations: localizations?.minOperationsCannotBeGreaterThanMaxOperations ?? 'minOperations ne peut pas être supérieur à maxOperations',
+      );
       
       final options = _normalizeOptions(intervals);
       if (options.isEmpty) {
@@ -624,22 +637,26 @@ class FeeOptimizerUtil {
   }
 
   static void _validateInput(
-    double totalAmount, 
-    List<FeeInterval> intervals, 
-    int maxOperations, 
-    int minOperations,
-  ) {
-    if (totalAmount <= 0) throw ArgumentError('Le montant doit être positif');
-    if (totalAmount > _maxSafeAmount) throw ArgumentError('Montant trop élevé');
-    if (intervals.isEmpty) throw ArgumentError('Aucune option disponible');
-    if (maxOperations < 0) throw ArgumentError('maxOperations doit être >= 0');
-    if (minOperations < 0) throw ArgumentError('minOperations doit être >= 0');
+    double totalAmount,
+    List<FeeInterval> intervals,
+    int maxOperations,
+    int minOperations, {
+    String amountMustBePositive = 'Le montant doit être positif',
+    String amountTooHigh = 'Montant trop élevé',
+    String noOptionsAvailable = 'Aucune option disponible',
+    String maxOperationsMustBePositive = 'maxOperations doit être >= 0',
+    String minOperationsMustBePositive = 'minOperations doit être >= 0',
+    String minOperationsCannotBeGreaterThanMaxOperations = 'minOperations ne peut pas être supérieur à maxOperations',
+  }) {
+    if (totalAmount <= 0) throw ArgumentError(amountMustBePositive);
+    if (totalAmount > _maxSafeAmount) throw ArgumentError(amountTooHigh);
+    if (intervals.isEmpty) throw ArgumentError(noOptionsAvailable);
+    if (maxOperations < 0) throw ArgumentError(maxOperationsMustBePositive);
+    if (minOperations < 0) throw ArgumentError(minOperationsMustBePositive);
     if (minOperations > 0 && maxOperations > 0 && minOperations > maxOperations) {
-      throw ArgumentError('minOperations ne peut pas être supérieur à maxOperations');
+      throw ArgumentError(minOperationsCannotBeGreaterThanMaxOperations);
     }
-  }
-
-  static FeeOptimizerResult _buildResult(
+  }  static FeeOptimizerResult _buildResult(
     double totalAmount,
     double netAmount,
     double totalFees,

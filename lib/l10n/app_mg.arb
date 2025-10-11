@@ -801,5 +801,29 @@
   "noValidFeeIntervalsAvailable": "Tsy misy elanelam-pandoavam-bola mety",
   "@noValidFeeIntervalsAvailable": {
     "description": "Message d'erreur lorsqu'aucun intervalle de frais valide n'est disponible pour le fournisseur"
+  },
+  "amountMustBePositive": "Tsara raha mihoatra ny aotra ny vola",
+  "@amountMustBePositive": {
+    "description": "Message d'erreur lorsque le montant n'est pas positif"
+  },
+  "amountTooHigh": "Mihoatra loatra ny vola",
+  "@amountTooHigh": {
+    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée"
+  },
+  "noOptionsAvailable": "Tsy misy safidy misy",
+  "@noOptionsAvailable": {
+    "description": "Message d'erreur lorsqu'aucune option de frais n'est disponible"
+  },
+  "maxOperationsMustBePositive": "maxOperations tsara raha >= 0",
+  "@maxOperationsMustBePositive": {
+    "description": "Message d'erreur lorsque maxOperations est négatif"
+  },
+  "minOperationsMustBePositive": "minOperations tsara raha >= 0",
+  "@minOperationsMustBePositive": {
+    "description": "Message d'erreur lorsque minOperations est négatif"
+  },
+  "minOperationsCannotBeGreaterThanMaxOperations": "minOperations tsy afaka mihoatra ny maxOperations",
+  "@minOperationsCannotBeGreaterThanMaxOperations": {
+    "description": "Message d'erreur lorsque minOperations est supérieur à maxOperations"
   }
 }

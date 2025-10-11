@@ -687,4 +687,23 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get noValidFeeIntervalsAvailable =>
       'Tsy misy elanelam-pandoavam-bola mety';
+
+  @override
+  String get amountMustBePositive => 'Tsara raha mihoatra ny aotra ny vola';
+
+  @override
+  String get amountTooHigh => 'Mihoatra loatra ny vola';
+
+  @override
+  String get noOptionsAvailable => 'Tsy misy safidy misy';
+
+  @override
+  String get maxOperationsMustBePositive => 'maxOperations tsara raha >= 0';
+
+  @override
+  String get minOperationsMustBePositive => 'minOperations tsara raha >= 0';
+
+  @override
+  String get minOperationsCannotBeGreaterThanMaxOperations =>
+      'minOperations tsy afaka mihoatra ny maxOperations';
 }

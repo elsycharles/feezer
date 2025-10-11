@@ -1311,6 +1311,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No valid fee intervals available'**
   String get noValidFeeIntervalsAvailable;
+
+  /// Error message when amount is not positive
+  ///
+  /// In en, this message translates to:
+  /// **'Amount must be positive'**
+  String get amountMustBePositive;
+
+  /// Error message when amount exceeds maximum allowed limit
+  ///
+  /// In en, this message translates to:
+  /// **'Amount too high'**
+  String get amountTooHigh;
+
+  /// Error message when no fee options are available
+  ///
+  /// In en, this message translates to:
+  /// **'No options available'**
+  String get noOptionsAvailable;
+
+  /// Error message when maxOperations is negative
+  ///
+  /// In en, this message translates to:
+  /// **'maxOperations must be >= 0'**
+  String get maxOperationsMustBePositive;
+
+  /// Error message when minOperations is negative
+  ///
+  /// In en, this message translates to:
+  /// **'minOperations must be >= 0'**
+  String get minOperationsMustBePositive;
+
+  /// Error message when minOperations is greater than maxOperations
+  ///
+  /// In en, this message translates to:
+  /// **'minOperations cannot be greater than maxOperations'**
+  String get minOperationsCannotBeGreaterThanMaxOperations;
 }
 
 class _AppLocalizationsDelegate

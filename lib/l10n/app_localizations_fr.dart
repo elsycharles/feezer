@@ -700,4 +700,23 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get noValidFeeIntervalsAvailable =>
       'Aucun intervalle de frais valide disponible';
+
+  @override
+  String get amountMustBePositive => 'Le montant doit être positif';
+
+  @override
+  String get amountTooHigh => 'Montant trop élevé';
+
+  @override
+  String get noOptionsAvailable => 'Aucune option disponible';
+
+  @override
+  String get maxOperationsMustBePositive => 'maxOperations doit être >= 0';
+
+  @override
+  String get minOperationsMustBePositive => 'minOperations doit être >= 0';
+
+  @override
+  String get minOperationsCannotBeGreaterThanMaxOperations =>
+      'minOperations ne peut pas être supérieur à maxOperations';
 }

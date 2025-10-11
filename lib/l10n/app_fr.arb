@@ -766,5 +766,29 @@
   "noValidFeeIntervalsAvailable": "Aucun intervalle de frais valide disponible",
   "@noValidFeeIntervalsAvailable": {
     "description": "Message d'erreur lorsqu'aucun intervalle de frais valide n'est disponible pour le fournisseur"
+  },
+  "amountMustBePositive": "Le montant doit être positif",
+  "@amountMustBePositive": {
+    "description": "Message d'erreur lorsque le montant n'est pas positif"
+  },
+  "amountTooHigh": "Montant trop élevé",
+  "@amountTooHigh": {
+    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée"
+  },
+  "noOptionsAvailable": "Aucune option disponible",
+  "@noOptionsAvailable": {
+    "description": "Message d'erreur lorsqu'aucune option de frais n'est disponible"
+  },
+  "maxOperationsMustBePositive": "maxOperations doit être >= 0",
+  "@maxOperationsMustBePositive": {
+    "description": "Message d'erreur lorsque maxOperations est négatif"
+  },
+  "minOperationsMustBePositive": "minOperations doit être >= 0",
+  "@minOperationsMustBePositive": {
+    "description": "Message d'erreur lorsque minOperations est négatif"
+  },
+  "minOperationsCannotBeGreaterThanMaxOperations": "minOperations ne peut pas être supérieur à maxOperations",
+  "@minOperationsCannotBeGreaterThanMaxOperations": {
+    "description": "Message d'erreur lorsque minOperations est supérieur à maxOperations"
   }
 }

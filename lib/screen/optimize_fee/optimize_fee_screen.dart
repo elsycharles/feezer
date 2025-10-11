@@ -748,6 +748,7 @@ class _State extends State<OptimizeFeeScreen> {
     }
 
     final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+    final localizations = AppLocalizations.of(context);
 
     try {
       final db = DatabaseUtil();
@@ -803,6 +804,7 @@ class _State extends State<OptimizeFeeScreen> {
         intervals,
         maxOperations: _maxTransactions,
         minOperations: _minTransactions,
+        localizations: localizations,
       );
 
       final coveragePercentage = (optimizationResult.netAmount / amountInAriary) * 100;
