@@ -93,7 +93,30 @@ class _SearchFieldState extends State<SearchField> {
                 tooltip: widget.clearTooltip ?? AppLocalizations.of(context).clearSearch,
               )
             : null,
-        border: InputBorder.none,
+        border: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,

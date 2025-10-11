@@ -112,7 +112,7 @@ class _State extends State<CurrencyListScreen> {
       context: context,
       builder: (_) => _ConfirmationDialog(
         title: AppLocalizations.of(context).deleteCurrencies,
-        message: AppLocalizations.of(context)!.confirmDeleteCurrencies(count),
+        message: AppLocalizations.of(context).confirmDeleteCurrencies(count),
         confirmText: AppLocalizations.of(context).delete,
         cancelText: AppLocalizations.of(context).cancel,
       ),
