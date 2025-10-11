@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-import '../../model/provider_model.dart';
+import '../../model/provider_model.dart' as model;
 import '../../model/fee_minimizer_result_model.dart';
 import '../../model/fee_interval_model.dart';
 import 'package:fee_minimizer/styles/global.dart';
@@ -18,6 +19,7 @@ import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
 import '../../util/database_util.dart';
+import '../../provider/currency_provider.dart';
 import '../../util/constant_util.dart';
 import '../../util/fee_minimizer_util.dart';
 import '../../util/icon_util.dart';
@@ -26,7 +28,7 @@ import '../../util/icon_util.dart';
 class OptimizeFeeScreen extends StatefulWidget {
   const OptimizeFeeScreen({super.key, this.defaultProvider});
 
-  final Provider? defaultProvider;
+  final model.Provider? defaultProvider;
 
   @override
   State<OptimizeFeeScreen> createState() => _State();
@@ -35,9 +37,9 @@ class OptimizeFeeScreen extends StatefulWidget {
 class _State extends State<OptimizeFeeScreen> {
   DateTime? _lastBackPressed;
   
-  final _providers = <Provider>[];
+  final _providers = <model.Provider>[];
 
-  Provider? _selectedProvider;
+  model.Provider? _selectedProvider;
   int _amount = 10000;
   int _minTransactions = 0;
   int _maxTransactions = 0;
@@ -61,7 +63,7 @@ class _State extends State<OptimizeFeeScreen> {
   Future<void> _loadProviders() async {
     final db = DatabaseUtil();
     final providerMaps = await db.query(ConstantUtil.tableProviders);
-    final loadedProviders = providerMaps.map((map) => Provider.fromMap(map)).toList();
+    final loadedProviders = providerMaps.map((map) => model.Provider.fromMap(map)).toList();
     if (mounted) {
       setState(() {
         _providers
@@ -168,7 +170,7 @@ class _State extends State<OptimizeFeeScreen> {
           border: Border.all(color: context.colorScheme.outlineVariant),
         ),
         child: DropdownButtonHideUnderline(
-          child: DropdownButton<Provider>(
+          child: DropdownButton<model.Provider>(
             value: _selectedProvider,
             isExpanded: true,
             padding: Global.padMd,
@@ -226,7 +228,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
               ),
               // Add new provider option
-              DropdownMenuItem<Provider>(
+              DropdownMenuItem<model.Provider>(
                 value: null, // Special value to indicate "add new"
                 child: Row(
                   children: [
@@ -464,7 +466,7 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).totalAmount,
-                value: '${_result!.totalAmount.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                value: '${_result!.totalAmount.toInt()} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.account_balance_wallet,
                 color: context.colorScheme.primary,
               ),
@@ -473,7 +475,7 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).netAmount,
-                value: '${_result!.netAmount.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                value: '${_result!.netAmount.toInt()} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.savings,
                 color: Colors.green,
               ),
@@ -486,7 +488,7 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).totalFees,
-                value: '${_result!.totalFees.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                value: '${_result!.totalFees.toInt()} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.money_off,
                 color: Colors.red,
               ),
@@ -517,7 +519,7 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).remaining,
-                value: '${_result!.remaining.toInt()} ${AppLocalizations.of(context).currencySymbol}',
+                value: '${_result!.remaining.toInt()} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.pending,
                 color: context.colorScheme.tertiary,
               ),
@@ -642,10 +644,10 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 child: Row(
                   children: [
-                    Expanded(flex: 2, child: _buildTableCell('${detail.amount.toInt()} ${AppLocalizations.of(context).currencySymbol}')),
-                    Expanded(child: _buildTableCell('${detail.fee.toInt()} ${AppLocalizations.of(context).currencySymbol}', isGreen: false)),
+                    Expanded(flex: 2, child: _buildTableCell('${detail.amount.toInt()} ${context.read<CurrencyProvider>().currencySymbol}')),
+                    Expanded(child: _buildTableCell('${detail.fee.toInt()} ${context.read<CurrencyProvider>().currencySymbol}', isGreen: false)),
                     Expanded(child: _buildTableCell(detail.count.toString())),
-                    Expanded(child: _buildTableCell('${detail.totalCost.toInt()} ${AppLocalizations.of(context).currencySymbol}', isGreen: true)),
+                    Expanded(child: _buildTableCell('${detail.totalCost.toInt()} ${context.read<CurrencyProvider>().currencySymbol}', isGreen: true)),
                   ],
                 ),
               );

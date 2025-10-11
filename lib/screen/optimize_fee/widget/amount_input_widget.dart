@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../../../util/theme_util.dart';
 import '../../../styles/global.dart';
+import '../../../provider/currency_provider.dart';
 
 class AmountInputWidget extends StatefulWidget {
   const AmountInputWidget({
@@ -13,13 +15,12 @@ class AmountInputWidget extends StatefulWidget {
     this.max = 999999,
     this.step = 1,
     this.label = 'Amount',
-    this.currency = 'Ar',
   });
 
   final int value;
   final ValueChanged<int> onChanged;
   final int min, max, step;
-  final String label, currency;
+  final String label;
 
   @override
   State<AmountInputWidget> createState() => _AmountInputWidgetState();
@@ -82,7 +83,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                 ),
               ),
               Text(
-                widget.currency,
+                context.read<CurrencyProvider>().currencySymbol,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w600,

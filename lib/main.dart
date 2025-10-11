@@ -2,6 +2,7 @@ import 'package:fee_minimizer/util/constant_util.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/provider/theme_provider.dart';
 import 'package:fee_minimizer/provider/locale_provider.dart';
+import 'package:fee_minimizer/provider/currency_provider.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 import 'package:fee_minimizer/l10n/localization_delegate.dart';
 import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
@@ -27,10 +28,12 @@ void main() async {
   // Initialize providers
   final themeProvider = ThemeProvider();
   final localeProvider = LocaleProvider();
+  final currencyProvider = CurrencyProvider();
 
   await Future.wait([
     themeProvider.initializeTheme(),
     localeProvider.initializeLocale(),
+    currencyProvider.initializeCurrency(),
   ]);
 
   // Check if first launch
@@ -39,6 +42,7 @@ void main() async {
   runApp(MyApp(
     themeProvider: themeProvider,
     localeProvider: localeProvider,
+    currencyProvider: currencyProvider,
     initialRoute: isFirstLaunch ? '/onboarding' : '/',
   ));
 }
@@ -46,12 +50,14 @@ void main() async {
 class MyApp extends StatelessWidget {
   final ThemeProvider themeProvider;
   final LocaleProvider localeProvider;
+  final CurrencyProvider currencyProvider;
   final String initialRoute;
 
   const MyApp({
     super.key,
     required this.themeProvider,
     required this.localeProvider,
+    required this.currencyProvider,
     required this.initialRoute,
   });
 
@@ -108,9 +114,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: localeProvider),
+        ChangeNotifierProvider.value(value: currencyProvider),
       ],
-      child: Consumer2<ThemeProvider, LocaleProvider>(
-        builder: (context, themeProvider, localeProvider, child) {
+      child: Consumer3<ThemeProvider, LocaleProvider, CurrencyProvider>(
+        builder: (context, themeProvider, localeProvider, currencyProvider, child) {
           return MaterialApp(
             title: ConstantUtil.appName,
             routes: routes,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/fee_interval_model.dart';
@@ -11,6 +12,7 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
+import '../../provider/currency_provider.dart';
 
 /// Clean screen for creating new fee intervals
 class NewFeeIntervalScreen extends StatefulWidget {
@@ -91,7 +93,7 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMinAmountField() => custom_form.FormField(
-    label: AppLocalizations.of(context).minimumAmountAr,
+    label: '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
     controller: _minAmountController,
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMinimumAmount,
@@ -106,7 +108,7 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMaxAmountField() => custom_form.FormField(
-    label: AppLocalizations.of(context).maximumAmountAr,
+    label: '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
     controller: _maxAmountController,
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMaximumAmount,
@@ -117,7 +119,7 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildFeeField() => custom_form.FormField(
-    label: AppLocalizations.of(context).feeAr,
+    label: '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
     controller: _feeController,
     icon: Icons.attach_money,
     hintText: AppLocalizations.of(context).enterFeeAmount,

@@ -35,15 +35,15 @@ class FeeInterval {
       (maxAmount ?? 0) > (minAmount ?? 0) &&
       (fee ?? 0) >= 0;
 
-  /// Gets formatted amount range
-  String get formattedRange {
+  /// Gets formatted amount range with currency symbol
+  String formattedRangeWithSymbol(String currencySymbol) {
     final min = (minAmount ?? 0).toInt();
     final max = (maxAmount ?? 0).toInt();
-    return '$min - $max Ar';
+    return '$min - $max $currencySymbol';
   }
 
-  /// Gets formatted fee
-  String get formattedFee => '${(fee ?? 0).toInt()} Ar';
+  /// Gets formatted fee with currency symbol
+  String formattedFeeWithSymbol(String currencySymbol) => '${(fee ?? 0).toInt()} $currencySymbol';
 
   static FeeInterval fromMap(Map<String, dynamic> map) {
     return FeeInterval(
@@ -80,5 +80,5 @@ class FeeInterval {
 
   @override
   String toString() =>
-      'FeeInterval(id: $id, range: $formattedRange, fee: $formattedFee)';
+      'FeeInterval(id: $id, range: ${formattedRangeWithSymbol('Ar')}, fee: ${formattedFeeWithSymbol('Ar')})';
 }

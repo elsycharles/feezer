@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/fee_interval_model.dart';
@@ -8,6 +9,7 @@ import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/loading_button.dart';
 import '../../../widget/app_toast.dart';
+import '../../../provider/currency_provider.dart';
 
 /// Clean fee interval editor
 class FeeIntervalEditBottomSheet extends StatefulWidget {
@@ -61,7 +63,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     child: Column(
       children: [
         custom_form.FormField(
-          label: AppLocalizations.of(context).minimumAmountAr,
+          label: '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _minAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -71,7 +73,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: AppLocalizations.of(context).maximumAmountAr,
+          label: '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _maxAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -81,7 +83,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: AppLocalizations.of(context).feeAr,
+          label: '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _feeController,
           icon: Icons.attach_money,
           keyboardType: TextInputType.number,

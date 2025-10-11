@@ -8,9 +8,11 @@ import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
 import '../../provider/theme_provider.dart';
 import '../../provider/locale_provider.dart';
+import '../../provider/currency_provider.dart';
 import '../../l10n/app_localizations.dart';
 import 'widget/theme_selection_modal.dart';
 import 'widget/language_selection_modal.dart';
+import 'widget/currency_selection_modal.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -47,6 +49,15 @@ class SettingsScreen extends StatelessWidget {
                       AppLocalizations.of(context).system,
                   Icons.language_outlined,
                   onTap: () => LanguageSelectionModal.show(context),
+                ),
+              ),
+              Consumer<CurrencyProvider>(
+                builder: (context, currencyProvider, child) => _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).currencies,
+                  currencyProvider.selectedCurrency?.displayName ?? AppLocalizations.of(context).system,
+                  Icons.currency_exchange_outlined,
+                  onTap: () => _showCurrencySelection(context),
                 ),
               ),
             ]),
@@ -179,6 +190,10 @@ class SettingsScreen extends StatelessWidget {
       context,
       AppLocalizations.of(context).featureComingNextVersion,
     );
+  }
+
+  void _showCurrencySelection(BuildContext context) {
+    CurrencySelectionModal.show(context);
   }
 
   String _getThemeModeDisplayName(
