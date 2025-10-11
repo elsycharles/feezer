@@ -6,6 +6,7 @@ import '../../model/provider_model.dart' as model;
 import '../../model/fee_minimizer_result_model.dart';
 import '../../model/fee_minimizer_detail_model.dart';
 import '../../model/fee_interval_model.dart';
+import '../../model/currency_model.dart';
 import 'package:fee_minimizer/styles/global.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 import '../../util/constant_util.dart';
@@ -47,6 +48,8 @@ class _State extends State<OptimizeFeeScreen> {
   FeeOptimizerResult? _result;
   bool _hasOptimized = false;
   bool _isOptimizing = false;
+  
+  Currency? _previousCurrency;
 
   @override
   void initState() {
@@ -59,6 +62,26 @@ class _State extends State<OptimizeFeeScreen> {
     super.didChangeDependencies();
     // Reload providers when screen becomes visible again (e.g., after adding provider via menu)
     _loadProviders();
+    
+    // Convert amount when currency changes
+    _convertAmountForNewCurrency();
+  }
+
+  void _convertAmountForNewCurrency() {
+    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+    
+    // If we have a previous currency and it changed, convert the amount
+    if (_previousCurrency != null && _previousCurrency != currencyProvider.selectedCurrency) {
+      // Convert from previous currency to new currency
+      final amountInAriary = _previousCurrency!.rate * _amount;
+      _amount = amountInAriary / currencyProvider.selectedCurrency!.rate;
+      
+      // Reset optimization results when currency changes
+      _result = null;
+      _hasOptimized = false;
+    }
+    
+    _previousCurrency = currencyProvider.selectedCurrency;
   }
 
   FeeOptimizerResult? get _convertedResult {
@@ -732,6 +755,9 @@ class _State extends State<OptimizeFeeScreen> {
       return;
     }
 
+    // Get currency provider before async operations
+    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+
     try {
       // Load fee intervals for the selected provider
       final db = DatabaseUtil();
@@ -759,8 +785,9 @@ class _State extends State<OptimizeFeeScreen> {
       }
 
       // Calculate optimal operations
+      final amountInAriary = currencyProvider.convertToAriary(_amount);
       final optimizationResult = FeeOptimizerUtil.calculateOptimalOperations(
-        _amount.toDouble(),
+        amountInAriary,
         intervals,
         maxOperations: _maxTransactions,
         minOperations: _minTransactions,
