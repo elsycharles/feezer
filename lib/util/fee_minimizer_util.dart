@@ -9,7 +9,7 @@ class FeeOptimizerUtil {
   static final _cache = LRUCache<String, FeeOptimizerResult>(100);
   
   // Limites de sécurité pour éviter les crashs
-  static const int _maxSafeOperations = 10000;
+  static const int _maxSafeOperations = 50000;
   // static const int _maxIterationsPerOption = 100;
   static const double _maxSafeAmount = 1e15; // Quadrillion
   
@@ -72,7 +72,7 @@ class FeeOptimizerUtil {
     }
     
     // Pour les montants moyens à élevés
-    if (totalAmount > 1e6) {
+    if (totalAmount > 1e8) {
       return _highAmountStrategy(totalAmount, options, precision, maxOperations, minOperations);
     }
     
@@ -152,7 +152,7 @@ class FeeOptimizerUtil {
       
       // Calculer combien de fois on peut répéter cette opération
       final operationCost = best.amount + best.fee;
-      final repeatCount = min((budget / operationCost).floor(), 1000);
+      final repeatCount = min((budget / operationCost).floor(), _maxSafeOperations);
       
       if (repeatCount > 0) {
         final key = '${best.amount}-${best.fee}';

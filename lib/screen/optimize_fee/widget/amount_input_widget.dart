@@ -139,9 +139,9 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                     focusNode: _focusNode,
                     textAlign: TextAlign.center,
                     textAlignVertical: TextAlignVertical.center,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       LengthLimitingTextInputFormatter(11)
                     ],
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
