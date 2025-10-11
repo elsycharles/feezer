@@ -723,7 +723,7 @@ class _State extends State<OptimizeFeeScreen> {
           _hasOptimized = true;
         });
         if (mounted) {
-          AppToast.info(context, AppLocalizations.of(context).noProvidersFound);
+          AppToast.info(context, AppLocalizations.of(context).noFeeIntervalsFound);
         }
         return;
       }
