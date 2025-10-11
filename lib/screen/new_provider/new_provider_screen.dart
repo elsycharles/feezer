@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/provider_model.dart';
@@ -13,6 +12,7 @@ import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
+import '../../util/navigation_util.dart';
 
 /// Clean screen for creating new providers
 class NewProviderScreen extends StatefulWidget {
@@ -30,6 +30,22 @@ class _State extends State<NewProviderScreen> {
   late final _descriptionController = TextEditingController();
   String _selectedIcon = 'business';
   bool _isCreating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Reset loading state in case screen is reused
+    _isCreating = false;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reset loading state when screen becomes visible again
+    if (mounted && _isCreating) {
+      setState(() => _isCreating = false);
+    }
+  }
 
   @override
   void dispose() {
@@ -133,7 +149,7 @@ class _State extends State<NewProviderScreen> {
         Expanded(
           child: LoadingButton(
             text: AppLocalizations.of(context).cancel,
-            onPressed: () => GoRouter.of(context).pop(),
+            onPressed: () => Navigator.of(context).pop(),
             isLoading: false,
             isOutlined: true,
           ),
@@ -154,23 +170,40 @@ class _State extends State<NewProviderScreen> {
   void _create() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isCreating = true);
-      final now = DateTime.now();
-      final provider = Provider(
-        id: now.millisecondsSinceEpoch.toString(),
-        name: _nameController.text.trim(),
-        description: _descriptionController.text.trim(),
-        iconName: _selectedIcon,
-        creationDatetime: now,
-      );
-      final db = DatabaseUtil();
-      await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
-      widget.onProviderAdded?.call(provider);
-      if (mounted) {
-        AppToast.success(
-          context,
-          AppLocalizations.of(context).providerCreatedSuccessfully,
+      try {
+        final now = DateTime.now();
+        final provider = Provider(
+          id: now.microsecondsSinceEpoch.toString(),
+          name: _nameController.text.trim(),
+          description: _descriptionController.text.trim(),
+          iconName: _selectedIcon,
+          creationDatetime: now,
         );
-        GoRouter.of(context).pop(provider);
+        final db = DatabaseUtil();
+        await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
+        widget.onProviderAdded?.call(provider);
+        
+        // Ensure loading is visible for at least 800ms for better UX
+        await Future.delayed(const Duration(milliseconds: 800));
+        
+        if (mounted) {
+          AppToast.success(
+            context,
+            AppLocalizations.of(context).providerCreatedSuccessfully,
+          );
+          // Keep loading visible during navigation transition
+          await NavigationUtil.pushTo(
+            context,
+            NavigationUtil.providerDetailRoute,
+            extra: provider,
+          );
+        }
+      } catch (e) {
+        // Stop loading on error
+        if (mounted) {
+          setState(() => _isCreating = false);
+          AppToast.error(context, 'Failed to create provider: $e');
+        }
       }
     }
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' hide BottomSheet;
-import 'package:go_router/go_router.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/provider_model.dart';
@@ -108,7 +107,7 @@ class _State extends State<ProviderEditBottomSheet> {
         await Future.delayed(const Duration(milliseconds: 300));
 
         if (mounted) {
-          GoRouter.of(context).pop();
+          Navigator.of(context).pop();
           widget.onSave(provider);
           AppToast.success(
             context,

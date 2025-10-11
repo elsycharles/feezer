@@ -33,7 +33,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
-  go_router: ^16.2.4
   shared_preferences: ^2.3.4
   provider: ^6.1.2
   flutter_svg: ^2.0.9

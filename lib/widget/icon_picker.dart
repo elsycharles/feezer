@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../l10n/app_localizations.dart';
 import '../util/icon_util.dart';
@@ -48,7 +47,7 @@ class IconPicker {
                       selected: iconName == selected,
                       onTap: () {
                         onSelected(iconName);
-                        GoRouter.of(dialogContext).pop();
+                        Navigator.of(dialogContext).pop();
                       },
                     );
                   },

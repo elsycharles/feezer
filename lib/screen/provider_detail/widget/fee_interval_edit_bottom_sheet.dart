@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/fee_interval_model.dart';
@@ -155,7 +154,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         await Future.delayed(const Duration(milliseconds: 300));
 
         if (mounted) {
-          GoRouter.of(context).pop();
+          Navigator.of(context).pop();
           widget.onSave(feeInterval);
           AppToast.success(
             context,

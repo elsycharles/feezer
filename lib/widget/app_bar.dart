@@ -13,6 +13,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showMenuButton;
   final List<String> menuExcludeRoutes;
   final Color? menuIconColor;
+  final bool automaticallyImplyLeading;
 
   const AppBar({
     super.key,
@@ -23,6 +24,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showMenuButton = true,
     this.menuExcludeRoutes = const [],
     this.menuIconColor,
+    this.automaticallyImplyLeading = true,
   });
 
   @override
@@ -45,7 +47,7 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: _buildActions(context, colorScheme),
       leading: leading, // Use native GoRouter back button behavior
-      automaticallyImplyLeading: leading == null, // Let GoRouter handle back button
+      automaticallyImplyLeading: automaticallyImplyLeading && leading == null, // Let GoRouter handle back button
     );
   }
 
