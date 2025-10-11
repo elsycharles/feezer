@@ -10,7 +10,6 @@ class FeeOptimizerUtil {
   
   // Limites de sécurité pour éviter les crashs
   static const int _maxSafeOperations = 50000;
-  // static const int _maxIterationsPerOption = 100;
   static const double _maxSafeAmount = 1e15; // Quadrillion
   
   static FeeOptimizerResult calculateOptimalOperations(
@@ -87,6 +86,166 @@ class FeeOptimizerUtil {
     return _applyConstraintsOptimized(
       unlimitedResult, totalAmount, options, precision, maxOperations, minOperations,
     );
+  }
+
+  static FeeOptimizerResult _applyConstraintsOptimized(
+    FeeOptimizerResult unlimitedResult,
+    double totalAmount,
+    List<_FeeOption> options,
+    double precision,
+    int maxOperations,
+    int minOperations,
+  ) {
+    final actualCount = unlimitedResult.totalOperations;
+
+    // Pas de contraintes
+    if (maxOperations == 0 && minOperations == 0) {
+      return unlimitedResult;
+    }
+
+    // Seulement maxOperations
+    if (maxOperations > 0 && minOperations == 0) {
+      if (actualCount <= maxOperations) {
+        return unlimitedResult;
+      }
+      return _constrainedOperationsFast(totalAmount, options, precision, maxOperations, 0);
+    }
+
+    // Seulement minOperations
+    if (minOperations > 0 && maxOperations == 0) {
+      if (actualCount >= minOperations) {
+        return unlimitedResult;
+      }
+      return _minConstrainedOperationsFast(totalAmount, options, precision, minOperations, 0);
+    }
+
+    // Les deux contraintes
+    if (actualCount >= minOperations && actualCount <= maxOperations) {
+      return unlimitedResult;
+    }
+
+    if (actualCount < minOperations) {
+      return _minConstrainedOperationsFast(totalAmount, options, precision, minOperations, maxOperations);
+    }
+
+    return _constrainedOperationsFast(totalAmount, options, precision, maxOperations, minOperations);
+  }
+
+  static FeeOptimizerResult _minConstrainedOperationsFast(
+    double totalAmount,
+    List<_FeeOption> options,
+    double precision,
+    int minOperations,
+    int maxOperations,
+  ) {
+    final results = <FeeOptimizerResult>[];
+    final end = maxOperations > 0 ? min(maxOperations, 100) : 100;
+
+    // Tester plusieurs nombres d'opérations à partir du minimum
+    for (int numOperations = minOperations; numOperations <= end; numOperations++) {
+      final result = _distributeOptimallyFast(totalAmount, options, precision, numOperations);
+      if (result != null) {
+        results.add(result);
+      }
+    }
+
+    if (results.isEmpty) {
+      return _buildResult(totalAmount, 0, 0, totalAmount, {});
+    }
+
+    // Sélectionner le meilleur résultat
+    return results.reduce((best, curr) {
+      if (curr.netAmount > best.netAmount) return curr;
+      if (curr.netAmount < best.netAmount) return best;
+
+      if (curr.totalFees < best.totalFees) return curr;
+      if (curr.totalFees > best.totalFees) return best;
+
+      final currCount = curr.totalOperations;
+      final bestCount = best.totalOperations;
+      return currCount < bestCount ? curr : best;
+    });
+  }
+
+  static FeeOptimizerResult? _distributeOptimallyFast(
+    double totalAmount,
+    List<_FeeOption> options,
+    double precision,
+    int targetCount,
+  ) {
+    if (targetCount > _maxSafeOperations) {
+      return _distributeWithMainOption(
+        totalAmount, 
+        options, 
+        precision, 
+        targetCount, 
+        _findMostEfficientOption(options)!
+      );
+    }
+    
+    final counts = <String, int>{};
+    double budget = totalAmount;
+    double totalNet = 0;
+    double totalFees = 0;
+    
+    // Calculer le montant moyen par opération
+    final avgPerOperation = totalAmount / targetCount;
+    
+    // Stratégie : distribuer les opérations de manière équilibrée
+    for (int i = 0; i < targetCount; i++) {
+      if (budget <= 0) break;
+      
+      final remaining = budget;
+      final remainingOperations = targetCount - i;
+      final targetAmount = remaining / remainingOperations;
+
+      _BestOperation? best;
+      
+      for (final opt in options) {
+        final maxAmount = min(opt.max, remaining - opt.fee);
+        if (maxAmount < opt.min) continue;
+        
+        // Chercher un montant proche du montant cible
+        double amount = min(maxAmount, max(opt.min, targetAmount - opt.fee));
+        amount = (amount / precision).floor() * precision;
+        
+        if (amount < opt.min) {
+          amount = opt.min;
+        }
+        if (amount > maxAmount) continue;
+        
+        // Score basé sur l'efficience et la proximité du montant cible
+        final efficiency = amount / opt.fee;
+        final proximity = 1 / (1 + (amount - targetAmount).abs());
+        final score = efficiency * 10 + proximity * amount;
+        
+        if (best == null || score > best.score) {
+          best = _BestOperation(amount: amount, fee: opt.fee, score: score);
+        }
+      }
+      
+      // Si aucune option n'est trouvée, utiliser la meilleure disponible
+      if (best == null) {
+        final fallback = _findBestOperationFast(remaining, options, precision);
+        if (fallback == null) break;
+        best = fallback;
+      }
+      
+      final key = '${best.amount}-${best.fee}';
+      counts[key] = (counts[key] ?? 0) + 1;
+      totalNet += best.amount;
+      totalFees += best.fee;
+      budget -= best.amount + best.fee;
+    }
+    
+    final actualCount = counts.values.fold(0, (sum, count) => sum + count);
+    
+    // Vérifier qu'on a bien atteint le nombre cible
+    if (actualCount < targetCount) {
+      return null;
+    }
+    
+    return _buildResult(totalAmount, totalNet, totalFees, budget, counts);
   }
 
   static FeeOptimizerResult _ultraHighAmountStrategy(
@@ -231,35 +390,6 @@ class FeeOptimizerUtil {
     return samples;
   }
 
-  static FeeOptimizerResult _applyConstraintsOptimized(
-    FeeOptimizerResult unlimitedResult,
-    double totalAmount,
-    List<_FeeOption> options,
-    double precision,
-    int maxOperations,
-    int minOperations,
-  ) {
-    final actualCount = unlimitedResult.totalOperations;
-
-    if (maxOperations == 0 && minOperations == 0) return unlimitedResult;
-    if (_isWithinConstraints(actualCount, minOperations, maxOperations)) {
-      return unlimitedResult;
-    }
-
-    if (actualCount < minOperations) {
-      return _minConstrainedOperationsFast(totalAmount, options, precision, minOperations, maxOperations);
-    }
-
-    return _constrainedOperationsFast(totalAmount, options, precision, maxOperations, minOperations);
-  }
-
-  static bool _isWithinConstraints(int count, int min, int max) {
-    if (min == 0 && max == 0) return true;
-    if (min == 0 && max > 0) return count <= max;
-    if (min > 0 && max == 0) return count >= min;
-    return count >= min && count <= max;
-  }
-
   static FeeOptimizerResult _constrainedOperationsFast(
     double totalAmount,
     List<_FeeOption> options,
@@ -357,73 +487,6 @@ class FeeOptimizerUtil {
         budget -= cost * count;
         remaining -= count;
       }
-    }
-    
-    return _buildResultFromCounts(totalAmount, counts);
-  }
-
-  static FeeOptimizerResult _minConstrainedOperationsFast(
-    double totalAmount,
-    List<_FeeOption> options,
-    double precision,
-    int minOperations,
-    int maxOperations,
-  ) {
-    final targetOps = maxOperations > 0 
-        ? min(maxOperations, minOperations + 10)
-        : min(minOperations + 10, 100);
-    
-    return _distributeOptimallyFast(totalAmount, options, precision, targetOps) 
-        ?? _buildResult(totalAmount, 0, 0, totalAmount, {});
-  }
-
-  static FeeOptimizerResult? _distributeOptimallyFast(
-    double totalAmount,
-    List<_FeeOption> options,
-    double precision,
-    int targetCount,
-  ) {
-    if (targetCount > _maxSafeOperations) {
-      return _distributeWithMainOption(
-        totalAmount, 
-        options, 
-        precision, 
-        targetCount, 
-        _findMostEfficientOption(options)!
-      );
-    }
-    
-    final counts = <String, int>{};
-    double budget = totalAmount;
-    
-    // Stratégie : utiliser les meilleures options en priorité
-    final sortedOptions = List<_FeeOption>.from(options)
-      ..sort((a, b) => (b.max / b.fee).compareTo(a.max / a.fee));
-    
-    for (int i = 0; i < targetCount && budget > 0; i++) {
-      _BestOperation? best;
-      
-      for (final opt in sortedOptions) {
-        final maxAmount = min(opt.max, budget - opt.fee);
-        if (maxAmount < opt.min) continue;
-        
-        final amount = (maxAmount / precision).floor() * precision;
-        if (amount < opt.min) continue;
-        
-        final score = amount / opt.fee;
-        if (best == null || score > best.score) {
-          best = _BestOperation(amount: amount, fee: opt.fee, score: score);
-        }
-        
-        // Sortir tôt si on a trouvé une très bonne option
-        if (score > 100) break;
-      }
-      
-      if (best == null) break;
-      
-      final key = '${best.amount}-${best.fee}';
-      counts[key] = (counts[key] ?? 0) + 1;
-      budget -= best.amount + best.fee;
     }
     
     return _buildResultFromCounts(totalAmount, counts);
@@ -549,7 +612,6 @@ class FeeOptimizerUtil {
     return '$totalAmount-$intervalsHash-$precision-$maxOperations-$minOperations';
   }
 
-  // Méthodes existantes optimisées
   static List<_FeeOption> _normalizeOptions(List<FeeInterval> intervals) {
     final validIntervals = intervals.where((interval) => interval.isValid).toList();
     if (validIntervals.isEmpty) return [];
