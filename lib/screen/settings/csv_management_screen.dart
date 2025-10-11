@@ -371,112 +371,275 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     await showDialog(
       context: context,
       builder: (dialogContext) => StatefulBuilder(
-        builder: (context, setState) => AlertDialog(
+        builder: (context, setState) => Dialog(
           backgroundColor: colorScheme.surface,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(20),
           ),
-          title: Text(
-            AppLocalizations.of(context).importData,
-            style: TextStyle(color: colorScheme.onSurface),
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Toggle between file import and text input
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => setState(() => useTextInput = false),
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: !useTextInput
-                            ? colorScheme.primaryContainer
-                            : Colors.transparent,
-                        side: BorderSide(
-                          color: !useTextInput
-                              ? colorScheme.primary
-                              : colorScheme.outline,
-                        ),
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            constraints: const BoxConstraints(maxWidth: 600, minWidth: 400),
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Header with icon
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primaryContainer,
+                        borderRadius: BorderRadius.circular(Global.radiusMd),
                       ),
+                      child: Icon(
+                        Icons.import_export,
+                        color: colorScheme.onPrimaryContainer,
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
                       child: Text(
-                        'Fichier',
-                        style: TextStyle(
-                          color: !useTextInput
-                              ? colorScheme.onPrimaryContainer
-                              : colorScheme.onSurface,
+                        AppLocalizations.of(context).importData,
+                        style: ThemeUtil.titleLarge.copyWith(
+                          color: colorScheme.onSurface,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () => setState(() => useTextInput = true),
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: useTextInput
-                            ? colorScheme.primaryContainer
-                            : Colors.transparent,
-                        side: BorderSide(
-                          color: useTextInput
-                              ? colorScheme.primary
-                              : colorScheme.outline,
-                        ),
-                      ),
-                      child: Text(
-                        'Texte',
-                        style: TextStyle(
-                          color: useTextInput
-                              ? colorScheme.onPrimaryContainer
-                              : colorScheme.onSurface,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              if (useTextInput)
-                TextField(
-                  maxLines: 8,
-                  decoration: InputDecoration(
-                    hintText: 'Collez votre contenu CSV ici...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    filled: true,
-                    fillColor: colorScheme.surfaceContainerHighest,
-                  ),
-                  onChanged: (value) => csvText = value,
-                )
-              else
-                Text(
-                  AppLocalizations.of(context).clickImportToSelectFile,
-                  style: TextStyle(color: colorScheme.onSurfaceVariant),
-                  textAlign: TextAlign.center,
+                  ],
                 ),
-            ],
+                const SizedBox(height: 32),
+                // Modern toggle switch
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(Global.radiusMd),
+                    border: Border.all(
+                      color: colorScheme.outline.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      // File option
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => setState(() => useTextInput = false),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                            decoration: BoxDecoration(
+                              color: !useTextInput
+                                  ? colorScheme.primaryContainer
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(Global.radiusSm),
+                              boxShadow: !useTextInput
+                                  ? [
+                                      BoxShadow(
+                                        color: colorScheme.primary.withValues(alpha: 0.2),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ]
+                                  : null,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.file_upload_outlined,
+                                  size: 20,
+                                  color: !useTextInput
+                                      ? colorScheme.onPrimaryContainer
+                                      : colorScheme.onSurfaceVariant,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Fichier',
+                                  style: ThemeUtil.bodyMedium.copyWith(
+                                    color: !useTextInput
+                                        ? colorScheme.onPrimaryContainer
+                                        : colorScheme.onSurfaceVariant,
+                                    fontWeight: !useTextInput ? FontWeight.w600 : FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      // Text option
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () => setState(() => useTextInput = true),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                            decoration: BoxDecoration(
+                              color: useTextInput
+                                  ? colorScheme.primaryContainer
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(Global.radiusSm),
+                              boxShadow: useTextInput
+                                  ? [
+                                      BoxShadow(
+                                        color: colorScheme.primary.withValues(alpha: 0.2),
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ]
+                                  : null,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.edit_note_outlined,
+                                  size: 20,
+                                  color: useTextInput
+                                      ? colorScheme.onPrimaryContainer
+                                      : colorScheme.onSurfaceVariant,
+                                ),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Texte',
+                                  style: ThemeUtil.bodyMedium.copyWith(
+                                    color: useTextInput
+                                        ? colorScheme.onPrimaryContainer
+                                        : colorScheme.onSurfaceVariant,
+                                    fontWeight: useTextInput ? FontWeight.w600 : FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 24),
+                // Content based on selection
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: useTextInput
+                      ? Container(
+                          key: const ValueKey('text_input'),
+                          child: TextField(
+                            maxLines: 10,
+                            decoration: InputDecoration(
+                              hintText: 'Collez votre contenu CSV ici...',
+                              hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(Global.radiusMd),
+                                borderSide: BorderSide(color: colorScheme.outline),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(Global.radiusMd),
+                                borderSide: BorderSide(color: colorScheme.outline.withValues(alpha: 0.5)),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(Global.radiusMd),
+                                borderSide: BorderSide(color: ThemeUtil.primaryColor, width: 2),
+                              ),
+                              filled: true,
+                              fillColor: colorScheme.surfaceContainerHighest,
+                              contentPadding: const EdgeInsets.all(16),
+                            ),
+                            style: ThemeUtil.bodyMedium.copyWith(
+                              color: colorScheme.onSurface,
+                            ),
+                            onChanged: (value) => csvText = value,
+                          ),
+                        )
+                      : Container(
+                          key: const ValueKey('file_info'),
+                          padding: const EdgeInsets.all(24),
+                          decoration: BoxDecoration(
+                            color: colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(Global.radiusMd),
+                            border: Border.all(
+                              color: colorScheme.outline.withValues(alpha: 0.3),
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.file_upload_outlined,
+                                size: 48,
+                                color: colorScheme.primary,
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                AppLocalizations.of(context).clickImportToSelectFile,
+                                style: ThemeUtil.bodyMedium.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                ),
+                const SizedBox(height: 32),
+                // Action buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.of(dialogContext).pop(),
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: colorScheme.outline),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(Global.radiusMd),
+                          ),
+                        ),
+                        child: Text(
+                          'Annuler',
+                          style: ThemeUtil.bodyMedium.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: FilledButton(
+                        onPressed: () async {
+                          Navigator.of(dialogContext).pop();
+                          if (useTextInput) {
+                            await _importFromText(csvText);
+                          } else {
+                            await _importCsv();
+                          }
+                        },
+                        style: FilledButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(Global.radiusMd),
+                          ),
+                        ),
+                        child: Text(
+                          'Importer',
+                          style: ThemeUtil.bodyMedium.copyWith(
+                            color: colorScheme.onPrimary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: Text(
-                'Annuler',
-                style: TextStyle(color: colorScheme.onSurfaceVariant),
-              ),
-            ),
-            FilledButton(
-              onPressed: () async {
-                Navigator.of(dialogContext).pop();
-                if (useTextInput) {
-                  await _importFromText(csvText);
-                } else {
-                  await _importCsv();
-                }
-              },
-              child: Text('Importer'),
-            ),
-          ],
         ),
       ),
     );
