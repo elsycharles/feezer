@@ -12,7 +12,55 @@
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsara niaraka tamin'izay.",
+  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsy tapaka.",
+  "@onboardingDescription3": {
+    "description": "Third onboarding screen description"
+  },
+  "next": "Manaraka",
+  "@next": {
+    "description": "Next button text"
+  },
+  "skip": "Halevina",
+  "@skip": {
+    "description": "Skip button text"
+  },
+  "getStarted": "Manomboka",
+  "@getStarted": {
+    "description": "Get started button text"
+  },
+  "back": "Miverina",
+  "@back": {
+    "description": "Back button text"
+  },
+  "cancel": "Hanafoana",
+  "@cancel": {
+    "description": "Cancel button text"
+  },
+  "save": "Tehirizina",
+  "@save": {
+    "description": "Save button text"
+  },
+  "confirmDeleteCurrencies": "Tianao ve ny hamafa {count} vola ?",
+  "@confirmDeleteCurrencies": {
+    "description": "Hafatra fanamafisana ny famafana vola",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "operationCount": "{count} asa",
+  "@operationCount": {
+    "description": "Soratra aseho ny isan'ny asa miaraka amin'ny isa",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "delete": "Hamafa",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },
@@ -587,5 +635,195 @@
         "example": "50"
       }
     }
+  },
+  "deleteCurrencies": "Hamafa vola",
+  "@deleteCurrencies": {
+    "description": "Title for delete currencies confirmation dialog"
+  },
+  "currencyDeletedSuccessfully": "Vola voafafa soamantsara",
+  "@currencyDeletedSuccessfully": {
+    "description": "Success message when currency is deleted"
+  },
+  "currencies": "Vola",
+  "@currencies": {
+    "description": "Title for currencies screen"
+  },
+  "searchCurrencies": "Karohy vola...",
+  "@searchCurrencies": {
+    "description": "Placeholder text for currency search field"
+  },
+  "noCurrenciesFound": "Tsy misy vola hita",
+  "@noCurrenciesFound": {
+    "description": "Message when no currencies are found"
+  },
+  "centralizeCurrencies": "Ampifandrary ny volanao amin'ny toerana iray",
+  "@centralizeCurrencies": {
+    "description": "Description text for empty currencies state"
+  },
+  "addNewCurrency": "Ampiditra vola vaovao",
+  "@addNewCurrency": {
+    "description": "Button text to add a new currency"
+  },
+  "newCurrency": "Vola vaovao",
+  "@newCurrency": {
+    "description": "Title for new currency screen"
+  },
+  "createNewCurrency": "Mamorona vola vaovao",
+  "@createNewCurrency": {
+    "description": "Header text for new currency creation"
+  },
+  "currencyCode": "Kaody vola",
+  "@currencyCode": {
+    "description": "Label for currency code field"
+  },
+  "currencyName": "Anarana vola",
+  "@currencyName": {
+    "description": "Label for currency name field"
+  },
+  "currencySymbolLabel": "Famantarana vola",
+  "@currencySymbolLabel": {
+    "description": "Label for currency symbol field"
+  },
+  "exchangeRate": "Tahan'ny fifanakalo",
+  "@exchangeRate": {
+    "description": "Label for exchange rate field"
+  },
+  "currencyCreatedSuccessfully": "Vola voaforona soamantsara",
+  "@currencyCreatedSuccessfully": {
+    "description": "Success message when currency is created"
+  },
+  "manageYourCurrencies": "Tantano ny volanao",
+  "@manageYourCurrencies": {
+    "description": "Header text for currency management"
+  },
+  "totalCurrencies": "Total vola",
+  "@totalCurrencies": {
+    "description": "Label for total currencies count"
+  },
+  "activeCurrencies": "Vola mavitrika",
+  "@activeCurrencies": {
+    "description": "Label for active currencies count"
+  },
+  "editCurrency": "Hanova vola",
+  "@editCurrency": {
+    "description": "Title for edit currency bottom sheet"
+  },
+  "currencyUpdatedSuccessfully": "Vola voaova soamantsara",
+  "@currencyUpdatedSuccessfully": {
+    "description": "Success message when currency is updated"
+  },
+  "addNewCurrencyDescription": "Ampiditra vola vaovao ao amin'ny fanangonanao",
+  "@addNewCurrencyDescription": {
+    "description": "Description text for adding new currency"
+  },
+  "currencyCodeMustBe3Characters": "Ny kaody vola tsy maintsy misy litera 3 ihany",
+  "@currencyCodeMustBe3Characters": {
+    "description": "Validation message for currency code length"
+  },
+  "currencyCodeMustContainOnlyUppercase": "Ny kaody vola tsy maintsy misy litera majuscule ihany",
+  "@currencyCodeMustContainOnlyUppercase": {
+    "description": "Validation message for currency code format"
+  },
+  "pleaseEnterValidPositiveRate": "Ampidiro isa tsara sy positive",
+  "@pleaseEnterValidPositiveRate": {
+    "description": "Validation message for exchange rate"
+  },
+  "failedToCreateCurrency": "Tsy nahavita namorona vola",
+  "@failedToCreateCurrency": {
+    "description": "Error message when currency creation fails"
+  },
+  "failedToUpdateCurrency": "Tsy nahavita nanova vola",
+  "@failedToUpdateCurrency": {
+    "description": "Error message when currency update fails"
+  },
+  "codeMustBe3Characters": "Kaody tsy maintsy 3 litera",
+  "@codeMustBe3Characters": {
+    "description": "Short validation message for currency code length"
+  },
+  "invalidRate": "Tahan’ny fifanakalozam-bola tsy mety",
+  "@invalidRate": {
+    "description": "Validation message for invalid exchange rate"
+  },
+  "rateLabel": "Tahan’ny fifanakalozam-bola :",
+  "@rateLabel": {
+    "description": "Label for exchange rate display in currency card"
+  },
+  "confirmDeleteCurrencies": "Tena te hanala {count} vola ve ianao ?",
+  "@confirmDeleteCurrencies": {
+    "description": "Confirmation message for deleting currencies",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "optimizationFailedNoValidSolution": "Tsy nahomby ny fanatsarana : Tsy misy vahaolana mety hita",
+  "@optimizationFailedNoValidSolution": {
+    "description": "Message d'erreur lorsque l'optimisation ne trouve pas de solution valide"
+  },
+  "optimizationIncomplete": "Tsy feno ny fanatsarana : {percentage}% amin'ny vola ihany no voarakotra. Diniho ny fanovana ny fetran'ny fifampiraharahana na ny elanelam-pandoavam-bola.",
+  "@optimizationIncomplete": {
+    "description": "Message d'avertissement lorsque l'optimisation couvre moins que le montant attendu",
+    "placeholders": {
+      "percentage": {
+        "type": "String",
+        "example": "75.5"
+      }
+    }
+  },
+  "amountExceedsMaximumLimit": "Mihoatra ny fetra ambony indrindra ny vola ({amount} {currency})",
+  "@amountExceedsMaximumLimit": {
+    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "1 000 000"
+      },
+      "currency": {
+        "type": "String",
+        "example": "EUR"
+      }
+    }
+  },
+  "failedToCalculateOptimization": "Tsy nahomby ny fanisana ny fanatsarana",
+  "@failedToCalculateOptimization": {
+    "description": "Message d'erreur générique lorsque le calcul d'optimisation échoue"
+  },
+  "amountExceedsMaximumAllowedLimit": "Mihoatra ny fetra ambony indrindra azo ekena ny vola",
+  "@amountExceedsMaximumAllowedLimit": {
+    "description": "Message d'erreur pour le montant dépassant la limite maximale autorisée"
+  },
+  "invalidTransactionRangeConstraints": "Tsy mety ny fetran'ny fifampiraharahana",
+  "@invalidTransactionRangeConstraints": {
+    "description": "Message d'erreur pour les contraintes de plage de transaction invalides"
+  },
+  "noValidFeeIntervalsAvailable": "Tsy misy elanelam-pandoavam-bola mety",
+  "@noValidFeeIntervalsAvailable": {
+    "description": "Message d'erreur lorsqu'aucun intervalle de frais valide n'est disponible pour le fournisseur"
+  },
+  "amountMustBePositive": "Tsara raha mihoatra ny aotra ny vola",
+  "@amountMustBePositive": {
+    "description": "Message d'erreur lorsque le montant n'est pas positif"
+  },
+  "amountTooHigh": "Mihoatra loatra ny vola",
+  "@amountTooHigh": {
+    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée"
+  },
+  "noOptionsAvailable": "Tsy misy safidy misy",
+  "@noOptionsAvailable": {
+    "description": "Message d'erreur lorsqu'aucune option de frais n'est disponible"
+  },
+  "maxOperationsMustBePositive": "maxOperations tsara raha >= 0",
+  "@maxOperationsMustBePositive": {
+    "description": "Message d'erreur lorsque maxOperations est négatif"
+  },
+  "minOperationsMustBePositive": "minOperations tsara raha >= 0",
+  "@minOperationsMustBePositive": {
+    "description": "Message d'erreur lorsque minOperations est négatif"
+  },
+  "minOperationsCannotBeGreaterThanMaxOperations": "minOperations tsy afaka mihoatra ny maxOperations",
+  "@minOperationsCannotBeGreaterThanMaxOperations": {
+    "description": "Message d'erreur lorsque minOperations est supérieur à maxOperations"
   }
 }

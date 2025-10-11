@@ -1089,6 +1089,264 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Must be less than {count} characters'**
   String mustBeLessThanNCharacters(int count);
+
+  /// Title for delete currencies confirmation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Currencies'**
+  String get deleteCurrencies;
+
+  /// Success message when currency is deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Currency deleted successfully'**
+  String get currencyDeletedSuccessfully;
+
+  /// Title for currencies screen
+  ///
+  /// In en, this message translates to:
+  /// **'Currencies'**
+  String get currencies;
+
+  /// Placeholder text for currency search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search currencies...'**
+  String get searchCurrencies;
+
+  /// Message when no currencies are found
+  ///
+  /// In en, this message translates to:
+  /// **'No currencies found'**
+  String get noCurrenciesFound;
+
+  /// Description text for empty currencies state
+  ///
+  /// In en, this message translates to:
+  /// **'Centralize your currencies in one place'**
+  String get centralizeCurrencies;
+
+  /// Button text to add a new currency
+  ///
+  /// In en, this message translates to:
+  /// **'Add new currency'**
+  String get addNewCurrency;
+
+  /// Title for new currency screen
+  ///
+  /// In en, this message translates to:
+  /// **'New Currency'**
+  String get newCurrency;
+
+  /// Header text for new currency creation
+  ///
+  /// In en, this message translates to:
+  /// **'Create New Currency'**
+  String get createNewCurrency;
+
+  /// Label for currency code field
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Code'**
+  String get currencyCode;
+
+  /// Label for currency name field
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Name'**
+  String get currencyName;
+
+  /// Label for currency symbol field
+  ///
+  /// In en, this message translates to:
+  /// **'Currency Symbol'**
+  String get currencySymbolLabel;
+
+  /// Label for exchange rate field
+  ///
+  /// In en, this message translates to:
+  /// **'Exchange Rate'**
+  String get exchangeRate;
+
+  /// Success message when currency is created
+  ///
+  /// In en, this message translates to:
+  /// **'Currency created successfully'**
+  String get currencyCreatedSuccessfully;
+
+  /// Header text for currency management
+  ///
+  /// In en, this message translates to:
+  /// **'Manage your currencies'**
+  String get manageYourCurrencies;
+
+  /// Label for total currencies count
+  ///
+  /// In en, this message translates to:
+  /// **'Total Currencies'**
+  String get totalCurrencies;
+
+  /// Label for active currencies count
+  ///
+  /// In en, this message translates to:
+  /// **'Active Currencies'**
+  String get activeCurrencies;
+
+  /// Title for edit currency bottom sheet
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Currency'**
+  String get editCurrency;
+
+  /// Success message when currency is updated
+  ///
+  /// In en, this message translates to:
+  /// **'Currency updated successfully'**
+  String get currencyUpdatedSuccessfully;
+
+  /// Description text for adding new currency
+  ///
+  /// In en, this message translates to:
+  /// **'Add a new currency to your collection'**
+  String get addNewCurrencyDescription;
+
+  /// Validation message for currency code length
+  ///
+  /// In en, this message translates to:
+  /// **'Currency code must be exactly 3 characters'**
+  String get currencyCodeMustBe3Characters;
+
+  /// Validation message for currency code format
+  ///
+  /// In en, this message translates to:
+  /// **'Currency code must contain only uppercase letters'**
+  String get currencyCodeMustContainOnlyUppercase;
+
+  /// Validation message for exchange rate
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid positive rate'**
+  String get pleaseEnterValidPositiveRate;
+
+  /// Error message when currency creation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create currency'**
+  String get failedToCreateCurrency;
+
+  /// Error message when currency update fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update currency'**
+  String get failedToUpdateCurrency;
+
+  /// Short validation message for currency code length
+  ///
+  /// In en, this message translates to:
+  /// **'Code must be 3 characters'**
+  String get codeMustBe3Characters;
+
+  /// Validation message for invalid exchange rate
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid rate'**
+  String get invalidRate;
+
+  /// Label for exchange rate display in currency card
+  ///
+  /// In en, this message translates to:
+  /// **'Rate:'**
+  String get rateLabel;
+
+  /// Confirmation message for deleting currencies
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete {count} currencies?'**
+  String confirmDeleteCurrencies(int count);
+
+  /// Display text for number of operations with count
+  ///
+  /// In en, this message translates to:
+  /// **'{count} operations'**
+  String operationCount(int count);
+
+  /// Error message when optimization fails to find a valid solution
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization failed: No valid solution found'**
+  String get optimizationFailedNoValidSolution;
+
+  /// Warning message when optimization covers less than expected amount
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization incomplete: Only {percentage}% of amount covered. Consider adjusting transaction limits or fee intervals.'**
+  String optimizationIncomplete(String percentage);
+
+  /// Error message when amount exceeds the maximum allowed limit
+  ///
+  /// In en, this message translates to:
+  /// **'Amount exceeds maximum limit ({amount} {currency})'**
+  String amountExceedsMaximumLimit(String amount, String currency);
+
+  /// Generic error message when optimization calculation fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to calculate optimization'**
+  String get failedToCalculateOptimization;
+
+  /// Error message for amount exceeding maximum allowed limit
+  ///
+  /// In en, this message translates to:
+  /// **'Amount exceeds maximum allowed limit'**
+  String get amountExceedsMaximumAllowedLimit;
+
+  /// Error message for invalid transaction range constraints
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid transaction range constraints'**
+  String get invalidTransactionRangeConstraints;
+
+  /// Error message when no valid fee intervals are available for the provider
+  ///
+  /// In en, this message translates to:
+  /// **'No valid fee intervals available'**
+  String get noValidFeeIntervalsAvailable;
+
+  /// Error message when amount is not positive
+  ///
+  /// In en, this message translates to:
+  /// **'Amount must be positive'**
+  String get amountMustBePositive;
+
+  /// Error message when amount exceeds maximum allowed limit
+  ///
+  /// In en, this message translates to:
+  /// **'Amount too high'**
+  String get amountTooHigh;
+
+  /// Error message when no fee options are available
+  ///
+  /// In en, this message translates to:
+  /// **'No options available'**
+  String get noOptionsAvailable;
+
+  /// Error message when maxOperations is negative
+  ///
+  /// In en, this message translates to:
+  /// **'maxOperations must be >= 0'**
+  String get maxOperationsMustBePositive;
+
+  /// Error message when minOperations is negative
+  ///
+  /// In en, this message translates to:
+  /// **'minOperations must be >= 0'**
+  String get minOperationsMustBePositive;
+
+  /// Error message when minOperations is greater than maxOperations
+  ///
+  /// In en, this message translates to:
+  /// **'minOperations cannot be greater than maxOperations'**
+  String get minOperationsCannotBeGreaterThanMaxOperations;
 }
 
 class _AppLocalizationsDelegate

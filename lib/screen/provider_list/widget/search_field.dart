@@ -2,17 +2,20 @@ import 'package:flutter/material.dart';
 import '../../../util/theme_util.dart';
 import '../../../util/extensions_util.dart';
 import '../../../styles/global.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// Reusable search field with icon and clear functionality
 class SearchField extends StatefulWidget {
   const SearchField({
     super.key,
     this.hintText = 'Search...',
+    this.clearTooltip,
     this.onChanged,
     this.controller,
   });
 
   final String hintText;
+  final String? clearTooltip;
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
 
@@ -87,10 +90,33 @@ class _SearchFieldState extends State<SearchField> {
                   color: context.colorScheme.onSurfaceVariant,
                   size: 20,
                 ),
-                tooltip: 'Clear search',
+                tooltip: widget.clearTooltip ?? AppLocalizations.of(context).clearSearch,
               )
             : null,
-        border: InputBorder.none,
+        border: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: Global.borderMd,
+          borderSide: BorderSide.none,
+        ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,

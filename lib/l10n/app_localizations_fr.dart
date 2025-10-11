@@ -571,4 +571,152 @@ class AppLocalizationsFr extends AppLocalizations {
   String mustBeLessThanNCharacters(int count) {
     return 'Doit contenir moins de $count caractères';
   }
+
+  @override
+  String get deleteCurrencies => 'Supprimer les devises';
+
+  @override
+  String get currencyDeletedSuccessfully => 'Devise supprimée avec succès';
+
+  @override
+  String get currencies => 'Devises';
+
+  @override
+  String get searchCurrencies => 'Rechercher des devises...';
+
+  @override
+  String get noCurrenciesFound => 'Aucune devise trouvée';
+
+  @override
+  String get centralizeCurrencies =>
+      'Centralisez vos devises en un seul endroit';
+
+  @override
+  String get addNewCurrency => 'Ajouter une nouvelle devise';
+
+  @override
+  String get newCurrency => 'Nouvelle devise';
+
+  @override
+  String get createNewCurrency => 'Créer une nouvelle devise';
+
+  @override
+  String get currencyCode => 'Code de la devise';
+
+  @override
+  String get currencyName => 'Nom de la devise';
+
+  @override
+  String get currencySymbolLabel => 'Symbole de la devise';
+
+  @override
+  String get exchangeRate => 'Taux de change';
+
+  @override
+  String get currencyCreatedSuccessfully => 'Devise créée avec succès';
+
+  @override
+  String get manageYourCurrencies => 'Gérez vos devises';
+
+  @override
+  String get totalCurrencies => 'Total des devises';
+
+  @override
+  String get activeCurrencies => 'Devises actives';
+
+  @override
+  String get editCurrency => 'Modifier la devise';
+
+  @override
+  String get currencyUpdatedSuccessfully => 'Devise mise à jour avec succès';
+
+  @override
+  String get addNewCurrencyDescription =>
+      'Ajoutez une nouvelle devise à votre collection';
+
+  @override
+  String get currencyCodeMustBe3Characters =>
+      'Le code de devise doit contenir exactement 3 caractères';
+
+  @override
+  String get currencyCodeMustContainOnlyUppercase =>
+      'Le code de devise ne doit contenir que des lettres majuscules';
+
+  @override
+  String get pleaseEnterValidPositiveRate =>
+      'Veuillez saisir un taux positif valide';
+
+  @override
+  String get failedToCreateCurrency => 'Échec de la création de la devise';
+
+  @override
+  String get failedToUpdateCurrency => 'Échec de la mise à jour de la devise';
+
+  @override
+  String get codeMustBe3Characters => 'Le code doit contenir 3 caractères';
+
+  @override
+  String get invalidRate => 'Taux invalide';
+
+  @override
+  String get rateLabel => 'Taux :';
+
+  @override
+  String confirmDeleteCurrencies(int count) {
+    return 'Êtes-vous sûr de vouloir supprimer $count devises ?';
+  }
+
+  @override
+  String operationCount(int count) {
+    return '$count opérations';
+  }
+
+  @override
+  String get optimizationFailedNoValidSolution =>
+      'Optimisation échouée : Aucune solution valide trouvée';
+
+  @override
+  String optimizationIncomplete(String percentage) {
+    return 'Optimisation incomplète : Seulement $percentage% du montant couvert. Envisagez d\'ajuster les limites de transaction ou les intervalles de frais.';
+  }
+
+  @override
+  String amountExceedsMaximumLimit(String amount, String currency) {
+    return 'Le montant dépasse la limite maximale ($amount $currency)';
+  }
+
+  @override
+  String get failedToCalculateOptimization =>
+      'Échec du calcul de l\'optimisation';
+
+  @override
+  String get amountExceedsMaximumAllowedLimit =>
+      'Le montant dépasse la limite maximale autorisée';
+
+  @override
+  String get invalidTransactionRangeConstraints =>
+      'Contraintes de plage de transaction invalides';
+
+  @override
+  String get noValidFeeIntervalsAvailable =>
+      'Aucun intervalle de frais valide disponible';
+
+  @override
+  String get amountMustBePositive => 'Le montant doit être positif';
+
+  @override
+  String get amountTooHigh => 'Montant trop élevé';
+
+  @override
+  String get noOptionsAvailable => 'Aucune option disponible';
+
+  @override
+  String get maxOperationsMustBePositive => 'maxOperations doit être >= 0';
+
+  @override
+  String get minOperationsMustBePositive => 'minOperations doit être >= 0';
+
+  @override
+  String get minOperationsCannotBeGreaterThanMaxOperations =>
+      'minOperations ne peut pas être supérieur à maxOperations';
 }
