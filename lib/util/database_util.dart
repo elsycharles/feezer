@@ -114,7 +114,7 @@ class DatabaseUtil {
     }
   }
 
-  // Méthodes génériques de base de données
+  // Generic database methods
   Future<int> insert(String table, Map<String, dynamic> values) async {
     final db = await database;
     return await db.insert(table, values);

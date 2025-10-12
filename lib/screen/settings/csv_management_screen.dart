@@ -214,13 +214,13 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       final template = CsvUtil.getImportTemplate(locale);
 
-      // Créer un fichier temporaire
+      // Create temporary file
       final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
       final tempFile = File('${directory.path}/template_$timestamp.csv');
       await tempFile.writeAsString(template);
 
-      // Sauvegarder avec le nom suggéré
+      // Save with suggested name
       await _saveFileToUserLocation(
         tempFile.path,
         'fee_minimizer_template.csv',
@@ -242,11 +242,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       // Get localized string before async operation
       final chooseWhereToSaveText = localizations.chooseWhereToSave;
 
-      // Lire le fichier source
+      // Read source file
       final sourceFile = File(sourceFilePath);
       final bytes = await sourceFile.readAsBytes();
 
-      // Sauvegarder avec FilePicker (gère automatiquement les permissions)
+      // Save with FilePicker (handles permissions automatically)
       final result = await FilePicker.platform.saveFile(
         dialogTitle: chooseWhereToSaveText,
         fileName: suggestedName,
@@ -308,7 +308,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 }
 
 // ============================================================================
-// COMPOSANTS RÉUTILISABLES
+// REUSABLE COMPONENTS
 // ============================================================================
 
 class _InfoCard extends StatelessWidget {

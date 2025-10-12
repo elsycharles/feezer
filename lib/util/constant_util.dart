@@ -75,7 +75,7 @@ class ConstantUtil {
     // For extremely large amounts, use scientific notation or round significantly
     return amount.toStringAsExponential(2);
   }
-  // Configuration base de données
+  // Database configuration
   static const String databaseName = 'fee_optimizer.db';
   static const int databaseVersion = 3;
 
@@ -86,7 +86,7 @@ class ConstantUtil {
   static const String tableOptimizationResults = 'optimization_results';
   static const String tableOptimizationDetails = 'optimization_details';
 
-  // Colonnes communes
+  // Common columns
   static const String columnId = 'id';
   static const String columnCreationDatetime = 'creation_datetime';
 

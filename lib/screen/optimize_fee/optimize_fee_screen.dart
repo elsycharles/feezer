@@ -74,7 +74,7 @@ class _State extends State<OptimizeFeeScreen> {
     if (_previousCurrency != null && _previousCurrency != currencyProvider.selectedCurrency) {
       // Convert from previous currency to new currency - NO ROUNDING
       final amountInAriary = _previousCurrency!.rate * _amount;
-      final newAmount = amountInAriary / currencyProvider.selectedCurrency!.rate;  // SUPPRIMÉ: * 100).round() / 100
+      final newAmount = amountInAriary / currencyProvider.selectedCurrency!.rate;  // REMOVED: * 100).round() / 100
       
       // Update amount but keep optimization results (they will be converted via _convertedResult)
       setState(() {

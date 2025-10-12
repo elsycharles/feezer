@@ -61,19 +61,19 @@ class FeeOptimizerUtil {
         minOperations
       );
       
-      // Filtrer les détails avec des valeurs nulles ou zéro
+      // Filter out details with null or zero values
       final filteredDetails = result.details.where((detail) => 
         detail.count > 0 && detail.amount > 0
       ).toList();
       
-      // Si après filtrage il ne reste rien, recalculer avec des contraintes assouplies
+      // If after filtering nothing remains, recalculate with relaxed constraints
       if (filteredDetails.isEmpty && result.netAmount == 0) {
         final relaxedResult = _computeOptimalStrategy(
           totalAmount, 
           options, 
           precision, 
-          0, // Pas de limite max
-          0, // Pas de limite min
+          0, // No max limit
+          0, // No min limit
         );
         
         final relaxedFiltered = relaxedResult.details.where((detail) => 
@@ -93,7 +93,7 @@ class FeeOptimizerUtil {
         }
       }
       
-      // Créer le résultat final avec les détails filtrés
+      // Create final result with filtered details
       final finalResult = filteredDetails.isEmpty 
           ? result 
           : FeeOptimizerResult(
@@ -109,7 +109,7 @@ class FeeOptimizerUtil {
       
       return finalResult;
     } catch (e) {
-      // En cas d'erreur, tenter une optimisation simplifiée
+      // In case of error, try simplified optimization
       final options = _normalizeOptions(intervals);
       if (options.isNotEmpty) {
         final simpleResult = _greedyOptimizedFast(totalAmount, options, precision);
@@ -275,7 +275,7 @@ class FeeOptimizerUtil {
         final maxAmount = min(opt.max, remaining - opt.fee);
         if (maxAmount < opt.min) continue;
         
-        // SUPPRIMÉ l'arrondi: amount = (amount / precision).floor() * precision;
+        // REMOVED rounding: amount = (amount / precision).floor() * precision;
         double amount = min(maxAmount, max(opt.min, targetAmount - opt.fee));
         
         if (amount < opt.min) {
@@ -327,7 +327,7 @@ class FeeOptimizerUtil {
     }
     
     final operationCost = bestOption.max + bestOption.fee;
-    final maxPossibleOps = (totalAmount / operationCost).toInt();  // CHANGÉ: .floor() en .toInt()
+    final maxPossibleOps = (totalAmount / operationCost).toInt();  // CHANGED: .floor() to .toInt()
     
     int targetOps = maxPossibleOps;
     if (maxOperations > 0) targetOps = min(targetOps, maxOperations);
@@ -374,7 +374,7 @@ class FeeOptimizerUtil {
       if (best == null) break;
       
       final operationCost = best.amount + best.fee;
-      // SUPPRIMÉ .floor() - Utiliser la valeur exacte
+      // REMOVED .floor() - Use exact value
       final repeatCount = min((budget / operationCost).toInt(), _maxSafeOperations);
       
       if (repeatCount > 0) {
@@ -413,7 +413,7 @@ class FeeOptimizerUtil {
         if (amount < opt.min) continue;
         
         final cost = amount + opt.fee;
-        final count = min((totalAmount / cost).toInt(), _maxSafeOperations);  // CHANGÉ: .floor() en .toInt()
+        final count = min((totalAmount / cost).toInt(), _maxSafeOperations);  // CHANGED: .floor() to .toInt()
         if (count == 0) continue;
 
         final net = amount * count;
@@ -442,7 +442,7 @@ class FeeOptimizerUtil {
     for (int i = 1; i < numSamples; i++) {
       final amt = opt.max - (step * i);
       if (amt >= opt.min) {
-        // SUPPRIMÉ l'arrondi: (amt / precision).floor() * precision
+        // REMOVED rounding: (amt / precision).floor() * precision
         samples.add(amt);
       }
     }
@@ -457,7 +457,7 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Pour les gros nombres d'opérations, utiliser une approche par batch
+    // For large numbers of operations, use batch approach
     if (maxOperations > 100) {
       return _batchConstrainedOperations(totalAmount, options, precision, maxOperations, minOperations);
     }
@@ -466,7 +466,7 @@ class FeeOptimizerUtil {
     final start = max(1, minOperations);
     final end = min(maxOperations, 50);
     
-    // Échantillonnage intelligent des nombres d'opérations
+    // Intelligent sampling of operation counts
     final samples = _getOperationSamples(start, end);
 
     for (final numOperations in samples) {
@@ -507,7 +507,7 @@ class FeeOptimizerUtil {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
     
-    final targetOps = min(maxOperations, (totalAmount / (bestOption.max + bestOption.fee)).toInt());  // CHANGÉ
+    final targetOps = min(maxOperations, (totalAmount / (bestOption.max + bestOption.fee)).toInt());  // CHANGED
     final actualOps = max(minOperations, targetOps);
     
     return _distributeWithMainOption(totalAmount, options, precision, actualOps, bestOption);
@@ -524,7 +524,7 @@ class FeeOptimizerUtil {
     double budget = totalAmount;
     
     final mainCost = mainOption.max + mainOption.fee;
-    final mainCount = min(targetCount, (budget / mainCost).toInt());  // CHANGÉ
+    final mainCount = min(targetCount, (budget / mainCost).toInt());  // CHANGED
     
     if (mainCount > 0) {
       counts['${mainOption.max}-${mainOption.fee}'] = mainCount;
@@ -538,7 +538,7 @@ class FeeOptimizerUtil {
       final cost = opt.max + opt.fee;
       if (cost > budget) continue;
       
-      final count = min(remaining, (budget / cost).toInt());  // CHANGÉ
+      final count = min(remaining, (budget / cost).toInt());  // CHANGED
       if (count > 0) {
         counts['${opt.max}-${opt.fee}'] = count;
         budget -= cost * count;
@@ -566,8 +566,8 @@ class FeeOptimizerUtil {
       
       final cost = opt.max + opt.fee;
       final maxCount = maxOperations > 0 
-          ? min((budget / cost).toInt(), maxOperations - totalOps)  // CHANGÉ
-          : (budget / cost).toInt();  // CHANGÉ
+          ? min((budget / cost).toInt(), maxOperations - totalOps)  // CHANGED
+          : (budget / cost).toInt();  // CHANGED
       
       if (maxCount > 0) {
         final count = min(maxCount, _maxSafeOperations - totalOps);
@@ -624,7 +624,7 @@ class FeeOptimizerUtil {
       final maxAmount = min(opt.max, budget - opt.fee);
       if (maxAmount < opt.min) continue;
 
-      // SUPPRIMÉ l'arrondi: (maxAmount / precision).floor() * precision
+      // REMOVED rounding: (maxAmount / precision).floor() * precision
       final amount = maxAmount;
       if (amount < opt.min) continue;
 
@@ -717,7 +717,7 @@ class FeeOptimizerUtil {
     double remaining,
     Map<String, int> counts,
   ) {
-    // Filtrer les entrées avec count = 0 ou amount = 0
+    // Filter entries with count = 0 or amount = 0
     final filteredCounts = Map<String, int>.from(counts)
       ..removeWhere((key, value) {
         if (value <= 0) return true;
@@ -809,7 +809,7 @@ class LRUCache<K, V> {
   void clear() => _cache.clear();
 }
 
-// Classes internes optimisées
+// Optimized internal classes
 class _FeeOption {
   _FeeOption({required this.min, required this.max, required this.fee, required this.feeValue, required this.feeType});
   final double min;

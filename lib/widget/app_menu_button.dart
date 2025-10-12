@@ -6,7 +6,7 @@ import '../util/extensions_util.dart';
 import '../util/navigation_util.dart';
 import '../util/theme_util.dart';
 
-/// Réutilisable PopupMenuButton pour la navigation entre les écrans principaux
+/// Reusable PopupMenuButton for navigation between main screens
 class AppMenuButton extends StatelessWidget {
   final List<String> excludeRoutes;
   final Color? iconColor;
