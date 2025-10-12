@@ -358,7 +358,6 @@ class _DataManagementSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -367,12 +366,12 @@ class _DataManagementSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
           child: Row(
             children: [
-              Icon(Icons.import_export, size: 20, color: colorScheme.primary),
+              Icon(Icons.import_export, size: 20, color: ThemeUtil.primaryColor),
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).dataManagement,
                 style: theme.textTheme.titleMedium?.copyWith(
-                  color: colorScheme.primary,
+                  color: ThemeUtil.primaryColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -425,7 +424,7 @@ class _ActionTile extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.zero,
       builder: (context, hovered, pressed) => ListTile(
-        leading: Icon(icon, color: colorScheme.onSurface),
+        leading: Icon(icon, color: ThemeUtil.primaryColor),
         title: Text(
           title,
           style: theme.textTheme.bodyLarge?.copyWith(
@@ -462,7 +461,6 @@ class _TemplatesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -471,12 +469,12 @@ class _TemplatesSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
           child: Row(
             children: [
-              Icon(Icons.description_outlined, size: 20, color: colorScheme.primary),
+              Icon(Icons.description_outlined, size: 20, color: ThemeUtil.primaryColor),
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).templates,
                 style: theme.textTheme.titleMedium?.copyWith(
-                  color: colorScheme.primary,
+                  color: ThemeUtil.primaryColor,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -815,17 +813,8 @@ class _ToggleOption extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primaryContainer : Colors.transparent,
+          color: isSelected ? ThemeUtil.primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: colorScheme.primary.withValues(alpha: 0.15),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -834,7 +823,7 @@ class _ToggleOption extends StatelessWidget {
               icon,
               size: 20,
               color: isSelected
-                  ? colorScheme.onPrimaryContainer
+                  ? ThemeUtil.textLight
                   : colorScheme.onSurfaceVariant,
             ),
             const SizedBox(width: 8),
@@ -842,7 +831,7 @@ class _ToggleOption extends StatelessWidget {
               label,
               style: ThemeUtil.bodyMedium.copyWith(
                 color: isSelected
-                    ? colorScheme.onPrimaryContainer
+                    ? ThemeUtil.textLight
                     : colorScheme.onSurfaceVariant,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
               ),
