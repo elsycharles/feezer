@@ -1050,11 +1050,11 @@ class AppLocalizationsMg extends AppLocalizations {
       'Try different keywords or browse categories';
 
   @override
-  String get faqWhatIsFeeMinimizer => 'Inona no Fee Minimizer?';
+  String get faqWhatIsFeeMinimizer => 'Inona no Feezer na Fee Minimizer?';
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran\'ny fifampiraharahana amin\'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian\'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.';
+      'Feezer na Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran\'ny fifampiraharahana amin\'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian\'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.';
 
   @override
   String get faqHowToAddProvider =>
@@ -1083,7 +1083,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqOfflineModeAnswer =>
-      'Eny, Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin\'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.';
+      'Eny, Feezer na Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin\'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.';
 
   @override
   String get faqCurrencyRates =>
@@ -1121,7 +1121,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get gettingStartedDescription =>
-      'Learn the basics of using Fee Minimizer';
+      'Mianara ny fototry ny fampiasana Feezer na Fee Minimizer';
 
   @override
   String get providerManagement => 'Provider Management';
@@ -1146,7 +1146,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get videoTutorialsDescription =>
-      'Watch step-by-step video guides to master Fee Minimizer';
+      'Mijery torolàlana video isaky ny dingana mba hahay Feezer na Fee Minimizer';
 
   @override
   String get watchTutorials => 'Watch Tutorials';
@@ -1156,7 +1156,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get feedbackDescription =>
-      'Help us improve Fee Minimizer by sharing your feedback and suggestions';
+      'Ampio anay hanatsarana Feezer na Fee Minimizer amin\'ny alalan\'ny fizarana ny hevitrao sy soso-kevitrao';
 
   @override
   String get submitFeedback => 'Submit Feedback';
@@ -1166,7 +1166,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get rateAppDescription =>
-      'If you enjoy using Fee Minimizer, please rate us on the app store';
+      'Raha tiavinao ny fampiasana Feezer na Fee Minimizer, azafady omeo isa anay ao amin\'ny app store';
 
   @override
   String get rateOnStore => 'Rate on Store';

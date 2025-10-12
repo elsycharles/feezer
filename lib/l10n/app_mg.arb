@@ -1537,11 +1537,11 @@
   "@tryDifferentKeywords": {
     "description": "Suggestion when no search results"
   },
-  "faqWhatIsFeeMinimizer": "Inona no Fee Minimizer?",
+  "faqWhatIsFeeMinimizer": "Inona no Feezer na Fee Minimizer?",
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
   },
-  "faqWhatIsFeeMinimizerAnswer": "Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran'ny fifampiraharahana amin'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.",
+  "faqWhatIsFeeMinimizerAnswer": "Feezer na Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran'ny fifampiraharahana amin'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.",
   "@faqWhatIsFeeMinimizerAnswer": {
     "description": "FAQ answer"
   },
@@ -1573,7 +1573,7 @@
   "@faqOfflineMode": {
     "description": "FAQ question"
   },
-  "faqOfflineModeAnswer": "Eny, Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.",
+  "faqOfflineModeAnswer": "Eny, Feezer na Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.",
   "@faqOfflineModeAnswer": {
     "description": "FAQ answer"
   },
@@ -1609,7 +1609,7 @@
   "@gettingStarted": {
     "description": "Getting started guide title"
   },
-  "gettingStartedDescription": "Learn the basics of using Fee Minimizer",
+  "gettingStartedDescription": "Mianara ny fototry ny fampiasana Feezer na Fee Minimizer",
   "@gettingStartedDescription": {
     "description": "Getting started guide description"
   },
@@ -1641,7 +1641,7 @@
   "@videoTutorials": {
     "description": "Video tutorials section title"
   },
-  "videoTutorialsDescription": "Watch step-by-step video guides to master Fee Minimizer",
+  "videoTutorialsDescription": "Mijery torolàlana video isaky ny dingana mba hahay Feezer na Fee Minimizer",
   "@videoTutorialsDescription": {
     "description": "Video tutorials description"
   },
@@ -1653,7 +1653,7 @@
   "@shareYourThoughts": {
     "description": "Feedback section title"
   },
-  "feedbackDescription": "Help us improve Fee Minimizer by sharing your feedback and suggestions",
+  "feedbackDescription": "Ampio anay hanatsarana Feezer na Fee Minimizer amin'ny alalan'ny fizarana ny hevitrao sy soso-kevitrao",
   "@feedbackDescription": {
     "description": "Feedback description"
   },
@@ -1665,7 +1665,7 @@
   "@rateApp": {
     "description": "Rate app section title"
   },
-  "rateAppDescription": "If you enjoy using Fee Minimizer, please rate us on the app store",
+  "rateAppDescription": "Raha tiavinao ny fampiasana Feezer na Fee Minimizer, azafady omeo isa anay ao amin'ny app store",
   "@rateAppDescription": {
     "description": "Rate app description"
   },

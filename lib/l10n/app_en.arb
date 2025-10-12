@@ -1541,11 +1541,11 @@
   "@tryDifferentKeywords": {
     "description": "Suggestion when no search results"
   },
-  "faqWhatIsFeeMinimizer": "What is Fee Minimizer?",
+  "faqWhatIsFeeMinimizer": "What is Feezer or Fee Minimizer?",
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
   },
-  "faqWhatIsFeeMinimizerAnswer": "Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.",
+  "faqWhatIsFeeMinimizerAnswer": "Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.",
   "@faqWhatIsFeeMinimizerAnswer": {
     "description": "FAQ answer"
   },
@@ -1577,7 +1577,7 @@
   "@faqOfflineMode": {
     "description": "FAQ question"
   },
-  "faqOfflineModeAnswer": "Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.",
+  "faqOfflineModeAnswer": "Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.",
   "@faqOfflineModeAnswer": {
     "description": "FAQ answer"
   },
@@ -1618,7 +1618,7 @@
   "@gettingStarted": {
     "description": "Getting started guide title"
   },
-  "gettingStartedDescription": "Learn the basics of using Fee Minimizer",
+  "gettingStartedDescription": "Learn the basics of using Feezer or Fee Minimizer",
   "@gettingStartedDescription": {
     "description": "Getting started guide description"
   },
@@ -1650,7 +1650,7 @@
   "@videoTutorials": {
     "description": "Video tutorials section title"
   },
-  "videoTutorialsDescription": "Watch step-by-step video guides to master Fee Minimizer",
+  "videoTutorialsDescription": "Watch step-by-step video guides to master Feezer or Fee Minimizer",
   "@videoTutorialsDescription": {
     "description": "Video tutorials description"
   },
@@ -1662,7 +1662,7 @@
   "@shareYourThoughts": {
     "description": "Feedback section title"
   },
-  "feedbackDescription": "Help us improve Fee Minimizer by sharing your feedback and suggestions",
+  "feedbackDescription": "Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions",
   "@feedbackDescription": {
     "description": "Feedback description"
   },
@@ -1674,7 +1674,7 @@
   "@rateApp": {
     "description": "Rate app section title"
   },
-  "rateAppDescription": "If you enjoy using Fee Minimizer, please rate us on the app store",
+  "rateAppDescription": "If you enjoy using Feezer or Fee Minimizer, please rate us on the app store",
   "@rateAppDescription": {
     "description": "Rate app description"
   },

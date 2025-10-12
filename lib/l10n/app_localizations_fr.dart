@@ -1065,11 +1065,12 @@ class AppLocalizationsFr extends AppLocalizations {
       'Essayez différents mots-clés ou parcourez les catégories';
 
   @override
-  String get faqWhatIsFeeMinimizer => 'Qu\'est-ce que Fee Minimizer ?';
+  String get faqWhatIsFeeMinimizer =>
+      'Qu\'est-ce que Feezer ou Fee Minimizer ?';
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.';
+      'Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.';
 
   @override
   String get faqHowToAddProvider => 'Comment ajouter un nouveau fournisseur ?';
@@ -1098,7 +1099,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqOfflineModeAnswer =>
-      'Oui, Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.';
+      'Oui, Feezer ou Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.';
 
   @override
   String get faqCurrencyRates => 'Comment fonctionnent les taux de change ?';
@@ -1135,7 +1136,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get gettingStartedDescription =>
-      'Apprenez les bases de l\'utilisation de Fee Minimizer';
+      'Apprenez les bases de l\'utilisation de Feezer ou Fee Minimizer';
 
   @override
   String get providerManagement => 'Gestion des fournisseurs';
@@ -1160,7 +1161,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get videoTutorialsDescription =>
-      'Regardez des guides vidéo étape par étape pour maîtriser Fee Minimizer';
+      'Regardez des guides vidéo étape par étape pour maîtriser Feezer ou Fee Minimizer';
 
   @override
   String get watchTutorials => 'Voir les tutoriels';
@@ -1170,7 +1171,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get feedbackDescription =>
-      'Aidez-nous à améliorer Fee Minimizer en partageant vos commentaires et suggestions';
+      'Aidez-nous à améliorer Feezer ou Fee Minimizer en partageant vos commentaires et suggestions';
 
   @override
   String get submitFeedback => 'Envoyer un commentaire';
@@ -1180,7 +1181,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rateAppDescription =>
-      'Si vous aimez utiliser Fee Minimizer, veuillez nous évaluer sur l\'App Store';
+      'Si vous aimez utiliser Feezer ou Fee Minimizer, veuillez nous évaluer sur l\'App Store';
 
   @override
   String get rateOnStore => 'Évaluer sur le Store';

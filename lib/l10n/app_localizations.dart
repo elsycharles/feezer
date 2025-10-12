@@ -1926,13 +1926,13 @@ abstract class AppLocalizations {
   /// FAQ question
   ///
   /// In en, this message translates to:
-  /// **'What is Fee Minimizer?'**
+  /// **'What is Feezer or Fee Minimizer?'**
   String get faqWhatIsFeeMinimizer;
 
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.'**
+  /// **'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.'**
   String get faqWhatIsFeeMinimizerAnswer;
 
   /// FAQ question
@@ -1980,7 +1980,7 @@ abstract class AppLocalizations {
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.'**
+  /// **'Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.'**
   String get faqOfflineModeAnswer;
 
   /// FAQ question
@@ -2046,7 +2046,7 @@ abstract class AppLocalizations {
   /// Getting started guide description
   ///
   /// In en, this message translates to:
-  /// **'Learn the basics of using Fee Minimizer'**
+  /// **'Learn the basics of using Feezer or Fee Minimizer'**
   String get gettingStartedDescription;
 
   /// Provider management guide title
@@ -2088,7 +2088,7 @@ abstract class AppLocalizations {
   /// Video tutorials description
   ///
   /// In en, this message translates to:
-  /// **'Watch step-by-step video guides to master Fee Minimizer'**
+  /// **'Watch step-by-step video guides to master Feezer or Fee Minimizer'**
   String get videoTutorialsDescription;
 
   /// Watch tutorials button text
@@ -2106,7 +2106,7 @@ abstract class AppLocalizations {
   /// Feedback description
   ///
   /// In en, this message translates to:
-  /// **'Help us improve Fee Minimizer by sharing your feedback and suggestions'**
+  /// **'Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions'**
   String get feedbackDescription;
 
   /// Submit feedback button text
@@ -2124,7 +2124,7 @@ abstract class AppLocalizations {
   /// Rate app description
   ///
   /// In en, this message translates to:
-  /// **'If you enjoy using Fee Minimizer, please rate us on the app store'**
+  /// **'If you enjoy using Feezer or Fee Minimizer, please rate us on the app store'**
   String get rateAppDescription;
 
   /// Rate on store button text
