@@ -15,6 +15,7 @@ class NavigationUtil {
   static const String newCurrencyRoute = '/new-currency';
   static const String csvManagementRoute = '/csv-management';
   static const String helpSupportRoute = '/help-support';
+  static const String termsOfUseRoute = '/terms-of-use';
 
   /// Safe async navigation - captures context before async operation
   static Future<void> safeAsyncNavigate({
