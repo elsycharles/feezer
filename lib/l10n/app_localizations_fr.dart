@@ -1225,4 +1225,25 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get faqAnswer5 =>
       'Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
+
+  @override
+  String get faqQuestion6 => 'Comment ajouter un nouveau fournisseur ?';
+
+  @override
+  String get faqAnswer6 =>
+      'Appuyez sur le bouton \'+\' dans l\'écran de liste des fournisseurs. Saisissez le nom du fournisseur, la description, et choisissez une icône. Vous pouvez ensuite ajouter des intervalles de frais pour différents montants de transaction.';
+
+  @override
+  String get faqQuestion7 => 'Qu\'est-ce que les intervalles de frais ?';
+
+  @override
+  String get faqAnswer7 =>
+      'Les intervalles de frais définissent la structure de coût pour chaque fournisseur. Vous pouvez définir des frais fixes (ex. : 2,50 €) ou des frais en pourcentage (ex. : 1,5 %) pour différentes plages de montants de transaction.';
+
+  @override
+  String get faqQuestion8 => 'Comment fonctionne l\'optimisation ?';
+
+  @override
+  String get faqAnswer8 =>
+      'Feezer analyse toutes les structures de frais de vos fournisseurs et calcule la manière optimale de diviser votre transaction en plusieurs opérations pour minimiser les frais totaux tout en respectant vos contraintes.';
 }

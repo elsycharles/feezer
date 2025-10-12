@@ -1736,5 +1736,29 @@
   "faqAnswer5": "Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.",
   "@faqAnswer5": {
     "description": "Fifth FAQ answer"
+  },
+  "faqQuestion6": "How do I add a new provider?",
+  "@faqQuestion6": {
+    "description": "Sixth FAQ question"
+  },
+  "faqAnswer6": "Tap the '+' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.",
+  "@faqAnswer6": {
+    "description": "Sixth FAQ answer"
+  },
+  "faqQuestion7": "What are fee intervals?",
+  "@faqQuestion7": {
+    "description": "Seventh FAQ question"
+  },
+  "faqAnswer7": "Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., $2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.",
+  "@faqAnswer7": {
+    "description": "Seventh FAQ answer"
+  },
+  "faqQuestion8": "How does the optimization work?",
+  "@faqQuestion8": {
+    "description": "Eighth FAQ question"
+  },
+  "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
+  "@faqAnswer8": {
+    "description": "Eighth FAQ answer"
   }
 }

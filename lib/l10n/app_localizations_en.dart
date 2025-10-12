@@ -1205,4 +1205,25 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get faqAnswer5 =>
       'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
+
+  @override
+  String get faqQuestion6 => 'How do I add a new provider?';
+
+  @override
+  String get faqAnswer6 =>
+      'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.';
+
+  @override
+  String get faqQuestion7 => 'What are fee intervals?';
+
+  @override
+  String get faqAnswer7 =>
+      'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.';
+
+  @override
+  String get faqQuestion8 => 'How does the optimization work?';
+
+  @override
+  String get faqAnswer8 =>
+      'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.';
 }

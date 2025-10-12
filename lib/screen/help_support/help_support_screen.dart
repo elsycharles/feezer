@@ -177,7 +177,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                 ),
               ),
               subtitle: Text(
-                'support@feeminimizer.com',
+                'elsy.s.charles@gmail.com',
                 style: TextStyle(
                   fontSize: ThemeUtil.fontSizeBodyMedium,
                   color: colorScheme.onSurfaceVariant,
@@ -217,7 +217,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                 ),
               ),
               subtitle: Text(
-                '+1 (555) 123-4567',
+                '+261 34 84 216 34',
                 style: TextStyle(
                   fontSize: ThemeUtil.fontSizeBodyMedium,
                   color: colorScheme.onSurfaceVariant,
@@ -243,7 +243,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
-                  Icons.web,
+                  Icons.language,
                   color: colorScheme.primary,
                   size: 24,
                 ),
@@ -257,7 +257,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                 ),
               ),
               subtitle: Text(
-                'www.feeminimizer.com',
+                'https://elsy-charles.vercel.app/',
                 style: TextStyle(
                   fontSize: ThemeUtil.fontSizeBodyMedium,
                   color: colorScheme.onSurfaceVariant,
@@ -300,6 +300,21 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
       FaqItem(
         question: AppLocalizations.of(context).faqQuestion5,
         answer: AppLocalizations.of(context).faqAnswer5,
+        category: 'general',
+      ),
+      FaqItem(
+        question: AppLocalizations.of(context).faqQuestion6,
+        answer: AppLocalizations.of(context).faqAnswer6,
+        category: 'general',
+      ),
+      FaqItem(
+        question: AppLocalizations.of(context).faqQuestion7,
+        answer: AppLocalizations.of(context).faqAnswer7,
+        category: 'general',
+      ),
+      FaqItem(
+        question: AppLocalizations.of(context).faqQuestion8,
+        answer: AppLocalizations.of(context).faqAnswer8,
         category: 'general',
       ),
     ];

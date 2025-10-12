@@ -2204,6 +2204,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.'**
   String get faqAnswer5;
+
+  /// Sixth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I add a new provider?'**
+  String get faqQuestion6;
+
+  /// Sixth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.'**
+  String get faqAnswer6;
+
+  /// Seventh FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'What are fee intervals?'**
+  String get faqQuestion7;
+
+  /// Seventh FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.'**
+  String get faqAnswer7;
+
+  /// Eighth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How does the optimization work?'**
+  String get faqQuestion8;
+
+  /// Eighth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.'**
+  String get faqAnswer8;
 }
 
 class _AppLocalizationsDelegate

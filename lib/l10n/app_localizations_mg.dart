@@ -1050,46 +1050,47 @@ class AppLocalizationsMg extends AppLocalizations {
       'Try different keywords or browse categories';
 
   @override
-  String get faqWhatIsFeeMinimizer => 'What is Fee Minimizer?';
+  String get faqWhatIsFeeMinimizer => 'Inona no Fee Minimizer?';
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.';
+      'Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran\'ny fifampiraharahana amin\'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian\'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.';
 
   @override
-  String get faqHowToAddProvider => 'How do I add a new provider?';
+  String get faqHowToAddProvider =>
+      'Ahoana no fomba hanampiana mpamatsy vaovao?';
 
   @override
   String get faqHowToAddProviderAnswer =>
-      'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.';
+      'Raha hanampy mpamatsy vaovao ianao, midira ao amin\'ny efijery Mpamatsy ary tsindrio ny bokotra \'+\'. Fenoy ny antsipirian\'ny mpamatsy ao anatin\'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin\'ny alalan\'ny rakitra CSV.';
 
   @override
-  String get faqHowToCalculateFees => 'How does fee calculation work?';
+  String get faqHowToCalculateFees => 'Ahoana no fomba iasana ny kajy sarany?';
 
   @override
   String get faqHowToCalculateFeesAnswer =>
-      'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.';
+      'Ampidiro ny vola fifampiraharahana sy misafidy mpamatsy. Ny app dia kajy ny sarany rehetra azo ampiharina ao anatin\'izany ny sarany raikitra, sarany isan-jato, ary sarany ambony/ambany. Izy io dia mampiseho anao ny vidiny manontolo ary manoro hevitra fanatsarana.';
 
   @override
-  String get faqDataSecurity => 'Is my data secure?';
+  String get faqDataSecurity => 'Azo antoka ve ny angon-drakitra?';
 
   @override
   String get faqDataSecurityAnswer =>
-      'Yes, your data is stored locally on your device. We don\'t collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.';
+      'Eny, ny angon-drakitrao dia voatahiry ao amin\'ny fitaovanao. Tsy manangona na mandefa angona ara-bola manokana izahay. Ny kajy rehetra dia atao tsy misy internet mba hiantohana ny fiainanao manokana sy ny fiarovana.';
 
   @override
-  String get faqOfflineMode => 'Does the app work offline?';
+  String get faqOfflineMode => 'Miasa ve ny app nefa tsy misy internet?';
 
   @override
   String get faqOfflineModeAnswer =>
-      'Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.';
+      'Eny, Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin\'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.';
 
   @override
-  String get faqExportData => 'How do I export my data?';
+  String get faqExportData => 'Ahoana no fomba hanondrana ny angon-drakitra?';
 
   @override
   String get faqExportDataAnswer =>
-      'Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.';
+      'Midira ao amin\'ny Fikirana > Fitantanana angona > Fitantanana CSV. Azonao atao ny manondrana mpamatsy, vola ary elanelana sarany ho rakitra CSV. Ireo dia azo ampiasaina ho backup na hanafatra ao amin\'ny app hafa.';
 
   @override
   String get emailSupport => 'Email Support';
@@ -1209,4 +1210,25 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get faqAnswer5 =>
       'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
+
+  @override
+  String get faqQuestion6 => 'How do I add a new provider?';
+
+  @override
+  String get faqAnswer6 =>
+      'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.';
+
+  @override
+  String get faqQuestion7 => 'What are fee intervals?';
+
+  @override
+  String get faqAnswer7 =>
+      'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.';
+
+  @override
+  String get faqQuestion8 => 'How does the optimization work?';
+
+  @override
+  String get faqAnswer8 =>
+      'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.';
 }

@@ -1537,51 +1537,51 @@
   "@tryDifferentKeywords": {
     "description": "Suggestion when no search results"
   },
-  "faqWhatIsFeeMinimizer": "What is Fee Minimizer?",
+  "faqWhatIsFeeMinimizer": "Inona no Fee Minimizer?",
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
   },
-  "faqWhatIsFeeMinimizerAnswer": "Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.",
+  "faqWhatIsFeeMinimizerAnswer": "Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran'ny fifampiraharahana amin'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.",
   "@faqWhatIsFeeMinimizerAnswer": {
     "description": "FAQ answer"
   },
-  "faqHowToAddProvider": "How do I add a new provider?",
+  "faqHowToAddProvider": "Ahoana no fomba hanampiana mpamatsy vaovao?",
   "@faqHowToAddProvider": {
     "description": "FAQ question"
   },
-  "faqHowToAddProviderAnswer": "To add a new provider, go to the Providers screen and tap the '+' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.",
+  "faqHowToAddProviderAnswer": "Raha hanampy mpamatsy vaovao ianao, midira ao amin'ny efijery Mpamatsy ary tsindrio ny bokotra '+'. Fenoy ny antsipirian'ny mpamatsy ao anatin'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin'ny alalan'ny rakitra CSV.",
   "@faqHowToAddProviderAnswer": {
     "description": "FAQ answer"
   },
-  "faqHowToCalculateFees": "How does fee calculation work?",
+  "faqHowToCalculateFees": "Ahoana no fomba iasana ny kajy sarany?",
   "@faqHowToCalculateFees": {
     "description": "FAQ question"
   },
-  "faqHowToCalculateFeesAnswer": "Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.",
+  "faqHowToCalculateFeesAnswer": "Ampidiro ny vola fifampiraharahana sy misafidy mpamatsy. Ny app dia kajy ny sarany rehetra azo ampiharina ao anatin'izany ny sarany raikitra, sarany isan-jato, ary sarany ambony/ambany. Izy io dia mampiseho anao ny vidiny manontolo ary manoro hevitra fanatsarana.",
   "@faqHowToCalculateFeesAnswer": {
     "description": "FAQ answer"
   },
-  "faqDataSecurity": "Is my data secure?",
+  "faqDataSecurity": "Azo antoka ve ny angon-drakitra?",
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Yes, your data is stored locally on your device. We don't collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.",
+  "faqDataSecurityAnswer": "Eny, ny angon-drakitrao dia voatahiry ao amin'ny fitaovanao. Tsy manangona na mandefa angona ara-bola manokana izahay. Ny kajy rehetra dia atao tsy misy internet mba hiantohana ny fiainanao manokana sy ny fiarovana.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
-  "faqOfflineMode": "Does the app work offline?",
+  "faqOfflineMode": "Miasa ve ny app nefa tsy misy internet?",
   "@faqOfflineMode": {
     "description": "FAQ question"
   },
-  "faqOfflineModeAnswer": "Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.",
+  "faqOfflineModeAnswer": "Eny, Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.",
   "@faqOfflineModeAnswer": {
     "description": "FAQ answer"
   },
-  "faqExportData": "How do I export my data?",
+  "faqExportData": "Ahoana no fomba hanondrana ny angon-drakitra?",
   "@faqExportData": {
     "description": "FAQ question"
   },
-  "faqExportDataAnswer": "Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.",
+  "faqExportDataAnswer": "Midira ao amin'ny Fikirana > Fitantanana angona > Fitantanana CSV. Azonao atao ny manondrana mpamatsy, vola ary elanelana sarany ho rakitra CSV. Ireo dia azo ampiasaina ho backup na hanafatra ao amin'ny app hafa.",
   "@faqExportDataAnswer": {
     "description": "FAQ answer"
   },
@@ -1732,5 +1732,29 @@
   "faqAnswer5": "Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.",
   "@faqAnswer5": {
     "description": "Fifth FAQ answer"
+  },
+  "faqQuestion6": "How do I add a new provider?",
+  "@faqQuestion6": {
+    "description": "Sixth FAQ question"
+  },
+  "faqAnswer6": "Tap the '+' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.",
+  "@faqAnswer6": {
+    "description": "Sixth FAQ answer"
+  },
+  "faqQuestion7": "What are fee intervals?",
+  "@faqQuestion7": {
+    "description": "Seventh FAQ question"
+  },
+  "faqAnswer7": "Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., $2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.",
+  "@faqAnswer7": {
+    "description": "Seventh FAQ answer"
+  },
+  "faqQuestion8": "How does the optimization work?",
+  "@faqQuestion8": {
+    "description": "Eighth FAQ question"
+  },
+  "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
+  "@faqAnswer8": {
+    "description": "Eighth FAQ answer"
   }
 }
