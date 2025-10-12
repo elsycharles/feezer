@@ -93,7 +93,12 @@ class CurrencyHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildStatChip(BuildContext context, String label, String value, Color color) {
+  Widget _buildStatChip(
+    BuildContext context,
+    String label,
+    String value,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
@@ -112,12 +117,7 @@ class CurrencyHeader extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 4),
-          Text(
-            label,
-            style: ThemeUtil.bodySmall.copyWith(
-              color: color,
-            ),
-          ),
+          Text(label, style: ThemeUtil.bodySmall.copyWith(color: color)),
         ],
       ),
     );

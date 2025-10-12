@@ -102,10 +102,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                 if (widget.selectedCount < widget.totalCount)
                   IconButton(
                     onPressed: widget.onSelectAll,
-                    icon: Icon(
-                      Icons.select_all,
-                      color: colorScheme.onPrimary,
-                    ),
+                    icon: Icon(Icons.select_all, color: colorScheme.onPrimary),
                     tooltip: AppLocalizations.of(context).selectAll,
                   ),
                 if (widget.onDetails != null)

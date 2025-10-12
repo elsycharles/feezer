@@ -30,7 +30,8 @@ extension BuildContextExtensions on BuildContext {
   void pop<T>([T? result]) => Navigator.of(this).pop(result);
 
   /// Push new route using Navigator path
-  Future<T?> push<T>(String path, {Object? extra}) => Navigator.of(this).pushNamed<T>(path, arguments: extra);
+  Future<T?> push<T>(String path, {Object? extra}) =>
+      Navigator.of(this).pushNamed<T>(path, arguments: extra);
 }
 
 /// Extensions for String to simplify common operations

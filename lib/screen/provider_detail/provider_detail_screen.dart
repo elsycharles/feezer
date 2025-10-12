@@ -63,7 +63,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       where: '${ConstantUtil.columnProviderId} = ?',
       whereArgs: [int.tryParse(widget.provider.id)],
     );
-    final loadedIntervals = feeIntervalMaps.map((map) => FeeInterval.fromMap(map)).toList();
+    final loadedIntervals = feeIntervalMaps
+        .map((map) => FeeInterval.fromMap(map))
+        .toList();
     if (mounted) {
       setState(() {
         _feeIntervals
@@ -91,12 +93,12 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).providerDetails,
-          leading: _selectedIds.isNotEmpty 
-            ? IconButton(
-                icon: const Icon(Icons.clear),
-                onPressed: () => setState(() => _selectedIds.clear()),
-              )
-            : null, // Let Navigator handle the back button
+          leading: _selectedIds.isNotEmpty
+              ? IconButton(
+                  icon: const Icon(Icons.clear),
+                  onPressed: () => setState(() => _selectedIds.clear()),
+                )
+              : null, // Let Navigator handle the back button
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
         body: SafeArea(
@@ -131,9 +133,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                     // Intervals list - now properly integrated in the main scroll
                     _buildIntervalSliver(),
                     // Bottom padding for FAB
-                    const SliverToBoxAdapter(
-                      child: SizedBox(height: 100),
-                    ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 100)),
                   ],
                 ),
         ),
@@ -167,7 +167,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 16,
-              vertical: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 48 : 32,
+              vertical: MediaQuery.of(context).textScaler.scale(1.0) > 1.3
+                  ? 48
+                  : 32,
             ),
             child: SearchEmptyState(
               icon: Icons.search_off,
@@ -179,7 +181,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       : SliverPadding(
           padding: EdgeInsets.symmetric(
             horizontal: 16,
-            vertical: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 8 : 4,
+            vertical: MediaQuery.of(context).textScaler.scale(1.0) > 1.3
+                ? 8
+                : 4,
           ),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
@@ -331,7 +335,10 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   );
 
   void _addInterval() async {
-    final result = await NavigationUtil.pushTo<FeeInterval>(context, NavigationUtil.newFeeIntervalRoute);
+    final result = await NavigationUtil.pushTo<FeeInterval>(
+      context,
+      NavigationUtil.newFeeIntervalRoute,
+    );
     if (result != null) {
       final db = DatabaseUtil();
       final insertedId = await db.insert(
@@ -390,7 +397,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).minFee,
-      hintStyle: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
+      hintStyle: ThemeUtil.bodySmall.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
       filled: true,
       fillColor: colorScheme.surface,
       border: OutlineInputBorder(
@@ -415,7 +424,9 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).maxFee,
-      hintStyle: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
+      hintStyle: ThemeUtil.bodySmall.copyWith(
+        color: colorScheme.onSurfaceVariant,
+      ),
       filled: true,
       fillColor: colorScheme.surface,
       border: OutlineInputBorder(
@@ -489,7 +500,11 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _onOptimizeFees() {
-    NavigationUtil.pushTo(context, NavigationUtil.homeRoute, extra: widget.provider);
+    NavigationUtil.pushTo(
+      context,
+      NavigationUtil.homeRoute,
+      extra: widget.provider,
+    );
 
     // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
     // Could pass provider data via extra: widget.provider

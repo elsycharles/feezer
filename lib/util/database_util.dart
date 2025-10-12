@@ -16,8 +16,11 @@ class DatabaseUtil {
   }
 
   Future<Database> _initDatabase() async {
-    final String path = join(await getDatabasesPath(), ConstantUtil.databaseName);
-    
+    final String path = join(
+      await getDatabasesPath(),
+      ConstantUtil.databaseName,
+    );
+
     return await openDatabase(
       path,
       version: ConstantUtil.databaseVersion,
@@ -89,7 +92,11 @@ class DatabaseUtil {
     ''');
   }
 
-  Future<void> _upgradeDatabase(Database db, int oldVersion, int newVersion) async {
+  Future<void> _upgradeDatabase(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  ) async {
     if (oldVersion < 2) {
       // Migration vers la version 2 : ajout de la table currencies
       await db.execute('''
@@ -105,11 +112,17 @@ class DatabaseUtil {
     }
     if (oldVersion < 3) {
       // Migration vers la version 3 : ajout de la colonne fee_type si elle n'existe pas
-      final tableInfo = await db.rawQuery('PRAGMA table_info(${ConstantUtil.tableFeeIntervals})');
-      final hasFeeTypeColumn = tableInfo.any((column) => column['name'] == ConstantUtil.columnFeeType);
-      
+      final tableInfo = await db.rawQuery(
+        'PRAGMA table_info(${ConstantUtil.tableFeeIntervals})',
+      );
+      final hasFeeTypeColumn = tableInfo.any(
+        (column) => column['name'] == ConstantUtil.columnFeeType,
+      );
+
       if (!hasFeeTypeColumn) {
-        await db.execute('ALTER TABLE ${ConstantUtil.tableFeeIntervals} ADD COLUMN ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0');
+        await db.execute(
+          'ALTER TABLE ${ConstantUtil.tableFeeIntervals} ADD COLUMN ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0',
+        );
       }
     }
   }

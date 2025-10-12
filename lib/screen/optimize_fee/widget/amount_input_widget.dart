@@ -134,10 +134,12 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                     focusNode: _focusNode,
                     textAlign: TextAlign.center,
                     textAlignVertical: TextAlignVertical.center,
-                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    keyboardType: TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
                     inputFormatters: [
                       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                      LengthLimitingTextInputFormatter(11)
+                      LengthLimitingTextInputFormatter(11),
                     ],
                     style: ThemeUtil.titleLarge.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
@@ -224,7 +226,9 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   void _onTextChanged(String value) {
     _isUserTyping = true;
     final doubleValue = ConstantUtil.parseLocalizedNumber(value);
-    if (doubleValue != null && doubleValue >= widget.min && doubleValue <= widget.max) {
+    if (doubleValue != null &&
+        doubleValue >= widget.min &&
+        doubleValue <= widget.max) {
       widget.onChanged(doubleValue);
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);

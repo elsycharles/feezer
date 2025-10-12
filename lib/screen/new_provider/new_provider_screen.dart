@@ -57,9 +57,7 @@ class _State extends State<NewProviderScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
-    appBar: custom.AppBar(
-      title: AppLocalizations.of(context).newProvider,
-    ),
+    appBar: custom.AppBar(title: AppLocalizations.of(context).newProvider),
     body: Form(
       key: _formKey,
       child: Column(
@@ -119,13 +117,13 @@ class _State extends State<NewProviderScreen> {
   );
 
   Widget _buildDescriptionField() => custom_form.FormField(
-  label: AppLocalizations.of(context).description,
-  controller: _descriptionController,
-  icon: Icons.description,
-  hintText: AppLocalizations.of(context).enterDescription,
-  maxLines: 4,
-  required: false,
-  validator: null,
+    label: AppLocalizations.of(context).description,
+    controller: _descriptionController,
+    icon: Icons.description,
+    hintText: AppLocalizations.of(context).enterDescription,
+    maxLines: 4,
+    required: false,
+    validator: null,
   );
 
   Widget _buildIconField() => IconSelectorField(
@@ -182,10 +180,10 @@ class _State extends State<NewProviderScreen> {
         final db = DatabaseUtil();
         await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
         widget.onProviderAdded?.call(provider);
-        
+
         // Ensure loading is visible for at least 800ms for better UX
         await Future.delayed(const Duration(milliseconds: 800));
-        
+
         if (mounted) {
           AppToast.success(
             context,

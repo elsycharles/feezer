@@ -44,19 +44,31 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   late FeeType _feeType;
   late final _minAmountController = TextEditingController(
     text: widget.feeInterval.minAmount != null
-        ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.minAmount!))
+        ? ConstantUtil.formatCurrencyAmount(
+            context.read<CurrencyProvider>().convertFromAriary(
+              widget.feeInterval.minAmount!,
+            ),
+          )
         : '',
   );
   late final _maxAmountController = TextEditingController(
     text: widget.feeInterval.maxAmount != null
-        ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.maxAmount!))
+        ? ConstantUtil.formatCurrencyAmount(
+            context.read<CurrencyProvider>().convertFromAriary(
+              widget.feeInterval.maxAmount!,
+            ),
+          )
         : '',
   );
   late final _feeController = TextEditingController(
     text: widget.feeInterval.fee != null
         ? widget.feeInterval.feeType == FeeType.percentage
-            ? widget.feeInterval.fee!.toStringAsFixed(2)
-            : ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.fee!))
+              ? widget.feeInterval.fee!.toStringAsFixed(2)
+              : ConstantUtil.formatCurrencyAmount(
+                  context.read<CurrencyProvider>().convertFromAriary(
+                    widget.feeInterval.fee!,
+                  ),
+                )
         : '',
   );
 
@@ -80,7 +92,8 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     child: Column(
       children: [
         custom_form.FormField(
-          label: '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
+          label:
+              '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _minAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -90,7 +103,8 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         ),
         Global.gapLg,
         custom_form.FormField(
-          label: '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
+          label:
+              '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _maxAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
@@ -135,7 +149,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context).feeType, // TODO: add to localizations
+          AppLocalizations.of(context).feeType,
           style: TextStyle(
             fontSize: ThemeUtil.fontSizeLabelLarge,
             fontWeight: FontWeight.w500,
@@ -149,7 +163,10 @@ class _State extends State<FeeIntervalEditBottomSheet> {
               child: GestureDetector(
                 onTap: () => setState(() => _feeType = FeeType.fixed),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: _feeType == FeeType.fixed
                         ? Theme.of(context).colorScheme.primaryContainer
@@ -179,7 +196,10 @@ class _State extends State<FeeIntervalEditBottomSheet> {
               child: GestureDetector(
                 onTap: () => setState(() => _feeType = FeeType.percentage),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: _feeType == FeeType.percentage
                         ? Theme.of(context).colorScheme.primaryContainer
@@ -262,11 +282,29 @@ class _State extends State<FeeIntervalEditBottomSheet> {
       try {
         final feeInterval = FeeInterval(
           id: widget.feeInterval.id,
-          minAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_minAmountController.text.trim()) ?? 0),
-          maxAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_maxAmountController.text.trim()) ?? 0),
+          minAmount: context.read<CurrencyProvider>().convertToAriary(
+            ConstantUtil.parseLocalizedNumber(
+                  _minAmountController.text.trim(),
+                ) ??
+                0,
+          ),
+          maxAmount: context.read<CurrencyProvider>().convertToAriary(
+            ConstantUtil.parseLocalizedNumber(
+                  _maxAmountController.text.trim(),
+                ) ??
+                0,
+          ),
           fee: _feeType == FeeType.percentage
-              ? (ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0)
-              : context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
+              ? (ConstantUtil.parseLocalizedNumber(
+                      _feeController.text.trim(),
+                    ) ??
+                    0)
+              : context.read<CurrencyProvider>().convertToAriary(
+                  ConstantUtil.parseLocalizedNumber(
+                        _feeController.text.trim(),
+                      ) ??
+                      0,
+                ),
           feeType: _feeType,
           creationDateTime: widget.feeInterval.creationDatetime,
         );

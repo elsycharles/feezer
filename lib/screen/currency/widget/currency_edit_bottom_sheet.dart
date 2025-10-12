@@ -76,7 +76,9 @@ class _State extends State<CurrencyEditBottomSheet> {
               return AppLocalizations.of(context).codeMustBe3Characters;
             }
             if (!RegExp(r'^[A-Z]{3}$').hasMatch(value)) {
-              return AppLocalizations.of(context).currencyCodeMustContainOnlyUppercase;
+              return AppLocalizations.of(
+                context,
+              ).currencyCodeMustContainOnlyUppercase;
             }
             return null;
           },

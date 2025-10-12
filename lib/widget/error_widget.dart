@@ -25,12 +25,14 @@ class ErrorScreen extends StatelessWidget {
             Icon(Icons.error_outline, size: 64, color: colorScheme.error),
             const SizedBox(height: 16),
             Text(
-              errorMessage ?? AppLocalizations.of(context).screenNotFound('Unknown'),
+              errorMessage ??
+                  AppLocalizations.of(context).screenNotFound('Unknown'),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => NavigationUtil.goTo(context, NavigationUtil.homeRoute),
+              onPressed: () =>
+                  NavigationUtil.goTo(context, NavigationUtil.homeRoute),
               child: Text(AppLocalizations.of(context).goHome),
             ),
           ],

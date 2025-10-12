@@ -14,6 +14,7 @@ class NavigationUtil {
   static const String currenciesRoute = '/currencies';
   static const String newCurrencyRoute = '/new-currency';
   static const String csvManagementRoute = '/csv-management';
+
   /// Safe async navigation - captures context before async operation
   static Future<void> safeAsyncNavigate({
     required BuildContext context,
@@ -28,42 +29,60 @@ class NavigationUtil {
   }
 
   /// Safely navigates back using Navigator. If no pages to pop, navigates to fallback route.
-  /// 
+  ///
   /// [context] - BuildContext for navigation
   /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to home route)
-  static Future<void> safeBack(BuildContext context, {String? fallbackRoute}) async {
+  static Future<void> safeBack(
+    BuildContext context, {
+    String? fallbackRoute,
+  }) async {
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {
       navigator.pop();
       return;
     }
-    navigator.pushNamedAndRemoveUntil(fallbackRoute ?? NavigationUtil.homeRoute, (route) => false);
+    navigator.pushNamedAndRemoveUntil(
+      fallbackRoute ?? NavigationUtil.homeRoute,
+      (route) => false,
+    );
   }
 
   /// Safely pops with a result using Navigator. If no pages to pop, navigates to fallback route.
-  /// 
+  ///
   /// [context] - BuildContext for navigation
   /// [result] - Result to return when popping
   /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to home route)
-  static void safeBackWithResult<T>(BuildContext context, T result, {String? fallbackRoute}) {
+  static void safeBackWithResult<T>(
+    BuildContext context,
+    T result, {
+    String? fallbackRoute,
+  }) {
     final navigator = Navigator.of(context);
     if (navigator.canPop()) {
       navigator.pop<T>(result);
       return;
     }
-    navigator.pushNamedAndRemoveUntil(fallbackRoute ?? NavigationUtil.homeRoute, (route) => false);
+    navigator.pushNamedAndRemoveUntil(
+      fallbackRoute ?? NavigationUtil.homeRoute,
+      (route) => false,
+    );
   }
-
 
   NavigationUtil._();
 
   /// Navigate (replace) to [route]
   static void goTo(BuildContext context, String route, {Object? extra}) {
-    Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false, arguments: extra);
+    Navigator.of(
+      context,
+    ).pushNamedAndRemoveUntil(route, (route) => false, arguments: extra);
   }
 
   /// Push [route] on stack and optionally return a result
-  static Future<T?> pushTo<T>(BuildContext context, String route, {Object? extra}) {
+  static Future<T?> pushTo<T>(
+    BuildContext context,
+    String route, {
+    Object? extra,
+  }) {
     // For routes that return values, use push with MaterialPageRoute
     if (route == newProviderRoute) {
       return Navigator.of(context).push<T>(

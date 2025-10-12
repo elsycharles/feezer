@@ -31,7 +31,7 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
   void initState() {
     super.initState();
     _controller = TextEditingController(
-      text: widget.value == 0 ? '' : widget.value.toString()
+      text: widget.value == 0 ? '' : widget.value.toString(),
     );
     _focusNode = FocusNode();
     _focusNode.addListener(_onFocusChanged);
@@ -103,10 +103,15 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
             decoration: InputDecoration(
               border: InputBorder.none,
               isDense: false,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 10,
+              ),
               hintText: '0',
               hintStyle: TextStyle(
-                color: Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
               ),
             ),
             onChanged: _onTextChanged,
@@ -118,12 +123,12 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
 
   void _onTextChanged(String value) {
     _isUserTyping = true;
-    
+
     if (value.isEmpty) {
       widget.onChanged(0);
       return;
     }
-    
+
     final intValue = int.tryParse(value);
     if (intValue != null && intValue >= widget.min && intValue <= widget.max) {
       widget.onChanged(intValue);
