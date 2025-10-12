@@ -1460,5 +1460,13 @@
   "providerNameColumnNotFound": "Provider name column not found",
   "@providerNameColumnNotFound": {
     "description": "Error message when provider name column is missing in CSV"
+  },
+  "pullToRefresh": "Pull down to refresh",
+  "@pullToRefresh": {
+    "description": "Hint text shown when user can pull down to refresh content"
+  },
+  "refreshing": "Refreshing...",
+  "@refreshing": {
+    "description": "Text shown when content is being refreshed"
   }
 }

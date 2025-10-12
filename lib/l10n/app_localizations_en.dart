@@ -982,4 +982,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get providerNameColumnNotFound => 'Provider name column not found';
+
+  @override
+  String get pullToRefresh => 'Pull down to refresh';
+
+  @override
+  String get refreshing => 'Refreshing...';
 }

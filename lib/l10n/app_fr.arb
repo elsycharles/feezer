@@ -1276,5 +1276,13 @@
   "providerNameColumnNotFound": "Colonne du nom du fournisseur introuvable",
   "@providerNameColumnNotFound": {
     "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
+  },
+  "pullToRefresh": "Tirez vers le bas pour actualiser",
+  "@pullToRefresh": {
+    "description": "Texte d'indication affiché lorsque l'utilisateur peut tirer vers le bas pour actualiser le contenu"
+  },
+  "refreshing": "Actualisation...",
+  "@refreshing": {
+    "description": "Texte affiché lorsque le contenu est en cours d'actualisation"
   }
 }

@@ -17,6 +17,7 @@ import 'widget/provider_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
+import '../../widget/refreshable_screen.dart';
 
 /// Clean provider list screen
 class ProviderListScreen extends StatefulWidget {
@@ -156,12 +157,15 @@ class _State extends State<ProviderListScreen> {
               Expanded(
                 child: _isLoading
                     ? const AppLoading.overlay()
-                    : CustomScrollView(
-                        slivers: [
-                          _buildProviderSliver(),
-                          SliverToBoxAdapter(child: Global.gapMd),
-                          SliverToBoxAdapter(child: SizedBox(height: 80)),
-                        ],
+                    : RefreshableScreen(
+                        onRefresh: _loadProviders,
+                        child: CustomScrollView(
+                          slivers: [
+                            _buildProviderSliver(),
+                            SliverToBoxAdapter(child: Global.gapMd),
+                            SliverToBoxAdapter(child: SizedBox(height: 80)),
+                          ],
+                        ),
                       ),
               ),
             ],

@@ -1802,6 +1802,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Provider name column not found'**
   String get providerNameColumnNotFound;
+
+  /// Hint text shown when user can pull down to refresh content
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to refresh'**
+  String get pullToRefresh;
+
+  /// Text shown when content is being refreshed
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshing...'**
+  String get refreshing;
 }
 
 class _AppLocalizationsDelegate

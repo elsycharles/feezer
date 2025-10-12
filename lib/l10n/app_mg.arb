@@ -1447,5 +1447,13 @@
   "csvImportExportInfo": "Fitantanana angona CSV",
   "@csvImportExportInfo": {
     "description": "Titre d'information pour l'import/export CSV"
+  },
+  "pullToRefresh": "Sakaro ambony hanavaozana",
+  "@pullToRefresh": {
+    "description": "Sorohina aseho rehefa afaka sakaro ambony hanavaozana ny votoaty"
+  },
+  "refreshing": "Manavao...",
+  "@refreshing": {
+    "description": "Sorohina aseho rehefa manavao ny votoaty"
   }
 }

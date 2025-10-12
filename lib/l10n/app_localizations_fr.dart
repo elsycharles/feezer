@@ -998,4 +998,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get providerNameColumnNotFound =>
       'Colonne du nom du fournisseur introuvable';
+
+  @override
+  String get pullToRefresh => 'Tirez vers le bas pour actualiser';
+
+  @override
+  String get refreshing => 'Actualisation...';
 }

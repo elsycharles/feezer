@@ -18,6 +18,7 @@ import 'widget/currency_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
+import '../../widget/refreshable_screen.dart';
 
 /// Clean currency list screen
 class CurrencyListScreen extends StatefulWidget {
@@ -234,20 +235,22 @@ class _State extends State<CurrencyListScreen> {
                                   : null,
                             ),
                           )
-                        : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            itemCount: _filtered.length,
-                            itemBuilder: (context, index) {
-                              final currency = _filtered[index];
-                              return CurrencyTile(
-                                currency: currency,
-                                isSelected: _selectedIds.contains(currency.id),
-                                showSelection: _selectedIds.isNotEmpty,
-                                onSelectionChanged: (selected) =>
-                                    _toggleSelection(currency.id, selected),
-                                onLongPress: () => _startSelection(currency.id),
-                                onTap: _selectedIds.isNotEmpty
-                                    ? () => _toggleSelection(
+                        : RefreshableScreen(
+                            onRefresh: _loadCurrencies,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              itemCount: _filtered.length,
+                              itemBuilder: (context, index) {
+                                final currency = _filtered[index];
+                                return CurrencyTile(
+                                  currency: currency,
+                                  isSelected: _selectedIds.contains(currency.id),
+                                  showSelection: _selectedIds.isNotEmpty,
+                                  onSelectionChanged: (selected) =>
+                                      _toggleSelection(currency.id, selected),
+                                  onLongPress: () => _startSelection(currency.id),
+                                  onTap: _selectedIds.isNotEmpty
+                                      ? () => _toggleSelection(
                                         currency.id,
                                         !_selectedIds.contains(currency.id),
                                       )
@@ -255,6 +258,7 @@ class _State extends State<CurrencyListScreen> {
                               );
                             },
                           ),
+                        ),
                   ),
                 ],
               ),

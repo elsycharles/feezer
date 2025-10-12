@@ -985,4 +985,10 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get providerNameColumnNotFound =>
       'Tsy hita ny tsanganana anaran\'ny mpanome';
+
+  @override
+  String get pullToRefresh => 'Sakaro ambony hanavaozana';
+
+  @override
+  String get refreshing => 'Manavao...';
 }
