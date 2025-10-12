@@ -38,7 +38,9 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
   Future<void> _loadCurrencies() async {
     final db = DatabaseUtil();
     final currencyMaps = await db.query(ConstantUtil.tableCurrencies);
-    final loadedCurrencies = currencyMaps.map((map) => Currency.fromMap(map)).toList();
+    final loadedCurrencies = currencyMaps
+        .map((map) => Currency.fromMap(map))
+        .toList();
 
     if (mounted) {
       setState(() {
@@ -113,22 +115,29 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
                       _buildCurrencyOption(
                         context,
                         'Ariary (Ar)', // Always show Ariary as the system default
-                        currencyProvider.selectedCurrency == null || currencyProvider.selectedCurrency?.code == 'MGA',
+                        currencyProvider.selectedCurrency == null ||
+                            currencyProvider.selectedCurrency?.code == 'MGA',
                         () {
-                          final currencyProvider = context.read<CurrencyProvider>();
+                          final currencyProvider = context
+                              .read<CurrencyProvider>();
                           currencyProvider.clearSelectedCurrency();
                         },
                         icon: Icons.settings_brightness,
                       ),
 
                       // Currency options (excluding Ariary since it's the system default)
-                      ..._currencies.where((currency) => currency.code != 'MGA').map((currency) => _buildCurrencyOption(
-                        context,
-                        currency.displayName,
-                        currencyProvider.selectedCurrency?.id == currency.id,
-                        () => _changeCurrency(context, currency),
-                        icon: Icons.currency_exchange,
-                      )),
+                      ..._currencies
+                          .where((currency) => currency.code != 'MGA')
+                          .map(
+                            (currency) => _buildCurrencyOption(
+                              context,
+                              currency.displayName,
+                              currencyProvider.selectedCurrency?.id ==
+                                  currency.id,
+                              () => _changeCurrency(context, currency),
+                              icon: Icons.currency_exchange,
+                            ),
+                          ),
                     ],
                   );
                 },
@@ -184,8 +193,12 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
 
             // Radio button indicator
             Icon(
-              isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-              color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
+              isSelected
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: isSelected
+                  ? colorScheme.primary
+                  : colorScheme.onSurfaceVariant,
               size: 24,
             ),
           ],

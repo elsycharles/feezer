@@ -75,6 +75,7 @@ class ConstantUtil {
     // For extremely large amounts, use scientific notation or round significantly
     return amount.toStringAsExponential(2);
   }
+
   // Database configuration
   static const String databaseName = 'fee_optimizer.db';
   static const int databaseVersion = 3;

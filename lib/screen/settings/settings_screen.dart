@@ -39,78 +39,83 @@ class SettingsScreen extends StatelessWidget {
         child: RefreshableScreen(
           onRefresh: () => _onRefresh(context),
           child: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            _buildSection(context, AppLocalizations.of(context).general, [
-              Consumer<ThemeProvider>(
-                builder: (context, themeProvider, child) => _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).theme,
-                  _getThemeModeDisplayName(context, themeProvider.themeMode),
-                  Icons.palette_outlined,
-                  onTap: () => ThemeSelectionModal.show(context),
+            padding: const EdgeInsets.all(16),
+            children: [
+              _buildSection(context, AppLocalizations.of(context).general, [
+                Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, child) => _buildSettingTile(
+                    context,
+                    AppLocalizations.of(context).theme,
+                    _getThemeModeDisplayName(context, themeProvider.themeMode),
+                    Icons.palette_outlined,
+                    onTap: () => ThemeSelectionModal.show(context),
+                  ),
                 ),
-              ),
-              Consumer<LocaleProvider>(
-                builder: (context, localeProvider, child) => _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).language,
-                  localeProvider.currentSupportedLocale?.nativeName ??
-                      AppLocalizations.of(context).system,
-                  Icons.language_outlined,
-                  onTap: () => LanguageSelectionModal.show(context),
+                Consumer<LocaleProvider>(
+                  builder: (context, localeProvider, child) =>
+                      _buildSettingTile(
+                        context,
+                        AppLocalizations.of(context).language,
+                        localeProvider.currentSupportedLocale?.nativeName ??
+                            AppLocalizations.of(context).system,
+                        Icons.language_outlined,
+                        onTap: () => LanguageSelectionModal.show(context),
+                      ),
                 ),
-              ),
-              Consumer<CurrencyProvider>(
-                builder: (context, currencyProvider, child) => _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).currencies,
-                  currencyProvider.selectedCurrency?.displayName ?? AppLocalizations.of(context).system,
-                  Icons.currency_exchange_outlined,
-                  onTap: () => _showCurrencySelection(context),
+                Consumer<CurrencyProvider>(
+                  builder: (context, currencyProvider, child) =>
+                      _buildSettingTile(
+                        context,
+                        AppLocalizations.of(context).currencies,
+                        currencyProvider.selectedCurrency?.displayName ??
+                            AppLocalizations.of(context).system,
+                        Icons.currency_exchange_outlined,
+                        onTap: () => _showCurrencySelection(context),
+                      ),
                 ),
+              ]),
+              const SizedBox(height: 24),
+              _buildSection(
+                context,
+                AppLocalizations.of(context).dataManagement,
+                [
+                  _buildSettingTile(
+                    context,
+                    AppLocalizations.of(context).csvManagement,
+                    AppLocalizations.of(context).importExportData,
+                    Icons.file_download_outlined,
+                    onTap: () => Navigator.of(
+                      context,
+                    ).pushNamed(NavigationUtil.csvManagementRoute),
+                  ),
+                ],
               ),
-            ]),
-            const SizedBox(height: 24),
-            _buildSection(
-              context,
-              AppLocalizations.of(context).dataManagement,
-              [
+              const SizedBox(height: 24),
+              _buildSection(context, AppLocalizations.of(context).about, [
                 _buildSettingTile(
                   context,
-                  AppLocalizations.of(context).csvManagement,
-                  AppLocalizations.of(context).importExportData,
-                  Icons.file_download_outlined,
-                  onTap: () => Navigator.of(context).pushNamed(NavigationUtil.csvManagementRoute),
+                  AppLocalizations.of(context).version,
+                  '1.0.0',
+                  Icons.info_outline,
+                  showArrow: false,
                 ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            _buildSection(context, AppLocalizations.of(context).about, [
-              _buildSettingTile(
-                context,
-                AppLocalizations.of(context).version,
-                '1.0.0',
-                Icons.info_outline,
-                showArrow: false,
-              ),
-              _buildSettingTile(
-                context,
-                AppLocalizations.of(context).helpAndSupport,
-                AppLocalizations.of(context).faqAndContact,
-                Icons.help_outline,
-                onTap: () => _showComingSoon(context),
-              ),
-              _buildSettingTile(
-                context,
-                AppLocalizations.of(context).termsOfUse,
-                AppLocalizations.of(context).termsAndPrivacyPolicy,
-                Icons.description_outlined,
-                onTap: () => _showComingSoon(context),
-              ),
-            ]),
-          ],
-        ),
+                _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).helpAndSupport,
+                  AppLocalizations.of(context).faqAndContact,
+                  Icons.help_outline,
+                  onTap: () => _showComingSoon(context),
+                ),
+                _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).termsOfUse,
+                  AppLocalizations.of(context).termsAndPrivacyPolicy,
+                  Icons.description_outlined,
+                  onTap: () => _showComingSoon(context),
+                ),
+              ]),
+            ],
+          ),
         ),
       ),
     );

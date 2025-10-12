@@ -38,7 +38,7 @@ class OptimizeFeeScreen extends StatefulWidget {
 
 class _State extends State<OptimizeFeeScreen> {
   DateTime? _lastBackPressed;
-  
+
   final _providers = <model.Provider>[];
 
   model.Provider? _selectedProvider;
@@ -48,7 +48,7 @@ class _State extends State<OptimizeFeeScreen> {
   FeeOptimizerResult? _result;
   bool _hasOptimized = false;
   bool _isOptimizing = false;
-  
+
   Currency? _previousCurrency;
 
   @override
@@ -62,34 +62,45 @@ class _State extends State<OptimizeFeeScreen> {
     super.didChangeDependencies();
     // Reload providers when screen becomes visible again (e.g., after adding provider via menu)
     _loadProviders();
-    
+
     // Convert amount when currency changes
     _convertAmountForNewCurrency();
   }
 
   void _convertAmountForNewCurrency() {
-    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
-    
+    final currencyProvider = Provider.of<CurrencyProvider>(
+      context,
+      listen: false,
+    );
+
     // If we have a previous currency and it changed, convert the amount
-    if (_previousCurrency != null && _previousCurrency != currencyProvider.selectedCurrency) {
+    if (_previousCurrency != null &&
+        _previousCurrency != currencyProvider.selectedCurrency) {
       // Convert from previous currency to new currency - NO ROUNDING
       final amountInAriary = _previousCurrency!.rate * _amount;
-      final newAmount = amountInAriary / currencyProvider.selectedCurrency!.rate;  // REMOVED: * 100).round() / 100
-      
+      final newAmount =
+          amountInAriary /
+          currencyProvider
+              .selectedCurrency!
+              .rate; // REMOVED: * 100).round() / 100
+
       // Update amount but keep optimization results (they will be converted via _convertedResult)
       setState(() {
         _amount = newAmount;
       });
     }
-    
+
     _previousCurrency = currencyProvider.selectedCurrency;
   }
 
   FeeOptimizerResult? get _convertedResult {
     if (_result == null) return null;
-    
-    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
-    
+
+    final currencyProvider = Provider.of<CurrencyProvider>(
+      context,
+      listen: false,
+    );
+
     // If the result is already in the current currency, return as is
     // For now, assume all results are in Ariary and need conversion
     return FeeOptimizerResult(
@@ -97,30 +108,38 @@ class _State extends State<OptimizeFeeScreen> {
       netAmount: currencyProvider.convertFromAriary(_result!.netAmount),
       totalFees: currencyProvider.convertFromAriary(_result!.totalFees),
       remaining: currencyProvider.convertFromAriary(_result!.remaining),
-      details: _result!.details.map((detail) => FeeOptimizerDetail(
-        amount: currencyProvider.convertFromAriary(detail.amount),
-        fee: currencyProvider.convertFromAriary(detail.fee),
-        count: detail.count,
-      )).toList(),
+      details: _result!.details
+          .map(
+            (detail) => FeeOptimizerDetail(
+              amount: currencyProvider.convertFromAriary(detail.amount),
+              fee: currencyProvider.convertFromAriary(detail.fee),
+              count: detail.count,
+            ),
+          )
+          .toList(),
     );
   }
 
   Future<void> _loadProviders() async {
     final db = DatabaseUtil();
     final providerMaps = await db.query(ConstantUtil.tableProviders);
-    final loadedProviders = providerMaps.map((map) => model.Provider.fromMap(map)).toList();
+    final loadedProviders = providerMaps
+        .map((map) => model.Provider.fromMap(map))
+        .toList();
     if (mounted) {
       setState(() {
         _providers
           ..clear()
           ..addAll(loadedProviders);
         // Only set default provider if none is currently selected or if selected provider no longer exists
-        if (_selectedProvider == null || !_providers.contains(_selectedProvider)) {
+        if (_selectedProvider == null ||
+            !_providers.contains(_selectedProvider)) {
           _selectedProvider = _providers.isNotEmpty
-            ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider)
-                ? widget.defaultProvider
-                : _providers.first)
-            : null;
+              ? (widget.defaultProvider != null &&
+                        _providers.contains(widget.defaultProvider)
+                    ? widget.defaultProvider
+                    : _providers.first)
+              : null;
         }
       });
     }
@@ -142,7 +161,9 @@ class _State extends State<OptimizeFeeScreen> {
         appBar: custom.AppBar(
           title: AppLocalizations.of(context).optimizeFee,
           leading: null, // Will be handled by automaticallyImplyLeading
-          automaticallyImplyLeading: ModalRoute.of(context)?.canPop ?? false, // Show back button only when can pop
+          automaticallyImplyLeading:
+              ModalRoute.of(context)?.canPop ??
+              false, // Show back button only when can pop
           menuExcludeRoutes: [NavigationUtil.homeRoute],
           menuIconColor: context.colorScheme.onSurface,
         ),
@@ -156,7 +177,9 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 // Add proper padding for RTL support and accessibility
                 padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).textScaler.scale(1.0) > 1.3 ? 12 : 0,
+                  horizontal: MediaQuery.of(context).textScaler.scale(1.0) > 1.3
+                      ? 12
+                      : 0,
                 ),
                 child: SafeArea(
                   child: Column(
@@ -177,10 +200,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
               ),
             ),
-            SafeArea(
-              top: false,
-              child: _buildOptimizeButton(),
-            ),
+            SafeArea(top: false, child: _buildOptimizeButton()),
           ],
         ),
       ),
@@ -237,7 +257,9 @@ class _State extends State<OptimizeFeeScreen> {
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
-                          color: context.colorScheme.primary.withValues(alpha: 0.1),
+                          color: context.colorScheme.primary.withValues(
+                            alpha: 0.1,
+                          ),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
@@ -281,7 +303,9 @@ class _State extends State<OptimizeFeeScreen> {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: context.colorScheme.primary.withValues(alpha: 0.1),
+                        color: context.colorScheme.primary.withValues(
+                          alpha: 0.1,
+                        ),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Icon(
@@ -307,7 +331,10 @@ class _State extends State<OptimizeFeeScreen> {
             onChanged: (provider) async {
               if (provider == null) {
                 // Navigate to NewProviderScreen when "Add new provider" is selected
-                await NavigationUtil.pushTo(context, NavigationUtil.newProviderRoute);
+                await NavigationUtil.pushTo(
+                  context,
+                  NavigationUtil.newProviderRoute,
+                );
                 // Reload providers list after returning from new provider screen
                 await _loadProviders();
               } else {
@@ -395,7 +422,9 @@ class _State extends State<OptimizeFeeScreen> {
               Icon(
                 Icons.analytics_outlined,
                 size: 40,
-                color: context.colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                color: context.colorScheme.onSurfaceVariant.withValues(
+                  alpha: 0.6,
+                ),
               ),
               Global.gapMd,
               Text(
@@ -447,7 +476,9 @@ class _State extends State<OptimizeFeeScreen> {
               Container(
                 padding: Global.padMd,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.errorContainer.withValues(alpha: 0.1),
+                  color: context.colorScheme.errorContainer.withValues(
+                    alpha: 0.1,
+                  ),
                   borderRadius: Global.borderMd,
                   border: Border.all(
                     color: context.colorScheme.error.withValues(alpha: 0.3),
@@ -500,7 +531,8 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).totalAmount,
-                value: '${ConstantUtil.formatCurrencyAmount(_convertedResult!.totalAmount)} ${context.read<CurrencyProvider>().currencySymbol}',
+                value:
+                    '${ConstantUtil.formatCurrencyAmount(_convertedResult!.totalAmount)} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.account_balance_wallet,
                 color: context.colorScheme.primary,
               ),
@@ -509,7 +541,8 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).netAmount,
-                value: '${ConstantUtil.formatCurrencyAmount(_convertedResult!.netAmount)} ${context.read<CurrencyProvider>().currencySymbol}',
+                value:
+                    '${ConstantUtil.formatCurrencyAmount(_convertedResult!.netAmount)} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.savings,
                 color: Colors.green,
               ),
@@ -522,7 +555,8 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).totalFees,
-                value: '${ConstantUtil.formatCurrencyAmount(_convertedResult!.totalFees)} ${context.read<CurrencyProvider>().currencySymbol}',
+                value:
+                    '${ConstantUtil.formatCurrencyAmount(_convertedResult!.totalFees)} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.money_off,
                 color: Colors.red,
               ),
@@ -533,7 +567,11 @@ class _State extends State<OptimizeFeeScreen> {
                 title: AppLocalizations.of(context).efficiency,
                 value: '${_convertedResult!.efficiency.toStringAsFixed(1)}%',
                 icon: Icons.trending_up,
-                color: _convertedResult!.efficiency >= 95 ? Colors.green : _convertedResult!.efficiency >= 90 ? Colors.orange : Colors.red,
+                color: _convertedResult!.efficiency >= 95
+                    ? Colors.green
+                    : _convertedResult!.efficiency >= 90
+                    ? Colors.orange
+                    : Colors.red,
               ),
             ),
           ],
@@ -553,7 +591,8 @@ class _State extends State<OptimizeFeeScreen> {
             Expanded(
               child: _buildMetricCard(
                 title: AppLocalizations.of(context).remaining,
-                value: '${ConstantUtil.formatCurrencyAmount(_convertedResult!.remaining)} ${context.read<CurrencyProvider>().currencySymbol}',
+                value:
+                    '${ConstantUtil.formatCurrencyAmount(_convertedResult!.remaining)} ${context.read<CurrencyProvider>().currencySymbol}',
                 icon: Icons.pending,
                 color: context.colorScheme.tertiary,
               ),
@@ -627,7 +666,11 @@ class _State extends State<OptimizeFeeScreen> {
         children: [
           Row(
             children: [
-              Icon(Icons.list_alt, size: 18, color: context.colorScheme.primary),
+              Icon(
+                Icons.list_alt,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
               Global.gapSm,
               Flexible(
                 child: Text(
@@ -645,15 +688,26 @@ class _State extends State<OptimizeFeeScreen> {
             margin: const EdgeInsets.only(bottom: 8),
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: context.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+              color: context.colorScheme.surfaceContainerHighest.withValues(
+                alpha: 0.5,
+              ),
               borderRadius: Global.borderMd,
             ),
             child: Row(
               children: [
-                Expanded(flex: 2, child: _buildHeaderCell(AppLocalizations.of(context).amount)),
-                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).fee)),
-                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).count)),
-                Expanded(child: _buildHeaderCell(AppLocalizations.of(context).total)),
+                Expanded(
+                  flex: 2,
+                  child: _buildHeaderCell(AppLocalizations.of(context).amount),
+                ),
+                Expanded(
+                  child: _buildHeaderCell(AppLocalizations.of(context).fee),
+                ),
+                Expanded(
+                  child: _buildHeaderCell(AppLocalizations.of(context).count),
+                ),
+                Expanded(
+                  child: _buildHeaderCell(AppLocalizations.of(context).total),
+                ),
               ],
             ),
           ),
@@ -672,10 +726,25 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 child: Row(
                   children: [
-                    Expanded(flex: 2, child: _buildTableCell('${ConstantUtil.formatCurrencyAmount(detail.amount)} ${context.read<CurrencyProvider>().currencySymbol}')),
-                    Expanded(child: _buildTableCell('${ConstantUtil.formatCurrencyAmount(detail.fee)} ${context.read<CurrencyProvider>().currencySymbol}', isGreen: false)),
+                    Expanded(
+                      flex: 2,
+                      child: _buildTableCell(
+                        '${ConstantUtil.formatCurrencyAmount(detail.amount)} ${context.read<CurrencyProvider>().currencySymbol}',
+                      ),
+                    ),
+                    Expanded(
+                      child: _buildTableCell(
+                        '${ConstantUtil.formatCurrencyAmount(detail.fee)} ${context.read<CurrencyProvider>().currencySymbol}',
+                        isGreen: false,
+                      ),
+                    ),
                     Expanded(child: _buildTableCell(detail.count.toString())),
-                    Expanded(child: _buildTableCell('${ConstantUtil.formatCurrencyAmount(detail.totalCost)} ${context.read<CurrencyProvider>().currencySymbol}', isGreen: true)),
+                    Expanded(
+                      child: _buildTableCell(
+                        '${ConstantUtil.formatCurrencyAmount(detail.totalCost)} ${context.read<CurrencyProvider>().currencySymbol}',
+                        isGreen: true,
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -736,7 +805,9 @@ class _State extends State<OptimizeFeeScreen> {
       return;
     }
 
-    if (_minTransactions > 0 && _maxTransactions > 0 && _minTransactions > _maxTransactions) {
+    if (_minTransactions > 0 &&
+        _maxTransactions > 0 &&
+        _minTransactions > _maxTransactions) {
       setState(() {
         _result = null;
         _hasOptimized = true;
@@ -744,14 +815,22 @@ class _State extends State<OptimizeFeeScreen> {
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
-            AppToast.error(context, AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax);
+            AppToast.error(
+              context,
+              AppLocalizations.of(
+                context,
+              ).minTransactionsCannotBeGreaterThanMax,
+            );
           }
         });
       }
       return;
     }
 
-    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+    final currencyProvider = Provider.of<CurrencyProvider>(
+      context,
+      listen: false,
+    );
     final localizations = AppLocalizations.of(context);
 
     try {
@@ -761,7 +840,9 @@ class _State extends State<OptimizeFeeScreen> {
         where: '${ConstantUtil.columnProviderId} = ?',
         whereArgs: [int.tryParse(_selectedProvider!.id)],
       );
-      final intervals = feeIntervalMaps.map((map) => FeeInterval.fromMap(map)).toList();
+      final intervals = feeIntervalMaps
+          .map((map) => FeeInterval.fromMap(map))
+          .toList();
 
       if (intervals.isEmpty) {
         setState(() {
@@ -772,7 +853,10 @@ class _State extends State<OptimizeFeeScreen> {
         if (mounted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
-              AppToast.info(context, AppLocalizations.of(context).noFeeIntervalsFound);
+              AppToast.info(
+                context,
+                AppLocalizations.of(context).noFeeIntervalsFound,
+              );
             }
           });
         }
@@ -780,18 +864,20 @@ class _State extends State<OptimizeFeeScreen> {
       }
 
       final amountInAriary = currencyProvider.convertToAriary(_amount);
-      
+
       const maxSafeAmount = 1e15;
       if (amountInAriary > maxSafeAmount) {
         if (mounted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
               AppToast.error(
-                context, 
+                context,
                 AppLocalizations.of(context).amountExceedsMaximumLimit(
-                  ConstantUtil.formatCurrencyAmount(currencyProvider.convertFromAriary(maxSafeAmount)),
-                  currencyProvider.currencySymbol
-                )
+                  ConstantUtil.formatCurrencyAmount(
+                    currencyProvider.convertFromAriary(maxSafeAmount),
+                  ),
+                  currencyProvider.currencySymbol,
+                ),
               );
             }
           });
@@ -811,14 +897,18 @@ class _State extends State<OptimizeFeeScreen> {
         localizations: localizations,
       );
 
-      final coveragePercentage = (optimizationResult.netAmount / amountInAriary) * 100;
+      final coveragePercentage =
+          (optimizationResult.netAmount / amountInAriary) * 100;
       final hasLowCoverage = coveragePercentage < 80.0;
 
       if (optimizationResult.details.isEmpty && amountInAriary > 0) {
         if (mounted) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (mounted) {
-            AppToast.error(context, AppLocalizations.of(context).optimizationFailedNoValidSolution);
+              AppToast.error(
+                context,
+                AppLocalizations.of(context).optimizationFailedNoValidSolution,
+              );
             }
           });
         }
@@ -828,7 +918,9 @@ class _State extends State<OptimizeFeeScreen> {
             if (mounted) {
               AppToast.warning(
                 context,
-                AppLocalizations.of(context).optimizationIncomplete(coveragePercentage.toStringAsFixed(1))
+                AppLocalizations.of(
+                  context,
+                ).optimizationIncomplete(coveragePercentage.toStringAsFixed(1)),
               );
             }
           });
@@ -843,16 +935,24 @@ class _State extends State<OptimizeFeeScreen> {
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
-            String errorMessage = AppLocalizations.of(context).failedToCalculateOptimization;
-            
+            String errorMessage = AppLocalizations.of(
+              context,
+            ).failedToCalculateOptimization;
+
             if (e.toString().contains('Montant trop élevé')) {
-              errorMessage = AppLocalizations.of(context).amountExceedsMaximumAllowedLimit;
+              errorMessage = AppLocalizations.of(
+                context,
+              ).amountExceedsMaximumAllowedLimit;
             } else if (e.toString().contains('minOperations')) {
-              errorMessage = AppLocalizations.of(context).invalidTransactionRangeConstraints;
+              errorMessage = AppLocalizations.of(
+                context,
+              ).invalidTransactionRangeConstraints;
             } else if (e.toString().contains('Aucune option')) {
-              errorMessage = AppLocalizations.of(context).noValidFeeIntervalsAvailable;
+              errorMessage = AppLocalizations.of(
+                context,
+              ).noValidFeeIntervalsAvailable;
             }
-            
+
             AppToast.error(context, errorMessage);
           }
         });
@@ -866,15 +966,26 @@ class _State extends State<OptimizeFeeScreen> {
 
   void _optimize() async {
     if (_amount <= 0) {
-      AppToast.error(context, AppLocalizations.of(context).pleaseEnterValidAmount);
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).pleaseEnterValidAmount,
+      );
       return;
     }
-    if (_minTransactions > _maxTransactions && _minTransactions > 0 && _maxTransactions > 0) {
-      AppToast.error(context, AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax);
+    if (_minTransactions > _maxTransactions &&
+        _minTransactions > 0 &&
+        _maxTransactions > 0) {
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax,
+      );
       return;
     }
     if (_selectedProvider == null) {
-      AppToast.error(context, AppLocalizations.of(context).pleaseSelectProvider);
+      AppToast.error(
+        context,
+        AppLocalizations.of(context).pleaseSelectProvider,
+      );
       return;
     }
 

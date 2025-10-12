@@ -22,34 +22,34 @@ class CollapsibleCard extends StatefulWidget {
 
   /// Title text displayed in the header
   final String title;
-  
+
   /// Optional subtitle text displayed below title
   final String? subtitle;
-  
+
   /// Optional icon displayed before the title
   final IconData? icon;
-  
+
   /// Color for the icon and expand/collapse icon
   final Color? iconColor;
-  
+
   /// Custom style for the title text
   final TextStyle? titleStyle;
-  
+
   /// Custom style for the subtitle text
   final TextStyle? subtitleStyle;
-  
+
   /// Content widgets displayed when expanded
   final List<Widget> children;
-  
+
   /// Whether the card is initially expanded
   final bool isInitiallyExpanded;
-  
+
   /// Padding inside the card
   final EdgeInsets padding;
-  
+
   /// Margin around the card
   final EdgeInsets margin;
-  
+
   /// Callback when expanded state changes
   final ValueChanged<bool>? onExpandedChanged;
 
@@ -77,7 +77,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final defaultIconColor = widget.iconColor ?? colorScheme.primary;
-    
+
     // Use title color for collapse icon
     final titleColor = widget.titleStyle?.color ?? colorScheme.onSurface;
     final collapseIconColor = titleColor;
@@ -97,11 +97,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                 child: Row(
                   children: [
                     if (widget.icon != null) ...[
-                      Icon(
-                        widget.icon,
-                        size: 18,
-                        color: defaultIconColor,
-                      ),
+                      Icon(widget.icon, size: 18, color: defaultIconColor),
                       Global.gapSm,
                     ],
                     Expanded(
@@ -112,11 +108,12 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                         children: [
                           Text(
                             widget.title,
-                            style: widget.titleStyle ?? 
-                              ThemeUtil.titleMedium.copyWith(
-                                color: colorScheme.onSurface,
-                                fontWeight: FontWeight.w700,
-                              ),
+                            style:
+                                widget.titleStyle ??
+                                ThemeUtil.titleMedium.copyWith(
+                                  color: colorScheme.onSurface,
+                                  fontWeight: FontWeight.w700,
+                                ),
                             // Add textDirection for better RTL support
                             textDirection: TextDirection.ltr,
                           ),
@@ -124,10 +121,11 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                             const SizedBox(height: 6),
                             Text(
                               widget.subtitle!,
-                              style: widget.subtitleStyle ??
-                                ThemeUtil.bodyMedium.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
-                                ),
+                              style:
+                                  widget.subtitleStyle ??
+                                  ThemeUtil.bodyMedium.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                  ),
                               textDirection: TextDirection.ltr,
                             ),
                           ],
@@ -142,7 +140,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                 ),
               ),
             ),
-            
+
             // Collapsible content
             if (_isExpanded) ...[
               Container(
@@ -150,7 +148,8 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                   left: widget.padding.left,
                   right: widget.padding.right,
                   bottom: widget.padding.bottom,
-                  top: 8, // Reduced top spacing since header already has padding
+                  top:
+                      8, // Reduced top spacing since header already has padding
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

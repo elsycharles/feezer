@@ -44,9 +44,7 @@ class _State extends State<NewFeeIntervalScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: context.theme.scaffoldBackgroundColor,
-    appBar: custom.AppBar(
-      title: AppLocalizations.of(context).newFeeInterval,
-    ),
+    appBar: custom.AppBar(title: AppLocalizations.of(context).newFeeInterval),
     body: Form(
       key: _formKey,
       child: Column(
@@ -97,7 +95,8 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMinAmountField() => custom_form.FormField(
-    label: '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
+    label:
+        '${AppLocalizations.of(context).minimumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
     controller: _minAmountController,
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMinimumAmount,
@@ -112,7 +111,8 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   Widget _buildMaxAmountField() => custom_form.FormField(
-    label: '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
+    label:
+        '${AppLocalizations.of(context).maximumAmount} (${context.read<CurrencyProvider>().currencySymbol})',
     controller: _maxAmountController,
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMaximumAmount,
@@ -145,7 +145,10 @@ class _State extends State<NewFeeIntervalScreen> {
               child: GestureDetector(
                 onTap: () => setState(() => _feeType = FeeType.fixed),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: _feeType == FeeType.fixed
                         ? context.colorScheme.primaryContainer
@@ -174,7 +177,10 @@ class _State extends State<NewFeeIntervalScreen> {
               child: GestureDetector(
                 onTap: () => setState(() => _feeType = FeeType.percentage),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 12,
+                    horizontal: 16,
+                  ),
                   decoration: BoxDecoration(
                     color: _feeType == FeeType.percentage
                         ? context.colorScheme.primaryContainer
@@ -301,11 +307,29 @@ class _State extends State<NewFeeIntervalScreen> {
         final now = DateTime.now();
         final feeInterval = FeeInterval(
           id: now.millisecondsSinceEpoch.toString(),
-          minAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_minAmountController.text.trim()) ?? 0),
-          maxAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_maxAmountController.text.trim()) ?? 0),
+          minAmount: context.read<CurrencyProvider>().convertToAriary(
+            ConstantUtil.parseLocalizedNumber(
+                  _minAmountController.text.trim(),
+                ) ??
+                0,
+          ),
+          maxAmount: context.read<CurrencyProvider>().convertToAriary(
+            ConstantUtil.parseLocalizedNumber(
+                  _maxAmountController.text.trim(),
+                ) ??
+                0,
+          ),
           fee: _feeType == FeeType.percentage
-              ? (ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0)
-              : context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
+              ? (ConstantUtil.parseLocalizedNumber(
+                      _feeController.text.trim(),
+                    ) ??
+                    0)
+              : context.read<CurrencyProvider>().convertToAriary(
+                  ConstantUtil.parseLocalizedNumber(
+                        _feeController.text.trim(),
+                      ) ??
+                      0,
+                ),
           feeType: _feeType,
           creationDateTime: now,
         );

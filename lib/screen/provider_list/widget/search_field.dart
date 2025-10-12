@@ -90,7 +90,9 @@ class _SearchFieldState extends State<SearchField> {
                   color: context.colorScheme.onSurfaceVariant,
                   size: 20,
                 ),
-                tooltip: widget.clearTooltip ?? AppLocalizations.of(context).clearSearch,
+                tooltip:
+                    widget.clearTooltip ??
+                    AppLocalizations.of(context).clearSearch,
               )
             : null,
         border: OutlineInputBorder(

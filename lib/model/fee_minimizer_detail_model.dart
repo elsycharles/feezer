@@ -20,15 +20,12 @@ class FeeOptimizerDetail {
   double get totalFees => fee * count;
 
   /// Creates a copy with updated values
-  FeeOptimizerDetail copyWith({
-    double? amount,
-    double? fee,
-    int? count,
-  }) => FeeOptimizerDetail(
-    amount: amount ?? this.amount,
-    fee: fee ?? this.fee,
-    count: count ?? this.count,
-  );
+  FeeOptimizerDetail copyWith({double? amount, double? fee, int? count}) =>
+      FeeOptimizerDetail(
+        amount: amount ?? this.amount,
+        fee: fee ?? this.fee,
+        count: count ?? this.count,
+      );
 
   @override
   bool operator ==(Object other) =>

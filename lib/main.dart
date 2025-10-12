@@ -40,12 +40,14 @@ void main() async {
   // Check if first launch
   final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
 
-  runApp(MyApp(
-    themeProvider: themeProvider,
-    localeProvider: localeProvider,
-    currencyProvider: currencyProvider,
-    initialRoute: isFirstLaunch ? '/onboarding' : '/',
-  ));
+  runApp(
+    MyApp(
+      themeProvider: themeProvider,
+      localeProvider: localeProvider,
+      currencyProvider: currencyProvider,
+      initialRoute: isFirstLaunch ? '/onboarding' : '/',
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -64,7 +66,8 @@ class MyApp extends StatelessWidget {
 
   Map<String, WidgetBuilder> get routes => {
     '/': (context) {
-      final args = ModalRoute.of(context)?.settings.arguments as model.Provider?;
+      final args =
+          ModalRoute.of(context)?.settings.arguments as model.Provider?;
       return OptimizeFeeScreen(defaultProvider: args);
     },
     '/onboarding': (_) => const OnboardingScreen(),
@@ -72,7 +75,8 @@ class MyApp extends StatelessWidget {
     '/settings': (_) => const SettingsScreen(),
     '/currencies': (_) => const CurrencyListScreen(),
     '/provider': (context) {
-      final args = ModalRoute.of(context)?.settings.arguments as model.Provider?;
+      final args =
+          ModalRoute.of(context)?.settings.arguments as model.Provider?;
       if (args != null) {
         return ProviderDetailScreen(provider: args);
       }
@@ -123,28 +127,31 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: currencyProvider),
       ],
       child: Consumer3<ThemeProvider, LocaleProvider, CurrencyProvider>(
-        builder: (context, themeProvider, localeProvider, currencyProvider, child) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: MaterialApp(
-              title: ConstantUtil.appName,
-              routes: routes,
-              onGenerateRoute: onGenerateRoute,
-              initialRoute: initialRoute,
-              theme: ThemeUtil.lightTheme,
-              darkTheme: ThemeUtil.darkTheme,
-              themeMode: themeProvider.flutterThemeMode,
-              locale: localeProvider.locale,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                FallbackMaterialLocalizationsDelegate(),
-                GlobalWidgetsLocalizations.delegate,
-                FallbackCupertinoLocalizationsDelegate(),
-              ],
-              supportedLocales: AppLocalizations.supportedLocales,
-            ),
-          );
-        },
+        builder:
+            (context, themeProvider, localeProvider, currencyProvider, child) {
+              return MediaQuery(
+                data: MediaQuery.of(
+                  context,
+                ).copyWith(textScaler: TextScaler.linear(1.0)),
+                child: MaterialApp(
+                  title: ConstantUtil.appName,
+                  routes: routes,
+                  onGenerateRoute: onGenerateRoute,
+                  initialRoute: initialRoute,
+                  theme: ThemeUtil.lightTheme,
+                  darkTheme: ThemeUtil.darkTheme,
+                  themeMode: themeProvider.flutterThemeMode,
+                  locale: localeProvider.locale,
+                  localizationsDelegates: const [
+                    AppLocalizations.delegate,
+                    FallbackMaterialLocalizationsDelegate(),
+                    GlobalWidgetsLocalizations.delegate,
+                    FallbackCupertinoLocalizationsDelegate(),
+                  ],
+                  supportedLocales: AppLocalizations.supportedLocales,
+                ),
+              );
+            },
       ),
     );
   }

@@ -80,13 +80,18 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
   Future<void> _importCsvFromFile(PlatformFile file) async {
     try {
       if (file.bytes == null && file.path == null) {
-        if (mounted) {/* Lines 85-86 omitted */}
+        if (mounted) {
+          /* Lines 85-86 omitted */
+        }
         return;
       }
 
       setState(() => _isProcessing = true);
 
-      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+      final currencyProvider = Provider.of<CurrencyProvider>(
+        context,
+        listen: false,
+      );
       final localizations = AppLocalizations.of(context);
 
       // Lire le contenu du fichier
@@ -95,9 +100,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
           : await File(file.path!).readAsString();
 
       final importResult = await CsvUtil.importFromCsv(
-        csvContent, 
-        currencyProvider, 
-        createCsvLocalizations(localizations)
+        csvContent,
+        currencyProvider,
+        createCsvLocalizations(localizations),
       );
 
       setState(() => _isProcessing = false);
@@ -126,7 +131,10 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
   Future<void> _importFromText(String csvText) async {
     if (csvText.trim().isEmpty) {
       if (mounted) {
-        AppToast.error(context, AppLocalizations.of(context).csvContentCannotBeEmpty);
+        AppToast.error(
+          context,
+          AppLocalizations.of(context).csvContentCannotBeEmpty,
+        );
       }
       return;
     }
@@ -136,8 +144,15 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     try {
       setState(() => _isProcessing = true);
 
-      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
-      final importResult = await CsvUtil.importFromCsv(csvText, currencyProvider, createCsvLocalizations(localizations));
+      final currencyProvider = Provider.of<CurrencyProvider>(
+        context,
+        listen: false,
+      );
+      final importResult = await CsvUtil.importFromCsv(
+        csvText,
+        currencyProvider,
+        createCsvLocalizations(localizations),
+      );
 
       setState(() => _isProcessing = false);
 
@@ -168,9 +183,15 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     try {
       setState(() => _isProcessing = true);
 
-      final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+      final localeProvider = Provider.of<LocaleProvider>(
+        context,
+        listen: false,
+      );
       final locale = localeProvider.locale?.languageCode ?? 'en';
-      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+      final currencyProvider = Provider.of<CurrencyProvider>(
+        context,
+        listen: false,
+      );
 
       final exportResult = await CsvUtil.exportToCsv(
         locale: locale,
@@ -208,7 +229,10 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     final localizations = AppLocalizations.of(context);
 
     try {
-      final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+      final localeProvider = Provider.of<LocaleProvider>(
+        context,
+        listen: false,
+      );
       final locale = localeProvider.locale?.languageCode ?? 'en';
 
       final template = CsvUtil.getImportTemplate(locale);
@@ -234,7 +258,10 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     }
   }
 
-  Future<void> _saveFileToUserLocation(String sourceFilePath, String suggestedName) async {
+  Future<void> _saveFileToUserLocation(
+    String sourceFilePath,
+    String suggestedName,
+  ) async {
     final localizations = AppLocalizations.of(context);
 
     try {
@@ -256,10 +283,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       if (result != null) {
         if (mounted) {
-          AppToast.success(
-            context,
-            localizations.fileSavedSuccessfully,
-          );
+          AppToast.success(context, localizations.fileSavedSuccessfully);
         }
       }
     } catch (e) {
@@ -276,7 +300,10 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     final localizations = AppLocalizations.of(context);
 
     try {
-      final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
+      final localeProvider = Provider.of<LocaleProvider>(
+        context,
+        listen: false,
+      );
       final locale = localeProvider.locale?.languageCode ?? 'en';
 
       final template = CsvUtil.getImportTemplate(locale);
@@ -285,10 +312,8 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       await showDialog(
         context: context,
-        builder: (context) => _PreviewDialog(
-          template: template,
-          onDownload: _downloadTemplate,
-        ),
+        builder: (context) =>
+            _PreviewDialog(template: template, onDownload: _downloadTemplate),
       );
     } catch (e) {
       if (mounted) {
@@ -323,7 +348,11 @@ class _InfoCard extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            child: Icon(Icons.info_outline, color: Theme.of(context).colorScheme.primary, size: 24),
+            child: Icon(
+              Icons.info_outline,
+              color: Theme.of(context).colorScheme.primary,
+              size: 24,
+            ),
           ),
           Global.gapMd,
           Expanded(
@@ -366,8 +395,6 @@ class _DataManagementSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -375,7 +402,11 @@ class _DataManagementSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
           child: Row(
             children: [
-              Icon(Icons.import_export, size: 20, color: ThemeUtil.primaryColor),
+              Icon(
+                Icons.import_export,
+                size: 20,
+                color: ThemeUtil.primaryColor,
+              ),
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).dataManagement,
@@ -436,9 +467,7 @@ class _ActionTile extends StatelessWidget {
         leading: Icon(icon, color: ThemeUtil.primaryColor),
         title: Text(
           title,
-          style: ThemeUtil.bodyLarge.copyWith(
-            color: colorScheme.onSurface,
-          ),
+          style: ThemeUtil.bodyLarge.copyWith(color: colorScheme.onSurface),
         ),
         subtitle: Text(
           subtitle,
@@ -478,7 +507,11 @@ class _TemplatesSection extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
           child: Row(
             children: [
-              Icon(Icons.description_outlined, size: 20, color: ThemeUtil.primaryColor),
+              Icon(
+                Icons.description_outlined,
+                size: 20,
+                color: ThemeUtil.primaryColor,
+              ),
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).templates,
@@ -560,7 +593,10 @@ class _TemplateTile extends StatelessWidget {
               label: Text(AppLocalizations.of(context).preview),
               style: OutlinedButton.styleFrom(
                 side: BorderSide(color: ThemeUtil.getPrimaryColor(context)),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Global.radiusSm),
                 ),
@@ -574,7 +610,10 @@ class _TemplateTile extends StatelessWidget {
               style: FilledButton.styleFrom(
                 backgroundColor: colorScheme.primary,
                 foregroundColor: colorScheme.onPrimary,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 10,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(Global.radiusSm),
                 ),
@@ -597,9 +636,7 @@ class _LoadingOverlay extends StatelessWidget {
     return Container(
       color: colorScheme.surface.withValues(alpha: 0.8),
       child: Center(
-        child: CircularProgressIndicator(
-          color: colorScheme.primary,
-        ),
+        child: CircularProgressIndicator(color: colorScheme.primary),
       ),
     );
   }
@@ -610,10 +647,7 @@ class _LoadingOverlay extends StatelessWidget {
 // ============================================================================
 
 class _ImportDialog extends StatefulWidget {
-  const _ImportDialog({
-    required this.onFileImport,
-    required this.onTextImport,
-  });
+  const _ImportDialog({required this.onFileImport, required this.onTextImport});
 
   final void Function(PlatformFile) onFileImport;
   final void Function(String) onTextImport;
@@ -667,7 +701,9 @@ class _ImportDialogState extends State<_ImportDialog> {
                 const SizedBox(height: 24),
                 _ImportActions(
                   isImporting: _isImporting,
-                  canImport: _useTextInput ? _csvText.trim().isNotEmpty : _selectedFile != null,
+                  canImport: _useTextInput
+                      ? _csvText.trim().isNotEmpty
+                      : _selectedFile != null,
                   onCancel: () => Navigator.of(context).pop(),
                   onImport: _handleImport,
                 ),
@@ -693,7 +729,10 @@ class _ImportDialogState extends State<_ImportDialog> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, AppLocalizations.of(context).failedToSelectFile);
+        AppToast.error(
+          context,
+          AppLocalizations.of(context).failedToSelectFile,
+        );
       }
     }
   }
@@ -712,7 +751,10 @@ class _ImportDialogState extends State<_ImportDialog> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, AppLocalizations.of(context).importFailed(e.toString()));
+        AppToast.error(
+          context,
+          AppLocalizations.of(context).importFailed(e.toString()),
+        );
       }
     } finally {
       if (mounted) {
@@ -723,10 +765,7 @@ class _ImportDialogState extends State<_ImportDialog> {
 }
 
 class _DialogHeader extends StatelessWidget {
-  const _DialogHeader({
-    required this.icon,
-    required this.title,
-  });
+  const _DialogHeader({required this.icon, required this.title});
 
   final IconData icon;
   final String title;
@@ -739,7 +778,11 @@ class _DialogHeader extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(12),
-          child: Icon(icon, color: Theme.of(context).colorScheme.primary, size: 24),
+          child: Icon(
+            icon,
+            color: Theme.of(context).colorScheme.primary,
+            size: 24,
+          ),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -757,10 +800,7 @@ class _DialogHeader extends StatelessWidget {
 }
 
 class _ImportModeToggle extends StatelessWidget {
-  const _ImportModeToggle({
-    required this.useTextInput,
-    required this.onToggle,
-  });
+  const _ImportModeToggle({required this.useTextInput, required this.onToggle});
 
   final bool useTextInput;
   final ValueChanged<bool> onToggle;
@@ -774,9 +814,7 @@ class _ImportModeToggle extends StatelessWidget {
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.3),
-        ),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -955,11 +993,7 @@ class _FileUploadArea extends StatelessWidget {
         child: Column(
           children: [
             if (selectedFile != null) ...[
-              Icon(
-                Icons.check_circle,
-                size: 48,
-                color: ThemeUtil.success,
-              ),
+              Icon(Icons.check_circle, size: 48, color: ThemeUtil.success),
               const SizedBox(height: 16),
               Text(
                 AppLocalizations.of(context).fileSelected,
@@ -970,11 +1004,16 @@ class _FileUploadArea extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.surface,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
+                  border: Border.all(
+                    color: colorScheme.outline.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -1021,7 +1060,10 @@ class _FileUploadArea extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
                   color: colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(16),
@@ -1097,12 +1139,16 @@ class _ImportActions extends StatelessWidget {
               foregroundColor: canImport && !isImporting
                   ? colorScheme.onPrimary
                   : colorScheme.onSurface.withValues(alpha: 0.38),
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
-              disabledBackgroundColor: colorScheme.onSurface.withValues(alpha: 0.12),
-              disabledForegroundColor: colorScheme.onSurface.withValues(alpha: 0.38),
+              disabledBackgroundColor: colorScheme.onSurface.withValues(
+                alpha: 0.12,
+              ),
+              disabledForegroundColor: colorScheme.onSurface.withValues(
+                alpha: 0.38,
+              ),
             ),
             child: AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
@@ -1221,7 +1267,7 @@ class _ResultContent extends StatelessWidget {
           Text(
             result.message!,
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
+              color: colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 16),
@@ -1229,13 +1275,17 @@ class _ResultContent extends StatelessWidget {
         if (result.providersCount > 0)
           _ResultItem(
             icon: Icons.business,
-            text: AppLocalizations.of(context).providersImported(result.providersCount),
+            text: AppLocalizations.of(
+              context,
+            ).providersImported(result.providersCount),
             color: ThemeUtil.info,
           ),
         if (result.feeIntervalsCount > 0)
           _ResultItem(
             icon: Icons.attach_money,
-            text: AppLocalizations.of(context).feeIntervalsImported(result.feeIntervalsCount),
+            text: AppLocalizations.of(
+              context,
+            ).feeIntervalsImported(result.feeIntervalsCount),
             color: ThemeUtil.success,
           ),
         if (result.errors.isNotEmpty) ...[
@@ -1269,7 +1319,7 @@ class _ResultItem extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
         ],
@@ -1320,15 +1370,17 @@ class _ErrorsCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: errors
-                    .map((error) => Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
-                          child: Text(
-                            '• $error',
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.error,
-                            ),
+                    .map(
+                      (error) => Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Text(
+                          '• $error',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.error,
                           ),
-                        ))
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
             ),
@@ -1365,10 +1417,7 @@ class _ResultActions extends StatelessWidget {
 }
 
 class _PreviewDialog extends StatelessWidget {
-  const _PreviewDialog({
-    required this.template,
-    required this.onDownload,
-  });
+  const _PreviewDialog({required this.template, required this.onDownload});
 
   final String template;
   final VoidCallback onDownload;
@@ -1398,10 +1447,7 @@ class _PreviewDialog extends StatelessWidget {
                 const SizedBox(height: 16),
                 _PreviewContent(template: template),
                 const SizedBox(height: 24),
-                _PreviewActions(
-                  template: template,
-                  onDownload: onDownload,
-                ),
+                _PreviewActions(template: template, onDownload: onDownload),
               ],
             ),
           ),
@@ -1459,10 +1505,7 @@ class _PreviewContent extends StatelessWidget {
 }
 
 class _PreviewActions extends StatelessWidget {
-  const _PreviewActions({
-    required this.template,
-    required this.onDownload,
-  });
+  const _PreviewActions({required this.template, required this.onDownload});
 
   final String template;
   final VoidCallback onDownload;

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +13,12 @@ class AmountInputWidget extends StatefulWidget {
     required this.onChanged,
     this.min = 0.0,
     this.max = 999999.0,
-    this.step = 1.0,
     this.label = 'Amount',
   });
 
   final double value;
   final ValueChanged<double> onChanged;
-  final double min, max, step;
+  final double min, max;
   final String label;
 
   @override
@@ -30,7 +28,6 @@ class AmountInputWidget extends StatefulWidget {
 class _AmountInputWidgetState extends State<AmountInputWidget> {
   late final TextEditingController _controller;
   late FocusNode _focusNode;
-  Timer? _repeatTimer;
   bool _isUserTyping = false;
 
   @override
@@ -45,7 +42,6 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   @override
   void dispose() {
-    _repeatTimer?.cancel();
     _focusNode.removeListener(_onFocusChanged);
     _controller.dispose();
     _focusNode.dispose();
@@ -120,43 +116,28 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: SizedBox(
             height: 56,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _buildRepeatButton(
-                  Icons.remove,
-                  widget.value > widget.min,
-                  isIncrement: false,
-                ),
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    focusNode: _focusNode,
-                    textAlign: TextAlign.center,
-                    textAlignVertical: TextAlignVertical.center,
-                    keyboardType: TextInputType.numberWithOptions(decimal: true),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                      LengthLimitingTextInputFormatter(11)
-                    ],
-                    style: ThemeUtil.titleLarge.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      isDense: false,
-                      contentPadding: EdgeInsets.symmetric(vertical: 0),
-                    ),
-                    onChanged: _onTextChanged,
-                  ),
-                ),
-                _buildRepeatButton(
-                  Icons.add,
-                  widget.value < widget.max,
-                  isIncrement: true,
-                ),
+            child: TextField(
+              controller: _controller,
+              focusNode: _focusNode,
+              textAlign: TextAlign.center,
+              textAlignVertical: TextAlignVertical.center,
+              keyboardType: TextInputType.numberWithOptions(
+                decimal: true,
+              ),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+                LengthLimitingTextInputFormatter(11),
               ],
+              style: ThemeUtil.titleLarge.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+                fontWeight: FontWeight.w600,
+              ),
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                isDense: false,
+                contentPadding: EdgeInsets.symmetric(vertical: 0),
+              ),
+              onChanged: _onTextChanged,
             ),
           ),
         ),
@@ -164,67 +145,12 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
     ),
   );
 
-  Widget _buildRepeatButton(
-    IconData icon,
-    bool enabled, {
-    required bool isIncrement,
-  }) {
-    final Color fg = enabled
-        ? Theme.of(context).colorScheme.primary
-        : Theme.of(context).colorScheme.onSurfaceVariant.withValues(alpha: 0.5);
-    final Color bg = enabled
-        ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.1)
-        : Theme.of(context).colorScheme.surface;
-
-    void tapOnce() {
-      if (!enabled) return;
-      isIncrement ? _increment() : _decrement();
-    }
-
-    void startRepeat() {
-      if (!enabled) return;
-      _repeatTimer?.cancel();
-      _repeatTimer = Timer.periodic(const Duration(milliseconds: 70), (_) {
-        isIncrement ? _increment() : _decrement();
-      });
-    }
-
-    void stopRepeat() {
-      _repeatTimer?.cancel();
-      _repeatTimer = null;
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: GestureDetector(
-        onLongPressStart: (_) => startRepeat(),
-        onLongPressEnd: (_) => stopRepeat(),
-        child: Material(
-          color: bg,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            onTap: tapOnce,
-            child: SizedBox(
-              width: 44,
-              height: 44,
-              child: Icon(icon, size: 18, color: fg),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  double _clamp(double v) => v.clamp(widget.min, widget.max);
-  void _increment() => widget.onChanged(_clamp(widget.value + widget.step));
-  void _decrement() => widget.onChanged(_clamp(widget.value - widget.step));
   void _onTextChanged(String value) {
     _isUserTyping = true;
     final doubleValue = ConstantUtil.parseLocalizedNumber(value);
-    if (doubleValue != null && doubleValue >= widget.min && doubleValue <= widget.max) {
+    if (doubleValue != null &&
+        doubleValue >= widget.min &&
+        doubleValue <= widget.max) {
       widget.onChanged(doubleValue);
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);

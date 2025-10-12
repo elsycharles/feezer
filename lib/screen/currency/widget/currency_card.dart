@@ -104,7 +104,10 @@ class CurrencyCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: colorScheme.surfaceContainerHighest,
                           borderRadius: BorderRadius.circular(8),
@@ -131,9 +134,7 @@ class CurrencyCard extends StatelessWidget {
             ),
 
             // Trailing widget (if no checkbox)
-            if (!showCheckbox && trailing != null) ...[
-              trailing!,
-            ],
+            if (!showCheckbox && trailing != null) ...[trailing!],
           ],
         ),
       ),

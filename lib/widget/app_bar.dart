@@ -45,7 +45,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
     final colorScheme = theme.colorScheme;
     final isDark = theme.brightness == Brightness.dark;
 
-    final bgColor = backgroundColor ??
+    final bgColor =
+        backgroundColor ??
         (isDark
             ? colorScheme.surface.withValues(alpha: 0.95)
             : colorScheme.surface.withValues(alpha: 0.98));
@@ -57,7 +58,8 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
       gradient: useGradient
           ? LinearGradient(
               colors: [
-                gradientStartColor ?? colorScheme.primary.withValues(alpha: 0.1),
+                gradientStartColor ??
+                    colorScheme.primary.withValues(alpha: 0.1),
                 gradientEndColor ?? colorScheme.primary.withValues(alpha: 0.05),
               ],
               begin: Alignment.topCenter,
@@ -136,5 +138,6 @@ class AppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + (borderRadius > 0 ? 8 : 0));
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (borderRadius > 0 ? 8 : 0));
 }
