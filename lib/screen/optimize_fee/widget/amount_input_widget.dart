@@ -63,13 +63,13 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   @override
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
-    // Ne pas mettre à jour si l'utilisateur a le focus OU est en train de taper
+    // Do not update if user has focus OR is typing
     if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
       _controller.text = _formatValue(widget.value);
     }
   }
 
-  // Nouvelle méthode pour formater la valeur
+  // New method to format value
   String _formatValue(double value) {
     // Si c'est un nombre entier, on n'affiche pas le .0
     if (value == value.toInt()) {
@@ -237,6 +237,6 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);
     }
-    // Pas besoin de remettre à false ici, on laisse le onFocusChanged s'en charger
+    // No need to reset to false here, let onFocusChanged handle it
   }
 }

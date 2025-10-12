@@ -30,6 +30,7 @@ class _State extends State<NewFeeIntervalScreen> {
   late final _minAmountController = TextEditingController();
   late final _maxAmountController = TextEditingController();
   late final _feeController = TextEditingController();
+  FeeType _feeType = FeeType.fixed;
   bool _isCreating = false;
 
   @override
@@ -61,6 +62,8 @@ class _State extends State<NewFeeIntervalScreen> {
                   _buildMinAmountField(),
                   Global.gapLg,
                   _buildMaxAmountField(),
+                  Global.gapLg,
+                  _buildFeeTypeSelector(),
                   Global.gapLg,
                   _buildFeeField(),
                 ],
@@ -119,18 +122,116 @@ class _State extends State<NewFeeIntervalScreen> {
     required: true,
   );
 
+  Widget _buildFeeTypeSelector() => Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: context.colorScheme.surface,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: context.colorScheme.outlineVariant),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context).feeType,
+          style: ThemeUtil.labelLarge.copyWith(
+            color: context.colorScheme.onSurface,
+          ),
+        ),
+        Global.gapMd,
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => setState(() => _feeType = FeeType.fixed),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: _feeType == FeeType.fixed
+                        ? context.colorScheme.primaryContainer
+                        : context.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: _feeType == FeeType.fixed
+                          ? context.colorScheme.primary
+                          : context.colorScheme.outlineVariant,
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context).fixedAmount,
+                    textAlign: TextAlign.center,
+                    style: ThemeUtil.bodyMedium.copyWith(
+                      color: _feeType == FeeType.fixed
+                          ? context.colorScheme.onPrimaryContainer
+                          : context.colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Global.gapMd,
+            Expanded(
+              child: GestureDetector(
+                onTap: () => setState(() => _feeType = FeeType.percentage),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: _feeType == FeeType.percentage
+                        ? context.colorScheme.primaryContainer
+                        : context.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: _feeType == FeeType.percentage
+                          ? context.colorScheme.primary
+                          : context.colorScheme.outlineVariant,
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context).percentage,
+                    textAlign: TextAlign.center,
+                    style: ThemeUtil.bodyMedium.copyWith(
+                      color: _feeType == FeeType.percentage
+                          ? context.colorScheme.onPrimaryContainer
+                          : context.colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+
   Widget _buildFeeField() => custom_form.FormField(
-    label: '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
+    label: _feeType == FeeType.percentage
+        ? '${AppLocalizations.of(context).fee} (%)'
+        : '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
     controller: _feeController,
     icon: Icons.attach_money,
-    hintText: AppLocalizations.of(context).enterFeeAmount,
+    hintText: _feeType == FeeType.percentage
+        ? AppLocalizations.of(context).enterPercentage
+        : AppLocalizations.of(context).enterFeeAmount,
     keyboardType: TextInputType.number,
-    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.positiveNumber(
-      value,
-      context,
-      AppLocalizations.of(context).feeAmount,
-    ),
+    inputFormatters: _feeType == FeeType.percentage
+        ? [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))]
+        : [FilteringTextInputFormatter.digitsOnly],
+    validator: (value) {
+      if (_feeType == FeeType.percentage) {
+        final num? numValue = num.tryParse(value ?? '');
+        if (numValue == null || numValue < 0 || numValue > 100) {
+          return AppLocalizations.of(context).percentageMustBeBetween0And100;
+        }
+      } else {
+        return ValidationUtil.positiveNumber(
+          value,
+          context,
+          AppLocalizations.of(context).feeAmount,
+        );
+      }
+      return null;
+    },
     required: true,
   );
 
@@ -180,7 +281,7 @@ class _State extends State<NewFeeIntervalScreen> {
     // Then check it's greater than min amount
     final amount = ConstantUtil.parseLocalizedNumber(value!);
     if (amount == null) {
-      return 'Montant invalide';
+      return AppLocalizations.of(context).invalidAmount;
     }
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
     if (amount <= minAmount) {
@@ -202,7 +303,10 @@ class _State extends State<NewFeeIntervalScreen> {
           id: now.millisecondsSinceEpoch.toString(),
           minAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_minAmountController.text.trim()) ?? 0),
           maxAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_maxAmountController.text.trim()) ?? 0),
-          fee: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
+          fee: _feeType == FeeType.percentage
+              ? (ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0)
+              : context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
+          feeType: _feeType,
           creationDateTime: now,
         );
         widget.onFeeIntervalAdded?.call(feeInterval);

@@ -55,7 +55,7 @@ class CsvResult {
   final String? filePath;
 }
 
-// Configuration centralisée des mappings de colonnes
+// Centralized configuration of column mappings
 class _ColumnMapping {
   static const providerName = [
     'provider_name', 'name', 'nom', 'nom_fournisseur', 
@@ -156,7 +156,7 @@ class CsvUtil {
       );
     }
 
-    // Déterminer le type d'import
+    // Determine import type
     if (hasFeeFields && hasProviderFields) {
       return await _importCombined(headers, dataRows, currencyProvider, localizations);
     } else if (hasProviderFields && !hasFeeFields) {
@@ -521,7 +521,7 @@ class CsvUtil {
       return _parseId(providers.first[ConstantUtil.columnId]);
     }
 
-    // Créer le provider avec les infos de la première ligne valide
+    // Create provider with info from first valid row
     final providerData = _extractProviderData(rowIndices, dataRows, indices);
     
     final provider = model.Provider(

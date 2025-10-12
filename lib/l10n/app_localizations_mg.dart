@@ -991,4 +991,34 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get refreshing => 'Manavao...';
+
+  @override
+  String get feeType => 'Karazana sara';
+
+  @override
+  String get fixedAmount => 'Sara raikitra';
+
+  @override
+  String get percentage => 'Isan-jato';
+
+  @override
+  String get enterPercentage => 'Ampidiro ny isan-jato';
+
+  @override
+  String get percentageMustBeBetween0And100 =>
+      'Ny isan-jato dia tsy maintsy eo anelanelan\'ny 0 sy 100';
+
+  @override
+  String get invalidAmount => 'Vola tsy manan-kery';
+
+  @override
+  String get pleaseEnterPercentage => 'Ampidiro ny isan-jato azafady';
+
+  @override
+  String get pleaseEnterValidPercentage =>
+      'Ampidiro isan-jato manan-kery azafady';
+
+  @override
+  String get percentageCannotExceed100 =>
+      'Ny isan-jato dia tsy afaka mihoatra ny 100';
 }

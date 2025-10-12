@@ -1468,5 +1468,41 @@
   "refreshing": "Refreshing...",
   "@refreshing": {
     "description": "Text shown when content is being refreshed"
+  },
+  "feeType": "Fee Type",
+  "@feeType": {
+    "description": "Label for fee type selector"
+  },
+  "fixedAmount": "Fixed Amount",
+  "@fixedAmount": {
+    "description": "Option for fixed fee amount"
+  },
+  "percentage": "Percentage",
+  "@percentage": {
+    "description": "Option for percentage-based fee"
+  },
+  "enterPercentage": "Enter percentage",
+  "@enterPercentage": {
+    "description": "Placeholder for percentage input"
+  },
+  "percentageMustBeBetween0And100": "Percentage must be between 0 and 100",
+  "@percentageMustBeBetween0And100": {
+    "description": "Validation error for percentage input"
+  },
+  "invalidAmount": "Invalid amount",
+  "@invalidAmount": {
+    "description": "Error message for invalid amount input"
+  },
+  "pleaseEnterPercentage": "Please enter percentage",
+  "@pleaseEnterPercentage": {
+    "description": "Validation message for missing percentage input"
+  },
+  "pleaseEnterValidPercentage": "Please enter a valid percentage",
+  "@pleaseEnterValidPercentage": {
+    "description": "Validation message for invalid percentage input"
+  },
+  "percentageCannotExceed100": "Percentage cannot exceed 100",
+  "@percentageCannotExceed100": {
+    "description": "Validation error when percentage exceeds 100"
   }
 }

@@ -72,9 +72,9 @@ class _State extends State<OptimizeFeeScreen> {
     
     // If we have a previous currency and it changed, convert the amount
     if (_previousCurrency != null && _previousCurrency != currencyProvider.selectedCurrency) {
-      // Convert from previous currency to new currency
+      // Convert from previous currency to new currency - NO ROUNDING
       final amountInAriary = _previousCurrency!.rate * _amount;
-      final newAmount = ((amountInAriary / currencyProvider.selectedCurrency!.rate) * 100).round() / 100;
+      final newAmount = amountInAriary / currencyProvider.selectedCurrency!.rate;  // REMOVED: * 100).round() / 100
       
       // Update amount but keep optimization results (they will be converted via _convertedResult)
       setState(() {
@@ -114,11 +114,14 @@ class _State extends State<OptimizeFeeScreen> {
         _providers
           ..clear()
           ..addAll(loadedProviders);
-        _selectedProvider = _providers.isNotEmpty 
-          ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider) 
-              ? widget.defaultProvider 
-              : _providers.first) 
-          : null;
+        // Only set default provider if none is currently selected or if selected provider no longer exists
+        if (_selectedProvider == null || !_providers.contains(_selectedProvider)) {
+          _selectedProvider = _providers.isNotEmpty
+            ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider)
+                ? widget.defaultProvider
+                : _providers.first)
+            : null;
+        }
       });
     }
   }
@@ -341,7 +344,7 @@ class _State extends State<OptimizeFeeScreen> {
           },
           label: AppLocalizations.of(context).amount,
           min: 0.01,
-          max: 9999999.0,
+          max: 99999999999.0,
         ),
       ),
     ],
