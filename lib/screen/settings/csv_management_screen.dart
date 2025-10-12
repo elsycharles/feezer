@@ -11,7 +11,6 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
-import '../../widget/loading_button.dart';
 import '../../l10n/app_localizations.dart';
 import '../../provider/locale_provider.dart';
 import '../../provider/currency_provider.dart';
@@ -1089,10 +1088,42 @@ class _ImportActions extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: LoadingButton(
-            text: AppLocalizations.of(context).importData,
-            onPressed: canImport ? onImport : null,
-            isLoading: isImporting,
+          child: FilledButton(
+            onPressed: canImport && !isImporting ? onImport : null,
+            style: FilledButton.styleFrom(
+              backgroundColor: canImport && !isImporting
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.12),
+              foregroundColor: canImport && !isImporting
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurface.withValues(alpha: 0.38),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              disabledBackgroundColor: colorScheme.onSurface.withValues(alpha: 0.12),
+              disabledForegroundColor: colorScheme.onSurface.withValues(alpha: 0.38),
+            ),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: isImporting
+                  ? const SizedBox(
+                      key: ValueKey('loading'),
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : Center(
+                      key: ValueKey('text'),
+                      child: Text(
+                        AppLocalizations.of(context).importData,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+            ),
           ),
         ),
       ],
