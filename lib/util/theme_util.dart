@@ -35,75 +35,92 @@ class ThemeUtil {
   static const Color onboardingIllustrationBg = Color(0xFFFFFFFF);
   static const double onboardingIllustrationBgOpacity = 0.1;
 
+  // Font size constants - Small fixed sizes
+  static const double fontSizeDisplayLarge = 28;
+  static const double fontSizeDisplayMedium = 20;
+  static const double fontSizeTitleLarge = 20;
+  static const double fontSizeTitleMedium = 16;
+  static const double fontSizeTitleSmall = 14;
+  static const double fontSizeBodyLarge = 13;
+  static const double fontSizeBodyMedium = 12;
+  static const double fontSizeBodySmall = 11;
+  static const double fontSizeLabelLarge = 12;
+  static const double fontSizeLabelMedium = 11;
+  static const double fontSizeLabelSmall = 10;
+  static const double fontSizeCaption = 11;
+  static const double fontSizeAppBar = 15;
+  static const double fontSizeButton = 12;
+  static const double fontSizeTextButton = 11;
+
   // Text Styles - Optimized for smaller, more readable sizes
   static const TextStyle titleLarge = TextStyle(
-    fontSize: 24,
+    fontSize: ThemeUtil.fontSizeTitleLarge,
     fontWeight: FontWeight.bold,
     color: textPrimary,
   );
 
   static const TextStyle titleMedium = TextStyle(
-    fontSize: 18,
+    fontSize: ThemeUtil.fontSizeTitleMedium,
     fontWeight: FontWeight.w600,
     color: textPrimary,
   );
 
   static const TextStyle titleSmall = TextStyle(
-    fontSize: 16,
+    fontSize: ThemeUtil.fontSizeTitleSmall,
     fontWeight: FontWeight.w600,
     color: textPrimary,
   );
 
   static const TextStyle bodyLarge = TextStyle(
-    fontSize: 15,
+    fontSize: ThemeUtil.fontSizeBodyLarge,
     fontWeight: FontWeight.w500,
     color: textPrimary,
   );
 
   static const TextStyle bodyMedium = TextStyle(
-    fontSize: 14,
+    fontSize: ThemeUtil.fontSizeBodyMedium,
     fontWeight: FontWeight.normal,
     color: textPrimary,
   );
 
   static const TextStyle bodySmall = TextStyle(
-    fontSize: 13,
+    fontSize: ThemeUtil.fontSizeBodySmall,
     fontWeight: FontWeight.normal,
     color: textSecondary,
   );
 
   static const TextStyle labelLarge = TextStyle(
-    fontSize: 14,
+    fontSize: ThemeUtil.fontSizeLabelLarge,
     fontWeight: FontWeight.w600,
     color: textLight,
   );
 
   static const TextStyle labelMedium = TextStyle(
-    fontSize: 13,
+    fontSize: ThemeUtil.fontSizeLabelMedium,
     fontWeight: FontWeight.w500,
     color: textPrimary,
   );
 
   static const TextStyle labelSmall = TextStyle(
-    fontSize: 11,
+    fontSize: ThemeUtil.fontSizeLabelSmall,
     fontWeight: FontWeight.w500,
     color: textSecondary,
   );
 
   static const TextStyle displayLarge = TextStyle(
-    fontSize: 32,
+    fontSize: ThemeUtil.fontSizeDisplayLarge,
     fontWeight: FontWeight.bold,
     color: textLight,
   );
 
   static const TextStyle displayMedium = TextStyle(
-    fontSize: 24,
+    fontSize: ThemeUtil.fontSizeDisplayMedium,
     fontWeight: FontWeight.bold,
     color: textLight,
   );
 
   static const TextStyle captionLight = TextStyle(
-    fontSize: 13,
+    fontSize: ThemeUtil.fontSizeCaption,
     fontWeight: FontWeight.w300,
     color: textLight,
   );
@@ -128,7 +145,7 @@ class ThemeUtil {
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 17,
+          fontSize: ThemeUtil.fontSizeAppBar,
           fontWeight: FontWeight.w600,
           color: textLight,
         ),
@@ -145,7 +162,7 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
           ),
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
@@ -159,7 +176,7 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+            const TextStyle(fontSize: ThemeUtil.fontSizeTextButton, fontWeight: FontWeight.w500),
           ),
           splashFactory: NoSplash.splashFactory,
         ),
@@ -175,7 +192,7 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
           ),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -206,6 +223,23 @@ class ThemeUtil {
         ),
         labelStyle: const TextStyle(color: textSecondary),
         hintStyle: const TextStyle(color: textSecondary),
+      ),
+      textTheme: TextTheme(
+        displayLarge: titleLarge,
+        displayMedium: displayMedium,
+        displaySmall: displayMedium,
+        headlineLarge: titleLarge,
+        headlineMedium: titleMedium,
+        headlineSmall: titleSmall,
+        titleLarge: titleLarge,
+        titleMedium: titleMedium,
+        titleSmall: titleSmall,
+        bodyLarge: bodyLarge,
+        bodyMedium: bodyMedium,
+        bodySmall: bodySmall,
+        labelLarge: labelLarge,
+        labelMedium: labelMedium,
+        labelSmall: labelSmall,
       ),
     );
   }
@@ -258,7 +292,7 @@ class ThemeUtil {
         elevation: 0,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 17,
+          fontSize: ThemeUtil.fontSizeAppBar,
           fontWeight: FontWeight.w600,
           color: textLight,
         ),
@@ -275,7 +309,7 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
           ),
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
@@ -313,7 +347,7 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+            const TextStyle(fontSize: ThemeUtil.fontSizeTextButton, fontWeight: FontWeight.w500),
           ),
           splashFactory: NoSplash.splashFactory,
         ),
@@ -329,13 +363,30 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
           ),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           ),
           splashFactory: NoSplash.splashFactory,
         ),
+      ),
+      textTheme: TextTheme(
+        displayLarge: titleLarge,
+        displayMedium: displayMedium,
+        displaySmall: displayMedium,
+        headlineLarge: titleLarge,
+        headlineMedium: titleMedium,
+        headlineSmall: titleSmall,
+        titleLarge: titleLarge,
+        titleMedium: titleMedium,
+        titleSmall: titleSmall,
+        bodyLarge: bodyLarge,
+        bodyMedium: bodyMedium,
+        bodySmall: bodySmall,
+        labelLarge: labelLarge,
+        labelMedium: labelMedium,
+        labelSmall: labelSmall,
       ),
     );
   }

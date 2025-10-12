@@ -440,13 +440,6 @@ class _State extends State<OptimizeFeeScreen> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const Spacer(),
-                Text(
-                  AppLocalizations.of(context).operationCount(_convertedResult?.details.length ?? 0),
-                  style: ThemeUtil.bodyMedium.copyWith(
-                    color: context.colorScheme.onSurfaceVariant,
-                  ),
-                ),
               ],
             ),
             Global.gapMd,
@@ -619,6 +612,8 @@ class _State extends State<OptimizeFeeScreen> {
               color: context.colorScheme.onSurface,
               fontWeight: FontWeight.w700,
             ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ],
       ),
@@ -634,11 +629,13 @@ class _State extends State<OptimizeFeeScreen> {
             children: [
               Icon(Icons.list_alt, size: 18, color: context.colorScheme.primary),
               Global.gapSm,
-              Text(
-                AppLocalizations.of(context).transactionDetails,
-                style: ThemeUtil.titleMedium.copyWith(
-                  color: context.colorScheme.primary,
-                  fontWeight: FontWeight.w600,
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context).transactionDetails,
+                  style: ThemeUtil.titleMedium.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -697,6 +694,8 @@ class _State extends State<OptimizeFeeScreen> {
       letterSpacing: 0.2,
     ),
     textAlign: TextAlign.center,
+    softWrap: true,
+    overflow: TextOverflow.visible,
   );
 
   Widget _buildTableCell(String text, {bool isGreen = false}) => Text(
@@ -706,6 +705,8 @@ class _State extends State<OptimizeFeeScreen> {
       fontWeight: isGreen ? FontWeight.w600 : FontWeight.normal,
     ),
     textAlign: TextAlign.center,
+    softWrap: true,
+    overflow: TextOverflow.visible,
   );
 
   Widget _buildOptimizeButton() => Container(

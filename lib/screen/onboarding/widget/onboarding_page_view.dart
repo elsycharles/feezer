@@ -13,7 +13,7 @@ class OnboardingPageView extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Padding(
+    return SingleChildScrollView(
       padding: Global.padLg,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
