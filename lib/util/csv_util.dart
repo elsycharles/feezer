@@ -6,6 +6,7 @@ import '../model/provider_model.dart' as model;
 import '../model/fee_interval_model.dart';
 import '../util/database_util.dart';
 import '../util/constant_util.dart';
+import '../provider/currency_provider.dart';
 
 class CsvResult {
   const CsvResult({
@@ -67,7 +68,7 @@ class CsvUtil {
   // IMPORT METHODS
   // ============================================================================
 
-  static Future<CsvResult> importFromCsv(String csvContent) async {
+  static Future<CsvResult> importFromCsv(String csvContent, CurrencyProvider currencyProvider) async {
     try {
       final rows = const CsvToListConverter(
         fieldDelimiter: ',',
@@ -87,7 +88,7 @@ class CsvUtil {
         return const CsvResult(success: false, message: 'No data rows found');
       }
 
-      return await _processImport(headers, dataRows);
+      return await _processImport(headers, dataRows, currencyProvider);
     } catch (e) {
       return CsvResult(success: false, message: 'Import failed: ${e.toString()}');
     }
@@ -100,8 +101,9 @@ class CsvUtil {
   static Future<CsvResult> _processImport(
     List<String> headers,
     List<List<dynamic>> dataRows,
+    CurrencyProvider currencyProvider,
   ) async {
-    final hasColumn = (List<String> mapping) => 
+    final hasColumn = (List<String> mapping) =>
       headers.any((h) => mapping.contains(h));
 
     final hasProviderName = hasColumn(_ColumnMapping.providerName);
@@ -120,14 +122,14 @@ class CsvUtil {
 
     // Déterminer le type d'import
     if (hasFeeFields && hasProviderFields) {
-      return await _importCombined(headers, dataRows);
+      return await _importCombined(headers, dataRows, currencyProvider);
     } else if (hasProviderFields && !hasFeeFields) {
       return await _importProviders(headers, dataRows);
     } else if (hasFeeFields) {
-      return await _importFeeIntervals(headers, dataRows);
+      return await _importFeeIntervals(headers, dataRows, currencyProvider);
     }
 
-    return await _importCombined(headers, dataRows);
+    return await _importCombined(headers, dataRows, currencyProvider);
   }
 
   static Future<CsvResult> _importProviders(
@@ -207,6 +209,7 @@ class CsvUtil {
   static Future<CsvResult> _importFeeIntervals(
     List<String> headers,
     List<List<dynamic>> dataRows,
+    CurrencyProvider currencyProvider,
   ) async {
     final db = DatabaseUtil();
     final indices = _HeaderIndices(headers);
@@ -223,7 +226,7 @@ class CsvUtil {
 
     for (int i = 0; i < dataRows.length; i++) {
       final result = await _processFeeIntervalRow(
-        db, dataRows[i], indices, i + 2
+        db, dataRows[i], indices, i + 2, currencyProvider
       );
       
       if (result.success) {
@@ -246,6 +249,7 @@ class CsvUtil {
     List<dynamic> row,
     _HeaderIndices indices,
     int rowNumber,
+    CurrencyProvider currencyProvider,
   ) async {
     try {
       final providerName = _getCellValue(row, indices.providerName)?.trim();
@@ -266,8 +270,13 @@ class CsvUtil {
         return _RowResult(error: validation);
       }
 
+      // Convert amounts to Ariary (base currency) before storing
+      final minAmountInAriary = currencyProvider.convertToAriary(amounts.min!);
+      final maxAmountInAriary = currencyProvider.convertToAriary(amounts.max!);
+      final feeInAriary = currencyProvider.convertToAriary(amounts.fee!);
+
       final overlap = await _checkIntervalOverlap(
-        db, providerId, amounts.min!, amounts.max!
+        db, providerId, minAmountInAriary, maxAmountInAriary
       );
       
       if (overlap != null) {
@@ -278,9 +287,9 @@ class CsvUtil {
 
       final feeInterval = FeeInterval(
         id: _generateUniqueId(),
-        minAmount: amounts.min!,
-        maxAmount: amounts.max!,
-        fee: amounts.fee!,
+        minAmount: minAmountInAriary,
+        maxAmount: maxAmountInAriary,
+        fee: feeInAriary,
       );
 
       await db.insert(
@@ -365,6 +374,7 @@ class CsvUtil {
   static Future<CsvResult> _importCombined(
     List<String> headers,
     List<List<dynamic>> dataRows,
+    CurrencyProvider currencyProvider,
   ) async {
     final db = DatabaseUtil();
     final indices = _HeaderIndices(headers);
@@ -376,7 +386,7 @@ class CsvUtil {
 
     for (final entry in providerGroups.entries) {
       final result = await _processProviderGroup(
-        db, entry.key, entry.value, dataRows, indices
+        db, entry.key, entry.value, dataRows, indices, currencyProvider
       );
       
       providersCount += result.providersAdded;
@@ -415,6 +425,7 @@ class CsvUtil {
     List<int> rowIndices,
     List<List<dynamic>> dataRows,
     _HeaderIndices indices,
+    CurrencyProvider currencyProvider,
   ) async {
     try {
       final providerId = await _ensureProviderExists(
@@ -428,7 +439,7 @@ class CsvUtil {
       }
 
       final result = await _importGroupFeeIntervals(
-        db, providerId, rowIndices, dataRows, indices, providerName
+        db, providerId, rowIndices, dataRows, indices, providerName, currencyProvider
       );
 
       return result;
@@ -499,6 +510,7 @@ class CsvUtil {
     List<List<dynamic>> dataRows,
     _HeaderIndices indices,
     String providerName,
+    CurrencyProvider currencyProvider,
   ) async {
     int providersAdded = rowIndices.isEmpty ? 0 : 1;
     int feesAdded = 0;
@@ -516,8 +528,13 @@ class CsvUtil {
         continue;
       }
 
+      // Convert amounts to Ariary (base currency) before storing
+      final minAmountInAriary = currencyProvider.convertToAriary(amounts.min!);
+      final maxAmountInAriary = currencyProvider.convertToAriary(amounts.max!);
+      final feeInAriary = currencyProvider.convertToAriary(amounts.fee!);
+
       final overlap = await _checkIntervalOverlap(
-        db, providerId, amounts.min!, amounts.max!
+        db, providerId, minAmountInAriary, maxAmountInAriary
       );
       
       if (overlap != null) {
@@ -527,9 +544,9 @@ class CsvUtil {
 
       final feeInterval = FeeInterval(
         id: _generateUniqueId(),
-        minAmount: amounts.min!,
-        maxAmount: amounts.max!,
-        fee: amounts.fee!,
+        minAmount: minAmountInAriary,
+        maxAmount: maxAmountInAriary,
+        fee: feeInAriary,
       );
 
       await db.insert(
@@ -559,10 +576,11 @@ class CsvUtil {
   static Future<CsvResult> exportToCsv({
     String? providerId,
     String locale = 'en',
+    CurrencyProvider? currencyProvider,
   }) async {
     try {
       final db = DatabaseUtil();
-      final csvData = await _buildExportData(db, providerId, locale);
+      final csvData = await _buildExportData(db, providerId, locale, currencyProvider);
 
       if (csvData.length <= 1) {
         return const CsvResult(success: false, message: 'No data to export');
@@ -587,6 +605,7 @@ class CsvUtil {
     DatabaseUtil db,
     String? providerId,
     String locale,
+    CurrencyProvider? currencyProvider,
   ) async {
     final providers = await _fetchProviders(db, providerId);
     final headers = _getHeaders(locale);
@@ -602,7 +621,7 @@ class CsvUtil {
         whereArgs: [providerIdValue],
       );
 
-      _addProviderRows(csvData, provider, feeIntervals);
+      _addProviderRows(csvData, provider, feeIntervals, currencyProvider);
     }
 
     return csvData;
@@ -632,6 +651,7 @@ class CsvUtil {
     List<List<dynamic>> csvData,
     Map<String, dynamic> provider,
     List<Map<String, dynamic>> feeIntervals,
+    CurrencyProvider? currencyProvider,
   ) {
     final baseRow = [
       provider[ConstantUtil.columnName] ?? '',
@@ -643,11 +663,20 @@ class CsvUtil {
       csvData.add([...baseRow, '', '', '']);
     } else {
       for (final fee in feeIntervals) {
+        final minAmount = (fee[ConstantUtil.columnMinAmount] as num?)?.toDouble() ?? 0.0;
+        final maxAmount = (fee[ConstantUtil.columnMaxAmount] as num?)?.toDouble() ?? 0.0;
+        final feeAmount = (fee[ConstantUtil.columnFee] as num?)?.toDouble() ?? 0.0;
+
+        // Convert amounts from Ariary (base currency) to selected currency for export
+        final minAmountInSelectedCurrency = currencyProvider?.convertFromAriary(minAmount) ?? minAmount;
+        final maxAmountInSelectedCurrency = currencyProvider?.convertFromAriary(maxAmount) ?? maxAmount;
+        final feeAmountInSelectedCurrency = currencyProvider?.convertFromAriary(feeAmount) ?? feeAmount;
+
         csvData.add([
           ...baseRow,
-          fee[ConstantUtil.columnMinAmount] ?? 0,
-          fee[ConstantUtil.columnMaxAmount] ?? 0,
-          fee[ConstantUtil.columnFee] ?? 0,
+          minAmountInSelectedCurrency,
+          maxAmountInSelectedCurrency,
+          feeAmountInSelectedCurrency,
         ]);
       }
     }

@@ -14,6 +14,7 @@ import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
 import '../../l10n/app_localizations.dart';
 import '../../provider/locale_provider.dart';
+import '../../provider/currency_provider.dart';
 import '../../styles/global.dart';
 
 class CsvManagementScreen extends StatefulWidget {
@@ -100,7 +101,8 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
           ? String.fromCharCodes(file.bytes!)
           : await File(file.path!).readAsString();
 
-      final importResult = await CsvUtil.importFromCsv(csvContent);
+      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+      final importResult = await CsvUtil.importFromCsv(csvContent, currencyProvider);
 
       setState(() => _isProcessing = false);
 
@@ -136,7 +138,8 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     try {
       setState(() => _isProcessing = true);
 
-      final importResult = await CsvUtil.importFromCsv(csvText);
+      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+      final importResult = await CsvUtil.importFromCsv(csvText, currencyProvider);
 
       setState(() => _isProcessing = false);
 
@@ -167,8 +170,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
       final locale = localeProvider.locale?.languageCode ?? 'en';
+      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
 
-      final exportResult = await CsvUtil.exportToCsv(locale: locale);
+      final exportResult = await CsvUtil.exportToCsv(locale: locale, currencyProvider: currencyProvider);
 
       setState(() => _isProcessing = false);
 
