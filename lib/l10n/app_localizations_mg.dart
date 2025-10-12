@@ -1101,23 +1101,23 @@ class AppLocalizationsMg extends AppLocalizations {
       'Midira ao amin\'ny Fikirana > Fitantanana angona > Fitantanana CSV. Azonao atao ny manondrana mpamatsy, vola ary elanelana sarany ho rakitra CSV. Ireo dia azo ampiasaina ho backup na hanafatra ao amin\'ny app hafa.';
 
   @override
-  String get emailSupport => 'Email Support';
+  String get emailSupport => 'Fanohanana amin\'ny email';
 
   @override
-  String get phoneSupport => 'Phone Support';
+  String get phoneSupport => 'Fanohanana amin\'ny finday';
 
   @override
-  String get website => 'Website';
+  String get website => 'Tranonkala';
 
   @override
-  String get responseTime => 'Response Time';
+  String get responseTime => 'Fotoana famaliana';
 
   @override
   String get responseTimeDescription =>
-      'We typically respond to support requests within 24 hours during business days.';
+      'Matetika izahay mamaly ny fangatahana fanampiana ao anatin\'ny 24 ora amin\'ny andro fiasana.';
 
   @override
-  String get gettingStarted => 'Getting Started';
+  String get gettingStarted => 'Manomboka';
 
   @override
   String get gettingStartedDescription =>
@@ -1182,7 +1182,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get email => 'Email';
 
   @override
-  String get phone => 'Phone';
+  String get phone => 'Finday';
 
   @override
   String get faqQuestion1 =>

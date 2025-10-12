@@ -1585,27 +1585,27 @@
   "@faqExportDataAnswer": {
     "description": "FAQ answer"
   },
-  "emailSupport": "Email Support",
+  "emailSupport": "Fanohanana amin'ny email",
   "@emailSupport": {
     "description": "Email support option title"
   },
-  "phoneSupport": "Phone Support",
+  "phoneSupport": "Fanohanana amin'ny finday",
   "@phoneSupport": {
     "description": "Phone support option title"
   },
-  "website": "Website",
+  "website": "Tranonkala",
   "@website": {
     "description": "Website option title"
   },
-  "responseTime": "Response Time",
+  "responseTime": "Fotoana famaliana",
   "@responseTime": {
     "description": "Response time section title"
   },
-  "responseTimeDescription": "We typically respond to support requests within 24 hours during business days.",
+  "responseTimeDescription": "Matetika izahay mamaly ny fangatahana fanampiana ao anatin'ny 24 ora amin'ny andro fiasana.",
   "@responseTimeDescription": {
     "description": "Response time description"
   },
-  "gettingStarted": "Getting Started",
+  "gettingStarted": "Manomboka",
   "@gettingStarted": {
     "description": "Getting started guide title"
   },
@@ -1685,11 +1685,11 @@
   "@email": {
     "description": "Email contact method"
   },
-  "phone": "Phone",
+  "phone": "Finday",
   "@phone": {
     "description": "Phone contact method"
   },
-  "website": "Website",
+  "website": "Tranonkala",
   "@website": {
     "description": "Website contact method"
   },
