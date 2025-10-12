@@ -29,7 +29,6 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
@@ -45,284 +44,47 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildInfoCard(context),
+                  _InfoCard(),
                   Global.gapLg,
-                  _buildSection(
-                    context,
-                    AppLocalizations.of(context).dataManagement,
-                    Icons.import_export,
-                    [
-                      _buildActionTile(
-                        context,
-                        AppLocalizations.of(context).importData,
-                        AppLocalizations.of(context).importDataDescription,
-                        Icons.file_upload_outlined,
-                        _showImportDialog,
-                      ),
-                      _buildActionTile(
-                        context,
-                        AppLocalizations.of(context).exportData,
-                        AppLocalizations.of(context).exportDataDescription,
-                        Icons.file_download_outlined,
-                        _exportCsv,
-                      ),
-                    ],
+                  _DataManagementSection(
+                    isProcessing: _isProcessing,
+                    onImport: _showImportDialog,
+                    onExport: _exportCsv,
                   ),
                   Global.gapLg,
-                  _buildTemplatesSection(context),
+                  _TemplatesSection(
+                    isProcessing: _isProcessing,
+                    onPreview: _previewTemplate,
+                    onDownload: _downloadTemplate,
+                  ),
                 ],
               ),
             ),
-            if (_isProcessing)
-              Container(
-                color: colorScheme.surface.withValues(alpha: 0.8),
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
+            if (_isProcessing) _LoadingOverlay(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildInfoCard(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return SurfaceCard(
-      child: Row(
-        children: [
-          Icon(
-            Icons.info_outline,
-            color: colorScheme.primary,
-            size: 24,
-          ),
-          Global.gapMd,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocalizations.of(context).csvImportExportInfo,
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-                Global.gapSm,
-                Text(
-                  AppLocalizations.of(context).csvImportExportDescription,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSection(
-    BuildContext context,
-    String title,
-    IconData icon,
-    List<Widget> children,
-  ) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-          child: Row(
-            children: [
-              Icon(icon, size: 20, color: colorScheme.primary),
-              Global.gapSm,
-              Text(
-                title,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
-        SurfaceCard(
-          padding: Global.padMd,
-          child: Column(children: children),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildActionTile(
-    BuildContext context,
-    String title,
-    String subtitle,
-    IconData icon,
-    VoidCallback onTap,
-  ) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return InteractiveSurface(
-      onTap: _isProcessing ? null : onTap,
-      borderRadius: BorderRadius.zero,
-      builder: (context, hovered, pressed) => ListTile(
-        leading: Icon(icon, color: colorScheme.onSurface),
-        title: Text(
-          title,
-          style: theme.textTheme.bodyLarge?.copyWith(
-            color: colorScheme.onSurface,
-          ),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-        ),
-        trailing: Icon(
-          Icons.chevron_right,
-          color: colorScheme.onSurfaceVariant,
-        ),
-        enabled: !_isProcessing,
-      ),
-    );
-  }
-
-  Widget _buildTemplatesSection(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-          child: Row(
-            children: [
-              Icon(Icons.description_outlined, size: 20, color: colorScheme.primary),
-              Global.gapSm,
-              Text(
-                AppLocalizations.of(context).templates,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
-        SurfaceCard(
-          padding: EdgeInsets.zero,
-          child: _buildTemplateTile(
-            context,
-            AppLocalizations.of(context).downloadCombinedTemplate,
-            AppLocalizations.of(context).csvTemplateForCombined,
-            Icons.merge_type,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildTemplateTile(
-    BuildContext context,
-    String title,
-    String subtitle,
-    IconData icon,
-  ) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, color: colorScheme.onSurface, size: 22),
-              Global.gapMd,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      subtitle,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                        height: 1.4,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              OutlinedButton.icon(
-                onPressed: _isProcessing ? null : _previewTemplate,
-                icon: const Icon(Icons.visibility_outlined, size: 18),
-                label: Text(AppLocalizations.of(context).preview),
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: ThemeUtil.primaryColor),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(Global.radiusSm),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              FilledButton.icon(
-                onPressed: _isProcessing ? null : _downloadTemplate,
-                icon: const Icon(Icons.download_outlined, size: 18),
-                label: Text(AppLocalizations.of(context).download),
-                style: FilledButton.styleFrom(
-                  backgroundColor: colorScheme.primary,
-                  foregroundColor: colorScheme.onPrimary,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(Global.radiusSm),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+  Future<void> _showImportDialog() async {
+    await showDialog(
+      context: context,
+      builder: (dialogContext) => _ImportDialog(
+        onFileImport: _importCsv,
+        onTextImport: _importFromText,
       ),
     );
   }
 
   Future<void> _importCsv() async {
     try {
-      // Pick CSV file
       final result = await FilePicker.platform.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['csv'],
       );
 
-      if (result == null || result.files.isEmpty) {
-        return;
-      }
+      if (result == null || result.files.isEmpty) return;
 
       final file = result.files.first;
       if (file.bytes == null && file.path == null) {
@@ -334,315 +96,33 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       setState(() => _isProcessing = true);
 
-      // Read file content
-      String csvContent;
-      if (file.bytes != null) {
-        csvContent = String.fromCharCodes(file.bytes!);
-      } else {
-        csvContent = await File(file.path!).readAsString();
-      }
+      final csvContent = file.bytes != null
+          ? String.fromCharCodes(file.bytes!)
+          : await File(file.path!).readAsString();
 
-      // Import data (auto-detect type)
       final importResult = await CsvUtil.importFromCsv(csvContent);
 
       setState(() => _isProcessing = false);
 
       if (!mounted) return;
 
-      // Show result
       if (importResult.success) {
         _showImportResultDialog(importResult);
       } else {
-        AppToast.error(context, importResult.message ?? AppLocalizations.of(context).importFailed);
+        AppToast.error(
+          context,
+          importResult.message ?? AppLocalizations.of(context).importFailed,
+        );
       }
     } catch (e) {
       setState(() => _isProcessing = false);
       if (mounted) {
-        AppToast.error(context, '${AppLocalizations.of(context).importFailed}: ${e.toString()}');
+        AppToast.error(
+          context,
+          '${AppLocalizations.of(context).importFailed}: ${e.toString()}',
+        );
       }
     }
-  }
-
-  Future<void> _showImportDialog() async {
-    final colorScheme = Theme.of(context).colorScheme;
-    String csvText = '';
-    bool useTextInput = false;
-
-    await showDialog(
-      context: context,
-      builder: (dialogContext) => StatefulBuilder(
-        builder: (context, setState) => Dialog(
-          backgroundColor: colorScheme.surface,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Container(
-            width: MediaQuery.of(context).size.width * 0.9,
-            constraints: const BoxConstraints(maxWidth: 600, minWidth: 400),
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Header with icon
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(Global.radiusMd),
-                      ),
-                      child: Icon(
-                        Icons.import_export,
-                        color: colorScheme.onPrimaryContainer,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Text(
-                        AppLocalizations.of(context).importData,
-                        style: ThemeUtil.titleLarge.copyWith(
-                          color: colorScheme.onSurface,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                // Modern toggle switch
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(Global.radiusMd),
-                    border: Border.all(
-                      color: colorScheme.outline.withValues(alpha: 0.3),
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      // File option
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => setState(() => useTextInput = false),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                            decoration: BoxDecoration(
-                              color: !useTextInput
-                                  ? colorScheme.primaryContainer
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(Global.radiusSm),
-                              boxShadow: !useTextInput
-                                  ? [
-                                      BoxShadow(
-                                        color: colorScheme.primary.withValues(alpha: 0.2),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ]
-                                  : null,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.file_upload_outlined,
-                                  size: 20,
-                                  color: !useTextInput
-                                      ? colorScheme.onPrimaryContainer
-                                      : colorScheme.onSurfaceVariant,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Fichier',
-                                  style: ThemeUtil.bodyMedium.copyWith(
-                                    color: !useTextInput
-                                        ? colorScheme.onPrimaryContainer
-                                        : colorScheme.onSurfaceVariant,
-                                    fontWeight: !useTextInput ? FontWeight.w600 : FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      // Text option
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () => setState(() => useTextInput = true),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                            decoration: BoxDecoration(
-                              color: useTextInput
-                                  ? colorScheme.primaryContainer
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(Global.radiusSm),
-                              boxShadow: useTextInput
-                                  ? [
-                                      BoxShadow(
-                                        color: colorScheme.primary.withValues(alpha: 0.2),
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 2),
-                                      ),
-                                    ]
-                                  : null,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.edit_note_outlined,
-                                  size: 20,
-                                  color: useTextInput
-                                      ? colorScheme.onPrimaryContainer
-                                      : colorScheme.onSurfaceVariant,
-                                ),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Texte',
-                                  style: ThemeUtil.bodyMedium.copyWith(
-                                    color: useTextInput
-                                        ? colorScheme.onPrimaryContainer
-                                        : colorScheme.onSurfaceVariant,
-                                    fontWeight: useTextInput ? FontWeight.w600 : FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                // Content based on selection
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: useTextInput
-                      ? Container(
-                          key: const ValueKey('text_input'),
-                          child: TextField(
-                            maxLines: 10,
-                            decoration: InputDecoration(
-                              hintText: 'Collez votre contenu CSV ici...',
-                              hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(Global.radiusMd),
-                                borderSide: BorderSide(color: colorScheme.outline),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(Global.radiusMd),
-                                borderSide: BorderSide(color: colorScheme.outline.withValues(alpha: 0.5)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(Global.radiusMd),
-                                borderSide: BorderSide(color: ThemeUtil.primaryColor, width: 2),
-                              ),
-                              filled: true,
-                              fillColor: colorScheme.surfaceContainerHighest,
-                              contentPadding: const EdgeInsets.all(16),
-                            ),
-                            style: ThemeUtil.bodyMedium.copyWith(
-                              color: colorScheme.onSurface,
-                            ),
-                            onChanged: (value) => csvText = value,
-                          ),
-                        )
-                      : Container(
-                          key: const ValueKey('file_info'),
-                          padding: const EdgeInsets.all(24),
-                          decoration: BoxDecoration(
-                            color: colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(Global.radiusMd),
-                            border: Border.all(
-                              color: colorScheme.outline.withValues(alpha: 0.3),
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.file_upload_outlined,
-                                size: 48,
-                                color: colorScheme.primary,
-                              ),
-                              const SizedBox(height: 16),
-                              Text(
-                                AppLocalizations.of(context).clickImportToSelectFile,
-                                style: ThemeUtil.bodyMedium.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
-                        ),
-                ),
-                const SizedBox(height: 32),
-                // Action buttons
-                Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: () => Navigator.of(dialogContext).pop(),
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: colorScheme.outline),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(Global.radiusMd),
-                          ),
-                        ),
-                        child: Text(
-                          'Annuler',
-                          style: ThemeUtil.bodyMedium.copyWith(
-                            color: colorScheme.onSurfaceVariant,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: FilledButton(
-                        onPressed: () async {
-                          Navigator.of(dialogContext).pop();
-                          if (useTextInput) {
-                            await _importFromText(csvText);
-                          } else {
-                            await _importCsv();
-                          }
-                        },
-                        style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(Global.radiusMd),
-                          ),
-                        ),
-                        child: Text(
-                          'Importer',
-                          style: ThemeUtil.bodyMedium.copyWith(
-                            color: colorScheme.onPrimary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
   Future<void> _importFromText(String csvText) async {
@@ -656,23 +136,27 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     try {
       setState(() => _isProcessing = true);
 
-      // Import data from text
       final importResult = await CsvUtil.importFromCsv(csvText);
 
       setState(() => _isProcessing = false);
 
       if (!mounted) return;
 
-      // Show result
       if (importResult.success) {
         _showImportResultDialog(importResult);
       } else {
-        AppToast.error(context, importResult.message ?? AppLocalizations.of(context).importFailed);
+        AppToast.error(
+          context,
+          importResult.message ?? AppLocalizations.of(context).importFailed,
+        );
       }
     } catch (e) {
       setState(() => _isProcessing = false);
       if (mounted) {
-        AppToast.error(context, '${AppLocalizations.of(context).importFailed}: ${e.toString()}');
+        AppToast.error(
+          context,
+          '${AppLocalizations.of(context).importFailed}: ${e.toString()}',
+        );
       }
     }
   }
@@ -719,14 +203,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       final template = CsvUtil.getImportTemplate(locale);
 
-      // Save template file
       final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final fileName = 'template_combined_$timestamp.csv';
-      final file = File('${directory.path}/$fileName');
+      final file = File('${directory.path}/template_combined_$timestamp.csv');
       await file.writeAsString(template);
 
-      // Share template
       await Share.shareXFiles([XFile(file.path)]);
 
       if (mounted) {
@@ -745,319 +226,6 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     }
   }
 
-  void _showImportResultDialog(CsvResult result) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => Dialog(
-        backgroundColor: colorScheme.surface,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 400),
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildResultHeader(result, colorScheme),
-              const SizedBox(height: 16),
-              _buildResultContent(result, theme, colorScheme),
-              const SizedBox(height: 24),
-              _buildResultActions(context, colorScheme),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildResultHeader(CsvResult result, ColorScheme colorScheme) => Row(
-    children: [
-      Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: result.success
-              ? Colors.green.withValues(alpha: 0.1)
-              : colorScheme.error.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(
-          result.success ? Icons.check_circle : Icons.error,
-          color: result.success ? Colors.green : colorScheme.error,
-          size: 24,
-        ),
-      ),
-      const SizedBox(width: 16),
-      Expanded(
-        child: Text(
-          result.success
-              ? AppLocalizations.of(context).importSuccessful
-              : AppLocalizations.of(context).importFailed,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: colorScheme.onSurface,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    ],
-  );
-
-  Widget _buildResultContent(CsvResult result, ThemeData theme, ColorScheme colorScheme) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      if (result.message != null) ...[
-        Text(
-          result.message!,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 16),
-      ],
-      if (result.providersCount > 0)
-        _buildResultItem(
-          context,
-          Icons.business,
-          AppLocalizations.of(context).providersImported(result.providersCount),
-          Colors.blue,
-        ),
-      if (result.feeIntervalsCount > 0)
-        _buildResultItem(
-          context,
-          Icons.attach_money,
-          AppLocalizations.of(context).feeIntervalsImported(result.feeIntervalsCount),
-          Colors.green,
-        ),
-      if (result.errors.isNotEmpty) ...[
-        const SizedBox(height: 16),
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: colorScheme.error.withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: colorScheme.error.withValues(alpha: 0.2)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(Icons.warning, color: Colors.orange, size: 20),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      AppLocalizations.of(context).errorsEncountered(result.errors.length),
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: Colors.orange,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 150),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: result.errors.map((error) => Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Text(
-                        '• $error',
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.error,
-                        ),
-                      ),
-                    )).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ],
-  );
-
-  Widget _buildResultActions(BuildContext context, ColorScheme colorScheme) => Row(
-    children: [
-      Expanded(
-        child: FilledButton(
-          onPressed: () => Navigator.of(context).pop(),
-          style: FilledButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Global.radiusSm),
-            ),
-          ),
-          child: Text(AppLocalizations.of(context).confirm),
-        ),
-      ),
-    ],
-  );
-
-  Widget _buildResultItem(
-    BuildContext context,
-    IconData icon,
-    String text,
-    Color color,
-  ) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Icon(icon, color: color, size: 20),
-          Global.gapSm,
-          Expanded(
-            child: Text(
-              text,
-              style: theme.textTheme.bodyMedium,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPreviewHeader(ColorScheme colorScheme) => Row(
-    children: [
-      Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-          color: colorScheme.primary.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Icon(
-          Icons.description,
-          color: colorScheme.primary,
-          size: 24,
-        ),
-      ),
-      const SizedBox(width: 16),
-      Expanded(
-        child: Text(
-          AppLocalizations.of(context).templatePreview,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: colorScheme.onSurface,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    ],
-  );
-
-  Widget _buildPreviewContent(String template, ColorScheme colorScheme) => Expanded(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'CSV Content Preview:',
-          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: colorScheme.outline.withValues(alpha: 0.3),
-              ),
-            ),
-            child: SingleChildScrollView(
-              child: SelectableText(
-                template,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-
-  Widget _buildPreviewActions(BuildContext context, ColorScheme colorScheme, String template) => Column(
-    children: [
-      Row(
-        children: [
-          Expanded(
-            child: OutlinedButton(
-              onPressed: () => Navigator.of(context).pop(),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: ThemeUtil.primaryColor),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(Global.radiusSm),
-                ),
-              ),
-              child: Text(AppLocalizations.of(context).close),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: OutlinedButton.icon(
-              onPressed: () async {
-                await Clipboard.setData(ClipboardData(text: template));
-                if (context.mounted) {
-                  AppToast.success(
-                    context,
-                    AppLocalizations.of(context).copiedToClipboard,
-                  );
-                }
-              },
-              icon: const Icon(Icons.copy, size: 18),
-              label: Text(AppLocalizations.of(context).copy),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: ThemeUtil.primaryColor),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(Global.radiusSm),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      const SizedBox(height: 12),
-      SizedBox(
-        width: double.infinity,
-        child: FilledButton.icon(
-          onPressed: () {
-            Navigator.of(context).pop();
-            _downloadTemplate();
-          },
-          icon: const Icon(Icons.download, size: 18),
-          label: Text(AppLocalizations.of(context).download),
-          style: FilledButton.styleFrom(
-            backgroundColor: colorScheme.primary,
-            foregroundColor: colorScheme.onPrimary,
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Global.radiusSm),
-            ),
-          ),
-        ),
-      ),
-    ],
-  );
-
   Future<void> _previewTemplate() async {
     try {
       final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
@@ -1067,27 +235,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       if (!mounted) return;
 
-      final colorScheme = Theme.of(context).colorScheme;
-
-      showDialog(
+      await showDialog(
         context: context,
-        builder: (context) => Dialog(
-          backgroundColor: colorScheme.surface,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _buildPreviewHeader(colorScheme),
-                const SizedBox(height: 16),
-                _buildPreviewContent(template, colorScheme),
-                const SizedBox(height: 24),
-                _buildPreviewActions(context, colorScheme, template),
-              ],
-            ),
-          ),
+        builder: (context) => _PreviewDialog(
+          template: template,
+          onDownload: _downloadTemplate,
         ),
       );
     } catch (e) {
@@ -1095,5 +247,1089 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         AppToast.error(context, 'Failed to preview template: $e');
       }
     }
+  }
+
+  void _showImportResultDialog(CsvResult result) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => _ImportResultDialog(result: result),
+    );
+  }
+}
+
+// ============================================================================
+// COMPOSANTS RÉUTILISABLES
+// ============================================================================
+
+class _InfoCard extends StatelessWidget {
+  const _InfoCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return SurfaceCard(
+      child: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: colorScheme.primaryContainer,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              Icons.info_outline,
+              color: colorScheme.onPrimaryContainer,
+              size: 20,
+            ),
+          ),
+          Global.gapMd,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  AppLocalizations.of(context).csvImportExportInfo,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  AppLocalizations.of(context).csvImportExportDescription,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DataManagementSection extends StatelessWidget {
+  const _DataManagementSection({
+    required this.isProcessing,
+    required this.onImport,
+    required this.onExport,
+  });
+
+  final bool isProcessing;
+  final VoidCallback onImport;
+  final VoidCallback onExport;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+          child: Row(
+            children: [
+              Icon(Icons.import_export, size: 20, color: colorScheme.primary),
+              Global.gapSm,
+              Text(
+                AppLocalizations.of(context).dataManagement,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SurfaceCard(
+          padding: Global.padMd,
+          child: Column(
+            children: [
+              _ActionTile(
+                title: AppLocalizations.of(context).importData,
+                subtitle: AppLocalizations.of(context).importDataDescription,
+                icon: Icons.file_upload_outlined,
+                onTap: isProcessing ? null : onImport,
+              ),
+              _ActionTile(
+                title: AppLocalizations.of(context).exportData,
+                subtitle: AppLocalizations.of(context).exportDataDescription,
+                icon: Icons.file_download_outlined,
+                onTap: isProcessing ? null : onExport,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ActionTile extends StatelessWidget {
+  const _ActionTile({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.onTap,
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return InteractiveSurface(
+      onTap: onTap,
+      borderRadius: BorderRadius.zero,
+      builder: (context, hovered, pressed) => ListTile(
+        leading: Icon(icon, color: colorScheme.onSurface),
+        title: Text(
+          title,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: colorScheme.onSurface,
+          ),
+        ),
+        subtitle: Text(
+          subtitle,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+          ),
+        ),
+        trailing: Icon(
+          Icons.chevron_right,
+          color: colorScheme.onSurfaceVariant,
+        ),
+        enabled: onTap != null,
+      ),
+    );
+  }
+}
+
+class _TemplatesSection extends StatelessWidget {
+  const _TemplatesSection({
+    required this.isProcessing,
+    required this.onPreview,
+    required this.onDownload,
+  });
+
+  final bool isProcessing;
+  final VoidCallback onPreview;
+  final VoidCallback onDownload;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+          child: Row(
+            children: [
+              Icon(Icons.description_outlined, size: 20, color: colorScheme.primary),
+              Global.gapSm,
+              Text(
+                AppLocalizations.of(context).templates,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SurfaceCard(
+          padding: const EdgeInsets.all(16),
+          child: _TemplateTile(
+            isProcessing: isProcessing,
+            onPreview: onPreview,
+            onDownload: onDownload,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _TemplateTile extends StatelessWidget {
+  const _TemplateTile({
+    required this.isProcessing,
+    required this.onPreview,
+    required this.onDownload,
+  });
+
+  final bool isProcessing;
+  final VoidCallback onPreview;
+  final VoidCallback onDownload;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(Icons.merge_type, color: colorScheme.onSurface, size: 22),
+            Global.gapMd,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).downloadCombinedTemplate,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    AppLocalizations.of(context).csvTemplateForCombined,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            OutlinedButton.icon(
+              onPressed: isProcessing ? null : onPreview,
+              icon: const Icon(Icons.visibility_outlined, size: 18),
+              label: Text(AppLocalizations.of(context).preview),
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: ThemeUtil.getPrimaryColor(context)),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Global.radiusSm),
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            FilledButton.icon(
+              onPressed: isProcessing ? null : onDownload,
+              icon: const Icon(Icons.download_outlined, size: 18),
+              label: Text(AppLocalizations.of(context).download),
+              style: FilledButton.styleFrom(
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Global.radiusSm),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _LoadingOverlay extends StatelessWidget {
+  const _LoadingOverlay();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
+      color: colorScheme.surface.withValues(alpha: 0.8),
+      child: Center(
+        child: CircularProgressIndicator(
+          color: colorScheme.primary,
+        ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// DIALOGUES
+// ============================================================================
+
+class _ImportDialog extends StatefulWidget {
+  const _ImportDialog({
+    required this.onFileImport,
+    required this.onTextImport,
+  });
+
+  final VoidCallback onFileImport;
+  final void Function(String) onTextImport;
+
+  @override
+  State<_ImportDialog> createState() => _ImportDialogState();
+}
+
+class _ImportDialogState extends State<_ImportDialog> {
+  bool _useTextInput = false;
+  String _csvText = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Dialog(
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        constraints: const BoxConstraints(maxWidth: 600, minWidth: 400),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _DialogHeader(
+              icon: Icons.import_export,
+              title: AppLocalizations.of(context).importData,
+            ),
+            const SizedBox(height: 24),
+            _ImportModeToggle(
+              useTextInput: _useTextInput,
+              onToggle: (value) => setState(() => _useTextInput = value),
+            ),
+            const SizedBox(height: 24),
+            _ImportContent(
+              useTextInput: _useTextInput,
+              onTextChanged: (value) => _csvText = value,
+            ),
+            const SizedBox(height: 24),
+            _ImportActions(
+              onCancel: () => Navigator.of(context).pop(),
+              onImport: () {
+                Navigator.of(context).pop();
+                if (_useTextInput) {
+                  widget.onTextImport(_csvText);
+                } else {
+                  widget.onFileImport();
+                }
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DialogHeader extends StatelessWidget {
+  const _DialogHeader({
+    required this.icon,
+    required this.title,
+  });
+
+  final IconData icon;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(icon, color: colorScheme.onPrimaryContainer, size: 24),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Text(
+            title,
+            style: ThemeUtil.titleLarge.copyWith(
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ImportModeToggle extends StatelessWidget {
+  const _ImportModeToggle({
+    required this.useTextInput,
+    required this.onToggle,
+  });
+
+  final bool useTextInput;
+  final ValueChanged<bool> onToggle;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: colorScheme.outline.withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: _ToggleOption(
+              icon: Icons.file_upload_outlined,
+              label: 'Fichier',
+              isSelected: !useTextInput,
+              onTap: () => onToggle(false),
+            ),
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: _ToggleOption(
+              icon: Icons.edit_note_outlined,
+              label: 'Texte',
+              isSelected: useTextInput,
+              onTap: () => onToggle(true),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ToggleOption extends StatelessWidget {
+  const _ToggleOption({
+    required this.icon,
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        decoration: BoxDecoration(
+          color: isSelected ? colorScheme.primaryContainer : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: colorScheme.primary.withValues(alpha: 0.15),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ]
+              : null,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: isSelected
+                  ? colorScheme.onPrimaryContainer
+                  : colorScheme.onSurfaceVariant,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              label,
+              style: ThemeUtil.bodyMedium.copyWith(
+                color: isSelected
+                    ? colorScheme.onPrimaryContainer
+                    : colorScheme.onSurfaceVariant,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ImportContent extends StatelessWidget {
+  const _ImportContent({
+    required this.useTextInput,
+    required this.onTextChanged,
+  });
+
+  final bool useTextInput;
+  final ValueChanged<String> onTextChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: useTextInput
+          ? _TextInputField(onChanged: onTextChanged)
+          : const _FileUploadInfo(),
+    );
+  }
+}
+
+class _TextInputField extends StatelessWidget {
+  const _TextInputField({required this.onChanged});
+
+  final ValueChanged<String> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return TextField(
+      key: const ValueKey('text_input'),
+      maxLines: 10,
+      decoration: InputDecoration(
+        hintText: 'Collez votre contenu CSV ici...',
+        hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.outline),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: colorScheme.outline.withValues(alpha: 0.5),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: colorScheme.primary, width: 2),
+        ),
+        filled: true,
+        fillColor: colorScheme.surfaceContainerHighest,
+        contentPadding: const EdgeInsets.all(16),
+      ),
+      style: ThemeUtil.bodyMedium.copyWith(color: colorScheme.onSurface),
+      onChanged: onChanged,
+    );
+  }
+}
+
+class _FileUploadInfo extends StatelessWidget {
+  const _FileUploadInfo();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
+      key: const ValueKey('file_info'),
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        children: [
+          Icon(Icons.file_upload_outlined, size: 48, color: colorScheme.primary),
+          const SizedBox(height: 16),
+          Text(
+            AppLocalizations.of(context).clickImportToSelectFile,
+            style: ThemeUtil.bodyMedium.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ImportActions extends StatelessWidget {
+  const _ImportActions({
+    required this.onCancel,
+    required this.onImport,
+  });
+
+  final VoidCallback onCancel;
+  final VoidCallback onImport;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        Expanded(
+          child: OutlinedButton(
+            onPressed: onCancel,
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(color: colorScheme.outline),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text(
+              'Annuler',
+              style: ThemeUtil.bodyMedium.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: FilledButton(
+            onPressed: onImport,
+            style: FilledButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            child: Text(
+              'Importer',
+              style: ThemeUtil.bodyMedium.copyWith(
+                color: colorScheme.onPrimary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ImportResultDialog extends StatelessWidget {
+  const _ImportResultDialog({required this.result});
+
+  final CsvResult result;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Dialog(
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 400),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _ResultHeader(success: result.success),
+            const SizedBox(height: 16),
+            _ResultContent(result: result),
+            const SizedBox(height: 24),
+            _ResultActions(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ResultHeader extends StatelessWidget {
+  const _ResultHeader({required this.success});
+
+  final bool success;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Row(
+      children: [
+        Container(
+          width: 48,
+          height: 48,
+          decoration: BoxDecoration(
+            color: success
+                ? ThemeUtil.success.withValues(alpha: 0.1)
+                : colorScheme.error.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Icon(
+            success ? Icons.check_circle : Icons.error,
+            color: success ? ThemeUtil.success : colorScheme.error,
+            size: 24,
+          ),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Text(
+            success
+                ? AppLocalizations.of(context).importSuccessful
+                : AppLocalizations.of(context).importFailed,
+            style: ThemeUtil.titleMedium.copyWith(
+              color: colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ResultContent extends StatelessWidget {
+  const _ResultContent({required this.result});
+
+  final CsvResult result;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (result.message != null) ...[
+          Text(
+            result.message!,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 16),
+        ],
+        if (result.providersCount > 0)
+          _ResultItem(
+            icon: Icons.business,
+            text: AppLocalizations.of(context).providersImported(result.providersCount),
+            color: ThemeUtil.info,
+          ),
+        if (result.feeIntervalsCount > 0)
+          _ResultItem(
+            icon: Icons.attach_money,
+            text: AppLocalizations.of(context).feeIntervalsImported(result.feeIntervalsCount),
+            color: ThemeUtil.success,
+          ),
+        if (result.errors.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          _ErrorsCard(errors: result.errors),
+        ],
+      ],
+    );
+  }
+}
+
+class _ResultItem extends StatelessWidget {
+  const _ResultItem({
+    required this.icon,
+    required this.text,
+    required this.color,
+  });
+
+  final IconData icon;
+  final String text;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 20),
+          Global.gapSm,
+          Expanded(
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ErrorsCard extends StatelessWidget {
+  const _ErrorsCard({required this.errors});
+
+  final List<String> errors;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: colorScheme.error.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: colorScheme.error.withValues(alpha: 0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.warning, color: ThemeUtil.warning, size: 20),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context).errorsEncountered(errors.length),
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: ThemeUtil.warning,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 150),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: errors
+                    .map((error) => Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Text(
+                            '• $error',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.error,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ResultActions extends StatelessWidget {
+  const _ResultActions();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+        onPressed: () => Navigator.of(context).pop(),
+        style: FilledButton.styleFrom(
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(Global.radiusSm),
+          ),
+        ),
+        child: Text(AppLocalizations.of(context).confirm),
+      ),
+    );
+  }
+}
+
+class _PreviewDialog extends StatelessWidget {
+  const _PreviewDialog({
+    required this.template,
+    required this.onDownload,
+  });
+
+  final String template;
+  final VoidCallback onDownload;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Dialog(
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _DialogHeader(
+              icon: Icons.description,
+              title: AppLocalizations.of(context).templatePreview,
+            ),
+            const SizedBox(height: 16),
+            _PreviewContent(template: template),
+            const SizedBox(height: 24),
+            _PreviewActions(
+              template: template,
+              onDownload: onDownload,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PreviewContent extends StatelessWidget {
+  const _PreviewContent({required this.template});
+
+  final String template;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'CSV Content Preview:',
+            style: theme.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: colorScheme.onSurface,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: colorScheme.outline.withValues(alpha: 0.3),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: SelectableText(
+                  template,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontFamily: 'monospace',
+                    fontSize: 12,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PreviewActions extends StatelessWidget {
+  const _PreviewActions({
+    required this.template,
+    required this.onDownload,
+  });
+
+  final String template;
+  final VoidCallback onDownload;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton(
+                onPressed: () => Navigator.of(context).pop(),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: colorScheme.primary),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Global.radiusSm),
+                  ),
+                ),
+                child: Text(AppLocalizations.of(context).close),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () async {
+                  await Clipboard.setData(ClipboardData(text: template));
+                  if (context.mounted) {
+                    AppToast.success(
+                      context,
+                      AppLocalizations.of(context).copiedToClipboard,
+                    );
+                  }
+                },
+                icon: const Icon(Icons.copy, size: 18),
+                label: Text(AppLocalizations.of(context).copy),
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: colorScheme.primary),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Global.radiusSm),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton.icon(
+            onPressed: () {
+              Navigator.of(context).pop();
+              onDownload();
+            },
+            icon: const Icon(Icons.download, size: 18),
+            label: Text(AppLocalizations.of(context).download),
+            style: FilledButton.styleFrom(
+              backgroundColor: colorScheme.primary,
+              foregroundColor: colorScheme.onPrimary,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Global.radiusSm),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
