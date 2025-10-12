@@ -638,35 +638,43 @@ class _ImportDialogState extends State<_ImportDialog> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        constraints: const BoxConstraints(maxWidth: 600, minWidth: 400),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _DialogHeader(
-              icon: Icons.import_export,
-              title: AppLocalizations.of(context).importData,
+        constraints: BoxConstraints(
+          maxWidth: 600,
+          minWidth: 400,
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _DialogHeader(
+                  icon: Icons.import_export,
+                  title: AppLocalizations.of(context).importData,
+                ),
+                const SizedBox(height: 24),
+                _ImportModeToggle(
+                  useTextInput: _useTextInput,
+                  onToggle: (value) => setState(() => _useTextInput = value),
+                ),
+                const SizedBox(height: 24),
+                _ImportContent(
+                  useTextInput: _useTextInput,
+                  selectedFile: _selectedFile,
+                  onTextChanged: (value) => _csvText = value,
+                  onFileSelected: _selectFile,
+                ),
+                const SizedBox(height: 24),
+                _ImportActions(
+                  isImporting: _isImporting,
+                  canImport: _useTextInput ? _csvText.trim().isNotEmpty : _selectedFile != null,
+                  onCancel: () => Navigator.of(context).pop(),
+                  onImport: _handleImport,
+                ),
+              ],
             ),
-            const SizedBox(height: 24),
-            _ImportModeToggle(
-              useTextInput: _useTextInput,
-              onToggle: (value) => setState(() => _useTextInput = value),
-            ),
-            const SizedBox(height: 24),
-            _ImportContent(
-              useTextInput: _useTextInput,
-              selectedFile: _selectedFile,
-              onTextChanged: (value) => _csvText = value,
-              onFileSelected: _selectFile,
-            ),
-            const SizedBox(height: 24),
-            _ImportActions(
-              isImporting: _isImporting,
-              canImport: _useTextInput ? _csvText.trim().isNotEmpty : _selectedFile != null,
-              onCancel: () => Navigator.of(context).pop(),
-              onImport: _handleImport,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -1342,23 +1350,30 @@ class _PreviewDialog extends StatelessWidget {
       backgroundColor: colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _DialogHeader(
-              icon: Icons.description,
-              title: AppLocalizations.of(context).templatePreview,
+        constraints: BoxConstraints(
+          maxWidth: 500,
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _DialogHeader(
+                  icon: Icons.description,
+                  title: AppLocalizations.of(context).templatePreview,
+                ),
+                const SizedBox(height: 16),
+                _PreviewContent(template: template),
+                const SizedBox(height: 24),
+                _PreviewActions(
+                  template: template,
+                  onDownload: onDownload,
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            _PreviewContent(template: template),
-            const SizedBox(height: 24),
-            _PreviewActions(
-              template: template,
-              onDownload: onDownload,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -1375,42 +1390,39 @@ class _PreviewContent extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            AppLocalizations.of(context).csvContentPreview,
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context).csvContentPreview,
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: 300, // Fixed height for preview content
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: colorScheme.outline.withValues(alpha: 0.3),
             ),
           ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: colorScheme.outline.withValues(alpha: 0.3),
-                ),
-              ),
-              child: SingleChildScrollView(
-                child: SelectableText(
-                  template,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
+          child: SingleChildScrollView(
+            child: SelectableText(
+              template,
+              style: theme.textTheme.bodySmall?.copyWith(
+                fontFamily: 'monospace',
+                fontSize: 12,
+                color: colorScheme.onSurface,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
