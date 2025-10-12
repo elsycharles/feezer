@@ -1,0 +1,4 @@
+storePassword=mystorepassword
+keyPassword=mystorepassword
+keyAlias=feezer
+storeFile=../my-release-key.jks
