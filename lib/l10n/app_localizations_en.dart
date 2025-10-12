@@ -1057,7 +1057,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqHowToAddProviderAnswer =>
-      'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.';
+      'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.';
 
   @override
   String get faqHowToCalculateFees => 'How does fee calculation work?';
@@ -1071,7 +1071,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqDataSecurityAnswer =>
-      'Yes, your data is stored locally on your device. We don\'t collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.';
+      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.';
 
   @override
   String get faqOfflineMode => 'Does the app work offline?';
@@ -1079,6 +1079,13 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get faqOfflineModeAnswer =>
       'Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.';
+
+  @override
+  String get faqCurrencyRates => 'How do currency exchange rates work?';
+
+  @override
+  String get faqCurrencyRatesAnswer =>
+      'The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.';
 
   @override
   String get faqExportData => 'How do I export my data?';

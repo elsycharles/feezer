@@ -1549,7 +1549,7 @@
   "@faqHowToAddProvider": {
     "description": "FAQ question"
   },
-  "faqHowToAddProviderAnswer": "Raha hanampy mpamatsy vaovao ianao, midira ao amin'ny efijery Mpamatsy ary tsindrio ny bokotra '+'. Fenoy ny antsipirian'ny mpamatsy ao anatin'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin'ny alalan'ny rakitra CSV.",
+  "faqHowToAddProviderAnswer": "Raha hanampy mpamatsy vaovao ianao, midira ao amin'ny efijery Mpamatsy ary tsindrio ny bokotra '+'. Fenoy ny antsipirian'ny mpamatsy ao anatin'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin'ny alalan'ny rakitra CSV. Tsy misy mpamatsy ankafizina - manana fahefana tanteraka ianao hanampy sy hanala mpamatsy araka ny ilainao.",
   "@faqHowToAddProviderAnswer": {
     "description": "FAQ answer"
   },
@@ -1565,7 +1565,7 @@
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Eny, ny angon-drakitrao dia voatahiry ao amin'ny fitaovanao. Tsy manangona na mandefa angona ara-bola manokana izahay. Ny kajy rehetra dia atao tsy misy internet mba hiantohana ny fiainanao manokana sy ny fiarovana.",
+  "faqDataSecurityAnswer": "Ny angon-drakitra ara-bola dia voatahiry ao amin'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin'ny fitaovanao ary tsy alefa any aiza na aiza.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
@@ -1756,5 +1756,13 @@
   "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
   "@faqAnswer8": {
     "description": "Eighth FAQ answer"
+  },
+  "faqCurrencyRates": "Ahoana no fomba iasana ny tahan'ny fifanakalozana vola ?",
+  "@faqCurrencyRates": {
+    "description": "FAQ question"
+  },
+  "faqCurrencyRatesAnswer": "Ny app dia tsy manavao ho azy ny tahan'ny fifanakalozana vola. Manana fahefana tanteraka ianao ary afaka mametraka tanana ny tahan'ny fifanakalozana volanao manokana ho an'ny fanazaran-tena tanteraka. Izany dia manome anao fahafaha-manao tanteraka hampiasa ny taha mifanaraka amin'ny filanao, ary miasa tsara tanteraka tsy misy internet.",
+  "@faqCurrencyRatesAnswer": {
+    "description": "FAQ answer"
   }
 }

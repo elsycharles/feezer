@@ -1076,7 +1076,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqHowToAddProviderAnswer =>
-      'Pour ajouter un nouveau fournisseur, allez à l\'écran Fournisseurs et appuyez sur le bouton \'+\'. Remplissez les détails du fournisseur incluant le nom, la description et la structure des frais. Vous pouvez également importer des données de fournisseur en utilisant des fichiers CSV.';
+      'Pour ajouter un nouveau fournisseur, allez à l\'écran Fournisseurs et appuyez sur le bouton \'+\'. Remplissez les détails du fournisseur incluant le nom, la description et la structure des frais. Vous pouvez également importer des données de fournisseur en utilisant des fichiers CSV. Il n\'y a pas de fournisseurs favoris - vous avez un contrôle total pour ajouter et supprimer des fournisseurs selon vos besoins.';
 
   @override
   String get faqHowToCalculateFees =>
@@ -1091,7 +1091,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqDataSecurityAnswer =>
-      'Oui, vos données sont stockées localement sur votre appareil. Nous ne collectons ni ne transmettons aucune information financière personnelle. Tous les calculs sont effectués hors ligne pour assurer votre confidentialité et sécurité.';
+      'Vos données financières sont stockées localement sur votre appareil sans cryptage ni mesures de sécurité supplémentaires. Cette application ne fournit pas de fonctionnalités de sécurité de niveau bancaire. Toutes les données restent sur votre appareil et ne sont transmises nulle part.';
 
   @override
   String get faqOfflineMode => 'L\'application fonctionne-t-elle hors ligne ?';
@@ -1099,6 +1099,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get faqOfflineModeAnswer =>
       'Oui, Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.';
+
+  @override
+  String get faqCurrencyRates => 'Comment fonctionnent les taux de change ?';
+
+  @override
+  String get faqCurrencyRatesAnswer =>
+      'L\'application ne met pas à jour automatiquement les taux de change des devises. Vous avez un contrôle total et pouvez définir manuellement vos propres taux de change pour une personnalisation complète. Cela vous donne une flexibilité totale pour utiliser les taux qui conviennent à vos besoins, et fonctionne parfaitement hors ligne.';
 
   @override
   String get faqExportData => 'Comment exporter mes données ?';

@@ -1944,7 +1944,7 @@ abstract class AppLocalizations {
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.'**
+  /// **'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.'**
   String get faqHowToAddProviderAnswer;
 
   /// FAQ question
@@ -1968,7 +1968,7 @@ abstract class AppLocalizations {
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'Yes, your data is stored locally on your device. We don\'t collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.'**
+  /// **'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.'**
   String get faqDataSecurityAnswer;
 
   /// FAQ question
@@ -1982,6 +1982,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.'**
   String get faqOfflineModeAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do currency exchange rates work?'**
+  String get faqCurrencyRates;
+
+  /// No description provided for @faqCurrencyRatesAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.'**
+  String get faqCurrencyRatesAnswer;
 
   /// FAQ question
   ///

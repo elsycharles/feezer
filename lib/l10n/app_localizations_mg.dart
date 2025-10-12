@@ -1062,7 +1062,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqHowToAddProviderAnswer =>
-      'Raha hanampy mpamatsy vaovao ianao, midira ao amin\'ny efijery Mpamatsy ary tsindrio ny bokotra \'+\'. Fenoy ny antsipirian\'ny mpamatsy ao anatin\'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin\'ny alalan\'ny rakitra CSV.';
+      'Raha hanampy mpamatsy vaovao ianao, midira ao amin\'ny efijery Mpamatsy ary tsindrio ny bokotra \'+\'. Fenoy ny antsipirian\'ny mpamatsy ao anatin\'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin\'ny alalan\'ny rakitra CSV. Tsy misy mpamatsy ankafizina - manana fahefana tanteraka ianao hanampy sy hanala mpamatsy araka ny ilainao.';
 
   @override
   String get faqHowToCalculateFees => 'Ahoana no fomba iasana ny kajy sarany?';
@@ -1076,7 +1076,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqDataSecurityAnswer =>
-      'Eny, ny angon-drakitrao dia voatahiry ao amin\'ny fitaovanao. Tsy manangona na mandefa angona ara-bola manokana izahay. Ny kajy rehetra dia atao tsy misy internet mba hiantohana ny fiainanao manokana sy ny fiarovana.';
+      'Ny angon-drakitra ara-bola dia voatahiry ao amin\'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin\'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin\'ny fitaovanao ary tsy alefa any aiza na aiza.';
 
   @override
   String get faqOfflineMode => 'Miasa ve ny app nefa tsy misy internet?';
@@ -1084,6 +1084,14 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get faqOfflineModeAnswer =>
       'Eny, Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin\'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.';
+
+  @override
+  String get faqCurrencyRates =>
+      'Ahoana no fomba iasana ny tahan\'ny fifanakalozana vola ?';
+
+  @override
+  String get faqCurrencyRatesAnswer =>
+      'Ny app dia tsy manavao ho azy ny tahan\'ny fifanakalozana vola. Manana fahefana tanteraka ianao ary afaka mametraka tanana ny tahan\'ny fifanakalozana volanao manokana ho an\'ny fanazaran-tena tanteraka. Izany dia manome anao fahafaha-manao tanteraka hampiasa ny taha mifanaraka amin\'ny filanao, ary miasa tsara tanteraka tsy misy internet.';
 
   @override
   String get faqExportData => 'Ahoana no fomba hanondrana ny angon-drakitra?';

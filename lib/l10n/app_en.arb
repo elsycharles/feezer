@@ -1553,7 +1553,7 @@
   "@faqHowToAddProvider": {
     "description": "FAQ question"
   },
-  "faqHowToAddProviderAnswer": "To add a new provider, go to the Providers screen and tap the '+' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.",
+  "faqHowToAddProviderAnswer": "To add a new provider, go to the Providers screen and tap the '+' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.",
   "@faqHowToAddProviderAnswer": {
     "description": "FAQ answer"
   },
@@ -1569,7 +1569,7 @@
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Yes, your data is stored locally on your device. We don't collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.",
+  "faqDataSecurityAnswer": "Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
@@ -1581,6 +1581,11 @@
   "@faqOfflineModeAnswer": {
     "description": "FAQ answer"
   },
+  "faqCurrencyRates": "How do currency exchange rates work?",
+  "@faqCurrencyRates": {
+    "description": "FAQ question"
+  },
+  "faqCurrencyRatesAnswer": "The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.",
   "faqExportData": "How do I export my data?",
   "@faqExportData": {
     "description": "FAQ question"

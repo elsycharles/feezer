@@ -278,43 +278,38 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
   List<FaqItem> _getFilteredFAQItems() {
     final allItems = [
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion1,
-        answer: AppLocalizations.of(context).faqAnswer1,
+        question: AppLocalizations.of(context).faqWhatIsFeeMinimizer,
+        answer: AppLocalizations.of(context).faqWhatIsFeeMinimizerAnswer,
         category: 'general',
       ),
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion2,
-        answer: AppLocalizations.of(context).faqAnswer2,
+        question: AppLocalizations.of(context).faqHowToAddProvider,
+        answer: AppLocalizations.of(context).faqHowToAddProviderAnswer,
         category: 'general',
       ),
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion3,
-        answer: AppLocalizations.of(context).faqAnswer3,
+        question: AppLocalizations.of(context).faqHowToCalculateFees,
+        answer: AppLocalizations.of(context).faqHowToCalculateFeesAnswer,
         category: 'general',
       ),
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion4,
-        answer: AppLocalizations.of(context).faqAnswer4,
+        question: AppLocalizations.of(context).faqDataSecurity,
+        answer: AppLocalizations.of(context).faqDataSecurityAnswer,
         category: 'general',
       ),
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion5,
-        answer: AppLocalizations.of(context).faqAnswer5,
+        question: AppLocalizations.of(context).faqOfflineMode,
+        answer: AppLocalizations.of(context).faqOfflineModeAnswer,
         category: 'general',
       ),
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion6,
-        answer: AppLocalizations.of(context).faqAnswer6,
+        question: AppLocalizations.of(context).faqExportData,
+        answer: AppLocalizations.of(context).faqExportDataAnswer,
         category: 'general',
       ),
       FaqItem(
-        question: AppLocalizations.of(context).faqQuestion7,
-        answer: AppLocalizations.of(context).faqAnswer7,
-        category: 'general',
-      ),
-      FaqItem(
-        question: AppLocalizations.of(context).faqQuestion8,
-        answer: AppLocalizations.of(context).faqAnswer8,
+        question: AppLocalizations.of(context).faqCurrencyRates,
+        answer: AppLocalizations.of(context).faqCurrencyRatesAnswer,
         category: 'general',
       ),
     ];
