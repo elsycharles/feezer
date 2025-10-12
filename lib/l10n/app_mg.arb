@@ -1,18 +1,27 @@
 {
   "@@locale": "mg",
   "appTitle": "Feezer",
-  "onboardingTitle1": "Mihevitra mialoha ary mitahiry vola amin'ny sara",
-  "onboardingDescription1": "Kajy ny fomba mahomby indrindra hitantanana ny volanao.",
-  "onboardingTitle2": "Atsikafo ny fifampiraharahanao",
-  "onboardingDescription2": "Ahena ho azy ny sara mifototra amin'ny elanelana efa voafarit",
-  "@onboardingDescription2": {
-    "description": "Onboarding description for second screen"
+  "onboardingTitle1": "Aza adino ny vola amin'ny sara banky",
+  "@onboardingTitle1": {
+    "description": "First onboarding screen title"
   },
-  "onboardingTitle3": "Mitahiry am-pahendrena, mandany tsara kokoa",
+  "onboardingDescription1": "Ny sara banky dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin'ny fifampiraharahana rehetra.",
+  "@onboardingDescription1": {
+    "description": "First onboarding screen description"
+  },
+  "onboardingTitle2": "Fanatsarana fifampiraharahana am-pahendrena",
+  "@onboardingTitle2": {
+    "description": "Second onboarding screen title"
+  },
+  "onboardingDescription2": "Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana volanao sy ny fandoavam-bola.",
+  "@onboardingDescription2": {
+    "description": "Second onboarding screen description"
+  },
+  "onboardingTitle3": "Mitahiry bebe kokoa, mitahiry bebe kokoa",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Mahazo soso-kevitra manokana ary manaova fanapahan-kevitra ara-bola tsy tapaka.",
+  "onboardingDescription3": "Mahazo paikady fanatsarana sara manokana ary mijery ny fitahirizanao miakatra amin'ny fifampiraharahana rehetra.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },

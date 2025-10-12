@@ -109,37 +109,37 @@ abstract class AppLocalizations {
   /// First onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Plan ahead and save on fees'**
+  /// **'Stop Losing Money to Banking Fees'**
   String get onboardingTitle1;
 
   /// First onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Calculate the most cost-efficient way to handle your money.'**
+  /// **'Banking fees can add up quickly. Feezer helps you minimize costs on every transaction.'**
   String get onboardingDescription1;
 
   /// Second onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Optimize your transactions'**
+  /// **'Smart Transaction Optimization'**
   String get onboardingTitle2;
 
   /// Second onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Minimize fees automatically based on predefined intervals.'**
+  /// **'Automatically calculate the most cost-effective way to handle your money transfers and payments.'**
   String get onboardingDescription2;
 
   /// Third onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Save smart, spend better'**
+  /// **'Save More, Keep More'**
   String get onboardingTitle3;
 
   /// Third onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Get personalized recommendations and make informed financial decisions instantly.'**
+  /// **'Get personalized fee optimization strategies and watch your savings grow with every transaction.'**
   String get onboardingDescription3;
 
   /// Next button text
