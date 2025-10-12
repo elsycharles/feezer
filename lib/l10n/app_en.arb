@@ -1184,5 +1184,21 @@
   "copiedToClipboard": "Copied to clipboard",
   "@copiedToClipboard": {
     "description": "Message shown when content is copied to clipboard"
+  },
+  "chooseWhereToSave": "Choose where to save the file",
+  "@chooseWhereToSave": {
+    "description": "Dialog title for file save location selection"
+  },
+  "fileSavedSuccessfully": "File saved successfully",
+  "@fileSavedSuccessfully": {
+    "description": "Success message when file is saved"
+  },
+  "failedToSaveFile": "Failed to save file",
+  "@failedToSaveFile": {
+    "description": "Error message when file save fails"
+  },
+  "failedToDownloadTemplate": "Failed to download template",
+  "@failedToDownloadTemplate": {
+    "description": "Error message when template download fails"
   }
 }

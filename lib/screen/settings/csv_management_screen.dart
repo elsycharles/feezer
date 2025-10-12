@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 import '../../util/csv_util.dart';
 import '../../util/navigation_util.dart';
 import '../../util/theme_util.dart';
@@ -172,16 +171,19 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       final locale = localeProvider.locale?.languageCode ?? 'en';
       final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
 
-      final exportResult = await CsvUtil.exportToCsv(locale: locale, currencyProvider: currencyProvider);
+      final exportResult = await CsvUtil.exportToCsv(
+        locale: locale,
+        currencyProvider: currencyProvider,
+      );
 
       setState(() => _isProcessing = false);
 
       if (!mounted) return;
 
-      if (exportResult.success) {
-        AppToast.success(
-          context,
-          exportResult.message ?? AppLocalizations.of(context).exportSuccessful,
+      if (exportResult.success && exportResult.filePath != null) {
+        await _saveFileToUserLocation(
+          exportResult.filePath!,
+          'fee_minimizer_export_${DateTime.now().millisecondsSinceEpoch}.csv',
         );
       } else {
         AppToast.error(
@@ -207,24 +209,55 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       final template = CsvUtil.getImportTemplate(locale);
 
+      // Créer un fichier temporaire
       final directory = await getTemporaryDirectory();
       final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final file = File('${directory.path}/template_combined_$timestamp.csv');
-      await file.writeAsString(template);
+      final tempFile = File('${directory.path}/template_$timestamp.csv');
+      await tempFile.writeAsString(template);
 
-      await Share.shareXFiles([XFile(file.path)]);
-
-      if (mounted) {
-        AppToast.success(
-          context,
-          AppLocalizations.of(context).templateDownloaded,
-        );
-      }
+      // Sauvegarder avec le nom suggéré
+      await _saveFileToUserLocation(
+        tempFile.path,
+        'fee_minimizer_template.csv',
+      );
     } catch (e) {
       if (mounted) {
         AppToast.error(
           context,
           '${AppLocalizations.of(context).failedToDownloadTemplate}: ${e.toString()}',
+        );
+      }
+    }
+  }
+
+  Future<void> _saveFileToUserLocation(String sourceFilePath, String suggestedName) async {
+    try {
+      // Lire le fichier source
+      final sourceFile = File(sourceFilePath);
+      final bytes = await sourceFile.readAsBytes();
+
+      // Sauvegarder avec FilePicker (gère automatiquement les permissions)
+      final result = await FilePicker.platform.saveFile(
+        dialogTitle: AppLocalizations.of(context).chooseWhereToSave,
+        fileName: suggestedName,
+        type: FileType.custom,
+        allowedExtensions: ['csv'],
+        bytes: bytes, // IMPORTANT: Passer les bytes sur mobile
+      );
+
+      if (result != null) {
+        if (mounted) {
+          AppToast.success(
+            context,
+            AppLocalizations.of(context).fileSavedSuccessfully,
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        AppToast.error(
+          context,
+          '${AppLocalizations.of(context).failedToSaveFile}: ${e.toString()}',
         );
       }
     }

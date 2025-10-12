@@ -773,7 +773,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get templateDownloaded => 'Template Downloaded';
 
   @override
-  String get failedToDownloadTemplate => 'Failed to download template';
+  String get failedToDownloadTemplate => 'Tsy nahomby ny fakana modely';
 
   @override
   String get failedToReadFile => 'Failed to read file';
@@ -860,4 +860,13 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get copiedToClipboard => 'Voarakitra ao amin\'ny fanindriana';
+
+  @override
+  String get chooseWhereToSave => 'Misafidy toerana hitehirizana ny rakitra';
+
+  @override
+  String get fileSavedSuccessfully => 'Voatahiry soa aman-tsara ny rakitra';
+
+  @override
+  String get failedToSaveFile => 'Tsy nahomby ny fitahirizana rakitra';
 }

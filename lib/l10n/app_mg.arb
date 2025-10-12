@@ -1065,5 +1065,21 @@
   "clickImportToSelectFile": "Tsindrio \"Ampidiro\" raha hanapaka rakitra CSV",
   "@clickImportToSelectFile": {
     "description": "Texte d'instruction pour l'option d'importation de fichier"
+  },
+  "chooseWhereToSave": "Misafidy toerana hitehirizana ny rakitra",
+  "@chooseWhereToSave": {
+    "description": "Titre de la boîte de dialogue pour la sélection de l'emplacement de sauvegarde"
+  },
+  "fileSavedSuccessfully": "Voatahiry soa aman-tsara ny rakitra",
+  "@fileSavedSuccessfully": {
+    "description": "Message de succès lorsque le fichier est enregistré"
+  },
+  "failedToSaveFile": "Tsy nahomby ny fitahirizana rakitra",
+  "@failedToSaveFile": {
+    "description": "Message d'erreur lorsque l'enregistrement du fichier échoue"
+  },
+  "failedToDownloadTemplate": "Tsy nahomby ny fakana modely",
+  "@failedToDownloadTemplate": {
+    "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
   }
 }

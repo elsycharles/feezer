@@ -873,4 +873,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get copiedToClipboard => 'Copié dans le presse-papiers';
+
+  @override
+  String get chooseWhereToSave => 'Choisir où enregistrer le fichier';
+
+  @override
+  String get fileSavedSuccessfully => 'Fichier enregistré avec succès';
+
+  @override
+  String get failedToSaveFile => 'Échec de l\'enregistrement du fichier';
 }

@@ -15,6 +15,7 @@ class CsvResult {
     this.providersCount = 0,
     this.feeIntervalsCount = 0,
     this.errors = const [],
+    this.filePath,
   });
 
   final bool success;
@@ -22,6 +23,7 @@ class CsvResult {
   final int providersCount;
   final int feeIntervalsCount;
   final List<String> errors;
+  final String? filePath;
 }
 
 // Configuration centralisée des mappings de colonnes
@@ -588,13 +590,14 @@ class CsvUtil {
 
       final csvString = const ListToCsvConverter().convert(csvData);
       final filePath = await _saveCsvFile(csvString, 'combined');
-      await Share.shareXFiles([XFile(filePath)]);
+      // Removed automatic sharing - will be handled in UI
 
       return CsvResult(
         success: true,
         message: 'Export successful',
         providersCount: csvData.where((row) => row[0].toString().isNotEmpty).length - 1,
         feeIntervalsCount: csvData.length - 1,
+        filePath: filePath,
       );
     } catch (e) {
       return CsvResult(success: false, message: 'Export failed: ${e.toString()}');

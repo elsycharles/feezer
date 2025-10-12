@@ -1468,7 +1468,7 @@ abstract class AppLocalizations {
   /// **'Template Downloaded'**
   String get templateDownloaded;
 
-  /// Template download failure message
+  /// Error message when template download fails
   ///
   /// In en, this message translates to:
   /// **'Failed to download template'**
@@ -1623,6 +1623,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied to clipboard'**
   String get copiedToClipboard;
+
+  /// Dialog title for file save location selection
+  ///
+  /// In en, this message translates to:
+  /// **'Choose where to save the file'**
+  String get chooseWhereToSave;
+
+  /// Success message when file is saved
+  ///
+  /// In en, this message translates to:
+  /// **'File saved successfully'**
+  String get fileSavedSuccessfully;
+
+  /// Error message when file save fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save file'**
+  String get failedToSaveFile;
 }
 
 class _AppLocalizationsDelegate

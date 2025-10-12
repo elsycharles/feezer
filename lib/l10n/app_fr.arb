@@ -1000,5 +1000,21 @@
   "clickImportToSelectFile": "Cliquez sur \"Importer\" pour sélectionner un fichier CSV",
   "@clickImportToSelectFile": {
     "description": "Texte d'instruction pour l'option d'importation de fichier"
+  },
+  "chooseWhereToSave": "Choisir où enregistrer le fichier",
+  "@chooseWhereToSave": {
+    "description": "Titre de la boîte de dialogue pour la sélection de l'emplacement de sauvegarde"
+  },
+  "fileSavedSuccessfully": "Fichier enregistré avec succès",
+  "@fileSavedSuccessfully": {
+    "description": "Message de succès lorsque le fichier est enregistré"
+  },
+  "failedToSaveFile": "Échec de l'enregistrement du fichier",
+  "@failedToSaveFile": {
+    "description": "Message d'erreur lorsque l'enregistrement du fichier échoue"
+  },
+  "failedToDownloadTemplate": "Échec du téléchargement du modèle",
+  "@failedToDownloadTemplate": {
+    "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
   }
 }

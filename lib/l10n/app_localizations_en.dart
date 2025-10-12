@@ -859,4 +859,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copiedToClipboard => 'Copied to clipboard';
+
+  @override
+  String get chooseWhereToSave => 'Choose where to save the file';
+
+  @override
+  String get fileSavedSuccessfully => 'File saved successfully';
+
+  @override
+  String get failedToSaveFile => 'Failed to save file';
 }
