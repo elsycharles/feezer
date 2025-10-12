@@ -387,7 +387,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get termsContactContent =>
-      'Raha manana fanontaniana momba ireo Fepetra fampiasana ireo ianao, azafady mifandraisa aminay amin\'ny alalan\'ny fizarana fanampiana amin\'ny app na amin\'ny email amin\'ny support@feezer.app. Hamaly ny fanontaniana anao haingana araka izay tratra izahay.';
+      'Raha manana fanontaniana momba ireo Fepetra fampiasana ireo ianao, azafady mifandraisa aminay amin\'ny alalan\'ny fizarana fanampiana amin\'ny app na amin\'ny email amin\'ny elsy.s.charles@gmail.com. Hamaly ny fanontaniana anao haingana araka izay tratra izahay.';
 
   @override
   String get featureComingNextVersion =>

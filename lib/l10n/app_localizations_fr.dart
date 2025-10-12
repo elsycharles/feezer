@@ -388,7 +388,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get termsContactContent =>
-      'Si vous avez des questions concernant ces Conditions d\'utilisation, veuillez nous contacter via la section support de l\'application ou par email à support@feezer.app. Nous répondrons à vos demandes aussi rapidement que possible.';
+      'Si vous avez des questions concernant ces Conditions d\'utilisation, veuillez nous contacter via la section support de l\'application ou par email à elsy.s.charles@gmail.com. Nous répondrons à vos demandes aussi rapidement que possible.';
 
   @override
   String get featureComingNextVersion =>

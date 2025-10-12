@@ -793,7 +793,7 @@ abstract class AppLocalizations {
   /// Terms of use contact section content
   ///
   /// In en, this message translates to:
-  /// **'If you have any questions about these Terms of Use, please contact us through the app\'s support section or via email at support@feezer.app. We will respond to your inquiries as quickly as possible.'**
+  /// **'If you have any questions about these Terms of Use, please contact us through the app\'s support section or via email at elsy.s.charles@gmail.com. We will respond to your inquiries as quickly as possible.'**
   String get termsContactContent;
 
   /// Message for upcoming features
