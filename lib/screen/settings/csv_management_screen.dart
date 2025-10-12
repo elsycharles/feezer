@@ -306,15 +306,7 @@ class _InfoCard extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: colorScheme.primaryContainer,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              Icons.info_outline,
-              color: colorScheme.onPrimaryContainer,
-              size: 20,
-            ),
+            child: Icon(Icons.info_outline, color: Theme.of(context).colorScheme.primary, size: 24),
           ),
           Global.gapMd,
           Expanded(
@@ -325,7 +317,7 @@ class _InfoCard extends StatelessWidget {
                   AppLocalizations.of(context).csvImportExportInfo,
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
+                    color: colorScheme.primary,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -722,11 +714,7 @@ class _DialogHeader extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: colorScheme.primaryContainer,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(icon, color: colorScheme.onPrimaryContainer, size: 24),
+          child: Icon(icon, color: Theme.of(context).colorScheme.primary, size: 24),
         ),
         const SizedBox(width: 16),
         Expanded(
