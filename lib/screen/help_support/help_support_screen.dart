@@ -327,30 +327,107 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
   Future<void> _launchEmail() async {
     final Uri emailUri = Uri(
       scheme: 'mailto',
-      path: 'support@feeminimizer.com',
+      path: 'elsy.s.charles@gmail.com',
       queryParameters: {
-        'subject': 'Fee Minimizer Support Request',
+        'subject': 'Feezer Support Request',
       },
     );
 
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
+    try {
+      if (await canLaunchUrl(emailUri)) {
+        await launchUrl(emailUri, mode: LaunchMode.platformDefault);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Aucune application mail trouvée. Veuillez installer une application mail.'),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Erreur lors de l\'ouverture de l\'application mail.'),
+          ),
+        );
+      }
     }
   }
 
   Future<void> _launchPhone() async {
-    final Uri phoneUri = Uri(scheme: 'tel', path: '+15551234567');
-
-    if (await canLaunchUrl(phoneUri)) {
-      await launchUrl(phoneUri);
+    // Try WhatsApp direct scheme first, then fallback to web URL
+    Uri phoneUri = Uri.parse('whatsapp://send?phone=261348421634');
+    
+    try {
+      if (await canLaunchUrl(phoneUri)) {
+        await launchUrl(phoneUri, mode: LaunchMode.platformDefault);
+      } else {
+        // Fallback to web WhatsApp
+        phoneUri = Uri.parse('https://wa.me/261348421634');
+        if (await canLaunchUrl(phoneUri)) {
+          await launchUrl(phoneUri, mode: LaunchMode.platformDefault);
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('WhatsApp n\'est pas installé ou le lien est invalide.'),
+              ),
+            );
+          }
+        }
+      }
+    } catch (e) {
+      // Try web fallback
+      try {
+        final webUri = Uri.parse('https://wa.me/261348421634');
+        if (await canLaunchUrl(webUri)) {
+          await launchUrl(webUri, mode: LaunchMode.platformDefault);
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Impossible d\'ouvrir WhatsApp.'),
+              ),
+            );
+          }
+        }
+      } catch (e2) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Erreur lors de l\'ouverture de WhatsApp.'),
+            ),
+          );
+        }
+      }
     }
   }
 
   Future<void> _launchWebsite() async {
-    final Uri websiteUri = Uri.parse('https://www.feeminimizer.com');
+    final Uri websiteUri = Uri.parse('https://elsy-charles.vercel.app/');
 
-    if (await canLaunchUrl(websiteUri)) {
-      await launchUrl(websiteUri, mode: LaunchMode.externalApplication);
+    try {
+      if (await canLaunchUrl(websiteUri)) {
+        await launchUrl(websiteUri, mode: LaunchMode.platformDefault);
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Aucun navigateur web trouvé.'),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Erreur lors de l\'ouverture du navigateur web.'),
+          ),
+        );
+      }
     }
   }
 }

@@ -1022,32 +1022,32 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ny isan-jato dia tsy afaka mihoatra ny 100';
 
   @override
-  String get searchHelpTopics => 'Search help topics...';
+  String get searchHelpTopics => 'Karohy lohahevitra fanampiana...';
 
   @override
-  String get faq => 'FAQ';
+  String get faq => 'Fanontaniana matetika';
 
   @override
-  String get contact => 'Contact';
+  String get contact => 'Fifandraisana';
 
   @override
-  String get userGuide => 'Guide';
+  String get userGuide => 'Torolalana';
 
   @override
-  String get feedback => 'Feedback';
+  String get feedback => 'Fanazavana';
 
   @override
-  String get found => 'Found';
+  String get found => 'Hita';
 
   @override
-  String get results => 'results';
+  String get results => 'valiny';
 
   @override
-  String get noResultsFound => 'No results found';
+  String get noResultsFound => 'Tsy misy valiny hita';
 
   @override
   String get tryDifferentKeywords =>
-      'Try different keywords or browse categories';
+      'Andramo teny manan-danja hafa na mijery sokajy';
 
   @override
   String get faqWhatIsFeeMinimizer => 'Inona no Feezer na Fee Minimizer?';
@@ -1159,24 +1159,24 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ampio anay hanatsarana Feezer na Fee Minimizer amin\'ny alalan\'ny fizarana ny hevitrao sy soso-kevitrao';
 
   @override
-  String get submitFeedback => 'Submit Feedback';
+  String get submitFeedback => 'Alefaso ny fanazavana';
 
   @override
-  String get rateApp => 'Rate the App';
+  String get rateApp => 'Omeo isa ny app';
 
   @override
   String get rateAppDescription =>
       'Raha tiavinao ny fampiasana Feezer na Fee Minimizer, azafady omeo isa anay ao amin\'ny app store';
 
   @override
-  String get rateOnStore => 'Rate on Store';
+  String get rateOnStore => 'Omeo isa ao amin\'ny store';
 
   @override
-  String get contactUs => 'Contact Us';
+  String get contactUs => 'Mifandraisa aminay';
 
   @override
   String get contactDescription =>
-      'Get in touch with our support team for help with any questions or issues.';
+      'Mifandraisa amin\'ny ekipan\'ny fanampiana ho an\'ny fanampiana amin\'ny fanontaniana na olana rehetra.';
 
   @override
   String get email => 'Email';
@@ -1185,58 +1185,60 @@ class AppLocalizationsMg extends AppLocalizations {
   String get phone => 'Phone';
 
   @override
-  String get faqQuestion1 => 'How do I minimize transaction fees?';
+  String get faqQuestion1 =>
+      'Ahoana no fomba hanalana ny sara fifampiraharahana?';
 
   @override
   String get faqAnswer1 =>
-      'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.';
+      'Ny app dia kajy ho azy ny fomba mahomby indrindra amin\'ny vidiny hiatrehana ny fifampiraharahanao amin\'ny fampitahana mpamatsy vola sy fomba fandoavam-bola samihafa.';
 
   @override
-  String get faqQuestion2 => 'What currencies are supported?';
+  String get faqQuestion2 => 'Inona avy ny vola raisina?';
 
   @override
   String get faqAnswer2 =>
-      'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.';
+      'Miaraka amin\'ny vola lehibe rehetra eran-tany isika ao anatin\'izany ny USD, EUR, GBP, JPY, ary maro hafa. Ny app dia kajy ho azy ny tahan\'ny fifanakalozana vola.';
 
   @override
-  String get faqQuestion3 => 'Is my financial data secure?';
+  String get faqQuestion3 => 'Azo antoka ve ny angon-drakitra ara-bola?';
 
   @override
   String get faqAnswer3 =>
-      'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.';
+      'Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga banky izahay. Ny angon-drakitrao dia tsy tehirizina ao amin\'ny server anay ary ny kajy rehetra dia atao eo amin\'ny fitaovanao ihany.';
 
   @override
-  String get faqQuestion4 => 'How do I update currency rates?';
+  String get faqQuestion4 =>
+      'Ahoana no fomba ianarana ny tahan\'ny fifanakalozana vola?';
 
   @override
   String get faqAnswer4 =>
-      'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.';
+      'Ny tahan\'ny fifanakalozana vola dia havaozina ho azy amin\'ny fotoana tena izy avy amin\'ny mpamatsy angon-drakitra ara-bola azo itokisana. Afaka havaozina tanana ihany koa ny taha ao amin\'ny kirakira.';
 
   @override
-  String get faqQuestion5 => 'Can I save my favorite providers?';
+  String get faqQuestion5 => 'Afaka tehirizina ve ny mpamatsy vola tiako?';
 
   @override
   String get faqAnswer5 =>
-      'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
+      'Eny, afaka tehirizina ny mpamatsy banky sy fomba fandoavam-bola tiavinao ho an\'ny fidirana haingana rehefa manao kajy vaovao.';
 
   @override
-  String get faqQuestion6 => 'How do I add a new provider?';
+  String get faqQuestion6 => 'Ahoana no fomba hanampiana mpamatsy vola vaovao?';
 
   @override
   String get faqAnswer6 =>
-      'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.';
+      'Tsindrio ny bokotra \'+\' ao amin\'ny efijery lisitry ny mpamatsy. Ampidiro ny anaran\'ny mpamatsy, famaritana, ary misafidy sary. Afaka manampy elanelana sara ho an\'ny habetsaky ny fifampiraharahana samihafa avy eo ianao.';
 
   @override
-  String get faqQuestion7 => 'What are fee intervals?';
+  String get faqQuestion7 => 'Inona avy ny elanelana sara?';
 
   @override
   String get faqAnswer7 =>
-      'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.';
+      'Ny elanelana sara dia mamaritra ny rafitra vidiny ho an\'ny mpamatsy tsirairay. Afaka mametraka sara raikitra (ohatra, \$2.50) na sara isan-jato (ohatra, 1.5%) ho an\'ny habetsaky ny fifampiraharahana samihafa.';
 
   @override
-  String get faqQuestion8 => 'How does the optimization work?';
+  String get faqQuestion8 => 'Ahoana no fomba iasana ny fanatsarana?';
 
   @override
   String get faqAnswer8 =>
-      'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.';
+      'Feezer dia mandinika ny rafitra sara mpamatsy rehetra ary kajy ny fomba tsara indrindra hizarana ny fifampiraharahanao ho asa maro mba hanalana ny sara total raha manaja ny fetra ataonao.';
 }
