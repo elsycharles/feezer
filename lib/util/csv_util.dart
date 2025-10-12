@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:csv/csv.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share_plus/share_plus.dart';
 import '../model/provider_model.dart' as model;
 import '../model/fee_interval_model.dart';
 import '../util/database_util.dart';

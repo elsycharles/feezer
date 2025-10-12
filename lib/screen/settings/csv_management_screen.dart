@@ -11,6 +11,7 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
+import '../../widget/loading_button.dart';
 import '../../l10n/app_localizations.dart';
 import '../../provider/locale_provider.dart';
 import '../../provider/currency_provider.dart';
@@ -1085,32 +1086,13 @@ class _ImportActions extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: FilledButton(
-            onPressed: (isImporting || !canImport) ? null : onImport,
-            style: FilledButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 14),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: isImporting
-                ? SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        colorScheme.onPrimary,
-                      ),
-                    ),
-                  )
-                : Text(
-                    AppLocalizations.of(context).importData,
-                    style: ThemeUtil.bodyMedium.copyWith(
-                      color: colorScheme.onPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+          child: LoadingButton(
+            text: AppLocalizations.of(context).importData,
+            onPressed: canImport ? onImport : null,
+            isLoading: isImporting,
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            backgroundColor: ThemeUtil.primaryColor,
+            foregroundColor: ThemeUtil.textLight,
           ),
         ),
       ],
