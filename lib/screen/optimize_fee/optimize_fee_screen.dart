@@ -344,7 +344,7 @@ class _State extends State<OptimizeFeeScreen> {
           },
           label: AppLocalizations.of(context).amount,
           min: 0.01,
-          max: 9999999.0,
+          max: 99999999999.0,
         ),
       ),
     ],
