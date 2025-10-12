@@ -61,12 +61,73 @@ class FeeOptimizerUtil {
         minOperations
       );
       
-      // Cache the result
-      _cache.put(cacheKey, result);
+      // Filtrer les détails avec des valeurs nulles ou zéro
+      final filteredDetails = result.details.where((detail) => 
+        detail.count > 0 && detail.amount > 0
+      ).toList();
       
-      return result;
+      // Si après filtrage il ne reste rien, recalculer avec des contraintes assouplies
+      if (filteredDetails.isEmpty && result.netAmount == 0) {
+        final relaxedResult = _computeOptimalStrategy(
+          totalAmount, 
+          options, 
+          precision, 
+          0, // Pas de limite max
+          0, // Pas de limite min
+        );
+        
+        final relaxedFiltered = relaxedResult.details.where((detail) => 
+          detail.count > 0 && detail.amount > 0
+        ).toList();
+        
+        if (relaxedFiltered.isNotEmpty) {
+          final finalResult = FeeOptimizerResult(
+            totalAmount: relaxedResult.totalAmount,
+            netAmount: relaxedResult.netAmount,
+            totalFees: relaxedResult.totalFees,
+            remaining: relaxedResult.remaining,
+            details: relaxedFiltered,
+          );
+          _cache.put(cacheKey, finalResult);
+          return finalResult;
+        }
+      }
+      
+      // Créer le résultat final avec les détails filtrés
+      final finalResult = filteredDetails.isEmpty 
+          ? result 
+          : FeeOptimizerResult(
+              totalAmount: result.totalAmount,
+              netAmount: result.netAmount,
+              totalFees: result.totalFees,
+              remaining: result.remaining,
+              details: filteredDetails,
+            );
+      
+      // Cache the result
+      _cache.put(cacheKey, finalResult);
+      
+      return finalResult;
     } catch (e) {
-      // In case of error, return an empty but valid result
+      // En cas d'erreur, tenter une optimisation simplifiée
+      final options = _normalizeOptions(intervals);
+      if (options.isNotEmpty) {
+        final simpleResult = _greedyOptimizedFast(totalAmount, options, precision);
+        final filteredDetails = simpleResult.details.where((detail) => 
+          detail.count > 0 && detail.amount > 0
+        ).toList();
+        
+        if (filteredDetails.isNotEmpty) {
+          return FeeOptimizerResult(
+            totalAmount: simpleResult.totalAmount,
+            netAmount: simpleResult.netAmount,
+            totalFees: simpleResult.totalFees,
+            remaining: simpleResult.remaining,
+            details: filteredDetails,
+          );
+        }
+      }
+      
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
   }
@@ -670,7 +731,16 @@ class FeeOptimizerUtil {
     double remaining,
     Map<String, int> counts,
   ) {
-    final details = counts.entries.map((entry) {
+    // Filtrer les entrées avec count = 0 ou amount = 0
+    final filteredCounts = Map<String, int>.from(counts)
+      ..removeWhere((key, value) {
+        if (value <= 0) return true;
+        final parts = key.split('-');
+        final amount = double.parse(parts[0]);
+        return amount <= 0;
+      });
+    
+    final details = filteredCounts.entries.map((entry) {
       final parts = entry.key.split('-');
       return FeeOptimizerDetail(
         amount: double.parse(parts[0]),
