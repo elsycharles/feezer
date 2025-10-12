@@ -1333,30 +1333,6 @@
   "@contact": {
     "description": "Titre de l'onglet Contact"
   },
-  "userGuide": "Guide",
-  "@userGuide": {
-    "description": "Titre de l'onglet Guide utilisateur"
-  },
-  "feedback": "Commentaires",
-  "@feedback": {
-    "description": "Titre de l'onglet Commentaires"
-  },
-  "found": "Trouvé",
-  "@found": {
-    "description": "Texte pour le nombre de résultats de recherche"
-  },
-  "results": "résultats",
-  "@results": {
-    "description": "Texte pour le nombre de résultats de recherche"
-  },
-  "noResultsFound": "Aucun résultat trouvé",
-  "@noResultsFound": {
-    "description": "Message quand aucun résultat de recherche"
-  },
-  "tryDifferentKeywords": "Essayez différents mots-clés ou parcourez les catégories",
-  "@tryDifferentKeywords": {
-    "description": "Suggestion quand aucun résultat de recherche"
-  },
   "faqWhatIsFeeMinimizer": "Qu'est-ce que Feezer ou Fee Minimizer ?",
   "@faqWhatIsFeeMinimizer": {
     "description": "Question FAQ"
@@ -1476,22 +1452,6 @@
   "feedbackDescription": "Aidez-nous à améliorer Feezer ou Fee Minimizer en partageant vos commentaires et suggestions",
   "@feedbackDescription": {
     "description": "Description des commentaires"
-  },
-  "submitFeedback": "Envoyer un commentaire",
-  "@submitFeedback": {
-    "description": "Texte du bouton envoyer un commentaire"
-  },
-  "rateApp": "Évaluer l'application",
-  "@rateApp": {
-    "description": "Titre de la section évaluer l'application"
-  },
-  "rateAppDescription": "Si vous aimez utiliser Feezer ou Fee Minimizer, veuillez nous évaluer sur l'App Store",
-  "@rateAppDescription": {
-    "description": "Description de l'évaluation de l'application"
-  },
-  "rateOnStore": "Évaluer sur le Store",
-  "@rateOnStore": {
-    "description": "Texte du bouton évaluer sur le store"
   },
   "contactUs": "Contactez-nous",
   "@contactUs": {

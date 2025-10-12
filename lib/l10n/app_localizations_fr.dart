@@ -1046,25 +1046,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get contact => 'Contact';
 
   @override
-  String get userGuide => 'Guide';
-
-  @override
-  String get feedback => 'Commentaires';
-
-  @override
-  String get found => 'Trouvé';
-
-  @override
-  String get results => 'résultats';
-
-  @override
-  String get noResultsFound => 'Aucun résultat trouvé';
-
-  @override
-  String get tryDifferentKeywords =>
-      'Essayez différents mots-clés ou parcourez les catégories';
-
-  @override
   String get faqWhatIsFeeMinimizer =>
       'Qu\'est-ce que Feezer ou Fee Minimizer ?';
 
@@ -1172,19 +1153,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get feedbackDescription =>
       'Aidez-nous à améliorer Feezer ou Fee Minimizer en partageant vos commentaires et suggestions';
-
-  @override
-  String get submitFeedback => 'Envoyer un commentaire';
-
-  @override
-  String get rateApp => 'Évaluer l\'application';
-
-  @override
-  String get rateAppDescription =>
-      'Si vous aimez utiliser Feezer ou Fee Minimizer, veuillez nous évaluer sur l\'App Store';
-
-  @override
-  String get rateOnStore => 'Évaluer sur le Store';
 
   @override
   String get contactUs => 'Contactez-nous';

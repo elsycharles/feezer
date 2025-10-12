@@ -1513,30 +1513,6 @@
   "@contact": {
     "description": "Contact tab title"
   },
-  "userGuide": "Torolalana",
-  "@userGuide": {
-    "description": "User Guide tab title"
-  },
-  "feedback": "Fanazavana",
-  "@feedback": {
-    "description": "Feedback tab title"
-  },
-  "found": "Hita",
-  "@found": {
-    "description": "Text for search results count"
-  },
-  "results": "valiny",
-  "@results": {
-    "description": "Text for search results count"
-  },
-  "noResultsFound": "Tsy misy valiny hita",
-  "@noResultsFound": {
-    "description": "Message when no search results"
-  },
-  "tryDifferentKeywords": "Andramo teny manan-danja hafa na mijery sokajy",
-  "@tryDifferentKeywords": {
-    "description": "Suggestion when no search results"
-  },
   "faqWhatIsFeeMinimizer": "Inona no Feezer na Fee Minimizer?",
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
@@ -1656,22 +1632,6 @@
   "feedbackDescription": "Ampio anay hanatsarana Feezer na Fee Minimizer amin'ny alalan'ny fizarana ny hevitrao sy soso-kevitrao",
   "@feedbackDescription": {
     "description": "Feedback description"
-  },
-  "submitFeedback": "Alefaso ny fanazavana",
-  "@submitFeedback": {
-    "description": "Submit feedback button text"
-  },
-  "rateApp": "Omeo isa ny app",
-  "@rateApp": {
-    "description": "Rate app section title"
-  },
-  "rateAppDescription": "Raha tiavinao ny fampiasana Feezer na Fee Minimizer, azafady omeo isa anay ao amin'ny app store",
-  "@rateAppDescription": {
-    "description": "Rate app description"
-  },
-  "rateOnStore": "Omeo isa ao amin'ny store",
-  "@rateOnStore": {
-    "description": "Rate on store button text"
   },
   "contactUs": "Mifandraisa aminay",
   "@contactUs": {

@@ -1517,30 +1517,6 @@
   "@contact": {
     "description": "Contact tab title"
   },
-  "userGuide": "Guide",
-  "@userGuide": {
-    "description": "User Guide tab title"
-  },
-  "feedback": "Feedback",
-  "@feedback": {
-    "description": "Feedback tab title"
-  },
-  "found": "Found",
-  "@found": {
-    "description": "Text for search results count"
-  },
-  "results": "results",
-  "@results": {
-    "description": "Text for search results count"
-  },
-  "noResultsFound": "No results found",
-  "@noResultsFound": {
-    "description": "Message when no search results"
-  },
-  "tryDifferentKeywords": "Try different keywords or browse categories",
-  "@tryDifferentKeywords": {
-    "description": "Suggestion when no search results"
-  },
   "faqWhatIsFeeMinimizer": "What is Feezer or Fee Minimizer?",
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
@@ -1665,22 +1641,6 @@
   "feedbackDescription": "Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions",
   "@feedbackDescription": {
     "description": "Feedback description"
-  },
-  "submitFeedback": "Submit Feedback",
-  "@submitFeedback": {
-    "description": "Submit feedback button text"
-  },
-  "rateApp": "Rate the App",
-  "@rateApp": {
-    "description": "Rate app section title"
-  },
-  "rateAppDescription": "If you enjoy using Feezer or Fee Minimizer, please rate us on the app store",
-  "@rateAppDescription": {
-    "description": "Rate app description"
-  },
-  "rateOnStore": "Rate on Store",
-  "@rateOnStore": {
-    "description": "Rate on store button text"
   },
   "contactUs": "Contact Us",
   "@contactUs": {

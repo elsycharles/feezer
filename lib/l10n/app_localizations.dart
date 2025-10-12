@@ -1887,42 +1887,6 @@ abstract class AppLocalizations {
   /// **'Contact'**
   String get contact;
 
-  /// User Guide tab title
-  ///
-  /// In en, this message translates to:
-  /// **'Guide'**
-  String get userGuide;
-
-  /// Feedback tab title
-  ///
-  /// In en, this message translates to:
-  /// **'Feedback'**
-  String get feedback;
-
-  /// Text for search results count
-  ///
-  /// In en, this message translates to:
-  /// **'Found'**
-  String get found;
-
-  /// Text for search results count
-  ///
-  /// In en, this message translates to:
-  /// **'results'**
-  String get results;
-
-  /// Message when no search results
-  ///
-  /// In en, this message translates to:
-  /// **'No results found'**
-  String get noResultsFound;
-
-  /// Suggestion when no search results
-  ///
-  /// In en, this message translates to:
-  /// **'Try different keywords or browse categories'**
-  String get tryDifferentKeywords;
-
   /// FAQ question
   ///
   /// In en, this message translates to:
@@ -2108,30 +2072,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions'**
   String get feedbackDescription;
-
-  /// Submit feedback button text
-  ///
-  /// In en, this message translates to:
-  /// **'Submit Feedback'**
-  String get submitFeedback;
-
-  /// Rate app section title
-  ///
-  /// In en, this message translates to:
-  /// **'Rate the App'**
-  String get rateApp;
-
-  /// Rate app description
-  ///
-  /// In en, this message translates to:
-  /// **'If you enjoy using Feezer or Fee Minimizer, please rate us on the app store'**
-  String get rateAppDescription;
-
-  /// Rate on store button text
-  ///
-  /// In en, this message translates to:
-  /// **'Rate on Store'**
-  String get rateOnStore;
 
   /// Contact us section title
   ///

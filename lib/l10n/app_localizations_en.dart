@@ -1027,25 +1027,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contact => 'Contact';
 
   @override
-  String get userGuide => 'Guide';
-
-  @override
-  String get feedback => 'Feedback';
-
-  @override
-  String get found => 'Found';
-
-  @override
-  String get results => 'results';
-
-  @override
-  String get noResultsFound => 'No results found';
-
-  @override
-  String get tryDifferentKeywords =>
-      'Try different keywords or browse categories';
-
-  @override
   String get faqWhatIsFeeMinimizer => 'What is Feezer or Fee Minimizer?';
 
   @override
@@ -1151,19 +1132,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get feedbackDescription =>
       'Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions';
-
-  @override
-  String get submitFeedback => 'Submit Feedback';
-
-  @override
-  String get rateApp => 'Rate the App';
-
-  @override
-  String get rateAppDescription =>
-      'If you enjoy using Feezer or Fee Minimizer, please rate us on the app store';
-
-  @override
-  String get rateOnStore => 'Rate on Store';
 
   @override
   String get contactUs => 'Contact Us';

@@ -1031,25 +1031,6 @@ class AppLocalizationsMg extends AppLocalizations {
   String get contact => 'Fifandraisana';
 
   @override
-  String get userGuide => 'Torolalana';
-
-  @override
-  String get feedback => 'Fanazavana';
-
-  @override
-  String get found => 'Hita';
-
-  @override
-  String get results => 'valiny';
-
-  @override
-  String get noResultsFound => 'Tsy misy valiny hita';
-
-  @override
-  String get tryDifferentKeywords =>
-      'Andramo teny manan-danja hafa na mijery sokajy';
-
-  @override
   String get faqWhatIsFeeMinimizer => 'Inona no Feezer na Fee Minimizer?';
 
   @override
@@ -1157,19 +1138,6 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get feedbackDescription =>
       'Ampio anay hanatsarana Feezer na Fee Minimizer amin\'ny alalan\'ny fizarana ny hevitrao sy soso-kevitrao';
-
-  @override
-  String get submitFeedback => 'Alefaso ny fanazavana';
-
-  @override
-  String get rateApp => 'Omeo isa ny app';
-
-  @override
-  String get rateAppDescription =>
-      'Raha tiavinao ny fampiasana Feezer na Fee Minimizer, azafady omeo isa anay ao amin\'ny app store';
-
-  @override
-  String get rateOnStore => 'Omeo isa ao amin\'ny store';
 
   @override
   String get contactUs => 'Mifandraisa aminay';
