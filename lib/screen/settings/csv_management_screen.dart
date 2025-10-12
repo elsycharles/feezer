@@ -71,22 +71,14 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
     await showDialog(
       context: context,
       builder: (dialogContext) => _ImportDialog(
-        onFileImport: _importCsv,
-        onTextImport: _importFromText,
+        onFileImport: (file) => _importCsvFromFile(file),
+        onTextImport: (text) => _importFromText(text),
       ),
     );
   }
 
-  Future<void> _importCsv() async {
+  Future<void> _importCsvFromFile(PlatformFile file) async {
     try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['csv'],
-      );
-
-      if (result == null || result.files.isEmpty) return;
-
-      final file = result.files.first;
       if (file.bytes == null && file.path == null) {
         if (mounted) {
           AppToast.error(context, AppLocalizations.of(context).failedToReadFile);
@@ -96,6 +88,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
       setState(() => _isProcessing = true);
 
+      // Lire le contenu du fichier
       final csvContent = file.bytes != null
           ? String.fromCharCodes(file.bytes!)
           : await File(file.path!).readAsString();
@@ -614,7 +607,7 @@ class _ImportDialog extends StatefulWidget {
     required this.onTextImport,
   });
 
-  final VoidCallback onFileImport;
+  final void Function(PlatformFile) onFileImport;
   final void Function(String) onTextImport;
 
   @override
@@ -624,6 +617,8 @@ class _ImportDialog extends StatefulWidget {
 class _ImportDialogState extends State<_ImportDialog> {
   bool _useTextInput = false;
   String _csvText = '';
+  bool _isImporting = false;
+  PlatformFile? _selectedFile;
 
   @override
   Widget build(BuildContext context) {
@@ -651,24 +646,63 @@ class _ImportDialogState extends State<_ImportDialog> {
             const SizedBox(height: 24),
             _ImportContent(
               useTextInput: _useTextInput,
+              selectedFile: _selectedFile,
               onTextChanged: (value) => _csvText = value,
+              onFileSelected: _selectFile,
             ),
             const SizedBox(height: 24),
             _ImportActions(
+              isImporting: _isImporting,
+              canImport: _useTextInput ? _csvText.trim().isNotEmpty : _selectedFile != null,
               onCancel: () => Navigator.of(context).pop(),
-              onImport: () {
-                Navigator.of(context).pop();
-                if (_useTextInput) {
-                  widget.onTextImport(_csvText);
-                } else {
-                  widget.onFileImport();
-                }
-              },
+              onImport: _handleImport,
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _selectFile() async {
+    try {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['csv'],
+      );
+
+      if (result != null && result.files.isNotEmpty) {
+        setState(() {
+          _selectedFile = result.files.first;
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        AppToast.error(context, 'Failed to select file: $e');
+      }
+    }
+  }
+
+  Future<void> _handleImport() async {
+    setState(() => _isImporting = true);
+
+    try {
+      Navigator.of(context).pop();
+      if (_useTextInput) {
+        widget.onTextImport(_csvText);
+      } else {
+        if (_selectedFile != null) {
+          widget.onFileImport(_selectedFile!);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        AppToast.error(context, 'Import failed: $e');
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isImporting = false);
+      }
+    }
   }
 }
 
@@ -822,11 +856,15 @@ class _ToggleOption extends StatelessWidget {
 class _ImportContent extends StatelessWidget {
   const _ImportContent({
     required this.useTextInput,
+    required this.selectedFile,
     required this.onTextChanged,
+    required this.onFileSelected,
   });
 
   final bool useTextInput;
+  final PlatformFile? selectedFile;
   final ValueChanged<String> onTextChanged;
+  final VoidCallback onFileSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -834,7 +872,10 @@ class _ImportContent extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       child: useTextInput
           ? _TextInputField(onChanged: onTextChanged)
-          : const _FileUploadInfo(),
+          : _FileUploadArea(
+              selectedFile: selectedFile,
+              onFileSelected: onFileSelected,
+            ),
     );
   }
 }
@@ -878,44 +919,142 @@ class _TextInputField extends StatelessWidget {
   }
 }
 
-class _FileUploadInfo extends StatelessWidget {
-  const _FileUploadInfo();
+class _FileUploadArea extends StatelessWidget {
+  const _FileUploadArea({
+    required this.selectedFile,
+    required this.onFileSelected,
+  });
+
+  final PlatformFile? selectedFile;
+  final VoidCallback onFileSelected;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      key: const ValueKey('file_info'),
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
-      ),
-      child: Column(
-        children: [
-          Icon(Icons.file_upload_outlined, size: 48, color: colorScheme.primary),
-          const SizedBox(height: 16),
-          Text(
-            AppLocalizations.of(context).clickImportToSelectFile,
-            style: ThemeUtil.bodyMedium.copyWith(
-              color: colorScheme.onSurfaceVariant,
-            ),
-            textAlign: TextAlign.center,
+    return GestureDetector(
+      onTap: onFileSelected,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: selectedFile != null
+              ? ThemeUtil.success.withValues(alpha: 0.1)
+              : colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: selectedFile != null
+                ? ThemeUtil.success
+                : colorScheme.outline.withValues(alpha: 0.3),
+            width: selectedFile != null ? 2 : 1,
           ),
-        ],
+        ),
+        child: Column(
+          children: [
+            if (selectedFile != null) ...[
+              Icon(
+                Icons.check_circle,
+                size: 48,
+                color: ThemeUtil.success,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'File Selected',
+                style: ThemeUtil.titleMedium.copyWith(
+                  color: ThemeUtil.success,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: colorScheme.surface,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.insert_drive_file,
+                      size: 20,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: Text(
+                        selectedFile!.name,
+                        style: ThemeUtil.bodyMedium.copyWith(
+                          color: colorScheme.onSurface,
+                          fontWeight: FontWeight.w500,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      _formatFileSize(selectedFile!.size),
+                      style: ThemeUtil.bodySmall.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ] else ...[
+              Icon(
+                Icons.file_upload_outlined,
+                size: 48,
+                color: colorScheme.primary,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                AppLocalizations.of(context).clickImportToSelectFile,
+                style: ThemeUtil.bodyMedium.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Text(
+                  'CSV files only',
+                  style: ThemeUtil.bodySmall.copyWith(
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
+  }
+
+  String _formatFileSize(int bytes) {
+    if (bytes < 1024) return '$bytes B';
+    if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
+    return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
   }
 }
 
 class _ImportActions extends StatelessWidget {
   const _ImportActions({
+    required this.isImporting,
+    required this.canImport,
     required this.onCancel,
     required this.onImport,
   });
 
+  final bool isImporting;
+  final bool canImport;
   final VoidCallback onCancel;
   final VoidCallback onImport;
 
@@ -927,7 +1066,7 @@ class _ImportActions extends StatelessWidget {
       children: [
         Expanded(
           child: OutlinedButton(
-            onPressed: onCancel,
+            onPressed: isImporting ? null : onCancel,
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: colorScheme.outline),
               padding: const EdgeInsets.symmetric(vertical: 14),
@@ -936,7 +1075,7 @@ class _ImportActions extends StatelessWidget {
               ),
             ),
             child: Text(
-              'Annuler',
+              AppLocalizations.of(context).cancel,
               style: ThemeUtil.bodyMedium.copyWith(
                 color: colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w600,
@@ -947,20 +1086,31 @@ class _ImportActions extends StatelessWidget {
         const SizedBox(width: 16),
         Expanded(
           child: FilledButton(
-            onPressed: onImport,
+            onPressed: (isImporting || !canImport) ? null : onImport,
             style: FilledButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: Text(
-              'Importer',
-              style: ThemeUtil.bodyMedium.copyWith(
-                color: colorScheme.onPrimary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            child: isImporting
+                ? SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        colorScheme.onPrimary,
+                      ),
+                    ),
+                  )
+                : Text(
+                    AppLocalizations.of(context).importData,
+                    style: ThemeUtil.bodyMedium.copyWith(
+                      color: colorScheme.onPrimary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
           ),
         ),
       ],
