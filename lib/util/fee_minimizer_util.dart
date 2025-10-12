@@ -262,7 +262,6 @@ class FeeOptimizerUtil {
     double totalNet = 0;
     double totalFees = 0;
     
-    // Strategy: distribute operations evenly
     for (int i = 0; i < targetCount; i++) {
       if (budget <= 0) break;
       
@@ -276,16 +275,14 @@ class FeeOptimizerUtil {
         final maxAmount = min(opt.max, remaining - opt.fee);
         if (maxAmount < opt.min) continue;
         
-        // Find an amount close to the target amount
+        // SUPPRIMÉ l'arrondi: amount = (amount / precision).floor() * precision;
         double amount = min(maxAmount, max(opt.min, targetAmount - opt.fee));
-        amount = (amount / precision).floor() * precision;
         
         if (amount < opt.min) {
           amount = opt.min;
         }
         if (amount > maxAmount) continue;
         
-        // Score based on efficiency and proximity to target amount
         final efficiency = amount / opt.fee;
         final proximity = 1 / (1 + (amount - targetAmount).abs());
         final score = efficiency * 10 + proximity * amount;
@@ -295,7 +292,6 @@ class FeeOptimizerUtil {
         }
       }
       
-      // Si aucune option n'est trouvée, utiliser la meilleure disponible
       if (best == null) {
         final fallback = _findBestOperationFast(remaining, options, precision);
         if (fallback == null) break;
@@ -311,7 +307,6 @@ class FeeOptimizerUtil {
     
     final actualCount = counts.values.fold(0, (sum, count) => sum + count);
     
-    // Vérifier qu'on a bien atteint le nombre cible
     if (actualCount < targetCount) {
       return null;
     }
@@ -326,14 +321,13 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Pour les montants extrêmes, utiliser uniquement l'option la plus efficiente
     final bestOption = _findMostEfficientOption(options);
     if (bestOption == null) {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
     
     final operationCost = bestOption.max + bestOption.fee;
-    final maxPossibleOps = (totalAmount / operationCost).floor();
+    final maxPossibleOps = (totalAmount / operationCost).toInt();  // CHANGÉ: .floor() en .toInt()
     
     int targetOps = maxPossibleOps;
     if (maxOperations > 0) targetOps = min(targetOps, maxOperations);
@@ -375,14 +369,13 @@ class FeeOptimizerUtil {
     double totalFees = 0;
     int iterations = 0;
     
-    // Limiter le nombre d'itérations pour éviter les boucles infinies
     while (budget > 0 && iterations < _maxSafeOperations) {
       final best = _findBestOperationFast(budget, options, precision);
       if (best == null) break;
       
-      // Calculer combien de fois on peut répéter cette opération
       final operationCost = best.amount + best.fee;
-      final repeatCount = min((budget / operationCost).floor(), _maxSafeOperations);
+      // SUPPRIMÉ .floor() - Utiliser la valeur exacte
+      final repeatCount = min((budget / operationCost).toInt(), _maxSafeOperations);
       
       if (repeatCount > 0) {
         final key = '${best.amount}-${best.fee}';
@@ -392,7 +385,6 @@ class FeeOptimizerUtil {
         budget -= operationCost * repeatCount;
         iterations += repeatCount;
       } else {
-        // Opération unique
         final key = '${best.amount}-${best.fee}';
         counts[key] = (counts[key] ?? 0) + 1;
         totalNet += best.amount;
@@ -412,18 +404,16 @@ class FeeOptimizerUtil {
   ) {
     FeeOptimizerResult bestResult = _greedyOptimizedFast(totalAmount, options, precision);
     
-    // Limiter le nombre d'options à tester pour les gros montants
     final optionsToTest = totalAmount > 1e9 ? options.take(3).toList() : options;
     
     for (final opt in optionsToTest) {
-      // Utiliser une stratégie d'échantillonnage adaptatif
       final samples = _getAdaptiveSamples(opt, totalAmount, precision);
       
       for (final amount in samples) {
         if (amount < opt.min) continue;
         
         final cost = amount + opt.fee;
-        final count = min((totalAmount / cost).floor(), _maxSafeOperations);
+        final count = min((totalAmount / cost).toInt(), _maxSafeOperations);  // CHANGÉ: .floor() en .toInt()
         if (count == 0) continue;
 
         final net = amount * count;
@@ -444,17 +434,16 @@ class FeeOptimizerUtil {
   static List<double> _getAdaptiveSamples(_FeeOption opt, double totalAmount, double precision) {
     final samples = <double>[];
     
-    // Toujours tester le maximum
     samples.add(opt.max);
     
-    // Pour les gros montants, réduire le nombre d'échantillons
     final numSamples = totalAmount > 1e9 ? 5 : (totalAmount > 1e6 ? 10 : 15);
     final step = max(precision, (opt.max - opt.min) / numSamples);
     
     for (int i = 1; i < numSamples; i++) {
       final amt = opt.max - (step * i);
       if (amt >= opt.min) {
-        samples.add((amt / precision).floor() * precision);
+        // SUPPRIMÉ l'arrondi: (amt / precision).floor() * precision
+        samples.add(amt);
       }
     }
     
@@ -513,13 +502,12 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Utiliser l'option la plus efficiente pour remplir rapidement
     final bestOption = _findMostEfficientOption(options);
     if (bestOption == null) {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
     
-    final targetOps = min(maxOperations, (totalAmount / (bestOption.max + bestOption.fee)).floor());
+    final targetOps = min(maxOperations, (totalAmount / (bestOption.max + bestOption.fee)).toInt());  // CHANGÉ
     final actualOps = max(minOperations, targetOps);
     
     return _distributeWithMainOption(totalAmount, options, precision, actualOps, bestOption);
@@ -535,16 +523,14 @@ class FeeOptimizerUtil {
     final counts = <String, int>{};
     double budget = totalAmount;
     
-    // Remplir avec l'option principale
     final mainCost = mainOption.max + mainOption.fee;
-    final mainCount = min(targetCount, (budget / mainCost).floor());
+    final mainCount = min(targetCount, (budget / mainCost).toInt());  // CHANGÉ
     
     if (mainCount > 0) {
       counts['${mainOption.max}-${mainOption.fee}'] = mainCount;
       budget -= mainCost * mainCount;
     }
     
-    // Compléter avec d'autres options si nécessaire
     int remaining = targetCount - mainCount;
     for (final opt in options) {
       if (remaining <= 0 || budget <= 0) break;
@@ -552,7 +538,7 @@ class FeeOptimizerUtil {
       final cost = opt.max + opt.fee;
       if (cost > budget) continue;
       
-      final count = min(remaining, (budget / cost).floor());
+      final count = min(remaining, (budget / cost).toInt());  // CHANGÉ
       if (count > 0) {
         counts['${opt.max}-${opt.fee}'] = count;
         budget -= cost * count;
@@ -580,8 +566,8 @@ class FeeOptimizerUtil {
       
       final cost = opt.max + opt.fee;
       final maxCount = maxOperations > 0 
-          ? min((budget / cost).floor(), maxOperations - totalOps)
-          : (budget / cost).floor();
+          ? min((budget / cost).toInt(), maxOperations - totalOps)  // CHANGÉ
+          : (budget / cost).toInt();  // CHANGÉ
       
       if (maxCount > 0) {
         final count = min(maxCount, _maxSafeOperations - totalOps);
@@ -638,10 +624,10 @@ class FeeOptimizerUtil {
       final maxAmount = min(opt.max, budget - opt.fee);
       if (maxAmount < opt.min) continue;
 
-      final amount = (maxAmount / precision).floor() * precision;
+      // SUPPRIMÉ l'arrondi: (maxAmount / precision).floor() * precision
+      final amount = maxAmount;
       if (amount < opt.min) continue;
 
-      // Optimisation : score simplifié pour les calculs rapides
       final score = amount / opt.fee;
 
       if (best == null || score > best.score) {
