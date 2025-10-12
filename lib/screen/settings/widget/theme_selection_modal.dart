@@ -74,6 +74,15 @@ class ThemeSelectionModal extends StatelessWidget {
                   children: [
                     _buildThemeOption(
                       context,
+                      AppLocalizations.of(context).system,
+                      AppLocalizations.of(context).followSystemSettings,
+                      Icons.settings_brightness,
+                      AppThemeMode.system,
+                      themeProvider.themeMode == AppThemeMode.system,
+                      () => _changeTheme(context, AppThemeMode.system),
+                    ),
+                    _buildThemeOption(
+                      context,
                       AppLocalizations.of(context).light,
                       AppLocalizations.of(context).alwaysUseLightTheme,
                       Icons.light_mode,
@@ -89,15 +98,6 @@ class ThemeSelectionModal extends StatelessWidget {
                       AppThemeMode.dark,
                       themeProvider.themeMode == AppThemeMode.dark,
                       () => _changeTheme(context, AppThemeMode.dark),
-                    ),
-                    _buildThemeOption(
-                      context,
-                      AppLocalizations.of(context).system,
-                      AppLocalizations.of(context).followSystemSettings,
-                      Icons.settings_brightness,
-                      AppThemeMode.system,
-                      themeProvider.themeMode == AppThemeMode.system,
-                      () => _changeTheme(context, AppThemeMode.system),
                     ),
                   ],
                 );

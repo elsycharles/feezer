@@ -13,9 +13,16 @@ import '../../l10n/app_localizations.dart';
 import 'widget/theme_selection_modal.dart';
 import 'widget/language_selection_modal.dart';
 import 'widget/currency_selection_modal.dart';
+import '../../widget/refreshable_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
+
+  Future<void> _onRefresh(BuildContext context) async {
+    // For settings screen, we could refresh currency data or just provide haptic feedback
+    // For now, we'll just wait a bit to simulate refresh
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,9 @@ class SettingsScreen extends StatelessWidget {
         menuExcludeRoutes: [NavigationUtil.settingsRoute],
       ),
       body: SafeArea(
-        child: ListView(
+        child: RefreshableScreen(
+          onRefresh: () => _onRefresh(context),
+          child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
             _buildSection(context, AppLocalizations.of(context).general, [
@@ -62,35 +71,20 @@ class SettingsScreen extends StatelessWidget {
               ),
             ]),
             const SizedBox(height: 24),
-            // _buildSection(
-            //   context,
-            //   'Data',
-            //   [
-            //     _buildSettingTile(
-            //       context,
-            //       'Export data',
-            //       'Backup your providers and fees',
-            //       Icons.file_download_outlined,
-            //       onTap: () => _showComingSoon(context),
-            //     ),
-            //     _buildSettingTile(
-            //       context,
-            //       'Import data',
-            //       'Restore from backup',
-            //       Icons.file_upload_outlined,
-            //       onTap: () => _showComingSoon(context),
-            //     ),
-            //     _buildSettingTile(
-            //       context,
-            //       'Reset',
-            //       'Clear all data',
-            //       Icons.delete_outline,
-            //       onTap: () => _showResetConfirmation(context),
-            //       textColor: colorScheme.error,
-            //     ),
-            //   ],
-            // ),
-            // const SizedBox(height: 24),
+            _buildSection(
+              context,
+              AppLocalizations.of(context).dataManagement,
+              [
+                _buildSettingTile(
+                  context,
+                  AppLocalizations.of(context).csvManagement,
+                  AppLocalizations.of(context).importExportData,
+                  Icons.file_download_outlined,
+                  onTap: () => Navigator.of(context).pushNamed(NavigationUtil.csvManagementRoute),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
             _buildSection(context, AppLocalizations.of(context).about, [
               _buildSettingTile(
                 context,
@@ -115,6 +109,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ]),
           ],
+        ),
         ),
       ),
     );

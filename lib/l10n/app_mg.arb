@@ -272,6 +272,10 @@
   "@providerDeletedSuccessfully": {
     "description": "Success message after deleting provider(s)"
   },
+  "deleteProviderWarning": "Hofafana koa ny intervalle sara rehetra mifandraika.",
+  "@deleteProviderWarning": {
+    "description": "Warning message when deleting providers about fee intervals"
+  },
   "editProvider": "Manova mpanome tolotra",
   "@editProvider": {
     "description": "Title for edit provider bottom sheet"
@@ -825,5 +829,631 @@
   "minOperationsCannotBeGreaterThanMaxOperations": "minOperations tsy afaka mihoatra ny maxOperations",
   "@minOperationsCannotBeGreaterThanMaxOperations": {
     "description": "Message d'erreur lorsque minOperations est supérieur à maxOperations"
+  },
+  "csvManagement": "Fitantanana CSV",
+  "@csvManagement": {
+    "description": "Title for CSV management screen"
+  },
+  "importExportData": "Ampidiro/Hampidino angona",
+  "@importExportData": {
+    "description": "Description for CSV import/export functionality"
+  },
+  "importData": "Ampidiro angona",
+  "@importData": {
+    "description": "Import data section title"
+  },
+  "exportData": "Hampidino angona",
+  "@exportData": {
+    "description": "Export data section title"
+  },
+  "importAllData": "Ampidiro angona rehetra",
+  "@importAllData": {
+    "description": "Import all data button text"
+  },
+  "exportAllData": "Hampidino angona rehetra",
+  "@exportAllData": {
+    "description": "Export all data button text"
+  },
+  "downloadTemplate": "Hampidino modely",
+  "@downloadTemplate": {
+    "description": "Download template button text"
+  },
+  "selectFile": "Misafidy rakitra",
+  "@selectFile": {
+    "description": "Select file button text"
+  },
+  "importingData": "Ampidirina ny angona...",
+  "@importingData": {
+    "description": "Importing data progress message"
+  },
+  "exportingData": "Ampidinina ny angona...",
+  "@exportingData": {
+    "description": "Exporting data progress message"
+  },
+  "importSuccessful": "Nahomby ny fampidirana",
+  "@importSuccessful": {
+    "description": "Import success message"
+  },
+  "exportSuccessful": "Nahomby ny fampidinana",
+  "@exportSuccessful": {
+    "description": "Export success message"
+  },
+  "importFailed": "Tsy nahomby ny fampidirana",
+  "@importFailed": {
+    "description": "Import failed message"
+  },
+  "exportFailed": "Tsy nahomby ny fampidinana",
+  "@exportFailed": {
+    "description": "Export failed message"
+  },
+  "providersImportedSuccessfully": "{count, plural, =1{Mpanome tolotra 1 voampiditra soa aman-tsara} other{Mpanome tolotra {count} voampiditra soa aman-tsara}}",
+  "@providersImportedSuccessfully": {
+    "description": "Success message for providers import",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "feeIntervalsImportedSuccessfully": "{count, plural, =1{Elanelam-para 1 voampiditra soa aman-tsara} other{Elanelam-para {count} voampiditra soa aman-tsara}}",
+  "@feeIntervalsImportedSuccessfully": {
+    "description": "Success message for fee intervals import",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "dataImportedSuccessfully": "Angona voampiditra soa aman-tsara",
+  "@dataImportedSuccessfully": {
+    "description": "Success message for general data import"
+  },
+  "noDataToExport": "Tsy misy angona hampidina",
+  "@noDataToExport": {
+    "description": "Message when no data is available for export"
+  },
+  "invalidCsvFormat": "Tsy mety ny endrika CSV",
+  "@invalidCsvFormat": {
+    "description": "Error message for invalid CSV format"
+  },
+  "csvFileNotFound": "Tsy hita ny rakitra CSV",
+  "@csvFileNotFound": {
+    "description": "Error message when CSV file is not found"
+  },
+  "errorReadingFile": "Diso amin'ny famakiana rakitra",
+  "@errorReadingFile": {
+    "description": "Error message when file reading fails"
+  },
+  "errorWritingFile": "Diso amin'ny fanoratana rakitra",
+  "@errorWritingFile": {
+    "description": "Error message when file writing fails"
+  },
+  "permissionDenied": "Tsy nomena alalana",
+  "@permissionDenied": {
+    "description": "Error message for permission denied"
+  },
+  "fileTooLarge": "Lehibe loatra ny rakitra",
+  "@fileTooLarge": {
+    "description": "Error message for file too large"
+  },
+  "unsupportedFileType": "Karazana rakitra tsy raisina",
+  "@unsupportedFileType": {
+    "description": "Error message for unsupported file type"
+  },
+  "dataValidationError": "Diso amin'ny fanamarinana angona",
+  "@dataValidationError": {
+    "description": "Error message for data validation failure"
+  },
+  "duplicateDataFound": "Angona mifangaro hita",
+  "@duplicateDataFound": {
+    "description": "Error message for duplicate data found"
+  },
+  "missingRequiredFields": "Misy saha ilaina tsy hita",
+  "@missingRequiredFields": {
+    "description": "Error message for missing required fields"
+  },
+  "invalidDataFormat": "Tsy mety ny endrika angona",
+  "@invalidDataFormat": {
+    "description": "Error message for invalid data format"
+  },
+  "providersTemplate": "Modely mpanome tolotra",
+  "@providersTemplate": {
+    "description": "Providers template file name"
+  },
+  "feeIntervalsTemplate": "Modely elanelam-para",
+  "@feeIntervalsTemplate": {
+    "description": "Fee intervals template file name"
+  },
+  "allDataTemplate": "Modely angona rehetra",
+  "@allDataTemplate": {
+    "description": "All data template file name"
+  },
+  "providersData": "Angon'ny mpanome tolotra",
+  "@providersData": {
+    "description": "Providers data file name"
+  },
+  "feeIntervalsData": "Angon'ny elanelam-para",
+  "@feeIntervalsData": {
+    "description": "Fee intervals data file name"
+  },
+  "allData": "Angona rehetra",
+  "@allData": {
+    "description": "All data file name"
+  },
+  "csvImportExportDescription": "Ampidiro na hampidino angona amin'ny alalan'ny rakitra CSV. Azonao atao ny mampiasa modely ho an'ny fanombohana.",
+  "@csvImportExportDescription": {
+    "description": "Description for CSV import/export functionality"
+  },
+  "templateDescription": "Hampidino modely CSV miaraka amin'ny lohateny mety mba hanampy amin'ny fampidirana angona.",
+  "@templateDescription": {
+    "description": "Description for template download"
+  },
+  "importDescription": "Misafidy rakitra CSV avy amin'ny fitaovanao mba hampidirana angona.",
+  "@importDescription": {
+    "description": "Description for data import"
+  },
+  "exportDescription": "Hampidino angona amin'ny rakitra CSV azo zaraina.",
+  "@exportDescription": {
+    "description": "Description for data export"
+  },
+  "backupYourData": "Tahirizo ny angonao",
+  "@backupYourData": {
+    "description": "Backup data description"
+  },
+  "restoreYourData": "Avereno ny angonao",
+  "@restoreYourData": {
+    "description": "Restore data description"
+  },
+  "shareData": "Zarao angona",
+  "@shareData": {
+    "description": "Share data description"
+  },
+  "dataManagement": "Fitantanana angona",
+  "@dataManagement": {
+    "description": "Data management section title"
+  },
+  "csvManagement": "Fitantanana CSV",
+  "@csvManagement": {
+    "description": "Title for CSV management screen"
+  },
+  "previewTemplate": "Jereo modely",
+  "@previewTemplate": {
+    "description": "Preview template button text"
+  },
+  "preview": "Jereo",
+  "@preview": {
+    "description": "Preview button text"
+  },
+  "download": "Hampidino",
+  "@download": {
+    "description": "Download button text"
+  },
+  "templatePreview": "Jereo modely",
+  "@templatePreview": {
+    "description": "Template preview dialog title"
+  },
+  "close": "Hidio",
+  "@close": {
+    "description": "Close button text"
+  },
+  "dataManagement": "Fitantanana angona",
+  "@dataManagement": {
+    "description": "Titre de la section de gestion des données"
+  },
+  "importDataDescription": "Ampidiro ny mpanome sy ny intervalle sara avy amin'ny rakitra CSV. Hahalalala ho azy ny rafitra ny karazana angona araka ny tsanganana.",
+  "@importDataDescription": {
+    "description": "Description de l'action d'importation des données"
+  },
+  "exportDataDescription": "Avoao daholo ny mpanome sy ny intervalle sarany amin'ny rakitra CSV mifangaro.",
+  "@exportDataDescription": {
+    "description": "Description de l'action d'exportation des données"
+  },
+  "copy": "Adikao",
+  "@copy": {
+    "description": "Texte du bouton pour copier le contenu"
+  },
+  "copiedToClipboard": "Voarakitra ao amin'ny fanindriana",
+  "@copiedToClipboard": {
+    "description": "Message affiché lorsque le contenu est copié dans le presse-papiers"
+  },
+  "csvContentCannotBeEmpty": "Tsy azo atao ho foana ny votoatin'ny CSV",
+  "@csvContentCannotBeEmpty": {
+    "description": "Message d'erreur lorsque le texte CSV saisi est vide"
+  },
+  "clickImportToSelectFile": "Tsindrio hanapaka rakitra CSV",
+  "@clickImportToSelectFile": {
+    "description": "Texte d'instruction pour l'option d'importation de fichier"
+  },
+  "chooseWhereToSave": "Misafidy toerana hitehirizana ny rakitra",
+  "@chooseWhereToSave": {
+    "description": "Titre de la boîte de dialogue pour la sélection de l'emplacement de sauvegarde"
+  },
+  "fileSavedSuccessfully": "Voatahiry soa aman-tsara ny rakitra",
+  "@fileSavedSuccessfully": {
+    "description": "Message de succès lorsque le fichier est enregistré"
+  },
+  "failedToSaveFile": "Tsy nahomby ny fitahirizana rakitra",
+  "@failedToSaveFile": {
+    "description": "Message d'erreur lorsque l'enregistrement du fichier échoue"
+  },
+  "failedToDownloadTemplate": "Tsy nahomby ny fakana modely",
+  "@failedToDownloadTemplate": {
+    "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
+  },
+  "file": "Rakitra",
+  "@file": {
+    "description": "File option text"
+  },
+  "text": "Soratra",
+  "@text": {
+    "description": "Text option text"
+  },
+  "pasteCsvContentHere": "Apetrao eto ny atin'ny CSV...",
+  "@pasteCsvContentHere": {
+    "description": "Hint text for CSV text input field"
+  },
+  "fileSelected": "Voafantina ny rakitra",
+  "@fileSelected": {
+    "description": "Text shown when a file is selected"
+  },
+  "csvFilesOnly": "Rakitra CSV ihany",
+  "@csvFilesOnly": {
+    "description": "Text indicating only CSV files are accepted"
+  },
+  "csvContentPreview": "Topi-maso ny atin'ny CSV:",
+  "@csvContentPreview": {
+    "description": "Title for CSV content preview section"
+  },
+  "failedToSelectFile": "Tsy nahomby ny famantarana ny rakitra",
+  "@failedToSelectFile": {
+    "description": "Error message when file selection fails"
+  },
+  "failedToPreviewTemplate": "Tsy nahomby ny topi-maso ny modely",
+  "@failedToPreviewTemplate": {
+    "description": "Error message when template preview fails"
+  },
+  "csvFileIsEmpty": "Foana ny rakitra CSV",
+  "@csvFileIsEmpty": {
+    "description": "Message d'erreur lorsque le fichier CSV ne contient aucune donnée"
+  },
+  "noDataRowsFound": "Tsy misy andalana angona hita",
+  "@noDataRowsFound": {
+    "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
+  },
+  "importFailed": "Tsy nahomby ny fanafarana : {error}",
+  "@importFailed": {
+    "description": "Message d'échec d'importation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Format CSV invalide"
+      }
+    }
+  },
+  "rowProviderNameRequired": "Andalana {rowNumber} : Ilaina ny anaran'ny mpanome",
+  "@rowProviderNameRequired": {
+    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "rowProviderAlreadyExists": "Andalana {rowNumber} : Efa misy ny mpanome \"{name}\"",
+  "@rowProviderAlreadyExists": {
+    "description": "Message d'erreur lorsque le fournisseur existe déjà dans la base de données",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "name": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "rowGenericError": "Andalana {rowNumber} : {error}",
+  "@rowGenericError": {
+    "description": "Message d'erreur générique pour le traitement de ligne CSV",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "error": {
+        "type": "String",
+        "example": "Format de données invalide"
+      }
+    }
+  },
+  "rowProviderNameRequiredFee": "Andalana {rowNumber} : Ilaina ny anaran'ny mpanome",
+  "@rowProviderNameRequiredFee": {
+    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV d'intervalle de frais",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "rowProviderNotFound": "Andalana {rowNumber} : Tsy hita ny mpanome \"{providerName}\"",
+  "@rowProviderNotFound": {
+    "description": "Message d'erreur lorsque le fournisseur référencé dans le CSV n'existe pas",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "rowIntervalOverlaps": "Andalana {rowNumber} : Mifangaro amin'ny intervalle efa misy ny intervalle ({overlap})",
+  "@rowIntervalOverlaps": {
+    "description": "Message d'erreur lorsque l'intervalle de frais chevauche un intervalle existant",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "overlap": {
+        "type": "String",
+        "example": "1000-2000"
+      }
+    }
+  },
+  "rowInvalidAmounts": "Andalana {rowNumber} : Tsy mety ny vola (kely : {minStr}, lehibe : {maxStr}, sara : {feeStr})",
+  "@rowInvalidAmounts": {
+    "description": "Message d'erreur lorsque les montants dans la ligne CSV sont invalides",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "minStr": {
+        "type": "String",
+        "example": "1000"
+      },
+      "maxStr": {
+        "type": "String",
+        "example": "2000"
+      },
+      "feeStr": {
+        "type": "String",
+        "example": "50"
+      }
+    }
+  },
+  "rowMinAmountGreaterThanMax": "Andalana {rowNumber} : Ny vola kely ({min}) tsy maintsy ambany noho ny vola lehibe ({max})",
+  "@rowMinAmountGreaterThanMax": {
+    "description": "Message d'erreur lorsque le montant minimum est supérieur au montant maximum",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "min": {
+        "type": "String",
+        "example": "2000"
+      },
+      "max": {
+        "type": "String",
+        "example": "1000"
+      }
+    }
+  },
+  "rowFeeMustBePositive": "Andalana {rowNumber} : Tsy maintsy positif ny sara",
+  "@rowFeeMustBePositive": {
+    "description": "Message d'erreur lorsque le montant des frais n'est pas positif",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "importedProvidersAndFees": "Voampiditra {providersCount} mpanome sy {feesCount} intervalle sara",
+  "@importedProvidersAndFees": {
+    "description": "Message de succès montrant le nombre de fournisseurs et d'intervalles de frais importés",
+    "placeholders": {
+      "providersCount": {
+        "type": "int",
+        "example": "2"
+      },
+      "feesCount": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "providerInvalidProviderId": "Mpanome \"{providerName}\" : Tsy mety ny ID mpanome",
+  "@providerInvalidProviderId": {
+    "description": "Message d'erreur lorsque l'ID du fournisseur est invalide lors de l'importation",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "providerNoFeeIntervals": "Mpanome \"{providerName}\" : Tsy misy fetra sarany hita",
+  "@providerNoFeeIntervals": {
+    "description": "Message d'erreur lorsque le fournisseur n'a pas d'intervalles de frais lors de l'importation",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "providerImportError": "Mpanome \"{providerName}\" : {error}",
+  "@providerImportError": {
+    "description": "Message d'erreur générique pour l'importation de fournisseur",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      },
+      "error": {
+        "type": "String",
+        "example": "Erreur de base de données"
+      }
+    }
+  },
+  "rowIntervalOverlapsCombined": "Andalana {rowNumber} : Mifangaro amin'ny intervalle efa misy ny intervalle ({overlap})",
+  "@rowIntervalOverlapsCombined": {
+    "description": "Message d'erreur pour les intervalles qui se chevauchent dans l'importation combinée",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "overlap": {
+        "type": "String",
+        "example": "1000-2000"
+      }
+    }
+  },
+  "noDataToExport": "Tsy misy angona havoaka",
+  "@noDataToExport": {
+    "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
+  },
+  "exportSuccessful": "Nahomby ny fanavoahana",
+  "@exportSuccessful": {
+    "description": "Message de succès lorsque l'exportation se termine avec succès"
+  },
+  "exportFailed": "Tsy nahomby ny fanavoahana : {error}",
+  "@exportFailed": {
+    "description": "Message d'échec d'exportation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erreur d'écriture de fichier"
+      }
+    }
+  },
+  "providerNameColumnNotFound": "Tsy hita ny tsanganana anaran'ny mpanome",
+  "@providerNameColumnNotFound": {
+    "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
+  },
+  "templates": "Modely CSV",
+  "@templates": {
+    "description": "Titre de la section des modèles CSV"
+  },
+  "exportCombined": "Hanondrana Mifangaro",
+  "@exportCombined": {
+    "description": "Titre de l'option d'exportation des données combinées"
+  },
+  "exportCombinedDescription": "Hanondrana mpamatsy vola miaraka amin'ny elanelam-pomba azy ireo",
+  "@exportCombinedDescription": {
+    "description": "Description pour l'exportation des données combinées"
+  },
+  "downloadProviderTemplate": "Modely Mpamatsy Vola",
+  "@downloadProviderTemplate": {
+    "description": "Option de téléchargement du modèle CSV pour les fournisseurs"
+  },
+  "csvTemplateForProviders": "Misintona modely CSV ho an'ny fanafarana mpamatsy vola",
+  "@csvTemplateForProviders": {
+    "description": "Description pour le téléchargement du modèle fournisseur"
+  },
+  "downloadFeeTemplate": "Modely Elanelam-pomba",
+  "@downloadFeeTemplate": {
+    "description": "Option de téléchargement du modèle CSV pour les intervalles de frais"
+  },
+  "csvTemplateForFees": "Misintona modely CSV ho an'ny fanafarana sara",
+  "@csvTemplateForFees": {
+    "description": "Description pour le téléchargement du modèle d'intervalles de frais"
+  },
+  "downloadCombinedTemplate": "Modely Mifangaro",
+  "@downloadCombinedTemplate": {
+    "description": "Option de téléchargement du modèle CSV combiné"
+  },
+  "csvTemplateForCombined": "Misintona modely CSV ho an'ny fanafarana mifangaro",
+  "@csvTemplateForCombined": {
+    "description": "Description pour le téléchargement du modèle combiné"
+  },
+  "templateDownloaded": "Voasintona ny Modely",
+  "@templateDownloaded": {
+    "description": "Message de succès du téléchargement du modèle"
+  },
+  "failedToReadFile": "Tsy nahavaky ny rakitra",
+  "@failedToReadFile": {
+    "description": "Message d'erreur lors de la lecture d'un fichier"
+  },
+  "providersImported": "{count} mpamatsy vola voafarana",
+  "@providersImported": {
+    "description": "Message indiquant le nombre de fournisseurs importés",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "feeIntervalsImported": "{count} elanelam-pomba voafarana",
+  "@feeIntervalsImported": {
+    "description": "Message indiquant le nombre d'intervalles de frais importés",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "errorsEncountered": "{count} tsy fetezana hita",
+  "@errorsEncountered": {
+    "description": "Message indiquant le nombre d'erreurs rencontrées",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "backup": "Tahiry",
+  "@backup": {
+    "description": "Titre de l'option de sauvegarde"
+  },
+  "reset": "Averina",
+  "@reset": {
+    "description": "Titre de l'option de réinitialisation"
+  },
+  "clearAllData": "Fafao ny angona rehetra",
+  "@clearAllData": {
+    "description": "Description de la fonctionnalité de réinitialisation"
+  },
+  "confirmReset": "Hanamarina ny Fanavaozana",
+  "@confirmReset": {
+    "description": "Titre de la boîte de dialogue de confirmation de réinitialisation"
+  },
+  "resetWarningMessage": "Izany dia hamafa mandrakizay ny mpamatsy volanao rehetra sy ny elanelam-pomba. Tsy azo ivalozana ity hetsika ity.",
+  "@resetWarningMessage": {
+    "description": "Message d'avertissement pour la réinitialisation des données"
+  },
+  "dataResetSuccessful": "Nahomby ny fanavaozana ny angona",
+  "@dataResetSuccessful": {
+    "description": "Message de succès pour la réinitialisation des données"
+  },
+  "resetFailed": "Tsy nahomby ny fanavaozana",
+  "@resetFailed": {
+    "description": "Message d'échec pour la réinitialisation des données"
+  },
+  "csvImportExportInfo": "Fitantanana angona CSV",
+  "@csvImportExportInfo": {
+    "description": "Titre d'information pour l'import/export CSV"
+  },
+  "pullToRefresh": "Sakaro ambony hanavaozana",
+  "@pullToRefresh": {
+    "description": "Sorohina aseho rehefa afaka sakaro ambony hanavaozana ny votoaty"
+  },
+  "refreshing": "Manavao...",
+  "@refreshing": {
+    "description": "Sorohina aseho rehefa manavao ny votoaty"
   }
 }

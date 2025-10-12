@@ -281,6 +281,10 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
+  String get deleteProviderWarning =>
+      'Hofafana koa ny intervalle sara rehetra mifandraika.';
+
+  @override
   String get editProvider => 'Manova mpanome tolotra';
 
   @override
@@ -706,4 +710,285 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get minOperationsCannotBeGreaterThanMaxOperations =>
       'minOperations tsy afaka mihoatra ny maxOperations';
+
+  @override
+  String get importExportData => 'Ampidiro/Hampidino angona';
+
+  @override
+  String get csvImportExportInfo => 'Fitantanana angona CSV';
+
+  @override
+  String get csvImportExportDescription =>
+      'Ampidiro na hampidino angona amin\'ny alalan\'ny rakitra CSV. Azonao atao ny mampiasa modely ho an\'ny fanombohana.';
+
+  @override
+  String get importData => 'Ampidiro angona';
+
+  @override
+  String get exportData => 'Hampidino angona';
+
+  @override
+  String get templates => 'Modely CSV';
+
+  @override
+  String get exportCombined => 'Hanondrana Mifangaro';
+
+  @override
+  String get exportCombinedDescription =>
+      'Hanondrana mpamatsy vola miaraka amin\'ny elanelam-pomba azy ireo';
+
+  @override
+  String get downloadProviderTemplate => 'Modely Mpamatsy Vola';
+
+  @override
+  String get csvTemplateForProviders =>
+      'Misintona modely CSV ho an\'ny fanafarana mpamatsy vola';
+
+  @override
+  String get downloadFeeTemplate => 'Modely Elanelam-pomba';
+
+  @override
+  String get csvTemplateForFees =>
+      'Misintona modely CSV ho an\'ny fanafarana sara';
+
+  @override
+  String get downloadCombinedTemplate => 'Modely Mifangaro';
+
+  @override
+  String get csvTemplateForCombined =>
+      'Misintona modely CSV ho an\'ny fanafarana mifangaro';
+
+  @override
+  String get importSuccessful => 'Nahomby ny fampidirana';
+
+  @override
+  String importFailed(String error) {
+    return 'Tsy nahomby ny fanafarana : $error';
+  }
+
+  @override
+  String get exportSuccessful => 'Nahomby ny fanavoahana';
+
+  @override
+  String exportFailed(String error) {
+    return 'Tsy nahomby ny fanavoahana : $error';
+  }
+
+  @override
+  String get templateDownloaded => 'Voasintona ny Modely';
+
+  @override
+  String get failedToDownloadTemplate => 'Tsy nahomby ny fakana modely';
+
+  @override
+  String get failedToReadFile => 'Tsy nahavaky ny rakitra';
+
+  @override
+  String providersImported(int count) {
+    return '$count mpamatsy vola voafarana';
+  }
+
+  @override
+  String feeIntervalsImported(int count) {
+    return '$count elanelam-pomba voafarana';
+  }
+
+  @override
+  String errorsEncountered(int count) {
+    return '$count tsy fetezana hita';
+  }
+
+  @override
+  String get dataManagement => 'Fitantanana angona';
+
+  @override
+  String get backup => 'Tahiry';
+
+  @override
+  String get backupYourData => 'Tahirizo ny angonao';
+
+  @override
+  String get reset => 'Averina';
+
+  @override
+  String get clearAllData => 'Fafao ny angona rehetra';
+
+  @override
+  String get confirmReset => 'Hanamarina ny Fanavaozana';
+
+  @override
+  String get resetWarningMessage =>
+      'Izany dia hamafa mandrakizay ny mpamatsy volanao rehetra sy ny elanelam-pomba. Tsy azo ivalozana ity hetsika ity.';
+
+  @override
+  String get dataResetSuccessful => 'Nahomby ny fanavaozana ny angona';
+
+  @override
+  String get resetFailed => 'Tsy nahomby ny fanavaozana';
+
+  @override
+  String get csvManagement => 'Fitantanana CSV';
+
+  @override
+  String get previewTemplate => 'Jereo modely';
+
+  @override
+  String get preview => 'Jereo';
+
+  @override
+  String get download => 'Hampidino';
+
+  @override
+  String get templatePreview => 'Jereo modely';
+
+  @override
+  String get close => 'Hidio';
+
+  @override
+  String get importDataDescription =>
+      'Ampidiro ny mpanome sy ny intervalle sara avy amin\'ny rakitra CSV. Hahalalala ho azy ny rafitra ny karazana angona araka ny tsanganana.';
+
+  @override
+  String get exportDataDescription =>
+      'Avoao daholo ny mpanome sy ny intervalle sarany amin\'ny rakitra CSV mifangaro.';
+
+  @override
+  String get csvContentCannotBeEmpty =>
+      'Tsy azo atao ho foana ny votoatin\'ny CSV';
+
+  @override
+  String get clickImportToSelectFile => 'Tsindrio hanapaka rakitra CSV';
+
+  @override
+  String get copy => 'Adikao';
+
+  @override
+  String get copiedToClipboard => 'Voarakitra ao amin\'ny fanindriana';
+
+  @override
+  String get chooseWhereToSave => 'Misafidy toerana hitehirizana ny rakitra';
+
+  @override
+  String get fileSavedSuccessfully => 'Voatahiry soa aman-tsara ny rakitra';
+
+  @override
+  String get failedToSaveFile => 'Tsy nahomby ny fitahirizana rakitra';
+
+  @override
+  String get file => 'Rakitra';
+
+  @override
+  String get text => 'Soratra';
+
+  @override
+  String get pasteCsvContentHere => 'Apetrao eto ny atin\'ny CSV...';
+
+  @override
+  String get fileSelected => 'Voafantina ny rakitra';
+
+  @override
+  String get csvFilesOnly => 'Rakitra CSV ihany';
+
+  @override
+  String get csvContentPreview => 'Topi-maso ny atin\'ny CSV:';
+
+  @override
+  String get failedToSelectFile => 'Tsy nahomby ny famantarana ny rakitra';
+
+  @override
+  String get failedToPreviewTemplate => 'Tsy nahomby ny topi-maso ny modely';
+
+  @override
+  String get csvFileIsEmpty => 'Foana ny rakitra CSV';
+
+  @override
+  String get noDataRowsFound => 'Tsy misy andalana angona hita';
+
+  @override
+  String rowProviderNameRequired(int rowNumber) {
+    return 'Andalana $rowNumber : Ilaina ny anaran\'ny mpanome';
+  }
+
+  @override
+  String rowProviderAlreadyExists(int rowNumber, String name) {
+    return 'Andalana $rowNumber : Efa misy ny mpanome \"$name\"';
+  }
+
+  @override
+  String rowGenericError(int rowNumber, String error) {
+    return 'Andalana $rowNumber : $error';
+  }
+
+  @override
+  String rowProviderNameRequiredFee(int rowNumber) {
+    return 'Andalana $rowNumber : Ilaina ny anaran\'ny mpanome';
+  }
+
+  @override
+  String rowProviderNotFound(int rowNumber, String providerName) {
+    return 'Andalana $rowNumber : Tsy hita ny mpanome \"$providerName\"';
+  }
+
+  @override
+  String rowIntervalOverlaps(int rowNumber, String overlap) {
+    return 'Andalana $rowNumber : Mifangaro amin\'ny intervalle efa misy ny intervalle ($overlap)';
+  }
+
+  @override
+  String rowInvalidAmounts(
+    int rowNumber,
+    String minStr,
+    String maxStr,
+    String feeStr,
+  ) {
+    return 'Andalana $rowNumber : Tsy mety ny vola (kely : $minStr, lehibe : $maxStr, sara : $feeStr)';
+  }
+
+  @override
+  String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
+    return 'Andalana $rowNumber : Ny vola kely ($min) tsy maintsy ambany noho ny vola lehibe ($max)';
+  }
+
+  @override
+  String rowFeeMustBePositive(int rowNumber) {
+    return 'Andalana $rowNumber : Tsy maintsy positif ny sara';
+  }
+
+  @override
+  String importedProvidersAndFees(int providersCount, int feesCount) {
+    return 'Voampiditra $providersCount mpanome sy $feesCount intervalle sara';
+  }
+
+  @override
+  String providerInvalidProviderId(String providerName) {
+    return 'Mpanome \"$providerName\" : Tsy mety ny ID mpanome';
+  }
+
+  @override
+  String providerNoFeeIntervals(String providerName) {
+    return 'Mpanome \"$providerName\" : Tsy misy fetra sarany hita';
+  }
+
+  @override
+  String providerImportError(String providerName, String error) {
+    return 'Mpanome \"$providerName\" : $error';
+  }
+
+  @override
+  String rowIntervalOverlapsCombined(int rowNumber, String overlap) {
+    return 'Andalana $rowNumber : Mifangaro amin\'ny intervalle efa misy ny intervalle ($overlap)';
+  }
+
+  @override
+  String get noDataToExport => 'Tsy misy angona havoaka';
+
+  @override
+  String get providerNameColumnNotFound =>
+      'Tsy hita ny tsanganana anaran\'ny mpanome';
+
+  @override
+  String get pullToRefresh => 'Sakaro ambony hanavaozana';
+
+  @override
+  String get refreshing => 'Manavao...';
 }

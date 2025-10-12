@@ -280,6 +280,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get deleteProviderWarning =>
+      'Cela supprimera également tous les intervalles de frais associés.';
+
+  @override
   String get editProvider => 'Modifier le fournisseur';
 
   @override
@@ -719,4 +723,285 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get minOperationsCannotBeGreaterThanMaxOperations =>
       'minOperations ne peut pas être supérieur à maxOperations';
+
+  @override
+  String get importExportData => 'Import/Export de données';
+
+  @override
+  String get csvImportExportInfo => 'Gestion des données CSV';
+
+  @override
+  String get csvImportExportDescription =>
+      'Importez ou exportez vos fournisseurs et intervalles de frais via des fichiers CSV';
+
+  @override
+  String get importData => 'Importer des données';
+
+  @override
+  String get exportData => 'Exporter des données';
+
+  @override
+  String get templates => 'Modèles CSV';
+
+  @override
+  String get exportCombined => 'Exporter combiné';
+
+  @override
+  String get exportCombinedDescription =>
+      'Exporter les fournisseurs avec leurs intervalles de frais';
+
+  @override
+  String get downloadProviderTemplate => 'Modèle fournisseurs';
+
+  @override
+  String get csvTemplateForProviders =>
+      'Télécharger le modèle CSV pour importer des fournisseurs';
+
+  @override
+  String get downloadFeeTemplate => 'Modèle intervalles de frais';
+
+  @override
+  String get csvTemplateForFees =>
+      'Télécharger le modèle CSV pour importer des frais';
+
+  @override
+  String get downloadCombinedTemplate => 'Modèle combiné';
+
+  @override
+  String get csvTemplateForCombined =>
+      'Télécharger le modèle CSV pour l\'import combiné';
+
+  @override
+  String get importSuccessful => 'Import réussi';
+
+  @override
+  String importFailed(String error) {
+    return 'Échec de l\'importation : $error';
+  }
+
+  @override
+  String get exportSuccessful => 'Exportation réussie';
+
+  @override
+  String exportFailed(String error) {
+    return 'Échec de l\'exportation : $error';
+  }
+
+  @override
+  String get templateDownloaded => 'Modèle téléchargé';
+
+  @override
+  String get failedToDownloadTemplate => 'Échec du téléchargement du modèle';
+
+  @override
+  String get failedToReadFile => 'Impossible de lire le fichier';
+
+  @override
+  String providersImported(int count) {
+    return '$count fournisseur(s) importé(s)';
+  }
+
+  @override
+  String feeIntervalsImported(int count) {
+    return '$count intervalle(s) de frais importé(s)';
+  }
+
+  @override
+  String errorsEncountered(int count) {
+    return '$count erreur(s) rencontrée(s)';
+  }
+
+  @override
+  String get dataManagement => 'Gestion des données';
+
+  @override
+  String get backup => 'Sauvegarde';
+
+  @override
+  String get backupYourData => 'Sauvegarder vos fournisseurs et frais';
+
+  @override
+  String get reset => 'Réinitialiser';
+
+  @override
+  String get clearAllData => 'Effacer toutes les données';
+
+  @override
+  String get confirmReset => 'Confirmer la réinitialisation';
+
+  @override
+  String get resetWarningMessage =>
+      'Ceci supprimera définitivement tous vos fournisseurs et intervalles de frais. Cette action est irréversible.';
+
+  @override
+  String get dataResetSuccessful => 'Données réinitialisées avec succès';
+
+  @override
+  String get resetFailed => 'Échec de la réinitialisation';
+
+  @override
+  String get csvManagement => 'Gestion CSV';
+
+  @override
+  String get previewTemplate => 'Aperçu du modèle';
+
+  @override
+  String get preview => 'Aperçu';
+
+  @override
+  String get download => 'Télécharger';
+
+  @override
+  String get templatePreview => 'Aperçu du modèle';
+
+  @override
+  String get close => 'Fermer';
+
+  @override
+  String get importDataDescription =>
+      'Importer des fournisseurs et intervalles de frais depuis un fichier CSV. Le système détectera automatiquement le type de données selon les colonnes.';
+
+  @override
+  String get exportDataDescription =>
+      'Exporter tous les fournisseurs et leurs intervalles de frais vers un fichier CSV combiné.';
+
+  @override
+  String get csvContentCannotBeEmpty => 'Le contenu CSV ne peut pas être vide';
+
+  @override
+  String get clickImportToSelectFile =>
+      'Cliquez pour séléctionner un fichier csv';
+
+  @override
+  String get copy => 'Copier';
+
+  @override
+  String get copiedToClipboard => 'Copié dans le presse-papiers';
+
+  @override
+  String get chooseWhereToSave => 'Choisir où enregistrer le fichier';
+
+  @override
+  String get fileSavedSuccessfully => 'Fichier enregistré avec succès';
+
+  @override
+  String get failedToSaveFile => 'Échec de l\'enregistrement du fichier';
+
+  @override
+  String get file => 'Fichier';
+
+  @override
+  String get text => 'Texte';
+
+  @override
+  String get pasteCsvContentHere => 'Collez votre contenu CSV ici...';
+
+  @override
+  String get fileSelected => 'Fichier sélectionné';
+
+  @override
+  String get csvFilesOnly => 'Fichiers CSV uniquement';
+
+  @override
+  String get csvContentPreview => 'Aperçu du contenu CSV :';
+
+  @override
+  String get failedToSelectFile => 'Échec de la sélection du fichier';
+
+  @override
+  String get failedToPreviewTemplate => 'Échec de l\'aperçu du modèle';
+
+  @override
+  String get csvFileIsEmpty => 'Le fichier CSV est vide';
+
+  @override
+  String get noDataRowsFound => 'Aucune ligne de données trouvée';
+
+  @override
+  String rowProviderNameRequired(int rowNumber) {
+    return 'Ligne $rowNumber : Le nom du fournisseur est requis';
+  }
+
+  @override
+  String rowProviderAlreadyExists(int rowNumber, String name) {
+    return 'Ligne $rowNumber : Le fournisseur \"$name\" existe déjà';
+  }
+
+  @override
+  String rowGenericError(int rowNumber, String error) {
+    return 'Ligne $rowNumber : $error';
+  }
+
+  @override
+  String rowProviderNameRequiredFee(int rowNumber) {
+    return 'Ligne $rowNumber : Le nom du fournisseur est requis';
+  }
+
+  @override
+  String rowProviderNotFound(int rowNumber, String providerName) {
+    return 'Ligne $rowNumber : Fournisseur \"$providerName\" introuvable';
+  }
+
+  @override
+  String rowIntervalOverlaps(int rowNumber, String overlap) {
+    return 'Ligne $rowNumber : L\'intervalle chevauche un intervalle existant ($overlap)';
+  }
+
+  @override
+  String rowInvalidAmounts(
+    int rowNumber,
+    String minStr,
+    String maxStr,
+    String feeStr,
+  ) {
+    return 'Ligne $rowNumber : Montants invalides (min : $minStr, max : $maxStr, frais : $feeStr)';
+  }
+
+  @override
+  String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
+    return 'Ligne $rowNumber : Le montant min ($min) doit être inférieur au montant max ($max)';
+  }
+
+  @override
+  String rowFeeMustBePositive(int rowNumber) {
+    return 'Ligne $rowNumber : Les frais doivent être positifs';
+  }
+
+  @override
+  String importedProvidersAndFees(int providersCount, int feesCount) {
+    return '$providersCount fournisseur(s) et $feesCount intervalle(s) de frais importé(s)';
+  }
+
+  @override
+  String providerInvalidProviderId(String providerName) {
+    return 'Fournisseur \"$providerName\" : ID de fournisseur invalide';
+  }
+
+  @override
+  String providerNoFeeIntervals(String providerName) {
+    return 'Fournisseur \"$providerName\" : Aucun intervalle de frais trouvé';
+  }
+
+  @override
+  String providerImportError(String providerName, String error) {
+    return 'Fournisseur \"$providerName\" : $error';
+  }
+
+  @override
+  String rowIntervalOverlapsCombined(int rowNumber, String overlap) {
+    return 'Ligne $rowNumber : L\'intervalle chevauche un intervalle existant ($overlap)';
+  }
+
+  @override
+  String get noDataToExport => 'Aucune donnée à exporter';
+
+  @override
+  String get providerNameColumnNotFound =>
+      'Colonne du nom du fournisseur introuvable';
+
+  @override
+  String get pullToRefresh => 'Tirez vers le bas pour actualiser';
+
+  @override
+  String get refreshing => 'Actualisation...';
 }
