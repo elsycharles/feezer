@@ -990,7 +990,7 @@ class _FileUploadArea extends StatelessWidget {
               Text(
                 AppLocalizations.of(context).clickImportToSelectFile,
                 style: ThemeUtil.bodyMedium.copyWith(
-                  color: colorScheme.onSurfaceVariant,
+                  color: colorScheme.primary,
                 ),
                 textAlign: TextAlign.center,
               ),
