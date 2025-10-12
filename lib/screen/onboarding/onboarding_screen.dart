@@ -101,7 +101,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                   child: Text(
                     AppLocalizations.of(context).skip,
-                    style: theme.textTheme.bodyMedium?.copyWith(
+                    style: ThemeUtil.bodyMedium.copyWith(
                       color: theme.colorScheme.onSurface.withValues(
                         alpha: ThemeUtil.onboardingTextSecondaryOpacity,
                       ),

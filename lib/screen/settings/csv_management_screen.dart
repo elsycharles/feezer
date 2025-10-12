@@ -332,7 +332,7 @@ class _InfoCard extends StatelessWidget {
               children: [
                 Text(
                   AppLocalizations.of(context).csvImportExportInfo,
-                  style: theme.textTheme.titleSmall?.copyWith(
+                  style: ThemeUtil.titleSmall.copyWith(
                     fontWeight: FontWeight.w600,
                     color: colorScheme.primary,
                   ),
@@ -340,7 +340,7 @@ class _InfoCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context).csvImportExportDescription,
-                  style: theme.textTheme.bodySmall?.copyWith(
+                  style: ThemeUtil.bodySmall.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
                 ),
@@ -379,7 +379,7 @@ class _DataManagementSection extends StatelessWidget {
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).dataManagement,
-                style: theme.textTheme.titleMedium?.copyWith(
+                style: ThemeUtil.titleMedium.copyWith(
                   color: ThemeUtil.primaryColor,
                   fontWeight: FontWeight.w600,
                 ),
@@ -436,13 +436,13 @@ class _ActionTile extends StatelessWidget {
         leading: Icon(icon, color: ThemeUtil.primaryColor),
         title: Text(
           title,
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: ThemeUtil.bodyLarge.copyWith(
             color: colorScheme.onSurface,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: ThemeUtil.bodyMedium.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
         ),
@@ -1447,7 +1447,7 @@ class _PreviewContent extends StatelessWidget {
               template,
               style: theme.textTheme.bodySmall?.copyWith(
                 fontFamily: 'monospace',
-                fontSize: 12,
+                fontSize: ThemeUtil.fontSizeLabelSmall,
                 color: colorScheme.onSurface,
               ),
             ),

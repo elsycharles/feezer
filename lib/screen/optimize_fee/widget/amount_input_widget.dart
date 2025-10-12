@@ -102,18 +102,13 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
             children: [
               Text(
                 widget.label,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                ) ?? ThemeUtil.labelMedium.copyWith(
+                style: ThemeUtil.labelMedium.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
               Text(
                 context.read<CurrencyProvider>().currencySymbol,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ) ?? ThemeUtil.labelMedium.copyWith(
+                style: ThemeUtil.labelMedium.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w600,
                 ),
@@ -144,10 +139,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                       FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
                       LengthLimitingTextInputFormatter(11)
                     ],
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurface,
-                      fontWeight: FontWeight.w600,
-                    ) ?? ThemeUtil.titleLarge.copyWith(
+                    style: ThemeUtil.titleLarge.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.w600,
                     ),

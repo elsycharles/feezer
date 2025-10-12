@@ -6,6 +6,7 @@ import '../../../widget/interactive_surface.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../util/database_util.dart';
 import '../../../util/constant_util.dart';
+import '../../../util/theme_util.dart';
 
 /// Currency selection modal with radio buttons
 class CurrencySelectionModal extends StatefulWidget {
@@ -90,7 +91,7 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
               child: Text(
                 l10n.currencies,
-                style: theme.textTheme.headlineSmall?.copyWith(
+                style: ThemeUtil.titleMedium.copyWith(
                   fontWeight: FontWeight.w600,
                   color: colorScheme.onSurface,
                 ),
@@ -169,11 +170,10 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
               const SizedBox(width: 16),
             ],
 
-            // Text
             Expanded(
               child: Text(
                 primaryText,
-                style: theme.textTheme.bodyLarge?.copyWith(
+                style: ThemeUtil.bodyLarge.copyWith(
                   color: isSelected
                       ? colorScheme.primary
                       : colorScheme.onSurface,

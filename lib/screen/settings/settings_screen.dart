@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../util/theme_util.dart';
 import '../../util/preference_util.dart';
 import '../../util/navigation_util.dart';
 import '../../widget/app_bar.dart' as custom;
@@ -162,13 +163,13 @@ class SettingsScreen extends StatelessWidget {
         leading: Icon(icon, color: textColor ?? colorScheme.onSurface),
         title: Text(
           title,
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: ThemeUtil.bodyLarge.copyWith(
             color: textColor ?? colorScheme.onSurface,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: ThemeUtil.bodyMedium.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
         ),
