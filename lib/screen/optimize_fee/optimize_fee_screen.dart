@@ -692,8 +692,8 @@ class _State extends State<OptimizeFeeScreen> {
       letterSpacing: 0.2,
     ),
     textAlign: TextAlign.center,
-    overflow: TextOverflow.ellipsis,
-    maxLines: 1,
+    softWrap: true,
+    overflow: TextOverflow.visible,
   );
 
   Widget _buildTableCell(String text, {bool isGreen = false}) => Text(
@@ -703,8 +703,8 @@ class _State extends State<OptimizeFeeScreen> {
       fontWeight: isGreen ? FontWeight.w600 : FontWeight.normal,
     ),
     textAlign: TextAlign.center,
-    overflow: TextOverflow.ellipsis,
-    maxLines: 1,
+    softWrap: true,
+    overflow: TextOverflow.visible,
   );
 
   Widget _buildOptimizeButton() => Container(
