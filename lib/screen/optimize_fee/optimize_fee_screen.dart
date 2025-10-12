@@ -629,11 +629,13 @@ class _State extends State<OptimizeFeeScreen> {
             children: [
               Icon(Icons.list_alt, size: 18, color: context.colorScheme.primary),
               Global.gapSm,
-              Text(
-                AppLocalizations.of(context).transactionDetails,
-                style: ThemeUtil.titleMedium.copyWith(
-                  color: context.colorScheme.primary,
-                  fontWeight: FontWeight.w600,
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context).transactionDetails,
+                  style: ThemeUtil.titleMedium.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
