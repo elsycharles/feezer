@@ -125,50 +125,50 @@ class _State extends State<ProviderListScreen> {
             ? _buildAddProviderButton(colorScheme)
             : null,
         body: SafeArea(
-          child: Column(
-            children: [
-              Global.gapMd,
-              ProviderHeader(providerCount: _providers.length),
-              Global.gapLg,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SearchField(
-                  hintText: AppLocalizations.of(context).searchProviders,
-                  controller: _searchController,
-                ),
-              ),
-              if (_selectedIds.isNotEmpty) ...[
+          child: RefreshableScreen(
+            onRefresh: _loadProviders,
+            child: Column(
+              children: [
                 Global.gapMd,
+                ProviderHeader(providerCount: _providers.length),
+                Global.gapLg,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SelectionActionBar(
-                    selectedCount: _selectedIds.length,
-                    totalCount: _filtered.length,
-                    onSelectAll: _selectAll,
-                    onClearSelection: _clearSelection,
-                    onDelete: _deleteSelected,
-                    onEdit: _isSingleSelection ? _editSelected : null,
-                    onDetails: _isSingleSelection ? _showSelectedDetails : null,
-                    margin: EdgeInsets.zero,
+                  child: SearchField(
+                    hintText: AppLocalizations.of(context).searchProviders,
+                    controller: _searchController,
                   ),
                 ),
-              ],
-              Global.gapMd,
-              Expanded(
-                child: _isLoading
-                    ? const AppLoading.overlay()
-                    : RefreshableScreen(
-                        onRefresh: _loadProviders,
-                        child: CustomScrollView(
+                if (_selectedIds.isNotEmpty) ...[
+                  Global.gapMd,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SelectionActionBar(
+                      selectedCount: _selectedIds.length,
+                      totalCount: _filtered.length,
+                      onSelectAll: _selectAll,
+                      onClearSelection: _clearSelection,
+                      onDelete: _deleteSelected,
+                      onEdit: _isSingleSelection ? _editSelected : null,
+                      onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                      margin: EdgeInsets.zero,
+                    ),
+                  ),
+                ],
+                Global.gapMd,
+                Expanded(
+                  child: _isLoading
+                      ? const AppLoading.overlay()
+                      : CustomScrollView(
                           slivers: [
                             _buildProviderSliver(),
                             SliverToBoxAdapter(child: Global.gapMd),
                             SliverToBoxAdapter(child: SizedBox(height: 80)),
                           ],
                         ),
-                      ),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
     );

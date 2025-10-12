@@ -190,22 +190,24 @@ class _State extends State<CurrencyListScreen> {
       body: _isLoading
           ? const AppLoading()
           : SafeArea(
-              child: Column(
-                children: [
-                  Global.gapMd,
-                  CurrencyHeader(
-                    totalCount: _currencies.length,
-                    filteredCount: _filtered.length,
-                    selectedCount: _selectedIds.length,
-                  ),
-                  Global.gapLg,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SearchField(
-                      controller: _searchController,
-                      hintText: AppLocalizations.of(context).searchCurrencies,
+              child: RefreshableScreen(
+                onRefresh: _loadCurrencies,
+                child: Column(
+                  children: [
+                    Global.gapMd,
+                    CurrencyHeader(
+                      totalCount: _currencies.length,
+                      filteredCount: _filtered.length,
+                      selectedCount: _selectedIds.length,
                     ),
-                  ),
+                    Global.gapLg,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: SearchField(
+                        controller: _searchController,
+                        hintText: AppLocalizations.of(context).searchCurrencies,
+                      ),
+                    ),
                   if (_selectedIds.isNotEmpty) ...[
                     Global.gapMd,
                     Padding(
@@ -235,33 +237,31 @@ class _State extends State<CurrencyListScreen> {
                                   : null,
                             ),
                           )
-                        : RefreshableScreen(
-                            onRefresh: _loadCurrencies,
-                            child: ListView.builder(
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
-                              itemCount: _filtered.length,
-                              itemBuilder: (context, index) {
-                                final currency = _filtered[index];
-                                return CurrencyTile(
-                                  currency: currency,
-                                  isSelected: _selectedIds.contains(currency.id),
-                                  showSelection: _selectedIds.isNotEmpty,
-                                  onSelectionChanged: (selected) =>
-                                      _toggleSelection(currency.id, selected),
-                                  onLongPress: () => _startSelection(currency.id),
-                                  onTap: _selectedIds.isNotEmpty
-                                      ? () => _toggleSelection(
-                                        currency.id,
-                                        !_selectedIds.contains(currency.id),
-                                      )
-                                    : () => _editCurrency(currency),
+                        : ListView.builder(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            itemCount: _filtered.length,
+                            itemBuilder: (context, index) {
+                              final currency = _filtered[index];
+                              return CurrencyTile(
+                                currency: currency,
+                                isSelected: _selectedIds.contains(currency.id),
+                                showSelection: _selectedIds.isNotEmpty,
+                                onSelectionChanged: (selected) =>
+                                    _toggleSelection(currency.id, selected),
+                                onLongPress: () => _startSelection(currency.id),
+                                onTap: _selectedIds.isNotEmpty
+                                    ? () => _toggleSelection(
+                                      currency.id,
+                                      !_selectedIds.contains(currency.id),
+                                    )
+                                  : () => _editCurrency(currency),
                               );
                             },
                           ),
-                        ),
                   ),
                 ],
               ),
+            ),
             ),
     );
   }
