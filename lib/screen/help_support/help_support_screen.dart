@@ -115,6 +115,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
               fontWeight: FontWeight.w500,
               color: colorScheme.onSurface,
             ),
+            isInitiallyExpanded: false,
             children: [
               Text(
                 item.answer,

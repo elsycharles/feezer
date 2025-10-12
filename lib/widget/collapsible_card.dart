@@ -89,9 +89,10 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with title and expand/collapse functionality
+            // Header with title and expand/collapse functionality - make entire header clickable
             GestureDetector(
               onTap: _toggleExpanded,
+              behavior: HitTestBehavior.opaque,
               child: Container(
                 padding: widget.padding,
                 child: Row(
@@ -135,6 +136,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                     Icon(
                       _isExpanded ? Icons.expand_less : Icons.expand_more,
                       color: collapseIconColor,
+                      size: 20,
                     ),
                   ],
                 ),
