@@ -92,10 +92,13 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                   tooltip: AppLocalizations.of(context).clearSelection,
                 ),
                 const SizedBox(width: 8),
-                Text(
-                  '${widget.selectedCount} ${AppLocalizations.of(context).selected}',
-                  style: ThemeUtil.labelLarge.copyWith(
-                    color: colorScheme.onPrimary,
+                Expanded(
+                  child: Text(
+                    '${widget.selectedCount} ${AppLocalizations.of(context).selected}',
+                    style: ThemeUtil.labelLarge.copyWith(
+                      color: colorScheme.onPrimary,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 const Spacer(),

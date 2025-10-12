@@ -1267,7 +1267,7 @@ class _ResultContent extends StatelessWidget {
           Text(
             result.message!,
             style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
+              color: colorScheme.onSurface,
             ),
           ),
           const SizedBox(height: 16),
