@@ -42,7 +42,7 @@ class ConstantUtil {
   }
   // Configuration base de données
   static const String databaseName = 'fee_optimizer.db';
-  static const int databaseVersion = 2;
+  static const int databaseVersion = 3;
 
   // Tables
   static const String tableFeeIntervals = 'fee_intervals';
@@ -59,6 +59,7 @@ class ConstantUtil {
   static const String columnMinAmount = 'min_amount';
   static const String columnMaxAmount = 'max_amount';
   static const String columnFee = 'fee';
+  static const String columnFeeType = 'fee_type';
   static const String columnProviderId = 'provider_id';
 
   // Provider columns

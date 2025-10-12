@@ -988,4 +988,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get refreshing => 'Refreshing...';
+
+  @override
+  String get feeType => 'Fee Type';
+
+  @override
+  String get fixedAmount => 'Fixed Amount';
+
+  @override
+  String get percentage => 'Percentage';
+
+  @override
+  String get enterPercentage => 'Enter percentage';
+
+  @override
+  String get percentageMustBeBetween0And100 =>
+      'Percentage must be between 0 and 100';
 }

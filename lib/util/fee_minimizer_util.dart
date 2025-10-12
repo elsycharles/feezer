@@ -626,11 +626,18 @@ class FeeOptimizerUtil {
     final validIntervals = intervals.where((interval) => interval.isValid).toList();
     if (validIntervals.isEmpty) return [];
     
-    final options = validIntervals.map((interval) => _FeeOption(
-      min: interval.minAmount!,
-      max: interval.maxAmount!,
-      fee: interval.fee!,
-    )).toList();
+    final options = validIntervals.map((interval) {
+      final approximatedFee = interval.feeType == FeeType.percentage 
+          ? interval.maxAmount! * (interval.fee! / 100.0)
+          : interval.fee!;
+      return _FeeOption(
+        min: interval.minAmount!,
+        max: interval.maxAmount!,
+        fee: approximatedFee,
+        feeValue: interval.fee!,
+        feeType: interval.feeType,
+      );
+    }).toList();
 
     options.sort((a, b) => (b.max / b.fee).compareTo(a.max / a.fee));
     return options;
@@ -705,7 +712,10 @@ class FeeOptimizerUtil {
 
     for (final interval in validIntervals) {
       if (amount >= interval.minAmount! && amount <= interval.maxAmount!) {
-        final efficiency = (amount - interval.fee!) / interval.fee!;
+        final fee = interval.feeType == FeeType.percentage 
+            ? amount * (interval.fee! / 100.0) 
+            : interval.fee!;
+        final efficiency = (amount - fee) / fee;
         if (efficiency > bestEfficiency) {
           bestEfficiency = efficiency;
           best = interval;
@@ -745,10 +755,20 @@ class LRUCache<K, V> {
 
 // Classes internes optimisées
 class _FeeOption {
-  _FeeOption({required this.min, required this.max, required this.fee});
+  _FeeOption({required this.min, required this.max, required this.fee, required this.feeValue, required this.feeType});
   final double min;
   final double max;
-  final double fee;
+  final double fee; // Approximated fee for sorting
+  final double feeValue;
+  final FeeType feeType;
+
+  double getFeeForAmount(double amount) {
+    if (feeType == FeeType.percentage) {
+      return amount * (feeValue / 100.0);
+    } else {
+      return feeValue;
+    }
+  }
 }
 
 class _BestOperation {

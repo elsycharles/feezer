@@ -1468,5 +1468,25 @@
   "refreshing": "Refreshing...",
   "@refreshing": {
     "description": "Text shown when content is being refreshed"
+  },
+  "feeType": "Fee Type",
+  "@feeType": {
+    "description": "Label for fee type selector"
+  },
+  "fixedAmount": "Fixed Amount",
+  "@fixedAmount": {
+    "description": "Option for fixed fee amount"
+  },
+  "percentage": "Percentage",
+  "@percentage": {
+    "description": "Option for percentage-based fee"
+  },
+  "enterPercentage": "Enter percentage",
+  "@enterPercentage": {
+    "description": "Placeholder for percentage input"
+  },
+  "percentageMustBeBetween0And100": "Percentage must be between 0 and 100",
+  "@percentageMustBeBetween0And100": {
+    "description": "Validation error for percentage input"
   }
 }

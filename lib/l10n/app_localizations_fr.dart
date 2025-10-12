@@ -1004,4 +1004,20 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get refreshing => 'Actualisation...';
+
+  @override
+  String get feeType => 'Type de frais';
+
+  @override
+  String get fixedAmount => 'Montant fixe';
+
+  @override
+  String get percentage => 'Pourcentage';
+
+  @override
+  String get enterPercentage => 'Entrez le pourcentage';
+
+  @override
+  String get percentageMustBeBetween0And100 =>
+      'Le pourcentage doit être entre 0 et 100';
 }

@@ -1284,5 +1284,25 @@
   "refreshing": "Actualisation...",
   "@refreshing": {
     "description": "Texte affiché lorsque le contenu est en cours d'actualisation"
+  },
+  "feeType": "Type de frais",
+  "@feeType": {
+    "description": "Étiquette pour le sélecteur de type de frais"
+  },
+  "fixedAmount": "Montant fixe",
+  "@fixedAmount": {
+    "description": "Option pour montant de frais fixe"
+  },
+  "percentage": "Pourcentage",
+  "@percentage": {
+    "description": "Option pour frais basé sur pourcentage"
+  },
+  "enterPercentage": "Entrez le pourcentage",
+  "@enterPercentage": {
+    "description": "Placeholder pour la saisie de pourcentage"
+  },
+  "percentageMustBeBetween0And100": "Le pourcentage doit être entre 0 et 100",
+  "@percentageMustBeBetween0And100": {
+    "description": "Erreur de validation pour la saisie de pourcentage"
   }
 }

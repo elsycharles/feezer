@@ -44,6 +44,7 @@ class DatabaseUtil {
         ${ConstantUtil.columnMinAmount} REAL NOT NULL,
         ${ConstantUtil.columnMaxAmount} REAL NOT NULL,
         ${ConstantUtil.columnFee} REAL NOT NULL,
+        ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0,
         ${ConstantUtil.columnCreationDatetime} INTEGER NOT NULL,
         FOREIGN KEY (${ConstantUtil.columnProviderId}) 
         REFERENCES ${ConstantUtil.tableProviders} (${ConstantUtil.columnId})
@@ -101,6 +102,10 @@ class DatabaseUtil {
           ${ConstantUtil.columnCreationDatetime} INTEGER NOT NULL
         )
       ''');
+    }
+    if (oldVersion < 3) {
+      // Migration vers la version 3 : ajout de la colonne fee_type
+      await db.execute('ALTER TABLE ${ConstantUtil.tableFeeIntervals} ADD COLUMN ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0');
     }
   }
 

@@ -40,6 +40,7 @@ class FeeIntervalEditBottomSheet extends StatefulWidget {
 class _State extends State<FeeIntervalEditBottomSheet> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  late FeeType _feeType;
   late final _minAmountController = TextEditingController(
     text: widget.feeInterval.minAmount != null
         ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.minAmount!))
@@ -52,9 +53,17 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   );
   late final _feeController = TextEditingController(
     text: widget.feeInterval.fee != null
-        ? ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.fee!))
+        ? widget.feeInterval.feeType == FeeType.percentage
+            ? widget.feeInterval.fee!.toStringAsFixed(2)
+            : ConstantUtil.formatCurrencyAmount(context.read<CurrencyProvider>().convertFromAriary(widget.feeInterval.fee!))
         : '',
   );
+
+  @override
+  void initState() {
+    super.initState();
+    _feeType = widget.feeInterval.feeType;
+  }
 
   @override
   void dispose() {
@@ -89,12 +98,18 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           required: true,
         ),
         Global.gapLg,
+        _buildFeeTypeSelector(),
+        Global.gapLg,
         custom_form.FormField(
-          label: '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
+          label: _feeType == FeeType.percentage
+              ? '${AppLocalizations.of(context).fee} (%)'
+              : '${AppLocalizations.of(context).fee} (${context.read<CurrencyProvider>().currencySymbol})',
           controller: _feeController,
           icon: Icons.attach_money,
           keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: _feeType == FeeType.percentage
+              ? [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))]
+              : [FilteringTextInputFormatter.digitsOnly],
           validator: _validateFee,
           required: true,
         ),
@@ -103,6 +118,92 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           text: AppLocalizations.of(context).saveChanges,
           isLoading: _isLoading,
           onPressed: _isLoading ? null : _save,
+        ),
+      ],
+    ),
+  );
+
+  Widget _buildFeeTypeSelector() => Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Theme.of(context).colorScheme.surface,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context).feeType, // TODO: add to localizations
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => setState(() => _feeType = FeeType.fixed),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: _feeType == FeeType.fixed
+                        ? Theme.of(context).colorScheme.primaryContainer
+                        : Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: _feeType == FeeType.fixed
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.outlineVariant,
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context).fixedAmount,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _feeType == FeeType.fixed
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => setState(() => _feeType = FeeType.percentage),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: _feeType == FeeType.percentage
+                        ? Theme.of(context).colorScheme.primaryContainer
+                        : Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: _feeType == FeeType.percentage
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.outlineVariant,
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context).percentage,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: _feeType == FeeType.percentage
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     ),
@@ -137,11 +238,18 @@ class _State extends State<FeeIntervalEditBottomSheet> {
 
   String? _validateFee(String? value) {
     if (value?.isEmpty ?? true) {
-      return AppLocalizations.of(context).pleaseEnterFeeAmount;
+      return _feeType == FeeType.percentage
+          ? 'Veuillez entrer le pourcentage'
+          : AppLocalizations.of(context).pleaseEnterFeeAmount;
     }
     final fee = double.tryParse(value!);
     if (fee == null || fee < 0) {
-      return AppLocalizations.of(context).pleaseEnterValidFee;
+      return _feeType == FeeType.percentage
+          ? 'Veuillez entrer un pourcentage valide'
+          : AppLocalizations.of(context).pleaseEnterValidFee;
+    }
+    if (_feeType == FeeType.percentage && fee > 100) {
+      return 'Le pourcentage ne peut pas dépasser 100';
     }
     return null;
   }
@@ -155,7 +263,10 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           id: widget.feeInterval.id,
           minAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_minAmountController.text.trim()) ?? 0),
           maxAmount: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_maxAmountController.text.trim()) ?? 0),
-          fee: context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
+          fee: _feeType == FeeType.percentage
+              ? (ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0)
+              : context.read<CurrencyProvider>().convertToAriary(ConstantUtil.parseLocalizedNumber(_feeController.text.trim()) ?? 0),
+          feeType: _feeType,
           creationDateTime: widget.feeInterval.creationDatetime,
         );
 
