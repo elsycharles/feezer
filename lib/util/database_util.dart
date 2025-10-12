@@ -44,6 +44,7 @@ class DatabaseUtil {
         ${ConstantUtil.columnMinAmount} REAL NOT NULL,
         ${ConstantUtil.columnMaxAmount} REAL NOT NULL,
         ${ConstantUtil.columnFee} REAL NOT NULL,
+        ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0,
         ${ConstantUtil.columnCreationDatetime} INTEGER NOT NULL,
         FOREIGN KEY (${ConstantUtil.columnProviderId}) 
         REFERENCES ${ConstantUtil.tableProviders} (${ConstantUtil.columnId})
@@ -102,9 +103,18 @@ class DatabaseUtil {
         )
       ''');
     }
+    if (oldVersion < 3) {
+      // Migration vers la version 3 : ajout de la colonne fee_type si elle n'existe pas
+      final tableInfo = await db.rawQuery('PRAGMA table_info(${ConstantUtil.tableFeeIntervals})');
+      final hasFeeTypeColumn = tableInfo.any((column) => column['name'] == ConstantUtil.columnFeeType);
+      
+      if (!hasFeeTypeColumn) {
+        await db.execute('ALTER TABLE ${ConstantUtil.tableFeeIntervals} ADD COLUMN ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0');
+      }
+    }
   }
 
-  // Méthodes génériques de base de données
+  // Generic database methods
   Future<int> insert(String table, Map<String, dynamic> values) async {
     final db = await database;
     return await db.insert(table, values);

@@ -1814,6 +1814,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Refreshing...'**
   String get refreshing;
+
+  /// Label for fee type selector
+  ///
+  /// In en, this message translates to:
+  /// **'Fee Type'**
+  String get feeType;
+
+  /// Option for fixed fee amount
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed Amount'**
+  String get fixedAmount;
+
+  /// Option for percentage-based fee
+  ///
+  /// In en, this message translates to:
+  /// **'Percentage'**
+  String get percentage;
+
+  /// Placeholder for percentage input
+  ///
+  /// In en, this message translates to:
+  /// **'Enter percentage'**
+  String get enterPercentage;
+
+  /// Validation error for percentage input
+  ///
+  /// In en, this message translates to:
+  /// **'Percentage must be between 0 and 100'**
+  String get percentageMustBeBetween0And100;
+
+  /// Error message for invalid amount input
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid amount'**
+  String get invalidAmount;
+
+  /// Validation message for missing percentage input
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter percentage'**
+  String get pleaseEnterPercentage;
+
+  /// Validation message for invalid percentage input
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid percentage'**
+  String get pleaseEnterValidPercentage;
+
+  /// Validation error when percentage exceeds 100
+  ///
+  /// In en, this message translates to:
+  /// **'Percentage cannot exceed 100'**
+  String get percentageCannotExceed100;
 }
 
 class _AppLocalizationsDelegate
