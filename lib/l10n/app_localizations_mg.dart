@@ -327,6 +327,69 @@ class AppLocalizationsMg extends AppLocalizations {
       'Fepetra sy politikan\'ny fiainana manokana';
 
   @override
+  String get termsIntroductionTitle => 'Fampidirana';
+
+  @override
+  String get termsIntroductionContent =>
+      'Tongasoa eto amin\'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin\'ny banky. Amin\'ny fampiasana Feezer, manaiky ianao ny ho voafehin\'ireo fepetra ireo. Azafady vakio tsara ireo alohan\'ny hampiasana ny serivisinay.';
+
+  @override
+  String get termsAcceptanceTitle => 'Fanekena ny Fepetra';
+
+  @override
+  String get termsAcceptanceContent =>
+      'Amin\'ny fidirana sy fampiasana Feezer, manaiky ianao ary manaiky ny ho voafehin\'ny fepetra sy fanapahan-kevitry ny fifanarahana. Raha tsy manaiky ny hanaraka ny teo ambony ianao, azafady aza ampiasaina io serivisy io.';
+
+  @override
+  String get termsResponsibilitiesTitle => 'Adidin\'ny Mpampiasa';
+
+  @override
+  String get termsResponsibilitiesContent =>
+      'Ianao no tompon\'andraikitra amin\'ny fitazonana ny tsiambaratelon\'ny mombamomba ny kaontinao ary amin\'ny asa rehetra izay mitranga ao ambanin\'ny kaontinao. Manaiky ianao ny hanome mombamomba marina sy feno amin\'ny fampiasana ny serivisinay ary hanavao ireo mombamomba ireo raha ilaina.';
+
+  @override
+  String get termsServiceTitle => 'Fanoritsoritana ny Serivisy';
+
+  @override
+  String get termsServiceContent =>
+      'Feezer dia fitaovana fanamainana saram-bola izay manampy anao hanisa sy hanatsara ny vidin\'ny fifampiraharahana amin\'ny banky. Ny serivisinay dia manome fanisana saram-bola, soso-kevitra fanatsarana fifampiraharahana, ary votoaty fanabeazana momba ny saram-bola amin\'ny banky. Miezaka izahay ny hanome mombamomba marina, saingy ny fanisana rehetra dia vinavinanana ary tokony hohamarinina amin\'ny orinasam-bola.';
+
+  @override
+  String get termsPrivacyTitle => 'Tsiambaratelo sy Fiarovana Data';
+
+  @override
+  String get termsPrivacyContent =>
+      'Ny tsiambaratelonao dia zava-dehibe ho anay. Feezer dia manangona mombamomba manokana kely indrindra ilaina amin\'ny fanomezana ny serivisinay. Tsy amidy, tsy miantsena, na tsy mamindra ny mombamomba manokana anao amin\'ny olon-kafa izahay raha tsy misy ny faneken\'anao, afa-tsy araka ny voalaza ao amin\'ny Politikan\'ny Tsiambaratelo. Mametraka fepetra fiarovana mety izahay mba hiarovana ny datanao.';
+
+  @override
+  String get termsLiabilityTitle => 'Famaritana ny Adidy';
+
+  @override
+  String get termsLiabilityContent =>
+      'Feezer dia manome serivisy fanisana saram-bola ho an\'ny fanazavana fotsiny. Tsy tompon\'andraikitra amin\'ny fahaverezan-bola, fahasimbana, na fanapahan-kevitra natao mifototra amin\'ny mombamomba omen\'ny app anay izahay. Tokony hohamarinina foana amin\'ny orinasam-bola ny fanisana ary hiresaka amin\'ny mpanolo-tsaina ara-bola ho an\'ny fanapahan-kevitra ara-bola lehibe.';
+
+  @override
+  String get termsTerminationTitle => 'Famaranana';
+
+  @override
+  String get termsTerminationContent =>
+      'Misy zo anay ny hanapaka na hanakana ny kaontinao sy ny fidirana amin\'ny serivisinay araka ny sitraponay ihany, tsy misy fampahafantarana mialoha, amin\'ny fihetsika izay heverinay ho manitsakitsaka ireo Fepetra fampiasana ireo na manimba ny mpampiasa hafa, anay, na ny olon-kafa, na amin\'ny antony hafa.';
+
+  @override
+  String get termsGoverningLawTitle => 'Lalàna Mifehy';
+
+  @override
+  String get termsGoverningLawContent =>
+      'Ireo Fepetra fampiasana ireo dia hofehezina sy hohajaina araka ny lalàn\'ny faritany izay iasan\'ny serivisinay. Ny adin-tsaina rehetra avy amin\'ireo fepetra ireo dia ho voavaha amin\'ny alalan\'ny arbitration binding araka ny fitsipika amin\'ny association arbitration mety.';
+
+  @override
+  String get termsContactTitle => 'Mombamomba ny Fifandraisana';
+
+  @override
+  String get termsContactContent =>
+      'Raha manana fanontaniana momba ireo Fepetra fampiasana ireo ianao, azafady mifandraisa aminay amin\'ny alalan\'ny fizarana fanampiana amin\'ny app na amin\'ny email amin\'ny elsy.s.charles@gmail.com. Hamaly ny fanontaniana anao haingana araka izay tratra izahay.';
+
+  @override
   String get featureComingNextVersion =>
       'Endri-javatra ho avy amin\'ny dikan-kevitra manaraka';
 

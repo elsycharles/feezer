@@ -341,6 +341,78 @@
   "@termsAndPrivacyPolicy": {
     "description": "Terms and privacy policy description"
   },
+  "termsIntroductionTitle": "Fampidirana",
+  "@termsIntroductionTitle": {
+    "description": "Terms of use introduction section title"
+  },
+  "termsIntroductionContent": "Tongasoa eto amin'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin'ny banky. Amin'ny fampiasana Feezer, manaiky ianao ny ho voafehin'ireo fepetra ireo. Azafady vakio tsara ireo alohan'ny hampiasana ny serivisinay.",
+  "@termsIntroductionContent": {
+    "description": "Terms of use introduction section content"
+  },
+  "termsAcceptanceTitle": "Fanekena ny Fepetra",
+  "@termsAcceptanceTitle": {
+    "description": "Terms of use acceptance section title"
+  },
+  "termsAcceptanceContent": "Amin'ny fidirana sy fampiasana Feezer, manaiky ianao ary manaiky ny ho voafehin'ny fepetra sy fanapahan-kevitry ny fifanarahana. Raha tsy manaiky ny hanaraka ny teo ambony ianao, azafady aza ampiasaina io serivisy io.",
+  "@termsAcceptanceContent": {
+    "description": "Terms of use acceptance section content"
+  },
+  "termsResponsibilitiesTitle": "Adidin'ny Mpampiasa",
+  "@termsResponsibilitiesTitle": {
+    "description": "Terms of use user responsibilities section title"
+  },
+  "termsResponsibilitiesContent": "Ianao no tompon'andraikitra amin'ny fitazonana ny tsiambaratelon'ny mombamomba ny kaontinao ary amin'ny asa rehetra izay mitranga ao ambanin'ny kaontinao. Manaiky ianao ny hanome mombamomba marina sy feno amin'ny fampiasana ny serivisinay ary hanavao ireo mombamomba ireo raha ilaina.",
+  "@termsResponsibilitiesContent": {
+    "description": "Terms of use user responsibilities section content"
+  },
+  "termsServiceTitle": "Fanoritsoritana ny Serivisy",
+  "@termsServiceTitle": {
+    "description": "Terms of use service description section title"
+  },
+  "termsServiceContent": "Feezer dia fitaovana fanamainana saram-bola izay manampy anao hanisa sy hanatsara ny vidin'ny fifampiraharahana amin'ny banky. Ny serivisinay dia manome fanisana saram-bola, soso-kevitra fanatsarana fifampiraharahana, ary votoaty fanabeazana momba ny saram-bola amin'ny banky. Miezaka izahay ny hanome mombamomba marina, saingy ny fanisana rehetra dia vinavinanana ary tokony hohamarinina amin'ny orinasam-bola.",
+  "@termsServiceContent": {
+    "description": "Terms of use service description section content"
+  },
+  "termsPrivacyTitle": "Tsiambaratelo sy Fiarovana Data",
+  "@termsPrivacyTitle": {
+    "description": "Terms of use privacy section title"
+  },
+  "termsPrivacyContent": "Ny tsiambaratelonao dia zava-dehibe ho anay. Feezer dia manangona mombamomba manokana kely indrindra ilaina amin'ny fanomezana ny serivisinay. Tsy amidy, tsy miantsena, na tsy mamindra ny mombamomba manokana anao amin'ny olon-kafa izahay raha tsy misy ny faneken'anao, afa-tsy araka ny voalaza ao amin'ny Politikan'ny Tsiambaratelo. Mametraka fepetra fiarovana mety izahay mba hiarovana ny datanao.",
+  "@termsPrivacyContent": {
+    "description": "Terms of use privacy section content"
+  },
+  "termsLiabilityTitle": "Famaritana ny Adidy",
+  "@termsLiabilityTitle": {
+    "description": "Terms of use liability section title"
+  },
+  "termsLiabilityContent": "Feezer dia manome serivisy fanisana saram-bola ho an'ny fanazavana fotsiny. Tsy tompon'andraikitra amin'ny fahaverezan-bola, fahasimbana, na fanapahan-kevitra natao mifototra amin'ny mombamomba omen'ny app anay izahay. Tokony hohamarinina foana amin'ny orinasam-bola ny fanisana ary hiresaka amin'ny mpanolo-tsaina ara-bola ho an'ny fanapahan-kevitra ara-bola lehibe.",
+  "@termsLiabilityContent": {
+    "description": "Terms of use liability section content"
+  },
+  "termsTerminationTitle": "Famaranana",
+  "@termsTerminationTitle": {
+    "description": "Terms of use termination section title"
+  },
+  "termsTerminationContent": "Misy zo anay ny hanapaka na hanakana ny kaontinao sy ny fidirana amin'ny serivisinay araka ny sitraponay ihany, tsy misy fampahafantarana mialoha, amin'ny fihetsika izay heverinay ho manitsakitsaka ireo Fepetra fampiasana ireo na manimba ny mpampiasa hafa, anay, na ny olon-kafa, na amin'ny antony hafa.",
+  "@termsTerminationContent": {
+    "description": "Terms of use termination section content"
+  },
+  "termsGoverningLawTitle": "Lalàna Mifehy",
+  "@termsGoverningLawTitle": {
+    "description": "Terms of use governing law section title"
+  },
+  "termsGoverningLawContent": "Ireo Fepetra fampiasana ireo dia hofehezina sy hohajaina araka ny lalàn'ny faritany izay iasan'ny serivisinay. Ny adin-tsaina rehetra avy amin'ireo fepetra ireo dia ho voavaha amin'ny alalan'ny arbitration binding araka ny fitsipika amin'ny association arbitration mety.",
+  "@termsGoverningLawContent": {
+    "description": "Terms of use governing law section content"
+  },
+  "termsContactTitle": "Mombamomba ny Fifandraisana",
+  "@termsContactTitle": {
+    "description": "Terms of use contact section title"
+  },
+  "termsContactContent": "Raha manana fanontaniana momba ireo Fepetra fampiasana ireo ianao, azafady mifandraisa aminay amin'ny alalan'ny fizarana fanampiana amin'ny app na amin'ny email amin'ny elsy.s.charles@gmail.com. Hamaly ny fanontaniana anao haingana araka izay tratra izahay.",
+  "@termsContactContent": {
+    "description": "Terms of use contact section content"
+  },
   "featureComingNextVersion": "Endri-javatra ho avy amin'ny dikan-kevitra manaraka",
   "@featureComingNextVersion": {
     "description": "Message for upcoming features"

@@ -4,7 +4,6 @@ import '../../util/theme_util.dart';
 import '../../util/preference_util.dart';
 import '../../util/navigation_util.dart';
 import '../../widget/app_bar.dart' as custom;
-import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
 import '../../provider/theme_provider.dart';
@@ -111,7 +110,7 @@ class SettingsScreen extends StatelessWidget {
                   AppLocalizations.of(context).termsOfUse,
                   AppLocalizations.of(context).termsAndPrivacyPolicy,
                   Icons.description_outlined,
-                  onTap: () => _showComingSoon(context),
+                  onTap: () => Navigator.of(context).pushNamed(NavigationUtil.termsOfUseRoute),
                 ),
               ]),
             ],
@@ -183,13 +182,6 @@ class SettingsScreen extends StatelessWidget {
             : null,
         enabled: onTap != null,
       ),
-    );
-  }
-
-  void _showComingSoon(BuildContext context) {
-    AppToast.info(
-      context,
-      AppLocalizations.of(context).featureComingNextVersion,
     );
   }
 
