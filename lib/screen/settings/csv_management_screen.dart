@@ -1317,7 +1317,10 @@ class _ResultItem extends StatelessWidget {
           Icon(icon, color: color, size: 20),
           Global.gapSm,
           Expanded(
-            child: Text(text, style: Theme.of(context).textTheme.bodyMedium),
+            child: Text(
+              text,
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+            ),
           ),
         ],
       ),
