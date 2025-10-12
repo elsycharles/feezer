@@ -90,8 +90,9 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                   onPressed: widget.onClearSelection,
                   icon: Icon(Icons.close, color: colorScheme.onPrimary),
                   tooltip: AppLocalizations.of(context).clearSelection,
+                  visualDensity: VisualDensity.compact,
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 4),
                 Expanded(
                   child: Text(
                     '${widget.selectedCount} ${AppLocalizations.of(context).selected}',
@@ -107,6 +108,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                     onPressed: widget.onSelectAll,
                     icon: Icon(Icons.select_all, color: colorScheme.onPrimary),
                     tooltip: AppLocalizations.of(context).selectAll,
+                    visualDensity: VisualDensity.compact,
                   ),
                 if (widget.onDetails != null)
                   IconButton(
@@ -116,6 +118,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                       color: colorScheme.onPrimary,
                     ),
                     tooltip: AppLocalizations.of(context).details,
+                    visualDensity: VisualDensity.compact,
                   ),
                 if (widget.onEdit != null)
                   IconButton(
@@ -125,6 +128,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                       color: colorScheme.onPrimary,
                     ),
                     tooltip: AppLocalizations.of(context).edit,
+                    visualDensity: VisualDensity.compact,
                   ),
                 IconButton(
                   onPressed: widget.onDelete,
@@ -133,6 +137,7 @@ class _SelectionActionBarState extends State<SelectionActionBar>
                     color: colorScheme.onPrimary,
                   ),
                   tooltip: AppLocalizations.of(context).delete,
+                  visualDensity: VisualDensity.compact,
                 ),
               ],
             ),
