@@ -1341,5 +1341,111 @@
   "providerNameColumnNotFound": "Tsy hita ny tsanganana anaran'ny mpanome",
   "@providerNameColumnNotFound": {
     "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
+  },
+  "templates": "Modely CSV",
+  "@templates": {
+    "description": "Titre de la section des modèles CSV"
+  },
+  "exportCombined": "Hanondrana Mifangaro",
+  "@exportCombined": {
+    "description": "Titre de l'option d'exportation des données combinées"
+  },
+  "exportCombinedDescription": "Hanondrana mpamatsy vola miaraka amin'ny elanelam-pomba azy ireo",
+  "@exportCombinedDescription": {
+    "description": "Description pour l'exportation des données combinées"
+  },
+  "downloadProviderTemplate": "Modely Mpamatsy Vola",
+  "@downloadProviderTemplate": {
+    "description": "Option de téléchargement du modèle CSV pour les fournisseurs"
+  },
+  "csvTemplateForProviders": "Misintona modely CSV ho an'ny fanafarana mpamatsy vola",
+  "@csvTemplateForProviders": {
+    "description": "Description pour le téléchargement du modèle fournisseur"
+  },
+  "downloadFeeTemplate": "Modely Elanelam-pomba",
+  "@downloadFeeTemplate": {
+    "description": "Option de téléchargement du modèle CSV pour les intervalles de frais"
+  },
+  "csvTemplateForFees": "Misintona modely CSV ho an'ny fanafarana sara",
+  "@csvTemplateForFees": {
+    "description": "Description pour le téléchargement du modèle d'intervalles de frais"
+  },
+  "downloadCombinedTemplate": "Modely Mifangaro",
+  "@downloadCombinedTemplate": {
+    "description": "Option de téléchargement du modèle CSV combiné"
+  },
+  "csvTemplateForCombined": "Misintona modely CSV ho an'ny fanafarana mifangaro",
+  "@csvTemplateForCombined": {
+    "description": "Description pour le téléchargement du modèle combiné"
+  },
+  "templateDownloaded": "Voasintona ny Modely",
+  "@templateDownloaded": {
+    "description": "Message de succès du téléchargement du modèle"
+  },
+  "failedToReadFile": "Tsy nahavaky ny rakitra",
+  "@failedToReadFile": {
+    "description": "Message d'erreur lors de la lecture d'un fichier"
+  },
+  "providersImported": "{count} mpamatsy vola voafarana",
+  "@providersImported": {
+    "description": "Message indiquant le nombre de fournisseurs importés",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "feeIntervalsImported": "{count} elanelam-pomba voafarana",
+  "@feeIntervalsImported": {
+    "description": "Message indiquant le nombre d'intervalles de frais importés",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "errorsEncountered": "{count} tsy fetezana hita",
+  "@errorsEncountered": {
+    "description": "Message indiquant le nombre d'erreurs rencontrées",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "3"
+      }
+    }
+  },
+  "backup": "Tahiry",
+  "@backup": {
+    "description": "Titre de l'option de sauvegarde"
+  },
+  "reset": "Averina",
+  "@reset": {
+    "description": "Titre de l'option de réinitialisation"
+  },
+  "clearAllData": "Fafao ny angona rehetra",
+  "@clearAllData": {
+    "description": "Description de la fonctionnalité de réinitialisation"
+  },
+  "confirmReset": "Hanamarina ny Fanavaozana",
+  "@confirmReset": {
+    "description": "Titre de la boîte de dialogue de confirmation de réinitialisation"
+  },
+  "resetWarningMessage": "Izany dia hamafa mandrakizay ny mpamatsy volanao rehetra sy ny elanelam-pomba. Tsy azo ivalozana ity hetsika ity.",
+  "@resetWarningMessage": {
+    "description": "Message d'avertissement pour la réinitialisation des données"
+  },
+  "dataResetSuccessful": "Nahomby ny fanavaozana ny angona",
+  "@dataResetSuccessful": {
+    "description": "Message de succès pour la réinitialisation des données"
+  },
+  "resetFailed": "Tsy nahomby ny fanavaozana",
+  "@resetFailed": {
+    "description": "Message d'échec pour la réinitialisation des données"
+  },
+  "csvImportExportInfo": "Fitantanana angona CSV",
+  "@csvImportExportInfo": {
+    "description": "Titre d'information pour l'import/export CSV"
   }
 }

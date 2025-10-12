@@ -715,7 +715,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get importExportData => 'Ampidiro/Hampidino angona';
 
   @override
-  String get csvImportExportInfo => 'CSV Data Management';
+  String get csvImportExportInfo => 'Fitantanana angona CSV';
 
   @override
   String get csvImportExportDescription =>
@@ -728,34 +728,35 @@ class AppLocalizationsMg extends AppLocalizations {
   String get exportData => 'Hampidino angona';
 
   @override
-  String get templates => 'CSV Templates';
+  String get templates => 'Modely CSV';
 
   @override
-  String get exportCombined => 'Export Combined';
+  String get exportCombined => 'Hanondrana Mifangaro';
 
   @override
   String get exportCombinedDescription =>
-      'Export providers with their fee intervals';
+      'Hanondrana mpamatsy vola miaraka amin\'ny elanelam-pomba azy ireo';
 
   @override
-  String get downloadProviderTemplate => 'Provider Template';
+  String get downloadProviderTemplate => 'Modely Mpamatsy Vola';
 
   @override
   String get csvTemplateForProviders =>
-      'Download CSV template for importing providers';
+      'Misintona modely CSV ho an\'ny fanafarana mpamatsy vola';
 
   @override
-  String get downloadFeeTemplate => 'Fee Intervals Template';
+  String get downloadFeeTemplate => 'Modely Elanelam-pomba';
 
   @override
-  String get csvTemplateForFees => 'Download CSV template for importing fees';
+  String get csvTemplateForFees =>
+      'Misintona modely CSV ho an\'ny fanafarana sara';
 
   @override
-  String get downloadCombinedTemplate => 'Combined Template';
+  String get downloadCombinedTemplate => 'Modely Mifangaro';
 
   @override
   String get csvTemplateForCombined =>
-      'Download CSV template for combined import';
+      'Misintona modely CSV ho an\'ny fanafarana mifangaro';
 
   @override
   String get importSuccessful => 'Nahomby ny fampidirana';
@@ -774,56 +775,56 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get templateDownloaded => 'Template Downloaded';
+  String get templateDownloaded => 'Voasintona ny Modely';
 
   @override
   String get failedToDownloadTemplate => 'Tsy nahomby ny fakana modely';
 
   @override
-  String get failedToReadFile => 'Failed to read file';
+  String get failedToReadFile => 'Tsy nahavaky ny rakitra';
 
   @override
   String providersImported(int count) {
-    return '$count provider(s) imported';
+    return '$count mpamatsy vola voafarana';
   }
 
   @override
   String feeIntervalsImported(int count) {
-    return '$count fee interval(s) imported';
+    return '$count elanelam-pomba voafarana';
   }
 
   @override
   String errorsEncountered(int count) {
-    return '$count error(s) encountered';
+    return '$count tsy fetezana hita';
   }
 
   @override
   String get dataManagement => 'Fitantanana angona';
 
   @override
-  String get backup => 'Backup';
+  String get backup => 'Tahiry';
 
   @override
   String get backupYourData => 'Tahirizo ny angonao';
 
   @override
-  String get reset => 'Reset';
+  String get reset => 'Averina';
 
   @override
-  String get clearAllData => 'Clear all data';
+  String get clearAllData => 'Fafao ny angona rehetra';
 
   @override
-  String get confirmReset => 'Confirm Reset';
+  String get confirmReset => 'Hanamarina ny Fanavaozana';
 
   @override
   String get resetWarningMessage =>
-      'This will permanently delete all your providers and fee intervals. This action cannot be undone.';
+      'Izany dia hamafa mandrakizay ny mpamatsy volanao rehetra sy ny elanelam-pomba. Tsy azo ivalozana ity hetsika ity.';
 
   @override
-  String get dataResetSuccessful => 'Data reset successful';
+  String get dataResetSuccessful => 'Nahomby ny fanavaozana ny angona';
 
   @override
-  String get resetFailed => 'Reset failed';
+  String get resetFailed => 'Tsy nahomby ny fanavaozana';
 
   @override
   String get csvManagement => 'Fitantanana CSV';
