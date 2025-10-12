@@ -13,13 +13,12 @@ class AmountInputWidget extends StatefulWidget {
     required this.onChanged,
     this.min = 0.0,
     this.max = 999999.0,
-    this.step = 1.0,
     this.label = 'Amount',
   });
 
   final double value;
   final ValueChanged<double> onChanged;
-  final double min, max, step;
+  final double min, max;
   final String label;
 
   @override
