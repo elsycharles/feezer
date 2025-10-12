@@ -8,7 +8,7 @@ import '../util/database_util.dart';
 import '../util/constant_util.dart';
 
 class CsvResult {
-  CsvResult({
+  const CsvResult({
     required this.success,
     this.message,
     this.providersCount = 0,
@@ -23,42 +23,52 @@ class CsvResult {
   final List<String> errors;
 }
 
-class CsvUtil {
-  static const String providerNameKey = 'provider_name';
-  static const String providerDescriptionKey = 'provider_description';
-  static const String providerIconKey = 'provider_icon';
-  static const String minAmountKey = 'min_amount';
-  static const String maxAmountKey = 'max_amount';
-  static const String feeKey = 'fee';
+// Configuration centralisée des mappings de colonnes
+class _ColumnMapping {
+  static const providerName = [
+    'provider_name', 'name', 'nom', 'nom_fournisseur', 
+    'provider', 'fournisseur', 'anarany_mpanome'
+  ];
+  
+  static const description = [
+    'provider_description', 'description', 'desc', 'famaritana'
+  ];
+  
+  static const icon = [
+    'provider_icon', 'icon', 'icone', 'sary'
+  ];
+  
+  static const minAmount = [
+    'min_amount', 'min', 'minimum', 'montant_min', 'vola_farany_kely'
+  ];
+  
+  static const maxAmount = [
+    'max_amount', 'max', 'maximum', 'montant_max', 'vola_farany_lehibe'
+  ];
+  
+  static const fee = [
+    'fee', 'fees', 'frais', 'commission', 'sara'
+  ];
+}
 
-  // ID counter pour éviter les doublons
+class CsvUtil {
   static int _idCounter = 0;
 
   static String _generateUniqueId() {
-    final timestamp = DateTime.now().millisecondsSinceEpoch;
-    _idCounter++;
-    return '$timestamp$_idCounter';
+    return '${DateTime.now().millisecondsSinceEpoch}${++_idCounter}';
   }
 
-  // Helper pour parser un ID en toute sécurité
   static int? _parseId(dynamic value) {
     if (value == null) return null;
-    if (value is int) return value;
-    if (value is String) {
-      if (value.isEmpty) return null;
-      return int.tryParse(value);
-    }
-    return null;
+    return value is int ? value : int.tryParse(value.toString());
   }
 
   // ============================================================================
   // IMPORT METHODS
   // ============================================================================
 
-  /// Import data from CSV file - automatically detects type based on columns
   static Future<CsvResult> importFromCsv(String csvContent) async {
     try {
-      // Parse CSV
       final rows = const CsvToListConverter(
         fieldDelimiter: ',',
         textDelimiter: '"',
@@ -67,160 +77,85 @@ class CsvUtil {
       ).convert(csvContent);
 
       if (rows.isEmpty) {
-        return CsvResult(
-          success: false,
-          message: 'CSV file is empty',
-        );
+        return const CsvResult(success: false, message: 'CSV file is empty');
       }
 
-      // Extract headers (first row)
       final headers = rows.first.map((e) => e.toString().trim().toLowerCase()).toList();
-      final dataRows = rows.skip(1).where((row) {
-        // Filtrer les lignes complètement vides
-        return row.any((cell) => cell.toString().trim().isNotEmpty);
-      }).toList();
+      final dataRows = rows.skip(1).where(_isValidRow).toList();
 
       if (dataRows.isEmpty) {
-        return CsvResult(
-          success: false,
-          message: 'No data rows found',
-        );
+        return const CsvResult(success: false, message: 'No data rows found');
       }
 
-      // Detect import type automatically and process
-      final hasProviderName = headers.any((h) =>
-          h == 'provider_name' || 
-          h == 'nom_fournisseur' || 
-          h == 'anaran\'ny_mpanome' ||
-          h == 'provider' ||
-          h == 'fournisseur');
-      
-      final hasDescription = headers.any((h) =>
-          h == 'provider_description' || 
-          h == 'description' ||
-          h == 'famaritana');
-      
-      final hasIcon = headers.any((h) =>
-          h == 'provider_icon' || 
-          h == 'icon' ||
-          h == 'icone' ||
-          h == 'sary');
-      
-      final hasMinAmount = headers.any((h) =>
-          h == 'min_amount' || 
-          h == 'montant_min' ||
-          h == 'vola_farany_kely' ||
-          h == 'min');
-      
-      final hasMaxAmount = headers.any((h) =>
-          h == 'max_amount' || 
-          h == 'montant_max' ||
-          h == 'vola_farany_lehibe' ||
-          h == 'max');
-      
-      final hasFee = headers.any((h) =>
-          h == 'fee' || 
-          h == 'frais' ||
-          h == 'sara');
-
-      final hasFeeFields = hasMinAmount && hasMaxAmount && hasFee;
-      final hasProviderFields = hasDescription || hasIcon;
-
-      // Determine import type and process
-      if (hasProviderName && hasFeeFields && hasProviderFields) {
-        // Combined data
-        return await _importCombined(headers, dataRows);
-      } else if (hasProviderName && hasProviderFields && !hasFeeFields) {
-        // Providers only
-        return await _importProviders(headers, dataRows);
-      } else if (hasProviderName && hasFeeFields) {
-        // Fee intervals only
-        return await _importFeeIntervals(headers, dataRows);
-      } else {
-        // Default to combined import
-        return await _importCombined(headers, dataRows);
-      }
+      return await _processImport(headers, dataRows);
     } catch (e) {
-      return CsvResult(
-        success: false,
-        message: 'Import failed: ${e.toString()}',
-      );
+      return CsvResult(success: false, message: 'Import failed: ${e.toString()}');
     }
   }
 
+  static bool _isValidRow(List<dynamic> row) {
+    return row.any((cell) => cell.toString().trim().isNotEmpty);
+  }
 
+  static Future<CsvResult> _processImport(
+    List<String> headers,
+    List<List<dynamic>> dataRows,
+  ) async {
+    final hasColumn = (List<String> mapping) => 
+      headers.any((h) => mapping.contains(h));
+
+    final hasProviderName = hasColumn(_ColumnMapping.providerName);
+    final hasFeeFields = hasColumn(_ColumnMapping.minAmount) && 
+                        hasColumn(_ColumnMapping.maxAmount) && 
+                        hasColumn(_ColumnMapping.fee);
+    final hasProviderFields = hasColumn(_ColumnMapping.description) || 
+                             hasColumn(_ColumnMapping.icon);
+
+    if (!hasProviderName) {
+      return const CsvResult(
+        success: false,
+        message: 'Provider name column not found',
+      );
+    }
+
+    // Déterminer le type d'import
+    if (hasFeeFields && hasProviderFields) {
+      return await _importCombined(headers, dataRows);
+    } else if (hasProviderFields && !hasFeeFields) {
+      return await _importProviders(headers, dataRows);
+    } else if (hasFeeFields) {
+      return await _importFeeIntervals(headers, dataRows);
+    }
+
+    return await _importCombined(headers, dataRows);
+  }
 
   static Future<CsvResult> _importProviders(
     List<String> headers,
     List<List<dynamic>> dataRows,
   ) async {
     final db = DatabaseUtil();
-    int successCount = 0;
-    final errors = <String>[];
-
-    // Map header indices
-    final nameIndex = _findHeaderIndex(headers, [
-      providerNameKey,
-      'name',
-      'nom',
-      'nom_fournisseur',
-      'provider',
-      'fournisseur',
-      'anaran\'ny_mpanome',
-    ]);
-    final descIndex = _findHeaderIndex(headers, [
-      providerDescriptionKey,
-      'description',
-      'desc',
-      'famaritana',
-    ]);
-    final iconIndex = _findHeaderIndex(headers, [
-      providerIconKey,
-      'icon',
-      'icone',
-      'sary',
-    ]);
-
-    if (nameIndex == -1) {
-      return CsvResult(
+    final indices = _HeaderIndices(headers);
+    
+    if (indices.providerName == -1) {
+      return const CsvResult(
         success: false,
-        message: 'Provider name column not found. Required headers: provider_name, name, nom, provider, fournisseur, or nom_fournisseur',
+        message: 'Provider name column not found',
       );
     }
 
+    int successCount = 0;
+    final errors = <String>[];
+
     for (int i = 0; i < dataRows.length; i++) {
-      try {
-        final row = dataRows[i];
-        final name = _getCellValue(row, nameIndex)?.trim();
-
-        if (name == null || name.isEmpty) {
-          errors.add('Row ${i + 2}: Provider name is required');
-          continue;
-        }
-
-        // Check if provider already exists
-        final existing = await db.query(
-          ConstantUtil.tableProviders,
-          where: '${ConstantUtil.columnName} = ?',
-          whereArgs: [name],
-        );
-
-        if (existing.isNotEmpty) {
-          errors.add('Row ${i + 2}: Provider "$name" already exists');
-          continue;
-        }
-
-        final provider = model.Provider(
-          id: _generateUniqueId(),
-          name: name,
-          description: _getCellValue(row, descIndex)?.trim() ?? '',
-          iconName: _getCellValue(row, iconIndex)?.trim() ?? 'business',
-        );
-
-        await db.insert(ConstantUtil.tableProviders, model.Provider.toMap(provider));
+      final result = await _processProviderRow(
+        db, dataRows[i], indices, i + 2
+      );
+      
+      if (result.success) {
         successCount++;
-      } catch (e) {
-        errors.add('Row ${i + 2}: ${e.toString()}');
+      } else if (result.error != null) {
+        errors.add(result.error!);
       }
     }
 
@@ -232,133 +167,69 @@ class CsvUtil {
     );
   }
 
+  static Future<_RowResult> _processProviderRow(
+    DatabaseUtil db,
+    List<dynamic> row,
+    _HeaderIndices indices,
+    int rowNumber,
+  ) async {
+    try {
+      final name = _getCellValue(row, indices.providerName)?.trim();
+
+      if (name == null || name.isEmpty) {
+        return _RowResult(error: 'Row $rowNumber: Provider name is required');
+      }
+
+      final existing = await db.query(
+        ConstantUtil.tableProviders,
+        where: '${ConstantUtil.columnName} = ?',
+        whereArgs: [name],
+      );
+
+      if (existing.isNotEmpty) {
+        return _RowResult(error: 'Row $rowNumber: Provider "$name" already exists');
+      }
+
+      final provider = model.Provider(
+        id: _generateUniqueId(),
+        name: name,
+        description: _getCellValue(row, indices.description)?.trim() ?? '',
+        iconName: _getCellValue(row, indices.icon)?.trim() ?? 'business',
+      );
+
+      await db.insert(ConstantUtil.tableProviders, model.Provider.toMap(provider));
+      return _RowResult(success: true);
+    } catch (e) {
+      return _RowResult(error: 'Row $rowNumber: ${e.toString()}');
+    }
+  }
+
   static Future<CsvResult> _importFeeIntervals(
     List<String> headers,
     List<List<dynamic>> dataRows,
   ) async {
     final db = DatabaseUtil();
-    int successCount = 0;
-    final errors = <String>[];
+    final indices = _HeaderIndices(headers);
 
-    // Map header indices
-    final providerNameIndex = _findHeaderIndex(headers, [
-      providerNameKey,
-      'provider',
-      'provider_name',
-      'fournisseur',
-      'nom_fournisseur',
-      'anaran\'ny_mpanome',
-    ]);
-    final minIndex = _findHeaderIndex(headers, [
-      minAmountKey,
-      'min',
-      'minimum',
-      'min_amount',
-      'montant_min',
-      'vola_farany_kely',
-    ]);
-    final maxIndex = _findHeaderIndex(headers, [
-      maxAmountKey,
-      'max',
-      'maximum',
-      'max_amount',
-      'montant_max',
-      'vola_farany_lehibe',
-    ]);
-    final feeIndex = _findHeaderIndex(headers, [
-      feeKey,
-      'fee',
-      'fees',
-      'frais',
-      'commission',
-      'sara',
-    ]);
-
-    if (providerNameIndex == -1) {
-      return CsvResult(
-        success: false,
-        message: 'Provider name column not found',
-      );
-    }
-
-    if (minIndex == -1 || maxIndex == -1 || feeIndex == -1) {
-      return CsvResult(
+    if (!indices.hasValidFeeColumns) {
+      return const CsvResult(
         success: false,
         message: 'Required columns not found: min_amount, max_amount, and fee',
       );
     }
 
+    int successCount = 0;
+    final errors = <String>[];
+
     for (int i = 0; i < dataRows.length; i++) {
-      try {
-        final row = dataRows[i];
-        final providerName = _getCellValue(row, providerNameIndex)?.trim();
-        final minStr = _getCellValue(row, minIndex);
-        final maxStr = _getCellValue(row, maxIndex);
-        final feeStr = _getCellValue(row, feeIndex);
-
-        if (providerName == null || providerName.isEmpty) {
-          errors.add('Row ${i + 2}: Provider name is required');
-          continue;
-        }
-
-        // Find provider
-        final providers = await db.query(
-          ConstantUtil.tableProviders,
-          where: '${ConstantUtil.columnName} = ?',
-          whereArgs: [providerName],
-        );
-
-        if (providers.isEmpty) {
-          errors.add('Row ${i + 2}: Provider "$providerName" not found');
-          continue;
-        }
-
-        final providerIdValue = providers.first[ConstantUtil.columnId];
-        final providerId = _parseId(providerIdValue);
-
-        if (providerId == null) {
-          errors.add('Row ${i + 2}: Invalid provider ID');
-          continue;
-        }
-
-        // Parse amounts
-        final min = _parseAmount(minStr);
-        final max = _parseAmount(maxStr);
-        final fee = _parseAmount(feeStr);
-
-        if (min == null || max == null || fee == null) {
-          errors.add('Row ${i + 2}: Invalid amounts (min: $minStr, max: $maxStr, fee: $feeStr)');
-          continue;
-        }
-
-        if (min >= max) {
-          errors.add('Row ${i + 2}: Min amount ($min) must be less than max amount ($max)');
-          continue;
-        }
-
-        if (fee < 0) {
-          errors.add('Row ${i + 2}: Fee must be positive');
-          continue;
-        }
-
-        // Vérifier les chevauchements d'intervalles
-        final overlapping = await _checkIntervalOverlap(db, providerId, min, max);
-        if (overlapping != null) {
-          errors.add('Row ${i + 2}: Interval overlaps with existing interval ($overlapping)');
-          continue;
-        }
-
-        final feeInterval = FeeInterval(
-          id: _generateUniqueId(),
-          minAmount: min,
-          maxAmount: max,
-          fee: fee,
-        );
-
-        await db.insert(ConstantUtil.tableFeeIntervals, FeeInterval.toMap(feeInterval, providerId.toString()));
+      final result = await _processFeeIntervalRow(
+        db, dataRows[i], indices, i + 2
+      );
+      
+      if (result.success) {
         successCount++;
-      } catch (e) {
-        errors.add('Row ${i + 2}: ${e.toString()}');
+      } else if (result.error != null) {
+        errors.add(result.error!);
       }
     }
 
@@ -368,6 +239,97 @@ class CsvUtil {
       feeIntervalsCount: successCount,
       errors: errors,
     );
+  }
+
+  static Future<_RowResult> _processFeeIntervalRow(
+    DatabaseUtil db,
+    List<dynamic> row,
+    _HeaderIndices indices,
+    int rowNumber,
+  ) async {
+    try {
+      final providerName = _getCellValue(row, indices.providerName)?.trim();
+      
+      if (providerName == null || providerName.isEmpty) {
+        return _RowResult(error: 'Row $rowNumber: Provider name is required');
+      }
+
+      final providerId = await _getProviderId(db, providerName);
+      if (providerId == null) {
+        return _RowResult(error: 'Row $rowNumber: Provider "$providerName" not found');
+      }
+
+      final amounts = _parseRowAmounts(row, indices);
+      final validation = _validateAmounts(amounts, rowNumber);
+      
+      if (validation != null) {
+        return _RowResult(error: validation);
+      }
+
+      final overlap = await _checkIntervalOverlap(
+        db, providerId, amounts.min!, amounts.max!
+      );
+      
+      if (overlap != null) {
+        return _RowResult(
+          error: 'Row $rowNumber: Interval overlaps with existing interval ($overlap)'
+        );
+      }
+
+      final feeInterval = FeeInterval(
+        id: _generateUniqueId(),
+        minAmount: amounts.min!,
+        maxAmount: amounts.max!,
+        fee: amounts.fee!,
+      );
+
+      await db.insert(
+        ConstantUtil.tableFeeIntervals,
+        FeeInterval.toMap(feeInterval, providerId.toString())
+      );
+      
+      return _RowResult(success: true);
+    } catch (e) {
+      return _RowResult(error: 'Row $rowNumber: ${e.toString()}');
+    }
+  }
+
+  static Future<int?> _getProviderId(DatabaseUtil db, String providerName) async {
+    final providers = await db.query(
+      ConstantUtil.tableProviders,
+      where: '${ConstantUtil.columnName} = ?',
+      whereArgs: [providerName],
+    );
+
+    if (providers.isEmpty) return null;
+    return _parseId(providers.first[ConstantUtil.columnId]);
+  }
+
+  static _AmountData _parseRowAmounts(List<dynamic> row, _HeaderIndices indices) {
+    return _AmountData(
+      min: _parseAmount(_getCellValue(row, indices.minAmount)),
+      max: _parseAmount(_getCellValue(row, indices.maxAmount)),
+      fee: _parseAmount(_getCellValue(row, indices.fee)),
+      minStr: _getCellValue(row, indices.minAmount),
+      maxStr: _getCellValue(row, indices.maxAmount),
+      feeStr: _getCellValue(row, indices.fee),
+    );
+  }
+
+  static String? _validateAmounts(_AmountData amounts, int rowNumber) {
+    if (amounts.min == null || amounts.max == null || amounts.fee == null) {
+      return 'Row $rowNumber: Invalid amounts (min: ${amounts.minStr}, max: ${amounts.maxStr}, fee: ${amounts.feeStr})';
+    }
+
+    if (amounts.min! >= amounts.max!) {
+      return 'Row $rowNumber: Min amount (${amounts.min}) must be less than max amount (${amounts.max})';
+    }
+
+    if (amounts.fee! < 0) {
+      return 'Row $rowNumber: Fee must be positive';
+    }
+
+    return null;
   }
 
   static Future<String?> _checkIntervalOverlap(
@@ -386,10 +348,7 @@ class CsvUtil {
       final existingMin = (interval[ConstantUtil.columnMinAmount] as num).toDouble();
       final existingMax = (interval[ConstantUtil.columnMaxAmount] as num).toDouble();
 
-      // Vérifier le chevauchement
-      if ((min >= existingMin && min < existingMax) ||
-          (max > existingMin && max <= existingMax) ||
-          (min <= existingMin && max >= existingMax)) {
+      if (_hasOverlap(min, max, existingMin, existingMax)) {
         return '$existingMin - $existingMax';
       }
     }
@@ -397,184 +356,32 @@ class CsvUtil {
     return null;
   }
 
+  static bool _hasOverlap(double min, double max, double existingMin, double existingMax) {
+    return (min >= existingMin && min < existingMax) ||
+           (max > existingMin && max <= existingMax) ||
+           (min <= existingMin && max >= existingMax);
+  }
+
   static Future<CsvResult> _importCombined(
     List<String> headers,
     List<List<dynamic>> dataRows,
   ) async {
     final db = DatabaseUtil();
+    final indices = _HeaderIndices(headers);
     int providersCount = 0;
     int feesCount = 0;
     final errors = <String>[];
 
-    // Map header indices
-    final providerNameIndex = _findHeaderIndex(headers, [
-      providerNameKey,
-      'provider',
-      'provider_name',
-      'fournisseur',
-      'nom_fournisseur',
-      'anaran\'ny_mpanome',
-    ]);
-    final descIndex = _findHeaderIndex(headers, [
-      providerDescriptionKey,
-      'description',
-      'desc',
-      'famaritana',
-    ]);
-    final iconIndex = _findHeaderIndex(headers, [
-      providerIconKey,
-      'icon',
-      'icone',
-      'sary',
-    ]);
-    final minIndex = _findHeaderIndex(headers, [
-      minAmountKey,
-      'min',
-      'minimum',
-      'montant_min',
-      'vola_farany_kely',
-    ]);
-    final maxIndex = _findHeaderIndex(headers, [
-      maxAmountKey,
-      'max',
-      'maximum',
-      'montant_max',
-      'vola_farany_lehibe',
-    ]);
-    final feeIndex = _findHeaderIndex(headers, [
-      feeKey,
-      'fee',
-      'frais',
-      'sara',
-    ]);
+    final providerGroups = _groupRowsByProvider(dataRows, indices);
 
-    if (providerNameIndex == -1) {
-      return CsvResult(
-        success: false,
-        message: 'Provider name column not found',
+    for (final entry in providerGroups.entries) {
+      final result = await _processProviderGroup(
+        db, entry.key, entry.value, dataRows, indices
       );
-    }
-
-    // Group rows by provider
-    final providerMap = <String, List<int>>{};
-    for (int i = 0; i < dataRows.length; i++) {
-      final providerName = _getCellValue(dataRows[i], providerNameIndex)?.trim();
-      if (providerName != null && providerName.isNotEmpty) {
-        providerMap.putIfAbsent(providerName, () => []).add(i);
-      }
-    }
-
-    // Process each provider
-    for (final entry in providerMap.entries) {
-      final providerName = entry.key;
-      final rowIndices = entry.value;
-
-      try {
-        // Check if provider exists
-        var providers = await db.query(
-          ConstantUtil.tableProviders,
-          where: '${ConstantUtil.columnName} = ?',
-          whereArgs: [providerName],
-        );
-
-        int? providerId;
-
-        if (providers.isEmpty) {
-          // Create provider - prendre description et icône de la première ligne non-vide
-          String? description;
-          String? iconName;
-
-          for (final rowIndex in rowIndices) {
-            final row = dataRows[rowIndex];
-            if (description == null || description.isEmpty) {
-              description = _getCellValue(row, descIndex)?.trim();
-            }
-            if (iconName == null || iconName.isEmpty) {
-              iconName = _getCellValue(row, iconIndex)?.trim();
-            }
-            if ((description != null && description.isNotEmpty) && 
-                (iconName != null && iconName.isNotEmpty)) {
-              break;
-            }
-          }
-
-          final provider = model.Provider(
-            id: _generateUniqueId(),
-            name: providerName,
-            description: description ?? '',
-            iconName: iconName ?? 'business',
-          );
-
-          await db.insert(ConstantUtil.tableProviders, model.Provider.toMap(provider));
-          providerId = _parseId(provider.id);
-          providersCount++;
-        } else {
-          final providerIdValue = providers.first[ConstantUtil.columnId];
-          providerId = _parseId(providerIdValue);
-        }
-
-        if (providerId == null) {
-          errors.add('Provider "$providerName": Invalid provider ID');
-          continue;
-        }
-
-        // Import fee intervals for this provider
-        for (final rowIndex in rowIndices) {
-          try {
-            final row = dataRows[rowIndex];
-            final minStr = _getCellValue(row, minIndex);
-            final maxStr = _getCellValue(row, maxIndex);
-            final feeStr = _getCellValue(row, feeIndex);
-
-            // Skip if no fee data
-            if ((minStr == null || minStr.trim().isEmpty) &&
-                (maxStr == null || maxStr.trim().isEmpty) &&
-                (feeStr == null || feeStr.trim().isEmpty)) {
-              continue;
-            }
-
-            final min = _parseAmount(minStr);
-            final max = _parseAmount(maxStr);
-            final fee = _parseAmount(feeStr);
-
-            if (min == null || max == null || fee == null) {
-              errors.add('Row ${rowIndex + 2}: Invalid amounts for provider "$providerName" (min: $minStr, max: $maxStr, fee: $feeStr)');
-              continue;
-            }
-
-            if (min >= max) {
-              errors.add('Row ${rowIndex + 2}: Min ($min) must be less than max ($max)');
-              continue;
-            }
-
-            if (fee < 0) {
-              errors.add('Row ${rowIndex + 2}: Fee must be positive');
-              continue;
-            }
-
-            // Vérifier les chevauchements
-            final overlapping = await _checkIntervalOverlap(db, providerId, min, max);
-            if (overlapping != null) {
-              errors.add('Row ${rowIndex + 2}: Interval overlaps with existing interval ($overlapping)');
-              continue;
-            }
-
-            final feeInterval = FeeInterval(
-              id: _generateUniqueId(),
-              minAmount: min,
-              maxAmount: max,
-              fee: fee,
-            );
-
-            await db.insert(ConstantUtil.tableFeeIntervals, FeeInterval.toMap(feeInterval, providerId.toString()));
-            feesCount++;
-          } catch (e) {
-            errors.add('Row ${rowIndex + 2}: ${e.toString()}');
-          }
-        }
-      } catch (e) {
-        errors.add('Provider "$providerName": ${e.toString()}');
-      }
+      
+      providersCount += result.providersAdded;
+      feesCount += result.feesAdded;
+      errors.addAll(result.errors);
     }
 
     return CsvResult(
@@ -586,30 +393,182 @@ class CsvUtil {
     );
   }
 
+  static Map<String, List<int>> _groupRowsByProvider(
+    List<List<dynamic>> dataRows,
+    _HeaderIndices indices,
+  ) {
+    final groups = <String, List<int>>{};
+    
+    for (int i = 0; i < dataRows.length; i++) {
+      final providerName = _getCellValue(dataRows[i], indices.providerName)?.trim();
+      if (providerName != null && providerName.isNotEmpty) {
+        groups.putIfAbsent(providerName, () => []).add(i);
+      }
+    }
+    
+    return groups;
+  }
+
+  static Future<_GroupResult> _processProviderGroup(
+    DatabaseUtil db,
+    String providerName,
+    List<int> rowIndices,
+    List<List<dynamic>> dataRows,
+    _HeaderIndices indices,
+  ) async {
+    try {
+      final providerId = await _ensureProviderExists(
+        db, providerName, rowIndices, dataRows, indices
+      );
+
+      if (providerId == null) {
+        return _GroupResult(
+          errors: ['Provider "$providerName": Invalid provider ID']
+        );
+      }
+
+      final result = await _importGroupFeeIntervals(
+        db, providerId, rowIndices, dataRows, indices, providerName
+      );
+
+      return result;
+    } catch (e) {
+      return _GroupResult(
+        errors: ['Provider "$providerName": ${e.toString()}']
+      );
+    }
+  }
+
+  static Future<int?> _ensureProviderExists(
+    DatabaseUtil db,
+    String providerName,
+    List<int> rowIndices,
+    List<List<dynamic>> dataRows,
+    _HeaderIndices indices,
+  ) async {
+    var providers = await db.query(
+      ConstantUtil.tableProviders,
+      where: '${ConstantUtil.columnName} = ?',
+      whereArgs: [providerName],
+    );
+
+    if (providers.isNotEmpty) {
+      return _parseId(providers.first[ConstantUtil.columnId]);
+    }
+
+    // Créer le provider avec les infos de la première ligne valide
+    final providerData = _extractProviderData(rowIndices, dataRows, indices);
+    
+    final provider = model.Provider(
+      id: _generateUniqueId(),
+      name: providerName,
+      description: providerData.description,
+      iconName: providerData.iconName,
+    );
+
+    await db.insert(ConstantUtil.tableProviders, model.Provider.toMap(provider));
+    return _parseId(provider.id);
+  }
+
+  static _ProviderData _extractProviderData(
+    List<int> rowIndices,
+    List<List<dynamic>> dataRows,
+    _HeaderIndices indices,
+  ) {
+    String? description;
+    String? iconName;
+
+    for (final rowIndex in rowIndices) {
+      final row = dataRows[rowIndex];
+      description ??= _getCellValue(row, indices.description)?.trim();
+      iconName ??= _getCellValue(row, indices.icon)?.trim();
+      
+      if (description != null && iconName != null) break;
+    }
+
+    return _ProviderData(
+      description: description ?? '',
+      iconName: iconName ?? 'business',
+    );
+  }
+
+  static Future<_GroupResult> _importGroupFeeIntervals(
+    DatabaseUtil db,
+    int providerId,
+    List<int> rowIndices,
+    List<List<dynamic>> dataRows,
+    _HeaderIndices indices,
+    String providerName,
+  ) async {
+    int providersAdded = rowIndices.isEmpty ? 0 : 1;
+    int feesAdded = 0;
+    final errors = <String>[];
+
+    for (final rowIndex in rowIndices) {
+      final row = dataRows[rowIndex];
+      final amounts = _parseRowAmounts(row, indices);
+
+      if (_isEmptyFeeRow(amounts)) continue;
+
+      final validation = _validateAmounts(amounts, rowIndex + 2);
+      if (validation != null) {
+        errors.add(validation);
+        continue;
+      }
+
+      final overlap = await _checkIntervalOverlap(
+        db, providerId, amounts.min!, amounts.max!
+      );
+      
+      if (overlap != null) {
+        errors.add('Row ${rowIndex + 2}: Interval overlaps with existing interval ($overlap)');
+        continue;
+      }
+
+      final feeInterval = FeeInterval(
+        id: _generateUniqueId(),
+        minAmount: amounts.min!,
+        maxAmount: amounts.max!,
+        fee: amounts.fee!,
+      );
+
+      await db.insert(
+        ConstantUtil.tableFeeIntervals,
+        FeeInterval.toMap(feeInterval, providerId.toString())
+      );
+      feesAdded++;
+    }
+
+    return _GroupResult(
+      providersAdded: providersAdded,
+      feesAdded: feesAdded,
+      errors: errors,
+    );
+  }
+
+  static bool _isEmptyFeeRow(_AmountData amounts) {
+    return (amounts.minStr == null || amounts.minStr!.isEmpty) &&
+           (amounts.maxStr == null || amounts.maxStr!.isEmpty) &&
+           (amounts.feeStr == null || amounts.feeStr!.isEmpty);
+  }
+
   // ============================================================================
   // EXPORT METHODS
   // ============================================================================
 
-  /// Export all data to CSV file (always combined format)
   static Future<CsvResult> exportToCsv({
     String? providerId,
     String locale = 'en',
   }) async {
     try {
       final db = DatabaseUtil();
-      final csvData = await _exportCombined(db, providerId, locale);
+      final csvData = await _buildExportData(db, providerId, locale);
 
       if (csvData.length <= 1) {
-        return CsvResult(
-          success: false,
-          message: 'No data to export',
-        );
+        return const CsvResult(success: false, message: 'No data to export');
       }
 
-      // Convert to CSV string
       final csvString = const ListToCsvConverter().convert(csvData);
-
-      // Save and share file
       final filePath = await _saveCsvFile(csvString, 'combined');
       await Share.shareXFiles([XFile(filePath)]);
 
@@ -617,86 +576,87 @@ class CsvUtil {
         success: true,
         message: 'Export successful',
         providersCount: csvData.where((row) => row[0].toString().isNotEmpty).length - 1,
-        feeIntervalsCount: csvData.length - csvData.where((row) => row[0].toString().isEmpty).length - 1,
+        feeIntervalsCount: csvData.length - 1,
       );
     } catch (e) {
-      return CsvResult(
-        success: false,
-        message: 'Export failed: ${e.toString()}',
-      );
+      return CsvResult(success: false, message: 'Export failed: ${e.toString()}');
     }
   }
 
-  static Future<List<List<dynamic>>> _exportCombined(
+  static Future<List<List<dynamic>>> _buildExportData(
     DatabaseUtil db,
     String? providerId,
     String locale,
   ) async {
-    String? whereClause;
-    List<dynamic>? whereArgs;
-
-    if (providerId != null && providerId.isNotEmpty) {
-      final parsedId = _parseId(providerId);
-      if (parsedId != null) {
-        whereClause = '${ConstantUtil.columnId} = ?';
-        whereArgs = [parsedId];
-      }
-    }
-
-    final providers = await db.query(
-      ConstantUtil.tableProviders,
-      where: whereClause,
-      whereArgs: whereArgs,
-    );
-
-    final headers = _getCombinedHeaders(locale);
+    final providers = await _fetchProviders(db, providerId);
+    final headers = _getHeaders(locale);
     final csvData = <List<dynamic>>[headers];
 
     for (final provider in providers) {
-      final providerIdValue = provider[ConstantUtil.columnId];
-      final parsedProviderId = _parseId(providerIdValue);
-
-      if (parsedProviderId == null) continue;
+      final providerIdValue = _parseId(provider[ConstantUtil.columnId]);
+      if (providerIdValue == null) continue;
 
       final feeIntervals = await db.query(
         ConstantUtil.tableFeeIntervals,
         where: '${ConstantUtil.columnProviderId} = ?',
-        whereArgs: [parsedProviderId],
+        whereArgs: [providerIdValue],
       );
 
-      if (feeIntervals.isEmpty) {
-        // Provider without fee intervals
-        csvData.add([
-          provider[ConstantUtil.columnName] ?? '',
-          provider[ConstantUtil.columnDescription] ?? '',
-          provider[ConstantUtil.columnIconName] ?? 'business',
-          '',
-          '',
-          '',
-        ]);
-      } else {
-        // Provider with fee intervals
-        for (final fee in feeIntervals) {
-          csvData.add([
-            provider[ConstantUtil.columnName] ?? '',
-            provider[ConstantUtil.columnDescription] ?? '',
-            provider[ConstantUtil.columnIconName] ?? 'business',
-            fee[ConstantUtil.columnMinAmount] ?? 0,
-            fee[ConstantUtil.columnMaxAmount] ?? 0,
-            fee[ConstantUtil.columnFee] ?? 0,
-          ]);
-        }
-      }
+      _addProviderRows(csvData, provider, feeIntervals);
     }
 
     return csvData;
   }
 
+  static Future<List<Map<String, dynamic>>> _fetchProviders(
+    DatabaseUtil db,
+    String? providerId,
+  ) async {
+    if (providerId == null || providerId.isEmpty) {
+      return await db.query(ConstantUtil.tableProviders);
+    }
+
+    final parsedId = _parseId(providerId);
+    if (parsedId == null) {
+      return await db.query(ConstantUtil.tableProviders);
+    }
+
+    return await db.query(
+      ConstantUtil.tableProviders,
+      where: '${ConstantUtil.columnId} = ?',
+      whereArgs: [parsedId],
+    );
+  }
+
+  static void _addProviderRows(
+    List<List<dynamic>> csvData,
+    Map<String, dynamic> provider,
+    List<Map<String, dynamic>> feeIntervals,
+  ) {
+    final baseRow = [
+      provider[ConstantUtil.columnName] ?? '',
+      provider[ConstantUtil.columnDescription] ?? '',
+      provider[ConstantUtil.columnIconName] ?? 'business',
+    ];
+
+    if (feeIntervals.isEmpty) {
+      csvData.add([...baseRow, '', '', '']);
+    } else {
+      for (final fee in feeIntervals) {
+        csvData.add([
+          ...baseRow,
+          fee[ConstantUtil.columnMinAmount] ?? 0,
+          fee[ConstantUtil.columnMaxAmount] ?? 0,
+          fee[ConstantUtil.columnFee] ?? 0,
+        ]);
+      }
+    }
+  }
+
   static Future<String> _saveCsvFile(String csvContent, String type) async {
     final directory = await getTemporaryDirectory();
     final timestamp = DateTime.now().millisecondsSinceEpoch;
-    final fileName = '${type}_$timestamp.csv';
-    final file = File('${directory.path}/$fileName');
+    final file = File('${directory.path}/${type}_$timestamp.csv');
     await file.writeAsString(csvContent);
     return file.path;
   }
@@ -715,36 +675,28 @@ class CsvUtil {
 
   static String? _getCellValue(List<dynamic> row, int index) {
     if (index == -1 || index >= row.length) return null;
-    final value = row[index];
-    if (value == null) return null;
-    final stringValue = value.toString().trim();
-    return stringValue.isEmpty ? null : stringValue;
+    final value = row[index]?.toString().trim();
+    return (value == null || value.isEmpty) ? null : value;
   }
 
   static double? _parseAmount(String? value) {
     if (value == null || value.trim().isEmpty) return null;
-
-    // Remove spaces and replace comma with dot
     final cleaned = value.trim().replaceAll(' ', '').replaceAll(',', '.');
-
     return double.tryParse(cleaned);
   }
 
-  // Headers in different languages
-  static List<String> _getCombinedHeaders(String locale) {
-    switch (locale) {
-      case 'fr':
-        return ['nom_fournisseur', 'description', 'icone', 'montant_min', 'montant_max', 'frais'];
-      case 'mg':
-        return ['anaran\'ny_mpanome', 'famaritana', 'sary', 'vola_farany_kely', 'vola_farany_lehibe', 'sara'];
-      default:
-        return ['provider_name', 'provider_description', 'provider_icon', 'min_amount', 'max_amount', 'fee'];
-    }
+  static List<String> _getHeaders(String locale) {
+    const headers = {
+      'fr': ['nom_fournisseur', 'description', 'icone', 'montant_min', 'montant_max', 'frais'],
+      'mg': ['anarany_mpanome', 'famaritana', 'sary', 'vola_farany_kely', 'vola_farany_lehibe', 'sara'],
+    };
+    
+    return headers[locale] ?? 
+      ['provider_name', 'provider_description', 'provider_icon', 'min_amount', 'max_amount', 'fee'];
   }
 
-  /// Generate CSV template for import (combined format)
   static String getImportTemplate(String locale) {
-    final headers = _getCombinedHeaders(locale);
+    final headers = _getHeaders(locale);
     final template = [
       headers,
       ['TELMA', 'Mobile provider', 'phone', '0', '5000', '10'],
@@ -754,4 +706,75 @@ class CsvUtil {
 
     return const ListToCsvConverter().convert(template);
   }
+}
+
+// ============================================================================
+// HELPER CLASSES
+// ============================================================================
+
+class _HeaderIndices {
+  _HeaderIndices(List<String> headers)
+      : providerName = CsvUtil._findHeaderIndex(headers, _ColumnMapping.providerName),
+        description = CsvUtil._findHeaderIndex(headers, _ColumnMapping.description),
+        icon = CsvUtil._findHeaderIndex(headers, _ColumnMapping.icon),
+        minAmount = CsvUtil._findHeaderIndex(headers, _ColumnMapping.minAmount),
+        maxAmount = CsvUtil._findHeaderIndex(headers, _ColumnMapping.maxAmount),
+        fee = CsvUtil._findHeaderIndex(headers, _ColumnMapping.fee);
+
+  final int providerName;
+  final int description;
+  final int icon;
+  final int minAmount;
+  final int maxAmount;
+  final int fee;
+
+  bool get hasValidFeeColumns => 
+    providerName != -1 && minAmount != -1 && maxAmount != -1 && fee != -1;
+}
+
+class _RowResult {
+  const _RowResult({this.success = false, this.error});
+  
+  final bool success;
+  final String? error;
+}
+
+class _AmountData {
+  const _AmountData({
+    this.min,
+    this.max,
+    this.fee,
+    this.minStr,
+    this.maxStr,
+    this.feeStr,
+  });
+
+  final double? min;
+  final double? max;
+  final double? fee;
+  final String? minStr;
+  final String? maxStr;
+  final String? feeStr;
+}
+
+class _ProviderData {
+  const _ProviderData({
+    required this.description,
+    required this.iconName,
+  });
+
+  final String description;
+  final String iconName;
+}
+
+class _GroupResult {
+  const _GroupResult({
+    this.providersAdded = 0,
+    this.feesAdded = 0,
+    this.errors = const [],
+  });
+
+  final int providersAdded;
+  final int feesAdded;
+  final List<String> errors;
 }
