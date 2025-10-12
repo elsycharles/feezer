@@ -1,10 +1,7 @@
 import '../util/constant_util.dart';
 
 /// Type of fee calculation
-enum FeeType {
-  fixed,
-  percentage,
-}
+enum FeeType { fixed, percentage }
 
 /// Comprehensive FeeInterval model with validation and serialization
 class FeeInterval {
@@ -43,8 +40,10 @@ class FeeInterval {
 
   /// Validates the fee interval
   bool get isValid {
-    if ((minAmount ?? 0) < 0 || (maxAmount ?? 0) <= (minAmount ?? 0)) return false;
-    
+    if ((minAmount ?? 0) < 0 || (maxAmount ?? 0) <= (minAmount ?? 0)) {
+      return false;
+    }
+
     final feeValue = fee ?? 0;
     if (feeType == FeeType.percentage) {
       return feeValue >= 0 && feeValue <= 100;
@@ -54,14 +53,20 @@ class FeeInterval {
   }
 
   /// Gets formatted amount range with currency symbol and exchange rate conversion
-  String formattedRangeWithSymbol(String currencySymbol, [double exchangeRate = 1.0]) {
+  String formattedRangeWithSymbol(
+    String currencySymbol, [
+    double exchangeRate = 1.0,
+  ]) {
     final min = (minAmount ?? 0) / exchangeRate;
     final max = (maxAmount ?? 0) / exchangeRate;
     return '${ConstantUtil.formatCurrencyAmount(min)} - ${ConstantUtil.formatCurrencyAmount(max)} $currencySymbol';
   }
 
   /// Gets formatted fee with currency symbol and exchange rate conversion
-  String formattedFeeWithSymbol(String currencySymbol, [double exchangeRate = 1.0]) {
+  String formattedFeeWithSymbol(
+    String currencySymbol, [
+    double exchangeRate = 1.0,
+  ]) {
     final feeValue = fee ?? 0;
     if (feeType == FeeType.percentage) {
       return '${feeValue.toStringAsFixed(2)}%';
@@ -76,8 +81,8 @@ class FeeInterval {
       minAmount: map['min_amount']?.toDouble(),
       maxAmount: map['max_amount']?.toDouble(),
       fee: map['fee']?.toDouble(),
-      feeType: map['fee_type'] != null 
-          ? FeeType.values[map['fee_type'] as int] 
+      feeType: map['fee_type'] != null
+          ? FeeType.values[map['fee_type'] as int]
           : FeeType.fixed, // Default to fixed for backward compatibility
       creationDateTime: DateTime.fromMillisecondsSinceEpoch(
         map['creation_datetime'] ?? DateTime.now().millisecondsSinceEpoch,

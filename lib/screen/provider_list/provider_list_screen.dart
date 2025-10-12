@@ -55,7 +55,9 @@ class _State extends State<ProviderListScreen> {
     setState(() => _isLoading = true);
     final db = DatabaseUtil();
     final providerMaps = await db.query(ConstantUtil.tableProviders);
-    final loadedProviders = providerMaps.map((map) => Provider.fromMap(map)).toList();
+    final loadedProviders = providerMaps
+        .map((map) => Provider.fromMap(map))
+        .toList();
     if (mounted) {
       setState(() {
         _providers
@@ -116,61 +118,61 @@ class _State extends State<ProviderListScreen> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: custom.AppBar(
-          title: AppLocalizations.of(context).providers,
-          menuExcludeRoutes: [NavigationUtil.providersRoute],
-        ),
-        bottomNavigationBar: _selectedIds.isEmpty
-            ? _buildAddProviderButton(colorScheme)
-            : null,
-        body: SafeArea(
-          child: RefreshableScreen(
-            onRefresh: _loadProviders,
-            child: Column(
-              children: [
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: custom.AppBar(
+        title: AppLocalizations.of(context).providers,
+        menuExcludeRoutes: [NavigationUtil.providersRoute],
+      ),
+      bottomNavigationBar: _selectedIds.isEmpty
+          ? _buildAddProviderButton(colorScheme)
+          : null,
+      body: SafeArea(
+        child: RefreshableScreen(
+          onRefresh: _loadProviders,
+          child: Column(
+            children: [
+              Global.gapMd,
+              ProviderHeader(providerCount: _providers.length),
+              Global.gapLg,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SearchField(
+                  hintText: AppLocalizations.of(context).searchProviders,
+                  controller: _searchController,
+                ),
+              ),
+              if (_selectedIds.isNotEmpty) ...[
                 Global.gapMd,
-                ProviderHeader(providerCount: _providers.length),
-                Global.gapLg,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SearchField(
-                    hintText: AppLocalizations.of(context).searchProviders,
-                    controller: _searchController,
+                  child: SelectionActionBar(
+                    selectedCount: _selectedIds.length,
+                    totalCount: _filtered.length,
+                    onSelectAll: _selectAll,
+                    onClearSelection: _clearSelection,
+                    onDelete: _deleteSelected,
+                    onEdit: _isSingleSelection ? _editSelected : null,
+                    onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                    margin: EdgeInsets.zero,
                   ),
-                ),
-                if (_selectedIds.isNotEmpty) ...[
-                  Global.gapMd,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SelectionActionBar(
-                      selectedCount: _selectedIds.length,
-                      totalCount: _filtered.length,
-                      onSelectAll: _selectAll,
-                      onClearSelection: _clearSelection,
-                      onDelete: _deleteSelected,
-                      onEdit: _isSingleSelection ? _editSelected : null,
-                      onDetails: _isSingleSelection ? _showSelectedDetails : null,
-                      margin: EdgeInsets.zero,
-                    ),
-                  ),
-                ],
-                Global.gapMd,
-                Expanded(
-                  child: _isLoading
-                      ? const AppLoading.overlay()
-                      : CustomScrollView(
-                          slivers: [
-                            _buildProviderSliver(),
-                            SliverToBoxAdapter(child: Global.gapMd),
-                            SliverToBoxAdapter(child: SizedBox(height: 80)),
-                          ],
-                        ),
                 ),
               ],
-            ),
+              Global.gapMd,
+              Expanded(
+                child: _isLoading
+                    ? const AppLoading.overlay()
+                    : CustomScrollView(
+                        slivers: [
+                          _buildProviderSliver(),
+                          SliverToBoxAdapter(child: Global.gapMd),
+                          SliverToBoxAdapter(child: SizedBox(height: 80)),
+                        ],
+                      ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 
@@ -294,7 +296,11 @@ class _State extends State<ProviderListScreen> {
   }
 
   void _showProviderDetails(Provider provider) {
-    NavigationUtil.pushTo(context, NavigationUtil.providerDetailRoute, extra: provider);
+    NavigationUtil.pushTo(
+      context,
+      NavigationUtil.providerDetailRoute,
+      extra: provider,
+    );
   }
 }
 

@@ -39,9 +39,12 @@ class _State extends State<CurrencyListScreen> {
     return query.isEmpty
         ? _currencies
         : _currencies
-              .where((c) => c.name.toLowerCase().contains(query) ||
-                           c.code.toLowerCase().contains(query) ||
-                           c.symbol.toLowerCase().contains(query))
+              .where(
+                (c) =>
+                    c.name.toLowerCase().contains(query) ||
+                    c.code.toLowerCase().contains(query) ||
+                    c.symbol.toLowerCase().contains(query),
+              )
               .toList();
   }
 
@@ -56,7 +59,9 @@ class _State extends State<CurrencyListScreen> {
     setState(() => _isLoading = true);
     final db = DatabaseUtil();
     final currencyMaps = await db.query(ConstantUtil.tableCurrencies);
-    final loadedCurrencies = currencyMaps.map((map) => Currency.fromMap(map)).toList();
+    final loadedCurrencies = currencyMaps
+        .map((map) => Currency.fromMap(map))
+        .toList();
     if (mounted) {
       setState(() {
         _currencies
@@ -80,11 +85,7 @@ class _State extends State<CurrencyListScreen> {
   }
 
   void _editCurrency(Currency currency) async {
-    await CurrencyEditBottomSheet.show(
-      context,
-      currency,
-      _updateCurrency,
-    );
+    await CurrencyEditBottomSheet.show(context, currency, _updateCurrency);
   }
 
   void _updateCurrency(Currency updatedCurrency) async {
@@ -102,7 +103,10 @@ class _State extends State<CurrencyListScreen> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, AppLocalizations.of(context).failedToUpdateCurrency);
+        AppToast.error(
+          context,
+          AppLocalizations.of(context).failedToUpdateCurrency,
+        );
       }
     }
   }
@@ -208,60 +212,77 @@ class _State extends State<CurrencyListScreen> {
                         hintText: AppLocalizations.of(context).searchCurrencies,
                       ),
                     ),
-                  if (_selectedIds.isNotEmpty) ...[
-                    Global.gapMd,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: SelectionActionBar(
-                        selectedCount: _selectedIds.length,
-                        totalCount: _filtered.length,
-                        onSelectAll: _selectAll,
-                        onClearSelection: _clearSelection,
-                        onDelete: _deleteCurrencies,
-                        onEdit: _selectedIds.length == 1 ? () => _editCurrency(_filtered.firstWhere((c) => c.id == _selectedIds.first)) : null,
-                        margin: EdgeInsets.zero,
+                    if (_selectedIds.isNotEmpty) ...[
+                      Global.gapMd,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: SelectionActionBar(
+                          selectedCount: _selectedIds.length,
+                          totalCount: _filtered.length,
+                          onSelectAll: _selectAll,
+                          onClearSelection: _clearSelection,
+                          onDelete: _deleteCurrencies,
+                          onEdit: _selectedIds.length == 1
+                              ? () => _editCurrency(
+                                  _filtered.firstWhere(
+                                    (c) => c.id == _selectedIds.first,
+                                  ),
+                                )
+                              : null,
+                          margin: EdgeInsets.zero,
+                        ),
                       ),
+                    ],
+                    Global.gapMd,
+                    Expanded(
+                      child: _filtered.isEmpty
+                          ? Center(
+                              child: SearchEmptyState(
+                                icon: Icons.currency_exchange,
+                                title: _searchController.text.isEmpty
+                                    ? AppLocalizations.of(
+                                        context,
+                                      ).noCurrenciesFound
+                                    : AppLocalizations.of(
+                                        context,
+                                      ).noCurrenciesFound,
+                                message: _searchController.text.isEmpty
+                                    ? AppLocalizations.of(
+                                        context,
+                                      ).centralizeCurrencies
+                                    : null,
+                              ),
+                            )
+                          : ListView.builder(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              itemCount: _filtered.length,
+                              itemBuilder: (context, index) {
+                                final currency = _filtered[index];
+                                return CurrencyTile(
+                                  currency: currency,
+                                  isSelected: _selectedIds.contains(
+                                    currency.id,
+                                  ),
+                                  showSelection: _selectedIds.isNotEmpty,
+                                  onSelectionChanged: (selected) =>
+                                      _toggleSelection(currency.id, selected),
+                                  onLongPress: () =>
+                                      _startSelection(currency.id),
+                                  onTap: _selectedIds.isNotEmpty
+                                      ? () => _toggleSelection(
+                                          currency.id,
+                                          !_selectedIds.contains(currency.id),
+                                        )
+                                      : () => _editCurrency(currency),
+                                );
+                              },
+                            ),
                     ),
                   ],
-                  Global.gapMd,
-                  Expanded(
-                    child: _filtered.isEmpty
-                        ? Center(
-                            child: SearchEmptyState(
-                              icon: Icons.currency_exchange,
-                              title: _searchController.text.isEmpty
-                                  ? AppLocalizations.of(context).noCurrenciesFound
-                                  : AppLocalizations.of(context).noCurrenciesFound,
-                              message: _searchController.text.isEmpty
-                                  ? AppLocalizations.of(context).centralizeCurrencies
-                                  : null,
-                            ),
-                          )
-                        : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            itemCount: _filtered.length,
-                            itemBuilder: (context, index) {
-                              final currency = _filtered[index];
-                              return CurrencyTile(
-                                currency: currency,
-                                isSelected: _selectedIds.contains(currency.id),
-                                showSelection: _selectedIds.isNotEmpty,
-                                onSelectionChanged: (selected) =>
-                                    _toggleSelection(currency.id, selected),
-                                onLongPress: () => _startSelection(currency.id),
-                                onTap: _selectedIds.isNotEmpty
-                                    ? () => _toggleSelection(
-                                      currency.id,
-                                      !_selectedIds.contains(currency.id),
-                                    )
-                                  : () => _editCurrency(currency),
-                              );
-                            },
-                          ),
-                  ),
-                ],
+                ),
               ),
-            ),
             ),
     );
   }
@@ -349,9 +370,7 @@ class _ConfirmationDialog extends StatelessWidget {
 
   Widget _buildMessage(ColorScheme colorScheme) => Text(
     message,
-    style: ThemeUtil.bodyMedium.copyWith(
-      color: colorScheme.onSurfaceVariant,
-    ),
+    style: ThemeUtil.bodyMedium.copyWith(color: colorScheme.onSurfaceVariant),
     textAlign: TextAlign.center,
   );
 
@@ -369,9 +388,7 @@ class _ConfirmationDialog extends StatelessWidget {
           ),
           child: Text(
             cancelText,
-            style: ThemeUtil.labelLarge.copyWith(
-              color: colorScheme.onSurface,
-            ),
+            style: ThemeUtil.labelLarge.copyWith(color: colorScheme.onSurface),
           ),
         ),
       ),
@@ -388,9 +405,7 @@ class _ConfirmationDialog extends StatelessWidget {
           ),
           child: Text(
             confirmText,
-            style: ThemeUtil.labelLarge.copyWith(
-              color: colorScheme.onError,
-            ),
+            style: ThemeUtil.labelLarge.copyWith(color: colorScheme.onError),
           ),
         ),
       ),

@@ -97,12 +97,18 @@ class FeeIntervalTile extends StatelessWidget {
     ),
   );
 
-  Widget _buildContent(ColorScheme colorScheme, CurrencyProvider currencyProvider) => Column(
+  Widget _buildContent(
+    ColorScheme colorScheme,
+    CurrencyProvider currencyProvider,
+  ) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
     children: [
       Text(
-        feeInterval.formattedRangeWithSymbol(currencyProvider.currencySymbol, currencyProvider.exchangeRate),
+        feeInterval.formattedRangeWithSymbol(
+          currencyProvider.currencySymbol,
+          currencyProvider.exchangeRate,
+        ),
         style: ThemeUtil.titleSmall.copyWith(
           fontWeight: FontWeight.w600,
           color: colorScheme.onSurface,
@@ -118,8 +124,14 @@ class FeeIntervalTile extends StatelessWidget {
     ],
   );
 
-  Widget _buildFeeChip(ColorScheme colorScheme, CurrencyProvider currencyProvider) => Text(
-    feeInterval.formattedFeeWithSymbol(currencyProvider.currencySymbol, currencyProvider.exchangeRate),
+  Widget _buildFeeChip(
+    ColorScheme colorScheme,
+    CurrencyProvider currencyProvider,
+  ) => Text(
+    feeInterval.formattedFeeWithSymbol(
+      currencyProvider.currencySymbol,
+      currencyProvider.exchangeRate,
+    ),
     style: ThemeUtil.bodyMedium.copyWith(
       color: ThemeUtil.success,
       fontWeight: FontWeight.w600,

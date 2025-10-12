@@ -16,7 +16,9 @@ class CurrencyProvider extends ChangeNotifier {
   bool get isInitialized => _isInitialized;
 
   /// Get the currency symbol for display
-  String get currencySymbol => _selectedCurrency?.symbol ?? 'Ar'; // Default to 'Ar' if no currency selected
+  String get currencySymbol =>
+      _selectedCurrency?.symbol ??
+      'Ar'; // Default to 'Ar' if no currency selected
 
   /// Get the currency code for display
   String get currencyCode => _selectedCurrency?.code ?? 'MGA'; // Default to MGA

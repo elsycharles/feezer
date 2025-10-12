@@ -97,13 +97,19 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return AppLocalizations.of(context).thisFieldIsRequired;
+                          return AppLocalizations.of(
+                            context,
+                          ).thisFieldIsRequired;
                         }
                         if (value!.length != 3) {
-                          return AppLocalizations.of(context).currencyCodeMustBe3Characters;
+                          return AppLocalizations.of(
+                            context,
+                          ).currencyCodeMustBe3Characters;
                         }
                         if (!RegExp(r'^[A-Z]{3}$').hasMatch(value)) {
-                          return AppLocalizations.of(context).currencyCodeMustContainOnlyUppercase;
+                          return AppLocalizations.of(
+                            context,
+                          ).currencyCodeMustContainOnlyUppercase;
                         }
                         return null;
                       },
@@ -116,7 +122,9 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return AppLocalizations.of(context).thisFieldIsRequired;
+                          return AppLocalizations.of(
+                            context,
+                          ).thisFieldIsRequired;
                         }
                         return null;
                       },
@@ -129,7 +137,9 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return AppLocalizations.of(context).thisFieldIsRequired;
+                          return AppLocalizations.of(
+                            context,
+                          ).thisFieldIsRequired;
                         }
                         return null;
                       },
@@ -143,11 +153,15 @@ class _State extends State<NewCurrencyScreen> {
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
-                          return AppLocalizations.of(context).thisFieldIsRequired;
+                          return AppLocalizations.of(
+                            context,
+                          ).thisFieldIsRequired;
                         }
                         final rate = double.tryParse(value!);
                         if (rate == null || rate <= 0) {
-                          return AppLocalizations.of(context).pleaseEnterValidPositiveRate;
+                          return AppLocalizations.of(
+                            context,
+                          ).pleaseEnterValidPositiveRate;
                         }
                         return null;
                       },
@@ -197,7 +211,10 @@ class _State extends State<NewCurrencyScreen> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, AppLocalizations.of(context).failedToCreateCurrency);
+        AppToast.error(
+          context,
+          AppLocalizations.of(context).failedToCreateCurrency,
+        );
         setState(() => _isCreating = false);
       }
     }

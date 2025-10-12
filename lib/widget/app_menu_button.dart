@@ -20,7 +20,7 @@ class AppMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final menuItems = _buildMenuItems(context);
-    
+
     if (menuItems.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -28,10 +28,7 @@ class AppMenuButton extends StatelessWidget {
     final colorScheme = context.colorScheme;
 
     return PopupMenuButton<String>(
-      icon: Icon(
-        Icons.menu,
-        color: iconColor ?? colorScheme.onSurface,
-      ),
+      icon: Icon(Icons.menu, color: iconColor ?? colorScheme.onSurface),
       tooltip: MaterialLocalizations.of(context).moreButtonTooltip,
       color: colorScheme.surface,
       surfaceTintColor: colorScheme.surface,
@@ -44,53 +41,61 @@ class AppMenuButton extends StatelessWidget {
 
   List<PopupMenuEntry<String>> _buildMenuItems(BuildContext context) {
     final items = <PopupMenuEntry<String>>[];
-    
+
     // Fee Optimizer (Home)
     if (!excludeRoutes.contains(NavigationUtil.homeRoute)) {
-      items.add(PopupMenuItem(
-        value: NavigationUtil.homeRoute,
-        child: _MenuItem(
-          icon: Icons.analytics,
-          text: AppLocalizations.of(context).optimizeFee,
-          context: context,
+      items.add(
+        PopupMenuItem(
+          value: NavigationUtil.homeRoute,
+          child: _MenuItem(
+            icon: Icons.analytics,
+            text: AppLocalizations.of(context).optimizeFee,
+            context: context,
+          ),
         ),
-      ));
+      );
     }
 
     // Providers
     if (!excludeRoutes.contains(NavigationUtil.providersRoute)) {
-      items.add(PopupMenuItem(
-        value: NavigationUtil.providersRoute,
-        child: _MenuItem(
-          icon: Icons.business,
-          text: AppLocalizations.of(context).providers,
-          context: context,
+      items.add(
+        PopupMenuItem(
+          value: NavigationUtil.providersRoute,
+          child: _MenuItem(
+            icon: Icons.business,
+            text: AppLocalizations.of(context).providers,
+            context: context,
+          ),
         ),
-      ));
+      );
     }
 
     // Currencies
     if (!excludeRoutes.contains(NavigationUtil.currenciesRoute)) {
-      items.add(PopupMenuItem(
-        value: NavigationUtil.currenciesRoute,
-        child: _MenuItem(
-          icon: Icons.currency_exchange,
-          text: AppLocalizations.of(context).currencies,
-          context: context,
+      items.add(
+        PopupMenuItem(
+          value: NavigationUtil.currenciesRoute,
+          child: _MenuItem(
+            icon: Icons.currency_exchange,
+            text: AppLocalizations.of(context).currencies,
+            context: context,
+          ),
         ),
-      ));
+      );
     }
 
     // Settings
     if (!excludeRoutes.contains(NavigationUtil.settingsRoute)) {
-      items.add(PopupMenuItem(
-        value: NavigationUtil.settingsRoute,
-        child: _MenuItem(
-          icon: Icons.settings,
-          text: AppLocalizations.of(context).settings,
-          context: context,
+      items.add(
+        PopupMenuItem(
+          value: NavigationUtil.settingsRoute,
+          child: _MenuItem(
+            icon: Icons.settings,
+            text: AppLocalizations.of(context).settings,
+            context: context,
+          ),
         ),
-      ));
+      );
     }
 
     return items;

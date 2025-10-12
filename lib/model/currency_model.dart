@@ -98,5 +98,6 @@ class Currency {
   int get hashCode => id.hashCode;
 
   @override
-  String toString() => 'Currency(id: $id, code: $code, name: $name, symbol: $symbol, rate: $rate)';
+  String toString() =>
+      'Currency(id: $id, code: $code, name: $name, symbol: $symbol, rate: $rate)';
 }

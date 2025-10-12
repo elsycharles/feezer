@@ -162,7 +162,10 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
+            const TextStyle(
+              fontSize: ThemeUtil.fontSizeButton,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
@@ -176,7 +179,10 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: ThemeUtil.fontSizeTextButton, fontWeight: FontWeight.w500),
+            const TextStyle(
+              fontSize: ThemeUtil.fontSizeTextButton,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           splashFactory: NoSplash.splashFactory,
         ),
@@ -192,7 +198,10 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
+            const TextStyle(
+              fontSize: ThemeUtil.fontSizeButton,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -309,7 +318,10 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
+            const TextStyle(
+              fontSize: ThemeUtil.fontSizeButton,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           elevation: WidgetStateProperty.all(0),
           splashFactory: NoSplash.splashFactory,
@@ -347,7 +359,10 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: ThemeUtil.fontSizeTextButton, fontWeight: FontWeight.w500),
+            const TextStyle(
+              fontSize: ThemeUtil.fontSizeTextButton,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           splashFactory: NoSplash.splashFactory,
         ),
@@ -363,7 +378,10 @@ class ThemeUtil {
             const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           ),
           textStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: ThemeUtil.fontSizeButton, fontWeight: FontWeight.w600),
+            const TextStyle(
+              fontSize: ThemeUtil.fontSizeButton,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           shape: WidgetStateProperty.all(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

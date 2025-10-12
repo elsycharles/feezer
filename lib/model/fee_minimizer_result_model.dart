@@ -17,10 +17,13 @@ class FeeOptimizerResult {
   final List<FeeOptimizerDetail> details;
 
   /// Gets the total number of operations
-  int get totalOperations => details.map((detail) => detail.count).fold(0, (sum, count) => sum + count);
+  int get totalOperations => details
+      .map((detail) => detail.count)
+      .fold(0, (sum, count) => sum + count);
 
   /// Gets the efficiency percentage
-  double get efficiency => totalAmount > 0 ? (netAmount / totalAmount) * 100 : 0;
+  double get efficiency =>
+      totalAmount > 0 ? (netAmount / totalAmount) * 100 : 0;
 
   /// Creates a copy with updated values
   FeeOptimizerResult copyWith({
@@ -49,7 +52,8 @@ class FeeOptimizerResult {
           details == other.details;
 
   @override
-  int get hashCode => Object.hash(totalAmount, netAmount, totalFees, remaining, details);
+  int get hashCode =>
+      Object.hash(totalAmount, netAmount, totalFees, remaining, details);
 
   @override
   String toString() =>
