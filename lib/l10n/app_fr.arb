@@ -871,9 +871,41 @@
   "@templateDownloaded": {
     "description": "Message de succès du téléchargement de modèle"
   },
-  "failedToDownloadTemplate": "Échec du téléchargement du modèle",
+    "failedToDownloadTemplate": "Échec du téléchargement du modèle",
   "@failedToDownloadTemplate": {
-    "description": "Message d'échec du téléchargement de modèle"
+    "description": "Error message when template download fails"
+  },
+  "file": "Fichier",
+  "@file": {
+    "description": "File option text"
+  },
+  "text": "Texte",
+  "@text": {
+    "description": "Text option text"
+  },
+  "pasteCsvContentHere": "Collez votre contenu CSV ici...",
+  "@pasteCsvContentHere": {
+    "description": "Hint text for CSV text input field"
+  },
+  "fileSelected": "Fichier sélectionné",
+  "@fileSelected": {
+    "description": "Text shown when a file is selected"
+  },
+  "csvFilesOnly": "Fichiers CSV uniquement",
+  "@csvFilesOnly": {
+    "description": "Text indicating only CSV files are accepted"
+  },
+  "csvContentPreview": "Aperçu du contenu CSV :",
+  "@csvContentPreview": {
+    "description": "Title for CSV content preview section"
+  },
+  "failedToSelectFile": "Échec de la sélection du fichier",
+  "@failedToSelectFile": {
+    "description": "Error message when file selection fails"
+  },
+  "failedToPreviewTemplate": "Échec de l'aperçu du modèle",
+  "@failedToPreviewTemplate": {
+    "description": "Error message when template preview fails"
   },
   "failedToReadFile": "Impossible de lire le fichier",
   "@failedToReadFile": {
@@ -1016,5 +1048,233 @@
   "failedToDownloadTemplate": "Échec du téléchargement du modèle",
   "@failedToDownloadTemplate": {
     "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
+  },
+  "csvFileIsEmpty": "Le fichier CSV est vide",
+  "@csvFileIsEmpty": {
+    "description": "Message d'erreur lorsque le fichier CSV ne contient aucune donnée"
+  },
+  "noDataRowsFound": "Aucune ligne de données trouvée",
+  "@noDataRowsFound": {
+    "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
+  },
+  "importFailed": "Échec de l'importation : {error}",
+  "@importFailed": {
+    "description": "Message d'échec d'importation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Format CSV invalide"
+      }
+    }
+  },
+  "rowProviderNameRequired": "Ligne {rowNumber} : Le nom du fournisseur est requis",
+  "@rowProviderNameRequired": {
+    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "rowProviderAlreadyExists": "Ligne {rowNumber} : Le fournisseur \"{name}\" existe déjà",
+  "@rowProviderAlreadyExists": {
+    "description": "Message d'erreur lorsque le fournisseur existe déjà dans la base de données",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "name": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "rowGenericError": "Ligne {rowNumber} : {error}",
+  "@rowGenericError": {
+    "description": "Message d'erreur générique pour le traitement de ligne CSV",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "error": {
+        "type": "String",
+        "example": "Format de données invalide"
+      }
+    }
+  },
+  "rowProviderNameRequiredFee": "Ligne {rowNumber} : Le nom du fournisseur est requis",
+  "@rowProviderNameRequiredFee": {
+    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV d'intervalle de frais",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "rowProviderNotFound": "Ligne {rowNumber} : Fournisseur \"{providerName}\" introuvable",
+  "@rowProviderNotFound": {
+    "description": "Message d'erreur lorsque le fournisseur référencé dans le CSV n'existe pas",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "rowIntervalOverlaps": "Ligne {rowNumber} : L'intervalle chevauche un intervalle existant ({overlap})",
+  "@rowIntervalOverlaps": {
+    "description": "Message d'erreur lorsque l'intervalle de frais chevauche un intervalle existant",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "overlap": {
+        "type": "String",
+        "example": "1000-2000"
+      }
+    }
+  },
+  "rowInvalidAmounts": "Ligne {rowNumber} : Montants invalides (min : {minStr}, max : {maxStr}, frais : {feeStr})",
+  "@rowInvalidAmounts": {
+    "description": "Message d'erreur lorsque les montants dans la ligne CSV sont invalides",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "minStr": {
+        "type": "String",
+        "example": "1000"
+      },
+      "maxStr": {
+        "type": "String",
+        "example": "2000"
+      },
+      "feeStr": {
+        "type": "String",
+        "example": "50"
+      }
+    }
+  },
+  "rowMinAmountGreaterThanMax": "Ligne {rowNumber} : Le montant min ({min}) doit être inférieur au montant max ({max})",
+  "@rowMinAmountGreaterThanMax": {
+    "description": "Message d'erreur lorsque le montant minimum est supérieur au montant maximum",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "min": {
+        "type": "String",
+        "example": "2000"
+      },
+      "max": {
+        "type": "String",
+        "example": "1000"
+      }
+    }
+  },
+  "rowFeeMustBePositive": "Ligne {rowNumber} : Les frais doivent être positifs",
+  "@rowFeeMustBePositive": {
+    "description": "Message d'erreur lorsque le montant des frais n'est pas positif",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "importedProvidersAndFees": "{providersCount} fournisseur(s) et {feesCount} intervalle(s) de frais importé(s)",
+  "@importedProvidersAndFees": {
+    "description": "Message de succès montrant le nombre de fournisseurs et d'intervalles de frais importés",
+    "placeholders": {
+      "providersCount": {
+        "type": "int",
+        "example": "2"
+      },
+      "feesCount": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "providerInvalidProviderId": "Fournisseur \"{providerName}\" : ID de fournisseur invalide",
+  "@providerInvalidProviderId": {
+    "description": "Message d'erreur lorsque l'ID du fournisseur est invalide lors de l'importation",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "providerNoFeeIntervals": "Fournisseur \"{providerName}\" : Aucun intervalle de frais trouvé",
+  "@providerNoFeeIntervals": {
+    "description": "Message d'erreur lorsque le fournisseur n'a pas d'intervalles de frais lors de l'importation",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "providerImportError": "Fournisseur \"{providerName}\" : {error}",
+  "@providerImportError": {
+    "description": "Message d'erreur générique pour l'importation de fournisseur",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      },
+      "error": {
+        "type": "String",
+        "example": "Erreur de base de données"
+      }
+    }
+  },
+  "rowIntervalOverlapsCombined": "Ligne {rowNumber} : L'intervalle chevauche un intervalle existant ({overlap})",
+  "@rowIntervalOverlapsCombined": {
+    "description": "Message d'erreur pour les intervalles qui se chevauchent dans l'importation combinée",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "overlap": {
+        "type": "String",
+        "example": "1000-2000"
+      }
+    }
+  },
+  "noDataToExport": "Aucune donnée à exporter",
+  "@noDataToExport": {
+    "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
+  },
+  "exportSuccessful": "Exportation réussie",
+  "@exportSuccessful": {
+    "description": "Message de succès lorsque l'exportation se termine avec succès"
+  },
+  "exportFailed": "Échec de l'exportation : {error}",
+  "@exportFailed": {
+    "description": "Message d'échec d'exportation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erreur d'écriture de fichier"
+      }
+    }
+  },
+  "providerNameColumnNotFound": "Colonne du nom du fournisseur introuvable",
+  "@providerNameColumnNotFound": {
+    "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
   }
 }

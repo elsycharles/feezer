@@ -761,13 +761,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get importSuccessful => 'Import Successful';
 
   @override
-  String get importFailed => 'Import Failed';
+  String importFailed(String error) {
+    return 'Import failed: $error';
+  }
 
   @override
-  String get exportSuccessful => 'Export Successful';
+  String get exportSuccessful => 'Export successful';
 
   @override
-  String get exportFailed => 'Export Failed';
+  String exportFailed(String error) {
+    return 'Export failed: $error';
+  }
 
   @override
   String get templateDownloaded => 'Template Downloaded';
@@ -867,4 +871,115 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failedToSaveFile => 'Failed to save file';
+
+  @override
+  String get file => 'File';
+
+  @override
+  String get text => 'Text';
+
+  @override
+  String get pasteCsvContentHere => 'Paste your CSV content here...';
+
+  @override
+  String get fileSelected => 'File Selected';
+
+  @override
+  String get csvFilesOnly => 'CSV files only';
+
+  @override
+  String get csvContentPreview => 'CSV Content Preview:';
+
+  @override
+  String get failedToSelectFile => 'Failed to select file';
+
+  @override
+  String get failedToPreviewTemplate => 'Failed to preview template';
+
+  @override
+  String get csvFileIsEmpty => 'CSV file is empty';
+
+  @override
+  String get noDataRowsFound => 'No data rows found';
+
+  @override
+  String rowProviderNameRequired(int rowNumber) {
+    return 'Row $rowNumber: Provider name is required';
+  }
+
+  @override
+  String rowProviderAlreadyExists(int rowNumber, String name) {
+    return 'Row $rowNumber: Provider \"$name\" already exists';
+  }
+
+  @override
+  String rowGenericError(int rowNumber, String error) {
+    return 'Row $rowNumber: $error';
+  }
+
+  @override
+  String rowProviderNameRequiredFee(int rowNumber) {
+    return 'Row $rowNumber: Provider name is required';
+  }
+
+  @override
+  String rowProviderNotFound(int rowNumber, String providerName) {
+    return 'Row $rowNumber: Provider \"$providerName\" not found';
+  }
+
+  @override
+  String rowIntervalOverlaps(int rowNumber, String overlap) {
+    return 'Row $rowNumber: Interval overlaps with existing interval ($overlap)';
+  }
+
+  @override
+  String rowInvalidAmounts(
+    int rowNumber,
+    String minStr,
+    String maxStr,
+    String feeStr,
+  ) {
+    return 'Row $rowNumber: Invalid amounts (min: $minStr, max: $maxStr, fee: $feeStr)';
+  }
+
+  @override
+  String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
+    return 'Row $rowNumber: Min amount ($min) must be less than max amount ($max)';
+  }
+
+  @override
+  String rowFeeMustBePositive(int rowNumber) {
+    return 'Row $rowNumber: Fee must be positive';
+  }
+
+  @override
+  String importedProvidersAndFees(int providersCount, int feesCount) {
+    return 'Imported $providersCount provider(s) and $feesCount fee interval(s)';
+  }
+
+  @override
+  String providerInvalidProviderId(String providerName) {
+    return 'Provider \"$providerName\": Invalid provider ID';
+  }
+
+  @override
+  String providerNoFeeIntervals(String providerName) {
+    return 'Provider \"$providerName\": No fee intervals found';
+  }
+
+  @override
+  String providerImportError(String providerName, String error) {
+    return 'Provider \"$providerName\": $error';
+  }
+
+  @override
+  String rowIntervalOverlapsCombined(int rowNumber, String overlap) {
+    return 'Row $rowNumber: Interval overlaps with existing interval ($overlap)';
+  }
+
+  @override
+  String get noDataToExport => 'No data to export';
+
+  @override
+  String get providerNameColumnNotFound => 'Provider name column not found';
 }

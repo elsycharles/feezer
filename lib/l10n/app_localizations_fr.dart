@@ -775,13 +775,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get importSuccessful => 'Import réussi';
 
   @override
-  String get importFailed => 'Échec de l\'import';
+  String importFailed(String error) {
+    return 'Échec de l\'importation : $error';
+  }
 
   @override
-  String get exportSuccessful => 'Export réussi';
+  String get exportSuccessful => 'Exportation réussie';
 
   @override
-  String get exportFailed => 'Échec de l\'export';
+  String exportFailed(String error) {
+    return 'Échec de l\'exportation : $error';
+  }
 
   @override
   String get templateDownloaded => 'Modèle téléchargé';
@@ -882,4 +886,116 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get failedToSaveFile => 'Échec de l\'enregistrement du fichier';
+
+  @override
+  String get file => 'Fichier';
+
+  @override
+  String get text => 'Texte';
+
+  @override
+  String get pasteCsvContentHere => 'Collez votre contenu CSV ici...';
+
+  @override
+  String get fileSelected => 'Fichier sélectionné';
+
+  @override
+  String get csvFilesOnly => 'Fichiers CSV uniquement';
+
+  @override
+  String get csvContentPreview => 'Aperçu du contenu CSV :';
+
+  @override
+  String get failedToSelectFile => 'Échec de la sélection du fichier';
+
+  @override
+  String get failedToPreviewTemplate => 'Échec de l\'aperçu du modèle';
+
+  @override
+  String get csvFileIsEmpty => 'Le fichier CSV est vide';
+
+  @override
+  String get noDataRowsFound => 'Aucune ligne de données trouvée';
+
+  @override
+  String rowProviderNameRequired(int rowNumber) {
+    return 'Ligne $rowNumber : Le nom du fournisseur est requis';
+  }
+
+  @override
+  String rowProviderAlreadyExists(int rowNumber, String name) {
+    return 'Ligne $rowNumber : Le fournisseur \"$name\" existe déjà';
+  }
+
+  @override
+  String rowGenericError(int rowNumber, String error) {
+    return 'Ligne $rowNumber : $error';
+  }
+
+  @override
+  String rowProviderNameRequiredFee(int rowNumber) {
+    return 'Ligne $rowNumber : Le nom du fournisseur est requis';
+  }
+
+  @override
+  String rowProviderNotFound(int rowNumber, String providerName) {
+    return 'Ligne $rowNumber : Fournisseur \"$providerName\" introuvable';
+  }
+
+  @override
+  String rowIntervalOverlaps(int rowNumber, String overlap) {
+    return 'Ligne $rowNumber : L\'intervalle chevauche un intervalle existant ($overlap)';
+  }
+
+  @override
+  String rowInvalidAmounts(
+    int rowNumber,
+    String minStr,
+    String maxStr,
+    String feeStr,
+  ) {
+    return 'Ligne $rowNumber : Montants invalides (min : $minStr, max : $maxStr, frais : $feeStr)';
+  }
+
+  @override
+  String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
+    return 'Ligne $rowNumber : Le montant min ($min) doit être inférieur au montant max ($max)';
+  }
+
+  @override
+  String rowFeeMustBePositive(int rowNumber) {
+    return 'Ligne $rowNumber : Les frais doivent être positifs';
+  }
+
+  @override
+  String importedProvidersAndFees(int providersCount, int feesCount) {
+    return '$providersCount fournisseur(s) et $feesCount intervalle(s) de frais importé(s)';
+  }
+
+  @override
+  String providerInvalidProviderId(String providerName) {
+    return 'Fournisseur \"$providerName\" : ID de fournisseur invalide';
+  }
+
+  @override
+  String providerNoFeeIntervals(String providerName) {
+    return 'Fournisseur \"$providerName\" : Aucun intervalle de frais trouvé';
+  }
+
+  @override
+  String providerImportError(String providerName, String error) {
+    return 'Fournisseur \"$providerName\" : $error';
+  }
+
+  @override
+  String rowIntervalOverlapsCombined(int rowNumber, String overlap) {
+    return 'Ligne $rowNumber : L\'intervalle chevauche un intervalle existant ($overlap)';
+  }
+
+  @override
+  String get noDataToExport => 'Aucune donnée à exporter';
+
+  @override
+  String get providerNameColumnNotFound =>
+      'Colonne du nom du fournisseur introuvable';
 }

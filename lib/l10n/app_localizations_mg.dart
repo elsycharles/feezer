@@ -761,13 +761,17 @@ class AppLocalizationsMg extends AppLocalizations {
   String get importSuccessful => 'Nahomby ny fampidirana';
 
   @override
-  String get importFailed => 'Tsy nahomby ny fampidirana';
+  String importFailed(String error) {
+    return 'Tsy nahomby ny fanafarana : $error';
+  }
 
   @override
-  String get exportSuccessful => 'Nahomby ny fampidinana';
+  String get exportSuccessful => 'Nahomby ny fanavoahana';
 
   @override
-  String get exportFailed => 'Tsy nahomby ny fampidinana';
+  String exportFailed(String error) {
+    return 'Tsy nahomby ny fanavoahana : $error';
+  }
 
   @override
   String get templateDownloaded => 'Template Downloaded';
@@ -868,4 +872,116 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get failedToSaveFile => 'Tsy nahomby ny fitahirizana rakitra';
+
+  @override
+  String get file => 'Rakitra';
+
+  @override
+  String get text => 'Soratra';
+
+  @override
+  String get pasteCsvContentHere => 'Apetrao eto ny atin\'ny CSV...';
+
+  @override
+  String get fileSelected => 'Voafantina ny rakitra';
+
+  @override
+  String get csvFilesOnly => 'Rakitra CSV ihany';
+
+  @override
+  String get csvContentPreview => 'Topi-maso ny atin\'ny CSV:';
+
+  @override
+  String get failedToSelectFile => 'Tsy nahomby ny famantarana ny rakitra';
+
+  @override
+  String get failedToPreviewTemplate => 'Tsy nahomby ny topi-maso ny modely';
+
+  @override
+  String get csvFileIsEmpty => 'Foana ny rakitra CSV';
+
+  @override
+  String get noDataRowsFound => 'Tsy misy andalana angona hita';
+
+  @override
+  String rowProviderNameRequired(int rowNumber) {
+    return 'Andalana $rowNumber : Ilaina ny anaran\'ny mpanome';
+  }
+
+  @override
+  String rowProviderAlreadyExists(int rowNumber, String name) {
+    return 'Andalana $rowNumber : Efa misy ny mpanome \"$name\"';
+  }
+
+  @override
+  String rowGenericError(int rowNumber, String error) {
+    return 'Andalana $rowNumber : $error';
+  }
+
+  @override
+  String rowProviderNameRequiredFee(int rowNumber) {
+    return 'Andalana $rowNumber : Ilaina ny anaran\'ny mpanome';
+  }
+
+  @override
+  String rowProviderNotFound(int rowNumber, String providerName) {
+    return 'Andalana $rowNumber : Tsy hita ny mpanome \"$providerName\"';
+  }
+
+  @override
+  String rowIntervalOverlaps(int rowNumber, String overlap) {
+    return 'Andalana $rowNumber : Mifangaro amin\'ny intervalle efa misy ny intervalle ($overlap)';
+  }
+
+  @override
+  String rowInvalidAmounts(
+    int rowNumber,
+    String minStr,
+    String maxStr,
+    String feeStr,
+  ) {
+    return 'Andalana $rowNumber : Tsy mety ny vola (kely : $minStr, lehibe : $maxStr, sara : $feeStr)';
+  }
+
+  @override
+  String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
+    return 'Andalana $rowNumber : Ny vola kely ($min) tsy maintsy ambany noho ny vola lehibe ($max)';
+  }
+
+  @override
+  String rowFeeMustBePositive(int rowNumber) {
+    return 'Andalana $rowNumber : Tsy maintsy positif ny sara';
+  }
+
+  @override
+  String importedProvidersAndFees(int providersCount, int feesCount) {
+    return 'Voampiditra $providersCount mpanome sy $feesCount intervalle sara';
+  }
+
+  @override
+  String providerInvalidProviderId(String providerName) {
+    return 'Mpanome \"$providerName\" : Tsy mety ny ID mpanome';
+  }
+
+  @override
+  String providerNoFeeIntervals(String providerName) {
+    return 'Mpanome \"$providerName\" : Tsy misy fetra sarany hita';
+  }
+
+  @override
+  String providerImportError(String providerName, String error) {
+    return 'Mpanome \"$providerName\" : $error';
+  }
+
+  @override
+  String rowIntervalOverlapsCombined(int rowNumber, String overlap) {
+    return 'Andalana $rowNumber : Mifangaro amin\'ny intervalle efa misy ny intervalle ($overlap)';
+  }
+
+  @override
+  String get noDataToExport => 'Tsy misy angona havoaka';
+
+  @override
+  String get providerNameColumnNotFound =>
+      'Tsy hita ny tsanganana anaran\'ny mpanome';
 }

@@ -1081,5 +1081,265 @@
   "failedToDownloadTemplate": "Tsy nahomby ny fakana modely",
   "@failedToDownloadTemplate": {
     "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
+  },
+  "file": "Rakitra",
+  "@file": {
+    "description": "File option text"
+  },
+  "text": "Soratra",
+  "@text": {
+    "description": "Text option text"
+  },
+  "pasteCsvContentHere": "Apetrao eto ny atin'ny CSV...",
+  "@pasteCsvContentHere": {
+    "description": "Hint text for CSV text input field"
+  },
+  "fileSelected": "Voafantina ny rakitra",
+  "@fileSelected": {
+    "description": "Text shown when a file is selected"
+  },
+  "csvFilesOnly": "Rakitra CSV ihany",
+  "@csvFilesOnly": {
+    "description": "Text indicating only CSV files are accepted"
+  },
+  "csvContentPreview": "Topi-maso ny atin'ny CSV:",
+  "@csvContentPreview": {
+    "description": "Title for CSV content preview section"
+  },
+  "failedToSelectFile": "Tsy nahomby ny famantarana ny rakitra",
+  "@failedToSelectFile": {
+    "description": "Error message when file selection fails"
+  },
+  "failedToPreviewTemplate": "Tsy nahomby ny topi-maso ny modely",
+  "@failedToPreviewTemplate": {
+    "description": "Error message when template preview fails"
+  },
+  "csvFileIsEmpty": "Foana ny rakitra CSV",
+  "@csvFileIsEmpty": {
+    "description": "Message d'erreur lorsque le fichier CSV ne contient aucune donnée"
+  },
+  "noDataRowsFound": "Tsy misy andalana angona hita",
+  "@noDataRowsFound": {
+    "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
+  },
+  "importFailed": "Tsy nahomby ny fanafarana : {error}",
+  "@importFailed": {
+    "description": "Message d'échec d'importation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Format CSV invalide"
+      }
+    }
+  },
+  "rowProviderNameRequired": "Andalana {rowNumber} : Ilaina ny anaran'ny mpanome",
+  "@rowProviderNameRequired": {
+    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "rowProviderAlreadyExists": "Andalana {rowNumber} : Efa misy ny mpanome \"{name}\"",
+  "@rowProviderAlreadyExists": {
+    "description": "Message d'erreur lorsque le fournisseur existe déjà dans la base de données",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "name": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "rowGenericError": "Andalana {rowNumber} : {error}",
+  "@rowGenericError": {
+    "description": "Message d'erreur générique pour le traitement de ligne CSV",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "error": {
+        "type": "String",
+        "example": "Format de données invalide"
+      }
+    }
+  },
+  "rowProviderNameRequiredFee": "Andalana {rowNumber} : Ilaina ny anaran'ny mpanome",
+  "@rowProviderNameRequiredFee": {
+    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV d'intervalle de frais",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "rowProviderNotFound": "Andalana {rowNumber} : Tsy hita ny mpanome \"{providerName}\"",
+  "@rowProviderNotFound": {
+    "description": "Message d'erreur lorsque le fournisseur référencé dans le CSV n'existe pas",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "rowIntervalOverlaps": "Andalana {rowNumber} : Mifangaro amin'ny intervalle efa misy ny intervalle ({overlap})",
+  "@rowIntervalOverlaps": {
+    "description": "Message d'erreur lorsque l'intervalle de frais chevauche un intervalle existant",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "overlap": {
+        "type": "String",
+        "example": "1000-2000"
+      }
+    }
+  },
+  "rowInvalidAmounts": "Andalana {rowNumber} : Tsy mety ny vola (kely : {minStr}, lehibe : {maxStr}, sara : {feeStr})",
+  "@rowInvalidAmounts": {
+    "description": "Message d'erreur lorsque les montants dans la ligne CSV sont invalides",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "minStr": {
+        "type": "String",
+        "example": "1000"
+      },
+      "maxStr": {
+        "type": "String",
+        "example": "2000"
+      },
+      "feeStr": {
+        "type": "String",
+        "example": "50"
+      }
+    }
+  },
+  "rowMinAmountGreaterThanMax": "Andalana {rowNumber} : Ny vola kely ({min}) tsy maintsy ambany noho ny vola lehibe ({max})",
+  "@rowMinAmountGreaterThanMax": {
+    "description": "Message d'erreur lorsque le montant minimum est supérieur au montant maximum",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "min": {
+        "type": "String",
+        "example": "2000"
+      },
+      "max": {
+        "type": "String",
+        "example": "1000"
+      }
+    }
+  },
+  "rowFeeMustBePositive": "Andalana {rowNumber} : Tsy maintsy positif ny sara",
+  "@rowFeeMustBePositive": {
+    "description": "Message d'erreur lorsque le montant des frais n'est pas positif",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "importedProvidersAndFees": "Voampiditra {providersCount} mpanome sy {feesCount} intervalle sara",
+  "@importedProvidersAndFees": {
+    "description": "Message de succès montrant le nombre de fournisseurs et d'intervalles de frais importés",
+    "placeholders": {
+      "providersCount": {
+        "type": "int",
+        "example": "2"
+      },
+      "feesCount": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "providerInvalidProviderId": "Mpanome \"{providerName}\" : Tsy mety ny ID mpanome",
+  "@providerInvalidProviderId": {
+    "description": "Message d'erreur lorsque l'ID du fournisseur est invalide lors de l'importation",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "providerNoFeeIntervals": "Mpanome \"{providerName}\" : Tsy misy fetra sarany hita",
+  "@providerNoFeeIntervals": {
+    "description": "Message d'erreur lorsque le fournisseur n'a pas d'intervalles de frais lors de l'importation",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      }
+    }
+  },
+  "providerImportError": "Mpanome \"{providerName}\" : {error}",
+  "@providerImportError": {
+    "description": "Message d'erreur générique pour l'importation de fournisseur",
+    "placeholders": {
+      "providerName": {
+        "type": "String",
+        "example": "TELMA"
+      },
+      "error": {
+        "type": "String",
+        "example": "Erreur de base de données"
+      }
+    }
+  },
+  "rowIntervalOverlapsCombined": "Andalana {rowNumber} : Mifangaro amin'ny intervalle efa misy ny intervalle ({overlap})",
+  "@rowIntervalOverlapsCombined": {
+    "description": "Message d'erreur pour les intervalles qui se chevauchent dans l'importation combinée",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "overlap": {
+        "type": "String",
+        "example": "1000-2000"
+      }
+    }
+  },
+  "noDataToExport": "Tsy misy angona havoaka",
+  "@noDataToExport": {
+    "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
+  },
+  "exportSuccessful": "Nahomby ny fanavoahana",
+  "@exportSuccessful": {
+    "description": "Message de succès lorsque l'exportation se termine avec succès"
+  },
+  "exportFailed": "Tsy nahomby ny fanavoahana : {error}",
+  "@exportFailed": {
+    "description": "Message d'échec d'exportation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erreur d'écriture de fichier"
+      }
+    }
+  },
+  "providerNameColumnNotFound": "Tsy hita ny tsanganana anaran'ny mpanome",
+  "@providerNameColumnNotFound": {
+    "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
   }
 }

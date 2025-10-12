@@ -5,7 +5,37 @@ import '../model/provider_model.dart' as model;
 import '../model/fee_interval_model.dart';
 import '../util/database_util.dart';
 import '../util/constant_util.dart';
+import '../l10n/app_localizations.dart';
 import '../provider/currency_provider.dart';
+
+// Localization function type
+typedef CsvLocalizations = String Function(String key, [Map<String, Object>? args]);
+
+// Helper function to create CsvLocalizations from AppLocalizations
+CsvLocalizations createCsvLocalizations(AppLocalizations l10n) {
+  return (String key, [Map<String, Object>? args]) {
+    switch (key) {
+      case 'csvFileIsEmpty': return l10n.csvFileIsEmpty;
+      case 'noDataRowsFound': return l10n.noDataRowsFound;
+      case 'importFailed': return args != null ? l10n.importFailed(args['error'] as String) : l10n.importFailed('');
+      case 'importedProvidersAndFees': return l10n.importedProvidersAndFees(args!['providersCount'] as int, args['feesCount'] as int);
+      case 'rowProviderNameRequired': return l10n.rowProviderNameRequired(args!['rowNumber'] as int);
+      case 'rowProviderAlreadyExists': return l10n.rowProviderAlreadyExists(args!['rowNumber'] as int, args['name'] as String);
+      case 'rowGenericError': return l10n.rowGenericError(args!['rowNumber'] as int, args['error'] as String);
+      case 'rowProviderNameRequiredFee': return l10n.rowProviderNameRequiredFee(args!['rowNumber'] as int);
+      case 'rowProviderNotFound': return l10n.rowProviderNotFound(args!['rowNumber'] as int, args['providerName'] as String);
+      case 'rowInvalidAmounts': return l10n.rowInvalidAmounts(args!['rowNumber'] as int, args['minStr'] as String, args['maxStr'] as String, args['feeStr'] as String);
+      case 'rowFeeMustBePositive': return l10n.rowFeeMustBePositive(args!['rowNumber'] as int);
+      case 'rowIntervalOverlaps': return l10n.rowIntervalOverlaps(args!['rowNumber'] as int, args['overlap'] as String);
+      case 'providerInvalidProviderId': return l10n.providerInvalidProviderId(args!['providerName'] as String);
+      case 'providerImportError': return l10n.providerImportError(args!['providerName'] as String, args['error'] as String);
+      case 'providerNoFeeIntervals': return l10n.providerNoFeeIntervals(args!['providerName'] as String);
+      case 'noDataToExport': return l10n.noDataToExport;
+      case 'exportFailed': return args != null ? l10n.exportFailed(args['error'] as String) : l10n.exportFailed('');
+      default: return 'Unknown key: $key';
+    }
+  };
+}
 
 class CsvResult {
   const CsvResult({
@@ -69,7 +99,11 @@ class CsvUtil {
   // IMPORT METHODS
   // ============================================================================
 
-  static Future<CsvResult> importFromCsv(String csvContent, CurrencyProvider currencyProvider) async {
+  static Future<CsvResult> importFromCsv(
+    String csvContent, 
+    CurrencyProvider currencyProvider, 
+    CsvLocalizations localizations,
+  ) async {
     try {
       final rows = const CsvToListConverter(
         fieldDelimiter: ',',
@@ -79,19 +113,19 @@ class CsvUtil {
       ).convert(csvContent);
 
       if (rows.isEmpty) {
-        return const CsvResult(success: false, message: 'CSV file is empty');
+        return CsvResult(success: false, message: localizations('csvFileIsEmpty'));
       }
 
       final headers = rows.first.map((e) => e.toString().trim().toLowerCase()).toList();
       final dataRows = rows.skip(1).where(_isValidRow).toList();
 
       if (dataRows.isEmpty) {
-        return const CsvResult(success: false, message: 'No data rows found');
+        return CsvResult(success: false, message: localizations('noDataRowsFound'));
       }
 
-      return await _processImport(headers, dataRows, currencyProvider);
+      return await _processImport(headers, dataRows, currencyProvider, localizations);
     } catch (e) {
-      return CsvResult(success: false, message: 'Import failed: ${e.toString()}');
+      return CsvResult(success: false, message: localizations('importFailed', {'error': e.toString()}));
     }
   }
 
@@ -103,8 +137,9 @@ class CsvUtil {
     List<String> headers,
     List<List<dynamic>> dataRows,
     CurrencyProvider currencyProvider,
+    CsvLocalizations localizations,
   ) async {
-    final hasColumn = (List<String> mapping) =>
+    bool hasColumn(List<String> mapping) =>
       headers.any((h) => mapping.contains(h));
 
     final hasProviderName = hasColumn(_ColumnMapping.providerName);
@@ -115,27 +150,28 @@ class CsvUtil {
                              hasColumn(_ColumnMapping.icon);
 
     if (!hasProviderName) {
-      return const CsvResult(
+      return CsvResult(
         success: false,
-        message: 'Provider name column not found',
+        message: localizations('providerNameColumnNotFound'),
       );
     }
 
     // Déterminer le type d'import
     if (hasFeeFields && hasProviderFields) {
-      return await _importCombined(headers, dataRows, currencyProvider);
+      return await _importCombined(headers, dataRows, currencyProvider, localizations);
     } else if (hasProviderFields && !hasFeeFields) {
-      return await _importProviders(headers, dataRows);
+      return await _importProviders(headers, dataRows, localizations);
     } else if (hasFeeFields) {
-      return await _importFeeIntervals(headers, dataRows, currencyProvider);
+      return await _importFeeIntervals(headers, dataRows, currencyProvider, localizations);
     }
 
-    return await _importCombined(headers, dataRows, currencyProvider);
+    return await _importCombined(headers, dataRows, currencyProvider, localizations);
   }
 
   static Future<CsvResult> _importProviders(
     List<String> headers,
     List<List<dynamic>> dataRows,
+    CsvLocalizations localizations,
   ) async {
     final db = DatabaseUtil();
     final indices = _HeaderIndices(headers);
@@ -152,7 +188,7 @@ class CsvUtil {
 
     for (int i = 0; i < dataRows.length; i++) {
       final result = await _processProviderRow(
-        db, dataRows[i], indices, i + 2
+        db, dataRows[i], indices, i + 2, localizations
       );
       
       if (result.success) {
@@ -175,12 +211,13 @@ class CsvUtil {
     List<dynamic> row,
     _HeaderIndices indices,
     int rowNumber,
+    CsvLocalizations localizations,
   ) async {
     try {
       final name = _getCellValue(row, indices.providerName)?.trim();
 
       if (name == null || name.isEmpty) {
-        return _RowResult(error: 'Row $rowNumber: Provider name is required');
+        return _RowResult(error: localizations('rowProviderNameRequired', {'rowNumber': rowNumber}));
       }
 
       final existing = await db.query(
@@ -190,7 +227,7 @@ class CsvUtil {
       );
 
       if (existing.isNotEmpty) {
-        return _RowResult(error: 'Row $rowNumber: Provider "$name" already exists');
+        return _RowResult(error: localizations('rowProviderAlreadyExists', {'rowNumber': rowNumber, 'name': name}));
       }
 
       final provider = model.Provider(
@@ -203,7 +240,7 @@ class CsvUtil {
       await db.insert(ConstantUtil.tableProviders, model.Provider.toMap(provider));
       return _RowResult(success: true);
     } catch (e) {
-      return _RowResult(error: 'Row $rowNumber: ${e.toString()}');
+      return _RowResult(error: localizations('rowGenericError', {'rowNumber': rowNumber, 'error': e.toString()}));
     }
   }
 
@@ -211,6 +248,7 @@ class CsvUtil {
     List<String> headers,
     List<List<dynamic>> dataRows,
     CurrencyProvider currencyProvider,
+    CsvLocalizations localizations,
   ) async {
     final db = DatabaseUtil();
     final indices = _HeaderIndices(headers);
@@ -227,7 +265,7 @@ class CsvUtil {
 
     for (int i = 0; i < dataRows.length; i++) {
       final result = await _processFeeIntervalRow(
-        db, dataRows[i], indices, i + 2, currencyProvider
+        db, dataRows[i], indices, i + 2, currencyProvider, localizations
       );
       
       if (result.success) {
@@ -251,21 +289,22 @@ class CsvUtil {
     _HeaderIndices indices,
     int rowNumber,
     CurrencyProvider currencyProvider,
+    CsvLocalizations localizations,
   ) async {
     try {
       final providerName = _getCellValue(row, indices.providerName)?.trim();
       
       if (providerName == null || providerName.isEmpty) {
-        return _RowResult(error: 'Row $rowNumber: Provider name is required');
+        return _RowResult(error: localizations('rowProviderNameRequiredFee', {'rowNumber': rowNumber}));
       }
 
       final providerId = await _getProviderId(db, providerName);
       if (providerId == null) {
-        return _RowResult(error: 'Row $rowNumber: Provider "$providerName" not found');
+        return _RowResult(error: localizations('rowProviderNotFound', {'rowNumber': rowNumber, 'providerName': providerName}));
       }
 
       final amounts = _parseRowAmounts(row, indices);
-      final validation = _validateAmounts(amounts, rowNumber);
+      final validation = _validateAmounts(amounts, rowNumber, localizations);
       
       if (validation != null) {
         return _RowResult(error: validation);
@@ -282,7 +321,7 @@ class CsvUtil {
       
       if (overlap != null) {
         return _RowResult(
-          error: 'Row $rowNumber: Interval overlaps with existing interval ($overlap)'
+          error: localizations('rowIntervalOverlaps', {'rowNumber': rowNumber, 'overlap': overlap})
         );
       }
 
@@ -300,7 +339,7 @@ class CsvUtil {
       
       return _RowResult(success: true);
     } catch (e) {
-      return _RowResult(error: 'Row $rowNumber: ${e.toString()}');
+      return _RowResult(error: localizations('rowGenericError', {'rowNumber': rowNumber, 'error': e.toString()}));
     }
   }
 
@@ -326,17 +365,26 @@ class CsvUtil {
     );
   }
 
-  static String? _validateAmounts(_AmountData amounts, int rowNumber) {
+  static String? _validateAmounts(_AmountData amounts, int rowNumber, CsvLocalizations localizations) {
     if (amounts.min == null || amounts.max == null || amounts.fee == null) {
-      return 'Row $rowNumber: Invalid amounts (min: ${amounts.minStr}, max: ${amounts.maxStr}, fee: ${amounts.feeStr})';
+      return localizations('rowInvalidAmounts', {
+        'rowNumber': rowNumber,
+        'minStr': amounts.minStr ?? '',
+        'maxStr': amounts.maxStr ?? '',
+        'feeStr': amounts.feeStr ?? '',
+      });
     }
 
     if (amounts.min! >= amounts.max!) {
-      return 'Row $rowNumber: Min amount (${amounts.min}) must be less than max amount (${amounts.max})';
+      return localizations('rowMinAmountGreaterThanMax', {
+        'rowNumber': rowNumber,
+        'min': amounts.min.toString(),
+        'max': amounts.max.toString(),
+      });
     }
 
     if (amounts.fee! < 0) {
-      return 'Row $rowNumber: Fee must be positive';
+      return localizations('rowFeeMustBePositive', {'rowNumber': rowNumber});
     }
 
     return null;
@@ -376,6 +424,7 @@ class CsvUtil {
     List<String> headers,
     List<List<dynamic>> dataRows,
     CurrencyProvider currencyProvider,
+    CsvLocalizations localizations,
   ) async {
     final db = DatabaseUtil();
     final indices = _HeaderIndices(headers);
@@ -387,7 +436,7 @@ class CsvUtil {
 
     for (final entry in providerGroups.entries) {
       final result = await _processProviderGroup(
-        db, entry.key, entry.value, dataRows, indices, currencyProvider
+        db, entry.key, entry.value, dataRows, indices, currencyProvider, localizations
       );
       
       providersCount += result.providersAdded;
@@ -397,7 +446,10 @@ class CsvUtil {
 
     return CsvResult(
       success: providersCount > 0 || feesCount > 0,
-      message: 'Imported $providersCount provider(s) and $feesCount fee interval(s)',
+      message: localizations('importedProvidersAndFees', {
+        'providersCount': providersCount,
+        'feesCount': feesCount,
+      }),
       providersCount: providersCount,
       feeIntervalsCount: feesCount,
       errors: errors,
@@ -427,6 +479,7 @@ class CsvUtil {
     List<List<dynamic>> dataRows,
     _HeaderIndices indices,
     CurrencyProvider currencyProvider,
+    CsvLocalizations localizations,
   ) async {
     try {
       final providerId = await _ensureProviderExists(
@@ -435,18 +488,18 @@ class CsvUtil {
 
       if (providerId == null) {
         return _GroupResult(
-          errors: ['Provider "$providerName": Invalid provider ID']
+          errors: [localizations('providerInvalidProviderId', {'providerName': providerName})]
         );
       }
 
       final result = await _importGroupFeeIntervals(
-        db, providerId, rowIndices, dataRows, indices, providerName, currencyProvider
+        db, providerId, rowIndices, dataRows, indices, providerName, currencyProvider, localizations
       );
 
       return result;
     } catch (e) {
       return _GroupResult(
-        errors: ['Provider "$providerName": ${e.toString()}']
+        errors: [localizations('providerImportError', {'providerName': providerName, 'error': e.toString()})]
       );
     }
   }
@@ -512,6 +565,7 @@ class CsvUtil {
     _HeaderIndices indices,
     String providerName,
     CurrencyProvider currencyProvider,
+    CsvLocalizations localizations,
   ) async {
     int providersAdded = rowIndices.isEmpty ? 0 : 1;
     int feesAdded = 0;
@@ -523,7 +577,7 @@ class CsvUtil {
 
       if (_isEmptyFeeRow(amounts)) continue;
 
-      final validation = _validateAmounts(amounts, rowIndex + 2);
+      final validation = _validateAmounts(amounts, rowIndex + 2, localizations);
       if (validation != null) {
         errors.add(validation);
         continue;
@@ -539,7 +593,7 @@ class CsvUtil {
       );
       
       if (overlap != null) {
-        errors.add('Row ${rowIndex + 2}: Interval overlaps with existing interval ($overlap)');
+        errors.add(localizations('rowIntervalOverlaps', {'row': (rowIndex + 2).toString(), 'overlap': overlap}));
         continue;
       }
 
@@ -578,13 +632,14 @@ class CsvUtil {
     String? providerId,
     String locale = 'en',
     CurrencyProvider? currencyProvider,
+    required CsvLocalizations localizations,
   }) async {
     try {
       final db = DatabaseUtil();
       final csvData = await _buildExportData(db, providerId, locale, currencyProvider);
 
       if (csvData.length <= 1) {
-        return const CsvResult(success: false, message: 'No data to export');
+        return CsvResult(success: false, message: localizations('noDataToExport'));
       }
 
       final csvString = const ListToCsvConverter().convert(csvData);
@@ -599,7 +654,7 @@ class CsvUtil {
         filePath: filePath,
       );
     } catch (e) {
-      return CsvResult(success: false, message: 'Export failed: ${e.toString()}');
+      return CsvResult(success: false, message: localizations('exportFailed', {'error': e.toString()}));
     }
   }
 

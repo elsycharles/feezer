@@ -81,21 +81,25 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
   Future<void> _importCsvFromFile(PlatformFile file) async {
     try {
       if (file.bytes == null && file.path == null) {
-        if (mounted) {
-          AppToast.error(context, AppLocalizations.of(context).failedToReadFile);
-        }
+        if (mounted) {/* Lines 85-86 omitted */}
         return;
       }
 
       setState(() => _isProcessing = true);
+
+      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+      final localizations = AppLocalizations.of(context);
 
       // Lire le contenu du fichier
       final csvContent = file.bytes != null
           ? String.fromCharCodes(file.bytes!)
           : await File(file.path!).readAsString();
 
-      final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
-      final importResult = await CsvUtil.importFromCsv(csvContent, currencyProvider);
+      final importResult = await CsvUtil.importFromCsv(
+        csvContent, 
+        currencyProvider, 
+        createCsvLocalizations(localizations)
+      );
 
       setState(() => _isProcessing = false);
 
@@ -106,7 +110,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       } else {
         AppToast.error(
           context,
-          importResult.message ?? AppLocalizations.of(context).importFailed,
+          importResult.message ?? AppLocalizations.of(context).importFailed(''),
         );
       }
     } catch (e) {
@@ -128,11 +132,13 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       return;
     }
 
+    final localizations = AppLocalizations.of(context);
+
     try {
       setState(() => _isProcessing = true);
 
       final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
-      final importResult = await CsvUtil.importFromCsv(csvText, currencyProvider);
+      final importResult = await CsvUtil.importFromCsv(csvText, currencyProvider, createCsvLocalizations(localizations));
 
       setState(() => _isProcessing = false);
 
@@ -143,7 +149,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       } else {
         AppToast.error(
           context,
-          importResult.message ?? AppLocalizations.of(context).importFailed,
+          importResult.message ?? localizations.importFailed(''),
         );
       }
     } catch (e) {
@@ -151,13 +157,15 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       if (mounted) {
         AppToast.error(
           context,
-          '${AppLocalizations.of(context).importFailed}: ${e.toString()}',
+          '${localizations.importFailed}: ${e.toString()}',
         );
       }
     }
   }
 
   Future<void> _exportCsv() async {
+    final localizations = AppLocalizations.of(context);
+
     try {
       setState(() => _isProcessing = true);
 
@@ -168,6 +176,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       final exportResult = await CsvUtil.exportToCsv(
         locale: locale,
         currencyProvider: currencyProvider,
+        localizations: createCsvLocalizations(localizations),
       );
 
       setState(() => _isProcessing = false);
@@ -182,7 +191,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       } else {
         AppToast.error(
           context,
-          exportResult.message ?? AppLocalizations.of(context).exportFailed,
+          exportResult.message ?? localizations.exportFailed(''),
         );
       }
     } catch (e) {
@@ -190,13 +199,15 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       if (mounted) {
         AppToast.error(
           context,
-          '${AppLocalizations.of(context).exportFailed}: ${e.toString()}',
+          '${localizations.exportFailed}: ${e.toString()}',
         );
       }
     }
   }
 
   Future<void> _downloadTemplate() async {
+    final localizations = AppLocalizations.of(context);
+
     try {
       final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
       final locale = localeProvider.locale?.languageCode ?? 'en';
@@ -218,21 +229,26 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       if (mounted) {
         AppToast.error(
           context,
-          '${AppLocalizations.of(context).failedToDownloadTemplate}: ${e.toString()}',
+          '${localizations.failedToDownloadTemplate}: ${e.toString()}',
         );
       }
     }
   }
 
   Future<void> _saveFileToUserLocation(String sourceFilePath, String suggestedName) async {
+    final localizations = AppLocalizations.of(context);
+
     try {
+      // Get localized string before async operation
+      final chooseWhereToSaveText = localizations.chooseWhereToSave;
+
       // Lire le fichier source
       final sourceFile = File(sourceFilePath);
       final bytes = await sourceFile.readAsBytes();
 
       // Sauvegarder avec FilePicker (gère automatiquement les permissions)
       final result = await FilePicker.platform.saveFile(
-        dialogTitle: AppLocalizations.of(context).chooseWhereToSave,
+        dialogTitle: chooseWhereToSaveText,
         fileName: suggestedName,
         type: FileType.custom,
         allowedExtensions: ['csv'],
@@ -243,7 +259,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         if (mounted) {
           AppToast.success(
             context,
-            AppLocalizations.of(context).fileSavedSuccessfully,
+            localizations.fileSavedSuccessfully,
           );
         }
       }
@@ -251,13 +267,15 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       if (mounted) {
         AppToast.error(
           context,
-          '${AppLocalizations.of(context).failedToSaveFile}: ${e.toString()}',
+          '${localizations.failedToSaveFile}: ${e.toString()}',
         );
       }
     }
   }
 
   Future<void> _previewTemplate() async {
+    final localizations = AppLocalizations.of(context);
+
     try {
       final localeProvider = Provider.of<LocaleProvider>(context, listen: false);
       final locale = localeProvider.locale?.languageCode ?? 'en';
@@ -275,7 +293,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       );
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, 'Failed to preview template: $e');
+        AppToast.error(context, localizations.failedToPreviewTemplate);
       }
     }
   }
@@ -668,7 +686,7 @@ class _ImportDialogState extends State<_ImportDialog> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, 'Failed to select file: $e');
+        AppToast.error(context, AppLocalizations.of(context).failedToSelectFile);
       }
     }
   }
@@ -687,7 +705,7 @@ class _ImportDialogState extends State<_ImportDialog> {
       }
     } catch (e) {
       if (mounted) {
-        AppToast.error(context, 'Import failed: $e');
+        AppToast.error(context, AppLocalizations.of(context).importFailed(e.toString()));
       }
     } finally {
       if (mounted) {
@@ -758,7 +776,7 @@ class _ImportModeToggle extends StatelessWidget {
           Expanded(
             child: _ToggleOption(
               icon: Icons.file_upload_outlined,
-              label: 'Fichier',
+              label: AppLocalizations.of(context).file,
               isSelected: !useTextInput,
               onTap: () => onToggle(false),
             ),
@@ -767,7 +785,7 @@ class _ImportModeToggle extends StatelessWidget {
           Expanded(
             child: _ToggleOption(
               icon: Icons.edit_note_outlined,
-              label: 'Texte',
+              label: AppLocalizations.of(context).text,
               isSelected: useTextInput,
               onTap: () => onToggle(true),
             ),
@@ -871,7 +889,7 @@ class _TextInputField extends StatelessWidget {
       key: const ValueKey('text_input'),
       maxLines: 10,
       decoration: InputDecoration(
-        hintText: 'Collez votre contenu CSV ici...',
+        hintText: AppLocalizations.of(context).pasteCsvContentHere,
         hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -937,7 +955,7 @@ class _FileUploadArea extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                'File Selected',
+                AppLocalizations.of(context).fileSelected,
                 style: ThemeUtil.titleMedium.copyWith(
                   color: ThemeUtil.success,
                   fontWeight: FontWeight.w600,
@@ -1002,7 +1020,7 @@ class _FileUploadArea extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
-                  'CSV files only',
+                  AppLocalizations.of(context).csvFilesOnly,
                   style: ThemeUtil.bodySmall.copyWith(
                     color: colorScheme.primary,
                     fontWeight: FontWeight.w500,
@@ -1135,7 +1153,7 @@ class _ResultHeader extends StatelessWidget {
           child: Text(
             success
                 ? AppLocalizations.of(context).importSuccessful
-                : AppLocalizations.of(context).importFailed,
+                : AppLocalizations.of(context).importFailed(''),
             style: ThemeUtil.titleMedium.copyWith(
               color: colorScheme.onSurface,
               fontWeight: FontWeight.w600,
@@ -1362,7 +1380,7 @@ class _PreviewContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'CSV Content Preview:',
+            AppLocalizations.of(context).csvContentPreview,
             style: theme.textTheme.titleSmall?.copyWith(
               fontWeight: FontWeight.w600,
               color: colorScheme.onSurface,
