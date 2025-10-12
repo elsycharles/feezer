@@ -1139,7 +1139,7 @@ class _ImportActions extends StatelessWidget {
               foregroundColor: canImport && !isImporting
                   ? colorScheme.onPrimary
                   : colorScheme.onSurface.withValues(alpha: 0.38),
-              padding: const EdgeInsets.symmetric(vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
