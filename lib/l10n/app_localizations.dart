@@ -1609,7 +1609,7 @@ abstract class AppLocalizations {
   /// Instruction text for file import option
   ///
   /// In en, this message translates to:
-  /// **'Click on \"Import\" to select a CSV file'**
+  /// **'Click to select a CSV file'**
   String get clickImportToSelectFile;
 
   /// Button text for copying content

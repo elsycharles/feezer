@@ -866,7 +866,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get clickImportToSelectFile =>
-      'Cliquez sur \"Importer\" pour sélectionner un fichier CSV';
+      'Cliquez pour séléctionner un fichier csv';
 
   @override
   String get copy => 'Copier';

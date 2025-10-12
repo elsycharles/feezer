@@ -1062,7 +1062,7 @@
   "@csvContentCannotBeEmpty": {
     "description": "Message d'erreur lorsque le texte CSV saisi est vide"
   },
-  "clickImportToSelectFile": "Tsindrio \"Ampidiro\" raha hanapaka rakitra CSV",
+  "clickImportToSelectFile": "Tsindrio hanapaka rakitra CSV",
   "@clickImportToSelectFile": {
     "description": "Texte d'instruction pour l'option d'importation de fichier"
   },

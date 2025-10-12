@@ -852,8 +852,7 @@ class AppLocalizationsMg extends AppLocalizations {
       'Tsy azo atao ho foana ny votoatin\'ny CSV';
 
   @override
-  String get clickImportToSelectFile =>
-      'Tsindrio \"Ampidiro\" raha hanapaka rakitra CSV';
+  String get clickImportToSelectFile => 'Tsindrio hanapaka rakitra CSV';
 
   @override
   String get copy => 'Adikao';

@@ -997,7 +997,7 @@
   "@csvContentCannotBeEmpty": {
     "description": "Message d'erreur lorsque le texte CSV saisi est vide"
   },
-  "clickImportToSelectFile": "Cliquez sur \"Importer\" pour sélectionner un fichier CSV",
+  "clickImportToSelectFile": "Cliquez pour séléctionner un fichier csv",
   "@clickImportToSelectFile": {
     "description": "Texte d'instruction pour l'option d'importation de fichier"
   },

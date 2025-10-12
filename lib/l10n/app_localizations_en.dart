@@ -851,8 +851,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get csvContentCannotBeEmpty => 'CSV content cannot be empty';
 
   @override
-  String get clickImportToSelectFile =>
-      'Click on \"Import\" to select a CSV file';
+  String get clickImportToSelectFile => 'Click to select a CSV file';
 
   @override
   String get copy => 'Copy';
