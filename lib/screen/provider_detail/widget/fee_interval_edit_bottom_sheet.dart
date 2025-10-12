@@ -166,7 +166,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
                     style: TextStyle(
                       fontSize: 14,
                       color: _feeType == FeeType.fixed
-                          ? Theme.of(context).colorScheme.primary
+                          ? Theme.of(context).colorScheme.onPrimaryContainer
                           : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
@@ -196,7 +196,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
                     style: TextStyle(
                       fontSize: 14,
                       color: _feeType == FeeType.percentage
-                          ? Theme.of(context).colorScheme.primary
+                          ? Theme.of(context).colorScheme.onPrimaryContainer
                           : Theme.of(context).colorScheme.onSurface,
                     ),
                   ),

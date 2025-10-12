@@ -162,7 +162,7 @@ class _State extends State<NewFeeIntervalScreen> {
                     textAlign: TextAlign.center,
                     style: ThemeUtil.bodyMedium.copyWith(
                       color: _feeType == FeeType.fixed
-                          ? context.colorScheme.primary
+                          ? context.colorScheme.onPrimaryContainer
                           : context.colorScheme.onSurface,
                     ),
                   ),
@@ -191,7 +191,7 @@ class _State extends State<NewFeeIntervalScreen> {
                     textAlign: TextAlign.center,
                     style: ThemeUtil.bodyMedium.copyWith(
                       color: _feeType == FeeType.percentage
-                          ? context.colorScheme.primary
+                          ? context.colorScheme.onPrimaryContainer
                           : context.colorScheme.onSurface,
                     ),
                   ),

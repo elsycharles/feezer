@@ -104,8 +104,13 @@ class DatabaseUtil {
       ''');
     }
     if (oldVersion < 3) {
-      // Migration vers la version 3 : ajout de la colonne fee_type
-      await db.execute('ALTER TABLE ${ConstantUtil.tableFeeIntervals} ADD COLUMN ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0');
+      // Migration vers la version 3 : ajout de la colonne fee_type si elle n'existe pas
+      final tableInfo = await db.rawQuery('PRAGMA table_info(${ConstantUtil.tableFeeIntervals})');
+      final hasFeeTypeColumn = tableInfo.any((column) => column['name'] == ConstantUtil.columnFeeType);
+      
+      if (!hasFeeTypeColumn) {
+        await db.execute('ALTER TABLE ${ConstantUtil.tableFeeIntervals} ADD COLUMN ${ConstantUtil.columnFeeType} INTEGER DEFAULT 0');
+      }
     }
   }
 
