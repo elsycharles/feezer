@@ -114,11 +114,14 @@ class _State extends State<OptimizeFeeScreen> {
         _providers
           ..clear()
           ..addAll(loadedProviders);
-        _selectedProvider = _providers.isNotEmpty 
-          ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider) 
-              ? widget.defaultProvider 
-              : _providers.first) 
-          : null;
+        // Only set default provider if none is currently selected or if selected provider no longer exists
+        if (_selectedProvider == null || !_providers.contains(_selectedProvider)) {
+          _selectedProvider = _providers.isNotEmpty
+            ? (widget.defaultProvider != null && _providers.contains(widget.defaultProvider)
+                ? widget.defaultProvider
+                : _providers.first)
+            : null;
+        }
       });
     }
   }
