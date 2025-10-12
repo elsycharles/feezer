@@ -1016,4 +1016,189 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get percentageCannotExceed100 => 'Percentage cannot exceed 100';
+
+  @override
+  String get searchHelpTopics => 'Search help topics...';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get faqWhatIsFeeMinimizer => 'What is Feezer or Fee Minimizer?';
+
+  @override
+  String get faqWhatIsFeeMinimizerAnswer =>
+      'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.';
+
+  @override
+  String get faqHowToAddProvider => 'How do I add a new provider?';
+
+  @override
+  String get faqHowToAddProviderAnswer =>
+      'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.';
+
+  @override
+  String get faqHowToCalculateFees => 'How does fee calculation work?';
+
+  @override
+  String get faqHowToCalculateFeesAnswer =>
+      'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.';
+
+  @override
+  String get faqDataSecurity => 'Is my data secure?';
+
+  @override
+  String get faqDataSecurityAnswer =>
+      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.';
+
+  @override
+  String get faqOfflineMode => 'Does the app work offline?';
+
+  @override
+  String get faqOfflineModeAnswer =>
+      'Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.';
+
+  @override
+  String get faqCurrencyRates => 'How do currency exchange rates work?';
+
+  @override
+  String get faqCurrencyRatesAnswer =>
+      'The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.';
+
+  @override
+  String get faqExportData => 'How do I export my data?';
+
+  @override
+  String get faqExportDataAnswer =>
+      'Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.';
+
+  @override
+  String get emailSupport => 'Email Support';
+
+  @override
+  String get phoneSupport => 'Phone Support';
+
+  @override
+  String get website => 'Website';
+
+  @override
+  String get responseTime => 'Response Time';
+
+  @override
+  String get responseTimeDescription =>
+      'We typically respond to support requests within 24 hours during business days.';
+
+  @override
+  String get gettingStarted => 'Getting Started';
+
+  @override
+  String get gettingStartedDescription =>
+      'Learn the basics of using Feezer or Fee Minimizer';
+
+  @override
+  String get providerManagement => 'Provider Management';
+
+  @override
+  String get providerManagementDescription =>
+      'How to add, edit, and manage financial providers';
+
+  @override
+  String get feeCalculation => 'Fee Calculation';
+
+  @override
+  String get feeCalculationDescription =>
+      'Understanding how fees are calculated and optimized';
+
+  @override
+  String get dataManagementDescription =>
+      'Import, export, and backup your data';
+
+  @override
+  String get videoTutorials => 'Video Tutorials';
+
+  @override
+  String get videoTutorialsDescription =>
+      'Watch step-by-step video guides to master Feezer or Fee Minimizer';
+
+  @override
+  String get watchTutorials => 'Watch Tutorials';
+
+  @override
+  String get shareYourThoughts => 'Share Your Thoughts';
+
+  @override
+  String get feedbackDescription =>
+      'Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions';
+
+  @override
+  String get contactUs => 'Contact Us';
+
+  @override
+  String get contactDescription =>
+      'Get in touch with our support team for help with any questions or issues.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get faqQuestion1 => 'How do I minimize transaction fees?';
+
+  @override
+  String get faqAnswer1 =>
+      'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.';
+
+  @override
+  String get faqQuestion2 => 'What currencies are supported?';
+
+  @override
+  String get faqAnswer2 =>
+      'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.';
+
+  @override
+  String get faqQuestion3 => 'Is my financial data secure?';
+
+  @override
+  String get faqAnswer3 =>
+      'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.';
+
+  @override
+  String get faqQuestion4 => 'How do I update currency rates?';
+
+  @override
+  String get faqAnswer4 =>
+      'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.';
+
+  @override
+  String get faqQuestion5 => 'Can I save my favorite providers?';
+
+  @override
+  String get faqAnswer5 =>
+      'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
+
+  @override
+  String get faqQuestion6 => 'How do I add a new provider?';
+
+  @override
+  String get faqAnswer6 =>
+      'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.';
+
+  @override
+  String get faqQuestion7 => 'What are fee intervals?';
+
+  @override
+  String get faqAnswer7 =>
+      'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.';
+
+  @override
+  String get faqQuestion8 => 'How does the optimization work?';
+
+  @override
+  String get faqAnswer8 =>
+      'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.';
 }

@@ -1504,5 +1504,226 @@
   "percentageCannotExceed100": "Percentage cannot exceed 100",
   "@percentageCannotExceed100": {
     "description": "Validation error when percentage exceeds 100"
+  },
+  "searchHelpTopics": "Search help topics...",
+  "@searchHelpTopics": {
+    "description": "Placeholder text for help search field"
+  },
+  "faq": "FAQ",
+  "@faq": {
+    "description": "Frequently Asked Questions tab title"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Contact tab title"
+  },
+  "faqWhatIsFeeMinimizer": "What is Feezer or Fee Minimizer?",
+  "@faqWhatIsFeeMinimizer": {
+    "description": "FAQ question"
+  },
+  "faqWhatIsFeeMinimizerAnswer": "Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.",
+  "@faqWhatIsFeeMinimizerAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqHowToAddProvider": "How do I add a new provider?",
+  "@faqHowToAddProvider": {
+    "description": "FAQ question"
+  },
+  "faqHowToAddProviderAnswer": "To add a new provider, go to the Providers screen and tap the '+' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.",
+  "@faqHowToAddProviderAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqHowToCalculateFees": "How does fee calculation work?",
+  "@faqHowToCalculateFees": {
+    "description": "FAQ question"
+  },
+  "faqHowToCalculateFeesAnswer": "Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.",
+  "@faqHowToCalculateFeesAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqDataSecurity": "Is my data secure?",
+  "@faqDataSecurity": {
+    "description": "FAQ question"
+  },
+  "faqDataSecurityAnswer": "Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.",
+  "@faqDataSecurityAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqOfflineMode": "Does the app work offline?",
+  "@faqOfflineMode": {
+    "description": "FAQ question"
+  },
+  "faqOfflineModeAnswer": "Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.",
+  "@faqOfflineModeAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqCurrencyRates": "How do currency exchange rates work?",
+  "@faqCurrencyRates": {
+    "description": "FAQ question"
+  },
+  "faqCurrencyRatesAnswer": "The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.",
+  "faqExportData": "How do I export my data?",
+  "@faqExportData": {
+    "description": "FAQ question"
+  },
+  "faqExportDataAnswer": "Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.",
+  "@faqExportDataAnswer": {
+    "description": "FAQ answer"
+  },
+  "emailSupport": "Email Support",
+  "@emailSupport": {
+    "description": "Email support option title"
+  },
+  "phoneSupport": "Phone Support",
+  "@phoneSupport": {
+    "description": "Phone support option title"
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website option title"
+  },
+  "responseTime": "Response Time",
+  "@responseTime": {
+    "description": "Response time section title"
+  },
+  "responseTimeDescription": "We typically respond to support requests within 24 hours during business days.",
+  "@responseTimeDescription": {
+    "description": "Response time description"
+  },
+  "gettingStarted": "Getting Started",
+  "@gettingStarted": {
+    "description": "Getting started guide title"
+  },
+  "gettingStartedDescription": "Learn the basics of using Feezer or Fee Minimizer",
+  "@gettingStartedDescription": {
+    "description": "Getting started guide description"
+  },
+  "providerManagement": "Provider Management",
+  "@providerManagement": {
+    "description": "Provider management guide title"
+  },
+  "providerManagementDescription": "How to add, edit, and manage financial providers",
+  "@providerManagementDescription": {
+    "description": "Provider management guide description"
+  },
+  "feeCalculation": "Fee Calculation",
+  "@feeCalculation": {
+    "description": "Fee calculation guide title"
+  },
+  "feeCalculationDescription": "Understanding how fees are calculated and optimized",
+  "@feeCalculationDescription": {
+    "description": "Fee calculation guide description"
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management guide title"
+  },
+  "dataManagementDescription": "Import, export, and backup your data",
+  "@dataManagementDescription": {
+    "description": "Data management guide description"
+  },
+  "videoTutorials": "Video Tutorials",
+  "@videoTutorials": {
+    "description": "Video tutorials section title"
+  },
+  "videoTutorialsDescription": "Watch step-by-step video guides to master Feezer or Fee Minimizer",
+  "@videoTutorialsDescription": {
+    "description": "Video tutorials description"
+  },
+  "watchTutorials": "Watch Tutorials",
+  "@watchTutorials": {
+    "description": "Watch tutorials button text"
+  },
+  "shareYourThoughts": "Share Your Thoughts",
+  "@shareYourThoughts": {
+    "description": "Feedback section title"
+  },
+  "feedbackDescription": "Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions",
+  "@feedbackDescription": {
+    "description": "Feedback description"
+  },
+  "contactUs": "Contact Us",
+  "@contactUs": {
+    "description": "Contact us section title"
+  },
+  "contactDescription": "Get in touch with our support team for help with any questions or issues.",
+  "@contactDescription": {
+    "description": "Contact section description"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email contact method"
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "Phone contact method"
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website contact method"
+  },
+  "faqQuestion1": "How do I minimize transaction fees?",
+  "@faqQuestion1": {
+    "description": "First FAQ question"
+  },
+  "faqAnswer1": "Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.",
+  "@faqAnswer1": {
+    "description": "First FAQ answer"
+  },
+  "faqQuestion2": "What currencies are supported?",
+  "@faqQuestion2": {
+    "description": "Second FAQ question"
+  },
+  "faqAnswer2": "We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.",
+  "@faqAnswer2": {
+    "description": "Second FAQ answer"
+  },
+  "faqQuestion3": "Is my financial data secure?",
+  "@faqQuestion3": {
+    "description": "Third FAQ question"
+  },
+  "faqAnswer3": "Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.",
+  "@faqAnswer3": {
+    "description": "Third FAQ answer"
+  },
+  "faqQuestion4": "How do I update currency rates?",
+  "@faqQuestion4": {
+    "description": "Fourth FAQ question"
+  },
+  "faqAnswer4": "Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.",
+  "@faqAnswer4": {
+    "description": "Fourth FAQ answer"
+  },
+  "faqQuestion5": "Can I save my favorite providers?",
+  "@faqQuestion5": {
+    "description": "Fifth FAQ question"
+  },
+  "faqAnswer5": "Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.",
+  "@faqAnswer5": {
+    "description": "Fifth FAQ answer"
+  },
+  "faqQuestion6": "How do I add a new provider?",
+  "@faqQuestion6": {
+    "description": "Sixth FAQ question"
+  },
+  "faqAnswer6": "Tap the '+' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.",
+  "@faqAnswer6": {
+    "description": "Sixth FAQ answer"
+  },
+  "faqQuestion7": "What are fee intervals?",
+  "@faqQuestion7": {
+    "description": "Seventh FAQ question"
+  },
+  "faqAnswer7": "Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., $2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.",
+  "@faqAnswer7": {
+    "description": "Seventh FAQ answer"
+  },
+  "faqQuestion8": "How does the optimization work?",
+  "@faqQuestion8": {
+    "description": "Eighth FAQ question"
+  },
+  "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
+  "@faqAnswer8": {
+    "description": "Eighth FAQ answer"
   }
 }
