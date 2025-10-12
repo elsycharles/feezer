@@ -440,13 +440,6 @@ class _State extends State<OptimizeFeeScreen> {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                const Spacer(),
-                Text(
-                  AppLocalizations.of(context).operationCount(_convertedResult?.details.length ?? 0),
-                  style: ThemeUtil.bodyMedium.copyWith(
-                    color: context.colorScheme.onSurfaceVariant,
-                  ),
-                ),
               ],
             ),
             Global.gapMd,
