@@ -83,10 +83,7 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
         children: [
           Text(
             widget.label,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.w500,
-            ) ?? ThemeUtil.labelMedium.copyWith(
+            style: ThemeUtil.labelMedium.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
             ),
@@ -100,9 +97,7 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
               FilteringTextInputFormatter.digitsOnly,
               LengthLimitingTextInputFormatter(7),
             ],
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-            ) ?? ThemeUtil.titleMedium.copyWith(
+            style: ThemeUtil.titleMedium.copyWith(
               color: Theme.of(context).colorScheme.onSurface,
             ),
             decoration: InputDecoration(

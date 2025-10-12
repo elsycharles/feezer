@@ -8,6 +8,7 @@ import '../../../styles/global.dart';
 import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../util/constant_util.dart';
+import '../../../util/theme_util.dart';
 import '../../../widget/app_toast.dart';
 import '../../../widget/loading_button.dart';
 import '../../../provider/currency_provider.dart';
@@ -136,7 +137,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         Text(
           AppLocalizations.of(context).feeType, // TODO: add to localizations
           style: TextStyle(
-            fontSize: 14,
+            fontSize: ThemeUtil.fontSizeLabelLarge,
             fontWeight: FontWeight.w500,
             color: Theme.of(context).colorScheme.onSurface,
           ),
@@ -164,7 +165,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
                     AppLocalizations.of(context).fixedAmount,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: ThemeUtil.fontSizeLabelLarge,
                       color: _feeType == FeeType.fixed
                           ? Theme.of(context).colorScheme.onPrimaryContainer
                           : Theme.of(context).colorScheme.onSurface,
@@ -194,7 +195,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
                     AppLocalizations.of(context).percentage,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: ThemeUtil.fontSizeLabelLarge,
                       color: _feeType == FeeType.percentage
                           ? Theme.of(context).colorScheme.onPrimaryContainer
                           : Theme.of(context).colorScheme.onSurface,

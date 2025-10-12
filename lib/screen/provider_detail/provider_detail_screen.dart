@@ -390,7 +390,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).minFee,
-      hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
+      hintStyle: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
       filled: true,
       fillColor: colorScheme.surface,
       border: OutlineInputBorder(
@@ -407,7 +407,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
-    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurface) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+    style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
   );
 
   Widget _buildFeeMaxField(ColorScheme colorScheme) => TextField(
@@ -415,7 +415,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     keyboardType: TextInputType.number,
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).maxFee,
-      hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurfaceVariant) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
+      hintStyle: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurfaceVariant),
       filled: true,
       fillColor: colorScheme.surface,
       border: OutlineInputBorder(
@@ -432,7 +432,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
       ),
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     ),
-    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: colorScheme.onSurface) ?? ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
+    style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
   );
 
   void _filterIntervals() {

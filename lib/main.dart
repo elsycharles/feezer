@@ -124,22 +124,25 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer3<ThemeProvider, LocaleProvider, CurrencyProvider>(
         builder: (context, themeProvider, localeProvider, currencyProvider, child) {
-          return MaterialApp(
-            title: ConstantUtil.appName,
-            routes: routes,
-            onGenerateRoute: onGenerateRoute,
-            initialRoute: initialRoute,
-            theme: ThemeUtil.lightTheme,
-            darkTheme: ThemeUtil.darkTheme,
-            themeMode: themeProvider.flutterThemeMode,
-            locale: localeProvider.locale,
-            localizationsDelegates: const [
-              AppLocalizations.delegate,
-              FallbackMaterialLocalizationsDelegate(),
-              GlobalWidgetsLocalizations.delegate,
-              FallbackCupertinoLocalizationsDelegate(),
-            ],
-            supportedLocales: AppLocalizations.supportedLocales,
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: MaterialApp(
+              title: ConstantUtil.appName,
+              routes: routes,
+              onGenerateRoute: onGenerateRoute,
+              initialRoute: initialRoute,
+              theme: ThemeUtil.lightTheme,
+              darkTheme: ThemeUtil.darkTheme,
+              themeMode: themeProvider.flutterThemeMode,
+              locale: localeProvider.locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                FallbackMaterialLocalizationsDelegate(),
+                GlobalWidgetsLocalizations.delegate,
+                FallbackCupertinoLocalizationsDelegate(),
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+            ),
           );
         },
       ),

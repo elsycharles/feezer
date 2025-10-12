@@ -11,7 +11,6 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/app_toast.dart';
 import '../../widget/surface_card.dart';
 import '../../widget/interactive_surface.dart';
-import '../../widget/loading_button.dart';
 import '../../l10n/app_localizations.dart';
 import '../../provider/locale_provider.dart';
 import '../../provider/currency_provider.dart';
@@ -333,7 +332,7 @@ class _InfoCard extends StatelessWidget {
               children: [
                 Text(
                   AppLocalizations.of(context).csvImportExportInfo,
-                  style: theme.textTheme.titleSmall?.copyWith(
+                  style: ThemeUtil.titleSmall.copyWith(
                     fontWeight: FontWeight.w600,
                     color: colorScheme.primary,
                   ),
@@ -341,7 +340,7 @@ class _InfoCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   AppLocalizations.of(context).csvImportExportDescription,
-                  style: theme.textTheme.bodySmall?.copyWith(
+                  style: ThemeUtil.bodySmall.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
                 ),
@@ -380,7 +379,7 @@ class _DataManagementSection extends StatelessWidget {
               Global.gapSm,
               Text(
                 AppLocalizations.of(context).dataManagement,
-                style: theme.textTheme.titleMedium?.copyWith(
+                style: ThemeUtil.titleMedium.copyWith(
                   color: ThemeUtil.primaryColor,
                   fontWeight: FontWeight.w600,
                 ),
@@ -437,13 +436,13 @@ class _ActionTile extends StatelessWidget {
         leading: Icon(icon, color: ThemeUtil.primaryColor),
         title: Text(
           title,
-          style: theme.textTheme.bodyLarge?.copyWith(
+          style: ThemeUtil.bodyLarge.copyWith(
             color: colorScheme.onSurface,
           ),
         ),
         subtitle: Text(
           subtitle,
-          style: theme.textTheme.bodyMedium?.copyWith(
+          style: ThemeUtil.bodyMedium.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
         ),
@@ -638,35 +637,43 @@ class _ImportDialogState extends State<_ImportDialog> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        constraints: const BoxConstraints(maxWidth: 600, minWidth: 400),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _DialogHeader(
-              icon: Icons.import_export,
-              title: AppLocalizations.of(context).importData,
+        constraints: BoxConstraints(
+          maxWidth: 600,
+          minWidth: 400,
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _DialogHeader(
+                  icon: Icons.import_export,
+                  title: AppLocalizations.of(context).importData,
+                ),
+                const SizedBox(height: 24),
+                _ImportModeToggle(
+                  useTextInput: _useTextInput,
+                  onToggle: (value) => setState(() => _useTextInput = value),
+                ),
+                const SizedBox(height: 24),
+                _ImportContent(
+                  useTextInput: _useTextInput,
+                  selectedFile: _selectedFile,
+                  onTextChanged: (value) => _csvText = value,
+                  onFileSelected: _selectFile,
+                ),
+                const SizedBox(height: 24),
+                _ImportActions(
+                  isImporting: _isImporting,
+                  canImport: _useTextInput ? _csvText.trim().isNotEmpty : _selectedFile != null,
+                  onCancel: () => Navigator.of(context).pop(),
+                  onImport: _handleImport,
+                ),
+              ],
             ),
-            const SizedBox(height: 24),
-            _ImportModeToggle(
-              useTextInput: _useTextInput,
-              onToggle: (value) => setState(() => _useTextInput = value),
-            ),
-            const SizedBox(height: 24),
-            _ImportContent(
-              useTextInput: _useTextInput,
-              selectedFile: _selectedFile,
-              onTextChanged: (value) => _csvText = value,
-              onFileSelected: _selectFile,
-            ),
-            const SizedBox(height: 24),
-            _ImportActions(
-              isImporting: _isImporting,
-              canImport: _useTextInput ? _csvText.trim().isNotEmpty : _selectedFile != null,
-              onCancel: () => Navigator.of(context).pop(),
-              onImport: _handleImport,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -1081,10 +1088,42 @@ class _ImportActions extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         Expanded(
-          child: LoadingButton(
-            text: AppLocalizations.of(context).importData,
-            onPressed: canImport ? onImport : null,
-            isLoading: isImporting,
+          child: FilledButton(
+            onPressed: canImport && !isImporting ? onImport : null,
+            style: FilledButton.styleFrom(
+              backgroundColor: canImport && !isImporting
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withValues(alpha: 0.12),
+              foregroundColor: canImport && !isImporting
+                  ? colorScheme.onPrimary
+                  : colorScheme.onSurface.withValues(alpha: 0.38),
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              disabledBackgroundColor: colorScheme.onSurface.withValues(alpha: 0.12),
+              disabledForegroundColor: colorScheme.onSurface.withValues(alpha: 0.38),
+            ),
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: isImporting
+                  ? const SizedBox(
+                      key: ValueKey('loading'),
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : Center(
+                      key: ValueKey('text'),
+                      child: Text(
+                        AppLocalizations.of(context).importData,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+            ),
           ),
         ),
       ],
@@ -1342,23 +1381,30 @@ class _PreviewDialog extends StatelessWidget {
       backgroundColor: colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
-        constraints: const BoxConstraints(maxWidth: 500, maxHeight: 600),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _DialogHeader(
-              icon: Icons.description,
-              title: AppLocalizations.of(context).templatePreview,
+        constraints: BoxConstraints(
+          maxWidth: 500,
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _DialogHeader(
+                  icon: Icons.description,
+                  title: AppLocalizations.of(context).templatePreview,
+                ),
+                const SizedBox(height: 16),
+                _PreviewContent(template: template),
+                const SizedBox(height: 24),
+                _PreviewActions(
+                  template: template,
+                  onDownload: onDownload,
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            _PreviewContent(template: template),
-            const SizedBox(height: 24),
-            _PreviewActions(
-              template: template,
-              onDownload: onDownload,
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -1375,42 +1421,39 @@ class _PreviewContent extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            AppLocalizations.of(context).csvContentPreview,
-            style: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: colorScheme.onSurface,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          AppLocalizations.of(context).csvContentPreview,
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: 300, // Fixed height for preview content
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: colorScheme.outline.withValues(alpha: 0.3),
             ),
           ),
-          const SizedBox(height: 8),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: colorScheme.outline.withValues(alpha: 0.3),
-                ),
-              ),
-              child: SingleChildScrollView(
-                child: SelectableText(
-                  template,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontFamily: 'monospace',
-                    fontSize: 12,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
+          child: SingleChildScrollView(
+            child: SelectableText(
+              template,
+              style: theme.textTheme.bodySmall?.copyWith(
+                fontFamily: 'monospace',
+                fontSize: ThemeUtil.fontSizeLabelSmall,
+                color: colorScheme.onSurface,
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
