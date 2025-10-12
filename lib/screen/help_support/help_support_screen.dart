@@ -98,6 +98,50 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
     );
   }
 
+  Widget _buildHighlightedText(String text, String query, TextStyle baseStyle) {
+    if (query.isEmpty) {
+      return Text(text, style: baseStyle);
+    }
+
+    final lowerText = text.toLowerCase();
+    final lowerQuery = query.toLowerCase();
+
+    if (!lowerText.contains(lowerQuery)) {
+      return Text(text, style: baseStyle);
+    }
+
+    final spans = <TextSpan>[];
+    var start = 0;
+
+    while (start < text.length) {
+      final index = lowerText.indexOf(lowerQuery, start);
+      if (index == -1) {
+        // Add remaining text
+        spans.add(TextSpan(text: text.substring(start), style: baseStyle));
+        break;
+      }
+
+      // Add text before match
+      if (index > start) {
+        spans.add(TextSpan(text: text.substring(start, index), style: baseStyle));
+      }
+
+      // Add highlighted match
+      final endIndex = index + query.length;
+      spans.add(TextSpan(
+        text: text.substring(index, endIndex),
+        style: baseStyle.copyWith(
+          backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+          fontWeight: FontWeight.w600,
+        ),
+      ));
+
+      start = endIndex;
+    }
+
+    return RichText(text: TextSpan(children: spans));
+  }
+
   Widget _buildFAQTab(ColorScheme colorScheme) {
     final faqItems = _getFilteredFAQItems();
 
@@ -109,7 +153,15 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
         return Padding(
           padding: const EdgeInsets.only(bottom: 8),
           child: CollapsibleCard(
-            title: item.question,
+            titleWidget: _buildHighlightedText(
+              item.question,
+              _searchQuery,
+              TextStyle(
+                fontSize: ThemeUtil.fontSizeBodyMedium,
+                fontWeight: FontWeight.w500,
+                color: colorScheme.onSurface,
+              ),
+            ),
             titleStyle: TextStyle(
               fontSize: ThemeUtil.fontSizeBodyMedium,
               fontWeight: FontWeight.w500,
@@ -117,9 +169,10 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
             ),
             isInitiallyExpanded: false,
             children: [
-              Text(
+              _buildHighlightedText(
                 item.answer,
-                style: TextStyle(
+                _searchQuery,
+                TextStyle(
                   fontSize: ThemeUtil.fontSizeBodyMedium,
                   color: colorScheme.onSurfaceVariant,
                 ),
