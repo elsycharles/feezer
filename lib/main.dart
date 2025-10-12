@@ -8,6 +8,7 @@ import 'package:fee_minimizer/l10n/localization_delegate.dart';
 import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
 import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
 import 'package:fee_minimizer/screen/settings/settings_screen.dart';
+import 'package:fee_minimizer/screen/settings/csv_management_screen.dart';
 import 'package:fee_minimizer/screen/new_provider/new_provider_screen.dart';
 import 'package:fee_minimizer/screen/provider_detail/provider_detail_screen.dart';
 import 'package:fee_minimizer/screen/optimize_fee/optimize_fee_screen.dart';
@@ -101,6 +102,11 @@ class MyApp extends StatelessWidget {
       case '/new-currency':
         return MaterialPageRoute<Currency>(
           builder: (_) => const NewCurrencyScreen(),
+          settings: settings,
+        );
+      case '/csv-management':
+        return MaterialPageRoute(
+          builder: (_) => const CsvManagementScreen(),
           settings: settings,
         );
       default:

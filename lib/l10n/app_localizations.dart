@@ -598,6 +598,12 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1{1 provider deleted successfully} other{{count} providers deleted successfully}}'**
   String providerDeletedSuccessfully(num count);
 
+  /// Warning message when deleting providers about fee intervals
+  ///
+  /// In en, this message translates to:
+  /// **'This will also delete all associated fee intervals.'**
+  String get deleteProviderWarning;
+
   /// Title for edit provider bottom sheet
   ///
   /// In en, this message translates to:
@@ -1347,6 +1353,467 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'minOperations cannot be greater than maxOperations'**
   String get minOperationsCannotBeGreaterThanMaxOperations;
+
+  /// Import/Export data menu title
+  ///
+  /// In en, this message translates to:
+  /// **'Import/Export Data'**
+  String get importExportData;
+
+  /// CSV import/export information title
+  ///
+  /// In en, this message translates to:
+  /// **'CSV Data Management'**
+  String get csvImportExportInfo;
+
+  /// Description of CSV import/export functionality
+  ///
+  /// In en, this message translates to:
+  /// **'Import or export your providers and fee intervals using CSV files'**
+  String get csvImportExportDescription;
+
+  /// Import data section title
+  ///
+  /// In en, this message translates to:
+  /// **'Import Data'**
+  String get importData;
+
+  /// Export data section title
+  ///
+  /// In en, this message translates to:
+  /// **'Export Data'**
+  String get exportData;
+
+  /// CSV templates section title
+  ///
+  /// In en, this message translates to:
+  /// **'CSV Templates'**
+  String get templates;
+
+  /// Export combined data option title
+  ///
+  /// In en, this message translates to:
+  /// **'Export Combined'**
+  String get exportCombined;
+
+  /// Description for exporting combined data
+  ///
+  /// In en, this message translates to:
+  /// **'Export providers with their fee intervals'**
+  String get exportCombinedDescription;
+
+  /// Download provider CSV template option
+  ///
+  /// In en, this message translates to:
+  /// **'Provider Template'**
+  String get downloadProviderTemplate;
+
+  /// Description for provider template download
+  ///
+  /// In en, this message translates to:
+  /// **'Download CSV template for importing providers'**
+  String get csvTemplateForProviders;
+
+  /// Download fee intervals CSV template option
+  ///
+  /// In en, this message translates to:
+  /// **'Fee Intervals Template'**
+  String get downloadFeeTemplate;
+
+  /// Description for fee intervals template download
+  ///
+  /// In en, this message translates to:
+  /// **'Download CSV template for importing fees'**
+  String get csvTemplateForFees;
+
+  /// Download combined CSV template option
+  ///
+  /// In en, this message translates to:
+  /// **'Combined Template'**
+  String get downloadCombinedTemplate;
+
+  /// Description for combined template download
+  ///
+  /// In en, this message translates to:
+  /// **'Download CSV template for combined import'**
+  String get csvTemplateForCombined;
+
+  /// Import success message title
+  ///
+  /// In en, this message translates to:
+  /// **'Import Successful'**
+  String get importSuccessful;
+
+  /// Generic import failure message
+  ///
+  /// In en, this message translates to:
+  /// **'Import failed: {error}'**
+  String importFailed(String error);
+
+  /// Success message when export completes successfully
+  ///
+  /// In en, this message translates to:
+  /// **'Export successful'**
+  String get exportSuccessful;
+
+  /// Generic export failure message
+  ///
+  /// In en, this message translates to:
+  /// **'Export failed: {error}'**
+  String exportFailed(String error);
+
+  /// Template download success message
+  ///
+  /// In en, this message translates to:
+  /// **'Template Downloaded'**
+  String get templateDownloaded;
+
+  /// Error message when template download fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to download template'**
+  String get failedToDownloadTemplate;
+
+  /// File reading failure message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to read file'**
+  String get failedToReadFile;
+
+  /// Message showing number of providers imported
+  ///
+  /// In en, this message translates to:
+  /// **'{count} provider(s) imported'**
+  String providersImported(int count);
+
+  /// Message showing number of fee intervals imported
+  ///
+  /// In en, this message translates to:
+  /// **'{count} fee interval(s) imported'**
+  String feeIntervalsImported(int count);
+
+  /// Message showing number of errors encountered
+  ///
+  /// In en, this message translates to:
+  /// **'{count} error(s) encountered'**
+  String errorsEncountered(int count);
+
+  /// Data management section title
+  ///
+  /// In en, this message translates to:
+  /// **'Data Management'**
+  String get dataManagement;
+
+  /// Backup option title
+  ///
+  /// In en, this message translates to:
+  /// **'Backup'**
+  String get backup;
+
+  /// Description for backup functionality
+  ///
+  /// In en, this message translates to:
+  /// **'Backup your providers and fees'**
+  String get backupYourData;
+
+  /// Reset option title
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// Description for reset functionality
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all data'**
+  String get clearAllData;
+
+  /// Reset confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Reset'**
+  String get confirmReset;
+
+  /// Warning message for data reset
+  ///
+  /// In en, this message translates to:
+  /// **'This will permanently delete all your providers and fee intervals. This action cannot be undone.'**
+  String get resetWarningMessage;
+
+  /// Success message for data reset
+  ///
+  /// In en, this message translates to:
+  /// **'Data reset successful'**
+  String get dataResetSuccessful;
+
+  /// Failure message for data reset
+  ///
+  /// In en, this message translates to:
+  /// **'Reset failed'**
+  String get resetFailed;
+
+  /// Title for CSV management screen
+  ///
+  /// In en, this message translates to:
+  /// **'CSV Management'**
+  String get csvManagement;
+
+  /// Preview template button text
+  ///
+  /// In en, this message translates to:
+  /// **'Preview Template'**
+  String get previewTemplate;
+
+  /// Preview button text
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get preview;
+
+  /// Download button text
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
+  /// Template preview dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Template Preview'**
+  String get templatePreview;
+
+  /// Close button text
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// Description for import data action
+  ///
+  /// In en, this message translates to:
+  /// **'Import providers and fee intervals from CSV file. The system will automatically detect the data type based on columns.'**
+  String get importDataDescription;
+
+  /// Description for export data action
+  ///
+  /// In en, this message translates to:
+  /// **'Export all providers and their fee intervals to a combined CSV file.'**
+  String get exportDataDescription;
+
+  /// Error message when CSV text input is empty
+  ///
+  /// In en, this message translates to:
+  /// **'CSV content cannot be empty'**
+  String get csvContentCannotBeEmpty;
+
+  /// Instruction text for file import option
+  ///
+  /// In en, this message translates to:
+  /// **'Click to select a CSV file'**
+  String get clickImportToSelectFile;
+
+  /// Button text for copying content
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get copy;
+
+  /// Message shown when content is copied to clipboard
+  ///
+  /// In en, this message translates to:
+  /// **'Copied to clipboard'**
+  String get copiedToClipboard;
+
+  /// Dialog title for file save location selection
+  ///
+  /// In en, this message translates to:
+  /// **'Choose where to save the file'**
+  String get chooseWhereToSave;
+
+  /// Success message when file is saved
+  ///
+  /// In en, this message translates to:
+  /// **'File saved successfully'**
+  String get fileSavedSuccessfully;
+
+  /// Error message when file save fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save file'**
+  String get failedToSaveFile;
+
+  /// File option text
+  ///
+  /// In en, this message translates to:
+  /// **'File'**
+  String get file;
+
+  /// Text option text
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get text;
+
+  /// Hint text for CSV text input field
+  ///
+  /// In en, this message translates to:
+  /// **'Paste your CSV content here...'**
+  String get pasteCsvContentHere;
+
+  /// Text shown when a file is selected
+  ///
+  /// In en, this message translates to:
+  /// **'File Selected'**
+  String get fileSelected;
+
+  /// Text indicating only CSV files are accepted
+  ///
+  /// In en, this message translates to:
+  /// **'CSV files only'**
+  String get csvFilesOnly;
+
+  /// Title for CSV content preview section
+  ///
+  /// In en, this message translates to:
+  /// **'CSV Content Preview:'**
+  String get csvContentPreview;
+
+  /// Error message when file selection fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to select file'**
+  String get failedToSelectFile;
+
+  /// Error message when template preview fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to preview template'**
+  String get failedToPreviewTemplate;
+
+  /// Error message when CSV file contains no data
+  ///
+  /// In en, this message translates to:
+  /// **'CSV file is empty'**
+  String get csvFileIsEmpty;
+
+  /// Error message when CSV file has no valid data rows
+  ///
+  /// In en, this message translates to:
+  /// **'No data rows found'**
+  String get noDataRowsFound;
+
+  /// Error message when provider name is missing in CSV row
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Provider name is required'**
+  String rowProviderNameRequired(int rowNumber);
+
+  /// Error message when provider already exists in database
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Provider \"{name}\" already exists'**
+  String rowProviderAlreadyExists(int rowNumber, String name);
+
+  /// Generic error message for CSV row processing
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: {error}'**
+  String rowGenericError(int rowNumber, String error);
+
+  /// Error message when provider name is missing in fee interval CSV row
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Provider name is required'**
+  String rowProviderNameRequiredFee(int rowNumber);
+
+  /// Error message when provider referenced in CSV doesn't exist
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Provider \"{providerName}\" not found'**
+  String rowProviderNotFound(int rowNumber, String providerName);
+
+  /// Error message when fee interval overlaps with existing interval
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Interval overlaps with existing interval ({overlap})'**
+  String rowIntervalOverlaps(int rowNumber, String overlap);
+
+  /// Error message when amounts in CSV row are invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Invalid amounts (min: {minStr}, max: {maxStr}, fee: {feeStr})'**
+  String rowInvalidAmounts(
+    int rowNumber,
+    String minStr,
+    String maxStr,
+    String feeStr,
+  );
+
+  /// Error message when minimum amount is greater than maximum amount
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Min amount ({min}) must be less than max amount ({max})'**
+  String rowMinAmountGreaterThanMax(int rowNumber, String min, String max);
+
+  /// Error message when fee amount is not positive
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Fee must be positive'**
+  String rowFeeMustBePositive(int rowNumber);
+
+  /// Success message showing number of imported providers and fee intervals
+  ///
+  /// In en, this message translates to:
+  /// **'Imported {providersCount} provider(s) and {feesCount} fee interval(s)'**
+  String importedProvidersAndFees(int providersCount, int feesCount);
+
+  /// Error message when provider ID is invalid during import
+  ///
+  /// In en, this message translates to:
+  /// **'Provider \"{providerName}\": Invalid provider ID'**
+  String providerInvalidProviderId(String providerName);
+
+  /// Error message when provider has no fee intervals during import
+  ///
+  /// In en, this message translates to:
+  /// **'Provider \"{providerName}\": No fee intervals found'**
+  String providerNoFeeIntervals(String providerName);
+
+  /// Generic error message for provider import
+  ///
+  /// In en, this message translates to:
+  /// **'Provider \"{providerName}\": {error}'**
+  String providerImportError(String providerName, String error);
+
+  /// Error message for overlapping intervals in combined import
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Interval overlaps with existing interval ({overlap})'**
+  String rowIntervalOverlapsCombined(int rowNumber, String overlap);
+
+  /// Error message when there is no data available for export
+  ///
+  /// In en, this message translates to:
+  /// **'No data to export'**
+  String get noDataToExport;
+
+  /// Error message when provider name column is missing in CSV
+  ///
+  /// In en, this message translates to:
+  /// **'Provider name column not found'**
+  String get providerNameColumnNotFound;
+
+  /// Hint text shown when user can pull down to refresh content
+  ///
+  /// In en, this message translates to:
+  /// **'Pull down to refresh'**
+  String get pullToRefresh;
+
+  /// Text shown when content is being refreshed
+  ///
+  /// In en, this message translates to:
+  /// **'Refreshing...'**
+  String get refreshing;
 }
 
 class _AppLocalizationsDelegate
