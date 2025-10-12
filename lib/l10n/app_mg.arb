@@ -1500,5 +1500,229 @@
   "percentageCannotExceed100": "Ny isan-jato dia tsy afaka mihoatra ny 100",
   "@percentageCannotExceed100": {
     "description": "Validation error when percentage exceeds 100"
+  },
+  "searchHelpTopics": "Karohy lohahevitra fanampiana...",
+  "@searchHelpTopics": {
+    "description": "Placeholder text for help search field"
+  },
+  "faq": "Fanontaniana matetika",
+  "@faq": {
+    "description": "Frequently Asked Questions tab title"
+  },
+  "contact": "Fifandraisana",
+  "@contact": {
+    "description": "Contact tab title"
+  },
+  "faqWhatIsFeeMinimizer": "Inona no Feezer na Fee Minimizer?",
+  "@faqWhatIsFeeMinimizer": {
+    "description": "FAQ question"
+  },
+  "faqWhatIsFeeMinimizerAnswer": "Feezer na Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran'ny fifampiraharahana amin'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.",
+  "@faqWhatIsFeeMinimizerAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqHowToAddProvider": "Ahoana no fomba hanampiana mpamatsy vaovao?",
+  "@faqHowToAddProvider": {
+    "description": "FAQ question"
+  },
+  "faqHowToAddProviderAnswer": "Raha hanampy mpamatsy vaovao ianao, midira ao amin'ny efijery Mpamatsy ary tsindrio ny bokotra '+'. Fenoy ny antsipirian'ny mpamatsy ao anatin'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin'ny alalan'ny rakitra CSV. Tsy misy mpamatsy ankafizina - manana fahefana tanteraka ianao hanampy sy hanala mpamatsy araka ny ilainao.",
+  "@faqHowToAddProviderAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqHowToCalculateFees": "Ahoana no fomba iasana ny kajy sarany?",
+  "@faqHowToCalculateFees": {
+    "description": "FAQ question"
+  },
+  "faqHowToCalculateFeesAnswer": "Ampidiro ny vola fifampiraharahana sy misafidy mpamatsy. Ny app dia kajy ny sarany rehetra azo ampiharina ao anatin'izany ny sarany raikitra, sarany isan-jato, ary sarany ambony/ambany. Izy io dia mampiseho anao ny vidiny manontolo ary manoro hevitra fanatsarana.",
+  "@faqHowToCalculateFeesAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqDataSecurity": "Azo antoka ve ny angon-drakitra?",
+  "@faqDataSecurity": {
+    "description": "FAQ question"
+  },
+  "faqDataSecurityAnswer": "Ny angon-drakitra ara-bola dia voatahiry ao amin'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin'ny fitaovanao ary tsy alefa any aiza na aiza.",
+  "@faqDataSecurityAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqOfflineMode": "Miasa ve ny app nefa tsy misy internet?",
+  "@faqOfflineMode": {
+    "description": "FAQ question"
+  },
+  "faqOfflineModeAnswer": "Eny, Feezer na Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.",
+  "@faqOfflineModeAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqExportData": "Ahoana no fomba hanondrana ny angon-drakitra?",
+  "@faqExportData": {
+    "description": "FAQ question"
+  },
+  "faqExportDataAnswer": "Midira ao amin'ny Fikirana > Fitantanana angona > Fitantanana CSV. Azonao atao ny manondrana mpamatsy, vola ary elanelana sarany ho rakitra CSV. Ireo dia azo ampiasaina ho backup na hanafatra ao amin'ny app hafa.",
+  "@faqExportDataAnswer": {
+    "description": "FAQ answer"
+  },
+  "emailSupport": "Fanohanana amin'ny email",
+  "@emailSupport": {
+    "description": "Email support option title"
+  },
+  "phoneSupport": "Fanohanana amin'ny finday",
+  "@phoneSupport": {
+    "description": "Phone support option title"
+  },
+  "website": "Tranonkala",
+  "@website": {
+    "description": "Website option title"
+  },
+  "responseTime": "Fotoana famaliana",
+  "@responseTime": {
+    "description": "Response time section title"
+  },
+  "responseTimeDescription": "Matetika izahay mamaly ny fangatahana fanampiana ao anatin'ny 24 ora amin'ny andro fiasana.",
+  "@responseTimeDescription": {
+    "description": "Response time description"
+  },
+  "gettingStarted": "Manomboka",
+  "@gettingStarted": {
+    "description": "Getting started guide title"
+  },
+  "gettingStartedDescription": "Mianara ny fototry ny fampiasana Feezer na Fee Minimizer",
+  "@gettingStartedDescription": {
+    "description": "Getting started guide description"
+  },
+  "providerManagement": "Provider Management",
+  "@providerManagement": {
+    "description": "Provider management guide title"
+  },
+  "providerManagementDescription": "How to add, edit, and manage financial providers",
+  "@providerManagementDescription": {
+    "description": "Provider management guide description"
+  },
+  "feeCalculation": "Fee Calculation",
+  "@feeCalculation": {
+    "description": "Fee calculation guide title"
+  },
+  "feeCalculationDescription": "Understanding how fees are calculated and optimized",
+  "@feeCalculationDescription": {
+    "description": "Fee calculation guide description"
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management guide title"
+  },
+  "dataManagementDescription": "Import, export, and backup your data",
+  "@dataManagementDescription": {
+    "description": "Data management guide description"
+  },
+  "videoTutorials": "Video Tutorials",
+  "@videoTutorials": {
+    "description": "Video tutorials section title"
+  },
+  "videoTutorialsDescription": "Mijery torolàlana video isaky ny dingana mba hahay Feezer na Fee Minimizer",
+  "@videoTutorialsDescription": {
+    "description": "Video tutorials description"
+  },
+  "watchTutorials": "Watch Tutorials",
+  "@watchTutorials": {
+    "description": "Watch tutorials button text"
+  },
+  "shareYourThoughts": "Share Your Thoughts",
+  "@shareYourThoughts": {
+    "description": "Feedback section title"
+  },
+  "feedbackDescription": "Ampio anay hanatsarana Feezer na Fee Minimizer amin'ny alalan'ny fizarana ny hevitrao sy soso-kevitrao",
+  "@feedbackDescription": {
+    "description": "Feedback description"
+  },
+  "contactUs": "Mifandraisa aminay",
+  "@contactUs": {
+    "description": "Contact us section title"
+  },
+  "contactDescription": "Mifandraisa amin'ny ekipan'ny fanampiana ho an'ny fanampiana amin'ny fanontaniana na olana rehetra.",
+  "@contactDescription": {
+    "description": "Contact section description"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email contact method"
+  },
+  "phone": "Finday",
+  "@phone": {
+    "description": "Phone contact method"
+  },
+  "website": "Tranonkala",
+  "@website": {
+    "description": "Website contact method"
+  },
+  "faqQuestion1": "Ahoana no fomba hanalana ny sara fifampiraharahana?",
+  "@faqQuestion1": {
+    "description": "First FAQ question"
+  },
+  "faqAnswer1": "Ny app dia kajy ho azy ny fomba mahomby indrindra amin'ny vidiny hiatrehana ny fifampiraharahanao amin'ny fampitahana mpamatsy vola sy fomba fandoavam-bola samihafa.",
+  "@faqAnswer1": {
+    "description": "First FAQ answer"
+  },
+  "faqQuestion2": "Inona avy ny vola raisina?",
+  "@faqQuestion2": {
+    "description": "Second FAQ question"
+  },
+  "faqAnswer2": "Miaraka amin'ny vola lehibe rehetra eran-tany isika ao anatin'izany ny USD, EUR, GBP, JPY, ary maro hafa. Ny app dia kajy ho azy ny tahan'ny fifanakalozana vola.",
+  "@faqAnswer2": {
+    "description": "Second FAQ answer"
+  },
+  "faqQuestion3": "Azo antoka ve ny angon-drakitra ara-bola?",
+  "@faqQuestion3": {
+    "description": "Third FAQ question"
+  },
+  "faqAnswer3": "Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga banky izahay. Ny angon-drakitrao dia tsy tehirizina ao amin'ny server anay ary ny kajy rehetra dia atao eo amin'ny fitaovanao ihany.",
+  "@faqAnswer3": {
+    "description": "Third FAQ answer"
+  },
+  "faqQuestion4": "Ahoana no fomba ianarana ny tahan'ny fifanakalozana vola?",
+  "@faqQuestion4": {
+    "description": "Fourth FAQ question"
+  },
+  "faqAnswer4": "Ny tahan'ny fifanakalozana vola dia havaozina ho azy amin'ny fotoana tena izy avy amin'ny mpamatsy angon-drakitra ara-bola azo itokisana. Afaka havaozina tanana ihany koa ny taha ao amin'ny kirakira.",
+  "@faqAnswer4": {
+    "description": "Fourth FAQ answer"
+  },
+  "faqQuestion5": "Afaka tehirizina ve ny mpamatsy vola tiako?",
+  "@faqQuestion5": {
+    "description": "Fifth FAQ question"
+  },
+  "faqAnswer5": "Eny, afaka tehirizina ny mpamatsy banky sy fomba fandoavam-bola tiavinao ho an'ny fidirana haingana rehefa manao kajy vaovao.",
+  "@faqAnswer5": {
+    "description": "Fifth FAQ answer"
+  },
+  "faqQuestion6": "Ahoana no fomba hanampiana mpamatsy vola vaovao?",
+  "@faqQuestion6": {
+    "description": "Sixth FAQ question"
+  },
+  "faqAnswer6": "Tsindrio ny bokotra '+' ao amin'ny efijery lisitry ny mpamatsy. Ampidiro ny anaran'ny mpamatsy, famaritana, ary misafidy sary. Afaka manampy elanelana sara ho an'ny habetsaky ny fifampiraharahana samihafa avy eo ianao.",
+  "@faqAnswer6": {
+    "description": "Sixth FAQ answer"
+  },
+  "faqQuestion7": "Inona avy ny elanelana sara?",
+  "@faqQuestion7": {
+    "description": "Seventh FAQ question"
+  },
+  "faqAnswer7": "Ny elanelana sara dia mamaritra ny rafitra vidiny ho an'ny mpamatsy tsirairay. Afaka mametraka sara raikitra (ohatra, $2.50) na sara isan-jato (ohatra, 1.5%) ho an'ny habetsaky ny fifampiraharahana samihafa.",
+  "@faqAnswer7": {
+    "description": "Seventh FAQ answer"
+  },
+  "faqQuestion8": "Ahoana no fomba iasana ny fanatsarana?",
+  "@faqQuestion8": {
+    "description": "Eighth FAQ question"
+  },
+  "faqAnswer8": "Feezer dia mandinika ny rafitra sara mpamatsy rehetra ary kajy ny fomba tsara indrindra hizarana ny fifampiraharahanao ho asa maro mba hanalana ny sara total raha manaja ny fetra ataonao.",
+  "@faqAnswer8": {
+    "description": "Eighth FAQ answer"
+  },
+  "faqCurrencyRates": "Ahoana no fomba iasana ny tahan'ny fifanakalozana vola ?",
+  "@faqCurrencyRates": {
+    "description": "FAQ question"
+  },
+  "faqCurrencyRatesAnswer": "Ny app dia tsy manavao ho azy ny tahan'ny fifanakalozana vola. Manana fahefana tanteraka ianao ary afaka mametraka tanana ny tahan'ny fifanakalozana volanao manokana ho an'ny fanazaran-tena tanteraka. Izany dia manome anao fahafaha-manao tanteraka hampiasa ny taha mifanaraka amin'ny filanao, ary miasa tsara tanteraka tsy misy internet.",
+  "@faqCurrencyRatesAnswer": {
+    "description": "FAQ answer"
   }
 }

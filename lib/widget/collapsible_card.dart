@@ -7,7 +7,8 @@ import 'surface_card.dart';
 class CollapsibleCard extends StatefulWidget {
   const CollapsibleCard({
     super.key,
-    required this.title,
+    this.title,
+    this.titleWidget,
     required this.children,
     this.subtitle,
     this.icon,
@@ -18,10 +19,13 @@ class CollapsibleCard extends StatefulWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
     this.margin = const EdgeInsets.symmetric(horizontal: 16),
     this.onExpandedChanged,
-  });
+  }) : assert(title != null || titleWidget != null, 'Either title or titleWidget must be provided');
 
   /// Title text displayed in the header
-  final String title;
+  final String? title;
+
+  /// Title widget displayed in the header (takes precedence over title)
+  final Widget? titleWidget;
 
   /// Optional subtitle text displayed below title
   final String? subtitle;
@@ -89,9 +93,10 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with title and expand/collapse functionality
+            // Header with title and expand/collapse functionality - make entire header clickable
             GestureDetector(
               onTap: _toggleExpanded,
+              behavior: HitTestBehavior.opaque,
               child: Container(
                 padding: widget.padding,
                 child: Row(
@@ -106,8 +111,8 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(
-                            widget.title,
+                          widget.titleWidget ?? Text(
+                            widget.title!,
                             style:
                                 widget.titleStyle ??
                                 ThemeUtil.titleMedium.copyWith(
@@ -135,6 +140,7 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                     Icon(
                       _isExpanded ? Icons.expand_less : Icons.expand_more,
                       color: collapseIconColor,
+                      size: 20,
                     ),
                   ],
                 ),

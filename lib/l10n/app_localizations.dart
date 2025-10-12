@@ -1498,7 +1498,7 @@ abstract class AppLocalizations {
   /// **'{count} error(s) encountered'**
   String errorsEncountered(int count);
 
-  /// Data management section title
+  /// Data management guide title
   ///
   /// In en, this message translates to:
   /// **'Data Management'**
@@ -1868,6 +1868,330 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Percentage cannot exceed 100'**
   String get percentageCannotExceed100;
+
+  /// Placeholder text for help search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search help topics...'**
+  String get searchHelpTopics;
+
+  /// Frequently Asked Questions tab title
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faq;
+
+  /// Contact tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get contact;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'What is Feezer or Fee Minimizer?'**
+  String get faqWhatIsFeeMinimizer;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.'**
+  String get faqWhatIsFeeMinimizerAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I add a new provider?'**
+  String get faqHowToAddProvider;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.'**
+  String get faqHowToAddProviderAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How does fee calculation work?'**
+  String get faqHowToCalculateFees;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.'**
+  String get faqHowToCalculateFeesAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Is my data secure?'**
+  String get faqDataSecurity;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.'**
+  String get faqDataSecurityAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Does the app work offline?'**
+  String get faqOfflineMode;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.'**
+  String get faqOfflineModeAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do currency exchange rates work?'**
+  String get faqCurrencyRates;
+
+  /// No description provided for @faqCurrencyRatesAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.'**
+  String get faqCurrencyRatesAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I export my data?'**
+  String get faqExportData;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.'**
+  String get faqExportDataAnswer;
+
+  /// Email support option title
+  ///
+  /// In en, this message translates to:
+  /// **'Email Support'**
+  String get emailSupport;
+
+  /// Phone support option title
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Support'**
+  String get phoneSupport;
+
+  /// Website contact method
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get website;
+
+  /// Response time section title
+  ///
+  /// In en, this message translates to:
+  /// **'Response Time'**
+  String get responseTime;
+
+  /// Response time description
+  ///
+  /// In en, this message translates to:
+  /// **'We typically respond to support requests within 24 hours during business days.'**
+  String get responseTimeDescription;
+
+  /// Getting started guide title
+  ///
+  /// In en, this message translates to:
+  /// **'Getting Started'**
+  String get gettingStarted;
+
+  /// Getting started guide description
+  ///
+  /// In en, this message translates to:
+  /// **'Learn the basics of using Feezer or Fee Minimizer'**
+  String get gettingStartedDescription;
+
+  /// Provider management guide title
+  ///
+  /// In en, this message translates to:
+  /// **'Provider Management'**
+  String get providerManagement;
+
+  /// Provider management guide description
+  ///
+  /// In en, this message translates to:
+  /// **'How to add, edit, and manage financial providers'**
+  String get providerManagementDescription;
+
+  /// Fee calculation guide title
+  ///
+  /// In en, this message translates to:
+  /// **'Fee Calculation'**
+  String get feeCalculation;
+
+  /// Fee calculation guide description
+  ///
+  /// In en, this message translates to:
+  /// **'Understanding how fees are calculated and optimized'**
+  String get feeCalculationDescription;
+
+  /// Data management guide description
+  ///
+  /// In en, this message translates to:
+  /// **'Import, export, and backup your data'**
+  String get dataManagementDescription;
+
+  /// Video tutorials section title
+  ///
+  /// In en, this message translates to:
+  /// **'Video Tutorials'**
+  String get videoTutorials;
+
+  /// Video tutorials description
+  ///
+  /// In en, this message translates to:
+  /// **'Watch step-by-step video guides to master Feezer or Fee Minimizer'**
+  String get videoTutorialsDescription;
+
+  /// Watch tutorials button text
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Tutorials'**
+  String get watchTutorials;
+
+  /// Feedback section title
+  ///
+  /// In en, this message translates to:
+  /// **'Share Your Thoughts'**
+  String get shareYourThoughts;
+
+  /// Feedback description
+  ///
+  /// In en, this message translates to:
+  /// **'Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions'**
+  String get feedbackDescription;
+
+  /// Contact us section title
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Us'**
+  String get contactUs;
+
+  /// Contact section description
+  ///
+  /// In en, this message translates to:
+  /// **'Get in touch with our support team for help with any questions or issues.'**
+  String get contactDescription;
+
+  /// Email contact method
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// Phone contact method
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// First FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I minimize transaction fees?'**
+  String get faqQuestion1;
+
+  /// First FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.'**
+  String get faqAnswer1;
+
+  /// Second FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'What currencies are supported?'**
+  String get faqQuestion2;
+
+  /// Second FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.'**
+  String get faqAnswer2;
+
+  /// Third FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Is my financial data secure?'**
+  String get faqQuestion3;
+
+  /// Third FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.'**
+  String get faqAnswer3;
+
+  /// Fourth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I update currency rates?'**
+  String get faqQuestion4;
+
+  /// Fourth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.'**
+  String get faqAnswer4;
+
+  /// Fifth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Can I save my favorite providers?'**
+  String get faqQuestion5;
+
+  /// Fifth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.'**
+  String get faqAnswer5;
+
+  /// Sixth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I add a new provider?'**
+  String get faqQuestion6;
+
+  /// Sixth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.'**
+  String get faqAnswer6;
+
+  /// Seventh FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'What are fee intervals?'**
+  String get faqQuestion7;
+
+  /// Seventh FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.'**
+  String get faqAnswer7;
+
+  /// Eighth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How does the optimization work?'**
+  String get faqQuestion8;
+
+  /// Eighth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.'**
+  String get faqAnswer8;
 }
 
 class _AppLocalizationsDelegate

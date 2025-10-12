@@ -1035,4 +1035,191 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get percentageCannotExceed100 =>
       'Le pourcentage ne peut pas dépasser 100';
+
+  @override
+  String get searchHelpTopics => 'Rechercher des sujets d\'aide...';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get faqWhatIsFeeMinimizer =>
+      'Qu\'est-ce que Feezer ou Fee Minimizer ?';
+
+  @override
+  String get faqWhatIsFeeMinimizerAnswer =>
+      'Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.';
+
+  @override
+  String get faqHowToAddProvider => 'Comment ajouter un nouveau fournisseur ?';
+
+  @override
+  String get faqHowToAddProviderAnswer =>
+      'Pour ajouter un nouveau fournisseur, allez à l\'écran Fournisseurs et appuyez sur le bouton \'+\'. Remplissez les détails du fournisseur incluant le nom, la description et la structure des frais. Vous pouvez également importer des données de fournisseur en utilisant des fichiers CSV. Il n\'y a pas de fournisseurs favoris - vous avez un contrôle total pour ajouter et supprimer des fournisseurs selon vos besoins.';
+
+  @override
+  String get faqHowToCalculateFees =>
+      'Comment fonctionne le calcul des frais ?';
+
+  @override
+  String get faqHowToCalculateFeesAnswer =>
+      'Entrez le montant de votre transaction et sélectionnez un fournisseur. L\'application calculera tous les frais applicables incluant les frais fixes, les frais en pourcentage et les frais minimum/maximum. Elle vous montre ensuite le coût total et suggère des optimisations.';
+
+  @override
+  String get faqDataSecurity => 'Mes données sont-elles sécurisées ?';
+
+  @override
+  String get faqDataSecurityAnswer =>
+      'Vos données financières sont stockées localement sur votre appareil sans cryptage ni mesures de sécurité supplémentaires. Cette application ne fournit pas de fonctionnalités de sécurité de niveau bancaire. Toutes les données restent sur votre appareil et ne sont transmises nulle part.';
+
+  @override
+  String get faqOfflineMode => 'L\'application fonctionne-t-elle hors ligne ?';
+
+  @override
+  String get faqOfflineModeAnswer =>
+      'Oui, Feezer ou Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.';
+
+  @override
+  String get faqCurrencyRates => 'Comment fonctionnent les taux de change ?';
+
+  @override
+  String get faqCurrencyRatesAnswer =>
+      'L\'application ne met pas à jour automatiquement les taux de change des devises. Vous avez un contrôle total et pouvez définir manuellement vos propres taux de change pour une personnalisation complète. Cela vous donne une flexibilité totale pour utiliser les taux qui conviennent à vos besoins, et fonctionne parfaitement hors ligne.';
+
+  @override
+  String get faqExportData => 'Comment exporter mes données ?';
+
+  @override
+  String get faqExportDataAnswer =>
+      'Allez dans Paramètres > Gestion des données > Gestion CSV. Vous pouvez exporter les fournisseurs, devises et intervalles de frais sous forme de fichiers CSV. Ceux-ci peuvent être utilisés pour la sauvegarde ou l\'importation dans d\'autres instances de l\'application.';
+
+  @override
+  String get emailSupport => 'Support par email';
+
+  @override
+  String get phoneSupport => 'Support téléphonique';
+
+  @override
+  String get website => 'Site web';
+
+  @override
+  String get responseTime => 'Temps de réponse';
+
+  @override
+  String get responseTimeDescription =>
+      'Nous répondons généralement aux demandes de support dans les 24 heures pendant les jours ouvrables.';
+
+  @override
+  String get gettingStarted => 'Premiers pas';
+
+  @override
+  String get gettingStartedDescription =>
+      'Apprenez les bases de l\'utilisation de Feezer ou Fee Minimizer';
+
+  @override
+  String get providerManagement => 'Gestion des fournisseurs';
+
+  @override
+  String get providerManagementDescription =>
+      'Comment ajouter, modifier et gérer les fournisseurs financiers';
+
+  @override
+  String get feeCalculation => 'Calcul des frais';
+
+  @override
+  String get feeCalculationDescription =>
+      'Comprendre comment les frais sont calculés et optimisés';
+
+  @override
+  String get dataManagementDescription =>
+      'Importer, exporter et sauvegarder vos données';
+
+  @override
+  String get videoTutorials => 'Tutoriels vidéo';
+
+  @override
+  String get videoTutorialsDescription =>
+      'Regardez des guides vidéo étape par étape pour maîtriser Feezer ou Fee Minimizer';
+
+  @override
+  String get watchTutorials => 'Voir les tutoriels';
+
+  @override
+  String get shareYourThoughts => 'Partagez vos pensées';
+
+  @override
+  String get feedbackDescription =>
+      'Aidez-nous à améliorer Feezer ou Fee Minimizer en partageant vos commentaires et suggestions';
+
+  @override
+  String get contactUs => 'Contactez-nous';
+
+  @override
+  String get contactDescription =>
+      'Entrez en contact avec notre équipe de support pour obtenir de l\'aide sur vos questions ou problèmes.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Téléphone';
+
+  @override
+  String get faqQuestion1 => 'Comment minimiser les frais de transaction ?';
+
+  @override
+  String get faqAnswer1 =>
+      'Notre application calcule automatiquement la manière la plus rentable de gérer vos transactions en comparant différents fournisseurs et méthodes de paiement.';
+
+  @override
+  String get faqQuestion2 => 'Quelles devises sont prises en charge ?';
+
+  @override
+  String get faqAnswer2 =>
+      'Nous prenons en charge toutes les principales devises mondiales incluant USD, EUR, GBP, JPY, et bien d\'autres. L\'application gère automatiquement les taux de conversion des devises.';
+
+  @override
+  String get faqQuestion3 => 'Mes données financières sont-elles sécurisées ?';
+
+  @override
+  String get faqAnswer3 =>
+      'Oui, nous utilisons un cryptage et des mesures de sécurité de niveau bancaire. Vos données ne sont jamais stockées sur nos serveurs et tous les calculs sont effectués localement sur votre appareil.';
+
+  @override
+  String get faqQuestion4 => 'Comment mettre à jour les taux de change ?';
+
+  @override
+  String get faqAnswer4 =>
+      'Les taux de change sont automatiquement mis à jour en temps réel à partir de fournisseurs de données financières fiables. Vous pouvez également actualiser manuellement les taux dans les paramètres.';
+
+  @override
+  String get faqQuestion5 => 'Puis-je sauvegarder mes fournisseurs préférés ?';
+
+  @override
+  String get faqAnswer5 =>
+      'Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
+
+  @override
+  String get faqQuestion6 => 'Comment ajouter un nouveau fournisseur ?';
+
+  @override
+  String get faqAnswer6 =>
+      'Appuyez sur le bouton \'+\' dans l\'écran de liste des fournisseurs. Saisissez le nom du fournisseur, la description, et choisissez une icône. Vous pouvez ensuite ajouter des intervalles de frais pour différents montants de transaction.';
+
+  @override
+  String get faqQuestion7 => 'Qu\'est-ce que les intervalles de frais ?';
+
+  @override
+  String get faqAnswer7 =>
+      'Les intervalles de frais définissent la structure de coût pour chaque fournisseur. Vous pouvez définir des frais fixes (ex. : 2,50 €) ou des frais en pourcentage (ex. : 1,5 %) pour différentes plages de montants de transaction.';
+
+  @override
+  String get faqQuestion8 => 'Comment fonctionne l\'optimisation ?';
+
+  @override
+  String get faqAnswer8 =>
+      'Feezer analyse toutes les structures de frais de vos fournisseurs et calcule la manière optimale de diviser votre transaction en plusieurs opérations pour minimiser les frais totaux tout en respectant vos contraintes.';
 }

@@ -798,7 +798,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get dataManagement => 'Fitantanana angona';
+  String get dataManagement => 'Data Management';
 
   @override
   String get backup => 'Tahiry';
@@ -1020,4 +1020,193 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get percentageCannotExceed100 =>
       'Ny isan-jato dia tsy afaka mihoatra ny 100';
+
+  @override
+  String get searchHelpTopics => 'Karohy lohahevitra fanampiana...';
+
+  @override
+  String get faq => 'Fanontaniana matetika';
+
+  @override
+  String get contact => 'Fifandraisana';
+
+  @override
+  String get faqWhatIsFeeMinimizer => 'Inona no Feezer na Fee Minimizer?';
+
+  @override
+  String get faqWhatIsFeeMinimizerAnswer =>
+      'Feezer na Fee Minimizer dia rindranasa finday manampy ny mpampiasa kajy sy manatsara ny saran\'ny fifampiraharahana amin\'ny mpamatsy vola samihafa. Izy io dia mandinika ny antsipirian\'ny fifampiraharahanao ary manoro hevitra ny safidy tsara indrindra mba hahazoana sarany ambany.';
+
+  @override
+  String get faqHowToAddProvider =>
+      'Ahoana no fomba hanampiana mpamatsy vaovao?';
+
+  @override
+  String get faqHowToAddProviderAnswer =>
+      'Raha hanampy mpamatsy vaovao ianao, midira ao amin\'ny efijery Mpamatsy ary tsindrio ny bokotra \'+\'. Fenoy ny antsipirian\'ny mpamatsy ao anatin\'izany ny anarana, famaritana, ary ny rafitra sarany. Azonao atao koa ny manafatra angona mpamatsy amin\'ny alalan\'ny rakitra CSV. Tsy misy mpamatsy ankafizina - manana fahefana tanteraka ianao hanampy sy hanala mpamatsy araka ny ilainao.';
+
+  @override
+  String get faqHowToCalculateFees => 'Ahoana no fomba iasana ny kajy sarany?';
+
+  @override
+  String get faqHowToCalculateFeesAnswer =>
+      'Ampidiro ny vola fifampiraharahana sy misafidy mpamatsy. Ny app dia kajy ny sarany rehetra azo ampiharina ao anatin\'izany ny sarany raikitra, sarany isan-jato, ary sarany ambony/ambany. Izy io dia mampiseho anao ny vidiny manontolo ary manoro hevitra fanatsarana.';
+
+  @override
+  String get faqDataSecurity => 'Azo antoka ve ny angon-drakitra?';
+
+  @override
+  String get faqDataSecurityAnswer =>
+      'Ny angon-drakitra ara-bola dia voatahiry ao amin\'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin\'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin\'ny fitaovanao ary tsy alefa any aiza na aiza.';
+
+  @override
+  String get faqOfflineMode => 'Miasa ve ny app nefa tsy misy internet?';
+
+  @override
+  String get faqOfflineModeAnswer =>
+      'Eny, Feezer na Fee Minimizer miasa tanteraka tsy misy internet. Ny angon-drakitrao sy kajy rehetra dia voatahiry ao amin\'ny fitaovanao. Azonao ampiasaina ny endri-javatra rehetra nefa tsy misy fifandraisana internet.';
+
+  @override
+  String get faqCurrencyRates =>
+      'Ahoana no fomba iasana ny tahan\'ny fifanakalozana vola ?';
+
+  @override
+  String get faqCurrencyRatesAnswer =>
+      'Ny app dia tsy manavao ho azy ny tahan\'ny fifanakalozana vola. Manana fahefana tanteraka ianao ary afaka mametraka tanana ny tahan\'ny fifanakalozana volanao manokana ho an\'ny fanazaran-tena tanteraka. Izany dia manome anao fahafaha-manao tanteraka hampiasa ny taha mifanaraka amin\'ny filanao, ary miasa tsara tanteraka tsy misy internet.';
+
+  @override
+  String get faqExportData => 'Ahoana no fomba hanondrana ny angon-drakitra?';
+
+  @override
+  String get faqExportDataAnswer =>
+      'Midira ao amin\'ny Fikirana > Fitantanana angona > Fitantanana CSV. Azonao atao ny manondrana mpamatsy, vola ary elanelana sarany ho rakitra CSV. Ireo dia azo ampiasaina ho backup na hanafatra ao amin\'ny app hafa.';
+
+  @override
+  String get emailSupport => 'Fanohanana amin\'ny email';
+
+  @override
+  String get phoneSupport => 'Fanohanana amin\'ny finday';
+
+  @override
+  String get website => 'Tranonkala';
+
+  @override
+  String get responseTime => 'Fotoana famaliana';
+
+  @override
+  String get responseTimeDescription =>
+      'Matetika izahay mamaly ny fangatahana fanampiana ao anatin\'ny 24 ora amin\'ny andro fiasana.';
+
+  @override
+  String get gettingStarted => 'Manomboka';
+
+  @override
+  String get gettingStartedDescription =>
+      'Mianara ny fototry ny fampiasana Feezer na Fee Minimizer';
+
+  @override
+  String get providerManagement => 'Provider Management';
+
+  @override
+  String get providerManagementDescription =>
+      'How to add, edit, and manage financial providers';
+
+  @override
+  String get feeCalculation => 'Fee Calculation';
+
+  @override
+  String get feeCalculationDescription =>
+      'Understanding how fees are calculated and optimized';
+
+  @override
+  String get dataManagementDescription =>
+      'Import, export, and backup your data';
+
+  @override
+  String get videoTutorials => 'Video Tutorials';
+
+  @override
+  String get videoTutorialsDescription =>
+      'Mijery torolàlana video isaky ny dingana mba hahay Feezer na Fee Minimizer';
+
+  @override
+  String get watchTutorials => 'Watch Tutorials';
+
+  @override
+  String get shareYourThoughts => 'Share Your Thoughts';
+
+  @override
+  String get feedbackDescription =>
+      'Ampio anay hanatsarana Feezer na Fee Minimizer amin\'ny alalan\'ny fizarana ny hevitrao sy soso-kevitrao';
+
+  @override
+  String get contactUs => 'Mifandraisa aminay';
+
+  @override
+  String get contactDescription =>
+      'Mifandraisa amin\'ny ekipan\'ny fanampiana ho an\'ny fanampiana amin\'ny fanontaniana na olana rehetra.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Finday';
+
+  @override
+  String get faqQuestion1 =>
+      'Ahoana no fomba hanalana ny sara fifampiraharahana?';
+
+  @override
+  String get faqAnswer1 =>
+      'Ny app dia kajy ho azy ny fomba mahomby indrindra amin\'ny vidiny hiatrehana ny fifampiraharahanao amin\'ny fampitahana mpamatsy vola sy fomba fandoavam-bola samihafa.';
+
+  @override
+  String get faqQuestion2 => 'Inona avy ny vola raisina?';
+
+  @override
+  String get faqAnswer2 =>
+      'Miaraka amin\'ny vola lehibe rehetra eran-tany isika ao anatin\'izany ny USD, EUR, GBP, JPY, ary maro hafa. Ny app dia kajy ho azy ny tahan\'ny fifanakalozana vola.';
+
+  @override
+  String get faqQuestion3 => 'Azo antoka ve ny angon-drakitra ara-bola?';
+
+  @override
+  String get faqAnswer3 =>
+      'Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga banky izahay. Ny angon-drakitrao dia tsy tehirizina ao amin\'ny server anay ary ny kajy rehetra dia atao eo amin\'ny fitaovanao ihany.';
+
+  @override
+  String get faqQuestion4 =>
+      'Ahoana no fomba ianarana ny tahan\'ny fifanakalozana vola?';
+
+  @override
+  String get faqAnswer4 =>
+      'Ny tahan\'ny fifanakalozana vola dia havaozina ho azy amin\'ny fotoana tena izy avy amin\'ny mpamatsy angon-drakitra ara-bola azo itokisana. Afaka havaozina tanana ihany koa ny taha ao amin\'ny kirakira.';
+
+  @override
+  String get faqQuestion5 => 'Afaka tehirizina ve ny mpamatsy vola tiako?';
+
+  @override
+  String get faqAnswer5 =>
+      'Eny, afaka tehirizina ny mpamatsy banky sy fomba fandoavam-bola tiavinao ho an\'ny fidirana haingana rehefa manao kajy vaovao.';
+
+  @override
+  String get faqQuestion6 => 'Ahoana no fomba hanampiana mpamatsy vola vaovao?';
+
+  @override
+  String get faqAnswer6 =>
+      'Tsindrio ny bokotra \'+\' ao amin\'ny efijery lisitry ny mpamatsy. Ampidiro ny anaran\'ny mpamatsy, famaritana, ary misafidy sary. Afaka manampy elanelana sara ho an\'ny habetsaky ny fifampiraharahana samihafa avy eo ianao.';
+
+  @override
+  String get faqQuestion7 => 'Inona avy ny elanelana sara?';
+
+  @override
+  String get faqAnswer7 =>
+      'Ny elanelana sara dia mamaritra ny rafitra vidiny ho an\'ny mpamatsy tsirairay. Afaka mametraka sara raikitra (ohatra, \$2.50) na sara isan-jato (ohatra, 1.5%) ho an\'ny habetsaky ny fifampiraharahana samihafa.';
+
+  @override
+  String get faqQuestion8 => 'Ahoana no fomba iasana ny fanatsarana?';
+
+  @override
+  String get faqAnswer8 =>
+      'Feezer dia mandinika ny rafitra sara mpamatsy rehetra ary kajy ny fomba tsara indrindra hizarana ny fifampiraharahanao ho asa maro mba hanalana ny sara total raha manaja ny fetra ataonao.';
 }
