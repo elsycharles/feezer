@@ -1304,5 +1304,21 @@
   "percentageMustBeBetween0And100": "Le pourcentage doit être entre 0 et 100",
   "@percentageMustBeBetween0And100": {
     "description": "Erreur de validation pour la saisie de pourcentage"
+  },
+  "invalidAmount": "Montant invalide",
+  "@invalidAmount": {
+    "description": "Message d'erreur pour un montant invalide"
+  },
+  "pleaseEnterPercentage": "Veuillez entrer le pourcentage",
+  "@pleaseEnterPercentage": {
+    "description": "Message de validation pour un pourcentage manquant"
+  },
+  "pleaseEnterValidPercentage": "Veuillez entrer un pourcentage valide",
+  "@pleaseEnterValidPercentage": {
+    "description": "Message de validation pour un pourcentage invalide"
+  },
+  "percentageCannotExceed100": "Le pourcentage ne peut pas dépasser 100",
+  "@percentageCannotExceed100": {
+    "description": "Erreur de validation quand le pourcentage dépasse 100"
   }
 }

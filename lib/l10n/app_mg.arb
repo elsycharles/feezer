@@ -1455,5 +1455,41 @@
   "refreshing": "Manavao...",
   "@refreshing": {
     "description": "Sorohina aseho rehefa manavao ny votoaty"
+  },
+  "feeType": "Karazana sara",
+  "@feeType": {
+    "description": "Fee type label"
+  },
+  "fixedAmount": "Sara raikitra",
+  "@fixedAmount": {
+    "description": "Fixed amount option"
+  },
+  "percentage": "Isan-jato",
+  "@percentage": {
+    "description": "Percentage option"
+  },
+  "enterPercentage": "Ampidiro ny isan-jato",
+  "@enterPercentage": {
+    "description": "Placeholder for percentage input"
+  },
+  "percentageMustBeBetween0And100": "Ny isan-jato dia tsy maintsy eo anelanelan'ny 0 sy 100",
+  "@percentageMustBeBetween0And100": {
+    "description": "Validation error for percentage input"
+  },
+  "invalidAmount": "Vola tsy manan-kery",
+  "@invalidAmount": {
+    "description": "Error message for invalid amount input"
+  },
+  "pleaseEnterPercentage": "Ampidiro ny isan-jato azafady",
+  "@pleaseEnterPercentage": {
+    "description": "Validation message for missing percentage input"
+  },
+  "pleaseEnterValidPercentage": "Ampidiro isan-jato manan-kery azafady",
+  "@pleaseEnterValidPercentage": {
+    "description": "Validation message for invalid percentage input"
+  },
+  "percentageCannotExceed100": "Ny isan-jato dia tsy afaka mihoatra ny 100",
+  "@percentageCannotExceed100": {
+    "description": "Validation error when percentage exceeds 100"
   }
 }

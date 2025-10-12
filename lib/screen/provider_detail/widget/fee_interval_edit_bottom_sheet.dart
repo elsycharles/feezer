@@ -239,17 +239,17 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   String? _validateFee(String? value) {
     if (value?.isEmpty ?? true) {
       return _feeType == FeeType.percentage
-          ? 'Veuillez entrer le pourcentage'
+          ? AppLocalizations.of(context).pleaseEnterPercentage
           : AppLocalizations.of(context).pleaseEnterFeeAmount;
     }
     final fee = double.tryParse(value!);
     if (fee == null || fee < 0) {
       return _feeType == FeeType.percentage
-          ? 'Veuillez entrer un pourcentage valide'
+          ? AppLocalizations.of(context).pleaseEnterValidPercentage
           : AppLocalizations.of(context).pleaseEnterValidFee;
     }
     if (_feeType == FeeType.percentage && fee > 100) {
-      return 'Le pourcentage ne peut pas dépasser 100';
+      return AppLocalizations.of(context).percentageCannotExceed100;
     }
     return null;
   }

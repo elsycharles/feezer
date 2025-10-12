@@ -281,7 +281,7 @@ class _State extends State<NewFeeIntervalScreen> {
     // Then check it's greater than min amount
     final amount = ConstantUtil.parseLocalizedNumber(value!);
     if (amount == null) {
-      return 'Montant invalide';
+      return AppLocalizations.of(context).invalidAmount;
     }
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
     if (amount <= minAmount) {

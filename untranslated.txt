@@ -1,9 +1,1 @@
-{
-  "mg": [
-    "feeType",
-    "fixedAmount",
-    "percentage",
-    "enterPercentage",
-    "percentageMustBeBetween0And100"
-  ]
-}
+{}
