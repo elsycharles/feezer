@@ -688,6 +688,114 @@ abstract class AppLocalizations {
   /// **'Terms and privacy policy'**
   String get termsAndPrivacyPolicy;
 
+  /// Terms of use introduction section title
+  ///
+  /// In en, this message translates to:
+  /// **'Introduction'**
+  String get termsIntroductionTitle;
+
+  /// Terms of use introduction section content
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Feezer! These Terms of Use govern your use of our mobile application designed to help you minimize banking fees. By using Feezer, you agree to be bound by these terms. Please read them carefully before using our service.'**
+  String get termsIntroductionContent;
+
+  /// Terms of use acceptance section title
+  ///
+  /// In en, this message translates to:
+  /// **'Acceptance of Terms'**
+  String get termsAcceptanceTitle;
+
+  /// Terms of use acceptance section content
+  ///
+  /// In en, this message translates to:
+  /// **'By accessing and using Feezer, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.'**
+  String get termsAcceptanceContent;
+
+  /// Terms of use user responsibilities section title
+  ///
+  /// In en, this message translates to:
+  /// **'User Responsibilities'**
+  String get termsResponsibilitiesTitle;
+
+  /// Terms of use user responsibilities section content
+  ///
+  /// In en, this message translates to:
+  /// **'You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information when using our service and to update this information as necessary.'**
+  String get termsResponsibilitiesContent;
+
+  /// Terms of use service description section title
+  ///
+  /// In en, this message translates to:
+  /// **'Service Description'**
+  String get termsServiceTitle;
+
+  /// Terms of use service description section content
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer is a fee minimization tool that helps you calculate and optimize banking transaction costs. Our service provides fee calculations, transaction optimization suggestions, and educational content about banking fees. We strive to provide accurate information, but all calculations are estimates and should be verified with your financial institutions.'**
+  String get termsServiceContent;
+
+  /// Terms of use privacy section title
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy and Data Protection'**
+  String get termsPrivacyTitle;
+
+  /// Terms of use privacy section content
+  ///
+  /// In en, this message translates to:
+  /// **'Your privacy is important to us. Feezer collects minimal personal information necessary to provide our service. We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in our Privacy Policy. We implement appropriate security measures to protect your data.'**
+  String get termsPrivacyContent;
+
+  /// Terms of use liability section title
+  ///
+  /// In en, this message translates to:
+  /// **'Limitation of Liability'**
+  String get termsLiabilityTitle;
+
+  /// Terms of use liability section content
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer provides fee calculation services for informational purposes only. We are not responsible for any financial losses, damages, or decisions made based on the information provided by our application. Users should always verify calculations with their financial institutions and consult with financial advisors for important financial decisions.'**
+  String get termsLiabilityContent;
+
+  /// Terms of use termination section title
+  ///
+  /// In en, this message translates to:
+  /// **'Termination'**
+  String get termsTerminationTitle;
+
+  /// Terms of use termination section content
+  ///
+  /// In en, this message translates to:
+  /// **'We reserve the right to terminate or suspend your account and access to our service at our sole discretion, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users, us, or third parties, or for any other reason.'**
+  String get termsTerminationContent;
+
+  /// Terms of use governing law section title
+  ///
+  /// In en, this message translates to:
+  /// **'Governing Law'**
+  String get termsGoverningLawTitle;
+
+  /// Terms of use governing law section content
+  ///
+  /// In en, this message translates to:
+  /// **'These Terms of Use shall be governed by and construed in accordance with the laws of the jurisdiction in which our service operates. Any disputes arising from these terms shall be resolved through binding arbitration in accordance with the rules of the appropriate arbitration association.'**
+  String get termsGoverningLawContent;
+
+  /// Terms of use contact section title
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Information'**
+  String get termsContactTitle;
+
+  /// Terms of use contact section content
+  ///
+  /// In en, this message translates to:
+  /// **'If you have any questions about these Terms of Use, please contact us through the app\'s support section or via email at support@feezer.app. We will respond to your inquiries as quickly as possible.'**
+  String get termsContactContent;
+
   /// Message for upcoming features
   ///
   /// In en, this message translates to:

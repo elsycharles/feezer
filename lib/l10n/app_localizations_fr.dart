@@ -328,6 +328,69 @@ class AppLocalizationsFr extends AppLocalizations {
       'Conditions et politique de confidentialité';
 
   @override
+  String get termsIntroductionTitle => 'Introduction';
+
+  @override
+  String get termsIntroductionContent =>
+      'Bienvenue sur Feezer ! Ces Conditions d\'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais bancaires. En utilisant Feezer, vous acceptez d\'être lié par ces conditions. Veuillez les lire attentivement avant d\'utiliser notre service.';
+
+  @override
+  String get termsAcceptanceTitle => 'Acceptation des Conditions';
+
+  @override
+  String get termsAcceptanceContent =>
+      'En accédant et utilisant Feezer, vous acceptez et vous engagez à respecter les termes et dispositions de cet accord. Si vous n\'acceptez pas de vous conformer aux conditions ci-dessus, veuillez ne pas utiliser ce service.';
+
+  @override
+  String get termsResponsibilitiesTitle => 'Responsabilités de l\'Utilisateur';
+
+  @override
+  String get termsResponsibilitiesContent =>
+      'Vous êtes responsable du maintien de la confidentialité des informations de votre compte et de toutes les activités qui se déroulent sous votre compte. Vous acceptez de fournir des informations exactes et complètes lors de l\'utilisation de notre service et de mettre à jour ces informations si nécessaire.';
+
+  @override
+  String get termsServiceTitle => 'Description du Service';
+
+  @override
+  String get termsServiceContent =>
+      'Feezer est un outil de minimisation des frais qui vous aide à calculer et optimiser les coûts des transactions bancaires. Notre service fournit des calculs de frais, des suggestions d\'optimisation des transactions et du contenu éducatif sur les frais bancaires. Nous nous efforçons de fournir des informations exactes, mais tous les calculs sont des estimations et doivent être vérifiés auprès de vos établissements financiers.';
+
+  @override
+  String get termsPrivacyTitle => 'Confidentialité et Protection des Données';
+
+  @override
+  String get termsPrivacyContent =>
+      'Votre confidentialité est importante pour nous. Feezer collecte un minimum d\'informations personnelles nécessaires pour fournir notre service. Nous ne vendons, n\'échangeons ni ne transférons vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans notre Politique de Confidentialité. Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos données.';
+
+  @override
+  String get termsLiabilityTitle => 'Limitation de Responsabilité';
+
+  @override
+  String get termsLiabilityContent =>
+      'Feezer fournit des services de calcul de frais à des fins d\'information uniquement. Nous ne sommes pas responsables des pertes financières, dommages ou décisions prises sur la base des informations fournies par notre application. Les utilisateurs doivent toujours vérifier les calculs auprès de leurs établissements financiers et consulter des conseillers financiers pour les décisions financières importantes.';
+
+  @override
+  String get termsTerminationTitle => 'Résiliation';
+
+  @override
+  String get termsTerminationContent =>
+      'Nous nous réservons le droit de résilier ou suspendre votre compte et l\'accès à notre service à notre seule discrétion, sans préavis, pour un comportement que nous croyons violer ces Conditions d\'utilisation ou nuisible aux autres utilisateurs, à nous ou à des tiers, ou pour toute autre raison.';
+
+  @override
+  String get termsGoverningLawTitle => 'Loi Applicable';
+
+  @override
+  String get termsGoverningLawContent =>
+      'Ces Conditions d\'utilisation sont régies et interprétées conformément aux lois de la juridiction dans laquelle notre service opère. Tout différend découlant de ces conditions sera résolu par arbitrage obligatoire conformément aux règles de l\'association d\'arbitrage appropriée.';
+
+  @override
+  String get termsContactTitle => 'Informations de Contact';
+
+  @override
+  String get termsContactContent =>
+      'Si vous avez des questions concernant ces Conditions d\'utilisation, veuillez nous contacter via la section support de l\'application ou par email à support@feezer.app. Nous répondrons à vos demandes aussi rapidement que possible.';
+
+  @override
   String get featureComingNextVersion =>
       'Fonctionnalité disponible dans la prochaine version';
 

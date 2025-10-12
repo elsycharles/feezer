@@ -325,6 +325,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String get termsAndPrivacyPolicy => 'Terms and privacy policy';
 
   @override
+  String get termsIntroductionTitle => 'Introduction';
+
+  @override
+  String get termsIntroductionContent =>
+      'Welcome to Feezer! These Terms of Use govern your use of our mobile application designed to help you minimize banking fees. By using Feezer, you agree to be bound by these terms. Please read them carefully before using our service.';
+
+  @override
+  String get termsAcceptanceTitle => 'Acceptance of Terms';
+
+  @override
+  String get termsAcceptanceContent =>
+      'By accessing and using Feezer, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.';
+
+  @override
+  String get termsResponsibilitiesTitle => 'User Responsibilities';
+
+  @override
+  String get termsResponsibilitiesContent =>
+      'You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information when using our service and to update this information as necessary.';
+
+  @override
+  String get termsServiceTitle => 'Service Description';
+
+  @override
+  String get termsServiceContent =>
+      'Feezer is a fee minimization tool that helps you calculate and optimize banking transaction costs. Our service provides fee calculations, transaction optimization suggestions, and educational content about banking fees. We strive to provide accurate information, but all calculations are estimates and should be verified with your financial institutions.';
+
+  @override
+  String get termsPrivacyTitle => 'Privacy and Data Protection';
+
+  @override
+  String get termsPrivacyContent =>
+      'Your privacy is important to us. Feezer collects minimal personal information necessary to provide our service. We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in our Privacy Policy. We implement appropriate security measures to protect your data.';
+
+  @override
+  String get termsLiabilityTitle => 'Limitation of Liability';
+
+  @override
+  String get termsLiabilityContent =>
+      'Feezer provides fee calculation services for informational purposes only. We are not responsible for any financial losses, damages, or decisions made based on the information provided by our application. Users should always verify calculations with their financial institutions and consult with financial advisors for important financial decisions.';
+
+  @override
+  String get termsTerminationTitle => 'Termination';
+
+  @override
+  String get termsTerminationContent =>
+      'We reserve the right to terminate or suspend your account and access to our service at our sole discretion, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users, us, or third parties, or for any other reason.';
+
+  @override
+  String get termsGoverningLawTitle => 'Governing Law';
+
+  @override
+  String get termsGoverningLawContent =>
+      'These Terms of Use shall be governed by and construed in accordance with the laws of the jurisdiction in which our service operates. Any disputes arising from these terms shall be resolved through binding arbitration in accordance with the rules of the appropriate arbitration association.';
+
+  @override
+  String get termsContactTitle => 'Contact Information';
+
+  @override
+  String get termsContactContent =>
+      'If you have any questions about these Terms of Use, please contact us through the app\'s support section or via email at support@feezer.app. We will respond to your inquiries as quickly as possible.';
+
+  @override
   String get featureComingNextVersion => 'Feature coming in the next version';
 
   @override
