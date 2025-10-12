@@ -1161,4 +1161,52 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get rateOnStore => 'Rate on Store';
+
+  @override
+  String get contactUs => 'Contact Us';
+
+  @override
+  String get contactDescription =>
+      'Get in touch with our support team for help with any questions or issues.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get faqQuestion1 => 'How do I minimize transaction fees?';
+
+  @override
+  String get faqAnswer1 =>
+      'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.';
+
+  @override
+  String get faqQuestion2 => 'What currencies are supported?';
+
+  @override
+  String get faqAnswer2 =>
+      'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.';
+
+  @override
+  String get faqQuestion3 => 'Is my financial data secure?';
+
+  @override
+  String get faqAnswer3 =>
+      'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.';
+
+  @override
+  String get faqQuestion4 => 'How do I update currency rates?';
+
+  @override
+  String get faqAnswer4 =>
+      'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.';
+
+  @override
+  String get faqQuestion5 => 'Can I save my favorite providers?';
+
+  @override
+  String get faqAnswer5 =>
+      'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
 }

@@ -1492,5 +1492,65 @@
   "rateOnStore": "Évaluer sur le Store",
   "@rateOnStore": {
     "description": "Texte du bouton évaluer sur le store"
+  },
+  "contactUs": "Contactez-nous",
+  "@contactUs": {
+    "description": "Titre de la section contactez-nous"
+  },
+  "contactDescription": "Entrez en contact avec notre équipe de support pour obtenir de l'aide sur vos questions ou problèmes.",
+  "@contactDescription": {
+    "description": "Description de la section contact"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Méthode de contact email"
+  },
+  "phone": "Téléphone",
+  "@phone": {
+    "description": "Méthode de contact téléphone"
+  },
+  "website": "Site web",
+  "@website": {
+    "description": "Méthode de contact site web"
+  },
+  "faqQuestion1": "Comment minimiser les frais de transaction ?",
+  "@faqQuestion1": {
+    "description": "Première question FAQ"
+  },
+  "faqAnswer1": "Notre application calcule automatiquement la manière la plus rentable de gérer vos transactions en comparant différents fournisseurs et méthodes de paiement.",
+  "@faqAnswer1": {
+    "description": "Première réponse FAQ"
+  },
+  "faqQuestion2": "Quelles devises sont prises en charge ?",
+  "@faqQuestion2": {
+    "description": "Deuxième question FAQ"
+  },
+  "faqAnswer2": "Nous prenons en charge toutes les principales devises mondiales incluant USD, EUR, GBP, JPY, et bien d'autres. L'application gère automatiquement les taux de conversion des devises.",
+  "@faqAnswer2": {
+    "description": "Deuxième réponse FAQ"
+  },
+  "faqQuestion3": "Mes données financières sont-elles sécurisées ?",
+  "@faqQuestion3": {
+    "description": "Troisième question FAQ"
+  },
+  "faqAnswer3": "Oui, nous utilisons un cryptage et des mesures de sécurité de niveau bancaire. Vos données ne sont jamais stockées sur nos serveurs et tous les calculs sont effectués localement sur votre appareil.",
+  "@faqAnswer3": {
+    "description": "Troisième réponse FAQ"
+  },
+  "faqQuestion4": "Comment mettre à jour les taux de change ?",
+  "@faqQuestion4": {
+    "description": "Quatrième question FAQ"
+  },
+  "faqAnswer4": "Les taux de change sont automatiquement mis à jour en temps réel à partir de fournisseurs de données financières fiables. Vous pouvez également actualiser manuellement les taux dans les paramètres.",
+  "@faqAnswer4": {
+    "description": "Quatrième réponse FAQ"
+  },
+  "faqQuestion5": "Puis-je sauvegarder mes fournisseurs préférés ?",
+  "@faqQuestion5": {
+    "description": "Cinquième question FAQ"
+  },
+  "faqAnswer5": "Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.",
+  "@faqAnswer5": {
+    "description": "Cinquième réponse FAQ"
   }
 }

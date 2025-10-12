@@ -2007,7 +2007,7 @@ abstract class AppLocalizations {
   /// **'Phone Support'**
   String get phoneSupport;
 
-  /// Website option title
+  /// Website contact method
   ///
   /// In en, this message translates to:
   /// **'Website'**
@@ -2120,6 +2120,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Rate on Store'**
   String get rateOnStore;
+
+  /// Contact us section title
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Us'**
+  String get contactUs;
+
+  /// Contact section description
+  ///
+  /// In en, this message translates to:
+  /// **'Get in touch with our support team for help with any questions or issues.'**
+  String get contactDescription;
+
+  /// Email contact method
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// Phone contact method
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// First FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I minimize transaction fees?'**
+  String get faqQuestion1;
+
+  /// First FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.'**
+  String get faqAnswer1;
+
+  /// Second FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'What currencies are supported?'**
+  String get faqQuestion2;
+
+  /// Second FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.'**
+  String get faqAnswer2;
+
+  /// Third FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Is my financial data secure?'**
+  String get faqQuestion3;
+
+  /// Third FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.'**
+  String get faqAnswer3;
+
+  /// Fourth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I update currency rates?'**
+  String get faqQuestion4;
+
+  /// Fourth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.'**
+  String get faqAnswer4;
+
+  /// Fifth FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Can I save my favorite providers?'**
+  String get faqQuestion5;
+
+  /// Fifth FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.'**
+  String get faqAnswer5;
 }
 
 class _AppLocalizationsDelegate

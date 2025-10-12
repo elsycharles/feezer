@@ -1672,5 +1672,65 @@
   "rateOnStore": "Rate on Store",
   "@rateOnStore": {
     "description": "Rate on store button text"
+  },
+  "contactUs": "Contact Us",
+  "@contactUs": {
+    "description": "Contact us section title"
+  },
+  "contactDescription": "Get in touch with our support team for help with any questions or issues.",
+  "@contactDescription": {
+    "description": "Contact section description"
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Email contact method"
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "Phone contact method"
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website contact method"
+  },
+  "faqQuestion1": "How do I minimize transaction fees?",
+  "@faqQuestion1": {
+    "description": "First FAQ question"
+  },
+  "faqAnswer1": "Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.",
+  "@faqAnswer1": {
+    "description": "First FAQ answer"
+  },
+  "faqQuestion2": "What currencies are supported?",
+  "@faqQuestion2": {
+    "description": "Second FAQ question"
+  },
+  "faqAnswer2": "We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.",
+  "@faqAnswer2": {
+    "description": "Second FAQ answer"
+  },
+  "faqQuestion3": "Is my financial data secure?",
+  "@faqQuestion3": {
+    "description": "Third FAQ question"
+  },
+  "faqAnswer3": "Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.",
+  "@faqAnswer3": {
+    "description": "Third FAQ answer"
+  },
+  "faqQuestion4": "How do I update currency rates?",
+  "@faqQuestion4": {
+    "description": "Fourth FAQ question"
+  },
+  "faqAnswer4": "Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.",
+  "@faqAnswer4": {
+    "description": "Fourth FAQ answer"
+  },
+  "faqQuestion5": "Can I save my favorite providers?",
+  "@faqQuestion5": {
+    "description": "Fifth FAQ question"
+  },
+  "faqAnswer5": "Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.",
+  "@faqAnswer5": {
+    "description": "Fifth FAQ answer"
   }
 }

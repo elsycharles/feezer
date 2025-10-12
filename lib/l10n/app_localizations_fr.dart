@@ -1177,4 +1177,52 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rateOnStore => 'Évaluer sur le Store';
+
+  @override
+  String get contactUs => 'Contactez-nous';
+
+  @override
+  String get contactDescription =>
+      'Entrez en contact avec notre équipe de support pour obtenir de l\'aide sur vos questions ou problèmes.';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get phone => 'Téléphone';
+
+  @override
+  String get faqQuestion1 => 'Comment minimiser les frais de transaction ?';
+
+  @override
+  String get faqAnswer1 =>
+      'Notre application calcule automatiquement la manière la plus rentable de gérer vos transactions en comparant différents fournisseurs et méthodes de paiement.';
+
+  @override
+  String get faqQuestion2 => 'Quelles devises sont prises en charge ?';
+
+  @override
+  String get faqAnswer2 =>
+      'Nous prenons en charge toutes les principales devises mondiales incluant USD, EUR, GBP, JPY, et bien d\'autres. L\'application gère automatiquement les taux de conversion des devises.';
+
+  @override
+  String get faqQuestion3 => 'Mes données financières sont-elles sécurisées ?';
+
+  @override
+  String get faqAnswer3 =>
+      'Oui, nous utilisons un cryptage et des mesures de sécurité de niveau bancaire. Vos données ne sont jamais stockées sur nos serveurs et tous les calculs sont effectués localement sur votre appareil.';
+
+  @override
+  String get faqQuestion4 => 'Comment mettre à jour les taux de change ?';
+
+  @override
+  String get faqAnswer4 =>
+      'Les taux de change sont automatiquement mis à jour en temps réel à partir de fournisseurs de données financières fiables. Vous pouvez également actualiser manuellement les taux dans les paramètres.';
+
+  @override
+  String get faqQuestion5 => 'Puis-je sauvegarder mes fournisseurs préférés ?';
+
+  @override
+  String get faqAnswer5 =>
+      'Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
 }

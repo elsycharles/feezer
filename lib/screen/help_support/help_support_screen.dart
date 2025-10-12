@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fee_minimizer/screen/help_support/widget/faq_item.dart';
-import 'package:fee_minimizer/screen/help_support/widget/contact_card.dart';
+import 'package:fee_minimizer/widget/surface_card.dart';
+import 'package:fee_minimizer/widget/interactive_surface.dart';
 import 'package:fee_minimizer/util/theme_util.dart';
 import 'package:fee_minimizer/widget/collapsible_card.dart';
+import 'package:fee_minimizer/widget/app_bar.dart' as custom;
+import 'package:fee_minimizer/l10n/app_localizations.dart';
+import 'package:fee_minimizer/widget/refreshable_screen.dart';
+import 'package:fee_minimizer/screen/provider_list/widget/search_field.dart';
 
 class HelpSupportScreen extends StatefulWidget {
   const HelpSupportScreen({super.key});
@@ -36,72 +41,59 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
     final colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Help & Support',
-          style: TextStyle(
-            fontSize: ThemeUtil.fontSizeTitleLarge,
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface,
-          ),
-        ),
-        backgroundColor: colorScheme.surface,
-        foregroundColor: colorScheme.onSurface,
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(100),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      appBar: custom.AppBar(
+        title: AppLocalizations.of(context).helpAndSupport,
+        menuExcludeRoutes: const [],
+      ),
+      body: SafeArea(
+        child: RefreshableScreen(
+          onRefresh: () async {
+            // For help screen, we could refresh FAQ data or just provide haptic feedback
+            await Future.delayed(const Duration(milliseconds: 500));
+          },
           child: Column(
             children: [
+              const SizedBox(height: 16),
               // Search bar
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: TextField(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SearchField(
+                  hintText: AppLocalizations.of(context).searchHelpTopics,
                   controller: _searchController,
                   onChanged: (value) {
                     setState(() {
                       _searchQuery = value.toLowerCase();
                     });
                   },
-                  decoration: InputDecoration(
-                    hintText: 'Search help...',
-                    hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                    filled: true,
-                    fillColor: colorScheme.surfaceContainerHighest,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
-                  style: TextStyle(color: colorScheme.onSurface),
                 ),
               ),
+              const SizedBox(height: 16),
               // Tab bar
               TabBar(
                 controller: _tabController,
-                tabs: const [
-                  Tab(text: 'FAQ'),
-                  Tab(text: 'Contact'),
+                tabs: [
+                  Tab(text: AppLocalizations.of(context).faq),
+                  Tab(text: AppLocalizations.of(context).contact),
                 ],
                 labelColor: colorScheme.primary,
                 unselectedLabelColor: colorScheme.onSurfaceVariant,
                 indicatorColor: colorScheme.primary,
                 dividerColor: colorScheme.outlineVariant,
               ),
+              // Tab content
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    _buildFAQTab(colorScheme),
+                    _buildContactTab(colorScheme),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildFAQTab(colorScheme),
-          _buildContactTab(colorScheme),
-        ],
       ),
     );
   }
@@ -143,7 +135,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
       padding: const EdgeInsets.all(16),
       children: [
         Text(
-          'Contact Us',
+          AppLocalizations.of(context).contactUs,
           style: TextStyle(
             fontSize: ThemeUtil.fontSizeTitleLarge,
             fontWeight: FontWeight.w600,
@@ -152,32 +144,131 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
         ),
         const SizedBox(height: 8),
         Text(
-          'Get in touch with our support team for help with any questions or issues.',
+          AppLocalizations.of(context).contactDescription,
           style: TextStyle(
             fontSize: ThemeUtil.fontSizeBodyMedium,
             color: colorScheme.onSurfaceVariant,
           ),
         ),
         const SizedBox(height: 24),
-        ContactCard(
-          title: 'Email',
-          subtitle: 'support@feeminimizer.com',
-          icon: Icons.email,
-          onTap: () => _launchEmail(),
+        SurfaceCard(
+          child: InteractiveSurface(
+            onTap: () => _launchEmail(),
+            builder: (context, hovered, pressed) => ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.email,
+                  color: colorScheme.primary,
+                  size: 24,
+                ),
+              ),
+              title: Text(
+                AppLocalizations.of(context).email,
+                style: TextStyle(
+                  fontSize: ThemeUtil.fontSizeBodyLarge,
+                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              subtitle: Text(
+                'support@feeminimizer.com',
+                style: TextStyle(
+                  fontSize: ThemeUtil.fontSizeBodyMedium,
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: colorScheme.onSurfaceVariant,
+                size: 16,
+              ),
+            ),
+          ),
         ),
         const SizedBox(height: 12),
-        ContactCard(
-          title: 'Phone',
-          subtitle: '+1 (555) 123-4567',
-          icon: Icons.phone,
-          onTap: () => _launchPhone(),
+        SurfaceCard(
+          child: InteractiveSurface(
+            onTap: () => _launchPhone(),
+            builder: (context, hovered, pressed) => ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.phone,
+                  color: colorScheme.primary,
+                  size: 24,
+                ),
+              ),
+              title: Text(
+                AppLocalizations.of(context).phone,
+                style: TextStyle(
+                  fontSize: ThemeUtil.fontSizeBodyLarge,
+                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              subtitle: Text(
+                '+1 (555) 123-4567',
+                style: TextStyle(
+                  fontSize: ThemeUtil.fontSizeBodyMedium,
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: colorScheme.onSurfaceVariant,
+                size: 16,
+              ),
+            ),
+          ),
         ),
         const SizedBox(height: 12),
-        ContactCard(
-          title: 'Website',
-          subtitle: 'www.feeminimizer.com',
-          icon: Icons.web,
-          onTap: () => _launchWebsite(),
+        SurfaceCard(
+          child: InteractiveSurface(
+            onTap: () => _launchWebsite(),
+            builder: (context, hovered, pressed) => ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: colorScheme.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.web,
+                  color: colorScheme.primary,
+                  size: 24,
+                ),
+              ),
+              title: Text(
+                AppLocalizations.of(context).website,
+                style: TextStyle(
+                  fontSize: ThemeUtil.fontSizeBodyLarge,
+                  fontWeight: FontWeight.w500,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              subtitle: Text(
+                'www.feeminimizer.com',
+                style: TextStyle(
+                  fontSize: ThemeUtil.fontSizeBodyMedium,
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios,
+                color: colorScheme.onSurfaceVariant,
+                size: 16,
+              ),
+            ),
+          ),
         ),
       ],
     );
@@ -186,28 +277,28 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
   List<FaqItem> _getFilteredFAQItems() {
     final allItems = [
       FaqItem(
-        question: 'How do I minimize transaction fees?',
-        answer: 'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.',
+        question: AppLocalizations.of(context).faqQuestion1,
+        answer: AppLocalizations.of(context).faqAnswer1,
         category: 'general',
       ),
       FaqItem(
-        question: 'What currencies are supported?',
-        answer: 'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.',
+        question: AppLocalizations.of(context).faqQuestion2,
+        answer: AppLocalizations.of(context).faqAnswer2,
         category: 'general',
       ),
       FaqItem(
-        question: 'Is my financial data secure?',
-        answer: 'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.',
+        question: AppLocalizations.of(context).faqQuestion3,
+        answer: AppLocalizations.of(context).faqAnswer3,
         category: 'general',
       ),
       FaqItem(
-        question: 'How do I update currency rates?',
-        answer: 'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.',
+        question: AppLocalizations.of(context).faqQuestion4,
+        answer: AppLocalizations.of(context).faqAnswer4,
         category: 'general',
       ),
       FaqItem(
-        question: 'Can I save my favorite providers?',
-        answer: 'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.',
+        question: AppLocalizations.of(context).faqQuestion5,
+        answer: AppLocalizations.of(context).faqAnswer5,
         category: 'general',
       ),
     ];
