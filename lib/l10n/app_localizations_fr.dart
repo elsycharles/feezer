@@ -1035,4 +1035,146 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get percentageCannotExceed100 =>
       'Le pourcentage ne peut pas dépasser 100';
+
+  @override
+  String get searchHelpTopics => 'Rechercher des sujets d\'aide...';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get userGuide => 'Guide';
+
+  @override
+  String get feedback => 'Commentaires';
+
+  @override
+  String get found => 'Trouvé';
+
+  @override
+  String get results => 'résultats';
+
+  @override
+  String get noResultsFound => 'Aucun résultat trouvé';
+
+  @override
+  String get tryDifferentKeywords =>
+      'Essayez différents mots-clés ou parcourez les catégories';
+
+  @override
+  String get faqWhatIsFeeMinimizer => 'Qu\'est-ce que Fee Minimizer ?';
+
+  @override
+  String get faqWhatIsFeeMinimizerAnswer =>
+      'Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.';
+
+  @override
+  String get faqHowToAddProvider => 'Comment ajouter un nouveau fournisseur ?';
+
+  @override
+  String get faqHowToAddProviderAnswer =>
+      'Pour ajouter un nouveau fournisseur, allez à l\'écran Fournisseurs et appuyez sur le bouton \'+\'. Remplissez les détails du fournisseur incluant le nom, la description et la structure des frais. Vous pouvez également importer des données de fournisseur en utilisant des fichiers CSV.';
+
+  @override
+  String get faqHowToCalculateFees =>
+      'Comment fonctionne le calcul des frais ?';
+
+  @override
+  String get faqHowToCalculateFeesAnswer =>
+      'Entrez le montant de votre transaction et sélectionnez un fournisseur. L\'application calculera tous les frais applicables incluant les frais fixes, les frais en pourcentage et les frais minimum/maximum. Elle vous montre ensuite le coût total et suggère des optimisations.';
+
+  @override
+  String get faqDataSecurity => 'Mes données sont-elles sécurisées ?';
+
+  @override
+  String get faqDataSecurityAnswer =>
+      'Oui, vos données sont stockées localement sur votre appareil. Nous ne collectons ni ne transmettons aucune information financière personnelle. Tous les calculs sont effectués hors ligne pour assurer votre confidentialité et sécurité.';
+
+  @override
+  String get faqOfflineMode => 'L\'application fonctionne-t-elle hors ligne ?';
+
+  @override
+  String get faqOfflineModeAnswer =>
+      'Oui, Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.';
+
+  @override
+  String get faqExportData => 'Comment exporter mes données ?';
+
+  @override
+  String get faqExportDataAnswer =>
+      'Allez dans Paramètres > Gestion des données > Gestion CSV. Vous pouvez exporter les fournisseurs, devises et intervalles de frais sous forme de fichiers CSV. Ceux-ci peuvent être utilisés pour la sauvegarde ou l\'importation dans d\'autres instances de l\'application.';
+
+  @override
+  String get emailSupport => 'Support par email';
+
+  @override
+  String get phoneSupport => 'Support téléphonique';
+
+  @override
+  String get website => 'Site web';
+
+  @override
+  String get responseTime => 'Temps de réponse';
+
+  @override
+  String get responseTimeDescription =>
+      'Nous répondons généralement aux demandes de support dans les 24 heures pendant les jours ouvrables.';
+
+  @override
+  String get gettingStarted => 'Premiers pas';
+
+  @override
+  String get gettingStartedDescription =>
+      'Apprenez les bases de l\'utilisation de Fee Minimizer';
+
+  @override
+  String get providerManagement => 'Gestion des fournisseurs';
+
+  @override
+  String get providerManagementDescription =>
+      'Comment ajouter, modifier et gérer les fournisseurs financiers';
+
+  @override
+  String get feeCalculation => 'Calcul des frais';
+
+  @override
+  String get feeCalculationDescription =>
+      'Comprendre comment les frais sont calculés et optimisés';
+
+  @override
+  String get dataManagementDescription =>
+      'Importer, exporter et sauvegarder vos données';
+
+  @override
+  String get videoTutorials => 'Tutoriels vidéo';
+
+  @override
+  String get videoTutorialsDescription =>
+      'Regardez des guides vidéo étape par étape pour maîtriser Fee Minimizer';
+
+  @override
+  String get watchTutorials => 'Voir les tutoriels';
+
+  @override
+  String get shareYourThoughts => 'Partagez vos pensées';
+
+  @override
+  String get feedbackDescription =>
+      'Aidez-nous à améliorer Fee Minimizer en partageant vos commentaires et suggestions';
+
+  @override
+  String get submitFeedback => 'Envoyer un commentaire';
+
+  @override
+  String get rateApp => 'Évaluer l\'application';
+
+  @override
+  String get rateAppDescription =>
+      'Si vous aimez utiliser Fee Minimizer, veuillez nous évaluer sur l\'App Store';
+
+  @override
+  String get rateOnStore => 'Évaluer sur le Store';
 }

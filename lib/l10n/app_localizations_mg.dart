@@ -798,7 +798,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get dataManagement => 'Fitantanana angona';
+  String get dataManagement => 'Data Management';
 
   @override
   String get backup => 'Tahiry';
@@ -1020,4 +1020,145 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get percentageCannotExceed100 =>
       'Ny isan-jato dia tsy afaka mihoatra ny 100';
+
+  @override
+  String get searchHelpTopics => 'Search help topics...';
+
+  @override
+  String get faq => 'FAQ';
+
+  @override
+  String get contact => 'Contact';
+
+  @override
+  String get userGuide => 'Guide';
+
+  @override
+  String get feedback => 'Feedback';
+
+  @override
+  String get found => 'Found';
+
+  @override
+  String get results => 'results';
+
+  @override
+  String get noResultsFound => 'No results found';
+
+  @override
+  String get tryDifferentKeywords =>
+      'Try different keywords or browse categories';
+
+  @override
+  String get faqWhatIsFeeMinimizer => 'What is Fee Minimizer?';
+
+  @override
+  String get faqWhatIsFeeMinimizerAnswer =>
+      'Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.';
+
+  @override
+  String get faqHowToAddProvider => 'How do I add a new provider?';
+
+  @override
+  String get faqHowToAddProviderAnswer =>
+      'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.';
+
+  @override
+  String get faqHowToCalculateFees => 'How does fee calculation work?';
+
+  @override
+  String get faqHowToCalculateFeesAnswer =>
+      'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.';
+
+  @override
+  String get faqDataSecurity => 'Is my data secure?';
+
+  @override
+  String get faqDataSecurityAnswer =>
+      'Yes, your data is stored locally on your device. We don\'t collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.';
+
+  @override
+  String get faqOfflineMode => 'Does the app work offline?';
+
+  @override
+  String get faqOfflineModeAnswer =>
+      'Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.';
+
+  @override
+  String get faqExportData => 'How do I export my data?';
+
+  @override
+  String get faqExportDataAnswer =>
+      'Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.';
+
+  @override
+  String get emailSupport => 'Email Support';
+
+  @override
+  String get phoneSupport => 'Phone Support';
+
+  @override
+  String get website => 'Website';
+
+  @override
+  String get responseTime => 'Response Time';
+
+  @override
+  String get responseTimeDescription =>
+      'We typically respond to support requests within 24 hours during business days.';
+
+  @override
+  String get gettingStarted => 'Getting Started';
+
+  @override
+  String get gettingStartedDescription =>
+      'Learn the basics of using Fee Minimizer';
+
+  @override
+  String get providerManagement => 'Provider Management';
+
+  @override
+  String get providerManagementDescription =>
+      'How to add, edit, and manage financial providers';
+
+  @override
+  String get feeCalculation => 'Fee Calculation';
+
+  @override
+  String get feeCalculationDescription =>
+      'Understanding how fees are calculated and optimized';
+
+  @override
+  String get dataManagementDescription =>
+      'Import, export, and backup your data';
+
+  @override
+  String get videoTutorials => 'Video Tutorials';
+
+  @override
+  String get videoTutorialsDescription =>
+      'Watch step-by-step video guides to master Fee Minimizer';
+
+  @override
+  String get watchTutorials => 'Watch Tutorials';
+
+  @override
+  String get shareYourThoughts => 'Share Your Thoughts';
+
+  @override
+  String get feedbackDescription =>
+      'Help us improve Fee Minimizer by sharing your feedback and suggestions';
+
+  @override
+  String get submitFeedback => 'Submit Feedback';
+
+  @override
+  String get rateApp => 'Rate the App';
+
+  @override
+  String get rateAppDescription =>
+      'If you enjoy using Fee Minimizer, please rate us on the app store';
+
+  @override
+  String get rateOnStore => 'Rate on Store';
 }

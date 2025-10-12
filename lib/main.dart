@@ -15,6 +15,7 @@ import 'package:fee_minimizer/screen/optimize_fee/optimize_fee_screen.dart';
 import 'package:fee_minimizer/screen/fee_interval/new_fee_interval_screen.dart';
 import 'package:fee_minimizer/screen/currency/currency_list_screen.dart';
 import 'package:fee_minimizer/screen/currency/new_currency_screen.dart';
+import 'package:fee_minimizer/screen/help_support/help_support_screen.dart';
 import 'package:fee_minimizer/model/provider_model.dart' as model;
 import 'package:fee_minimizer/model/currency_model.dart';
 import 'package:fee_minimizer/model/fee_interval_model.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
     '/onboarding': (_) => const OnboardingScreen(),
     '/providers': (_) => const ProviderListScreen(),
     '/settings': (_) => const SettingsScreen(),
+    '/help-support': (_) => const HelpSupportScreen(),
     '/currencies': (_) => const CurrencyListScreen(),
     '/provider': (context) {
       final args =

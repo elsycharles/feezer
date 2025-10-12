@@ -1498,7 +1498,7 @@ abstract class AppLocalizations {
   /// **'{count} error(s) encountered'**
   String errorsEncountered(int count);
 
-  /// Data management section title
+  /// Data management guide title
   ///
   /// In en, this message translates to:
   /// **'Data Management'**
@@ -1868,6 +1868,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Percentage cannot exceed 100'**
   String get percentageCannotExceed100;
+
+  /// Placeholder text for help search field
+  ///
+  /// In en, this message translates to:
+  /// **'Search help topics...'**
+  String get searchHelpTopics;
+
+  /// Frequently Asked Questions tab title
+  ///
+  /// In en, this message translates to:
+  /// **'FAQ'**
+  String get faq;
+
+  /// Contact tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get contact;
+
+  /// User Guide tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Guide'**
+  String get userGuide;
+
+  /// Feedback tab title
+  ///
+  /// In en, this message translates to:
+  /// **'Feedback'**
+  String get feedback;
+
+  /// Text for search results count
+  ///
+  /// In en, this message translates to:
+  /// **'Found'**
+  String get found;
+
+  /// Text for search results count
+  ///
+  /// In en, this message translates to:
+  /// **'results'**
+  String get results;
+
+  /// Message when no search results
+  ///
+  /// In en, this message translates to:
+  /// **'No results found'**
+  String get noResultsFound;
+
+  /// Suggestion when no search results
+  ///
+  /// In en, this message translates to:
+  /// **'Try different keywords or browse categories'**
+  String get tryDifferentKeywords;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'What is Fee Minimizer?'**
+  String get faqWhatIsFeeMinimizer;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.'**
+  String get faqWhatIsFeeMinimizerAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I add a new provider?'**
+  String get faqHowToAddProvider;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.'**
+  String get faqHowToAddProviderAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How does fee calculation work?'**
+  String get faqHowToCalculateFees;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.'**
+  String get faqHowToCalculateFeesAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Is my data secure?'**
+  String get faqDataSecurity;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, your data is stored locally on your device. We don\'t collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.'**
+  String get faqDataSecurityAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'Does the app work offline?'**
+  String get faqOfflineMode;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.'**
+  String get faqOfflineModeAnswer;
+
+  /// FAQ question
+  ///
+  /// In en, this message translates to:
+  /// **'How do I export my data?'**
+  String get faqExportData;
+
+  /// FAQ answer
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.'**
+  String get faqExportDataAnswer;
+
+  /// Email support option title
+  ///
+  /// In en, this message translates to:
+  /// **'Email Support'**
+  String get emailSupport;
+
+  /// Phone support option title
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Support'**
+  String get phoneSupport;
+
+  /// Website option title
+  ///
+  /// In en, this message translates to:
+  /// **'Website'**
+  String get website;
+
+  /// Response time section title
+  ///
+  /// In en, this message translates to:
+  /// **'Response Time'**
+  String get responseTime;
+
+  /// Response time description
+  ///
+  /// In en, this message translates to:
+  /// **'We typically respond to support requests within 24 hours during business days.'**
+  String get responseTimeDescription;
+
+  /// Getting started guide title
+  ///
+  /// In en, this message translates to:
+  /// **'Getting Started'**
+  String get gettingStarted;
+
+  /// Getting started guide description
+  ///
+  /// In en, this message translates to:
+  /// **'Learn the basics of using Fee Minimizer'**
+  String get gettingStartedDescription;
+
+  /// Provider management guide title
+  ///
+  /// In en, this message translates to:
+  /// **'Provider Management'**
+  String get providerManagement;
+
+  /// Provider management guide description
+  ///
+  /// In en, this message translates to:
+  /// **'How to add, edit, and manage financial providers'**
+  String get providerManagementDescription;
+
+  /// Fee calculation guide title
+  ///
+  /// In en, this message translates to:
+  /// **'Fee Calculation'**
+  String get feeCalculation;
+
+  /// Fee calculation guide description
+  ///
+  /// In en, this message translates to:
+  /// **'Understanding how fees are calculated and optimized'**
+  String get feeCalculationDescription;
+
+  /// Data management guide description
+  ///
+  /// In en, this message translates to:
+  /// **'Import, export, and backup your data'**
+  String get dataManagementDescription;
+
+  /// Video tutorials section title
+  ///
+  /// In en, this message translates to:
+  /// **'Video Tutorials'**
+  String get videoTutorials;
+
+  /// Video tutorials description
+  ///
+  /// In en, this message translates to:
+  /// **'Watch step-by-step video guides to master Fee Minimizer'**
+  String get videoTutorialsDescription;
+
+  /// Watch tutorials button text
+  ///
+  /// In en, this message translates to:
+  /// **'Watch Tutorials'**
+  String get watchTutorials;
+
+  /// Feedback section title
+  ///
+  /// In en, this message translates to:
+  /// **'Share Your Thoughts'**
+  String get shareYourThoughts;
+
+  /// Feedback description
+  ///
+  /// In en, this message translates to:
+  /// **'Help us improve Fee Minimizer by sharing your feedback and suggestions'**
+  String get feedbackDescription;
+
+  /// Submit feedback button text
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Feedback'**
+  String get submitFeedback;
+
+  /// Rate app section title
+  ///
+  /// In en, this message translates to:
+  /// **'Rate the App'**
+  String get rateApp;
+
+  /// Rate app description
+  ///
+  /// In en, this message translates to:
+  /// **'If you enjoy using Fee Minimizer, please rate us on the app store'**
+  String get rateAppDescription;
+
+  /// Rate on store button text
+  ///
+  /// In en, this message translates to:
+  /// **'Rate on Store'**
+  String get rateOnStore;
 }
 
 class _AppLocalizationsDelegate

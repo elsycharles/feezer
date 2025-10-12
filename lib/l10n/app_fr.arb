@@ -1320,5 +1320,177 @@
   "percentageCannotExceed100": "Le pourcentage ne peut pas dépasser 100",
   "@percentageCannotExceed100": {
     "description": "Erreur de validation quand le pourcentage dépasse 100"
+  },
+  "searchHelpTopics": "Rechercher des sujets d'aide...",
+  "@searchHelpTopics": {
+    "description": "Texte d'espace réservé pour le champ de recherche d'aide"
+  },
+  "faq": "FAQ",
+  "@faq": {
+    "description": "Titre de l'onglet Questions fréquemment posées"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Titre de l'onglet Contact"
+  },
+  "userGuide": "Guide",
+  "@userGuide": {
+    "description": "Titre de l'onglet Guide utilisateur"
+  },
+  "feedback": "Commentaires",
+  "@feedback": {
+    "description": "Titre de l'onglet Commentaires"
+  },
+  "found": "Trouvé",
+  "@found": {
+    "description": "Texte pour le nombre de résultats de recherche"
+  },
+  "results": "résultats",
+  "@results": {
+    "description": "Texte pour le nombre de résultats de recherche"
+  },
+  "noResultsFound": "Aucun résultat trouvé",
+  "@noResultsFound": {
+    "description": "Message quand aucun résultat de recherche"
+  },
+  "tryDifferentKeywords": "Essayez différents mots-clés ou parcourez les catégories",
+  "@tryDifferentKeywords": {
+    "description": "Suggestion quand aucun résultat de recherche"
+  },
+  "faqWhatIsFeeMinimizer": "Qu'est-ce que Fee Minimizer ?",
+  "@faqWhatIsFeeMinimizer": {
+    "description": "Question FAQ"
+  },
+  "faqWhatIsFeeMinimizerAnswer": "Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.",
+  "@faqWhatIsFeeMinimizerAnswer": {
+    "description": "Réponse FAQ"
+  },
+  "faqHowToAddProvider": "Comment ajouter un nouveau fournisseur ?",
+  "@faqHowToAddProvider": {
+    "description": "Question FAQ"
+  },
+  "faqHowToAddProviderAnswer": "Pour ajouter un nouveau fournisseur, allez à l'écran Fournisseurs et appuyez sur le bouton '+'. Remplissez les détails du fournisseur incluant le nom, la description et la structure des frais. Vous pouvez également importer des données de fournisseur en utilisant des fichiers CSV.",
+  "@faqHowToAddProviderAnswer": {
+    "description": "Réponse FAQ"
+  },
+  "faqHowToCalculateFees": "Comment fonctionne le calcul des frais ?",
+  "@faqHowToCalculateFees": {
+    "description": "Question FAQ"
+  },
+  "faqHowToCalculateFeesAnswer": "Entrez le montant de votre transaction et sélectionnez un fournisseur. L'application calculera tous les frais applicables incluant les frais fixes, les frais en pourcentage et les frais minimum/maximum. Elle vous montre ensuite le coût total et suggère des optimisations.",
+  "@faqHowToCalculateFeesAnswer": {
+    "description": "Réponse FAQ"
+  },
+  "faqDataSecurity": "Mes données sont-elles sécurisées ?",
+  "@faqDataSecurity": {
+    "description": "Question FAQ"
+  },
+  "faqDataSecurityAnswer": "Oui, vos données sont stockées localement sur votre appareil. Nous ne collectons ni ne transmettons aucune information financière personnelle. Tous les calculs sont effectués hors ligne pour assurer votre confidentialité et sécurité.",
+  "@faqDataSecurityAnswer": {
+    "description": "Réponse FAQ"
+  },
+  "faqOfflineMode": "L'application fonctionne-t-elle hors ligne ?",
+  "@faqOfflineMode": {
+    "description": "Question FAQ"
+  },
+  "faqOfflineModeAnswer": "Oui, Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.",
+  "@faqOfflineModeAnswer": {
+    "description": "Réponse FAQ"
+  },
+  "faqExportData": "Comment exporter mes données ?",
+  "@faqExportData": {
+    "description": "Question FAQ"
+  },
+  "faqExportDataAnswer": "Allez dans Paramètres > Gestion des données > Gestion CSV. Vous pouvez exporter les fournisseurs, devises et intervalles de frais sous forme de fichiers CSV. Ceux-ci peuvent être utilisés pour la sauvegarde ou l'importation dans d'autres instances de l'application.",
+  "@faqExportDataAnswer": {
+    "description": "Réponse FAQ"
+  },
+  "emailSupport": "Support par email",
+  "@emailSupport": {
+    "description": "Titre de l'option support par email"
+  },
+  "phoneSupport": "Support téléphonique",
+  "@phoneSupport": {
+    "description": "Titre de l'option support téléphonique"
+  },
+  "website": "Site web",
+  "@website": {
+    "description": "Titre de l'option site web"
+  },
+  "responseTime": "Temps de réponse",
+  "@responseTime": {
+    "description": "Titre de la section temps de réponse"
+  },
+  "responseTimeDescription": "Nous répondons généralement aux demandes de support dans les 24 heures pendant les jours ouvrables.",
+  "@responseTimeDescription": {
+    "description": "Description du temps de réponse"
+  },
+  "gettingStarted": "Premiers pas",
+  "@gettingStarted": {
+    "description": "Titre du guide premiers pas"
+  },
+  "gettingStartedDescription": "Apprenez les bases de l'utilisation de Fee Minimizer",
+  "@gettingStartedDescription": {
+    "description": "Description du guide premiers pas"
+  },
+  "providerManagement": "Gestion des fournisseurs",
+  "@providerManagement": {
+    "description": "Titre du guide gestion des fournisseurs"
+  },
+  "providerManagementDescription": "Comment ajouter, modifier et gérer les fournisseurs financiers",
+  "@providerManagementDescription": {
+    "description": "Description du guide gestion des fournisseurs"
+  },
+  "feeCalculation": "Calcul des frais",
+  "@feeCalculation": {
+    "description": "Titre du guide calcul des frais"
+  },
+  "feeCalculationDescription": "Comprendre comment les frais sont calculés et optimisés",
+  "@feeCalculationDescription": {
+    "description": "Description du guide calcul des frais"
+  },
+  "dataManagement": "Gestion des données",
+  "@dataManagement": {
+    "description": "Titre du guide gestion des données"
+  },
+  "dataManagementDescription": "Importer, exporter et sauvegarder vos données",
+  "@dataManagementDescription": {
+    "description": "Description du guide gestion des données"
+  },
+  "videoTutorials": "Tutoriels vidéo",
+  "@videoTutorials": {
+    "description": "Titre de la section tutoriels vidéo"
+  },
+  "videoTutorialsDescription": "Regardez des guides vidéo étape par étape pour maîtriser Fee Minimizer",
+  "@videoTutorialsDescription": {
+    "description": "Description des tutoriels vidéo"
+  },
+  "watchTutorials": "Voir les tutoriels",
+  "@watchTutorials": {
+    "description": "Texte du bouton voir les tutoriels"
+  },
+  "shareYourThoughts": "Partagez vos pensées",
+  "@shareYourThoughts": {
+    "description": "Titre de la section commentaires"
+  },
+  "feedbackDescription": "Aidez-nous à améliorer Fee Minimizer en partageant vos commentaires et suggestions",
+  "@feedbackDescription": {
+    "description": "Description des commentaires"
+  },
+  "submitFeedback": "Envoyer un commentaire",
+  "@submitFeedback": {
+    "description": "Texte du bouton envoyer un commentaire"
+  },
+  "rateApp": "Évaluer l'application",
+  "@rateApp": {
+    "description": "Titre de la section évaluer l'application"
+  },
+  "rateAppDescription": "Si vous aimez utiliser Fee Minimizer, veuillez nous évaluer sur l'App Store",
+  "@rateAppDescription": {
+    "description": "Description de l'évaluation de l'application"
+  },
+  "rateOnStore": "Évaluer sur le Store",
+  "@rateOnStore": {
+    "description": "Texte du bouton évaluer sur le store"
   }
 }

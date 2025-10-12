@@ -1500,5 +1500,177 @@
   "percentageCannotExceed100": "Ny isan-jato dia tsy afaka mihoatra ny 100",
   "@percentageCannotExceed100": {
     "description": "Validation error when percentage exceeds 100"
+  },
+  "searchHelpTopics": "Search help topics...",
+  "@searchHelpTopics": {
+    "description": "Placeholder text for help search field"
+  },
+  "faq": "FAQ",
+  "@faq": {
+    "description": "Frequently Asked Questions tab title"
+  },
+  "contact": "Contact",
+  "@contact": {
+    "description": "Contact tab title"
+  },
+  "userGuide": "Guide",
+  "@userGuide": {
+    "description": "User Guide tab title"
+  },
+  "feedback": "Feedback",
+  "@feedback": {
+    "description": "Feedback tab title"
+  },
+  "found": "Found",
+  "@found": {
+    "description": "Text for search results count"
+  },
+  "results": "results",
+  "@results": {
+    "description": "Text for search results count"
+  },
+  "noResultsFound": "No results found",
+  "@noResultsFound": {
+    "description": "Message when no search results"
+  },
+  "tryDifferentKeywords": "Try different keywords or browse categories",
+  "@tryDifferentKeywords": {
+    "description": "Suggestion when no search results"
+  },
+  "faqWhatIsFeeMinimizer": "What is Fee Minimizer?",
+  "@faqWhatIsFeeMinimizer": {
+    "description": "FAQ question"
+  },
+  "faqWhatIsFeeMinimizerAnswer": "Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.",
+  "@faqWhatIsFeeMinimizerAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqHowToAddProvider": "How do I add a new provider?",
+  "@faqHowToAddProvider": {
+    "description": "FAQ question"
+  },
+  "faqHowToAddProviderAnswer": "To add a new provider, go to the Providers screen and tap the '+' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files.",
+  "@faqHowToAddProviderAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqHowToCalculateFees": "How does fee calculation work?",
+  "@faqHowToCalculateFees": {
+    "description": "FAQ question"
+  },
+  "faqHowToCalculateFeesAnswer": "Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.",
+  "@faqHowToCalculateFeesAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqDataSecurity": "Is my data secure?",
+  "@faqDataSecurity": {
+    "description": "FAQ question"
+  },
+  "faqDataSecurityAnswer": "Yes, your data is stored locally on your device. We don't collect or transmit any personal financial information. All calculations are performed offline to ensure your privacy and security.",
+  "@faqDataSecurityAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqOfflineMode": "Does the app work offline?",
+  "@faqOfflineMode": {
+    "description": "FAQ question"
+  },
+  "faqOfflineModeAnswer": "Yes, Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.",
+  "@faqOfflineModeAnswer": {
+    "description": "FAQ answer"
+  },
+  "faqExportData": "How do I export my data?",
+  "@faqExportData": {
+    "description": "FAQ question"
+  },
+  "faqExportDataAnswer": "Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.",
+  "@faqExportDataAnswer": {
+    "description": "FAQ answer"
+  },
+  "emailSupport": "Email Support",
+  "@emailSupport": {
+    "description": "Email support option title"
+  },
+  "phoneSupport": "Phone Support",
+  "@phoneSupport": {
+    "description": "Phone support option title"
+  },
+  "website": "Website",
+  "@website": {
+    "description": "Website option title"
+  },
+  "responseTime": "Response Time",
+  "@responseTime": {
+    "description": "Response time section title"
+  },
+  "responseTimeDescription": "We typically respond to support requests within 24 hours during business days.",
+  "@responseTimeDescription": {
+    "description": "Response time description"
+  },
+  "gettingStarted": "Getting Started",
+  "@gettingStarted": {
+    "description": "Getting started guide title"
+  },
+  "gettingStartedDescription": "Learn the basics of using Fee Minimizer",
+  "@gettingStartedDescription": {
+    "description": "Getting started guide description"
+  },
+  "providerManagement": "Provider Management",
+  "@providerManagement": {
+    "description": "Provider management guide title"
+  },
+  "providerManagementDescription": "How to add, edit, and manage financial providers",
+  "@providerManagementDescription": {
+    "description": "Provider management guide description"
+  },
+  "feeCalculation": "Fee Calculation",
+  "@feeCalculation": {
+    "description": "Fee calculation guide title"
+  },
+  "feeCalculationDescription": "Understanding how fees are calculated and optimized",
+  "@feeCalculationDescription": {
+    "description": "Fee calculation guide description"
+  },
+  "dataManagement": "Data Management",
+  "@dataManagement": {
+    "description": "Data management guide title"
+  },
+  "dataManagementDescription": "Import, export, and backup your data",
+  "@dataManagementDescription": {
+    "description": "Data management guide description"
+  },
+  "videoTutorials": "Video Tutorials",
+  "@videoTutorials": {
+    "description": "Video tutorials section title"
+  },
+  "videoTutorialsDescription": "Watch step-by-step video guides to master Fee Minimizer",
+  "@videoTutorialsDescription": {
+    "description": "Video tutorials description"
+  },
+  "watchTutorials": "Watch Tutorials",
+  "@watchTutorials": {
+    "description": "Watch tutorials button text"
+  },
+  "shareYourThoughts": "Share Your Thoughts",
+  "@shareYourThoughts": {
+    "description": "Feedback section title"
+  },
+  "feedbackDescription": "Help us improve Fee Minimizer by sharing your feedback and suggestions",
+  "@feedbackDescription": {
+    "description": "Feedback description"
+  },
+  "submitFeedback": "Submit Feedback",
+  "@submitFeedback": {
+    "description": "Submit feedback button text"
+  },
+  "rateApp": "Rate the App",
+  "@rateApp": {
+    "description": "Rate app section title"
+  },
+  "rateAppDescription": "If you enjoy using Fee Minimizer, please rate us on the app store",
+  "@rateAppDescription": {
+    "description": "Rate app description"
+  },
+  "rateOnStore": "Rate on Store",
+  "@rateOnStore": {
+    "description": "Rate on store button text"
   }
 }
