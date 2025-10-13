@@ -981,22 +981,22 @@ class _State extends State<OptimizeFeeScreen> {
                       Icon(
                         totalGainVsMax > 0 ? Icons.trending_down : Icons.trending_up,
                         size: 14,
-                        color: totalGainVsMax > 0 ? Colors.red.shade700 : Colors.green.shade700,
+                        color: totalGainVsMax > 0 ? context.colorScheme.error : context.colorScheme.primary,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
                           totalGainVsMax > 0
-                              ? AppLocalizations.of(context).youLoseAmount(
+                              ? AppLocalizations.of(context).transactionLosesVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
                                   currencySymbol,
                                 )
-                              : AppLocalizations.of(context).youGainAmount(
+                              : AppLocalizations.of(context).transactionGainsVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: totalGainVsMax > 0 ? Colors.red.shade700 : Colors.green.shade700,
+                            color: totalGainVsMax > 0 ? context.colorScheme.error : context.colorScheme.primary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1081,22 +1081,22 @@ class _State extends State<OptimizeFeeScreen> {
                       Icon(
                         feeDifferenceVsSameNet > 0 ? Icons.info_outline : Icons.check_circle,
                         size: 14,
-                        color: feeDifferenceVsSameNet > 0 ? Colors.orange : Colors.green,
+                        color: feeDifferenceVsSameNet > 0 ? context.colorScheme.tertiary : context.colorScheme.primary,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
                           feeDifferenceVsSameNet > 0
-                              ? AppLocalizations.of(context).optimizationCostsMoreFees(
+                              ? AppLocalizations.of(context).transactionLosesVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
                                   currencySymbol,
                                 )
-                              : AppLocalizations.of(context).youSaveFees(
+                              : AppLocalizations.of(context).transactionGainsVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: feeDifferenceVsSameNet > 0 ? Colors.orange.shade700 : Colors.green.shade700,
+                            color: feeDifferenceVsSameNet > 0 ? context.colorScheme.tertiary : context.colorScheme.primary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

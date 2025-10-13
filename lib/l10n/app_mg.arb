@@ -1974,5 +1974,29 @@
         "type": "String"
       }
     }
+  },
+  "transactionGainsVsOptimized": "Io fifampiraharahana io dia mahazo {amount} {currency} raha oharina amin'ny fanatsarana",
+  "@transactionGainsVsOptimized": {
+    "description": "Message showing gain when a non-optimized transaction performs better",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionLosesVsOptimized": "Io fifampiraharahana io dia very {amount} {currency} raha oharina amin'ny fanatsarana",
+  "@transactionLosesVsOptimized": {
+    "description": "Message showing loss when a non-optimized transaction performs worse",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
   }
 }

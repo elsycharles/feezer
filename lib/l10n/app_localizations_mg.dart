@@ -1361,4 +1361,14 @@ class AppLocalizationsMg extends AppLocalizations {
   String totalSavingsWithOptimization(String amount, String currency) {
     return 'Fitsitsiana total amin\'ny fanatsarana: $amount $currency';
   }
+
+  @override
+  String transactionGainsVsOptimized(String amount, String currency) {
+    return 'Io fifampiraharahana io dia mahazo $amount $currency raha oharina amin\'ny fanatsarana';
+  }
+
+  @override
+  String transactionLosesVsOptimized(String amount, String currency) {
+    return 'Io fifampiraharahana io dia very $amount $currency raha oharina amin\'ny fanatsarana';
+  }
 }

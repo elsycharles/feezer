@@ -1352,4 +1352,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String totalSavingsWithOptimization(String amount, String currency) {
     return 'Total savings with optimization: $amount $currency';
   }
+
+  @override
+  String transactionGainsVsOptimized(String amount, String currency) {
+    return 'This transaction gains $amount $currency compared to optimization';
+  }
+
+  @override
+  String transactionLosesVsOptimized(String amount, String currency) {
+    return 'This transaction loses $amount $currency compared to optimization';
+  }
 }

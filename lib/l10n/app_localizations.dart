@@ -2426,6 +2426,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total savings with optimization: {amount} {currency}'**
   String totalSavingsWithOptimization(String amount, String currency);
+
+  /// Message showing gain when a non-optimized transaction performs better
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction gains {amount} {currency} compared to optimization'**
+  String transactionGainsVsOptimized(String amount, String currency);
+
+  /// Message showing loss when a non-optimized transaction performs worse
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction loses {amount} {currency} compared to optimization'**
+  String transactionLosesVsOptimized(String amount, String currency);
 }
 
 class _AppLocalizationsDelegate
