@@ -51,7 +51,7 @@ class _State extends State<OptimizeFeeScreen> {
 
   Currency? _previousCurrency;
 
-  // Pour la comparaison sans optimisation
+  // For comparison without optimization
   Map<String, dynamic>? _nonOptimizedComparison;
 
   @override
@@ -800,30 +800,30 @@ class _State extends State<OptimizeFeeScreen> {
     final currencyProvider = context.read<CurrencyProvider>();
     final currencySymbol = currencyProvider.currencySymbol;
 
-    // Le montant total est toujours celui inséré par l'utilisateur
+    // The total amount is always the one entered by the user
     final userAmount = _amount;
 
-    // Données avec optimisation
+    // Data with optimization
     final optimizedNetAmount = _convertedResult!.netAmount;
     final optimizedTotalFees = _convertedResult!.totalFees;
-    final optimizedTotalAmount = _convertedResult!.totalAmount; // Montant total dépensé
+    final optimizedTotalAmount = _convertedResult!.totalAmount; // Total amount spent
 
-    // Données sans optimisation (montant maximal direct)
+    // Data without optimization (maximum direct amount)
     final nonOptMaxNetAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']);
     final nonOptMaxFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']);
 
-    // Données sans optimisation (si on envoie le même montant net avec UNE seule opération)
+    // Data without optimization (if we send the same net amount with ONE single operation)
     final nonOptSameNetTotalAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']);
     final nonOptSameFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']);
 
-    // Le montant net est le même que l'optimisation par définition
+    // The net amount is the same as optimization by definition
     final nonOptSingleOpNetAmount = optimizedNetAmount;
 
-    // Calcul des différences pour "même montant net"
-    final feesDifference = optimizedTotalFees - nonOptSameFee; // Positif = optimisation coûte plus
+    // Calculate differences for "same net amount"
+    final feesDifference = optimizedTotalFees - nonOptSameFee; // Positive = optimization costs more
     final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
 
-    // Calcul des économies vs max
+    // Calculate savings vs max
     final savingsVsMax = optimizedNetAmount - nonOptMaxNetAmount;
     final feesSavingsVsMax = nonOptMaxFee - optimizedTotalFees;
     final totalSavingsVsMax = savingsVsMax + feesSavingsVsMax;
@@ -842,7 +842,7 @@ class _State extends State<OptimizeFeeScreen> {
               Global.gapSm,
               Flexible(
                 child: Text(
-                  'Comparaison avec/sans optimisation',
+                  AppLocalizations.of(context).comparisonWithWithoutOptimization,
                   style: ThemeUtil.titleMedium.copyWith(
                     color: context.colorScheme.secondary,
                     fontWeight: FontWeight.w600,
@@ -853,7 +853,7 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           Global.gapLg,
 
-          // Section 1: Avec optimisation
+          // Section 1: With optimization
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
@@ -875,7 +875,7 @@ class _State extends State<OptimizeFeeScreen> {
                     ),
                     Global.gapSm,
                     Text(
-                      'Avec optimisation',
+                      AppLocalizations.of(context).withOptimization,
                       style: ThemeUtil.titleSmall.copyWith(
                         color: Colors.green.shade700,
                         fontWeight: FontWeight.w700,
@@ -885,25 +885,25 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Budget disponible',
+                  AppLocalizations.of(context).availableBudget,
                   '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Montant net envoyé',
+                  AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(optimizedNetAmount)} $currencySymbol',
                   valueColor: Colors.green.shade700,
                 ),
                 _buildComparisonRow(
-                  'Frais totaux',
+                  AppLocalizations.of(context).totalFees,
                   '${ConstantUtil.formatCurrencyAmount(optimizedTotalFees)} $currencySymbol',
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
-                  'Total dépensé',
+                  AppLocalizations.of(context).totalSpent,
                   '${ConstantUtil.formatCurrencyAmount(optimizedTotalAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Nombre d\'opérations',
+                  AppLocalizations.of(context).numberOfOperations,
                   '${_convertedResult!.totalOperations}',
                 ),
               ],
@@ -912,7 +912,7 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Section 2: Sans optimisation (montant maximal)
+          // Section 2: Without optimization (maximum amount)
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
@@ -935,7 +935,7 @@ class _State extends State<OptimizeFeeScreen> {
                     Global.gapSm,
                     Flexible(
                       child: Text(
-                        'Sans optimisation (montant max)',
+                        AppLocalizations.of(context).withoutOptimizationMaxAmount,
                         style: ThemeUtil.titleSmall.copyWith(
                           color: (totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green.shade700),
                           fontWeight: FontWeight.w700,
@@ -946,21 +946,21 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Budget disponible',
+                  AppLocalizations.of(context).availableBudget,
                   '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Montant net envoyé',
+                  AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
                   valueColor: Colors.orange.shade700,
                 ),
                 _buildComparisonRow(
-                  'Frais totaux',
+                  AppLocalizations.of(context).totalFees,
                   '${ConstantUtil.formatCurrencyAmount(nonOptMaxFee)} $currencySymbol',
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
-                  'Nombre d\'opérations',
+                  AppLocalizations.of(context).numberOfOperations,
                   '1',
                 ),
                 Global.gapSm,
@@ -977,7 +977,10 @@ class _State extends State<OptimizeFeeScreen> {
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          'Vous perdez ${ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs())} $currencySymbol',
+                          AppLocalizations.of(context).youLoseAmount(
+                            ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs()),
+                            currencySymbol,
+                          ),
                           style: ThemeUtil.bodySmall.copyWith(
                             color: Colors.red.shade700,
                             fontWeight: FontWeight.w600,
@@ -997,7 +1000,7 @@ class _State extends State<OptimizeFeeScreen> {
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          'Même résultat que l\'optimisation',
+                          AppLocalizations.of(context).sameResultAsOptimization,
                           style: ThemeUtil.bodySmall.copyWith(
                             color: Colors.green.shade700,
                             fontWeight: FontWeight.w600,
@@ -1009,13 +1012,19 @@ class _State extends State<OptimizeFeeScreen> {
                 if (totalSavingsVsMax.abs() > 0.01) ...[
                   Global.gapXs,
                   Text(
-                    '• Montant net en moins: ${ConstantUtil.formatCurrencyAmount(savingsVsMax.abs())} $currencySymbol',
+                    AppLocalizations.of(context).netAmountLess(
+                      ConstantUtil.formatCurrencyAmount(savingsVsMax.abs()),
+                      currencySymbol,
+                    ),
                     style: ThemeUtil.bodySmall.copyWith(
                       color: context.colorScheme.onSurfaceVariant,
                     ),
                   ),
                   Text(
-                    '• Frais en plus: ${ConstantUtil.formatCurrencyAmount(feesSavingsVsMax.abs())} $currencySymbol',
+                    AppLocalizations.of(context).feesMore(
+                      ConstantUtil.formatCurrencyAmount(feesSavingsVsMax.abs()),
+                      currencySymbol,
+                    ),
                     style: ThemeUtil.bodySmall.copyWith(
                       color: context.colorScheme.onSurfaceVariant,
                     ),
@@ -1027,7 +1036,7 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Section 3: Sans optimisation (même montant net avec une seule opération)
+          // Section 3: Without optimization (same net amount with one single operation)
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
@@ -1058,7 +1067,7 @@ class _State extends State<OptimizeFeeScreen> {
                     Global.gapSm,
                     Flexible(
                       child: Text(
-                        'Sans optimisation (même montant net)',
+                        AppLocalizations.of(context).withoutOptimizationSameNet,
                         style: ThemeUtil.titleSmall.copyWith(
                           color: (feesDifference.abs() > 0.01
                               ? (feesDifference > 0 ? Colors.orange.shade700 : Colors.green.shade700)
@@ -1097,7 +1106,7 @@ class _State extends State<OptimizeFeeScreen> {
                     ? (feesDifference > 0 ? Colors.orange : Colors.green)
                     : Colors.green).withValues(alpha: 0.3)),
                 Global.gapSm,
-                if (feesDifference > 0.01) // L'optimisation coûte PLUS cher
+                if (feesDifference > 0.01) // Optimization costs MORE
                   ...[
                     Row(
                       children: [
@@ -1109,7 +1118,10 @@ class _State extends State<OptimizeFeeScreen> {
                         Global.gapSm,
                         Expanded(
                           child: Text(
-                            'L\'optimisation coûte ${ConstantUtil.formatCurrencyAmount(feesDifference.abs())} $currencySymbol de frais en plus',
+                            AppLocalizations.of(context).optimizationCostsMoreFees(
+                              ConstantUtil.formatCurrencyAmount(feesDifference.abs()),
+                              currencySymbol,
+                            ),
                             style: ThemeUtil.bodySmall.copyWith(
                               color: Colors.orange.shade700,
                               fontWeight: FontWeight.w600,
@@ -1124,7 +1136,10 @@ class _State extends State<OptimizeFeeScreen> {
                           Global.gapXs,
                           Expanded(
                             child: Text(
-                              '• Ceci est dû aux contraintes de transactions (min: $_minTransactions, max: $_maxTransactions)',
+                              AppLocalizations.of(context).dueToTransactionConstraints(
+                                _minTransactions.toString(),
+                                _maxTransactions.toString(),
+                              ),
                               style: ThemeUtil.bodySmall.copyWith(
                                 color: context.colorScheme.onSurfaceVariant,
                                 fontStyle: FontStyle.italic,
@@ -1140,7 +1155,7 @@ class _State extends State<OptimizeFeeScreen> {
                           Global.gapXs,
                           Expanded(
                             child: Text(
-                              '• Dépasse le budget disponible',
+                              AppLocalizations.of(context).exceedsAvailableBudget,
                               style: ThemeUtil.bodySmall.copyWith(
                                 color: Colors.red.shade700,
                                 fontWeight: FontWeight.w600,
@@ -1151,7 +1166,7 @@ class _State extends State<OptimizeFeeScreen> {
                       ),
                     ],
                   ]
-                else if (feesDifference < -0.01) // Une seule opération coûte PLUS cher
+                else if (feesDifference < -0.01) // One single operation costs MORE
                   ...[
                     Row(
                       children: [
@@ -1163,7 +1178,10 @@ class _State extends State<OptimizeFeeScreen> {
                         Global.gapSm,
                         Expanded(
                           child: Text(
-                            'Vous économisez ${ConstantUtil.formatCurrencyAmount(feesDifference.abs())} $currencySymbol de frais',
+                            AppLocalizations.of(context).youSaveFees(
+                              ConstantUtil.formatCurrencyAmount(feesDifference.abs()),
+                              currencySymbol,
+                            ),
                             style: ThemeUtil.bodySmall.copyWith(
                               color: Colors.green.shade700,
                               fontWeight: FontWeight.w600,
@@ -1183,7 +1201,7 @@ class _State extends State<OptimizeFeeScreen> {
                           Global.gapXs,
                           Expanded(
                             child: Text(
-                              'Dépasse le budget disponible',
+                              AppLocalizations.of(context).exceedsAvailableBudget,
                               style: ThemeUtil.bodySmall.copyWith(
                                 color: Colors.red.shade700,
                                 fontWeight: FontWeight.w600,
@@ -1194,7 +1212,7 @@ class _State extends State<OptimizeFeeScreen> {
                       ),
                     ],
                   ]
-                else // Même résultat
+                else // Same result
                   Row(
                     children: [
                       Icon(
@@ -1205,7 +1223,7 @@ class _State extends State<OptimizeFeeScreen> {
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          'Même résultat que l\'optimisation',
+                          AppLocalizations.of(context).sameResultAsOptimization,
                           style: ThemeUtil.bodySmall.copyWith(
                             color: Colors.green.shade700,
                             fontWeight: FontWeight.w600,
@@ -1220,7 +1238,7 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Résumé des économies
+          // Savings summary
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
@@ -1240,7 +1258,10 @@ class _State extends State<OptimizeFeeScreen> {
                 Global.gapSm,
                 Expanded(
                   child: Text(
-                    'Économie totale avec optimisation: ${ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs())} $currencySymbol',
+                    AppLocalizations.of(context).totalSavingsWithOptimization(
+                      ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs()),
+                      currencySymbol,
+                    ),
                     style: ThemeUtil.bodyMedium.copyWith(
                       color: context.colorScheme.primary,
                       fontWeight: FontWeight.w700,
@@ -1286,24 +1307,24 @@ class _State extends State<OptimizeFeeScreen> {
     List<FeeInterval> intervals,
     FeeOptimizerResult optimizedResult,
   ) {
-    // Trouver le montant net maximal qu'on peut obtenir avec le budget disponible
+    // Find the maximum net amount we can obtain with the available budget
     double maxNetAmount = 0;
     double maxFee = 0;
 
-    // Parcourir tous les intervalles pour trouver le meilleur montant net possible
+    // Iterate through all intervals to find the best possible net amount
     for (final interval in intervals) {
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
       
-      // Calculer le montant net maximal dans cet intervalle sans dépasser le budget
+      // Calculate the maximum net amount in this interval without exceeding the budget
       double testAmount = (maxAmount < double.infinity) ? maxAmount : amountInAriary;
       
-      // Limiter au budget disponible
+      // Limit to available budget
       if (testAmount > amountInAriary) {
         testAmount = amountInAriary;
       }
       
-      // Vérifier si ce montant est dans l'intervalle
+      // Check if this amount is within the interval
       if (testAmount >= minAmount && testAmount <= maxAmount) {
         double fee = interval.feeType == FeeType.percentage
             ? testAmount * ((interval.fee ?? 0) / 100.0)
@@ -1311,7 +1332,7 @@ class _State extends State<OptimizeFeeScreen> {
         
         double totalCost = testAmount + fee;
         
-        // Si le coût total dépasse le budget, calculer le montant net maximal possible
+        // If the total cost exceeds the budget, calculate the maximum possible net amount
         if (totalCost > amountInAriary) {
           if (interval.feeType == FeeType.percentage) {
             double feeRate = (interval.fee ?? 0) / 100.0;
@@ -1322,13 +1343,13 @@ class _State extends State<OptimizeFeeScreen> {
             fee = interval.fee ?? 0;
           }
           
-          // Vérifier que le montant calculé est toujours dans l'intervalle
+          // Verify that the calculated amount is still within the interval
           if (testAmount < minAmount || testAmount > maxAmount) {
             continue;
           }
         }
         
-        // Garder le meilleur montant net
+        // Keep the best net amount
         if (testAmount > maxNetAmount) {
           maxNetAmount = testAmount;
           maxFee = fee;
@@ -1336,12 +1357,12 @@ class _State extends State<OptimizeFeeScreen> {
       }
     }
 
-    // Calcul si on prend le même montant net que l'optimisation
+    // Calculate if we take the same net amount as the optimization
     double sameNetFee = 0;
     double sameNetTotalAmount = 0;
     final optimizedNetAmount = optimizedResult.netAmount;
 
-    // Trouver l'intervalle qui correspond au montant net optimisé
+    // Find the interval that corresponds to the optimized net amount
     for (final interval in intervals) {
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
@@ -1404,9 +1425,7 @@ class _State extends State<OptimizeFeeScreen> {
           if (mounted) {
             AppToast.error(
               context,
-              AppLocalizations.of(
-                context,
-              ).minTransactionsCannotBeGreaterThanMax,
+              AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax,
             );
           }
         });
@@ -1478,7 +1497,7 @@ class _State extends State<OptimizeFeeScreen> {
         return;
       }
 
-      // Calcul de l'optimisation
+      // Optimization calculation
       final optimizationResult = FeeOptimizerUtil.calculateOptimalOperations(
         amountInAriary,
         intervals,
@@ -1487,7 +1506,7 @@ class _State extends State<OptimizeFeeScreen> {
         localizations: localizations,
       );
 
-      // Calcul sans optimisation
+      // Calculation without optimization
       final nonOptimizedData = _calculateNonOptimizedComparison(
         amountInAriary,
         intervals,
@@ -1515,9 +1534,7 @@ class _State extends State<OptimizeFeeScreen> {
             if (mounted) {
               AppToast.warning(
                 context,
-                AppLocalizations.of(
-                  context,
-                ).optimizationIncomplete(coveragePercentage.toStringAsFixed(1)),
+                AppLocalizations.of(context).optimizationIncomplete(coveragePercentage.toStringAsFixed(1)),
               );
             }
           });
@@ -1533,22 +1550,14 @@ class _State extends State<OptimizeFeeScreen> {
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
-            String errorMessage = AppLocalizations.of(
-              context,
-            ).failedToCalculateOptimization;
+            String errorMessage = AppLocalizations.of(context).failedToCalculateOptimization;
 
             if (e.toString().contains('Montant trop élevé')) {
-              errorMessage = AppLocalizations.of(
-                context,
-              ).amountExceedsMaximumAllowedLimit;
+              errorMessage = AppLocalizations.of(context).amountExceedsMaximumAllowedLimit;
             } else if (e.toString().contains('minOperations')) {
-              errorMessage = AppLocalizations.of(
-                context,
-              ).invalidTransactionRangeConstraints;
+              errorMessage = AppLocalizations.of(context).invalidTransactionRangeConstraints;
             } else if (e.toString().contains('Aucune option')) {
-              errorMessage = AppLocalizations.of(
-                context,
-              ).noValidFeeIntervalsAvailable;
+              errorMessage = AppLocalizations.of(context).noValidFeeIntervalsAvailable;
             }
 
             AppToast.error(context, errorMessage);

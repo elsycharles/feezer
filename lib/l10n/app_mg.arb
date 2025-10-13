@@ -1810,5 +1810,133 @@
   "faqCurrencyRatesAnswer": "Ny app dia tsy manavao ho azy ny tahan'ny fifanakalozana vola. Manana fahefana tanteraka ianao ary afaka mametraka tanana ny tahan'ny fifanakalozana volanao manokana ho an'ny fanazaran-tena tanteraka. Izany dia manome anao fahafaha-manao tanteraka hampiasa ny taha mifanaraka amin'ny filanao, ary miasa tsara tanteraka tsy misy internet.",
   "@faqCurrencyRatesAnswer": {
     "description": "FAQ answer"
+  },
+  "comparisonWithWithoutOptimization": "Fampitahana amin'ny tsy fanatsarana",
+  "@comparisonWithWithoutOptimization": {
+    "description": "Title for the comparison section showing optimized vs non-optimized results"
+  },
+  "withOptimization": "Amin'ny fanatsarana",
+  "@withOptimization": {
+    "description": "Label for the optimized results section"
+  },
+  "withoutOptimizationMaxAmount": "Tsy misy fanatsarana (vola ambony)",
+  "@withoutOptimizationMaxAmount": {
+    "description": "Label for the non-optimized results section using maximum amount"
+  },
+  "withoutOptimizationSameNet": "Tsy misy fanatsarana (vola madio mitovy)",
+  "@withoutOptimizationSameNet": {
+    "description": "Label for the non-optimized results section using same net amount"
+  },
+  "availableBudget": "Teti-bola misy",
+  "@availableBudget": {
+    "description": "Label for available budget in comparison"
+  },
+  "netAmountSent": "Vola madio nalefa",
+  "@netAmountSent": {
+    "description": "Label for net amount sent in comparison"
+  },
+  "totalFees": "Sara total",
+  "@totalFees": {
+    "description": "Label for total fees in comparison"
+  },
+  "totalSpent": "Total naloa",
+  "@totalSpent": {
+    "description": "Label for total amount spent in comparison"
+  },
+  "numberOfOperations": "Isan'ny asa",
+  "@numberOfOperations": {
+    "description": "Label for number of operations in comparison"
+  },
+  "youLoseAmount": "Very {amount} {currency} ianao",
+  "@youLoseAmount": {
+    "description": "Message when optimization results in loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "sameResultAsOptimization": "Vokatra mitovy amin'ny fanatsarana",
+  "@sameResultAsOptimization": {
+    "description": "Message when non-optimized result is same as optimized"
+  },
+  "netAmountLess": "• Vola madio kely kokoa: {amount} {currency}",
+  "@netAmountLess": {
+    "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Sara fanampiny: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationCostsMoreFees": "Ny fanatsarana dia mitentina sara fanampiny {amount} {currency}",
+  "@optimizationCostsMoreFees": {
+    "description": "Message when optimization costs more than single transaction",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dueToTransactionConstraints": "• Noho ny fetran'ny fifampiraharahana (kely: {min}, ambony: {max})",
+  "@dueToTransactionConstraints": {
+    "description": "Explanation for optimization cost due to transaction limits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "exceedsAvailableBudget": "• Mihoatra ny teti-bola misy",
+  "@exceedsAvailableBudget": {
+    "description": "Warning that result exceeds available budget"
+  },
+  "youSaveFees": "Mitsitsy sara {amount} {currency} ianao",
+  "@youSaveFees": {
+    "description": "Message showing savings from optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "totalSavingsWithOptimization": "Fitsitsiana total amin'ny fanatsarana: {amount} {currency}",
+  "@totalSavingsWithOptimization": {
+    "description": "Summary of total savings achieved with optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
   }
 }

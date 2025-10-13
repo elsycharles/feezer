@@ -206,7 +206,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get netAmount => 'Vola madio';
 
   @override
-  String get totalFees => 'Totalin\'ny sara';
+  String get totalFees => 'Sara total';
 
   @override
   String get efficiency => 'Fahombiazana';
@@ -1278,4 +1278,72 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get faqAnswer8 =>
       'Feezer dia mandinika ny rafitra sara mpamatsy rehetra ary kajy ny fomba tsara indrindra hizarana ny fifampiraharahanao ho asa maro mba hanalana ny sara total raha manaja ny fetra ataonao.';
+
+  @override
+  String get comparisonWithWithoutOptimization =>
+      'Fampitahana amin\'ny tsy fanatsarana';
+
+  @override
+  String get withOptimization => 'Amin\'ny fanatsarana';
+
+  @override
+  String get withoutOptimizationMaxAmount =>
+      'Tsy misy fanatsarana (vola ambony)';
+
+  @override
+  String get withoutOptimizationSameNet =>
+      'Tsy misy fanatsarana (vola madio mitovy)';
+
+  @override
+  String get availableBudget => 'Teti-bola misy';
+
+  @override
+  String get netAmountSent => 'Vola madio nalefa';
+
+  @override
+  String get totalSpent => 'Total naloa';
+
+  @override
+  String get numberOfOperations => 'Isan\'ny asa';
+
+  @override
+  String youLoseAmount(String amount, String currency) {
+    return 'Very $amount $currency ianao';
+  }
+
+  @override
+  String get sameResultAsOptimization => 'Vokatra mitovy amin\'ny fanatsarana';
+
+  @override
+  String netAmountLess(String amount, String currency) {
+    return '• Vola madio kely kokoa: $amount $currency';
+  }
+
+  @override
+  String feesMore(String amount, String currency) {
+    return '• Sara fanampiny: $amount $currency';
+  }
+
+  @override
+  String optimizationCostsMoreFees(String amount, String currency) {
+    return 'Ny fanatsarana dia mitentina sara fanampiny $amount $currency';
+  }
+
+  @override
+  String dueToTransactionConstraints(String min, String max) {
+    return '• Noho ny fetran\'ny fifampiraharahana (kely: $min, ambony: $max)';
+  }
+
+  @override
+  String get exceedsAvailableBudget => '• Mihoatra ny teti-bola misy';
+
+  @override
+  String youSaveFees(String amount, String currency) {
+    return 'Mitsitsy sara $amount $currency ianao';
+  }
+
+  @override
+  String totalSavingsWithOptimization(String amount, String currency) {
+    return 'Fitsitsiana total amin\'ny fanatsarana: $amount $currency';
+  }
 }

@@ -1630,5 +1630,133 @@
   "faqCurrencyRatesAnswer": "L'application ne met pas à jour automatiquement les taux de change des devises. Vous avez un contrôle total et pouvez définir manuellement vos propres taux de change pour une personnalisation complète. Cela vous donne une flexibilité totale pour utiliser les taux qui conviennent à vos besoins, et fonctionne parfaitement hors ligne.",
   "@faqCurrencyRatesAnswer": {
     "description": "FAQ answer"
+  },
+  "comparisonWithWithoutOptimization": "Comparaison avec/sans optimisation",
+  "@comparisonWithWithoutOptimization": {
+    "description": "Title for the comparison section showing optimized vs non-optimized results"
+  },
+  "withOptimization": "Avec optimisation",
+  "@withOptimization": {
+    "description": "Label for the optimized results section"
+  },
+  "withoutOptimizationMaxAmount": "Sans optimisation (montant max)",
+  "@withoutOptimizationMaxAmount": {
+    "description": "Label for the non-optimized results section using maximum amount"
+  },
+  "withoutOptimizationSameNet": "Sans optimisation (même montant net)",
+  "@withoutOptimizationSameNet": {
+    "description": "Label for the non-optimized results section using same net amount"
+  },
+  "availableBudget": "Budget disponible",
+  "@availableBudget": {
+    "description": "Label for available budget in comparison"
+  },
+  "netAmountSent": "Montant net envoyé",
+  "@netAmountSent": {
+    "description": "Label for net amount sent in comparison"
+  },
+  "totalFees": "Frais totaux",
+  "@totalFees": {
+    "description": "Label for total fees in comparison"
+  },
+  "totalSpent": "Total dépensé",
+  "@totalSpent": {
+    "description": "Label for total amount spent in comparison"
+  },
+  "numberOfOperations": "Nombre d'opérations",
+  "@numberOfOperations": {
+    "description": "Label for number of operations in comparison"
+  },
+  "youLoseAmount": "Vous perdez {amount} {currency}",
+  "@youLoseAmount": {
+    "description": "Message when optimization results in loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "sameResultAsOptimization": "Même résultat que l'optimisation",
+  "@sameResultAsOptimization": {
+    "description": "Message when non-optimized result is same as optimized"
+  },
+  "netAmountLess": "• Montant net en moins: {amount} {currency}",
+  "@netAmountLess": {
+    "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Frais en plus: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationCostsMoreFees": "L'optimisation coûte {amount} {currency} de frais en plus",
+  "@optimizationCostsMoreFees": {
+    "description": "Message when optimization costs more than single transaction",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dueToTransactionConstraints": "• Ceci est dû aux contraintes de transactions (min: {min}, max: {max})",
+  "@dueToTransactionConstraints": {
+    "description": "Explanation for optimization cost due to transaction limits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "exceedsAvailableBudget": "• Dépasse le budget disponible",
+  "@exceedsAvailableBudget": {
+    "description": "Warning that result exceeds available budget"
+  },
+  "youSaveFees": "Vous économisez {amount} {currency} de frais",
+  "@youSaveFees": {
+    "description": "Message showing savings from optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "totalSavingsWithOptimization": "Économie totale avec optimisation: {amount} {currency}",
+  "@totalSavingsWithOptimization": {
+    "description": "Summary of total savings achieved with optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
   }
 }

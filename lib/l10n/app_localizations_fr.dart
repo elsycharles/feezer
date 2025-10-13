@@ -207,7 +207,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get netAmount => 'Montant Net';
 
   @override
-  String get totalFees => 'Frais Totaux';
+  String get totalFees => 'Frais totaux';
 
   @override
   String get efficiency => 'Efficacité';
@@ -1291,4 +1291,71 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get faqAnswer8 =>
       'Feezer analyse toutes les structures de frais de vos fournisseurs et calcule la manière optimale de diviser votre transaction en plusieurs opérations pour minimiser les frais totaux tout en respectant vos contraintes.';
+
+  @override
+  String get comparisonWithWithoutOptimization =>
+      'Comparaison avec/sans optimisation';
+
+  @override
+  String get withOptimization => 'Avec optimisation';
+
+  @override
+  String get withoutOptimizationMaxAmount => 'Sans optimisation (montant max)';
+
+  @override
+  String get withoutOptimizationSameNet =>
+      'Sans optimisation (même montant net)';
+
+  @override
+  String get availableBudget => 'Budget disponible';
+
+  @override
+  String get netAmountSent => 'Montant net envoyé';
+
+  @override
+  String get totalSpent => 'Total dépensé';
+
+  @override
+  String get numberOfOperations => 'Nombre d\'opérations';
+
+  @override
+  String youLoseAmount(String amount, String currency) {
+    return 'Vous perdez $amount $currency';
+  }
+
+  @override
+  String get sameResultAsOptimization => 'Même résultat que l\'optimisation';
+
+  @override
+  String netAmountLess(String amount, String currency) {
+    return '• Montant net en moins: $amount $currency';
+  }
+
+  @override
+  String feesMore(String amount, String currency) {
+    return '• Frais en plus: $amount $currency';
+  }
+
+  @override
+  String optimizationCostsMoreFees(String amount, String currency) {
+    return 'L\'optimisation coûte $amount $currency de frais en plus';
+  }
+
+  @override
+  String dueToTransactionConstraints(String min, String max) {
+    return '• Ceci est dû aux contraintes de transactions (min: $min, max: $max)';
+  }
+
+  @override
+  String get exceedsAvailableBudget => '• Dépasse le budget disponible';
+
+  @override
+  String youSaveFees(String amount, String currency) {
+    return 'Vous économisez $amount $currency de frais';
+  }
+
+  @override
+  String totalSavingsWithOptimization(String amount, String currency) {
+    return 'Économie totale avec optimisation: $amount $currency';
+  }
 }

@@ -478,10 +478,10 @@ abstract class AppLocalizations {
   /// **'Net Amount'**
   String get netAmount;
 
-  /// Total fees metric title
+  /// Label for total fees in comparison
   ///
   /// In en, this message translates to:
-  /// **'Total Fees'**
+  /// **'Total fees'**
   String get totalFees;
 
   /// Optimization efficiency metric title
@@ -2306,6 +2306,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.'**
   String get faqAnswer8;
+
+  /// Title for the comparison section showing optimized vs non-optimized results
+  ///
+  /// In en, this message translates to:
+  /// **'Comparison with/without optimization'**
+  String get comparisonWithWithoutOptimization;
+
+  /// Label for the optimized results section
+  ///
+  /// In en, this message translates to:
+  /// **'With optimization'**
+  String get withOptimization;
+
+  /// Label for the non-optimized results section using maximum amount
+  ///
+  /// In en, this message translates to:
+  /// **'Without optimization (max amount)'**
+  String get withoutOptimizationMaxAmount;
+
+  /// Label for the non-optimized results section using same net amount
+  ///
+  /// In en, this message translates to:
+  /// **'Without optimization (same net amount)'**
+  String get withoutOptimizationSameNet;
+
+  /// Label for available budget in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Available budget'**
+  String get availableBudget;
+
+  /// Label for net amount sent in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Net amount sent'**
+  String get netAmountSent;
+
+  /// Label for total amount spent in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent'**
+  String get totalSpent;
+
+  /// Label for number of operations in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Number of operations'**
+  String get numberOfOperations;
+
+  /// Message when optimization results in loss
+  ///
+  /// In en, this message translates to:
+  /// **'You lose {amount} {currency}'**
+  String youLoseAmount(String amount, String currency);
+
+  /// Message when non-optimized result is same as optimized
+  ///
+  /// In en, this message translates to:
+  /// **'Same result as optimization'**
+  String get sameResultAsOptimization;
+
+  /// Detail showing net amount loss
+  ///
+  /// In en, this message translates to:
+  /// **'• Net amount less: {amount} {currency}'**
+  String netAmountLess(String amount, String currency);
+
+  /// Detail showing additional fees
+  ///
+  /// In en, this message translates to:
+  /// **'• Fees more: {amount} {currency}'**
+  String feesMore(String amount, String currency);
+
+  /// Message when optimization costs more than single transaction
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization costs {amount} {currency} more in fees'**
+  String optimizationCostsMoreFees(String amount, String currency);
+
+  /// Explanation for optimization cost due to transaction limits
+  ///
+  /// In en, this message translates to:
+  /// **'• This is due to transaction constraints (min: {min}, max: {max})'**
+  String dueToTransactionConstraints(String min, String max);
+
+  /// Warning that result exceeds available budget
+  ///
+  /// In en, this message translates to:
+  /// **'• Exceeds available budget'**
+  String get exceedsAvailableBudget;
+
+  /// Message showing savings from optimization
+  ///
+  /// In en, this message translates to:
+  /// **'You save {amount} {currency} in fees'**
+  String youSaveFees(String amount, String currency);
+
+  /// Summary of total savings achieved with optimization
+  ///
+  /// In en, this message translates to:
+  /// **'Total savings with optimization: {amount} {currency}'**
+  String totalSavingsWithOptimization(String amount, String currency);
 }
 
 class _AppLocalizationsDelegate

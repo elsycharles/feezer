@@ -1811,5 +1811,133 @@
   "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
   "@faqAnswer8": {
     "description": "Eighth FAQ answer"
+  },
+  "comparisonWithWithoutOptimization": "Comparison with/without optimization",
+  "@comparisonWithWithoutOptimization": {
+    "description": "Title for the comparison section showing optimized vs non-optimized results"
+  },
+  "withOptimization": "With optimization",
+  "@withOptimization": {
+    "description": "Label for the optimized results section"
+  },
+  "withoutOptimizationMaxAmount": "Without optimization (max amount)",
+  "@withoutOptimizationMaxAmount": {
+    "description": "Label for the non-optimized results section using maximum amount"
+  },
+  "withoutOptimizationSameNet": "Without optimization (same net amount)",
+  "@withoutOptimizationSameNet": {
+    "description": "Label for the non-optimized results section using same net amount"
+  },
+  "availableBudget": "Available budget",
+  "@availableBudget": {
+    "description": "Label for available budget in comparison"
+  },
+  "netAmountSent": "Net amount sent",
+  "@netAmountSent": {
+    "description": "Label for net amount sent in comparison"
+  },
+  "totalFees": "Total fees",
+  "@totalFees": {
+    "description": "Label for total fees in comparison"
+  },
+  "totalSpent": "Total spent",
+  "@totalSpent": {
+    "description": "Label for total amount spent in comparison"
+  },
+  "numberOfOperations": "Number of operations",
+  "@numberOfOperations": {
+    "description": "Label for number of operations in comparison"
+  },
+  "youLoseAmount": "You lose {amount} {currency}",
+  "@youLoseAmount": {
+    "description": "Message when optimization results in loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "sameResultAsOptimization": "Same result as optimization",
+  "@sameResultAsOptimization": {
+    "description": "Message when non-optimized result is same as optimized"
+  },
+  "netAmountLess": "• Net amount less: {amount} {currency}",
+  "@netAmountLess": {
+    "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Fees more: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationCostsMoreFees": "Optimization costs {amount} {currency} more in fees",
+  "@optimizationCostsMoreFees": {
+    "description": "Message when optimization costs more than single transaction",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dueToTransactionConstraints": "• This is due to transaction constraints (min: {min}, max: {max})",
+  "@dueToTransactionConstraints": {
+    "description": "Explanation for optimization cost due to transaction limits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "exceedsAvailableBudget": "• Exceeds available budget",
+  "@exceedsAvailableBudget": {
+    "description": "Warning that result exceeds available budget"
+  },
+  "youSaveFees": "You save {amount} {currency} in fees",
+  "@youSaveFees": {
+    "description": "Message showing savings from optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "totalSavingsWithOptimization": "Total savings with optimization: {amount} {currency}",
+  "@totalSavingsWithOptimization": {
+    "description": "Summary of total savings achieved with optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
   }
 }
