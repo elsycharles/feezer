@@ -1912,7 +1912,7 @@
       }
     }
   },
-  "exceedsAvailableBudget": "• Exceeds available budget",
+  "exceedsAvailableBudget": "Exceeds available budget",
   "@exceedsAvailableBudget": {
     "description": "Warning that result exceeds available budget"
   },

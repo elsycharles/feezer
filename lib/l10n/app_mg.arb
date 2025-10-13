@@ -1911,7 +1911,7 @@
       }
     }
   },
-  "exceedsAvailableBudget": "• Mihoatra ny teti-bola misy",
+  "exceedsAvailableBudget": "Mihoatra ny teti-bola misy",
   "@exceedsAvailableBudget": {
     "description": "Warning that result exceeds available budget"
   },

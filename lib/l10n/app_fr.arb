@@ -1731,7 +1731,7 @@
       }
     }
   },
-  "exceedsAvailableBudget": "• Dépasse le budget disponible",
+  "exceedsAvailableBudget": "Dépasse le budget disponible",
   "@exceedsAvailableBudget": {
     "description": "Warning that result exceeds available budget"
   },
