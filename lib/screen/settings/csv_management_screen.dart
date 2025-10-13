@@ -187,7 +187,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         context,
         listen: false,
       );
-      final locale = localeProvider.locale?.languageCode ?? 'en';
+      // Use the actual current locale from the context, which respects system locale when not set
+      final currentLocale = Localizations.localeOf(context);
+      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
       final currencyProvider = Provider.of<CurrencyProvider>(
         context,
         listen: false,
@@ -233,7 +235,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         context,
         listen: false,
       );
-      final locale = localeProvider.locale?.languageCode ?? 'en';
+      // Use the actual current locale from the context, which respects system locale when not set
+      final currentLocale = Localizations.localeOf(context);
+      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
 
       final template = CsvUtil.getImportTemplate(locale);
 
@@ -304,7 +308,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         context,
         listen: false,
       );
-      final locale = localeProvider.locale?.languageCode ?? 'en';
+      // Use the actual current locale from the context, which respects system locale when not set
+      final currentLocale = Localizations.localeOf(context);
+      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
 
       final template = CsvUtil.getImportTemplate(locale);
 
