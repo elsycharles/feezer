@@ -1080,25 +1080,25 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Budget disponible',
+                  AppLocalizations.of(context).availableBudget,
                   '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Montant net envoyé',
+                  AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptSingleOpNetAmount)} $currencySymbol',
                   valueColor: Colors.green.shade700,
                 ),
                 _buildComparisonRow(
-                  'Frais totaux',
+                  AppLocalizations.of(context).totalFees,
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameFee)} $currencySymbol',
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
-                  'Total dépensé',
+                  AppLocalizations.of(context).totalSpent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Nombre d\'opérations',
+                  AppLocalizations.of(context).numberOfOperations,
                   '1',
                 ),
                 Global.gapSm,
