@@ -1054,16 +1054,16 @@ class _State extends State<OptimizeFeeScreen> {
                 _buildComparisonRow(
                   'Montant total nécessaire',
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameTotalAmount)} $currencySymbol',
-                  valueColor: extraCostVsSame.abs() > 0.01 ? Colors.red.shade700 : Colors.green.shade700,
                 ),
                 _buildComparisonRow(
                   'Montant net reçu',
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameNetAmount)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
                   'Frais totaux',
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameFee)} $currencySymbol',
-                  valueColor: extraCostVsSame.abs() > 0.01 ? Colors.red.shade700 : Colors.green.shade700,
+                  valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
                   'Nombre d\'opérations',
