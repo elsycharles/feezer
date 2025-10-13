@@ -287,6 +287,8 @@ class _State extends State<OptimizeFeeScreen> {
                                 style: ThemeUtil.bodySmall.copyWith(
                                   color: context.colorScheme.onSurfaceVariant,
                                 ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                           ],
                         ),
