@@ -1058,6 +1058,7 @@ class _State extends State<OptimizeFeeScreen> {
                 _buildComparisonRow(
                   'Montant net reçu',
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameNetAmount)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
                   'Frais totaux',
