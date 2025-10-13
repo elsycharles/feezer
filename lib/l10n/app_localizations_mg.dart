@@ -1017,6 +1017,11 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
+  String rowFeePercentageInvalid(int rowNumber, String fee) {
+    return 'Andalana $rowNumber : Tsy maintsy eo anelanelan\'ny 0 sy 100 ny sara isaky ny 100 ($fee%)';
+  }
+
+  @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
     return 'Voampiditra $providersCount mpanome sy $feesCount intervalle sara';
   }

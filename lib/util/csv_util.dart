@@ -57,6 +57,11 @@ CsvLocalizations createCsvLocalizations(AppLocalizations l10n) {
         );
       case 'rowFeeMustBePositive':
         return l10n.rowFeeMustBePositive(args!['rowNumber'] as int);
+      case 'rowFeePercentageInvalid':
+        return l10n.rowFeePercentageInvalid(
+          args!['rowNumber'] as int,
+          args['fee'] as String,
+        );
       case 'rowIntervalOverlaps':
         return l10n.rowIntervalOverlaps(
           args!['rowNumber'] as int,
@@ -139,6 +144,15 @@ class _ColumnMapping {
   ];
 
   static const fee = ['fee', 'fees', 'frais', 'commission', 'sara'];
+
+  static const feeType = [
+    'fee_type',
+    'type_frais',
+    'fee_type',
+    'type',
+    'is_percentage',
+    'pourcentage',
+  ];
 }
 
 class CsvUtil {
@@ -461,6 +475,7 @@ class CsvUtil {
         minAmount: minAmountInAriary,
         maxAmount: maxAmountInAriary,
         fee: feeInAriary,
+        feeType: amounts.feeType ?? FeeType.fixed,
       );
 
       await db.insert(
@@ -501,9 +516,11 @@ class CsvUtil {
       min: _parseAmount(_getCellValue(row, indices.minAmount)),
       max: _parseAmount(_getCellValue(row, indices.maxAmount)),
       fee: _parseAmount(_getCellValue(row, indices.fee)),
+      feeType: _parseFeeType(_getCellValue(row, indices.feeType)),
       minStr: _getCellValue(row, indices.minAmount),
       maxStr: _getCellValue(row, indices.maxAmount),
       feeStr: _getCellValue(row, indices.fee),
+      feeTypeStr: _getCellValue(row, indices.feeType),
     );
   }
 
@@ -529,8 +546,17 @@ class CsvUtil {
       });
     }
 
-    if (amounts.fee! < 0) {
-      return localizations('rowFeeMustBePositive', {'rowNumber': rowNumber});
+    if (amounts.feeType == FeeType.percentage) {
+      if (amounts.fee! < 0 || amounts.fee! > 100) {
+        return localizations('rowFeePercentageInvalid', {
+          'rowNumber': rowNumber,
+          'fee': amounts.fee.toString(),
+        });
+      }
+    } else {
+      if (amounts.fee! < 0) {
+        return localizations('rowFeeMustBePositive', {'rowNumber': rowNumber});
+      }
     }
 
     return null;
@@ -795,6 +821,7 @@ class CsvUtil {
         minAmount: minAmountInAriary,
         maxAmount: maxAmountInAriary,
         fee: feeInAriary,
+        feeType: amounts.feeType ?? FeeType.fixed,
       );
 
       await db.insert(
@@ -922,7 +949,7 @@ class CsvUtil {
     ];
 
     if (feeIntervals.isEmpty) {
-      csvData.add([...baseRow, '', '', '']);
+      csvData.add([...baseRow, '', '', '', 'fixed']);
     } else {
       for (final fee in feeIntervals) {
         final minAmount =
@@ -940,11 +967,15 @@ class CsvUtil {
         final feeAmountInSelectedCurrency =
             currencyProvider?.convertFromAriary(feeAmount) ?? feeAmount;
 
+        final feeType = fee[ConstantUtil.columnFeeType] ?? 0;
+        final feeTypeString = feeType == 1 ? 'percentage' : 'fixed';
+
         csvData.add([
           ...baseRow,
           minAmountInSelectedCurrency,
           maxAmountInSelectedCurrency,
           feeAmountInSelectedCurrency,
+          feeTypeString,
         ]);
       }
     }
@@ -994,6 +1025,7 @@ class CsvUtil {
         'montant_min',
         'montant_max',
         'frais',
+        'type_frais',
       ],
       'mg': [
         'anarany_mpanome',
@@ -1002,6 +1034,7 @@ class CsvUtil {
         'vola_farany_kely',
         'vola_farany_lehibe',
         'sara',
+        'karazany_sara',
       ],
     };
 
@@ -1013,6 +1046,7 @@ class CsvUtil {
           'min_amount',
           'max_amount',
           'fee',
+          'fee_type',
         ];
   }
 
@@ -1020,8 +1054,8 @@ class CsvUtil {
     final headers = _getHeaders(locale);
     final template = [
       headers,
-      ['TELMA', 'Mobile provider', 'phone', '0', '5000', '10'],
-      ['TELMA', '', '', '5001', '10000', '25'],
+      ['TELMA', 'Mobile provider', 'phone', '0', '5000', '10', 'fixed'],
+      ['TELMA', '', '', '5001', '10000', '25', 'fixed'],
       [
         'AIRTEL',
         'Another mobile provider',
@@ -1029,16 +1063,45 @@ class CsvUtil {
         '1000',
         '2000',
         '15',
+        'fixed',
+      ],
+      [
+        'BANK',
+        'Bank transfer provider',
+        'account_balance',
+        '0',
+        '100000',
+        '2.5',
+        'percentage',
       ],
     ];
 
     return const ListToCsvConverter().convert(template);
   }
+
+  static FeeType _parseFeeType(String? value) {
+    if (value == null || value.trim().isEmpty) return FeeType.fixed;
+
+    final trimmed = value.trim().toLowerCase();
+
+    // Check for percentage indicators
+    if (trimmed == 'percentage' ||
+        trimmed == 'pourcentage' ||
+        trimmed == '%' ||
+        trimmed == 'percent' ||
+        trimmed == '1' ||
+        trimmed == 'true') {
+      return FeeType.percentage;
+    }
+
+    // Default to fixed for backward compatibility
+    return FeeType.fixed;
+  }
 }
 
-// ============================================================================
-// HELPER CLASSES
-// ============================================================================
+  // ============================================================================
+  // HELPER CLASSES
+  // ============================================================================
 
 class _HeaderIndices {
   _HeaderIndices(List<String> headers)
@@ -1053,7 +1116,8 @@ class _HeaderIndices {
       icon = CsvUtil._findHeaderIndex(headers, _ColumnMapping.icon),
       minAmount = CsvUtil._findHeaderIndex(headers, _ColumnMapping.minAmount),
       maxAmount = CsvUtil._findHeaderIndex(headers, _ColumnMapping.maxAmount),
-      fee = CsvUtil._findHeaderIndex(headers, _ColumnMapping.fee);
+      fee = CsvUtil._findHeaderIndex(headers, _ColumnMapping.fee),
+      feeType = CsvUtil._findHeaderIndex(headers, _ColumnMapping.feeType);
 
   final int providerName;
   final int description;
@@ -1061,6 +1125,7 @@ class _HeaderIndices {
   final int minAmount;
   final int maxAmount;
   final int fee;
+  final int feeType;
 
   bool get hasValidFeeColumns =>
       providerName != -1 && minAmount != -1 && maxAmount != -1 && fee != -1;
@@ -1078,17 +1143,21 @@ class _AmountData {
     this.min,
     this.max,
     this.fee,
+    this.feeType,
     this.minStr,
     this.maxStr,
     this.feeStr,
+    this.feeTypeStr,
   });
 
   final double? min;
   final double? max;
   final double? fee;
+  final FeeType? feeType;
   final String? minStr;
   final String? maxStr;
   final String? feeStr;
+  final String? feeTypeStr;
 }
 
 class _ProviderData {

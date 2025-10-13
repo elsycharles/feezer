@@ -1016,6 +1016,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String rowFeePercentageInvalid(int rowNumber, String fee) {
+    return 'Row $rowNumber: Percentage fee must be between 0 and 100 ($fee%)';
+  }
+
+  @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
     return 'Imported $providersCount provider(s) and $feesCount fee interval(s)';
   }
