@@ -814,7 +814,7 @@ class _State extends State<OptimizeFeeScreen> {
     // Données sans optimisation (si on prend le même montant net que l'optimisation)
     final nonOptSameNetAmount = optimizedNetAmount;
     final nonOptSameFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']);
-    final nonOptSameTotalAmount = nonOptSameNetAmount + nonOptSameFee;
+    final nonOptSameTotalAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']);
 
     // Calcul des économies
     final savingsVsMax = optimizedNetAmount - nonOptMaxNetAmount;
@@ -1058,7 +1058,6 @@ class _State extends State<OptimizeFeeScreen> {
                 _buildComparisonRow(
                   'Montant net reçu',
                   '${ConstantUtil.formatCurrencyAmount(nonOptSameNetAmount)} $currencySymbol',
-                  valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
                   'Frais totaux',
@@ -1245,6 +1244,7 @@ class _State extends State<OptimizeFeeScreen> {
 
     // Calcul si on prend le même montant net que l'optimisation
     double sameNetFee = 0;
+    double sameNetTotalAmount = 0;
     final optimizedNetAmount = optimizedResult.netAmount;
 
     // Trouver l'intervalle qui correspond au montant net optimisé
@@ -1256,6 +1256,7 @@ class _State extends State<OptimizeFeeScreen> {
         sameNetFee = interval.feeType == FeeType.percentage
             ? optimizedNetAmount * ((interval.fee ?? 0) / 100.0)
             : (interval.fee ?? 0);
+        sameNetTotalAmount = optimizedNetAmount + sameNetFee;
         break;
       }
     }
@@ -1264,6 +1265,7 @@ class _State extends State<OptimizeFeeScreen> {
       'maxNetAmount': maxNetAmount,
       'maxFee': maxFee,
       'sameNetFee': sameNetFee,
+      'sameNetTotalAmount': sameNetTotalAmount,
     };
   }
 

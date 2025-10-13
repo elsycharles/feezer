@@ -192,8 +192,12 @@ class FeeOptimizerUtil {
         ? _selectBest([
             _greedyOptimizedFast(totalAmount, options, precision),
             _repeatedOperationsOptimized(totalAmount, options, precision),
+            _findBestSingleOperation(totalAmount, options), // Nouvelle méthode
           ])
-        : _greedyOptimizedFast(totalAmount, options, precision);
+        : _selectBest([
+            _greedyOptimizedFast(totalAmount, options, precision),
+            _findBestSingleOperation(totalAmount, options), // Nouvelle méthode
+          ]);
 
     return _applyConstraintsOptimized(
       unlimitedResult,
@@ -203,6 +207,46 @@ class FeeOptimizerUtil {
       maxOperations,
       minOperations,
     );
+  }
+
+  static FeeOptimizerResult _findBestSingleOperation(
+    double totalAmount,
+    List<_FeeOption> options,
+  ) {
+    FeeOptimizerResult? bestResult;
+
+    for (final opt in options) {
+      double netAmount;
+      double fee;
+
+      if (opt.feeType == FeeType.percentage) {
+        // totalAmount = netAmount + netAmount * (feeValue / 100)
+        netAmount = totalAmount / (1 + opt.feeValue / 100);
+        fee = netAmount * (opt.feeValue / 100);
+      } else {
+        netAmount = totalAmount - opt.feeValue;
+        fee = opt.feeValue;
+      }
+
+      if (netAmount >= opt.min && netAmount <= opt.max && netAmount > 0) {
+        final result = _buildResult(
+          totalAmount,
+          netAmount,
+          fee,
+          totalAmount - netAmount - fee,
+          {'$netAmount-$fee': 1},
+        );
+
+        if (bestResult == null ||
+            result.netAmount > bestResult.netAmount ||
+            (result.netAmount == bestResult.netAmount &&
+             result.totalFees < bestResult.totalFees)) {
+          bestResult = result;
+        }
+      }
+    }
+
+    return bestResult ?? _buildResult(totalAmount, 0, 0, totalAmount, {});
   }
 
   static FeeOptimizerResult _applyConstraintsOptimized(
@@ -442,6 +486,71 @@ class FeeOptimizerUtil {
     List<_FeeOption> options,
     double precision,
   ) {
+    // D'abord, essayer de trouver une solution en une seule opération
+    _BestOperation? bestSingleOp;
+
+    for (final opt in options) {
+      final minAmount = opt.min;
+      final maxAmount = opt.max;
+
+      // Calculer le montant net si on utilise tout le budget
+      double netAmount;
+      double fee;
+
+      if (opt.feeType == FeeType.percentage) {
+        // totalAmount = netAmount + netAmount * (feeValue / 100)
+        // totalAmount = netAmount * (1 + feeValue / 100)
+        netAmount = totalAmount / (1 + opt.feeValue / 100);
+        fee = netAmount * (opt.feeValue / 100);
+      } else {
+        netAmount = totalAmount - opt.feeValue;
+        fee = opt.feeValue;
+      }
+
+      // Vérifier si ce montant net est dans l'intervalle
+      if (netAmount >= minAmount && netAmount <= maxAmount && netAmount > 0) {
+        final efficiency = netAmount / fee;
+
+        if (bestSingleOp == null || efficiency > bestSingleOp.score) {
+          bestSingleOp = _BestOperation(
+            amount: netAmount,
+            fee: fee,
+            score: efficiency,
+          );
+        }
+      }
+    }
+
+    // Si on a trouvé une solution en une seule opération, comparer avec multi-opérations
+    if (bestSingleOp != null) {
+      final singleOpResult = _buildResult(
+        totalAmount,
+        bestSingleOp.amount,
+        bestSingleOp.fee,
+        totalAmount - bestSingleOp.amount - bestSingleOp.fee,
+        {'${bestSingleOp.amount}-${bestSingleOp.fee}': 1},
+      );
+
+      // Comparer avec l'approche multi-opérations
+      final multiOpResult = _greedyMultiOperations(totalAmount, options, precision);
+
+      // Retourner le meilleur résultat (priorité au montant net, puis frais minimaux)
+      if (singleOpResult.netAmount > multiOpResult.netAmount ||
+          (singleOpResult.netAmount == multiOpResult.netAmount &&
+           singleOpResult.totalFees < multiOpResult.totalFees)) {
+        return singleOpResult;
+      }
+      return multiOpResult;
+    }
+
+    return _greedyMultiOperations(totalAmount, options, precision);
+  }
+
+  static FeeOptimizerResult _greedyMultiOperations(
+    double totalAmount,
+    List<_FeeOption> options,
+    double precision,
+  ) {
     final counts = <String, int>{};
     double budget = totalAmount;
     double totalNet = 0;
@@ -453,7 +562,6 @@ class FeeOptimizerUtil {
       if (best == null) break;
 
       final operationCost = best.amount + best.fee;
-      // REMOVED .floor() - Use exact value
       final repeatCount = min(
         (budget / operationCost).toInt(),
         _maxSafeOperations,
@@ -484,11 +592,45 @@ class FeeOptimizerUtil {
     List<_FeeOption> options,
     double precision,
   ) {
-    FeeOptimizerResult bestResult = _greedyOptimizedFast(
-      totalAmount,
-      options,
-      precision,
-    );
+    FeeOptimizerResult bestResult = _buildResult(totalAmount, 0, 0, totalAmount, {});
+
+    // Tester d'abord une opération unique utilisant tout le budget
+    for (final opt in options) {
+      double netAmount;
+      double fee;
+
+      if (opt.feeType == FeeType.percentage) {
+        netAmount = totalAmount / (1 + opt.feeValue / 100);
+        fee = netAmount * (opt.feeValue / 100);
+      } else {
+        netAmount = totalAmount - opt.feeValue;
+        fee = opt.feeValue;
+      }
+
+      if (netAmount >= opt.min && netAmount <= opt.max && netAmount > 0) {
+        final singleOpResult = _buildResult(
+          totalAmount,
+          netAmount,
+          fee,
+          totalAmount - netAmount - fee,
+          {'$netAmount-$fee': 1},
+        );
+
+        if (singleOpResult.netAmount > bestResult.netAmount ||
+            (singleOpResult.netAmount == bestResult.netAmount &&
+             singleOpResult.totalFees < bestResult.totalFees)) {
+          bestResult = singleOpResult;
+        }
+      }
+    }
+
+    // Tester également l'approche multi-opérations
+    final multiOpResult = _greedyMultiOperations(totalAmount, options, precision);
+    if (multiOpResult.netAmount > bestResult.netAmount ||
+        (multiOpResult.netAmount == bestResult.netAmount &&
+         multiOpResult.totalFees < bestResult.totalFees)) {
+      bestResult = multiOpResult;
+    }
 
     final optionsToTest = totalAmount > 1e9
         ? options.take(3).toList()
@@ -500,20 +642,20 @@ class FeeOptimizerUtil {
       for (final amount in samples) {
         if (amount < opt.min) continue;
 
-        final cost = amount + opt.fee;
+        final cost = amount + opt.getFeeForAmount(amount);
         final count = min(
           (totalAmount / cost).toInt(),
           _maxSafeOperations,
-        ); // CHANGED: .floor() to .toInt()
+        );
         if (count == 0) continue;
 
         final net = amount * count;
-        final fees = opt.fee * count;
+        final fees = opt.getFeeForAmount(amount) * count;
         final remaining = totalAmount - cost * count;
 
         if (net > bestResult.netAmount ||
             (net == bestResult.netAmount && fees < bestResult.totalFees)) {
-          final counts = <String, int>{'$amount-${opt.fee}': count};
+          final counts = <String, int>{'$amount-${opt.getFeeForAmount(amount)}': count};
           bestResult = _buildResult(totalAmount, net, fees, remaining, counts);
         }
       }
