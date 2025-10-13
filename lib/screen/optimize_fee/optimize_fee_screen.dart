@@ -806,18 +806,24 @@ class _State extends State<OptimizeFeeScreen> {
     // Données avec optimisation
     final optimizedNetAmount = _convertedResult!.netAmount;
     final optimizedTotalFees = _convertedResult!.totalFees;
+    final optimizedTotalAmount = _convertedResult!.totalAmount; // Montant total dépensé
 
     // Données sans optimisation (montant maximal direct)
     final nonOptMaxNetAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']);
     final nonOptMaxFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']);
 
-    // Données sans optimisation (si on utilise UNE seule opération avec le budget total)
-    final nonOptSingleOpNetAmount = currencyProvider.convertFromAriary(
-      _nonOptimizedComparison!['sameNetTotalAmount'] - _nonOptimizedComparison!['sameNetFee']
-    );
+    // Données sans optimisation (si on envoie le même montant net avec UNE seule opération)
+    final nonOptSameNetTotalAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']);
     final nonOptSameFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']);
 
-    // Calcul des économies
+    // Le montant net est le même que l'optimisation par définition
+    final nonOptSingleOpNetAmount = optimizedNetAmount;
+
+    // Calcul des différences pour "même montant net"
+    final feesDifference = optimizedTotalFees - nonOptSameFee; // Positif = optimisation coûte plus
+    final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
+
+    // Calcul des économies vs max
     final savingsVsMax = optimizedNetAmount - nonOptMaxNetAmount;
     final feesSavingsVsMax = nonOptMaxFee - optimizedTotalFees;
     final totalSavingsVsMax = savingsVsMax + feesSavingsVsMax;
@@ -846,7 +852,7 @@ class _State extends State<OptimizeFeeScreen> {
             ],
           ),
           Global.gapLg,
-          
+
           // Section 1: Avec optimisation
           Container(
             padding: Global.padMd,
@@ -879,11 +885,11 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Montant total',
+                  'Budget disponible',
                   '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Montant net reçu',
+                  'Montant net envoyé',
                   '${ConstantUtil.formatCurrencyAmount(optimizedNetAmount)} $currencySymbol',
                   valueColor: Colors.green.shade700,
                 ),
@@ -891,6 +897,10 @@ class _State extends State<OptimizeFeeScreen> {
                   'Frais totaux',
                   '${ConstantUtil.formatCurrencyAmount(optimizedTotalFees)} $currencySymbol',
                   valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  'Total dépensé',
+                  '${ConstantUtil.formatCurrencyAmount(optimizedTotalAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   'Nombre d\'opérations',
@@ -936,11 +946,11 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Montant total',
+                  'Budget disponible',
                   '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Montant net reçu',
+                  'Montant net envoyé',
                   '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
                   valueColor: Colors.orange.shade700,
                 ),
@@ -956,7 +966,7 @@ class _State extends State<OptimizeFeeScreen> {
                 Global.gapSm,
                 Divider(color: (totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green).withValues(alpha: 0.3)),
                 Global.gapSm,
-                if (totalSavingsVsMax.abs() > 0.01) // Tolérance pour éviter les erreurs d'arrondi
+                if (totalSavingsVsMax.abs() > 0.01)
                   Row(
                     children: [
                       Icon(
@@ -1017,14 +1027,18 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Section 3: Sans optimisation (une seule opération)
+          // Section 3: Sans optimisation (même montant net avec une seule opération)
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green).withValues(alpha: 0.1),
+              color: (feesDifference.abs() > 0.01
+                  ? (feesDifference > 0 ? Colors.orange : Colors.green)
+                  : Colors.green).withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green).withValues(alpha: 0.3),
+                color: (feesDifference.abs() > 0.01
+                    ? (feesDifference > 0 ? Colors.orange : Colors.green)
+                    : Colors.green).withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -1033,16 +1047,22 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      nonOptSameFee > optimizedTotalFees ? Icons.block : Icons.check_circle_outline,
+                      feesDifference.abs() > 0.01
+                          ? (feesDifference > 0 ? Icons.info_outline : Icons.check_circle_outline)
+                          : Icons.check_circle_outline,
                       size: 16,
-                      color: nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green,
+                      color: feesDifference.abs() > 0.01
+                          ? (feesDifference > 0 ? Colors.orange : Colors.green)
+                          : Colors.green,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
-                        'Sans optimisation (une seule opération)',
+                        'Sans optimisation (même montant net)',
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green.shade700),
+                          color: (feesDifference.abs() > 0.01
+                              ? (feesDifference > 0 ? Colors.orange.shade700 : Colors.green.shade700)
+                              : Colors.green.shade700),
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -1051,13 +1071,13 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Montant total',
+                  'Budget disponible',
                   '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
-                  'Montant net reçu',
+                  'Montant net envoyé',
                   '${ConstantUtil.formatCurrencyAmount(nonOptSingleOpNetAmount)} $currencySymbol',
-                  valueColor: nonOptSameFee > optimizedTotalFees ? Colors.red.shade700 : Colors.green.shade700,
+                  valueColor: Colors.green.shade700,
                 ),
                 _buildComparisonRow(
                   'Frais totaux',
@@ -1065,33 +1085,116 @@ class _State extends State<OptimizeFeeScreen> {
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
+                  'Total dépensé',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalAmount)} $currencySymbol',
+                ),
+                _buildComparisonRow(
                   'Nombre d\'opérations',
                   '1',
                 ),
                 Global.gapSm,
-                Divider(color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green).withValues(alpha: 0.3)),
+                Divider(color: (feesDifference.abs() > 0.01
+                    ? (feesDifference > 0 ? Colors.orange : Colors.green)
+                    : Colors.green).withValues(alpha: 0.3)),
                 Global.gapSm,
-                if (nonOptSameFee > optimizedTotalFees) // Frais plus élevés sans optimisation
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        size: 14,
-                        color: Colors.red,
-                      ),
-                      Global.gapSm,
-                      Expanded(
-                        child: Text(
-                          'Vous payez ${ConstantUtil.formatCurrencyAmount((nonOptSameFee - optimizedTotalFees).abs())} $currencySymbol de frais en plus',
-                          style: ThemeUtil.bodySmall.copyWith(
-                            color: Colors.red.shade700,
-                            fontWeight: FontWeight.w600,
+                if (feesDifference > 0.01) // L'optimisation coûte PLUS cher
+                  ...[
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.info_outline,
+                          size: 14,
+                          color: Colors.orange,
+                        ),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            'L\'optimisation coûte ${ConstantUtil.formatCurrencyAmount(feesDifference.abs())} $currencySymbol de frais en plus',
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: Colors.orange.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
+                      ],
+                    ),
+                    if (_minTransactions > 1 || _maxTransactions > 0) ...[
+                      Row(
+                        children: [
+                          Global.gapXs,
+                          Expanded(
+                            child: Text(
+                              '• Ceci est dû aux contraintes de transactions (min: $_minTransactions, max: $_maxTransactions)',
+                              style: ThemeUtil.bodySmall.copyWith(
+                                color: context.colorScheme.onSurfaceVariant,
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
-                  )
-                else
+                    if (exceedsBudget) ...[
+                      Row(
+                        children: [
+                          Global.gapXs,
+                          Expanded(
+                            child: Text(
+                              '• Dépasse le budget disponible',
+                              style: ThemeUtil.bodySmall.copyWith(
+                                color: Colors.red.shade700,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ]
+                else if (feesDifference < -0.01) // Une seule opération coûte PLUS cher
+                  ...[
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle,
+                          size: 14,
+                          color: Colors.green,
+                        ),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            'Vous économisez ${ConstantUtil.formatCurrencyAmount(feesDifference.abs())} $currencySymbol de frais',
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: Colors.green.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (exceedsBudget) ...[
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.warning_amber,
+                            size: 14,
+                            color: Colors.red.shade700,
+                          ),
+                          Global.gapXs,
+                          Expanded(
+                            child: Text(
+                              'Dépasse le budget disponible',
+                              style: ThemeUtil.bodySmall.copyWith(
+                                color: Colors.red.shade700,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ]
+                else // Même résultat
                   Row(
                     children: [
                       Icon(
