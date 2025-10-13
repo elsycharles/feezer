@@ -819,14 +819,17 @@ class _State extends State<OptimizeFeeScreen> {
     // The net amount is the same as optimization by definition
     final nonOptSingleOpNetAmount = optimizedNetAmount;
 
-    // Calculate differences for "same net amount"
-    final feesDifference = optimizedTotalFees - nonOptSameFee; // Positive = optimization costs more
+    // Gains vs maximum amount (1 single operation max)
+    final netGainVsMax = optimizedNetAmount - nonOptMaxNetAmount; // Net amount gain
+    final feeSavingsVsMax = nonOptMaxFee - optimizedTotalFees; // Fee savings
+    final totalGainVsMax = netGainVsMax + feeSavingsVsMax; // Total gain
+
+    // For the comparison "same net amount"
+    final feeDifferenceVsSameNet = optimizedTotalFees - nonOptSameFee; // Fee difference (negative = savings)
     final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
 
-    // Calculate savings vs max
-    final savingsVsMax = optimizedNetAmount - nonOptMaxNetAmount;
-    final feesSavingsVsMax = nonOptMaxFee - optimizedTotalFees;
-    final totalSavingsVsMax = savingsVsMax + feesSavingsVsMax;
+    // Global gains message
+    final totalGain = totalGainVsMax; // The real total gain
 
     return SurfaceCard(
       child: Column(
@@ -912,14 +915,19 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Section 2: Without optimization (maximum amount)
+          // ============ SECTION 2: Without optimization (maximum amount) ============
+          // Corrected logic
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green).withValues(alpha: 0.1),
+              color: (totalGainVsMax.abs() > 0.01
+                  ? (totalGainVsMax > 0 ? Colors.green : Colors.red)
+                  : Colors.grey).withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green).withValues(alpha: 0.3),
+                color: (totalGainVsMax.abs() > 0.01
+                    ? (totalGainVsMax > 0 ? Colors.green : Colors.red)
+                    : Colors.grey).withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -928,16 +936,16 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      totalSavingsVsMax.abs() > 0.01 ? Icons.warning_amber : Icons.check_circle_outline,
+                      totalGainVsMax > 0.01 ? Icons.trending_down : Icons.check_circle_outline,
                       size: 16,
-                      color: totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green,
+                      color: totalGainVsMax > 0.01 ? Colors.orange : Colors.grey,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationMaxAmount,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: (totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green.shade700),
+                          color: totalGainVsMax > 0.01 ? Colors.orange.shade700 : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -963,71 +971,37 @@ class _State extends State<OptimizeFeeScreen> {
                   AppLocalizations.of(context).numberOfOperations,
                   '1',
                 ),
-                Global.gapSm,
-                Divider(color: (totalSavingsVsMax.abs() > 0.01 ? Colors.orange : Colors.green).withValues(alpha: 0.3)),
-                Global.gapSm,
-                if (totalSavingsVsMax.abs() > 0.01)
+
+                if (totalGainVsMax.abs() > 0.01) ...[
+                  Global.gapSm,
+                  Divider(color: (totalGainVsMax > 0 ? Colors.green : Colors.red).withValues(alpha: 0.3)),
+                  Global.gapSm,
                   Row(
                     children: [
                       Icon(
-                        Icons.trending_down,
+                        totalGainVsMax > 0 ? Icons.trending_down : Icons.trending_up,
                         size: 14,
-                        color: Colors.red,
+                        color: totalGainVsMax > 0 ? Colors.red.shade700 : Colors.green.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          AppLocalizations.of(context).youLoseAmount(
-                            ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs()),
-                            currencySymbol,
-                          ),
+                          totalGainVsMax > 0
+                              ? AppLocalizations.of(context).youLoseAmount(
+                                  ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
+                                  currencySymbol,
+                                )
+                              : AppLocalizations.of(context).youGainAmount(
+                                  ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
+                                  currencySymbol,
+                                ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: Colors.red.shade700,
+                            color: totalGainVsMax > 0 ? Colors.red.shade700 : Colors.green.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                     ],
-                  )
-                else
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.check_circle_outline,
-                        size: 14,
-                        color: Colors.green,
-                      ),
-                      Global.gapSm,
-                      Expanded(
-                        child: Text(
-                          AppLocalizations.of(context).sameResultAsOptimization,
-                          style: ThemeUtil.bodySmall.copyWith(
-                            color: Colors.green.shade700,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                if (totalSavingsVsMax.abs() > 0.01) ...[
-                  Global.gapXs,
-                  Text(
-                    AppLocalizations.of(context).netAmountLess(
-                      ConstantUtil.formatCurrencyAmount(savingsVsMax.abs()),
-                      currencySymbol,
-                    ),
-                    style: ThemeUtil.bodySmall.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  Text(
-                    AppLocalizations.of(context).feesMore(
-                      ConstantUtil.formatCurrencyAmount(feesSavingsVsMax.abs()),
-                      currencySymbol,
-                    ),
-                    style: ThemeUtil.bodySmall.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
                   ),
                 ],
               ],
@@ -1036,18 +1010,18 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Section 3: Without optimization (same net amount with one single operation)
+          // ============ SECTION 3: Without optimization (same net amount) ============
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (feesDifference.abs() > 0.01
-                  ? (feesDifference > 0 ? Colors.orange : Colors.green)
-                  : Colors.green).withValues(alpha: 0.1),
+              color: (feeDifferenceVsSameNet.abs() > 0.01
+                  ? (feeDifferenceVsSameNet > 0 ? Colors.orange : Colors.green)
+                  : Colors.grey).withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (feesDifference.abs() > 0.01
-                    ? (feesDifference > 0 ? Colors.orange : Colors.green)
-                    : Colors.green).withValues(alpha: 0.3),
+                color: (feeDifferenceVsSameNet.abs() > 0.01
+                    ? (feeDifferenceVsSameNet > 0 ? Colors.orange : Colors.green)
+                    : Colors.grey).withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -1056,22 +1030,16 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      feesDifference.abs() > 0.01
-                          ? (feesDifference > 0 ? Icons.info_outline : Icons.check_circle_outline)
-                          : Icons.check_circle_outline,
+                      feeDifferenceVsSameNet > 0.01 ? Icons.info_outline : Icons.check_circle_outline,
                       size: 16,
-                      color: feesDifference.abs() > 0.01
-                          ? (feesDifference > 0 ? Colors.orange : Colors.green)
-                          : Colors.green,
+                      color: feeDifferenceVsSameNet > 0.01 ? Colors.orange : Colors.grey,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationSameNet,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: (feesDifference.abs() > 0.01
-                              ? (feesDifference > 0 ? Colors.orange.shade700 : Colors.green.shade700)
-                              : Colors.green.shade700),
+                          color: feeDifferenceVsSameNet > 0.01 ? Colors.orange.shade700 : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -1101,169 +1069,98 @@ class _State extends State<OptimizeFeeScreen> {
                   AppLocalizations.of(context).numberOfOperations,
                   '1',
                 ),
-                Global.gapSm,
-                Divider(color: (feesDifference.abs() > 0.01
-                    ? (feesDifference > 0 ? Colors.orange : Colors.green)
-                    : Colors.green).withValues(alpha: 0.3)),
-                Global.gapSm,
-                if (feesDifference > 0.01) // Optimization costs MORE
-                  ...[
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.info_outline,
-                          size: 14,
-                          color: Colors.orange,
-                        ),
-                        Global.gapSm,
-                        Expanded(
-                          child: Text(
-                            AppLocalizations.of(context).optimizationCostsMoreFees(
-                              ConstantUtil.formatCurrencyAmount(feesDifference.abs()),
-                              currencySymbol,
-                            ),
-                            style: ThemeUtil.bodySmall.copyWith(
-                              color: Colors.orange.shade700,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (_minTransactions > 1 || _maxTransactions > 0) ...[
-                      Row(
-                        children: [
-                          Global.gapXs,
-                          Expanded(
-                            child: Text(
-                              AppLocalizations.of(context).dueToTransactionConstraints(
-                                _minTransactions.toString(),
-                                _maxTransactions.toString(),
-                              ),
-                              style: ThemeUtil.bodySmall.copyWith(
-                                color: context.colorScheme.onSurfaceVariant,
-                                fontStyle: FontStyle.italic,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                    if (exceedsBudget) ...[
-                      Row(
-                        children: [
-                          Global.gapXs,
-                          Expanded(
-                            child: Text(
-                              AppLocalizations.of(context).exceedsAvailableBudget,
-                              style: ThemeUtil.bodySmall.copyWith(
-                                color: Colors.red.shade700,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ]
-                else if (feesDifference < -0.01) // One single operation costs MORE
-                  ...[
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.check_circle,
-                          size: 14,
-                          color: Colors.green,
-                        ),
-                        Global.gapSm,
-                        Expanded(
-                          child: Text(
-                            AppLocalizations.of(context).youSaveFees(
-                              ConstantUtil.formatCurrencyAmount(feesDifference.abs()),
-                              currencySymbol,
-                            ),
-                            style: ThemeUtil.bodySmall.copyWith(
-                              color: Colors.green.shade700,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (exceedsBudget) ...[
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.warning_amber,
-                            size: 14,
-                            color: Colors.red.shade700,
-                          ),
-                          Global.gapXs,
-                          Expanded(
-                            child: Text(
-                              AppLocalizations.of(context).exceedsAvailableBudget,
-                              style: ThemeUtil.bodySmall.copyWith(
-                                color: Colors.red.shade700,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ]
-                else // Same result
+
+                if (feeDifferenceVsSameNet.abs() > 0.01 || exceedsBudget) ...[
+                  Global.gapSm,
+                  Divider(color: Colors.orange.withValues(alpha: 0.3)),
+                  Global.gapSm,
+                  
+                  // Message sur les frais
                   Row(
                     children: [
                       Icon(
-                        Icons.check_circle_outline,
+                        feeDifferenceVsSameNet > 0 ? Icons.info_outline : Icons.check_circle,
                         size: 14,
-                        color: Colors.green,
+                        color: feeDifferenceVsSameNet > 0 ? Colors.orange : Colors.green,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          AppLocalizations.of(context).sameResultAsOptimization,
+                          feeDifferenceVsSameNet > 0
+                              ? AppLocalizations.of(context).optimizationCostsMoreFees(
+                                  ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
+                                  currencySymbol,
+                                )
+                              : AppLocalizations.of(context).youSaveFees(
+                                  ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
+                                  currencySymbol,
+                                ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: Colors.green.shade700,
+                            color: feeDifferenceVsSameNet > 0 ? Colors.orange.shade700 : Colors.green.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                     ],
                   ),
+                  
+                  if (exceedsBudget) ...[
+                    Global.gapXs,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.warning_amber,
+                          size: 14,
+                          color: Colors.red.shade700,
+                        ),
+                        Global.gapXs,
+                        Expanded(
+                          child: Text(
+                            AppLocalizations.of(context).exceedsAvailableBudget,
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: Colors.red.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
               ],
             ),
           ),
 
           Global.gapMd,
 
-          // Savings summary
+          // ============ GLOBAL SUMMARY ============
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: context.colorScheme.primaryContainer.withValues(alpha: 0.3),
+              color: (totalGain > 0.01 ? Colors.green : Colors.grey).withValues(alpha: 0.2),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: context.colorScheme.primary.withValues(alpha: 0.3),
+                color: (totalGain > 0.01 ? Colors.green : Colors.grey).withValues(alpha: 0.4),
               ),
             ),
             child: Row(
               children: [
                 Icon(
-                  Icons.savings,
-                  color: context.colorScheme.primary,
+                  totalGain > 0.01 ? Icons.savings : Icons.info_outline,
+                  color: totalGain > 0.01 ? Colors.green.shade700 : Colors.grey.shade700,
                   size: 20,
                 ),
                 Global.gapSm,
                 Expanded(
                   child: Text(
-                    AppLocalizations.of(context).totalSavingsWithOptimization(
-                      ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs()),
-                      currencySymbol,
-                    ),
+                    totalGain > 0.01
+                        ? AppLocalizations.of(context).totalSavingsWithOptimization(
+                            ConstantUtil.formatCurrencyAmount(totalGain.abs()),
+                            currencySymbol,
+                          )
+                        : AppLocalizations.of(context).sameResultAsOptimization,
                     style: ThemeUtil.bodyMedium.copyWith(
-                      color: context.colorScheme.primary,
+                      color: totalGain > 0.01 ? Colors.green.shade700 : Colors.grey.shade700,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

@@ -1860,6 +1860,18 @@
       }
     }
   },
+  "youGainAmount": "You gain {amount} {currency}",
+  "@youGainAmount": {
+    "description": "Message when optimization results in gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
   "sameResultAsOptimization": "Same result as optimization",
   "@sameResultAsOptimization": {
     "description": "Message when non-optimized result is same as optimized"
@@ -1867,6 +1879,42 @@
   "netAmountLess": "• Net amount less: {amount} {currency}",
   "@netAmountLess": {
     "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "netAmountMore": "• Net amount more: {amount} {currency}",
+  "@netAmountMore": {
+    "description": "Detail showing net amount gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesLess": "• Fees less: {amount} {currency}",
+  "@feesLess": {
+    "description": "Detail showing fee savings",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Fees more: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
     "placeholders": {
       "amount": {
         "type": "String"

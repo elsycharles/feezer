@@ -1312,11 +1312,26 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
+  String youGainAmount(String amount, String currency) {
+    return 'Mahazo $amount $currency ianao';
+  }
+
+  @override
   String get sameResultAsOptimization => 'Vokatra mitovy amin\'ny fanatsarana';
 
   @override
   String netAmountLess(String amount, String currency) {
     return '• Vola madio kely kokoa: $amount $currency';
+  }
+
+  @override
+  String netAmountMore(String amount, String currency) {
+    return '• Vola madio maro kokoa: $amount $currency';
+  }
+
+  @override
+  String feesLess(String amount, String currency) {
+    return '• Sara kely kokoa: $amount $currency';
   }
 
   @override
@@ -1335,7 +1350,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get exceedsAvailableBudget => '• Mihoatra ny teti-bola misy';
+  String get exceedsAvailableBudget => 'Mihoatra ny teti-bola misy';
 
   @override
   String youSaveFees(String amount, String currency) {

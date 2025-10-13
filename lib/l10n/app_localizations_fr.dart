@@ -1310,7 +1310,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get availableBudget => 'Budget disponible';
 
   @override
-  String get netAmountSent => 'Montant net envoyé';
+  String get netAmountSent => 'Montant net';
 
   @override
   String get totalSpent => 'Total dépensé';
@@ -1324,11 +1324,26 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String youGainAmount(String amount, String currency) {
+    return 'Vous gagnez $amount $currency';
+  }
+
+  @override
   String get sameResultAsOptimization => 'Même résultat que l\'optimisation';
 
   @override
   String netAmountLess(String amount, String currency) {
     return '• Montant net en moins: $amount $currency';
+  }
+
+  @override
+  String netAmountMore(String amount, String currency) {
+    return '• Montant net en plus: $amount $currency';
+  }
+
+  @override
+  String feesLess(String amount, String currency) {
+    return '• Frais en moins: $amount $currency';
   }
 
   @override
@@ -1347,7 +1362,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get exceedsAvailableBudget => '• Dépasse le budget disponible';
+  String get exceedsAvailableBudget => 'Dépasse le budget disponible';
 
   @override
   String youSaveFees(String amount, String currency) {

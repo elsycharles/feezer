@@ -1651,7 +1651,7 @@
   "@availableBudget": {
     "description": "Label for available budget in comparison"
   },
-  "netAmountSent": "Montant net envoyé",
+  "netAmountSent": "Montant net",
   "@netAmountSent": {
     "description": "Label for net amount sent in comparison"
   },
@@ -1679,6 +1679,18 @@
       }
     }
   },
+  "youGainAmount": "Vous gagnez {amount} {currency}",
+  "@youGainAmount": {
+    "description": "Message when optimization results in gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
   "sameResultAsOptimization": "Même résultat que l'optimisation",
   "@sameResultAsOptimization": {
     "description": "Message when non-optimized result is same as optimized"
@@ -1686,6 +1698,30 @@
   "netAmountLess": "• Montant net en moins: {amount} {currency}",
   "@netAmountLess": {
     "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "netAmountMore": "• Montant net en plus: {amount} {currency}",
+  "@netAmountMore": {
+    "description": "Detail showing net amount gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesLess": "• Frais en moins: {amount} {currency}",
+  "@feesLess": {
+    "description": "Detail showing fee savings",
     "placeholders": {
       "amount": {
         "type": "String"

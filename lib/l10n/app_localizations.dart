@@ -2361,6 +2361,12 @@ abstract class AppLocalizations {
   /// **'You lose {amount} {currency}'**
   String youLoseAmount(String amount, String currency);
 
+  /// Message when optimization results in gain
+  ///
+  /// In en, this message translates to:
+  /// **'You gain {amount} {currency}'**
+  String youGainAmount(String amount, String currency);
+
   /// Message when non-optimized result is same as optimized
   ///
   /// In en, this message translates to:
@@ -2372,6 +2378,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'• Net amount less: {amount} {currency}'**
   String netAmountLess(String amount, String currency);
+
+  /// Detail showing net amount gain
+  ///
+  /// In en, this message translates to:
+  /// **'• Net amount more: {amount} {currency}'**
+  String netAmountMore(String amount, String currency);
+
+  /// Detail showing fee savings
+  ///
+  /// In en, this message translates to:
+  /// **'• Fees less: {amount} {currency}'**
+  String feesLess(String amount, String currency);
 
   /// Detail showing additional fees
   ///
@@ -2394,7 +2412,7 @@ abstract class AppLocalizations {
   /// Warning that result exceeds available budget
   ///
   /// In en, this message translates to:
-  /// **'• Exceeds available budget'**
+  /// **'Exceeds available budget'**
   String get exceedsAvailableBudget;
 
   /// Message showing savings from optimization

@@ -1303,11 +1303,26 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String youGainAmount(String amount, String currency) {
+    return 'You gain $amount $currency';
+  }
+
+  @override
   String get sameResultAsOptimization => 'Same result as optimization';
 
   @override
   String netAmountLess(String amount, String currency) {
     return '• Net amount less: $amount $currency';
+  }
+
+  @override
+  String netAmountMore(String amount, String currency) {
+    return '• Net amount more: $amount $currency';
+  }
+
+  @override
+  String feesLess(String amount, String currency) {
+    return '• Fees less: $amount $currency';
   }
 
   @override
@@ -1326,7 +1341,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get exceedsAvailableBudget => '• Exceeds available budget';
+  String get exceedsAvailableBudget => 'Exceeds available budget';
 
   @override
   String youSaveFees(String amount, String currency) {
