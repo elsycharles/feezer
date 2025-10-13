@@ -51,6 +51,9 @@ class _State extends State<OptimizeFeeScreen> {
 
   Currency? _previousCurrency;
 
+  // Pour la comparaison sans optimisation
+  Map<String, dynamic>? _nonOptimizedComparison;
+
   @override
   void initState() {
     super.initState();
@@ -344,6 +347,7 @@ class _State extends State<OptimizeFeeScreen> {
                   _selectedProvider = provider;
                   _hasOptimized = false;
                   _result = null;
+                  _nonOptimizedComparison = null;
                 });
               }
             },
@@ -369,6 +373,7 @@ class _State extends State<OptimizeFeeScreen> {
               _amount = value;
               _hasOptimized = false;
               _result = null;
+              _nonOptimizedComparison = null;
             });
           },
           label: AppLocalizations.of(context).amount,
@@ -452,63 +457,71 @@ class _State extends State<OptimizeFeeScreen> {
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      child: SurfaceCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: Column(
+        children: [
+          SurfaceCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.analytics,
-                  size: 18,
-                  color: context.colorScheme.primary,
-                ),
-                Global.gapSm,
-                Text(
-                  AppLocalizations.of(context).optimizationResults,
-                  style: ThemeUtil.titleMedium.copyWith(
-                    color: context.colorScheme.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-            Global.gapMd,
-            if (_convertedResult == null || _convertedResult!.details.isEmpty)
-              Container(
-                padding: Global.padMd,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.errorContainer.withValues(
-                    alpha: 0.1,
-                  ),
-                  borderRadius: Global.borderMd,
-                  border: Border.all(
-                    color: context.colorScheme.error.withValues(alpha: 0.3),
-                  ),
-                ),
-                child: Row(
+                Row(
                   children: [
                     Icon(
-                      Icons.warning_outlined,
-                      color: context.colorScheme.error,
+                      Icons.analytics,
                       size: 18,
+                      color: context.colorScheme.primary,
                     ),
                     Global.gapSm,
-                    Expanded(
-                      child: Text(
-                        AppLocalizations.of(context).noOptimizationResultsFound,
-                        style: ThemeUtil.bodyMedium.copyWith(
-                          color: context.colorScheme.error,
-                        ),
+                    Text(
+                      AppLocalizations.of(context).optimizationResults,
+                      style: ThemeUtil.titleMedium.copyWith(
+                        color: context.colorScheme.primary,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
                 ),
-              )
-            else
-              _buildResultsDisplay(),
+                Global.gapMd,
+                if (_convertedResult == null || _convertedResult!.details.isEmpty)
+                  Container(
+                    padding: Global.padMd,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.errorContainer.withValues(
+                        alpha: 0.1,
+                      ),
+                      borderRadius: Global.borderMd,
+                      border: Border.all(
+                        color: context.colorScheme.error.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.warning_outlined,
+                          color: context.colorScheme.error,
+                          size: 18,
+                        ),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            AppLocalizations.of(context).noOptimizationResultsFound,
+                            style: ThemeUtil.bodyMedium.copyWith(
+                              color: context.colorScheme.error,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  _buildResultsDisplay(),
+              ],
+            ),
+          ),
+          if (_hasOptimized && _convertedResult != null && _convertedResult!.details.isNotEmpty && _nonOptimizedComparison != null) ...[
+            Global.gapLg,
+            _buildComparisonSection(),
           ],
-        ),
+        ],
       ),
     );
   }
@@ -780,6 +793,456 @@ class _State extends State<OptimizeFeeScreen> {
     overflow: TextOverflow.visible,
   );
 
+  Widget _buildComparisonSection() {
+    if (_nonOptimizedComparison == null) return const SizedBox.shrink();
+
+    final currencyProvider = context.read<CurrencyProvider>();
+    final currencySymbol = currencyProvider.currencySymbol;
+
+    // Le montant total est toujours celui inséré par l'utilisateur
+    final userAmount = _amount;
+
+    // Données avec optimisation
+    final optimizedNetAmount = _convertedResult!.netAmount;
+    final optimizedTotalFees = _convertedResult!.totalFees;
+
+    // Données sans optimisation (montant maximal direct)
+    final nonOptMaxNetAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']);
+    final nonOptMaxFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']);
+
+    // Données sans optimisation (si on prend le même montant net que l'optimisation)
+    final nonOptSameNetAmount = optimizedNetAmount;
+    final nonOptSameFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']);
+    final nonOptSameTotalAmount = nonOptSameNetAmount + nonOptSameFee;
+
+    // Calcul des économies
+    final savingsVsMax = optimizedNetAmount - nonOptMaxNetAmount;
+    final feesSavingsVsMax = nonOptMaxFee - optimizedTotalFees;
+    final totalSavingsVsMax = savingsVsMax + feesSavingsVsMax;
+
+    final extraCostVsSame = nonOptSameTotalAmount - userAmount;
+
+    return SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.compare_arrows,
+                size: 18,
+                color: context.colorScheme.secondary,
+              ),
+              Global.gapSm,
+              Flexible(
+                child: Text(
+                  'Comparaison avec/sans optimisation',
+                  style: ThemeUtil.titleMedium.copyWith(
+                    color: context.colorScheme.secondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Global.gapLg,
+          
+          // Section 1: Avec optimisation
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: Colors.green.withValues(alpha: 0.1),
+              borderRadius: Global.borderMd,
+              border: Border.all(
+                color: Colors.green.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.check_circle,
+                      size: 16,
+                      color: Colors.green,
+                    ),
+                    Global.gapSm,
+                    Text(
+                      'Avec optimisation',
+                      style: ThemeUtil.titleSmall.copyWith(
+                        color: Colors.green.shade700,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapSm,
+                _buildComparisonRow(
+                  'Montant total',
+                  '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  'Montant net reçu',
+                  '${ConstantUtil.formatCurrencyAmount(optimizedNetAmount)} $currencySymbol',
+                  valueColor: Colors.green.shade700,
+                ),
+                _buildComparisonRow(
+                  'Frais totaux',
+                  '${ConstantUtil.formatCurrencyAmount(optimizedTotalFees)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  'Nombre d\'opérations',
+                  '${_convertedResult!.totalOperations}',
+                ),
+              ],
+            ),
+          ),
+
+          Global.gapMd,
+
+          // Section 2: Sans optimisation (montant maximal)
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: Colors.orange.withValues(alpha: 0.1),
+              borderRadius: Global.borderMd,
+              border: Border.all(
+                color: Colors.orange.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.warning_amber,
+                      size: 16,
+                      color: Colors.orange,
+                    ),
+                    Global.gapSm,
+                    Flexible(
+                      child: Text(
+                        'Sans optimisation (montant max)',
+                        style: ThemeUtil.titleSmall.copyWith(
+                          color: Colors.orange.shade700,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapSm,
+                _buildComparisonRow(
+                  'Montant total',
+                  '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  'Montant net reçu',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
+                  valueColor: Colors.orange.shade700,
+                ),
+                _buildComparisonRow(
+                  'Frais totaux',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptMaxFee)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  'Nombre d\'opérations',
+                  '1',
+                ),
+                Global.gapSm,
+                Divider(color: Colors.orange.withValues(alpha: 0.3)),
+                Global.gapSm,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.trending_down,
+                      size: 14,
+                      color: Colors.red,
+                    ),
+                    Global.gapSm,
+                    Expanded(
+                      child: Text(
+                        'Vous perdez ${ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs())} $currencySymbol',
+                        style: ThemeUtil.bodySmall.copyWith(
+                          color: Colors.red.shade700,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapXs,
+                Text(
+                  '• Montant net en moins: ${ConstantUtil.formatCurrencyAmount(savingsVsMax.abs())} $currencySymbol',
+                  style: ThemeUtil.bodySmall.copyWith(
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+                Text(
+                  '• Frais en plus: ${ConstantUtil.formatCurrencyAmount(feesSavingsVsMax.abs())} $currencySymbol',
+                  style: ThemeUtil.bodySmall.copyWith(
+                    color: context.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Global.gapMd,
+
+          // Section 3: Sans optimisation (même montant net)
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: Colors.red.withValues(alpha: 0.1),
+              borderRadius: Global.borderMd,
+              border: Border.all(
+                color: Colors.red.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.block,
+                      size: 16,
+                      color: Colors.red,
+                    ),
+                    Global.gapSm,
+                    Flexible(
+                      child: Text(
+                        'Sans optimisation (même montant net)',
+                        style: ThemeUtil.titleSmall.copyWith(
+                          color: Colors.red.shade700,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapSm,
+                _buildComparisonRow(
+                  'Montant total nécessaire',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameTotalAmount)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  'Montant net reçu',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameNetAmount)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  'Frais totaux',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameFee)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  'Nombre d\'opérations',
+                  '1',
+                ),
+                Global.gapSm,
+                Divider(color: Colors.red.withValues(alpha: 0.3)),
+                Global.gapSm,
+                if (extraCostVsSame.abs() > 0.01) // Tolérance pour éviter les erreurs d'arrondi
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.error_outline,
+                        size: 14,
+                        color: Colors.red,
+                      ),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          'Dépassement de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame.abs())} $currencySymbol',
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.red.shade700,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.check_circle_outline,
+                        size: 14,
+                        color: Colors.green,
+                      ),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          'Même résultat que l\'optimisation',
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.green.shade700,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                if (extraCostVsSame.abs() > 0.01)
+                  Global.gapXs,
+                if (extraCostVsSame.abs() > 0.01)
+                  Text(
+                    '• Montant total dépasse votre budget de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame.abs())} $currencySymbol',
+                    style: ThemeUtil.bodySmall.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+
+          Global.gapMd,
+
+          // Résumé des économies
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: context.colorScheme.primaryContainer.withValues(alpha: 0.3),
+              borderRadius: Global.borderMd,
+              border: Border.all(
+                color: context.colorScheme.primary.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.savings,
+                  color: context.colorScheme.primary,
+                  size: 20,
+                ),
+                Global.gapSm,
+                Expanded(
+                  child: Text(
+                    'Économie totale avec optimisation: ${ConstantUtil.formatCurrencyAmount(totalSavingsVsMax.abs())} $currencySymbol',
+                    style: ThemeUtil.bodyMedium.copyWith(
+                      color: context.colorScheme.primary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildComparisonRow(String label, String value, {Color? valueColor}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: ThemeUtil.bodySmall.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+          Text(
+            value,
+            style: ThemeUtil.bodySmall.copyWith(
+              color: valueColor ?? context.colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Map<String, dynamic> _calculateNonOptimizedComparison(
+    double amountInAriary,
+    List<FeeInterval> intervals,
+    FeeOptimizerResult optimizedResult,
+  ) {
+    // Trouver le montant net maximal qu'on peut obtenir avec le budget disponible
+    double maxNetAmount = 0;
+    double maxFee = 0;
+
+    // Parcourir tous les intervalles pour trouver le meilleur montant net possible
+    for (final interval in intervals) {
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+      
+      // Calculer le montant net maximal dans cet intervalle sans dépasser le budget
+      double testAmount = (maxAmount < double.infinity) ? maxAmount : amountInAriary;
+      
+      // Limiter au budget disponible
+      if (testAmount > amountInAriary) {
+        testAmount = amountInAriary;
+      }
+      
+      // Vérifier si ce montant est dans l'intervalle
+      if (testAmount >= minAmount && testAmount <= maxAmount) {
+        double fee = interval.feeType == FeeType.percentage
+            ? testAmount * ((interval.fee ?? 0) / 100.0)
+            : (interval.fee ?? 0);
+        
+        double totalCost = testAmount + fee;
+        
+        // Si le coût total dépasse le budget, calculer le montant net maximal possible
+        if (totalCost > amountInAriary) {
+          if (interval.feeType == FeeType.percentage) {
+            double feeRate = (interval.fee ?? 0) / 100.0;
+            testAmount = amountInAriary / (1 + feeRate);
+            fee = testAmount * feeRate;
+          } else {
+            testAmount = amountInAriary - (interval.fee ?? 0);
+            fee = interval.fee ?? 0;
+          }
+          
+          // Vérifier que le montant calculé est toujours dans l'intervalle
+          if (testAmount < minAmount || testAmount > maxAmount) {
+            continue;
+          }
+        }
+        
+        // Garder le meilleur montant net
+        if (testAmount > maxNetAmount) {
+          maxNetAmount = testAmount;
+          maxFee = fee;
+        }
+      }
+    }
+
+    // Calcul si on prend le même montant net que l'optimisation
+    double sameNetFee = 0;
+    final optimizedNetAmount = optimizedResult.netAmount;
+
+    // Trouver l'intervalle qui correspond au montant net optimisé
+    for (final interval in intervals) {
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+      
+      if (optimizedNetAmount >= minAmount && optimizedNetAmount <= maxAmount) {
+        sameNetFee = interval.feeType == FeeType.percentage
+            ? optimizedNetAmount * ((interval.fee ?? 0) / 100.0)
+            : (interval.fee ?? 0);
+        break;
+      }
+    }
+
+    return {
+      'maxNetAmount': maxNetAmount,
+      'maxFee': maxFee,
+      'sameNetFee': sameNetFee,
+    };
+  }
+
   Widget _buildOptimizeButton() => Container(
     padding: EdgeInsets.fromLTRB(
       20,
@@ -803,6 +1266,7 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = null;
         _hasOptimized = true;
+        _nonOptimizedComparison = null;
       });
       return;
     }
@@ -813,6 +1277,7 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = null;
         _hasOptimized = true;
+        _nonOptimizedComparison = null;
       });
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -850,6 +1315,7 @@ class _State extends State<OptimizeFeeScreen> {
         setState(() {
           _result = null;
           _hasOptimized = true;
+          _nonOptimizedComparison = null;
         });
         // Use mounted check and avoid using context after await
         if (mounted) {
@@ -887,16 +1353,25 @@ class _State extends State<OptimizeFeeScreen> {
         setState(() {
           _result = null;
           _hasOptimized = true;
+          _nonOptimizedComparison = null;
         });
         return;
       }
 
+      // Calcul de l'optimisation
       final optimizationResult = FeeOptimizerUtil.calculateOptimalOperations(
         amountInAriary,
         intervals,
         maxOperations: _maxTransactions,
         minOperations: _minTransactions,
         localizations: localizations,
+      );
+
+      // Calcul sans optimisation
+      final nonOptimizedData = _calculateNonOptimizedComparison(
+        amountInAriary,
+        intervals,
+        optimizationResult,
       );
 
       final coveragePercentage =
@@ -932,6 +1407,7 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = optimizationResult;
         _hasOptimized = true;
+        _nonOptimizedComparison = nonOptimizedData;
       });
     } catch (e) {
       if (mounted) {
@@ -962,6 +1438,7 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = null;
         _hasOptimized = true;
+        _nonOptimizedComparison = null;
       });
     }
   }
