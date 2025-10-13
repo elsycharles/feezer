@@ -228,7 +228,8 @@ class FeeOptimizerUtil {
         fee = opt.feeValue;
       }
 
-      if (netAmount >= opt.min && netAmount <= opt.max && netAmount > 0) {
+      if (netAmount >= opt.min && netAmount <= opt.max && 
+          netAmount > 0 && (netAmount + fee) <= totalAmount) { // AJOUT
         final result = _buildResult(
           totalAmount,
           netAmount,
@@ -397,6 +398,7 @@ class FeeOptimizerUtil {
 
         // REMOVED rounding: amount = (amount / precision).floor() * precision;
         double amount = min(maxAmount, max(opt.min, targetAmount - opt.fee));
+        amount = (amount / precision).floor() * precision; // RESTAURER
 
         if (amount < opt.min) {
           amount = opt.min;
@@ -448,7 +450,7 @@ class FeeOptimizerUtil {
 
     final operationCost = bestOption.max + bestOption.fee;
     final maxPossibleOps = (totalAmount / operationCost)
-        .toInt(); // CHANGED: .floor() to .toInt()
+        .floor(); // RESTORED: .floor() from .toInt()
 
     int targetOps = maxPossibleOps;
     if (maxOperations > 0) targetOps = min(targetOps, maxOperations);
@@ -508,7 +510,8 @@ class FeeOptimizerUtil {
       }
 
       // Vérifier si ce montant net est dans l'intervalle
-      if (netAmount >= minAmount && netAmount <= maxAmount && netAmount > 0) {
+      if (netAmount >= minAmount && netAmount <= maxAmount && 
+          netAmount > 0 && (netAmount + fee) <= totalAmount) { // AJOUT
         final efficiency = netAmount / fee;
 
         if (bestSingleOp == null || efficiency > bestSingleOp.score) {
@@ -644,7 +647,7 @@ class FeeOptimizerUtil {
 
         final cost = amount + opt.getFeeForAmount(amount);
         final count = min(
-          (totalAmount / cost).toInt(),
+          (totalAmount / cost).floor(),
           _maxSafeOperations,
         );
         if (count == 0) continue;
@@ -757,8 +760,8 @@ class FeeOptimizerUtil {
 
     final targetOps = min(
       maxOperations,
-      (totalAmount / (bestOption.max + bestOption.fee)).toInt(),
-    ); // CHANGED
+      (totalAmount / (bestOption.max + bestOption.fee)).floor(),
+    ); // RESTORED: .floor() from .toInt()
     final actualOps = max(minOperations, targetOps);
 
     return _distributeWithMainOption(
@@ -781,7 +784,7 @@ class FeeOptimizerUtil {
     double budget = totalAmount;
 
     final mainCost = mainOption.max + mainOption.fee;
-    final mainCount = min(targetCount, (budget / mainCost).toInt()); // CHANGED
+    final mainCount = min(targetCount, (budget / mainCost).floor()); // RESTORED: .floor() from .toInt()
 
     if (mainCount > 0) {
       counts['${mainOption.max}-${mainOption.fee}'] = mainCount;
@@ -795,7 +798,7 @@ class FeeOptimizerUtil {
       final cost = opt.max + opt.fee;
       if (cost > budget) continue;
 
-      final count = min(remaining, (budget / cost).toInt()); // CHANGED
+      final count = min(remaining, (budget / cost).floor()); // RESTORED: .floor() from .toInt()
       if (count > 0) {
         counts['${opt.max}-${opt.fee}'] = count;
         budget -= cost * count;
@@ -823,8 +826,8 @@ class FeeOptimizerUtil {
 
       final cost = opt.max + opt.fee;
       final maxCount = maxOperations > 0
-          ? min((budget / cost).toInt(), maxOperations - totalOps) // CHANGED
-          : (budget / cost).toInt(); // CHANGED
+          ? min((budget / cost).floor(), maxOperations - totalOps) // RESTORED: .floor() from .toInt()
+          : (budget / cost).floor(); // RESTORED: .floor() from .toInt()
 
       if (maxCount > 0) {
         final count = min(maxCount, _maxSafeOperations - totalOps);
