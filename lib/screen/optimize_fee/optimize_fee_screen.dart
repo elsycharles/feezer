@@ -811,20 +811,16 @@ class _State extends State<OptimizeFeeScreen> {
     final nonOptMaxNetAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']);
     final nonOptMaxFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']);
 
-    // Données sans optimisation (si on prend le même montant net que l'optimisation)
-    final nonOptSameNetAmount = optimizedNetAmount;
+    // Données sans optimisation (si on utilise UNE seule opération avec le budget total)
+    final nonOptSingleOpNetAmount = currencyProvider.convertFromAriary(
+      _nonOptimizedComparison!['sameNetTotalAmount'] - _nonOptimizedComparison!['sameNetFee']
+    );
     final nonOptSameFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']);
-    final nonOptSameTotalAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']);
 
     // Calcul des économies
     final savingsVsMax = optimizedNetAmount - nonOptMaxNetAmount;
     final feesSavingsVsMax = nonOptMaxFee - optimizedTotalFees;
     final totalSavingsVsMax = savingsVsMax + feesSavingsVsMax;
-
-    // Vérifier si le montant total sans optimisation dépasse réellement le budget
-    final extraCostVsSame = nonOptSameTotalAmount > userAmount 
-        ? nonOptSameTotalAmount - userAmount 
-        : 0.0;
 
     return SurfaceCard(
       child: Column(
@@ -1021,14 +1017,14 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // Section 3: Sans optimisation (même montant net)
+          // Section 3: Sans optimisation (une seule opération)
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.1),
+              color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green).withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.3),
+                color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green).withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -1037,16 +1033,16 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      extraCostVsSame > 0.01 ? Icons.block : Icons.check_circle_outline,
+                      nonOptSameFee > optimizedTotalFees ? Icons.block : Icons.check_circle_outline,
                       size: 16,
-                      color: extraCostVsSame > 0.01 ? Colors.red : Colors.green,
+                      color: nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
-                        'Sans optimisation (même montant net)',
+                        'Sans optimisation (une seule opération)',
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green.shade700),
+                          color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green.shade700),
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -1055,13 +1051,13 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  'Montant total nécessaire',
-                  '${ConstantUtil.formatCurrencyAmount(nonOptSameTotalAmount)} $currencySymbol',
+                  'Montant total',
+                  '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   'Montant net reçu',
-                  '${ConstantUtil.formatCurrencyAmount(nonOptSameNetAmount)} $currencySymbol',
-                  valueColor: Colors.red.shade700,
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSingleOpNetAmount)} $currencySymbol',
+                  valueColor: nonOptSameFee > optimizedTotalFees ? Colors.red.shade700 : Colors.green.shade700,
                 ),
                 _buildComparisonRow(
                   'Frais totaux',
@@ -1073,9 +1069,9 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
                 Global.gapSm,
-                Divider(color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.3)),
+                Divider(color: (nonOptSameFee > optimizedTotalFees ? Colors.red : Colors.green).withValues(alpha: 0.3)),
                 Global.gapSm,
-                if (extraCostVsSame > 0.01) // Seulement si dépassement réel
+                if (nonOptSameFee > optimizedTotalFees) // Frais plus élevés sans optimisation
                   Row(
                     children: [
                       Icon(
@@ -1086,7 +1082,7 @@ class _State extends State<OptimizeFeeScreen> {
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          'Dépassement de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame)} $currencySymbol',
+                          'Vous payez ${ConstantUtil.formatCurrencyAmount((nonOptSameFee - optimizedTotalFees).abs())} $currencySymbol de frais en plus',
                           style: ThemeUtil.bodySmall.copyWith(
                             color: Colors.red.shade700,
                             fontWeight: FontWeight.w600,
@@ -1114,15 +1110,6 @@ class _State extends State<OptimizeFeeScreen> {
                         ),
                       ),
                     ],
-                  ),
-                if (extraCostVsSame > 0.01)
-                  Global.gapXs,
-                if (extraCostVsSame > 0.01)
-                  Text(
-                    '• Montant total dépasse votre budget de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame)} $currencySymbol',
-                    style: ThemeUtil.bodySmall.copyWith(
-                      color: context.colorScheme.onSurfaceVariant,
-                    ),
                   ),
               ],
             ),
