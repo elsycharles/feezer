@@ -1,0 +1,77 @@
+/// Default provider data with fee intervals
+class ProviderData {
+  static const List<Map<String, dynamic>> defaultProviders = [
+    {
+      'name': 'YAS',
+      'description': 'Principal opérateur télécom de Madagascar, anciennement Telma, offrant la 5G, la fibre et la plus large couverture nationale sous le groupe Axian Telecom.',
+      'iconName': 'phone_android',
+      'feeIntervals': [
+        {'minAmount': 500.0, 'maxAmount': 1000.0, 'fee': 100.0, 'feeType': 0}, // fixed
+        {'minAmount': 1001.0, 'maxAmount': 5000.0, 'fee': 200.0, 'feeType': 0},
+        {'minAmount': 5001.0, 'maxAmount': 10000.0, 'fee': 300.0, 'feeType': 0},
+        {'minAmount': 10001.0, 'maxAmount': 25000.0, 'fee': 600.0, 'feeType': 0},
+        {'minAmount': 25001.0, 'maxAmount': 50000.0, 'fee': 800.0, 'feeType': 0},
+        {'minAmount': 50001.0, 'maxAmount': 100000.0, 'fee': 1500.0, 'feeType': 0},
+        {'minAmount': 100001.0, 'maxAmount': 150000.0, 'fee': 2200.0, 'feeType': 0},
+        {'minAmount': 150001.0, 'maxAmount': 200000.0, 'fee': 3300.0, 'feeType': 0},
+        {'minAmount': 200001.0, 'maxAmount': 300000.0, 'fee': 4400.0, 'feeType': 0},
+        {'minAmount': 300001.0, 'maxAmount': 500000.0, 'fee': 5500.0, 'feeType': 0},
+        {'minAmount': 500001.0, 'maxAmount': 800000.0, 'fee': 7500.0, 'feeType': 0},
+        {'minAmount': 800001.0, 'maxAmount': 1000000.0, 'fee': 8000.0, 'feeType': 0},
+      ],
+    },
+    {
+      'name': 'ORANGE',
+      'description': 'Groupe mondial de télécommunications offrant à Madagascar des services mobiles et Internet complets pour particuliers et entreprises.',
+      'iconName': 'phone_android',
+      'feeIntervals': [
+        {'minAmount': 200.0, 'maxAmount': 1000.0, 'fee': 100.0, 'feeType': 0},
+        {'minAmount': 1001.0, 'maxAmount': 5000.0, 'fee': 140.0, 'feeType': 0},
+        {'minAmount': 5001.0, 'maxAmount': 10000.0, 'fee': 275.0, 'feeType': 0},
+        {'minAmount': 10001.0, 'maxAmount': 20000.0, 'fee': 500.0, 'feeType': 0},
+        {'minAmount': 20001.0, 'maxAmount': 25000.0, 'fee': 650.0, 'feeType': 0},
+        {'minAmount': 25001.0, 'maxAmount': 50000.0, 'fee': 1300.0, 'feeType': 0},
+        {'minAmount': 50001.0, 'maxAmount': 100000.0, 'fee': 1900.0, 'feeType': 0},
+        {'minAmount': 100001.0, 'maxAmount': 250000.0, 'fee': 3400.0, 'feeType': 0},
+        {'minAmount': 250001.0, 'maxAmount': 500000.0, 'fee': 4800.0, 'feeType': 0},
+        {'minAmount': 500001.0, 'maxAmount': 1000000.0, 'fee': 8700.0, 'feeType': 0},
+        {'minAmount': 1000001.0, 'maxAmount': 2000000.0, 'fee': 14700.0, 'feeType': 0},
+        {'minAmount': 2000001.0, 'maxAmount': 3000000.0, 'fee': 19600.0, 'feeType': 0},
+        {'minAmount': 3000001.0, 'maxAmount': 4000000.0, 'fee': 24500.0, 'feeType': 0},
+        {'minAmount': 4000001.0, 'maxAmount': 5000000.0, 'fee': 29400.0, 'feeType': 0},
+        {'minAmount': 5000001.0, 'maxAmount': 6000000.0, 'fee': 34300.0, 'feeType': 0},
+        {'minAmount': 6000001.0, 'maxAmount': 7000000.0, 'fee': 39200.0, 'feeType': 0},
+        {'minAmount': 7000001.0, 'maxAmount': 8000000.0, 'fee': 44100.0, 'feeType': 0},
+        {'minAmount': 8000001.0, 'maxAmount': 9000000.0, 'fee': 49000.0, 'feeType': 0},
+        {'minAmount': 9000001.0, 'maxAmount': 10000000.0, 'fee': 53900.0, 'feeType': 0},
+      ],
+    },
+    {
+      'name': 'AIRTEL',
+      'description': 'Opérateur majeur en Afrique, misant sur la 4G et les services financiers mobiles, présent activement à Madagascar.',
+      'iconName': 'phone_android',
+      'feeIntervals': [
+        {'minAmount': 100.0, 'maxAmount': 1000.0, 'fee': 0.03, 'feeType': 1}, // percentage
+        {'minAmount': 1001.0, 'maxAmount': 5000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 5001.0, 'maxAmount': 10000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 10001.0, 'maxAmount': 20000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 20001.0, 'maxAmount': 30000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 30001.0, 'maxAmount': 40000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 40001.0, 'maxAmount': 50000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 50001.0, 'maxAmount': 60000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 60001.0, 'maxAmount': 70000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 70001.0, 'maxAmount': 80000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 80001.0, 'maxAmount': 90000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 90001.0, 'maxAmount': 100000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 100001.0, 'maxAmount': 150000.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 150001.0, 'maxAmount': 166670.0, 'fee': 0.03, 'feeType': 1},
+        {'minAmount': 166671.0, 'maxAmount': 250000.0, 'fee': 5000.0, 'feeType': 0}, // fixed
+        {'minAmount': 250001.0, 'maxAmount': 300000.0, 'fee': 5000.0, 'feeType': 0},
+        {'minAmount': 300001.0, 'maxAmount': 350000.0, 'fee': 5000.0, 'feeType': 0},
+        {'minAmount': 350001.0, 'maxAmount': 400000.0, 'fee': 5000.0, 'feeType': 0},
+        {'minAmount': 400001.0, 'maxAmount': 450000.0, 'fee': 5000.0, 'feeType': 0},
+        {'minAmount': 450001.0, 'maxAmount': 500000.0, 'fee': 5000.0, 'feeType': 0},
+      ],
+    },
+  ];
+}

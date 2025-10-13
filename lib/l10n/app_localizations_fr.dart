@@ -1032,6 +1032,11 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String rowFeePercentageInvalid(int rowNumber, String fee) {
+    return 'Ligne $rowNumber : Les frais en pourcentage doivent être entre 0 et 100 ($fee%)';
+  }
+
+  @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
     return '$providersCount fournisseur(s) et $feesCount intervalle(s) de frais importé(s)';
   }

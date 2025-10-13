@@ -1449,6 +1449,20 @@
       }
     }
   },
+  "rowFeePercentageInvalid": "Row {rowNumber}: Percentage fee must be between 0 and 100 ({fee}%)",
+  "@rowFeePercentageInvalid": {
+    "description": "Error message when percentage fee is invalid (not between 0 and 100)",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "fee": {
+        "type": "String",
+        "example": "150"
+      }
+    }
+  },
   "importedProvidersAndFees": "Imported {providersCount} provider(s) and {feesCount} fee interval(s)",
   "@importedProvidersAndFees": {
     "description": "Success message showing number of imported providers and fee intervals",

@@ -179,111 +179,120 @@ class _State extends State<CurrencyListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.theme.scaffoldBackgroundColor,
-      appBar: custom.AppBar(
-        title: AppLocalizations.of(context).currencies,
-        leading: null, // Will be handled by automaticallyImplyLeading
-        automaticallyImplyLeading: ModalRoute.of(context)?.canPop ?? false,
-        showMenuButton: true,
-        menuExcludeRoutes: const [NavigationUtil.currenciesRoute],
-      ),
-      bottomNavigationBar: _selectedIds.isEmpty
-          ? _buildAddCurrencyButton(context.colorScheme)
-          : null,
-      body: _isLoading
-          ? const AppLoading()
-          : SafeArea(
-              child: RefreshableScreen(
-                onRefresh: _loadCurrencies,
-                child: Column(
-                  children: [
-                    Global.gapMd,
-                    CurrencyHeader(
-                      totalCount: _currencies.length,
-                      filteredCount: _filtered.length,
-                      selectedCount: _selectedIds.length,
-                    ),
-                    Global.gapLg,
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: SearchField(
-                        controller: _searchController,
-                        hintText: AppLocalizations.of(context).searchCurrencies,
-                      ),
-                    ),
-                    if (_selectedIds.isNotEmpty) ...[
+    return PopScope(
+      canPop: _selectedIds.isEmpty,
+      onPopInvokedWithResult: (didPop, result) {
+        // When selection mode is active, clear it instead of popping the route
+        if (!didPop && _selectedIds.isNotEmpty) {
+          setState(() => _selectedIds.clear());
+        }
+      },
+      child: Scaffold(
+        backgroundColor: context.theme.scaffoldBackgroundColor,
+        appBar: custom.AppBar(
+          title: AppLocalizations.of(context).currencies,
+          leading: null, // Will be handled by automaticallyImplyLeading
+          automaticallyImplyLeading: ModalRoute.of(context)?.canPop ?? false,
+          showMenuButton: true,
+          menuExcludeRoutes: const [NavigationUtil.currenciesRoute],
+        ),
+        bottomNavigationBar: _selectedIds.isEmpty
+            ? _buildAddCurrencyButton(context.colorScheme)
+            : null,
+        body: _isLoading
+            ? const AppLoading()
+            : SafeArea(
+                child: RefreshableScreen(
+                  onRefresh: _loadCurrencies,
+                  child: Column(
+                    children: [
                       Global.gapMd,
+                      CurrencyHeader(
+                        totalCount: _currencies.length,
+                        filteredCount: _filtered.length,
+                        selectedCount: _selectedIds.length,
+                      ),
+                      Global.gapLg,
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: SelectionActionBar(
-                          selectedCount: _selectedIds.length,
-                          totalCount: _filtered.length,
-                          onSelectAll: _selectAll,
-                          onClearSelection: _clearSelection,
-                          onDelete: _deleteCurrencies,
-                          onEdit: _selectedIds.length == 1
-                              ? () => _editCurrency(
-                                  _filtered.firstWhere(
-                                    (c) => c.id == _selectedIds.first,
-                                  ),
-                                )
-                              : null,
-                          margin: EdgeInsets.zero,
+                        child: SearchField(
+                          controller: _searchController,
+                          hintText: AppLocalizations.of(context).searchCurrencies,
                         ),
                       ),
+                      if (_selectedIds.isNotEmpty) ...[
+                        Global.gapMd,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: SelectionActionBar(
+                            selectedCount: _selectedIds.length,
+                            totalCount: _filtered.length,
+                            onSelectAll: _selectAll,
+                            onClearSelection: _clearSelection,
+                            onDelete: _deleteCurrencies,
+                            onEdit: _selectedIds.length == 1
+                                ? () => _editCurrency(
+                                    _filtered.firstWhere(
+                                      (c) => c.id == _selectedIds.first,
+                                    ),
+                                  )
+                                : null,
+                            margin: EdgeInsets.zero,
+                          ),
+                        ),
+                      ],
+                      Global.gapMd,
+                      Expanded(
+                        child: _filtered.isEmpty
+                            ? Center(
+                                child: SearchEmptyState(
+                                  icon: Icons.currency_exchange,
+                                  title: _searchController.text.isEmpty
+                                      ? AppLocalizations.of(
+                                          context,
+                                        ).noCurrenciesFound
+                                      : AppLocalizations.of(
+                                          context,
+                                        ).noCurrenciesFound,
+                                  message: _searchController.text.isEmpty
+                                      ? AppLocalizations.of(
+                                          context,
+                                        ).centralizeCurrencies
+                                      : null,
+                                ),
+                              )
+                            : ListView.builder(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                itemCount: _filtered.length,
+                                itemBuilder: (context, index) {
+                                  final currency = _filtered[index];
+                                  return CurrencyTile(
+                                    currency: currency,
+                                    isSelected: _selectedIds.contains(
+                                      currency.id,
+                                    ),
+                                    showSelection: _selectedIds.isNotEmpty,
+                                    onSelectionChanged: (selected) =>
+                                        _toggleSelection(currency.id, selected),
+                                    onLongPress: () =>
+                                        _startSelection(currency.id),
+                                    onTap: _selectedIds.isNotEmpty
+                                        ? () => _toggleSelection(
+                                            currency.id,
+                                            !_selectedIds.contains(currency.id),
+                                          )
+                                        : () => _editCurrency(currency),
+                                  );
+                                },
+                              ),
+                      ),
                     ],
-                    Global.gapMd,
-                    Expanded(
-                      child: _filtered.isEmpty
-                          ? Center(
-                              child: SearchEmptyState(
-                                icon: Icons.currency_exchange,
-                                title: _searchController.text.isEmpty
-                                    ? AppLocalizations.of(
-                                        context,
-                                      ).noCurrenciesFound
-                                    : AppLocalizations.of(
-                                        context,
-                                      ).noCurrenciesFound,
-                                message: _searchController.text.isEmpty
-                                    ? AppLocalizations.of(
-                                        context,
-                                      ).centralizeCurrencies
-                                    : null,
-                              ),
-                            )
-                          : ListView.builder(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                              ),
-                              itemCount: _filtered.length,
-                              itemBuilder: (context, index) {
-                                final currency = _filtered[index];
-                                return CurrencyTile(
-                                  currency: currency,
-                                  isSelected: _selectedIds.contains(
-                                    currency.id,
-                                  ),
-                                  showSelection: _selectedIds.isNotEmpty,
-                                  onSelectionChanged: (selected) =>
-                                      _toggleSelection(currency.id, selected),
-                                  onLongPress: () =>
-                                      _startSelection(currency.id),
-                                  onTap: _selectedIds.isNotEmpty
-                                      ? () => _toggleSelection(
-                                          currency.id,
-                                          !_selectedIds.contains(currency.id),
-                                        )
-                                      : () => _editCurrency(currency),
-                                );
-                              },
-                            ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 

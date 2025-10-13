@@ -1,6 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'constant_util.dart';
+import 'provider_data.dart';
 
 class DatabaseUtil {
   static final DatabaseUtil _instance = DatabaseUtil._internal();
@@ -159,6 +160,40 @@ class DatabaseUtil {
   }) async {
     final db = await database;
     return await db.update(table, values, where: where, whereArgs: whereArgs);
+  }
+
+  /// Seeds the database with default providers and fee intervals if the providers table is empty
+  Future<void> seedDefaultData() async {
+    final db = await database;
+
+    // Check if providers table is empty
+    final providerCount = Sqflite.firstIntValue(
+      await db.rawQuery('SELECT COUNT(*) FROM ${ConstantUtil.tableProviders}'),
+    );
+
+    if (providerCount == null || providerCount == 0) {
+      // Insert default providers
+      for (final providerData in ProviderData.defaultProviders) {
+        final providerId = await db.insert(ConstantUtil.tableProviders, {
+          ConstantUtil.columnName: providerData['name'],
+          ConstantUtil.columnDescription: providerData['description'],
+          ConstantUtil.columnIconName: providerData['iconName'],
+          ConstantUtil.columnCreationDatetime: DateTime.now().millisecondsSinceEpoch,
+        });
+
+        // Insert fee intervals for this provider
+        for (final feeInterval in providerData['feeIntervals']) {
+          await db.insert(ConstantUtil.tableFeeIntervals, {
+            ConstantUtil.columnProviderId: providerId,
+            ConstantUtil.columnMinAmount: feeInterval['minAmount'],
+            ConstantUtil.columnMaxAmount: feeInterval['maxAmount'],
+            ConstantUtil.columnFee: feeInterval['fee'],
+            ConstantUtil.columnFeeType: feeInterval['feeType'],
+            ConstantUtil.columnCreationDatetime: DateTime.now().millisecondsSinceEpoch,
+          });
+        }
+      }
+    }
   }
 
   Future<void> close() async {

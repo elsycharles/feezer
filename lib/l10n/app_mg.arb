@@ -1339,6 +1339,20 @@
       }
     }
   },
+  "rowFeePercentageInvalid": "Andalana {rowNumber} : Tsy maintsy eo anelanelan'ny 0 sy 100 ny sara isaky ny 100 ({fee}%)",
+  "@rowFeePercentageInvalid": {
+    "description": "Message d'erreur lorsque les frais en pourcentage sont invalides (pas entre 0 et 100)",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "fee": {
+        "type": "String",
+        "example": "150"
+      }
+    }
+  },
   "importedProvidersAndFees": "Voampiditra {providersCount} mpanome sy {feesCount} intervalle sara",
   "@importedProvidersAndFees": {
     "description": "Message de succès montrant le nombre de fournisseurs et d'intervalles de frais importés",

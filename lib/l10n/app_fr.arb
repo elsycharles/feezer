@@ -1265,6 +1265,20 @@
       }
     }
   },
+  "rowFeePercentageInvalid": "Ligne {rowNumber} : Les frais en pourcentage doivent être entre 0 et 100 ({fee}%)",
+  "@rowFeePercentageInvalid": {
+    "description": "Message d'erreur lorsque les frais en pourcentage sont invalides (pas entre 0 et 100)",
+    "placeholders": {
+      "rowNumber": {
+        "type": "int",
+        "example": "5"
+      },
+      "fee": {
+        "type": "String",
+        "example": "150"
+      }
+    }
+  },
   "importedProvidersAndFees": "{providersCount} fournisseur(s) et {feesCount} intervalle(s) de frais importé(s)",
   "@importedProvidersAndFees": {
     "description": "Message de succès montrant le nombre de fournisseurs et d'intervalles de frais importés",
