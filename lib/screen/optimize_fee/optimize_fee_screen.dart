@@ -917,14 +917,18 @@ class _State extends State<OptimizeFeeScreen> {
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (totalGainVsMax.abs() > 0.01
-                  ? (totalGainVsMax > 0 ? Colors.green : Colors.red)
-                  : Colors.grey).withValues(alpha: 0.1),
+              color: totalGainVsMax > 0.01
+                  ? Colors.red.withValues(alpha: 0.1)
+                  : totalGainVsMax < -0.01
+                      ? Colors.green.withValues(alpha: 0.1)
+                      : Colors.grey.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (totalGainVsMax.abs() > 0.01
-                    ? (totalGainVsMax > 0 ? Colors.green : Colors.red)
-                    : Colors.grey).withValues(alpha: 0.3),
+                color: totalGainVsMax > 0.01
+                    ? Colors.red.withValues(alpha: 0.3)
+                    : totalGainVsMax < -0.01
+                        ? Colors.green.withValues(alpha: 0.3)
+                        : Colors.grey.withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -933,16 +937,28 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      totalGainVsMax > 0.01 ? Icons.trending_down : Icons.check_circle_outline,
+                      totalGainVsMax > 0.01
+                          ? Icons.trending_down
+                          : totalGainVsMax < -0.01
+                              ? Icons.trending_up
+                              : Icons.remove_circle_outline,
                       size: 16,
-                      color: totalGainVsMax > 0.01 ? Colors.orange : Colors.grey,
+                      color: totalGainVsMax > 0.01
+                          ? Colors.red.shade700
+                          : totalGainVsMax < -0.01
+                              ? Colors.green.shade700
+                              : Colors.grey.shade700,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationMaxAmount,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: totalGainVsMax > 0.01 ? Colors.orange.shade700 : Colors.grey.shade700,
+                          color: totalGainVsMax > 0.01
+                              ? Colors.red.shade700
+                              : totalGainVsMax < -0.01
+                                  ? Colors.green.shade700
+                                  : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -957,7 +973,11 @@ class _State extends State<OptimizeFeeScreen> {
                 _buildComparisonRow(
                   AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
-                  valueColor: Colors.orange.shade700,
+                  valueColor: totalGainVsMax > 0.01
+                      ? Colors.red.shade700
+                      : totalGainVsMax < -0.01
+                          ? Colors.green.shade700
+                          : Colors.grey.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalFees,
@@ -969,16 +989,25 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
 
+                // Message de comparaison ou d'égalité
+                Global.gapSm,
+                Divider(
+                  color: totalGainVsMax > 0.01
+                      ? Colors.red.withValues(alpha: 0.3)
+                      : totalGainVsMax < -0.01
+                          ? Colors.green.withValues(alpha: 0.3)
+                          : Colors.grey.withValues(alpha: 0.3),
+                ),
+                Global.gapSm,
                 if (totalGainVsMax.abs() > 0.01) ...[
-                  Global.gapSm,
-                  Divider(color: (totalGainVsMax > 0 ? Colors.green : Colors.red).withValues(alpha: 0.3)),
-                  Global.gapSm,
                   Row(
                     children: [
                       Icon(
                         totalGainVsMax > 0 ? Icons.trending_down : Icons.trending_up,
                         size: 14,
-                        color: totalGainVsMax > 0 ? context.colorScheme.error : context.colorScheme.primary,
+                        color: totalGainVsMax > 0
+                            ? Colors.red.shade700
+                            : Colors.green.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
@@ -993,7 +1022,27 @@ class _State extends State<OptimizeFeeScreen> {
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: totalGainVsMax > 0 ? context.colorScheme.error : context.colorScheme.primary,
+                            color: totalGainVsMax > 0 ? Colors.red.shade700 : Colors.green.shade700,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ] else ...[
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.balance,
+                        size: 14,
+                        color: Colors.grey.shade700,
+                      ),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).transactionSameResultAsOptimized,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.grey.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1011,14 +1060,18 @@ class _State extends State<OptimizeFeeScreen> {
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (feeDifferenceVsSameNet.abs() > 0.01
-                  ? (feeDifferenceVsSameNet > 0 ? Colors.orange : Colors.green)
-                  : Colors.grey).withValues(alpha: 0.1),
+              color: feeDifferenceVsSameNet > 0.01
+                  ? Colors.red.withValues(alpha: 0.1)
+                  : feeDifferenceVsSameNet < -0.01
+                      ? Colors.green.withValues(alpha: 0.1)
+                      : Colors.grey.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (feeDifferenceVsSameNet.abs() > 0.01
-                    ? (feeDifferenceVsSameNet > 0 ? Colors.orange : Colors.green)
-                    : Colors.grey).withValues(alpha: 0.3),
+                color: feeDifferenceVsSameNet > 0.01
+                    ? Colors.red.withValues(alpha: 0.3)
+                    : feeDifferenceVsSameNet < -0.01
+                        ? Colors.green.withValues(alpha: 0.3)
+                        : Colors.grey.withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -1027,16 +1080,28 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      feeDifferenceVsSameNet > 0.01 ? Icons.info_outline : Icons.check_circle_outline,
+                      feeDifferenceVsSameNet > 0.01
+                          ? Icons.trending_down
+                          : feeDifferenceVsSameNet < -0.01
+                              ? Icons.check_circle
+                              : Icons.balance,
                       size: 16,
-                      color: feeDifferenceVsSameNet > 0.01 ? Colors.orange : Colors.grey,
+                      color: feeDifferenceVsSameNet > 0.01
+                          ? Colors.red.shade700
+                          : feeDifferenceVsSameNet < -0.01
+                              ? Colors.green.shade700
+                              : Colors.grey.shade700,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationSameNet,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: feeDifferenceVsSameNet > 0.01 ? Colors.orange.shade700 : Colors.grey.shade700,
+                          color: feeDifferenceVsSameNet > 0.01
+                              ? Colors.red.shade700
+                              : feeDifferenceVsSameNet < -0.01
+                                  ? Colors.green.shade700
+                                  : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -1051,7 +1116,11 @@ class _State extends State<OptimizeFeeScreen> {
                 _buildComparisonRow(
                   AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptSingleOpNetAmount)} $currencySymbol',
-                  valueColor: Colors.green.shade700,
+                  valueColor: feeDifferenceVsSameNet > 0.01
+                      ? Colors.red.shade700
+                      : feeDifferenceVsSameNet < -0.01
+                          ? Colors.green.shade700
+                          : Colors.grey.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalFees,
@@ -1067,18 +1136,24 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
 
-                if (feeDifferenceVsSameNet.abs() > 0.01 || exceedsBudget) ...[
-                  Global.gapSm,
-                  Divider(color: Colors.orange.withValues(alpha: 0.3)),
-                  Global.gapSm,
-                  
+                // Message de comparaison ou d'égalité
+                Global.gapSm,
+                Divider(
+                  color: feeDifferenceVsSameNet > 0.01
+                      ? Colors.red.withValues(alpha: 0.3)
+                      : feeDifferenceVsSameNet < -0.01
+                          ? Colors.green.withValues(alpha: 0.3)
+                          : Colors.grey.withValues(alpha: 0.3),
+                ),
+                Global.gapSm,
+                if (feeDifferenceVsSameNet.abs() > 0.01) ...[
                   // Message sur les frais
                   Row(
                     children: [
                       Icon(
-                        feeDifferenceVsSameNet < 0 ? Icons.check_circle : Icons.info_outline,
+                        feeDifferenceVsSameNet < 0 ? Icons.check_circle : Icons.trending_down,
                         size: 14,
-                        color: feeDifferenceVsSameNet < 0 ? context.colorScheme.primary : context.colorScheme.tertiary,
+                        color: feeDifferenceVsSameNet < 0 ? Colors.green.shade700 : Colors.red.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
@@ -1093,36 +1168,56 @@ class _State extends State<OptimizeFeeScreen> {
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: feeDifferenceVsSameNet < 0 ? context.colorScheme.primary : context.colorScheme.tertiary,
+                            color: feeDifferenceVsSameNet < 0 ? Colors.green.shade700 : Colors.red.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  
-                  if (exceedsBudget) ...[
-                    Global.gapXs,
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.warning_amber,
-                          size: 14,
-                          color: Colors.red.shade700,
-                        ),
-                        Global.gapXs,
-                        Expanded(
-                          child: Text(
-                            AppLocalizations.of(context).exceedsAvailableBudget,
-                            style: ThemeUtil.bodySmall.copyWith(
-                              color: Colors.red.shade700,
-                              fontWeight: FontWeight.w600,
-                            ),
+                ] else ...[
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.balance,
+                        size: 14,
+                        color: Colors.grey.shade700,
+                      ),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).transactionSameResultAsOptimized,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.grey.shade700,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
+                ],
+
+                if (exceedsBudget) ...[
+                  Global.gapXs,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber,
+                        size: 14,
+                        color: Colors.red.shade700,
+                      ),
+                      Global.gapXs,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).exceedsAvailableBudget,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.red.shade700,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ],
             ),

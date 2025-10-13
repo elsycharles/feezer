@@ -2438,6 +2438,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This transaction loses {amount} {currency} compared to optimization'**
   String transactionLosesVsOptimized(String amount, String currency);
+
+  /// Message showing when a non-optimized transaction has the same result as optimization
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction has the same result as optimization'**
+  String get transactionSameResultAsOptimized;
 }
 
 class _AppLocalizationsDelegate

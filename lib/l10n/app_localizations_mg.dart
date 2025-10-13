@@ -1371,4 +1371,8 @@ class AppLocalizationsMg extends AppLocalizations {
   String transactionLosesVsOptimized(String amount, String currency) {
     return 'Io fifampiraharahana io dia very $amount $currency raha oharina amin\'ny fanatsarana';
   }
+
+  @override
+  String get transactionSameResultAsOptimized =>
+      'Io fifampiraharahana io dia manana vokatra mitovy amin\'ny fanatsarana';
 }

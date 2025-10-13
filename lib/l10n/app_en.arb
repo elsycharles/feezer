@@ -2011,5 +2011,10 @@
         "type": "String"
       }
     }
+  },
+  "transactionSameResultAsOptimized": "This transaction has the same result as optimization",
+  "@transactionSameResultAsOptimized": {
+    "description": "Message showing when a non-optimized transaction has the same result as optimization",
+    "placeholders": {}
   }
 }

@@ -1383,4 +1383,8 @@ class AppLocalizationsFr extends AppLocalizations {
   String transactionLosesVsOptimized(String amount, String currency) {
     return 'Cette transaction perd $amount $currency par rapport à l\'optimisation';
   }
+
+  @override
+  String get transactionSameResultAsOptimized =>
+      'Cette transaction a le même résultat que l\'optimisation';
 }

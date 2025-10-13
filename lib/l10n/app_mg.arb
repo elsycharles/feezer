@@ -1998,5 +1998,10 @@
         "type": "String"
       }
     }
+  },
+  "transactionSameResultAsOptimized": "Io fifampiraharahana io dia manana vokatra mitovy amin'ny fanatsarana",
+  "@transactionSameResultAsOptimized": {
+    "description": "Message showing when a non-optimized transaction has the same result as optimization",
+    "placeholders": {}
   }
 }

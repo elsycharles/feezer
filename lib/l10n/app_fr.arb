@@ -1818,5 +1818,10 @@
         "type": "String"
       }
     }
+  },
+  "transactionSameResultAsOptimized": "Cette transaction a le même résultat que l'optimisation",
+  "@transactionSameResultAsOptimized": {
+    "description": "Message showing when a non-optimized transaction has the same result as optimization",
+    "placeholders": {}
   }
 }
