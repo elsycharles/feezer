@@ -208,7 +208,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       if (exportResult.success && exportResult.filePath != null) {
         await _saveFileToUserLocation(
           exportResult.filePath!,
-          'fee_minimizer_export_${DateTime.now().millisecondsSinceEpoch}.csv',
+          'feezer_export_${DateTime.now().millisecondsSinceEpoch}.csv',
         );
       } else {
         AppToast.error(
@@ -250,7 +250,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       // Save with suggested name
       await _saveFileToUserLocation(
         tempFile.path,
-        'fee_minimizer_template.csv',
+        'feezer_template.csv',
       );
     } catch (e) {
       if (mounted) {
