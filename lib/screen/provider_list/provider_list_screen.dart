@@ -117,59 +117,68 @@ class _State extends State<ProviderListScreen> {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: custom.AppBar(
-        title: AppLocalizations.of(context).providers,
-        menuExcludeRoutes: [NavigationUtil.providersRoute],
-      ),
-      bottomNavigationBar: _selectedIds.isEmpty
-          ? _buildAddProviderButton(colorScheme)
-          : null,
-      body: SafeArea(
-        child: RefreshableScreen(
-          onRefresh: _loadProviders,
-          child: Column(
-            children: [
-              Global.gapMd,
-              ProviderHeader(providerCount: _providers.length),
-              Global.gapLg,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SearchField(
-                  hintText: AppLocalizations.of(context).searchProviders,
-                  controller: _searchController,
-                ),
-              ),
-              if (_selectedIds.isNotEmpty) ...[
+    return PopScope(
+      canPop: _selectedIds.isEmpty,
+      onPopInvokedWithResult: (didPop, result) {
+        // When selection mode is active, clear it instead of popping the route
+        if (!didPop && _selectedIds.isNotEmpty) {
+          setState(() => _selectedIds.clear());
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        appBar: custom.AppBar(
+          title: AppLocalizations.of(context).providers,
+          menuExcludeRoutes: [NavigationUtil.providersRoute],
+        ),
+        bottomNavigationBar: _selectedIds.isEmpty
+            ? _buildAddProviderButton(colorScheme)
+            : null,
+        body: SafeArea(
+          child: RefreshableScreen(
+            onRefresh: _loadProviders,
+            child: Column(
+              children: [
                 Global.gapMd,
+                ProviderHeader(providerCount: _providers.length),
+                Global.gapLg,
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SelectionActionBar(
-                    selectedCount: _selectedIds.length,
-                    totalCount: _filtered.length,
-                    onSelectAll: _selectAll,
-                    onClearSelection: _clearSelection,
-                    onDelete: _deleteSelected,
-                    onEdit: _isSingleSelection ? _editSelected : null,
-                    onDetails: _isSingleSelection ? _showSelectedDetails : null,
-                    margin: EdgeInsets.zero,
+                  child: SearchField(
+                    hintText: AppLocalizations.of(context).searchProviders,
+                    controller: _searchController,
                   ),
                 ),
+                if (_selectedIds.isNotEmpty) ...[
+                  Global.gapMd,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SelectionActionBar(
+                      selectedCount: _selectedIds.length,
+                      totalCount: _filtered.length,
+                      onSelectAll: _selectAll,
+                      onClearSelection: _clearSelection,
+                      onDelete: _deleteSelected,
+                      onEdit: _isSingleSelection ? _editSelected : null,
+                      onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                      margin: EdgeInsets.zero,
+                    ),
+                  ),
+                ],
+                Global.gapMd,
+                Expanded(
+                  child: _isLoading
+                      ? const AppLoading.overlay()
+                      : CustomScrollView(
+                          slivers: [
+                            _buildProviderSliver(),
+                            SliverToBoxAdapter(child: Global.gapMd),
+                            SliverToBoxAdapter(child: SizedBox(height: 80)),
+                          ],
+                        ),
+                ),
               ],
-              Global.gapMd,
-              Expanded(
-                child: _isLoading
-                    ? const AppLoading.overlay()
-                    : CustomScrollView(
-                        slivers: [
-                          _buildProviderSliver(),
-                          SliverToBoxAdapter(child: Global.gapMd),
-                          SliverToBoxAdapter(child: SizedBox(height: 80)),
-                        ],
-                      ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
