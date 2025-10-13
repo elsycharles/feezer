@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -824,6 +825,15 @@ class _State extends State<OptimizeFeeScreen> {
     final feeSavingsVsMax = nonOptMaxFee - optimizedTotalFees; // Fee savings
     final totalGainVsMax = netGainVsMax + feeSavingsVsMax; // Total gain
 
+    // DEBUG: Add debug logs to verify calculations
+    print('DEBUG Comparison:');
+    print('  Optimized net: ${optimizedNetAmount}');
+    print('  Non-opt max net: ${nonOptMaxNetAmount}');
+    print('  Net gain: ${netGainVsMax}');
+    print('  Fee savings: ${feeSavingsVsMax}');
+    print('  Total gain: ${totalGainVsMax}');
+    print('  Should show: ${totalGainVsMax > 0.01 ? "GAIN (green)" : totalGainVsMax < -0.01 ? "LOSS (red)" : "EQUAL (grey)"}');
+
     // For the comparison "same net amount"
     final feeDifferenceVsSameNet = optimizedTotalFees - nonOptSameFee; // Fee difference (negative = savings)
     final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
@@ -913,21 +923,21 @@ class _State extends State<OptimizeFeeScreen> {
           Global.gapMd,
 
           // ============ SECTION 2: Without optimization (maximum amount) ============
-          // Corrected logic
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
+              // ✅ CORRECTION: Inverser les conditions de couleur
               color: totalGainVsMax > 0.01
-                  ? Colors.red.withValues(alpha: 0.1)
+                  ? Colors.green.withValues(alpha: 0.1)  // Optimisation GAGNE (vert)
                   : totalGainVsMax < -0.01
-                      ? Colors.green.withValues(alpha: 0.1)
+                      ? Colors.red.withValues(alpha: 0.1)  // Optimisation PERD (rouge)
                       : Colors.grey.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
                 color: totalGainVsMax > 0.01
-                    ? Colors.red.withValues(alpha: 0.3)
+                    ? Colors.green.withValues(alpha: 0.3)
                     : totalGainVsMax < -0.01
-                        ? Colors.green.withValues(alpha: 0.3)
+                        ? Colors.red.withValues(alpha: 0.3)
                         : Colors.grey.withValues(alpha: 0.3),
               ),
             ),
@@ -938,15 +948,15 @@ class _State extends State<OptimizeFeeScreen> {
                   children: [
                     Icon(
                       totalGainVsMax > 0.01
-                          ? Icons.trending_down
+                          ? Icons.check_circle  // ✅ Optimisation meilleure
                           : totalGainVsMax < -0.01
-                              ? Icons.trending_up
-                              : Icons.remove_circle_outline,
+                              ? Icons.trending_down  // Optimisation moins bonne
+                              : Icons.balance,
                       size: 16,
                       color: totalGainVsMax > 0.01
-                          ? Colors.red.shade700
+                          ? Colors.green.shade700
                           : totalGainVsMax < -0.01
-                              ? Colors.green.shade700
+                              ? Colors.red.shade700
                               : Colors.grey.shade700,
                     ),
                     Global.gapSm,
@@ -955,9 +965,9 @@ class _State extends State<OptimizeFeeScreen> {
                         AppLocalizations.of(context).withoutOptimizationMaxAmount,
                         style: ThemeUtil.titleSmall.copyWith(
                           color: totalGainVsMax > 0.01
-                              ? Colors.red.shade700
+                              ? Colors.green.shade700
                               : totalGainVsMax < -0.01
-                                  ? Colors.green.shade700
+                                  ? Colors.red.shade700
                                   : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
                         ),
@@ -974,9 +984,9 @@ class _State extends State<OptimizeFeeScreen> {
                   AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
                   valueColor: totalGainVsMax > 0.01
-                      ? Colors.red.shade700
+                      ? Colors.green.shade700
                       : totalGainVsMax < -0.01
-                          ? Colors.green.shade700
+                          ? Colors.red.shade700
                           : Colors.grey.shade700,
                 ),
                 _buildComparisonRow(
@@ -989,13 +999,13 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
 
-                // Message de comparaison ou d'égalité
+                // ✅ CORRECTION: Message de comparaison
                 Global.gapSm,
                 Divider(
                   color: totalGainVsMax > 0.01
-                      ? Colors.red.withValues(alpha: 0.3)
+                      ? Colors.green.withValues(alpha: 0.3)
                       : totalGainVsMax < -0.01
-                          ? Colors.green.withValues(alpha: 0.3)
+                          ? Colors.red.withValues(alpha: 0.3)
                           : Colors.grey.withValues(alpha: 0.3),
                 ),
                 Global.gapSm,
@@ -1003,26 +1013,28 @@ class _State extends State<OptimizeFeeScreen> {
                   Row(
                     children: [
                       Icon(
-                        totalGainVsMax > 0 ? Icons.trending_down : Icons.trending_up,
+                        // ✅ CORRECTION: Inverser les icônes
+                        totalGainVsMax > 0 ? Icons.trending_up : Icons.trending_down,
                         size: 14,
                         color: totalGainVsMax > 0
-                            ? Colors.red.shade700
-                            : Colors.green.shade700,
+                            ? Colors.green.shade700
+                            : Colors.red.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
+                          // ✅ CORRECTION: Inverser les messages
                           totalGainVsMax > 0
-                              ? AppLocalizations.of(context).transactionLosesVsOptimized(
+                              ? AppLocalizations.of(context).transactionGainsVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
                                   currencySymbol,
                                 )
-                              : AppLocalizations.of(context).transactionGainsVsOptimized(
+                              : AppLocalizations.of(context).transactionLosesVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: totalGainVsMax > 0 ? Colors.red.shade700 : Colors.green.shade700,
+                            color: totalGainVsMax > 0 ? Colors.green.shade700 : Colors.red.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1258,62 +1270,52 @@ class _State extends State<OptimizeFeeScreen> {
     List<FeeInterval> intervals,
     FeeOptimizerResult optimizedResult,
   ) {
-    // Find the maximum net amount we can obtain with the available budget
+    // Trouver le montant net maximum avec le budget disponible
     double maxNetAmount = 0;
     double maxFee = 0;
 
-    // Iterate through all intervals to find the best possible net amount
     for (final interval in intervals) {
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
       
-      // Calculate the maximum net amount in this interval without exceeding the budget
-      double testAmount = (maxAmount < double.infinity) ? maxAmount : amountInAriary;
+      // Calculer le montant net maximum possible dans cet intervalle
+      double netAmount;
       
-      // Limit to available budget
-      if (testAmount > amountInAriary) {
-        testAmount = amountInAriary;
+      if (interval.feeType == FeeType.percentage) {
+        // budget = netAmount + netAmount * (fee/100)
+        // budget = netAmount * (1 + fee/100)
+        // netAmount = budget / (1 + fee/100)
+        netAmount = amountInAriary / (1 + (interval.fee ?? 0) / 100.0);
+      } else {
+        netAmount = amountInAriary - (interval.fee ?? 0);
       }
       
-      // Check if this amount is within the interval
-      if (testAmount >= minAmount && testAmount <= maxAmount) {
-        double fee = interval.feeType == FeeType.percentage
-            ? testAmount * ((interval.fee ?? 0) / 100.0)
+      // Limiter au max de l'intervalle
+      netAmount = min(netAmount, maxAmount);
+      
+      // Vérifier si valide
+      if (netAmount >= minAmount && netAmount <= maxAmount && netAmount > 0) {
+        final fee = interval.feeType == FeeType.percentage
+            ? netAmount * ((interval.fee ?? 0) / 100.0)
             : (interval.fee ?? 0);
         
-        double totalCost = testAmount + fee;
+        final totalCost = netAmount + fee;
         
-        // If the total cost exceeds the budget, calculate the maximum possible net amount
-        if (totalCost > amountInAriary) {
-          if (interval.feeType == FeeType.percentage) {
-            double feeRate = (interval.fee ?? 0) / 100.0;
-            testAmount = amountInAriary / (1 + feeRate);
-            fee = testAmount * feeRate;
-          } else {
-            testAmount = amountInAriary - (interval.fee ?? 0);
-            fee = interval.fee ?? 0;
+        // Vérifier que ça ne dépasse pas le budget (avec tolérance)
+        if (totalCost <= amountInAriary + 0.01) {
+          if (netAmount > maxNetAmount) {
+            maxNetAmount = netAmount;
+            maxFee = fee;
           }
-          
-          // Verify that the calculated amount is still within the interval
-          if (testAmount < minAmount || testAmount > maxAmount) {
-            continue;
-          }
-        }
-        
-        // Keep the best net amount
-        if (testAmount > maxNetAmount) {
-          maxNetAmount = testAmount;
-          maxFee = fee;
         }
       }
     }
 
-    // Calculate if we take the same net amount as the optimization
+    // Calculer si on prend le même montant net que l'optimisation
     double sameNetFee = 0;
     double sameNetTotalAmount = 0;
     final optimizedNetAmount = optimizedResult.netAmount;
 
-    // Find the interval that corresponds to the optimized net amount
     for (final interval in intervals) {
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
