@@ -187,7 +187,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         context,
         listen: false,
       );
-      final locale = localeProvider.locale?.languageCode ?? 'en';
+      // Use the actual current locale from the context, which respects system locale when not set
+      final currentLocale = Localizations.localeOf(context);
+      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
       final currencyProvider = Provider.of<CurrencyProvider>(
         context,
         listen: false,
@@ -206,7 +208,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       if (exportResult.success && exportResult.filePath != null) {
         await _saveFileToUserLocation(
           exportResult.filePath!,
-          'fee_minimizer_export_${DateTime.now().millisecondsSinceEpoch}.csv',
+          'feezer_export_${DateTime.now().millisecondsSinceEpoch}.csv',
         );
       } else {
         AppToast.error(
@@ -233,7 +235,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         context,
         listen: false,
       );
-      final locale = localeProvider.locale?.languageCode ?? 'en';
+      // Use the actual current locale from the context, which respects system locale when not set
+      final currentLocale = Localizations.localeOf(context);
+      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
 
       final template = CsvUtil.getImportTemplate(locale);
 
@@ -246,7 +250,7 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       // Save with suggested name
       await _saveFileToUserLocation(
         tempFile.path,
-        'fee_minimizer_template.csv',
+        'feezer_template.csv',
       );
     } catch (e) {
       if (mounted) {
@@ -304,7 +308,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         context,
         listen: false,
       );
-      final locale = localeProvider.locale?.languageCode ?? 'en';
+      // Use the actual current locale from the context, which respects system locale when not set
+      final currentLocale = Localizations.localeOf(context);
+      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
 
       final template = CsvUtil.getImportTemplate(locale);
 
