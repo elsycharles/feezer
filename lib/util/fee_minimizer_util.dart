@@ -192,11 +192,11 @@ class FeeOptimizerUtil {
         ? _selectBest([
             _greedyOptimizedFast(totalAmount, options, precision),
             _repeatedOperationsOptimized(totalAmount, options, precision),
-            _findBestSingleOperation(totalAmount, options), // Nouvelle méthode
+            _findBestSingleOperation(totalAmount, options), // New method
           ])
         : _selectBest([
             _greedyOptimizedFast(totalAmount, options, precision),
-            _findBestSingleOperation(totalAmount, options), // Nouvelle méthode
+            _findBestSingleOperation(totalAmount, options), // New method
           ]);
 
     return _applyConstraintsOptimized(
@@ -229,7 +229,7 @@ class FeeOptimizerUtil {
       }
 
       if (netAmount >= opt.min && netAmount <= opt.max && 
-          netAmount > 0 && (netAmount + fee) <= totalAmount) { // AJOUT
+          netAmount > 0 && (netAmount + fee) <= totalAmount) { // ADDED
         final result = _buildResult(
           totalAmount,
           netAmount,
@@ -378,7 +378,7 @@ class FeeOptimizerUtil {
       );
     }
 
-    // ✅ Essayer d'abord une solution optimale avec une seule option
+    // ✅ Try first an optimal solution with a single option
     for (final opt in options) {
       final result = _trySingleOptionDistribution(
         totalAmount,
@@ -391,39 +391,39 @@ class FeeOptimizerUtil {
       }
     }
 
-    // ✅ Si pas possible, utiliser la distribution mixte
+    // ✅ If not possible, use mixed distribution
     return _mixedDistribution(totalAmount, options, precision, targetCount);
   }
 
-  // ✅ Nouvelle fonction : Distribution avec une seule option
+  // ✅ New function: Distribution with a single option
   static FeeOptimizerResult? _trySingleOptionDistribution(
     double totalAmount,
     _FeeOption opt,
     double precision,
     int targetCount,
   ) {
-    // ✅ Calcul correct selon le type de frais
+    // ✅ Correct calculation according to fee type
     double amountPerOp;
     
     if (opt.feeType == FeeType.percentage) {
-      // Pour un pourcentage : totalAmount = targetCount * (amount + amount * fee/100)
+      // For a percentage: totalAmount = targetCount * (amount + amount * fee/100)
       // totalAmount = targetCount * amount * (1 + fee/100)
       amountPerOp = totalAmount / (targetCount * (1 + opt.feeValue / 100));
     } else {
-      // Pour un frais fixe : totalAmount = targetCount * (amount + fee)
+      // For a fixed fee: totalAmount = targetCount * (amount + fee)
       amountPerOp = (totalAmount - (opt.feeValue * targetCount)) / targetCount;
     }
     
-    // Arrondir à la précision
+    // Round to precision
     amountPerOp = (amountPerOp / precision).floor() * precision;
 
-    // Vérifier les contraintes
+    // Check constraints
     if (amountPerOp < opt.min || amountPerOp > opt.max) return null;
 
     final fee = opt.getFeeForAmount(amountPerOp);
     final totalCost = (amountPerOp + fee) * targetCount;
 
-    // Tolérance pour les erreurs d'arrondi (0.01 = 1 centime)
+    // Tolerance for rounding errors (0.01 = 1 cent)
     if (totalCost > totalAmount + 0.01) return null;
 
     return _buildResult(
@@ -435,7 +435,7 @@ class FeeOptimizerUtil {
     );
   }
 
-  // ✅ Nouvelle fonction : Distribution mixte optimisée
+  // ✅ New function: Optimized mixed distribution
   static FeeOptimizerResult? _mixedDistribution(
     double totalAmount,
     List<_FeeOption> options,
@@ -458,32 +458,32 @@ class FeeOptimizerUtil {
       double bestScore = -1;
 
       for (final opt in options) {
-        // ✅ Calculer le montant optimal pour cette option
+        // ✅ Calculate the optimal amount for this option
         double amount;
         
         if (opt.feeType == FeeType.percentage) {
-          // Pour un pourcentage, résoudre : amount + amount*(fee/100) = targetAmount
+          // For a percentage, solve: amount + amount*(fee/100) = targetAmount
           amount = targetAmount / (1 + opt.feeValue / 100);
         } else {
           amount = targetAmount - opt.feeValue;
         }
 
-        // Arrondir et contraindre
+        // Round and constrain
         amount = (amount / precision).floor() * precision;
         amount = max(opt.min, min(opt.max, amount));
 
         final fee = opt.getFeeForAmount(amount);
         final totalCost = amount + fee;
 
-        // Vérifier si cette opération est valide
+        // Check if this operation is valid
         if (totalCost > remaining || amount < opt.min) continue;
 
-        // ✅ Calculer le score uniquement pour les opérations valides
-        final efficiency = amount / (fee + 0.0001); // Éviter division par zéro
-        final utilization = amount / opt.max; // Favoriser l'utilisation complète
-        final costFit = (targetAmount - totalCost).abs(); // Proximité au budget cible
+        // ✅ Calculate score only for valid operations
+        final efficiency = amount / (fee + 0.0001); // Avoid division by zero
+        final utilization = amount / opt.max; // Favor full utilization
+        final costFit = (targetAmount - totalCost).abs(); // Proximity to target budget
         
-        // Score amélioré : privilégier efficacité, utilisation et adéquation au budget
+        // Improved score: prioritize efficiency, utilization and budget fit
         final score = efficiency * 10 + utilization * 5 - costFit * 0.1;
 
         if (score > bestScore) {
@@ -523,7 +523,7 @@ class FeeOptimizerUtil {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
 
-    // ✅ Calculer le frais réel au montant maximum
+    // ✅ Calculate real fee at maximum amount
     final realFee = bestOption.getFeeForAmount(bestOption.max);
     final operationCost = bestOption.max + realFee;
     
@@ -549,7 +549,7 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Utiliser une combinaison des 2-3 meilleures options
+    // Use a combination of the 2-3 best options
     final topOptions = _getTopOptions(options, 3);
     return _hybridOptimization(
       totalAmount,
@@ -565,14 +565,14 @@ class FeeOptimizerUtil {
     List<_FeeOption> options,
     double precision,
   ) {
-    // D'abord, essayer de trouver une solution en une seule opération
+    // First, try to find a solution in a single operation
     _BestOperation? bestSingleOp;
 
     for (final opt in options) {
       final minAmount = opt.min;
       final maxAmount = opt.max;
 
-      // Calculer le montant net si on utilise tout le budget
+      // Calculate net amount if using entire budget
       double netAmount;
       double fee;
 
@@ -586,9 +586,9 @@ class FeeOptimizerUtil {
         fee = opt.feeValue;
       }
 
-      // Vérifier si ce montant net est dans l'intervalle
+      // Check if this net amount is within the interval
       if (netAmount >= minAmount && netAmount <= maxAmount && 
-          netAmount > 0 && (netAmount + fee) <= totalAmount) { // AJOUT
+          netAmount > 0 && (netAmount + fee) <= totalAmount) { // ADDED
         final efficiency = netAmount / fee;
 
         if (bestSingleOp == null || efficiency > bestSingleOp.score) {
@@ -601,7 +601,7 @@ class FeeOptimizerUtil {
       }
     }
 
-    // Si on a trouvé une solution en une seule opération, comparer avec multi-opérations
+    // If we found a single operation solution, compare with multi-operations
     if (bestSingleOp != null) {
       final singleOpResult = _buildResult(
         totalAmount,
@@ -611,10 +611,10 @@ class FeeOptimizerUtil {
         {'${bestSingleOp.amount}-${bestSingleOp.fee}': 1},
       );
 
-      // Comparer avec l'approche multi-opérations
+      // Compare with multi-operations approach
       final multiOpResult = _greedyMultiOperations(totalAmount, options, precision);
 
-      // Retourner le meilleur résultat (priorité au montant net, puis frais minimaux)
+      // Return the best result (priority to net amount, then minimum fees)
       if (singleOpResult.netAmount > multiOpResult.netAmount ||
           (singleOpResult.netAmount == multiOpResult.netAmount &&
            singleOpResult.totalFees < multiOpResult.totalFees)) {
@@ -674,7 +674,7 @@ class FeeOptimizerUtil {
   ) {
     FeeOptimizerResult bestResult = _buildResult(totalAmount, 0, 0, totalAmount, {});
 
-    // Tester d'abord une opération unique utilisant tout le budget
+    // First test a single operation using entire budget
     for (final opt in options) {
       double netAmount;
       double fee;
@@ -704,7 +704,7 @@ class FeeOptimizerUtil {
       }
     }
 
-    // Tester également l'approche multi-opérations
+    // Also test the multi-operations approach
     final multiOpResult = _greedyMultiOperations(totalAmount, options, precision);
     if (multiOpResult.netAmount > bestResult.netAmount ||
         (multiOpResult.netAmount == bestResult.netAmount &&
@@ -759,7 +759,7 @@ class FeeOptimizerUtil {
     for (int i = 1; i < numSamples; i++) {
       final amt = opt.max - (step * i);
       if (amt >= opt.min) {
-        // ✅ RESTAURER l'arrondi pour respecter la précision
+        // ✅ RESTORE rounding to respect precision
         final rounded = (amt / precision).floor() * precision;
         if (rounded >= opt.min) {
           samples.add(rounded);
@@ -838,7 +838,7 @@ class FeeOptimizerUtil {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
 
-    // ✅ Utiliser le frais réel
+    // ✅ Use real fee
     final realFee = bestOption.getFeeForAmount(bestOption.max);
     final targetOps = min(
       maxOperations,
@@ -865,7 +865,7 @@ class FeeOptimizerUtil {
     final counts = <String, int>{};
     double budget = totalAmount;
 
-    // ✅ Utiliser le frais réel
+    // ✅ Use real fee
     final mainFee = mainOption.getFeeForAmount(mainOption.max);
     final mainCost = mainOption.max + mainFee;
     final mainCount = min(targetCount, (budget / mainCost).floor());
@@ -879,7 +879,7 @@ class FeeOptimizerUtil {
     for (final opt in options) {
       if (remaining <= 0 || budget <= 0) break;
 
-      // ✅ Calculer le frais réel pour chaque option
+      // ✅ Calculate real fee for each option
       final optFee = opt.getFeeForAmount(opt.max);
       final cost = opt.max + optFee;
       if (cost > budget) continue;
@@ -910,7 +910,7 @@ class FeeOptimizerUtil {
       if (budget <= 0) break;
       if (maxOperations > 0 && totalOps >= maxOperations) break;
 
-      // ✅ Utiliser le frais réel
+      // ✅ Use real fee
       final optFee = opt.getFeeForAmount(opt.max);
       final cost = opt.max + optFee;
       
@@ -946,7 +946,7 @@ class FeeOptimizerUtil {
     double bestEfficiency = 0;
 
     for (final opt in options) {
-      // ✅ Calculer l'efficacité au montant maximum
+      // ✅ Calculate efficiency at maximum amount
       final fee = opt.getFeeForAmount(opt.max);
       final efficiency = opt.max / (fee + 0.0001);
       
@@ -962,7 +962,7 @@ class FeeOptimizerUtil {
   static List<_FeeOption> _getTopOptions(List<_FeeOption> options, int count) {
     final sorted = List<_FeeOption>.from(options)
       ..sort((a, b) {
-        // ✅ Calculer l'efficacité réelle au montant maximum
+        // ✅ Calculate real efficiency at maximum amount
         final feeA = a.getFeeForAmount(a.max);
         final feeB = b.getFeeForAmount(b.max);
         final effA = a.max / (feeA + 0.0001);
@@ -993,7 +993,7 @@ class FeeOptimizerUtil {
       maxAmount = min(maxAmount, opt.max);
       if (maxAmount < opt.min) continue;
 
-      // ✅ RESTAURER l'arrondi
+      // ✅ RESTORE rounding
       final amount = (maxAmount / precision).floor() * precision;
       if (amount < opt.min) continue;
 
@@ -1048,17 +1048,17 @@ class FeeOptimizerUtil {
     if (validIntervals.isEmpty) return [];
 
     final options = validIntervals.map((interval) {
-      // ✅ Ne plus approximer, stocker directement le type
+      // ✅ No longer approximate, store type directly
       return _FeeOption(
         min: interval.minAmount!,
         max: interval.maxAmount!,
-        fee: interval.fee!, // Valeur brute (% ou fixe)
+        fee: interval.fee!, // Raw value (% or fixed)
         feeValue: interval.fee!,
         feeType: interval.feeType,
       );
     }).toList();
 
-    // ✅ Tri dynamique basé sur l'efficacité réelle au max
+    // ✅ Dynamic sorting based on real efficiency at max
     options.sort((a, b) {
       final effA = _calculateEfficiency(a.max, a);
       final effB = _calculateEfficiency(b.max, b);
@@ -1068,10 +1068,10 @@ class FeeOptimizerUtil {
     return options;
   }
 
-  // ✅ Fonction helper pour calculer l'efficacité réelle
+  // ✅ Helper function to calculate real efficiency
   static double _calculateEfficiency(double amount, _FeeOption opt) {
     final fee = opt.getFeeForAmount(amount);
-    return amount / (fee + 0.0001); // Éviter division par zéro
+    return amount / (fee + 0.0001); // Avoid division by zero
   }
 
   static void _validateInput(
@@ -1137,7 +1137,7 @@ class FeeOptimizerUtil {
     if (results.isEmpty) return _buildResult(0, 0, 0, 0, {});
 
     return results.reduce((best, curr) {
-      // Prioriser le montant net, puis les frais minimaux, puis le reste minimal
+      // Prioritize net amount, then minimum fees, then minimum remainder
       if (curr.netAmount > best.netAmount) return curr;
       if (curr.netAmount == best.netAmount) {
         if (curr.totalFees < best.totalFees) return curr;
@@ -1209,14 +1209,14 @@ class _FeeOption {
   _FeeOption({
     required this.min,
     required this.max,
-    required this.fee, // ✅ Maintenant stocke la valeur brute
+    required this.fee, // ✅ Now stores raw value
     required this.feeValue,
     required this.feeType,
   });
   
   final double min;
   final double max;
-  final double fee; // Valeur brute (% ou fixe)
+  final double fee; // Raw value (% or fixed)
   final double feeValue;
   final FeeType feeType;
 
@@ -1228,7 +1228,7 @@ class _FeeOption {
     }
   }
   
-  // ✅ Nouvelle méthode : calculer le montant net à partir d'un budget
+  // ✅ New method: calculate net amount from budget
   double getNetAmountFromBudget(double budget) {
     if (feeType == FeeType.percentage) {
       return budget / (1 + feeValue / 100.0);
