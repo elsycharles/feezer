@@ -13,25 +13,26 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get onboardingTitle1 =>
-      'Arrêtez de perdre de l\'argent avec les frais bancaires';
+      'Arrêtez de perdre de l\'argent avec les frais d\'argent mobile';
 
   @override
   String get onboardingDescription1 =>
-      'Les frais bancaires peuvent s\'accumuler rapidement. Feezer vous aide à minimiser les coûts sur chaque transaction.';
+      'Les frais d\'argent mobile peuvent s\'accumuler rapidement. Feezer vous aide à minimiser les coûts sur chaque transaction.';
 
   @override
-  String get onboardingTitle2 => 'Optimisation intelligente des transactions';
+  String get onboardingTitle2 =>
+      'Optimisation intelligente de l\'argent mobile';
 
   @override
   String get onboardingDescription2 =>
-      'Calculez automatiquement le moyen le plus rentable de gérer vos virements et paiements.';
+      'Calculez automatiquement le moyen le plus rentable de gérer vos transferts d\'argent mobile et paiements.';
 
   @override
-  String get onboardingTitle3 => 'Économisez plus, gardez plus';
+  String get onboardingTitle3 => 'Économisez plus sur les transactions mobiles';
 
   @override
   String get onboardingDescription3 =>
-      'Obtenez des stratégies d\'optimisation des frais personnalisées et regardez vos économies croître à chaque transaction.';
+      'Obtenez des stratégies d\'optimisation des frais d\'argent mobile personnalisées et regardez vos économies croître à chaque transaction.';
 
   @override
   String get next => 'Suivant';

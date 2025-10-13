@@ -1,27 +1,27 @@
 {
   "@@locale": "mg",
   "appTitle": "Feezer",
-  "onboardingTitle1": "Aza adino ny vola amin'ny sara banky",
+  "onboardingTitle1": "Aza adino ny vola amin'ny sara vola finday",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Ny sara banky dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin'ny fifampiraharahana rehetra.",
+  "onboardingDescription1": "Ny sara vola finday dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin'ny fifampiraharahana rehetra.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Fanatsarana fifampiraharahana am-pahendrena",
+  "onboardingTitle2": "Fanatsarana vola finday am-pahendrena",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana volanao sy ny fandoavam-bola.",
+  "onboardingDescription2": "Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana vola finday sy ny fandoavam-bola.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Mitahiry bebe kokoa, mitahiry bebe kokoa",
+  "onboardingTitle3": "Mitahiry bebe kokoa amin'ny fifampiraharahana finday",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Mahazo paikady fanatsarana sara manokana ary mijery ny fitahirizanao miakatra amin'ny fifampiraharahana rehetra.",
+  "onboardingDescription3": "Mahazo paikady fanatsarana sara vola finday manokana ary mijery ny fitahirizanao miakatra amin'ny fifampiraharahana rehetra.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },

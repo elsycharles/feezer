@@ -12,25 +12,26 @@ class AppLocalizationsMg extends AppLocalizations {
   String get appTitle => 'Feezer';
 
   @override
-  String get onboardingTitle1 => 'Aza adino ny vola amin\'ny sara banky';
+  String get onboardingTitle1 => 'Aza adino ny vola amin\'ny sara vola finday';
 
   @override
   String get onboardingDescription1 =>
-      'Ny sara banky dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin\'ny fifampiraharahana rehetra.';
+      'Ny sara vola finday dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin\'ny fifampiraharahana rehetra.';
 
   @override
-  String get onboardingTitle2 => 'Fanatsarana fifampiraharahana am-pahendrena';
+  String get onboardingTitle2 => 'Fanatsarana vola finday am-pahendrena';
 
   @override
   String get onboardingDescription2 =>
-      'Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana volanao sy ny fandoavam-bola.';
+      'Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana vola finday sy ny fandoavam-bola.';
 
   @override
-  String get onboardingTitle3 => 'Mitahiry bebe kokoa, mitahiry bebe kokoa';
+  String get onboardingTitle3 =>
+      'Mitahiry bebe kokoa amin\'ny fifampiraharahana finday';
 
   @override
   String get onboardingDescription3 =>
-      'Mahazo paikady fanatsarana sara manokana ary mijery ny fitahirizanao miakatra amin\'ny fifampiraharahana rehetra.';
+      'Mahazo paikady fanatsarana sara vola finday manokana ary mijery ny fitahirizanao miakatra amin\'ny fifampiraharahana rehetra.';
 
   @override
   String get next => 'Manaraka';

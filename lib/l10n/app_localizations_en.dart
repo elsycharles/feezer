@@ -12,25 +12,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Feezer';
 
   @override
-  String get onboardingTitle1 => 'Stop Losing Money to Banking Fees';
+  String get onboardingTitle1 => 'Stop Losing Money to Mobile Money Fees';
 
   @override
   String get onboardingDescription1 =>
-      'Banking fees can add up quickly. Feezer helps you minimize costs on every transaction.';
+      'Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.';
 
   @override
-  String get onboardingTitle2 => 'Smart Transaction Optimization';
+  String get onboardingTitle2 => 'Smart Mobile Money Optimization';
 
   @override
   String get onboardingDescription2 =>
-      'Automatically calculate the most cost-effective way to handle your money transfers and payments.';
+      'Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.';
 
   @override
-  String get onboardingTitle3 => 'Save More, Keep More';
+  String get onboardingTitle3 => 'Save More on Mobile Transactions';
 
   @override
   String get onboardingDescription3 =>
-      'Get personalized fee optimization strategies and watch your savings grow with every transaction.';
+      'Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.';
 
   @override
   String get next => 'Next';

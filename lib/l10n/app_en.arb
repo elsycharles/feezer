@@ -4,27 +4,27 @@
   "@appTitle": {
     "description": "The title of the application"
   },
-  "onboardingTitle1": "Stop Losing Money to Banking Fees",
+  "onboardingTitle1": "Stop Losing Money to Mobile Money Fees",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Banking fees can add up quickly. Feezer helps you minimize costs on every transaction.",
+  "onboardingDescription1": "Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Smart Transaction Optimization",
+  "onboardingTitle2": "Smart Mobile Money Optimization",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Automatically calculate the most cost-effective way to handle your money transfers and payments.",
+  "onboardingDescription2": "Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Save More, Keep More",
+  "onboardingTitle3": "Save More on Mobile Transactions",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Get personalized fee optimization strategies and watch your savings grow with every transaction.",
+  "onboardingDescription3": "Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },
