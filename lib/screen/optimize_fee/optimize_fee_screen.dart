@@ -821,7 +821,10 @@ class _State extends State<OptimizeFeeScreen> {
     final feesSavingsVsMax = nonOptMaxFee - optimizedTotalFees;
     final totalSavingsVsMax = savingsVsMax + feesSavingsVsMax;
 
-    final extraCostVsSame = nonOptSameTotalAmount - userAmount;
+    // Vérifier si le montant total sans optimisation dépasse réellement le budget
+    final extraCostVsSame = nonOptSameTotalAmount > userAmount 
+        ? nonOptSameTotalAmount - userAmount 
+        : 0.0;
 
     return SurfaceCard(
       child: Column(
@@ -1022,10 +1025,10 @@ class _State extends State<OptimizeFeeScreen> {
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              color: (extraCostVsSame.abs() > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.1),
+              color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: (extraCostVsSame.abs() > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.3),
+                color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.3),
               ),
             ),
             child: Column(
@@ -1034,16 +1037,16 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      extraCostVsSame.abs() > 0.01 ? Icons.block : Icons.check_circle_outline,
+                      extraCostVsSame > 0.01 ? Icons.block : Icons.check_circle_outline,
                       size: 16,
-                      color: extraCostVsSame.abs() > 0.01 ? Colors.red : Colors.green,
+                      color: extraCostVsSame > 0.01 ? Colors.red : Colors.green,
                     ),
                     Global.gapSm,
                     Flexible(
                       child: Text(
                         'Sans optimisation (même montant net)',
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: (extraCostVsSame.abs() > 0.01 ? Colors.red : Colors.green.shade700),
+                          color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green.shade700),
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -1070,9 +1073,9 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
                 Global.gapSm,
-                Divider(color: (extraCostVsSame.abs() > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.3)),
+                Divider(color: (extraCostVsSame > 0.01 ? Colors.red : Colors.green).withValues(alpha: 0.3)),
                 Global.gapSm,
-                if (extraCostVsSame.abs() > 0.01) // Tolérance pour éviter les erreurs d'arrondi
+                if (extraCostVsSame > 0.01) // Seulement si dépassement réel
                   Row(
                     children: [
                       Icon(
@@ -1083,7 +1086,7 @@ class _State extends State<OptimizeFeeScreen> {
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          'Dépassement de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame.abs())} $currencySymbol',
+                          'Dépassement de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame)} $currencySymbol',
                           style: ThemeUtil.bodySmall.copyWith(
                             color: Colors.red.shade700,
                             fontWeight: FontWeight.w600,
@@ -1112,11 +1115,11 @@ class _State extends State<OptimizeFeeScreen> {
                       ),
                     ],
                   ),
-                if (extraCostVsSame.abs() > 0.01)
+                if (extraCostVsSame > 0.01)
                   Global.gapXs,
-                if (extraCostVsSame.abs() > 0.01)
+                if (extraCostVsSame > 0.01)
                   Text(
-                    '• Montant total dépasse votre budget de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame.abs())} $currencySymbol',
+                    '• Montant total dépasse votre budget de ${ConstantUtil.formatCurrencyAmount(extraCostVsSame)} $currencySymbol',
                     style: ThemeUtil.bodySmall.copyWith(
                       color: context.colorScheme.onSurfaceVariant,
                     ),
