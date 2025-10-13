@@ -828,9 +828,6 @@ class _State extends State<OptimizeFeeScreen> {
     final feeDifferenceVsSameNet = optimizedTotalFees - nonOptSameFee; // Fee difference (negative = savings)
     final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
 
-    // Global gains message
-    final totalGain = totalGainVsMax; // The real total gain
-
     return SurfaceCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1079,14 +1076,14 @@ class _State extends State<OptimizeFeeScreen> {
                   Row(
                     children: [
                       Icon(
-                        feeDifferenceVsSameNet > 0 ? Icons.info_outline : Icons.check_circle,
+                        feeDifferenceVsSameNet < 0 ? Icons.check_circle : Icons.info_outline,
                         size: 14,
-                        color: feeDifferenceVsSameNet > 0 ? context.colorScheme.tertiary : context.colorScheme.primary,
+                        color: feeDifferenceVsSameNet < 0 ? context.colorScheme.primary : context.colorScheme.tertiary,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          feeDifferenceVsSameNet > 0
+                          feeDifferenceVsSameNet < 0
                               ? AppLocalizations.of(context).transactionLosesVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
                                   currencySymbol,
@@ -1096,7 +1093,7 @@ class _State extends State<OptimizeFeeScreen> {
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: feeDifferenceVsSameNet > 0 ? context.colorScheme.tertiary : context.colorScheme.primary,
+                            color: feeDifferenceVsSameNet < 0 ? context.colorScheme.primary : context.colorScheme.tertiary,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1127,44 +1124,6 @@ class _State extends State<OptimizeFeeScreen> {
                     ),
                   ],
                 ],
-              ],
-            ),
-          ),
-
-          Global.gapMd,
-
-          // ============ GLOBAL SUMMARY ============
-          Container(
-            padding: Global.padMd,
-            decoration: BoxDecoration(
-              color: (totalGain > 0.01 ? Colors.green : Colors.grey).withValues(alpha: 0.2),
-              borderRadius: Global.borderMd,
-              border: Border.all(
-                color: (totalGain > 0.01 ? Colors.green : Colors.grey).withValues(alpha: 0.4),
-              ),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  totalGain > 0.01 ? Icons.savings : Icons.info_outline,
-                  color: totalGain > 0.01 ? Colors.green.shade700 : Colors.grey.shade700,
-                  size: 20,
-                ),
-                Global.gapSm,
-                Expanded(
-                  child: Text(
-                    totalGain > 0.01
-                        ? AppLocalizations.of(context).totalSavingsWithOptimization(
-                            ConstantUtil.formatCurrencyAmount(totalGain.abs()),
-                            currencySymbol,
-                          )
-                        : AppLocalizations.of(context).sameResultAsOptimization,
-                    style: ThemeUtil.bodyMedium.copyWith(
-                      color: totalGain > 0.01 ? Colors.green.shade700 : Colors.grey.shade700,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
