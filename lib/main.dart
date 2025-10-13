@@ -21,6 +21,7 @@ import 'package:fee_minimizer/model/provider_model.dart' as model;
 import 'package:fee_minimizer/model/currency_model.dart';
 import 'package:fee_minimizer/model/fee_interval_model.dart';
 import 'package:fee_minimizer/util/preference_util.dart';
+import 'package:fee_minimizer/util/database_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -38,6 +39,9 @@ void main() async {
     localeProvider.initializeLocale(),
     currencyProvider.initializeCurrency(),
   ]);
+
+  // Seed default data if needed
+  await DatabaseUtil().seedDefaultData();
 
   // Check if first launch
   final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
