@@ -33,8 +33,8 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   @override
   void initState() {
     super.initState();
-    // Initialize with raw value, no formatting
-    _controller = TextEditingController(text: widget.value.toString());
+    // Initialize with formatted value to avoid showing .0 for integers
+    _controller = TextEditingController(text: _formatValue(widget.value));
     _focusNode = FocusNode();
     // Add focus listeners to manage typing state
     _focusNode.addListener(_onFocusChanged);
