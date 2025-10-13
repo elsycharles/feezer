@@ -1869,6 +1869,12 @@ abstract class AppLocalizations {
   /// **'Row {rowNumber}: Fee must be positive'**
   String rowFeeMustBePositive(int rowNumber);
 
+  /// Error message when percentage fee is invalid (not between 0 and 100)
+  ///
+  /// In en, this message translates to:
+  /// **'Row {rowNumber}: Percentage fee must be between 0 and 100 ({fee}%)'**
+  String rowFeePercentageInvalid(int rowNumber, String fee);
+
   /// Success message showing number of imported providers and fee intervals
   ///
   /// In en, this message translates to:
