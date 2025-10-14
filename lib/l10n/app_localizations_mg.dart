@@ -1378,5 +1378,5 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get noValidIntervalForComparison =>
-      'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.';
+      'Ny vola nampidirina dia tsy ao anatin\'ny elanelam-para sara manan-kery. Tsy afaka manao famantarana raha tsy misy fanatsarana.';
 }
