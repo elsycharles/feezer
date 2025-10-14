@@ -1366,4 +1366,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get transactionSameResultAsOptimized =>
       'This transaction has the same result as optimization';
+
+  @override
+  String get noValidIntervalForComparison =>
+      'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.';
 }

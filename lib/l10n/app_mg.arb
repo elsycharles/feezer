@@ -2003,5 +2003,10 @@
   "@transactionSameResultAsOptimized": {
     "description": "Message showing when a non-optimized transaction has the same result as optimization",
     "placeholders": {}
+  },
+  "noValidIntervalForComparison": "The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.",
+  "@noValidIntervalForComparison": {
+    "description": "Message displayed when the entered amount is not within any valid fee interval for comparison",
+    "placeholders": {}
   }
 }

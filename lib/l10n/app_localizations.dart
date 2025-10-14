@@ -2444,6 +2444,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This transaction has the same result as optimization'**
   String get transactionSameResultAsOptimized;
+
+  /// Message displayed when the entered amount is not within any valid fee interval for comparison
+  ///
+  /// In en, this message translates to:
+  /// **'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.'**
+  String get noValidIntervalForComparison;
 }
 
 class _AppLocalizationsDelegate

@@ -1387,4 +1387,8 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get transactionSameResultAsOptimized =>
       'Cette transaction a le même résultat que l\'optimisation';
+
+  @override
+  String get noValidIntervalForComparison =>
+      'Le montant saisi ne se trouve dans aucun intervalle de frais valide. Impossible d\'effectuer la comparaison sans optimisation.';
 }

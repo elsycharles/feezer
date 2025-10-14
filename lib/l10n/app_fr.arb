@@ -1823,5 +1823,10 @@
   "@transactionSameResultAsOptimized": {
     "description": "Message showing when a non-optimized transaction has the same result as optimization",
     "placeholders": {}
+  },
+  "noValidIntervalForComparison": "Le montant saisi ne se trouve dans aucun intervalle de frais valide. Impossible d'effectuer la comparaison sans optimisation.",
+  "@noValidIntervalForComparison": {
+    "description": "Message affiché lorsque le montant saisi ne se trouve dans aucun intervalle de frais valide pour la comparaison",
+    "placeholders": {}
   }
 }

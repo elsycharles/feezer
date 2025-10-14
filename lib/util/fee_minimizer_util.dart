@@ -1260,6 +1260,89 @@ class FeeOptimizerUtil {
 
     return best;
   }
+
+  static Map<String, dynamic>? calculateNonOptimizedComparison(
+    double amountInAriary,
+    List<FeeInterval> intervals,
+    FeeOptimizerResult optimizedResult,
+  ) {
+    // Find the maximum net amount with available budget
+    double maxNetAmount = 0;
+    double maxFee = 0;
+    bool foundValidMaxInterval = false;
+
+    for (final interval in intervals) {
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+
+      // Calculate maximum possible net amount in this interval
+      double netAmount;
+
+      if (interval.feeType == FeeType.percentage) {
+        // budget = netAmount + netAmount * (fee/100)
+        // budget = netAmount * (1 + fee/100)
+        // netAmount = budget / (1 + fee/100)
+        netAmount = amountInAriary / (1 + (interval.fee ?? 0) / 100.0);
+      } else {
+        netAmount = amountInAriary - (interval.fee ?? 0);
+      }
+
+      // Limit to interval max
+      netAmount = min(netAmount, maxAmount);
+
+      // Check if valid
+      if (netAmount >= minAmount && netAmount <= maxAmount && netAmount > 0) {
+        final fee = interval.feeType == FeeType.percentage
+            ? netAmount * ((interval.fee ?? 0) / 100.0)
+            : (interval.fee ?? 0);
+
+        final totalCost = netAmount + fee;
+
+        // Check that it doesn't exceed budget (with tolerance)
+        if (totalCost <= amountInAriary + 0.01) {
+          foundValidMaxInterval = true;
+          if (netAmount > maxNetAmount) {
+            maxNetAmount = netAmount;
+            maxFee = fee;
+          }
+        }
+      }
+    }
+
+    // Calculate if we take the same net amount as optimization
+    double sameNetFee = 0;
+    double sameNetTotalAmount = 0;
+    bool foundValidSameNetInterval = false;
+    final optimizedNetAmount = optimizedResult.netAmount;
+
+    for (final interval in intervals) {
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+
+      if (optimizedNetAmount >= minAmount && optimizedNetAmount <= maxAmount) {
+        foundValidSameNetInterval = true;
+        sameNetFee = interval.feeType == FeeType.percentage
+            ? optimizedNetAmount * ((interval.fee ?? 0) / 100.0)
+            : (interval.fee ?? 0);
+        sameNetTotalAmount = optimizedNetAmount + sameNetFee;
+        break;
+      }
+    }
+
+    // Return null if no valid interval was found for either calculation
+    if (!foundValidMaxInterval && !foundValidSameNetInterval) {
+      return null;
+    }
+
+    return {
+      'maxNetAmount': maxNetAmount,
+      'maxFee': maxFee,
+      'sameNetFee': sameNetFee,
+      'sameNetTotalAmount': sameNetTotalAmount,
+      'hasValidMaxInterval': foundValidMaxInterval,
+      'hasValidSameNetInterval': foundValidSameNetInterval,
+    };
+  }
 }
 
 // Optimized internal classes
