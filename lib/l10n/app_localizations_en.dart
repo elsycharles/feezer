@@ -1286,7 +1286,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Without optimization (same net amount)';
 
   @override
-  String get availableBudget => 'Available budget';
+  String get enteredAmount => 'Entered amount';
 
   @override
   String get netAmountSent => 'Net amount sent';
@@ -1341,7 +1341,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get exceedsAvailableBudget => 'Exceeds available budget';
+  String get exceedsEnteredAmount => 'Exceeds entered amount';
 
   @override
   String youSaveFees(String amount, String currency) {

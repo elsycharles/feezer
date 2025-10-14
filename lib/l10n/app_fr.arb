@@ -1647,7 +1647,7 @@
   "@withoutOptimizationSameNet": {
     "description": "Label for the non-optimized results section using same net amount"
   },
-  "availableBudget": "Budget disponible",
+  "enteredAmount": "Montant saisi",
   "@availableBudget": {
     "description": "Label for available budget in comparison"
   },
@@ -1767,7 +1767,7 @@
       }
     }
   },
-  "exceedsAvailableBudget": "Dépasse le budget disponible",
+  "exceedsEnteredAmount": "Dépasse le montant saisi",
   "@exceedsAvailableBudget": {
     "description": "Warning that result exceeds available budget"
   },

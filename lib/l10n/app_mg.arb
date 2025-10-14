@@ -1827,7 +1827,7 @@
   "@withoutOptimizationSameNet": {
     "description": "Label for the non-optimized results section using same net amount"
   },
-  "availableBudget": "Teti-bola misy",
+  "enteredAmount": "Vola nampidirina",
   "@availableBudget": {
     "description": "Label for available budget in comparison"
   },
@@ -1947,7 +1947,7 @@
       }
     }
   },
-  "exceedsAvailableBudget": "Mihoatra ny teti-bola misy",
+  "exceedsEnteredAmount": "Mihoatra ny vola nampidirina",
   "@exceedsAvailableBudget": {
     "description": "Warning that result exceeds available budget"
   },

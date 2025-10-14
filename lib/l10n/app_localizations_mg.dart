@@ -1295,7 +1295,7 @@ class AppLocalizationsMg extends AppLocalizations {
       'Tsy misy fanatsarana (vola madio mitovy)';
 
   @override
-  String get availableBudget => 'Teti-bola misy';
+  String get enteredAmount => 'Vola nampidirina';
 
   @override
   String get netAmountSent => 'Vola madio nalefa';
@@ -1350,7 +1350,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get exceedsAvailableBudget => 'Mihoatra ny teti-bola misy';
+  String get exceedsEnteredAmount => 'Mihoatra ny vola nampidirina';
 
   @override
   String youSaveFees(String amount, String currency) {

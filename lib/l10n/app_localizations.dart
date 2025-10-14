@@ -2331,11 +2331,11 @@ abstract class AppLocalizations {
   /// **'Without optimization (same net amount)'**
   String get withoutOptimizationSameNet;
 
-  /// Label for available budget in comparison
+  /// No description provided for @enteredAmount.
   ///
   /// In en, this message translates to:
-  /// **'Available budget'**
-  String get availableBudget;
+  /// **'Entered amount'**
+  String get enteredAmount;
 
   /// Label for net amount sent in comparison
   ///
@@ -2409,11 +2409,11 @@ abstract class AppLocalizations {
   /// **'• This is due to transaction constraints (min: {min}, max: {max})'**
   String dueToTransactionConstraints(String min, String max);
 
-  /// Warning that result exceeds available budget
+  /// No description provided for @exceedsEnteredAmount.
   ///
   /// In en, this message translates to:
-  /// **'Exceeds available budget'**
-  String get exceedsAvailableBudget;
+  /// **'Exceeds entered amount'**
+  String get exceedsEnteredAmount;
 
   /// Message showing savings from optimization
   ///

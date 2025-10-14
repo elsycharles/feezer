@@ -1307,7 +1307,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Sans optimisation (même montant net)';
 
   @override
-  String get availableBudget => 'Budget disponible';
+  String get enteredAmount => 'Montant saisi';
 
   @override
   String get netAmountSent => 'Montant net';
@@ -1362,7 +1362,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get exceedsAvailableBudget => 'Dépasse le budget disponible';
+  String get exceedsEnteredAmount => 'Dépasse le montant saisi';
 
   @override
   String youSaveFees(String amount, String currency) {

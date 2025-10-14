@@ -907,7 +907,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ),
                 Global.gapSm,
                 _buildComparisonRow(
-                  AppLocalizations.of(context).availableBudget,
+                  AppLocalizations.of(context).enteredAmount,
                   '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
                 ),
                 _buildComparisonRow(
@@ -989,7 +989,7 @@ class _State extends State<OptimizeFeeScreen> {
                   ),
                   Global.gapSm,
                   _buildComparisonRow(
-                    AppLocalizations.of(context).availableBudget,
+                    AppLocalizations.of(context).enteredAmount,
                     '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
                   ),
                   _buildComparisonRow(
@@ -1165,7 +1165,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ] else ...[
                   // Show comparison when valid interval exists
                   _buildComparisonRow(
-                    AppLocalizations.of(context).availableBudget,
+                    AppLocalizations.of(context).enteredAmount,
                     '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
                   ),
                   _buildComparisonRow(
@@ -1264,7 +1264,7 @@ class _State extends State<OptimizeFeeScreen> {
                         Global.gapXs,
                         Expanded(
                           child: Text(
-                            AppLocalizations.of(context).exceedsAvailableBudget,
+                            AppLocalizations.of(context).exceedsEnteredAmount,
                             style: ThemeUtil.bodySmall.copyWith(
                               color: Colors.red.shade700,
                               fontWeight: FontWeight.w600,

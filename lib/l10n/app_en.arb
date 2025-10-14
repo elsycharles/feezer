@@ -1828,7 +1828,7 @@
   "@withoutOptimizationSameNet": {
     "description": "Label for the non-optimized results section using same net amount"
   },
-  "availableBudget": "Available budget",
+  "enteredAmount": "Entered amount",
   "@availableBudget": {
     "description": "Label for available budget in comparison"
   },
@@ -1960,7 +1960,7 @@
       }
     }
   },
-  "exceedsAvailableBudget": "Exceeds available budget",
+  "exceedsEnteredAmount": "Exceeds entered amount",
   "@exceedsAvailableBudget": {
     "description": "Warning that result exceeds available budget"
   },
