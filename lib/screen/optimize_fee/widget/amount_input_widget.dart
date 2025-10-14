@@ -67,7 +67,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   // New method to format value
   String _formatValue(double value) {
-    // Si c'est un nombre entier, on n'affiche pas le .0
+    // If it's an integer, we don't display the .0
     if (value == value.toInt()) {
       return value.toInt().toString();
     }

@@ -90,9 +90,9 @@ class FeeOptimizerUtil {
       if (result.details.isNotEmpty) {
         bool hasInvalidFees = false;
         for (final detail in result.details) {
-          // Si le montant existe mais les frais sont 0 ET ce n'est pas normal
+          // If the amount exists but fees are 0 AND it's not normal
           if (detail.amount > 0 && detail.fee == 0) {
-            // Recalculer le frais pour vérifier
+            // Recalculate the fee to verify
             final option = options.firstWhere(
               (opt) => detail.amount >= opt.min && detail.amount <= opt.max,
               orElse: () => options.first,
@@ -105,10 +105,10 @@ class FeeOptimizerUtil {
           }
         }
 
-        // Si on détecte des frais invalides, recalculer
+        // If invalid fees are detected, recalculate
         if (hasInvalidFees) {
-          // print('⚠️ Frais invalides détectés, recalcul...'); // Debug only
-          // Force un recalcul simple
+          // print('⚠️ Invalid fees detected, recalculating...'); // Debug only
+          // Force a simple recalculation
           final correctedResult = _greedyOptimizedFast(totalAmount, options, precision);
           _cache.put(cacheKey, correctedResult);
           return correctedResult;
@@ -732,7 +732,7 @@ class FeeOptimizerUtil {
   ) {
     FeeOptimizerResult bestResult = _buildResult(totalAmount, 0, 0, totalAmount, {});
 
-    // ✅ Test avec une seule opération (sans arrondi)
+    // ✅ Test with a single operation (without rounding)
     for (final opt in options) {
       double netAmount;
       double fee;
@@ -870,7 +870,7 @@ class FeeOptimizerUtil {
       return List.generate(end - start + 1, (i) => start + i);
     }
 
-    // Échantillonnage logarithmique pour les grandes plages
+    // Logarithmic sampling for large ranges
     final samples = <int>{start, end};
     final step = max(1, (end - start) ~/ 20);
 
@@ -1184,15 +1184,15 @@ class FeeOptimizerUtil {
     double remaining,
     Map<String, int> counts,
   ) {
-    // Convertir en Decimal pour des calculs précis
+    // Convert to Decimal for precise calculations
     final totalDecimal = Decimal.parse(totalAmount.toString());
     final netDecimal = Decimal.parse(netAmount.toString());
     final feesDecimal = Decimal.parse(totalFees.toString());
     
-    // Calculer le restant avec précision
+    // Calculate the remaining with precision
     final remainingDecimal = totalDecimal - netDecimal - feesDecimal;
     
-    // Si très proche de zéro ou négatif, mettre à zéro
+    // If very close to zero or negative, set to zero
     final zero = Decimal.zero;
     final tolerance = Decimal.parse('1e-10');
     
