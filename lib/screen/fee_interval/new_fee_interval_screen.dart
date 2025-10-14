@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:decimal/decimal.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/fee_interval_model.dart';
@@ -285,10 +286,11 @@ class _State extends State<NewFeeIntervalScreen> {
     if (basicValidation != null) return basicValidation;
 
     // Then check it's greater than min amount
-    final amount = ConstantUtil.parseLocalizedNumber(value!);
-    if (amount == null) {
+    final amountDecimal = ConstantUtil.parseLocalizedNumber(value!);
+    if (amountDecimal == null) {
       return AppLocalizations.of(context).invalidAmount;
     }
+    final amount = amountDecimal.toDouble();
     final minAmount = double.tryParse(_minAmountController.text) ?? 0;
     if (amount <= minAmount) {
       return AppLocalizations.of(context).maxAmountMustBeGreater;
@@ -308,27 +310,31 @@ class _State extends State<NewFeeIntervalScreen> {
         final feeInterval = FeeInterval(
           id: now.millisecondsSinceEpoch.toString(),
           minAmount: context.read<CurrencyProvider>().convertToAriary(
-            ConstantUtil.parseLocalizedNumber(
+            (ConstantUtil.parseLocalizedNumber(
                   _minAmountController.text.trim(),
                 ) ??
-                0,
+                Decimal.zero)
+                .toDouble(),
           ),
           maxAmount: context.read<CurrencyProvider>().convertToAriary(
-            ConstantUtil.parseLocalizedNumber(
+            (ConstantUtil.parseLocalizedNumber(
                   _maxAmountController.text.trim(),
                 ) ??
-                0,
+                Decimal.zero)
+                .toDouble(),
           ),
           fee: _feeType == FeeType.percentage
-              ? (ConstantUtil.parseLocalizedNumber(
+              ? ((ConstantUtil.parseLocalizedNumber(
                       _feeController.text.trim(),
                     ) ??
-                    0)
+                    Decimal.zero)
+                    .toDouble())
               : context.read<CurrencyProvider>().convertToAriary(
-                  ConstantUtil.parseLocalizedNumber(
+                  (ConstantUtil.parseLocalizedNumber(
                         _feeController.text.trim(),
                       ) ??
-                      0,
+                      Decimal.zero)
+                      .toDouble(),
                 ),
           feeType: _feeType,
           creationDateTime: now,

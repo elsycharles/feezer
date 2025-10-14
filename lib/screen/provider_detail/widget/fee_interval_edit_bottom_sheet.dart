@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' hide BottomSheet;
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:decimal/decimal.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/fee_interval_model.dart';
@@ -283,27 +284,31 @@ class _State extends State<FeeIntervalEditBottomSheet> {
         final feeInterval = FeeInterval(
           id: widget.feeInterval.id,
           minAmount: context.read<CurrencyProvider>().convertToAriary(
-            ConstantUtil.parseLocalizedNumber(
+            (ConstantUtil.parseLocalizedNumber(
                   _minAmountController.text.trim(),
                 ) ??
-                0,
+                Decimal.zero)
+                .toDouble(),
           ),
           maxAmount: context.read<CurrencyProvider>().convertToAriary(
-            ConstantUtil.parseLocalizedNumber(
+            (ConstantUtil.parseLocalizedNumber(
                   _maxAmountController.text.trim(),
                 ) ??
-                0,
+                Decimal.zero)
+                .toDouble(),
           ),
           fee: _feeType == FeeType.percentage
-              ? (ConstantUtil.parseLocalizedNumber(
+              ? ((ConstantUtil.parseLocalizedNumber(
                       _feeController.text.trim(),
                     ) ??
-                    0)
+                    Decimal.zero)
+                    .toDouble())
               : context.read<CurrencyProvider>().convertToAriary(
-                  ConstantUtil.parseLocalizedNumber(
+                  (ConstantUtil.parseLocalizedNumber(
                         _feeController.text.trim(),
                       ) ??
-                      0,
+                      Decimal.zero)
+                      .toDouble(),
                 ),
           feeType: _feeType,
           creationDateTime: widget.feeInterval.creationDatetime,

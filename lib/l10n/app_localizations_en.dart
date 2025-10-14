@@ -12,25 +12,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Feezer';
 
   @override
-  String get onboardingTitle1 => 'Stop Losing Money to Banking Fees';
+  String get onboardingTitle1 => 'Stop Losing Money to Mobile Money Fees';
 
   @override
   String get onboardingDescription1 =>
-      'Banking fees can add up quickly. Feezer helps you minimize costs on every transaction.';
+      'Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.';
 
   @override
-  String get onboardingTitle2 => 'Smart Transaction Optimization';
+  String get onboardingTitle2 => 'Smart Mobile Money Optimization';
 
   @override
   String get onboardingDescription2 =>
-      'Automatically calculate the most cost-effective way to handle your money transfers and payments.';
+      'Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.';
 
   @override
-  String get onboardingTitle3 => 'Save More, Keep More';
+  String get onboardingTitle3 => 'Save More on Mobile Transactions';
 
   @override
   String get onboardingDescription3 =>
-      'Get personalized fee optimization strategies and watch your savings grow with every transaction.';
+      'Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.';
 
   @override
   String get next => 'Next';
@@ -205,7 +205,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get netAmount => 'Net Amount';
 
   @override
-  String get totalFees => 'Total Fees';
+  String get totalFees => 'Total fees';
 
   @override
   String get efficiency => 'Efficiency';
@@ -1269,4 +1269,105 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get faqAnswer8 =>
       'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.';
+
+  @override
+  String get comparisonWithWithoutOptimization =>
+      'Comparison with/without optimization';
+
+  @override
+  String get withOptimization => 'With optimization';
+
+  @override
+  String get withoutOptimizationMaxAmount =>
+      'Without optimization (max amount)';
+
+  @override
+  String get withoutOptimizationSameNet =>
+      'Without optimization (same net amount)';
+
+  @override
+  String get enteredAmount => 'Entered amount';
+
+  @override
+  String get netAmountSent => 'Net amount sent';
+
+  @override
+  String get totalSpent => 'Total spent';
+
+  @override
+  String get numberOfOperations => 'Number of operations';
+
+  @override
+  String youLoseAmount(String amount, String currency) {
+    return 'You lose $amount $currency';
+  }
+
+  @override
+  String youGainAmount(String amount, String currency) {
+    return 'You gain $amount $currency';
+  }
+
+  @override
+  String get sameResultAsOptimization => 'Same result as optimization';
+
+  @override
+  String netAmountLess(String amount, String currency) {
+    return '• Net amount less: $amount $currency';
+  }
+
+  @override
+  String netAmountMore(String amount, String currency) {
+    return '• Net amount more: $amount $currency';
+  }
+
+  @override
+  String feesLess(String amount, String currency) {
+    return '• Fees less: $amount $currency';
+  }
+
+  @override
+  String feesMore(String amount, String currency) {
+    return '• Fees more: $amount $currency';
+  }
+
+  @override
+  String optimizationCostsMoreFees(String amount, String currency) {
+    return 'Optimization costs $amount $currency more in fees';
+  }
+
+  @override
+  String dueToTransactionConstraints(String min, String max) {
+    return '• This is due to transaction constraints (min: $min, max: $max)';
+  }
+
+  @override
+  String get exceedsEnteredAmount => 'Exceeds entered amount';
+
+  @override
+  String youSaveFees(String amount, String currency) {
+    return 'You save $amount $currency in fees';
+  }
+
+  @override
+  String totalSavingsWithOptimization(String amount, String currency) {
+    return 'Total savings with optimization: $amount $currency';
+  }
+
+  @override
+  String transactionGainsVsOptimized(String amount, String currency) {
+    return 'This transaction gains $amount $currency compared to optimization';
+  }
+
+  @override
+  String transactionLosesVsOptimized(String amount, String currency) {
+    return 'This transaction loses $amount $currency compared to optimization';
+  }
+
+  @override
+  String get transactionSameResultAsOptimized =>
+      'This transaction has the same result as optimization';
+
+  @override
+  String get noValidIntervalForComparison =>
+      'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.';
 }

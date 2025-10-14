@@ -1,12 +1,12 @@
 {
   "@@locale": "fr",
   "appTitle": "Feezer",
-  "onboardingTitle1": "Arrêtez de perdre de l'argent avec les frais bancaires",
-  "onboardingDescription1": "Les frais bancaires peuvent s'accumuler rapidement. Feezer vous aide à minimiser les coûts sur chaque transaction.",
-  "onboardingTitle2": "Optimisation intelligente des transactions",
-  "onboardingDescription2": "Calculez automatiquement le moyen le plus rentable de gérer vos virements et paiements.",
-  "onboardingTitle3": "Économisez plus, gardez plus",
-  "onboardingDescription3": "Obtenez des stratégies d'optimisation des frais personnalisées et regardez vos économies croître à chaque transaction.",
+  "onboardingTitle1": "Arrêtez de perdre de l'argent avec les frais d'argent mobile",
+  "onboardingDescription1": "Les frais d'argent mobile peuvent s'accumuler rapidement. Feezer vous aide à minimiser les coûts sur chaque transaction.",
+  "onboardingTitle2": "Optimisation intelligente de l'argent mobile",
+  "onboardingDescription2": "Calculez automatiquement le moyen le plus rentable de gérer vos transferts d'argent mobile et paiements.",
+  "onboardingTitle3": "Économisez plus sur les transactions mobiles",
+  "onboardingDescription3": "Obtenez des stratégies d'optimisation des frais d'argent mobile personnalisées et regardez vos économies croître à chaque transaction.",
   "next": "Suivant",
   "skip": "Ignorer",
   "getStarted": "Commencer",
@@ -1630,5 +1630,203 @@
   "faqCurrencyRatesAnswer": "L'application ne met pas à jour automatiquement les taux de change des devises. Vous avez un contrôle total et pouvez définir manuellement vos propres taux de change pour une personnalisation complète. Cela vous donne une flexibilité totale pour utiliser les taux qui conviennent à vos besoins, et fonctionne parfaitement hors ligne.",
   "@faqCurrencyRatesAnswer": {
     "description": "FAQ answer"
+  },
+  "comparisonWithWithoutOptimization": "Comparaison avec/sans optimisation",
+  "@comparisonWithWithoutOptimization": {
+    "description": "Title for the comparison section showing optimized vs non-optimized results"
+  },
+  "withOptimization": "Avec optimisation",
+  "@withOptimization": {
+    "description": "Label for the optimized results section"
+  },
+  "withoutOptimizationMaxAmount": "Sans optimisation (montant max)",
+  "@withoutOptimizationMaxAmount": {
+    "description": "Label for the non-optimized results section using maximum amount"
+  },
+  "withoutOptimizationSameNet": "Sans optimisation (même montant net)",
+  "@withoutOptimizationSameNet": {
+    "description": "Label for the non-optimized results section using same net amount"
+  },
+  "enteredAmount": "Montant saisi",
+  "@availableBudget": {
+    "description": "Label for available budget in comparison"
+  },
+  "netAmountSent": "Montant net",
+  "@netAmountSent": {
+    "description": "Label for net amount sent in comparison"
+  },
+  "totalFees": "Frais totaux",
+  "@totalFees": {
+    "description": "Label for total fees in comparison"
+  },
+  "totalSpent": "Total dépensé",
+  "@totalSpent": {
+    "description": "Label for total amount spent in comparison"
+  },
+  "numberOfOperations": "Nombre d'opérations",
+  "@numberOfOperations": {
+    "description": "Label for number of operations in comparison"
+  },
+  "youLoseAmount": "Vous perdez {amount} {currency}",
+  "@youLoseAmount": {
+    "description": "Message when optimization results in loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "youGainAmount": "Vous gagnez {amount} {currency}",
+  "@youGainAmount": {
+    "description": "Message when optimization results in gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "sameResultAsOptimization": "Même résultat que l'optimisation",
+  "@sameResultAsOptimization": {
+    "description": "Message when non-optimized result is same as optimized"
+  },
+  "netAmountLess": "• Montant net en moins: {amount} {currency}",
+  "@netAmountLess": {
+    "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "netAmountMore": "• Montant net en plus: {amount} {currency}",
+  "@netAmountMore": {
+    "description": "Detail showing net amount gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesLess": "• Frais en moins: {amount} {currency}",
+  "@feesLess": {
+    "description": "Detail showing fee savings",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Frais en plus: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationCostsMoreFees": "L'optimisation coûte {amount} {currency} de frais en plus",
+  "@optimizationCostsMoreFees": {
+    "description": "Message when optimization costs more than single transaction",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dueToTransactionConstraints": "• Ceci est dû aux contraintes de transactions (min: {min}, max: {max})",
+  "@dueToTransactionConstraints": {
+    "description": "Explanation for optimization cost due to transaction limits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "exceedsEnteredAmount": "Dépasse le montant saisi",
+  "@exceedsAvailableBudget": {
+    "description": "Warning that result exceeds available budget"
+  },
+  "youSaveFees": "Vous économisez {amount} {currency} de frais",
+  "@youSaveFees": {
+    "description": "Message showing savings from optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "totalSavingsWithOptimization": "Économie totale avec optimisation: {amount} {currency}",
+  "@totalSavingsWithOptimization": {
+    "description": "Summary of total savings achieved with optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionGainsVsOptimized": "Cette transaction gagne {amount} {currency} par rapport à l'optimisation",
+  "@transactionGainsVsOptimized": {
+    "description": "Message showing gain when a non-optimized transaction performs better",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionLosesVsOptimized": "Cette transaction perd {amount} {currency} par rapport à l'optimisation",
+  "@transactionLosesVsOptimized": {
+    "description": "Message showing loss when a non-optimized transaction performs worse",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionSameResultAsOptimized": "Cette transaction a le même résultat que l'optimisation",
+  "@transactionSameResultAsOptimized": {
+    "description": "Message showing when a non-optimized transaction has the same result as optimization",
+    "placeholders": {}
+  },
+  "noValidIntervalForComparison": "Le montant saisi ne se trouve dans aucun intervalle de frais valide. Impossible d'effectuer la comparaison sans optimisation.",
+  "@noValidIntervalForComparison": {
+    "description": "Message affiché lorsque le montant saisi ne se trouve dans aucun intervalle de frais valide pour la comparaison",
+    "placeholders": {}
   }
 }

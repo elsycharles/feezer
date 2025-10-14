@@ -1,27 +1,27 @@
 {
   "@@locale": "mg",
   "appTitle": "Feezer",
-  "onboardingTitle1": "Aza adino ny vola amin'ny sara banky",
+  "onboardingTitle1": "Aza adino ny vola amin'ny sara vola finday",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Ny sara banky dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin'ny fifampiraharahana rehetra.",
+  "onboardingDescription1": "Ny sara vola finday dia mety miakatra haingana. Feezer dia manampy anao kely ny vidiny amin'ny fifampiraharahana rehetra.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Fanatsarana fifampiraharahana am-pahendrena",
+  "onboardingTitle2": "Fanatsarana vola finday am-pahendrena",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana volanao sy ny fandoavam-bola.",
+  "onboardingDescription2": "Kajy ho azy ny fomba mahomby indrindra hitantanana ny famindrana vola finday sy ny fandoavam-bola.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Mitahiry bebe kokoa, mitahiry bebe kokoa",
+  "onboardingTitle3": "Mitahiry bebe kokoa amin'ny fifampiraharahana finday",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Mahazo paikady fanatsarana sara manokana ary mijery ny fitahirizanao miakatra amin'ny fifampiraharahana rehetra.",
+  "onboardingDescription3": "Mahazo paikady fanatsarana sara vola finday manokana ary mijery ny fitahirizanao miakatra amin'ny fifampiraharahana rehetra.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },
@@ -1810,5 +1810,203 @@
   "faqCurrencyRatesAnswer": "Ny app dia tsy manavao ho azy ny tahan'ny fifanakalozana vola. Manana fahefana tanteraka ianao ary afaka mametraka tanana ny tahan'ny fifanakalozana volanao manokana ho an'ny fanazaran-tena tanteraka. Izany dia manome anao fahafaha-manao tanteraka hampiasa ny taha mifanaraka amin'ny filanao, ary miasa tsara tanteraka tsy misy internet.",
   "@faqCurrencyRatesAnswer": {
     "description": "FAQ answer"
+  },
+  "comparisonWithWithoutOptimization": "Fampitahana amin'ny tsy fanatsarana",
+  "@comparisonWithWithoutOptimization": {
+    "description": "Title for the comparison section showing optimized vs non-optimized results"
+  },
+  "withOptimization": "Amin'ny fanatsarana",
+  "@withOptimization": {
+    "description": "Label for the optimized results section"
+  },
+  "withoutOptimizationMaxAmount": "Tsy misy fanatsarana (vola ambony)",
+  "@withoutOptimizationMaxAmount": {
+    "description": "Label for the non-optimized results section using maximum amount"
+  },
+  "withoutOptimizationSameNet": "Tsy misy fanatsarana (vola madio mitovy)",
+  "@withoutOptimizationSameNet": {
+    "description": "Label for the non-optimized results section using same net amount"
+  },
+  "enteredAmount": "Vola nampidirina",
+  "@availableBudget": {
+    "description": "Label for available budget in comparison"
+  },
+  "netAmountSent": "Vola madio nalefa",
+  "@netAmountSent": {
+    "description": "Label for net amount sent in comparison"
+  },
+  "totalFees": "Sara total",
+  "@totalFees": {
+    "description": "Label for total fees in comparison"
+  },
+  "totalSpent": "Total naloa",
+  "@totalSpent": {
+    "description": "Label for total amount spent in comparison"
+  },
+  "numberOfOperations": "Isan'ny asa",
+  "@numberOfOperations": {
+    "description": "Label for number of operations in comparison"
+  },
+  "youLoseAmount": "Very {amount} {currency} ianao",
+  "@youLoseAmount": {
+    "description": "Message when optimization results in loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "youGainAmount": "Mahazo {amount} {currency} ianao",
+  "@youGainAmount": {
+    "description": "Message when optimization results in gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "sameResultAsOptimization": "Vokatra mitovy amin'ny fanatsarana",
+  "@sameResultAsOptimization": {
+    "description": "Message when non-optimized result is same as optimized"
+  },
+  "netAmountLess": "• Vola madio kely kokoa: {amount} {currency}",
+  "@netAmountLess": {
+    "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "netAmountMore": "• Vola madio maro kokoa: {amount} {currency}",
+  "@netAmountMore": {
+    "description": "Detail showing net amount gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesLess": "• Sara kely kokoa: {amount} {currency}",
+  "@feesLess": {
+    "description": "Detail showing fee savings",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Sara fanampiny: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationCostsMoreFees": "Ny fanatsarana dia mitentina sara fanampiny {amount} {currency}",
+  "@optimizationCostsMoreFees": {
+    "description": "Message when optimization costs more than single transaction",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dueToTransactionConstraints": "• Noho ny fetran'ny fifampiraharahana (kely: {min}, ambony: {max})",
+  "@dueToTransactionConstraints": {
+    "description": "Explanation for optimization cost due to transaction limits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "exceedsEnteredAmount": "Mihoatra ny vola nampidirina",
+  "@exceedsAvailableBudget": {
+    "description": "Warning that result exceeds available budget"
+  },
+  "youSaveFees": "Mitsitsy sara {amount} {currency} ianao",
+  "@youSaveFees": {
+    "description": "Message showing savings from optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "totalSavingsWithOptimization": "Fitsitsiana total amin'ny fanatsarana: {amount} {currency}",
+  "@totalSavingsWithOptimization": {
+    "description": "Summary of total savings achieved with optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionGainsVsOptimized": "Io fifampiraharahana io dia mahazo {amount} {currency} raha oharina amin'ny fanatsarana",
+  "@transactionGainsVsOptimized": {
+    "description": "Message showing gain when a non-optimized transaction performs better",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionLosesVsOptimized": "Io fifampiraharahana io dia very {amount} {currency} raha oharina amin'ny fanatsarana",
+  "@transactionLosesVsOptimized": {
+    "description": "Message showing loss when a non-optimized transaction performs worse",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionSameResultAsOptimized": "Io fifampiraharahana io dia manana vokatra mitovy amin'ny fanatsarana",
+  "@transactionSameResultAsOptimized": {
+    "description": "Message showing when a non-optimized transaction has the same result as optimization",
+    "placeholders": {}
+  },
+  "noValidIntervalForComparison": "Ny vola nampidirina dia tsy ao anatin'ny elanelam-para sara manan-kery. Tsy afaka manao famantarana raha tsy misy fanatsarana.",
+  "@noValidIntervalForComparison": {
+    "description": "Message displayed when the entered amount is not within any valid fee interval for comparison",
+    "placeholders": {}
   }
 }
