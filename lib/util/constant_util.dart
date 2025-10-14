@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:fee_minimizer/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -21,59 +22,29 @@ class ConstantUtil {
 
   /// Format a number for display with intelligent rounding
   /// Rounds to appropriate decimal places based on amount size and precision needs
-  static String formatCurrencyAmount(double amount) {
+  static String formatCurrencyAmount(double amount, {int? decimals}) {
+    final amountDecimal = Decimal.parse(amount.toString());
+
     // Handle very small amounts (less than 0.01)
-    if (amount.abs() < 0.01) {
-      return amount.toStringAsFixed(4);
-    }
+    if (amountDecimal.abs() < Decimal.parse('0.01') &&
+        amountDecimal != Decimal.zero) {
+      // For amounts < 1 centime, display with maximum precision
+      final str = amountDecimal.toString();
 
-    // Handle small amounts (0.01 to 1)
-    if (amount.abs() < 1) {
-      return amount.toStringAsFixed(3);
-    }
-
-    // Handle medium amounts (1 to 100)
-    if (amount.abs() < 100) {
-      return amount.toStringAsFixed(2);
-    }
-
-    // Handle large amounts (100+)
-    if (amount.abs() < 1000) {
-      // Check if it's very close to a whole number (within 0.01)
-      if ((amount - amount.round()).abs() < 0.01) {
-        return amount.round().toString();
+      // If scientific notation would be clearer
+      if (str.length > 10) {
+        return amountDecimal.toStringAsExponential(6);
       }
-      return amount.toStringAsFixed(2);
-    }
 
-    // Handle very large amounts (1000+)
-    if (amount.abs() < 10000) {
-      // Check if it's very close to a whole number (within 0.1)
-      if ((amount - amount.round()).abs() < 0.1) {
-        return amount.round().toString();
-      }
-      return amount.toStringAsFixed(1);
+      // Otherwise, display with all significant decimals
+      return str;
+    } else if (amountDecimal.abs() < Decimal.parse('1')) {
+      // For amounts < 1, display 4-6 decimals
+      return amountDecimal.toStringAsFixed(6).replaceAll(RegExp(r'0+$'), '').replaceAll(RegExp(r'\.$'), '');
+    } else {
+      // Normal amounts: 2 decimals
+      return amountDecimal.toStringAsFixed(decimals ?? 2);
     }
-
-    // Handle extremely large amounts (10000+)
-    // Check if it's very close to a whole number (within 1)
-    if ((amount - amount.round()).abs() < 1) {
-      return amount.round().toString();
-    }
-
-    // For very large amounts, round to nearest 10, 100, etc. based on size
-    if (amount.abs() < 100000) {
-      return ((amount / 10).round() * 10).toString();
-    }
-    if (amount.abs() < 1000000) {
-      return ((amount / 100).round() * 100).toString();
-    }
-    if (amount.abs() < 10000000) {
-      return ((amount / 1000).round() * 1000).toString();
-    }
-
-    // For extremely large amounts, use scientific notation or round significantly
-    return amount.toStringAsExponential(2);
   }
 
   // Database configuration
