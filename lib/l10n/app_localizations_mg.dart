@@ -1122,12 +1122,12 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ampidiro ny vola fifampiraharahana sy misafidy mpamatsy. Ny app dia kajy ny sarany rehetra azo ampiharina ao anatin\'izany ny sarany raikitra, sarany isan-jato, ary sarany ambony/ambany. Izy io dia mampiseho anao ny vidiny manontolo ary manoro hevitra fanatsarana.';
 
   @override
-  String get faqMinMaxUsage =>
-      'Inona no dikan\'ny \'Vola Kely\' sy \'Vola Be\'?';
+  String get faqMinMaxTransactionRange =>
+      'Inona no dikan\'ny « Min transactions » sy « Max transactions »?';
 
   @override
-  String get faqMinMaxUsageAnswer =>
-      'Ny \'Vola Kely\' sy \'Vola Be\' dia mamaritra ny elanelam-bola tafiditra amin\'ny intervalle sara. Ohatra, raha manana Min=1 ary Max=1000 ny intervalle, dia mihatra amin\'ny vola rehetra eo anelanelan\'ny 1 sy 1000 izany. Rehefa mamorona na manova intervalle, ataovy azo antoka fa ny Min dia latsaky na mitovy amin\'ny Max ary tsy mifandona ny intervalle mba hisorohana ny kajy sara misafotofoto.';
+  String get faqMinMaxTransactionRangeAnswer =>
+      'Ny « Min transactions » sy « Max transactions » dia mamaritra ny isan\'ny fifanakalozana kely indrindra sy lehibe indrindra azo ampiasain\'ny mpanatsara mba hizara ny vola napetraka. Ohatra, raha manoratra 10 000 Ar ianao ary mampiditra Min transactions = 2 dia hikaroka vahaolana izay misy farafahakeliny 2 fifanakalozana ihany ny mpanatsara. Ataovy izay hahazoana antoka fa Min ≤ Max ary mety amin\'ny fikasanao ny sandany. Ireo fepetra ireo dia manery ny mpanatsara hahazo vokatra miaraka amin\'ny isan\'ny fifanakalozana ao anatin\'ny elanelana napetrakao.';
 
   @override
   String get faqDataSecurity => 'Azo antoka ve ny angon-drakitra?';
