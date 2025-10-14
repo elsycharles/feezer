@@ -4,27 +4,27 @@
   "@appTitle": {
     "description": "The title of the application"
   },
-  "onboardingTitle1": "Stop Losing Money to Banking Fees",
+  "onboardingTitle1": "Stop Losing Money to Mobile Money Fees",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Banking fees can add up quickly. Feezer helps you minimize costs on every transaction.",
+  "onboardingDescription1": "Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Smart Transaction Optimization",
+  "onboardingTitle2": "Smart Mobile Money Optimization",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Automatically calculate the most cost-effective way to handle your money transfers and payments.",
+  "onboardingDescription2": "Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Save More, Keep More",
+  "onboardingTitle3": "Save More on Mobile Transactions",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Get personalized fee optimization strategies and watch your savings grow with every transaction.",
+  "onboardingDescription3": "Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },
@@ -1811,5 +1811,215 @@
   "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
   "@faqAnswer8": {
     "description": "Eighth FAQ answer"
+  },
+  "comparisonWithWithoutOptimization": "Comparison with/without optimization",
+  "@comparisonWithWithoutOptimization": {
+    "description": "Title for the comparison section showing optimized vs non-optimized results"
+  },
+  "withOptimization": "With optimization",
+  "@withOptimization": {
+    "description": "Label for the optimized results section"
+  },
+  "withoutOptimizationMaxAmount": "Without optimization (max amount)",
+  "@withoutOptimizationMaxAmount": {
+    "description": "Label for the non-optimized results section using maximum amount"
+  },
+  "withoutOptimizationSameNet": "Without optimization (same net amount)",
+  "@withoutOptimizationSameNet": {
+    "description": "Label for the non-optimized results section using same net amount"
+  },
+  "enteredAmount": "Entered amount",
+  "@availableBudget": {
+    "description": "Label for available budget in comparison"
+  },
+  "netAmountSent": "Net amount sent",
+  "@netAmountSent": {
+    "description": "Label for net amount sent in comparison"
+  },
+  "totalFees": "Total fees",
+  "@totalFees": {
+    "description": "Label for total fees in comparison"
+  },
+  "totalSpent": "Total spent",
+  "@totalSpent": {
+    "description": "Label for total amount spent in comparison"
+  },
+  "numberOfOperations": "Number of operations",
+  "@numberOfOperations": {
+    "description": "Label for number of operations in comparison"
+  },
+  "youLoseAmount": "You lose {amount} {currency}",
+  "@youLoseAmount": {
+    "description": "Message when optimization results in loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "youGainAmount": "You gain {amount} {currency}",
+  "@youGainAmount": {
+    "description": "Message when optimization results in gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "sameResultAsOptimization": "Same result as optimization",
+  "@sameResultAsOptimization": {
+    "description": "Message when non-optimized result is same as optimized"
+  },
+  "netAmountLess": "• Net amount less: {amount} {currency}",
+  "@netAmountLess": {
+    "description": "Detail showing net amount loss",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "netAmountMore": "• Net amount more: {amount} {currency}",
+  "@netAmountMore": {
+    "description": "Detail showing net amount gain",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesLess": "• Fees less: {amount} {currency}",
+  "@feesLess": {
+    "description": "Detail showing fee savings",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Fees more: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "feesMore": "• Fees more: {amount} {currency}",
+  "@feesMore": {
+    "description": "Detail showing additional fees",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationCostsMoreFees": "Optimization costs {amount} {currency} more in fees",
+  "@optimizationCostsMoreFees": {
+    "description": "Message when optimization costs more than single transaction",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "dueToTransactionConstraints": "• This is due to transaction constraints (min: {min}, max: {max})",
+  "@dueToTransactionConstraints": {
+    "description": "Explanation for optimization cost due to transaction limits",
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "exceedsEnteredAmount": "Exceeds entered amount",
+  "@exceedsAvailableBudget": {
+    "description": "Warning that result exceeds available budget"
+  },
+  "youSaveFees": "You save {amount} {currency} in fees",
+  "@youSaveFees": {
+    "description": "Message showing savings from optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "totalSavingsWithOptimization": "Total savings with optimization: {amount} {currency}",
+  "@totalSavingsWithOptimization": {
+    "description": "Summary of total savings achieved with optimization",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionGainsVsOptimized": "This transaction gains {amount} {currency} compared to optimization",
+  "@transactionGainsVsOptimized": {
+    "description": "Message showing gain when a non-optimized transaction performs better",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionLosesVsOptimized": "This transaction loses {amount} {currency} compared to optimization",
+  "@transactionLosesVsOptimized": {
+    "description": "Message showing loss when a non-optimized transaction performs worse",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      },
+      "currency": {
+        "type": "String"
+      }
+    }
+  },
+  "transactionSameResultAsOptimized": "This transaction has the same result as optimization",
+  "@transactionSameResultAsOptimized": {
+    "description": "Message showing when a non-optimized transaction has the same result as optimization",
+    "placeholders": {}
+  },
+  "noValidIntervalForComparison": "The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.",
+  "@noValidIntervalForComparison": {
+    "description": "Message displayed when the entered amount is not within any valid fee interval for comparison",
+    "placeholders": {}
   }
 }

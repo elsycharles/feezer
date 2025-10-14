@@ -33,8 +33,8 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   @override
   void initState() {
     super.initState();
-    // Initialize with raw value, no formatting
-    _controller = TextEditingController(text: widget.value.toString());
+    // Initialize with formatted value to avoid showing .0 for integers
+    _controller = TextEditingController(text: _formatValue(widget.value));
     _focusNode = FocusNode();
     // Add focus listeners to manage typing state
     _focusNode.addListener(_onFocusChanged);
@@ -67,7 +67,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   // New method to format value
   String _formatValue(double value) {
-    // Si c'est un nombre entier, on n'affiche pas le .0
+    // If it's an integer, we don't display the .0
     if (value == value.toInt()) {
       return value.toInt().toString();
     }
@@ -147,11 +147,12 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onTextChanged(String value) {
     _isUserTyping = true;
-    final doubleValue = ConstantUtil.parseLocalizedNumber(value);
-    if (doubleValue != null &&
-        doubleValue >= widget.min &&
-        doubleValue <= widget.max) {
-      widget.onChanged(doubleValue);
+    final decimalValue = ConstantUtil.parseLocalizedNumber(value);
+    if (decimalValue != null) {
+      final doubleValue = decimalValue.toDouble();
+      if (doubleValue >= widget.min && doubleValue <= widget.max) {
+        widget.onChanged(doubleValue);
+      }
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);
     }

@@ -1,8 +1,11 @@
 import 'dart:math';
+import 'package:decimal/decimal.dart';
 import '../../model/fee_interval_model.dart';
 import '../../model/fee_minimizer_result_model.dart';
 import '../../model/fee_minimizer_detail_model.dart';
 import '../../util/constant_util.dart';
+import '../../util/decimal_util.dart';
+import '../../util/cache_util.dart';
 import '../../l10n/app_localizations.dart';
 
 class FeeOptimizerUtil {
@@ -82,6 +85,35 @@ class FeeOptimizerUtil {
         maxOperations,
         minOperations,
       );
+
+      // ✅ CRITICAL VALIDATION: Check that fees are not zero
+      if (result.details.isNotEmpty) {
+        bool hasInvalidFees = false;
+        for (final detail in result.details) {
+          // If the amount exists but fees are 0 AND it's not normal
+          if (detail.amount > 0 && detail.fee == 0) {
+            // Recalculate the fee to verify
+            final option = options.firstWhere(
+              (opt) => detail.amount >= opt.min && detail.amount <= opt.max,
+              orElse: () => options.first,
+            );
+            final expectedFee = option.getFeeForAmount(detail.amount);
+            if (expectedFee > 0) {
+              hasInvalidFees = true;
+              break;
+            }
+          }
+        }
+
+        // If invalid fees are detected, recalculate
+        if (hasInvalidFees) {
+          // print('⚠️ Invalid fees detected, recalculating...'); // Debug only
+          // Force a simple recalculation
+          final correctedResult = _greedyOptimizedFast(totalAmount, options, precision);
+          _cache.put(cacheKey, correctedResult);
+          return correctedResult;
+        }
+      }
 
       // Filter out details with null or zero values
       final filteredDetails = result.details
@@ -192,8 +224,12 @@ class FeeOptimizerUtil {
         ? _selectBest([
             _greedyOptimizedFast(totalAmount, options, precision),
             _repeatedOperationsOptimized(totalAmount, options, precision),
+            _findBestSingleOperation(totalAmount, options), // New method
           ])
-        : _greedyOptimizedFast(totalAmount, options, precision);
+        : _selectBest([
+            _greedyOptimizedFast(totalAmount, options, precision),
+            _findBestSingleOperation(totalAmount, options), // New method
+          ]);
 
     return _applyConstraintsOptimized(
       unlimitedResult,
@@ -203,6 +239,53 @@ class FeeOptimizerUtil {
       maxOperations,
       minOperations,
     );
+  }
+
+  static FeeOptimizerResult _findBestSingleOperation(
+    double totalAmount,
+    List<_FeeOption> options,
+  ) {
+    FeeOptimizerResult? bestResult;
+
+    for (final opt in options) {
+      double netAmount;
+      double fee;
+
+      if (opt.feeType == FeeType.percentage) {
+        netAmount = totalAmount / (1 + opt.feeValue / 100);
+        fee = netAmount * (opt.feeValue / 100);
+      } else {
+        netAmount = totalAmount - opt.feeValue;
+        fee = opt.feeValue;
+      }
+
+      // ✅ FIX: Use dynamic tolerance instead of hardcoded 0.01
+      final totalAmountDecimal = DecimalUtil.toDecimal(totalAmount);
+      final netAmountDecimal = DecimalUtil.toDecimal(netAmount);
+      final feeDecimal = DecimalUtil.toDecimal(fee);
+      final totalCostDecimal = netAmountDecimal + feeDecimal;
+      final tolerance = ConstantUtil.calculateTolerance(totalAmountDecimal);
+
+      if (netAmount >= opt.min && netAmount <= opt.max &&
+          netAmount > 0 && DecimalUtil.isLessOrEqual(totalCostDecimal, totalAmountDecimal, tolerance: tolerance)) {
+        final result = _buildResult(
+          totalAmount,
+          netAmount,
+          fee,
+          totalAmount - netAmount - fee,
+          {'$netAmount-$fee': 1},
+        );
+
+        if (bestResult == null ||
+            result.netAmount > bestResult.netAmount ||
+            (result.netAmount == bestResult.netAmount &&
+             result.totalFees < bestResult.totalFees)) {
+          bestResult = result;
+        }
+      }
+    }
+
+    return bestResult ?? _buildResult(totalAmount, 0, 0, totalAmount, {});
   }
 
   static FeeOptimizerResult _applyConstraintsOptimized(
@@ -333,38 +416,138 @@ class FeeOptimizerUtil {
       );
     }
 
+    // ✅ Try first an optimal solution with a single option
+    for (final opt in options) {
+      final result = _trySingleOptionDistribution(
+        totalAmount,
+        opt,
+        precision,
+        targetCount,
+      );
+      if (result != null && result.totalOperations == targetCount) {
+        return result;
+      }
+    }
+
+    // ✅ If not possible, use mixed distribution
+    return _mixedDistribution(totalAmount, options, precision, targetCount);
+  }
+
+  // Distribution with a single option
+  static FeeOptimizerResult? _trySingleOptionDistribution(
+    double totalAmount,
+    _FeeOption opt,
+    double precision,
+    int targetCount,
+  ) {
+    final totalDecimal = DecimalUtil.toDecimal(totalAmount);
+    final countDecimal = Decimal.fromInt(targetCount);
+
+    // Calculate with unlimited precision
+    final Decimal amountPerOpDecimal;
+
+    if (opt.feeType == FeeType.percentage) {
+      final hundred = Decimal.fromInt(100);
+      final one = Decimal.fromInt(1);
+      final denominator = countDecimal * (one + (opt._feeValueDecimal / hundred).toDecimal(scaleOnInfinitePrecision: 10));
+      amountPerOpDecimal = (totalDecimal / denominator).toDecimal(scaleOnInfinitePrecision: 10);
+    } else {
+      final totalFees = opt._feeValueDecimal * countDecimal;
+      amountPerOpDecimal = ((totalDecimal - totalFees) / countDecimal).toDecimal(scaleOnInfinitePrecision: 10);
+    }
+
+    // Check constraints
+    if (amountPerOpDecimal < opt._minDecimal ||
+        amountPerOpDecimal > opt._maxDecimal) {
+      return null;
+    }
+
+    final feeDecimal = opt.getFeeForAmountDecimal(amountPerOpDecimal);
+    final totalCostRational = (amountPerOpDecimal + feeDecimal) * countDecimal;
+    final totalCostDecimal = totalCostRational;
+
+    // ✅ FIXED: Use dynamic tolerance instead of hardcoded 0.01
+    final tolerance = ConstantUtil.calculateTolerance(totalDecimal);
+    if (ConstantUtil.isDecimalGreater(totalCostDecimal, totalDecimal, tolerance: tolerance)) {
+      return null;
+    }
+
+    // Convert to double for result
+    final amountPerOp = DecimalUtil.toDouble(amountPerOpDecimal);
+    final fee = DecimalUtil.toDouble(feeDecimal);
+    final totalNet = amountPerOp * targetCount;
+    final totalFees = fee * targetCount;
+    final totalCost = DecimalUtil.toDouble(totalCostDecimal);
+
+    return _buildResult(
+      totalAmount,
+      totalNet,
+      totalFees,
+      totalAmount - totalCost,
+      {'$amountPerOp-$fee': targetCount},
+    );
+  }
+
+  // ✅ New function: Optimized mixed distribution
+  static FeeOptimizerResult? _mixedDistribution(
+    double totalAmount,
+    List<_FeeOption> options,
+    double precision, // Gardé pour signature mais non utilisé
+    int targetCount,
+  ) {
     final counts = <String, int>{};
     double budget = totalAmount;
     double totalNet = 0;
     double totalFees = 0;
 
     for (int i = 0; i < targetCount; i++) {
-      if (budget <= 0) break;
+      final budgetDecimal = DecimalUtil.toDecimal(budget);
+      final tolerance = ConstantUtil.calculateTolerance(budgetDecimal);
+
+      // Stop if remaining budget is negligible
+      if (budgetDecimal <= tolerance) break;
 
       final remaining = budget;
       final remainingOperations = targetCount - i;
       final targetAmount = remaining / remainingOperations;
 
       _BestOperation? best;
+      double bestScore = -1;
 
       for (final opt in options) {
-        final maxAmount = min(opt.max, remaining - opt.fee);
-        if (maxAmount < opt.min) continue;
+        double amount;
 
-        // REMOVED rounding: amount = (amount / precision).floor() * precision;
-        double amount = min(maxAmount, max(opt.min, targetAmount - opt.fee));
-
-        if (amount < opt.min) {
-          amount = opt.min;
+        if (opt.feeType == FeeType.percentage) {
+          amount = targetAmount / (1 + opt.feeValue / 100);
+        } else {
+          amount = targetAmount - opt.feeValue;
         }
-        if (amount > maxAmount) continue;
 
-        final efficiency = amount / opt.fee;
-        final proximity = 1 / (1 + (amount - targetAmount).abs());
-        final score = efficiency * 10 + proximity * amount;
+        // ✅ NO ROUNDING - just constrain to limits
+        amount = max(opt.min, min(opt.max, amount));
 
-        if (best == null || score > best.score) {
-          best = _BestOperation(amount: amount, fee: opt.fee, score: score);
+        final fee = opt.getFeeForAmount(amount);
+        final totalCost = amount + fee;
+
+        // ✅ FIXED: Use dynamic tolerance for comparison
+        final costDecimal = DecimalUtil.toDecimal(totalCost);
+        final remainingDecimal = DecimalUtil.toDecimal(remaining);
+        final costTolerance = ConstantUtil.calculateTolerance(remainingDecimal);
+
+        if (ConstantUtil.isDecimalGreater(costDecimal, remainingDecimal, tolerance: costTolerance) ||
+            amount < opt.min) {
+          continue;
+        }
+
+        final efficiency = amount / (fee + 0.0001);
+        final utilization = amount / opt.max;
+        final costFit = (targetAmount - totalCost).abs();
+
+        final score = efficiency * 10 + utilization * 5 - costFit * 0.1;
+
+        if (score > bestScore) {
+          bestScore = score;
+          best = _BestOperation(amount: amount, fee: fee, score: score);
         }
       }
 
@@ -382,10 +565,7 @@ class FeeOptimizerUtil {
     }
 
     final actualCount = counts.values.fold(0, (sum, count) => sum + count);
-
-    if (actualCount < targetCount) {
-      return null;
-    }
+    if (actualCount < targetCount) return null;
 
     return _buildResult(totalAmount, totalNet, totalFees, budget, counts);
   }
@@ -402,20 +582,22 @@ class FeeOptimizerUtil {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
 
-    final operationCost = bestOption.max + bestOption.fee;
-    final maxPossibleOps = (totalAmount / operationCost)
-        .toInt(); // CHANGED: .floor() to .toInt()
+    // ✅ Calculate real fee at maximum amount
+    final realFee = bestOption.getFeeForAmount(bestOption.max);
+    final operationCost = bestOption.max + realFee;
+    
+    final maxPossibleOps = (totalAmount / operationCost).floor();
 
     int targetOps = maxPossibleOps;
     if (maxOperations > 0) targetOps = min(targetOps, maxOperations);
     if (minOperations > 0) targetOps = max(targetOps, minOperations);
 
     final netAmount = bestOption.max * targetOps;
-    final totalFees = bestOption.fee * targetOps;
+    final totalFees = realFee * targetOps;
     final remaining = totalAmount - (operationCost * targetOps);
 
     return _buildResult(totalAmount, netAmount, totalFees, remaining, {
-      '${bestOption.max}-${bestOption.fee}': targetOps,
+      '${bestOption.max}-$realFee': targetOps,
     });
   }
 
@@ -426,7 +608,7 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Utiliser une combinaison des 2-3 meilleures options
+    // Use a combination of the 2-3 best options
     final topOptions = _getTopOptions(options, 3);
     return _hybridOptimization(
       totalAmount,
@@ -442,6 +624,71 @@ class FeeOptimizerUtil {
     List<_FeeOption> options,
     double precision,
   ) {
+    _BestOperation? bestSingleOp;
+
+    for (final opt in options) {
+      final minAmount = opt.min;
+      final maxAmount = opt.max;
+
+      double netAmount;
+      double fee;
+
+      if (opt.feeType == FeeType.percentage) {
+        netAmount = totalAmount / (1 + opt.feeValue / 100);
+        fee = netAmount * (opt.feeValue / 100);
+      } else {
+        netAmount = totalAmount - opt.feeValue;
+        fee = opt.feeValue;
+      }
+
+      // ✅ FIX: Use dynamic tolerance instead of hardcoded 0.01
+      final totalAmountDecimal = DecimalUtil.toDecimal(totalAmount);
+      final netAmountDecimal = DecimalUtil.toDecimal(netAmount);
+      final feeDecimal = DecimalUtil.toDecimal(fee);
+      final totalCostDecimal = netAmountDecimal + feeDecimal;
+      final tolerance = ConstantUtil.calculateTolerance(totalAmountDecimal);
+
+      if (netAmount >= minAmount && netAmount <= maxAmount &&
+          netAmount > 0 && DecimalUtil.isLessOrEqual(totalCostDecimal, totalAmountDecimal, tolerance: tolerance)) {
+        final efficiency = netAmount / (fee + 0.0001);
+
+        if (bestSingleOp == null || efficiency > bestSingleOp.score) {
+          bestSingleOp = _BestOperation(
+            amount: netAmount,
+            fee: fee,
+            score: efficiency,
+          );
+        }
+      }
+    }
+
+    if (bestSingleOp != null) {
+      final singleOpResult = _buildResult(
+        totalAmount,
+        bestSingleOp.amount,
+        bestSingleOp.fee,
+        totalAmount - bestSingleOp.amount - bestSingleOp.fee,
+        {'${bestSingleOp.amount}-${bestSingleOp.fee}': 1},
+      );
+
+      final multiOpResult = _greedyMultiOperations(totalAmount, options, precision);
+
+      if (singleOpResult.netAmount > multiOpResult.netAmount ||
+          (singleOpResult.netAmount == multiOpResult.netAmount &&
+           singleOpResult.totalFees < multiOpResult.totalFees)) {
+        return singleOpResult;
+      }
+      return multiOpResult;
+    }
+
+    return _greedyMultiOperations(totalAmount, options, precision);
+  }
+
+  static FeeOptimizerResult _greedyMultiOperations(
+    double totalAmount,
+    List<_FeeOption> options,
+    double precision,
+  ) {
     final counts = <String, int>{};
     double budget = totalAmount;
     double totalNet = 0;
@@ -453,7 +700,6 @@ class FeeOptimizerUtil {
       if (best == null) break;
 
       final operationCost = best.amount + best.fee;
-      // REMOVED .floor() - Use exact value
       final repeatCount = min(
         (budget / operationCost).toInt(),
         _maxSafeOperations,
@@ -484,11 +730,44 @@ class FeeOptimizerUtil {
     List<_FeeOption> options,
     double precision,
   ) {
-    FeeOptimizerResult bestResult = _greedyOptimizedFast(
-      totalAmount,
-      options,
-      precision,
-    );
+    FeeOptimizerResult bestResult = _buildResult(totalAmount, 0, 0, totalAmount, {});
+
+    // ✅ Test with a single operation (without rounding)
+    for (final opt in options) {
+      double netAmount;
+      double fee;
+
+      if (opt.feeType == FeeType.percentage) {
+        netAmount = totalAmount / (1 + opt.feeValue / 100);
+        fee = netAmount * (opt.feeValue / 100);
+      } else {
+        netAmount = totalAmount - opt.feeValue;
+        fee = opt.feeValue;
+      }
+
+      if (netAmount >= opt.min && netAmount <= opt.max && netAmount > 0) {
+        final singleOpResult = _buildResult(
+          totalAmount,
+          netAmount,
+          fee,
+          totalAmount - netAmount - fee,
+          {'$netAmount-$fee': 1},
+        );
+
+        if (singleOpResult.netAmount > bestResult.netAmount ||
+            (singleOpResult.netAmount == bestResult.netAmount &&
+             singleOpResult.totalFees < bestResult.totalFees)) {
+          bestResult = singleOpResult;
+        }
+      }
+    }
+
+    final multiOpResult = _greedyMultiOperations(totalAmount, options, precision);
+    if (multiOpResult.netAmount > bestResult.netAmount ||
+        (multiOpResult.netAmount == bestResult.netAmount &&
+         multiOpResult.totalFees < bestResult.totalFees)) {
+      bestResult = multiOpResult;
+    }
 
     final optionsToTest = totalAmount > 1e9
         ? options.take(3).toList()
@@ -500,20 +779,21 @@ class FeeOptimizerUtil {
       for (final amount in samples) {
         if (amount < opt.min) continue;
 
-        final cost = amount + opt.fee;
+        final fee = opt.getFeeForAmount(amount);
+        final cost = amount + fee;
         final count = min(
-          (totalAmount / cost).toInt(),
+          (totalAmount / cost).floor(),
           _maxSafeOperations,
-        ); // CHANGED: .floor() to .toInt()
+        );
         if (count == 0) continue;
 
         final net = amount * count;
-        final fees = opt.fee * count;
+        final fees = fee * count;
         final remaining = totalAmount - cost * count;
 
         if (net > bestResult.netAmount ||
             (net == bestResult.netAmount && fees < bestResult.totalFees)) {
-          final counts = <String, int>{'$amount-${opt.fee}': count};
+          final counts = <String, int>{'$amount-$fee': count};
           bestResult = _buildResult(totalAmount, net, fees, remaining, counts);
         }
       }
@@ -525,7 +805,7 @@ class FeeOptimizerUtil {
   static List<double> _getAdaptiveSamples(
     _FeeOption opt,
     double totalAmount,
-    double precision,
+    double precision, // Gardé pour signature mais non utilisé
   ) {
     final samples = <double>[];
 
@@ -537,7 +817,7 @@ class FeeOptimizerUtil {
     for (int i = 1; i < numSamples; i++) {
       final amt = opt.max - (step * i);
       if (amt >= opt.min) {
-        // REMOVED rounding: (amt / precision).floor() * precision
+        // ✅ NO ROUNDING - exact value
         samples.add(amt);
       }
     }
@@ -590,7 +870,7 @@ class FeeOptimizerUtil {
       return List.generate(end - start + 1, (i) => start + i);
     }
 
-    // Échantillonnage logarithmique pour les grandes plages
+    // Logarithmic sampling for large ranges
     final samples = <int>{start, end};
     final step = max(1, (end - start) ~/ 20);
 
@@ -613,10 +893,12 @@ class FeeOptimizerUtil {
       return _buildResult(totalAmount, 0, 0, totalAmount, {});
     }
 
+    // ✅ Use real fee
+    final realFee = bestOption.getFeeForAmount(bestOption.max);
     final targetOps = min(
       maxOperations,
-      (totalAmount / (bestOption.max + bestOption.fee)).toInt(),
-    ); // CHANGED
+      (totalAmount / (bestOption.max + realFee)).floor(),
+    );
     final actualOps = max(minOperations, targetOps);
 
     return _distributeWithMainOption(
@@ -638,11 +920,13 @@ class FeeOptimizerUtil {
     final counts = <String, int>{};
     double budget = totalAmount;
 
-    final mainCost = mainOption.max + mainOption.fee;
-    final mainCount = min(targetCount, (budget / mainCost).toInt()); // CHANGED
+    // ✅ Use real fee
+    final mainFee = mainOption.getFeeForAmount(mainOption.max);
+    final mainCost = mainOption.max + mainFee;
+    final mainCount = min(targetCount, (budget / mainCost).floor());
 
     if (mainCount > 0) {
-      counts['${mainOption.max}-${mainOption.fee}'] = mainCount;
+      counts['${mainOption.max}-$mainFee'] = mainCount;
       budget -= mainCost * mainCount;
     }
 
@@ -650,12 +934,14 @@ class FeeOptimizerUtil {
     for (final opt in options) {
       if (remaining <= 0 || budget <= 0) break;
 
-      final cost = opt.max + opt.fee;
+      // ✅ Calculate real fee for each option
+      final optFee = opt.getFeeForAmount(opt.max);
+      final cost = opt.max + optFee;
       if (cost > budget) continue;
 
-      final count = min(remaining, (budget / cost).toInt()); // CHANGED
+      final count = min(remaining, (budget / cost).floor());
       if (count > 0) {
-        counts['${opt.max}-${opt.fee}'] = count;
+        counts['${opt.max}-$optFee'] = count;
         budget -= cost * count;
         remaining -= count;
       }
@@ -679,14 +965,17 @@ class FeeOptimizerUtil {
       if (budget <= 0) break;
       if (maxOperations > 0 && totalOps >= maxOperations) break;
 
-      final cost = opt.max + opt.fee;
+      // ✅ Use real fee
+      final optFee = opt.getFeeForAmount(opt.max);
+      final cost = opt.max + optFee;
+      
       final maxCount = maxOperations > 0
-          ? min((budget / cost).toInt(), maxOperations - totalOps) // CHANGED
-          : (budget / cost).toInt(); // CHANGED
+          ? min((budget / cost).floor(), maxOperations - totalOps)
+          : (budget / cost).floor();
 
       if (maxCount > 0) {
         final count = min(maxCount, _maxSafeOperations - totalOps);
-        counts['${opt.max}-${opt.fee}'] = count;
+        counts['${opt.max}-$optFee'] = count;
         budget -= cost * count;
         totalOps += count;
       }
@@ -712,7 +1001,10 @@ class FeeOptimizerUtil {
     double bestEfficiency = 0;
 
     for (final opt in options) {
-      final efficiency = opt.max / opt.fee;
+      // ✅ Calculate efficiency at maximum amount
+      final fee = opt.getFeeForAmount(opt.max);
+      final efficiency = opt.max / (fee + 0.0001);
+      
       if (efficiency > bestEfficiency) {
         bestEfficiency = efficiency;
         best = opt;
@@ -724,7 +1016,14 @@ class FeeOptimizerUtil {
 
   static List<_FeeOption> _getTopOptions(List<_FeeOption> options, int count) {
     final sorted = List<_FeeOption>.from(options)
-      ..sort((a, b) => (b.max / b.fee).compareTo(a.max / a.fee));
+      ..sort((a, b) {
+        // ✅ Calculate real efficiency at maximum amount
+        final feeA = a.getFeeForAmount(a.max);
+        final feeB = b.getFeeForAmount(b.max);
+        final effA = a.max / (feeA + 0.0001);
+        final effB = b.max / (feeB + 0.0001);
+        return effB.compareTo(effA);
+      });
     return sorted.take(count).toList();
   }
 
@@ -734,19 +1033,50 @@ class FeeOptimizerUtil {
     double precision,
   ) {
     _BestOperation? best;
+    double bestScore = -1;
+
+    final budgetDecimal = DecimalUtil.toDecimal(budget);
 
     for (final opt in options) {
-      final maxAmount = min(opt.max, budget - opt.fee);
-      if (maxAmount < opt.min) continue;
+      // Calculate with unlimited precision
+      final netAmountDecimal = DecimalUtil.calculateNetAmount(
+        budget: budgetDecimal,
+        feeValue: opt._feeValueDecimal,
+        isPercentage: opt.feeType == FeeType.percentage,
+      );
 
-      // REMOVED rounding: (maxAmount / precision).floor() * precision
-      final amount = maxAmount;
-      if (amount < opt.min) continue;
+      // Limit to maximum amount
+      Decimal amountDecimal = netAmountDecimal;
+      if (amountDecimal > opt._maxDecimal) {
+        amountDecimal = opt._maxDecimal;
+      }
+      if (amountDecimal < opt._minDecimal) continue;
 
-      final score = amount / opt.fee;
+      final feeDecimal = opt.getFeeForAmountDecimal(amountDecimal);
+      final totalCostDecimal = DecimalUtil.calculateTotalCost(
+        amount: amountDecimal,
+        fee: feeDecimal,
+      );
 
-      if (best == null || score > best.score) {
-        best = _BestOperation(amount: amount, fee: opt.fee, score: score);
+      // ✅ FIXED: Use dynamic tolerance
+      final tolerance = ConstantUtil.calculateTolerance(budgetDecimal);
+      if (ConstantUtil.isDecimalGreater(totalCostDecimal, budgetDecimal, tolerance: tolerance)) {
+        continue;
+      }
+
+      // Calculate score
+      final minFee = DecimalUtil.toDecimal(1e-15);
+      final safeFee = feeDecimal > minFee ? feeDecimal : minFee;
+      final scoreRational = amountDecimal / safeFee;
+      final score = scoreRational.toDouble();
+
+      if (score > bestScore) {
+        bestScore = score;
+        best = _BestOperation(
+          amount: DecimalUtil.toDouble(amountDecimal),
+          fee: DecimalUtil.toDouble(feeDecimal),
+          score: score,
+        );
       }
     }
 
@@ -792,20 +1122,30 @@ class FeeOptimizerUtil {
     if (validIntervals.isEmpty) return [];
 
     final options = validIntervals.map((interval) {
-      final approximatedFee = interval.feeType == FeeType.percentage
-          ? interval.maxAmount! * (interval.fee! / 100.0)
-          : interval.fee!;
+      // ✅ No longer approximate, store type directly
       return _FeeOption(
         min: interval.minAmount!,
         max: interval.maxAmount!,
-        fee: approximatedFee,
+        fee: interval.fee!, // Raw value (% or fixed)
         feeValue: interval.fee!,
         feeType: interval.feeType,
       );
     }).toList();
 
-    options.sort((a, b) => (b.max / b.fee).compareTo(a.max / a.fee));
+    // ✅ Dynamic sorting based on real efficiency at max
+    options.sort((a, b) {
+      final effA = _calculateEfficiency(a.max, a);
+      final effB = _calculateEfficiency(b.max, b);
+      return effB.compareTo(effA);
+    });
+    
     return options;
+  }
+
+  // ✅ Helper function to calculate real efficiency
+  static double _calculateEfficiency(double amount, _FeeOption opt) {
+    final fee = opt.getFeeForAmount(amount);
+    return amount / (fee + 0.0001); // Avoid division by zero
   }
 
   static void _validateInput(
@@ -833,6 +1173,10 @@ class FeeOptimizerUtil {
     }
   }
 
+  // ========================================
+  // 5. Improve _buildResult to handle extremely small values
+  // ========================================
+
   static FeeOptimizerResult _buildResult(
     double totalAmount,
     double netAmount,
@@ -840,13 +1184,35 @@ class FeeOptimizerUtil {
     double remaining,
     Map<String, int> counts,
   ) {
-    // Filter entries with count = 0 or amount = 0
+    // Convert to Decimal for precise calculations
+    final totalDecimal = Decimal.parse(totalAmount.toString());
+    final netDecimal = Decimal.parse(netAmount.toString());
+    final feesDecimal = Decimal.parse(totalFees.toString());
+    
+    // Calculate the remaining with precision
+    final remainingDecimal = totalDecimal - netDecimal - feesDecimal;
+    
+    // If very close to zero or negative, set to zero
+    final zero = Decimal.zero;
+    final tolerance = Decimal.parse('1e-10');
+    
+    double finalRemaining;
+    if (remainingDecimal.abs() < tolerance || remainingDecimal < zero) {
+      finalRemaining = 0.0;
+    } else {
+      finalRemaining = remainingDecimal.toDouble();
+    }
+
+    // Filter entries with count = 0 or truly zero amount
     final filteredCounts = Map<String, int>.from(counts)
       ..removeWhere((key, value) {
         if (value <= 0) return true;
+
         final parts = key.split('-');
-        final amount = double.parse(parts[0]);
-        return amount <= 0;
+        final amountDecimal = Decimal.parse(parts[0]);
+
+        // Only filter if amount is truly zero (not just very small)
+        return amountDecimal == zero;
       });
 
     final details = filteredCounts.entries.map((entry) {
@@ -862,7 +1228,7 @@ class FeeOptimizerUtil {
       totalAmount: totalAmount,
       netAmount: netAmount,
       totalFees: totalFees,
-      remaining: remaining,
+      remaining: finalRemaining,
       details: details,
     );
   }
@@ -871,7 +1237,7 @@ class FeeOptimizerUtil {
     if (results.isEmpty) return _buildResult(0, 0, 0, 0, {});
 
     return results.reduce((best, curr) {
-      // Prioriser le montant net, puis les frais minimaux, puis le reste minimal
+      // Prioritize net amount, then minimum fees, then minimum remainder
       if (curr.netAmount > best.netAmount) return curr;
       if (curr.netAmount == best.netAmount) {
         if (curr.totalFees < best.totalFees) return curr;
@@ -910,32 +1276,85 @@ class FeeOptimizerUtil {
 
     return best;
   }
-}
 
-// Cache LRU simple et efficace
-class LRUCache<K, V> {
-  final int capacity;
-  final _cache = <K, V>{};
+  static Map<String, dynamic>? calculateNonOptimizedComparison(
+    double amountInAriary,
+    List<FeeInterval> intervals,
+    FeeOptimizerResult optimizedResult,
+  ) {
+    // Find the maximum net amount with available budget
+    double maxNetAmount = 0;
+    double maxFee = 0;
+    bool foundValidMaxInterval = false;
 
-  LRUCache(this.capacity);
+    for (final interval in intervals) {
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
 
-  V? get(K key) {
-    final value = _cache.remove(key);
-    if (value != null) {
-      _cache[key] = value;
+      // Calculate maximum possible net amount in this interval
+      double netAmount;
+
+      if (interval.feeType == FeeType.percentage) {
+        // budget = netAmount + netAmount * (fee/100)
+        // budget = netAmount * (1 + fee/100)
+        // netAmount = budget / (1 + fee/100)
+        netAmount = amountInAriary / (1 + (interval.fee ?? 0) / 100.0);
+      } else {
+        netAmount = amountInAriary - (interval.fee ?? 0);
+      }
+
+      // Limit to interval max
+      netAmount = min(netAmount, maxAmount);
+
+      // Check if valid
+      if (netAmount >= minAmount && netAmount <= maxAmount && netAmount > 0) {
+        final fee = interval.feeType == FeeType.percentage
+            ? netAmount * ((interval.fee ?? 0) / 100.0)
+            : (interval.fee ?? 0);
+
+        final totalCost = netAmount + fee;
+
+        // Check that it doesn't exceed budget (with tolerance)
+        if (totalCost <= amountInAriary + 0.01) {
+          foundValidMaxInterval = true;
+          if (netAmount > maxNetAmount) {
+            maxNetAmount = netAmount;
+            maxFee = fee;
+          }
+        }
+      }
     }
-    return value;
-  }
 
-  void put(K key, V value) {
-    _cache.remove(key);
-    _cache[key] = value;
-    if (_cache.length > capacity) {
-      _cache.remove(_cache.keys.first);
+    // Calculate if we take the same net amount as optimization
+    double sameNetFee = 0;
+    double sameNetTotalAmount = 0;
+    bool foundValidSameNetInterval = false;
+    final optimizedNetAmount = optimizedResult.netAmount;
+
+    for (final interval in intervals) {
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+
+      if (optimizedNetAmount >= minAmount && optimizedNetAmount <= maxAmount) {
+        foundValidSameNetInterval = true;
+        sameNetFee = interval.feeType == FeeType.percentage
+            ? optimizedNetAmount * ((interval.fee ?? 0) / 100.0)
+            : (interval.fee ?? 0);
+        sameNetTotalAmount = optimizedNetAmount + sameNetFee;
+        break;
+      }
     }
-  }
 
-  void clear() => _cache.clear();
+    // Always return data with validity flags
+    return {
+      'maxNetAmount': maxNetAmount,
+      'maxFee': maxFee,
+      'sameNetFee': sameNetFee,
+      'sameNetTotalAmount': sameNetTotalAmount,
+      'hasValidMaxInterval': foundValidMaxInterval,
+      'hasValidSameNetInterval': foundValidSameNetInterval,
+    };
+  }
 }
 
 // Optimized internal classes
@@ -943,22 +1362,55 @@ class _FeeOption {
   _FeeOption({
     required this.min,
     required this.max,
-    required this.fee,
+    required this.fee, // Raw value (% or fixed)
     required this.feeValue,
     required this.feeType,
-  });
+  }) {
+    // Convert to Decimal for unlimited precision calculations
+    _minDecimal = DecimalUtil.toDecimal(min);
+    _maxDecimal = DecimalUtil.toDecimal(max);
+    _feeValueDecimal = DecimalUtil.toDecimal(feeValue);
+  }
+
   final double min;
   final double max;
-  final double fee; // Approximated fee for sorting
+  final double fee; // Raw value (% or fixed)
   final double feeValue;
   final FeeType feeType;
 
+  // Decimal versions for precise calculations
+  late final Decimal _minDecimal;
+  late final Decimal _maxDecimal;
+  late final Decimal _feeValueDecimal;
+
   double getFeeForAmount(double amount) {
-    if (feeType == FeeType.percentage) {
-      return amount * (feeValue / 100.0);
-    } else {
-      return feeValue;
-    }
+    final amountDecimal = DecimalUtil.toDecimal(amount);
+    final feeDecimal = DecimalUtil.calculateFee(
+      amount: amountDecimal,
+      feeValue: _feeValueDecimal,
+      isPercentage: feeType == FeeType.percentage,
+    );
+    return DecimalUtil.toDouble(feeDecimal);
+  }
+
+  // Calculate net amount from budget with unlimited precision
+  double getNetAmountFromBudget(double budget) {
+    final budgetDecimal = DecimalUtil.toDecimal(budget);
+    final netDecimal = DecimalUtil.calculateNetAmount(
+      budget: budgetDecimal,
+      feeValue: _feeValueDecimal,
+      isPercentage: feeType == FeeType.percentage,
+    );
+    return DecimalUtil.toDouble(netDecimal);
+  }
+
+  // Decimal version for internal calculations
+  Decimal getFeeForAmountDecimal(Decimal amount) {
+    return DecimalUtil.calculateFee(
+      amount: amount,
+      feeValue: _feeValueDecimal,
+      isPercentage: feeType == FeeType.percentage,
+    );
   }
 }
 

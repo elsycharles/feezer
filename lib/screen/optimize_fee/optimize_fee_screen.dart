@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +51,9 @@ class _State extends State<OptimizeFeeScreen> {
   bool _isOptimizing = false;
 
   Currency? _previousCurrency;
+
+  // For comparison without optimization
+  Map<String, dynamic>? _nonOptimizedComparison;
 
   @override
   void initState() {
@@ -344,6 +348,7 @@ class _State extends State<OptimizeFeeScreen> {
                   _selectedProvider = provider;
                   _hasOptimized = false;
                   _result = null;
+                  _nonOptimizedComparison = null;
                 });
               }
             },
@@ -369,6 +374,7 @@ class _State extends State<OptimizeFeeScreen> {
               _amount = value;
               _hasOptimized = false;
               _result = null;
+              _nonOptimizedComparison = null;
             });
           },
           label: AppLocalizations.of(context).amount,
@@ -386,6 +392,7 @@ class _State extends State<OptimizeFeeScreen> {
       color: context.colorScheme.onSurface,
       fontWeight: FontWeight.w700,
     ),
+    isInitiallyExpanded: false,
     children: [
       Row(
         children: [
@@ -452,63 +459,71 @@ class _State extends State<OptimizeFeeScreen> {
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
-      child: SurfaceCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: Column(
+        children: [
+          SurfaceCard(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.analytics,
-                  size: 18,
-                  color: context.colorScheme.primary,
-                ),
-                Global.gapSm,
-                Text(
-                  AppLocalizations.of(context).optimizationResults,
-                  style: ThemeUtil.titleMedium.copyWith(
-                    color: context.colorScheme.primary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ],
-            ),
-            Global.gapMd,
-            if (_convertedResult == null || _convertedResult!.details.isEmpty)
-              Container(
-                padding: Global.padMd,
-                decoration: BoxDecoration(
-                  color: context.colorScheme.errorContainer.withValues(
-                    alpha: 0.1,
-                  ),
-                  borderRadius: Global.borderMd,
-                  border: Border.all(
-                    color: context.colorScheme.error.withValues(alpha: 0.3),
-                  ),
-                ),
-                child: Row(
+                Row(
                   children: [
                     Icon(
-                      Icons.warning_outlined,
-                      color: context.colorScheme.error,
+                      Icons.analytics,
                       size: 18,
+                      color: context.colorScheme.primary,
                     ),
                     Global.gapSm,
-                    Expanded(
-                      child: Text(
-                        AppLocalizations.of(context).noOptimizationResultsFound,
-                        style: ThemeUtil.bodyMedium.copyWith(
-                          color: context.colorScheme.error,
-                        ),
+                    Text(
+                      AppLocalizations.of(context).optimizationResults,
+                      style: ThemeUtil.titleMedium.copyWith(
+                        color: context.colorScheme.primary,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],
                 ),
-              )
-            else
-              _buildResultsDisplay(),
+                Global.gapMd,
+                if (_convertedResult == null || _convertedResult!.details.isEmpty)
+                  Container(
+                    padding: Global.padMd,
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.errorContainer.withValues(
+                        alpha: 0.1,
+                      ),
+                      borderRadius: Global.borderMd,
+                      border: Border.all(
+                        color: context.colorScheme.error.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.warning_outlined,
+                          color: context.colorScheme.error,
+                          size: 18,
+                        ),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            AppLocalizations.of(context).noOptimizationResultsFound,
+                            style: ThemeUtil.bodyMedium.copyWith(
+                              color: context.colorScheme.error,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                else
+                  _buildResultsDisplay(),
+              ],
+            ),
+          ),
+          if (_hasOptimized && _convertedResult != null && _convertedResult!.details.isNotEmpty && _nonOptimizedComparison != null) ...[
+            Global.gapLg,
+            _buildComparisonSection(),
           ],
-        ),
+        ],
       ),
     );
   }
@@ -780,6 +795,522 @@ class _State extends State<OptimizeFeeScreen> {
     overflow: TextOverflow.visible,
   );
 
+  Widget _buildComparisonSection() {
+    if (_nonOptimizedComparison == null) return const SizedBox.shrink();
+
+    final hasValidMaxInterval = _nonOptimizedComparison!['hasValidMaxInterval'] as bool? ?? false;
+    final hasValidSameNetInterval = _nonOptimizedComparison!['hasValidSameNetInterval'] as bool? ?? false;
+
+    final currencyProvider = context.read<CurrencyProvider>();
+    final currencySymbol = currencyProvider.currencySymbol;
+
+    // Convert all values to Decimal for precise calculations
+    final userAmountDecimal = Decimal.parse(_amount.toString());
+
+    final optimizedNetDecimal = Decimal.parse(_convertedResult!.netAmount.toString());
+    final optimizedFeesDecimal = Decimal.parse(_convertedResult!.totalFees.toString());
+    final optimizedTotalDecimal = Decimal.parse(_convertedResult!.totalAmount.toString());
+
+    final nonOptMaxNetDecimal = hasValidMaxInterval ? Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']).toString()
+    ) : Decimal.zero;
+    final nonOptMaxFeeDecimal = hasValidMaxInterval ? Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']).toString()
+    ) : Decimal.zero;
+
+    // Calculate differences with full precision
+    final netDifferenceVsMax = hasValidMaxInterval ? nonOptMaxNetDecimal - optimizedNetDecimal : Decimal.zero;
+    final feeDifferenceVsMax = hasValidMaxInterval ? nonOptMaxFeeDecimal - optimizedFeesDecimal : Decimal.zero;
+    final totalGainLossVsMax = hasValidMaxInterval ? netDifferenceVsMax - feeDifferenceVsMax : Decimal.zero;
+
+    // Calculate same net comparison
+    final nonOptSameNetTotalDecimal = hasValidSameNetInterval ? Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']).toString()
+    ) : Decimal.zero;
+    final nonOptSameFeeDecimal = hasValidSameNetInterval ? Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']).toString()
+    ) : Decimal.zero;
+    final feeDifferenceVsSameNet = hasValidSameNetInterval ? nonOptSameFeeDecimal - optimizedFeesDecimal : Decimal.zero;
+
+    // Check if exceeds budget
+    final exceedsBudget = hasValidSameNetInterval && ConstantUtil.isDecimalGreater(nonOptSameNetTotalDecimal, userAmountDecimal);
+
+    // Use dynamic tolerance for comparison
+    final tolerance = ConstantUtil.calculateTolerance(totalGainLossVsMax);
+
+    // Determine optimization result with precise comparison
+    final bool optimizationIsBetter = hasValidMaxInterval && ConstantUtil.isDecimalLess(
+      totalGainLossVsMax,
+      -Decimal.zero,
+      tolerance: tolerance
+    );
+    final bool noOptIsBetter = hasValidMaxInterval && ConstantUtil.isDecimalGreater(
+      totalGainLossVsMax,
+      Decimal.zero,
+      tolerance: tolerance
+    );
+    final bool areEqual = hasValidMaxInterval && ConstantUtil.areDecimalsEqual(
+      totalGainLossVsMax,
+      Decimal.zero,
+      tolerance: tolerance
+    );
+
+    // Rest of the comparison UI with proper formatting
+    return SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.compare_arrows,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
+              Global.gapSm,
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context).comparisonWithWithoutOptimization,
+                  style: ThemeUtil.titleSmall.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Global.gapLg,
+
+          // ===== SECTION 1: WITH OPTIMIZATION =====
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: Colors.green.withValues(alpha: 0.1),
+              borderRadius: Global.borderMd,
+              border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(Icons.check_circle, size: 16, color: Colors.green),
+                    Global.gapSm,
+                    Text(
+                      AppLocalizations.of(context).withOptimization,
+                      style: ThemeUtil.titleSmall.copyWith(
+                        color: Colors.green.shade700,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapSm,
+                _buildComparisonRow(
+                  AppLocalizations.of(context).enteredAmount,
+                  '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).netAmountSent,
+                  '${ConstantUtil.formatCurrencyAmount(optimizedNetDecimal)} $currencySymbol',
+                  valueColor: Colors.green.shade700,
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).totalFees,
+                  '${ConstantUtil.formatCurrencyAmount(optimizedFeesDecimal)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).totalSpent,
+                  '${ConstantUtil.formatCurrencyAmount(optimizedTotalDecimal)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).numberOfOperations,
+                  '${_convertedResult!.totalOperations}',
+                ),
+              ],
+            ),
+          ),
+
+          Global.gapMd,
+
+          // ===== SECTION 2: WITHOUT OPTIMIZATION (MAX AMOUNT) =====
+          if (hasValidMaxInterval) ...[
+            Container(
+              padding: Global.padMd,
+              decoration: BoxDecoration(
+                color: noOptIsBetter
+                    ? Colors.green.withValues(alpha: 0.1)
+                    : optimizationIsBetter
+                        ? Colors.red.withValues(alpha: 0.1)
+                        : Colors.grey.withValues(alpha: 0.1),
+                borderRadius: Global.borderMd,
+                border: Border.all(
+                  color: noOptIsBetter
+                      ? Colors.green.withValues(alpha: 0.3)
+                      : optimizationIsBetter
+                          ? Colors.red.withValues(alpha: 0.3)
+                          : Colors.grey.withValues(alpha: 0.3),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        noOptIsBetter
+                            ? Icons.check_circle
+                            : optimizationIsBetter
+                                ? Icons.trending_down
+                                : Icons.balance,
+                        size: 16,
+                        color: noOptIsBetter
+                            ? Colors.green.shade700
+                            : optimizationIsBetter
+                                ? Colors.red.shade700
+                                : Colors.grey.shade700,
+                      ),
+                      Global.gapSm,
+                      Flexible(
+                        child: Text(
+                          AppLocalizations.of(context).withoutOptimizationMaxAmount,
+                          style: ThemeUtil.titleSmall.copyWith(
+                            color: noOptIsBetter
+                                ? Colors.green.shade700
+                                : optimizationIsBetter
+                                  ? Colors.red.shade700
+                                  : Colors.grey.shade700,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Global.gapSm,
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).enteredAmount,
+                    '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).netAmountSent,
+                    '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetDecimal)} $currencySymbol',
+                    valueColor: noOptIsBetter
+                        ? Colors.green.shade700
+                        : optimizationIsBetter
+                            ? Colors.red.shade700
+                            : Colors.grey.shade700,
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).totalFees,
+                    '${ConstantUtil.formatCurrencyAmount(nonOptMaxFeeDecimal)} $currencySymbol',
+                    valueColor: Colors.red.shade700,
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).numberOfOperations,
+                    '1',
+                  ),
+
+                  Global.gapSm,
+                  Divider(
+                    color: noOptIsBetter
+                        ? Colors.green.withValues(alpha: 0.3)
+                        : optimizationIsBetter
+                            ? Colors.red.withValues(alpha: 0.3)
+                            : Colors.grey.withValues(alpha: 0.3),
+                  ),
+                  Global.gapSm,
+
+                  // Show difference message if not equal
+                  if (!areEqual) ...[
+                    Row(
+                      children: [
+                        Icon(
+                          noOptIsBetter ? Icons.trending_up : Icons.trending_down,
+                          size: 14,
+                          color: noOptIsBetter
+                              ? Colors.green.shade700
+                              : Colors.red.shade700,
+                        ),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            noOptIsBetter
+                                ? AppLocalizations.of(context).transactionGainsVsOptimized(
+                                    ConstantUtil.formatCurrencyAmount(totalGainLossVsMax.abs()),
+                                    currencySymbol,
+                                  )
+                                : AppLocalizations.of(context).transactionLosesVsOptimized(
+                                    ConstantUtil.formatCurrencyAmount(totalGainLossVsMax.abs()),
+                                    currencySymbol,
+                                  ),
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: noOptIsBetter
+                                  ? Colors.green.shade700
+                                  : Colors.red.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ] else ...[
+                    Row(
+                      children: [
+                        Icon(Icons.balance, size: 14, color: Colors.grey.shade700),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            AppLocalizations.of(context).transactionSameResultAsOptimized,
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            Global.gapMd,
+          ],
+
+          // ===== SECTION 3: WITHOUT OPTIMIZATION (SAME NET) =====
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: !hasValidSameNetInterval
+                  ? Colors.orange.withValues(alpha: 0.1)
+                  : feeDifferenceVsSameNet > Decimal.zero
+                      ? Colors.red.withValues(alpha: 0.1)
+                      : feeDifferenceVsSameNet < Decimal.zero
+                          ? Colors.green.withValues(alpha: 0.1)
+                          : Colors.grey.withValues(alpha: 0.1),
+              borderRadius: Global.borderMd,
+              border: Border.all(
+                color: !hasValidSameNetInterval
+                    ? Colors.orange.withValues(alpha: 0.3)
+                    : feeDifferenceVsSameNet > Decimal.zero
+                        ? Colors.red.withValues(alpha: 0.3)
+                        : feeDifferenceVsSameNet < Decimal.zero
+                            ? Colors.green.withValues(alpha: 0.3)
+                            : Colors.grey.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      !hasValidSameNetInterval
+                          ? Icons.warning_amber
+                          : feeDifferenceVsSameNet > Decimal.zero
+                              ? Icons.trending_down
+                              : feeDifferenceVsSameNet < Decimal.zero
+                                  ? Icons.check_circle
+                                  : Icons.balance,
+                      size: 16,
+                      color: !hasValidSameNetInterval
+                          ? Colors.orange.shade700
+                          : feeDifferenceVsSameNet > Decimal.zero
+                              ? Colors.red.shade700
+                              : feeDifferenceVsSameNet < Decimal.zero
+                                  ? Colors.green.shade700
+                                  : Colors.grey.shade700,
+                    ),
+                    Global.gapSm,
+                    Flexible(
+                      child: Text(
+                        AppLocalizations.of(context).withoutOptimizationSameNet,
+                        style: ThemeUtil.titleSmall.copyWith(
+                          color: !hasValidSameNetInterval
+                              ? Colors.orange.shade700
+                              : feeDifferenceVsSameNet > Decimal.zero
+                                  ? Colors.red.shade700
+                                  : feeDifferenceVsSameNet < Decimal.zero
+                                      ? Colors.green.shade700
+                                      : Colors.grey.shade700,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapSm,
+
+                if (!hasValidSameNetInterval) ...[
+                  // Show warning when no valid interval found
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        size: 14,
+                        color: Colors.orange.shade700,
+                      ),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).noValidIntervalForComparison,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.orange.shade700,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ] else ...[
+                  // Show comparison when valid interval exists
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).enteredAmount,
+                    '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).netAmountSent,
+                    '${ConstantUtil.formatCurrencyAmount(optimizedNetDecimal)} $currencySymbol',
+                    valueColor: feeDifferenceVsSameNet > Decimal.zero
+                        ? Colors.red.shade700
+                        : feeDifferenceVsSameNet < Decimal.zero
+                            ? Colors.green.shade700
+                            : Colors.grey.shade700,
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).totalFees,
+                    '${ConstantUtil.formatCurrencyAmount(nonOptSameFeeDecimal)} $currencySymbol',
+                    valueColor: Colors.red.shade700,
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).totalSpent,
+                    '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalDecimal)} $currencySymbol',
+                  ),
+                  _buildComparisonRow(
+                    AppLocalizations.of(context).numberOfOperations,
+                    '1',
+                  ),
+
+                  Global.gapSm,
+                  Divider(
+                    color: feeDifferenceVsSameNet > Decimal.zero
+                        ? Colors.red.withValues(alpha: 0.3)
+                        : feeDifferenceVsSameNet < Decimal.zero
+                            ? Colors.green.withValues(alpha: 0.3)
+                            : Colors.grey.withValues(alpha: 0.3),
+                  ),
+                  Global.gapSm,
+
+                  // Show difference message if not equal
+                  if (feeDifferenceVsSameNet.abs() > tolerance) ...[
+                    Row(
+                      children: [
+                        Icon(
+                          feeDifferenceVsSameNet > Decimal.zero ? Icons.trending_down : Icons.trending_up,
+                          size: 14,
+                          color: feeDifferenceVsSameNet > Decimal.zero
+                              ? Colors.red.shade700
+                              : Colors.green.shade700,
+                        ),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            feeDifferenceVsSameNet > Decimal.zero
+                                ? AppLocalizations.of(context).transactionLosesVsOptimized(
+                                    ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
+                                    currencySymbol,
+                                  )
+                                : AppLocalizations.of(context).transactionGainsVsOptimized(
+                                    ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
+                                    currencySymbol,
+                                  ),
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: feeDifferenceVsSameNet > Decimal.zero
+                                  ? Colors.red.shade700
+                                  : Colors.green.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ] else ...[
+                    Row(
+                      children: [
+                        Icon(Icons.balance, size: 14, color: Colors.grey.shade700),
+                        Global.gapSm,
+                        Expanded(
+                          child: Text(
+                            AppLocalizations.of(context).transactionSameResultAsOptimized,
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+
+                  if (exceedsBudget) ...[
+                    Global.gapXs,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.warning_amber,
+                          size: 14,
+                          color: Colors.red.shade700,
+                        ),
+                        Global.gapXs,
+                        Expanded(
+                          child: Text(
+                            AppLocalizations.of(context).exceedsEnteredAmount,
+                            style: ThemeUtil.bodySmall.copyWith(
+                              color: Colors.red.shade700,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildComparisonRow(String label, String value, {Color? valueColor}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              label,
+              style: ThemeUtil.bodySmall.copyWith(
+                color: context.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ),
+          Text(
+            value,
+            style: ThemeUtil.bodySmall.copyWith(
+              color: valueColor ?? context.colorScheme.onSurface,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+
+
   Widget _buildOptimizeButton() => Container(
     padding: EdgeInsets.fromLTRB(
       20,
@@ -803,6 +1334,7 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = null;
         _hasOptimized = true;
+        _nonOptimizedComparison = null;
       });
       return;
     }
@@ -813,15 +1345,14 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = null;
         _hasOptimized = true;
+        _nonOptimizedComparison = null;
       });
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
             AppToast.error(
               context,
-              AppLocalizations.of(
-                context,
-              ).minTransactionsCannotBeGreaterThanMax,
+              AppLocalizations.of(context).minTransactionsCannotBeGreaterThanMax,
             );
           }
         });
@@ -850,6 +1381,7 @@ class _State extends State<OptimizeFeeScreen> {
         setState(() {
           _result = null;
           _hasOptimized = true;
+          _nonOptimizedComparison = null;
         });
         // Use mounted check and avoid using context after await
         if (mounted) {
@@ -887,16 +1419,25 @@ class _State extends State<OptimizeFeeScreen> {
         setState(() {
           _result = null;
           _hasOptimized = true;
+          _nonOptimizedComparison = null;
         });
         return;
       }
 
+      // Optimization calculation
       final optimizationResult = FeeOptimizerUtil.calculateOptimalOperations(
         amountInAriary,
         intervals,
         maxOperations: _maxTransactions,
         minOperations: _minTransactions,
         localizations: localizations,
+      );
+
+      // Calculation without optimization
+      final nonOptimizedData = FeeOptimizerUtil.calculateNonOptimizedComparison(
+        amountInAriary,
+        intervals,
+        optimizationResult,
       );
 
       final coveragePercentage =
@@ -920,9 +1461,7 @@ class _State extends State<OptimizeFeeScreen> {
             if (mounted) {
               AppToast.warning(
                 context,
-                AppLocalizations.of(
-                  context,
-                ).optimizationIncomplete(coveragePercentage.toStringAsFixed(1)),
+                AppLocalizations.of(context).optimizationIncomplete(coveragePercentage.toStringAsFixed(1)),
               );
             }
           });
@@ -932,27 +1471,20 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = optimizationResult;
         _hasOptimized = true;
+        _nonOptimizedComparison = nonOptimizedData;
       });
     } catch (e) {
       if (mounted) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (mounted) {
-            String errorMessage = AppLocalizations.of(
-              context,
-            ).failedToCalculateOptimization;
+            String errorMessage = AppLocalizations.of(context).failedToCalculateOptimization;
 
             if (e.toString().contains('Montant trop élevé')) {
-              errorMessage = AppLocalizations.of(
-                context,
-              ).amountExceedsMaximumAllowedLimit;
+              errorMessage = AppLocalizations.of(context).amountExceedsMaximumAllowedLimit;
             } else if (e.toString().contains('minOperations')) {
-              errorMessage = AppLocalizations.of(
-                context,
-              ).invalidTransactionRangeConstraints;
+              errorMessage = AppLocalizations.of(context).invalidTransactionRangeConstraints;
             } else if (e.toString().contains('Aucune option')) {
-              errorMessage = AppLocalizations.of(
-                context,
-              ).noValidFeeIntervalsAvailable;
+              errorMessage = AppLocalizations.of(context).noValidFeeIntervalsAvailable;
             }
 
             AppToast.error(context, errorMessage);
@@ -962,6 +1494,7 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() {
         _result = null;
         _hasOptimized = true;
+        _nonOptimizedComparison = null;
       });
     }
   }

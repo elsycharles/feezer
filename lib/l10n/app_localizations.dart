@@ -109,37 +109,37 @@ abstract class AppLocalizations {
   /// First onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Stop Losing Money to Banking Fees'**
+  /// **'Stop Losing Money to Mobile Money Fees'**
   String get onboardingTitle1;
 
   /// First onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Banking fees can add up quickly. Feezer helps you minimize costs on every transaction.'**
+  /// **'Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.'**
   String get onboardingDescription1;
 
   /// Second onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Smart Transaction Optimization'**
+  /// **'Smart Mobile Money Optimization'**
   String get onboardingTitle2;
 
   /// Second onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Automatically calculate the most cost-effective way to handle your money transfers and payments.'**
+  /// **'Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.'**
   String get onboardingDescription2;
 
   /// Third onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Save More, Keep More'**
+  /// **'Save More on Mobile Transactions'**
   String get onboardingTitle3;
 
   /// Third onboarding screen description
   ///
   /// In en, this message translates to:
-  /// **'Get personalized fee optimization strategies and watch your savings grow with every transaction.'**
+  /// **'Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.'**
   String get onboardingDescription3;
 
   /// Next button text
@@ -478,10 +478,10 @@ abstract class AppLocalizations {
   /// **'Net Amount'**
   String get netAmount;
 
-  /// Total fees metric title
+  /// Label for total fees in comparison
   ///
   /// In en, this message translates to:
-  /// **'Total Fees'**
+  /// **'Total fees'**
   String get totalFees;
 
   /// Optimization efficiency metric title
@@ -2306,6 +2306,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.'**
   String get faqAnswer8;
+
+  /// Title for the comparison section showing optimized vs non-optimized results
+  ///
+  /// In en, this message translates to:
+  /// **'Comparison with/without optimization'**
+  String get comparisonWithWithoutOptimization;
+
+  /// Label for the optimized results section
+  ///
+  /// In en, this message translates to:
+  /// **'With optimization'**
+  String get withOptimization;
+
+  /// Label for the non-optimized results section using maximum amount
+  ///
+  /// In en, this message translates to:
+  /// **'Without optimization (max amount)'**
+  String get withoutOptimizationMaxAmount;
+
+  /// Label for the non-optimized results section using same net amount
+  ///
+  /// In en, this message translates to:
+  /// **'Without optimization (same net amount)'**
+  String get withoutOptimizationSameNet;
+
+  /// No description provided for @enteredAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Entered amount'**
+  String get enteredAmount;
+
+  /// Label for net amount sent in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Net amount sent'**
+  String get netAmountSent;
+
+  /// Label for total amount spent in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Total spent'**
+  String get totalSpent;
+
+  /// Label for number of operations in comparison
+  ///
+  /// In en, this message translates to:
+  /// **'Number of operations'**
+  String get numberOfOperations;
+
+  /// Message when optimization results in loss
+  ///
+  /// In en, this message translates to:
+  /// **'You lose {amount} {currency}'**
+  String youLoseAmount(String amount, String currency);
+
+  /// Message when optimization results in gain
+  ///
+  /// In en, this message translates to:
+  /// **'You gain {amount} {currency}'**
+  String youGainAmount(String amount, String currency);
+
+  /// Message when non-optimized result is same as optimized
+  ///
+  /// In en, this message translates to:
+  /// **'Same result as optimization'**
+  String get sameResultAsOptimization;
+
+  /// Detail showing net amount loss
+  ///
+  /// In en, this message translates to:
+  /// **'• Net amount less: {amount} {currency}'**
+  String netAmountLess(String amount, String currency);
+
+  /// Detail showing net amount gain
+  ///
+  /// In en, this message translates to:
+  /// **'• Net amount more: {amount} {currency}'**
+  String netAmountMore(String amount, String currency);
+
+  /// Detail showing fee savings
+  ///
+  /// In en, this message translates to:
+  /// **'• Fees less: {amount} {currency}'**
+  String feesLess(String amount, String currency);
+
+  /// Detail showing additional fees
+  ///
+  /// In en, this message translates to:
+  /// **'• Fees more: {amount} {currency}'**
+  String feesMore(String amount, String currency);
+
+  /// Message when optimization costs more than single transaction
+  ///
+  /// In en, this message translates to:
+  /// **'Optimization costs {amount} {currency} more in fees'**
+  String optimizationCostsMoreFees(String amount, String currency);
+
+  /// Explanation for optimization cost due to transaction limits
+  ///
+  /// In en, this message translates to:
+  /// **'• This is due to transaction constraints (min: {min}, max: {max})'**
+  String dueToTransactionConstraints(String min, String max);
+
+  /// No description provided for @exceedsEnteredAmount.
+  ///
+  /// In en, this message translates to:
+  /// **'Exceeds entered amount'**
+  String get exceedsEnteredAmount;
+
+  /// Message showing savings from optimization
+  ///
+  /// In en, this message translates to:
+  /// **'You save {amount} {currency} in fees'**
+  String youSaveFees(String amount, String currency);
+
+  /// Summary of total savings achieved with optimization
+  ///
+  /// In en, this message translates to:
+  /// **'Total savings with optimization: {amount} {currency}'**
+  String totalSavingsWithOptimization(String amount, String currency);
+
+  /// Message showing gain when a non-optimized transaction performs better
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction gains {amount} {currency} compared to optimization'**
+  String transactionGainsVsOptimized(String amount, String currency);
+
+  /// Message showing loss when a non-optimized transaction performs worse
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction loses {amount} {currency} compared to optimization'**
+  String transactionLosesVsOptimized(String amount, String currency);
+
+  /// Message showing when a non-optimized transaction has the same result as optimization
+  ///
+  /// In en, this message translates to:
+  /// **'This transaction has the same result as optimization'**
+  String get transactionSameResultAsOptimized;
+
+  /// Message displayed when the entered amount is not within any valid fee interval for comparison
+  ///
+  /// In en, this message translates to:
+  /// **'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.'**
+  String get noValidIntervalForComparison;
 }
 
 class _AppLocalizationsDelegate
