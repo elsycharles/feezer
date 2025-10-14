@@ -1627,6 +1627,14 @@
   "@faqHowToCalculateFeesAnswer": {
     "description": "FAQ answer"
   },
+  "faqMinMaxUsage": "What do 'Min Amount' and 'Max Amount' mean?",
+  "@faqMinMaxUsage": {
+    "description": "FAQ question about min and max amount usage"
+  },
+  "faqMinMaxUsageAnswer": "'Min Amount' and 'Max Amount' define the inclusive range of transaction values covered by a fee interval. For example, if an interval has Min=1 and Max=1000, the fee applies to any transaction amount between 1 and 1000 inclusive. When creating or editing intervals, ensure that Min is less than or equal to Max and that intervals do not overlap to avoid ambiguous fee calculations.",
+  "@faqMinMaxUsageAnswer": {
+    "description": "FAQ answer about min and max amount usage"
+  },
   "faqDataSecurity": "Is my data secure?",
   "@faqDataSecurity": {
     "description": "FAQ question"

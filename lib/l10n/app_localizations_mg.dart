@@ -1122,6 +1122,14 @@ class AppLocalizationsMg extends AppLocalizations {
       'Ampidiro ny vola fifampiraharahana sy misafidy mpamatsy. Ny app dia kajy ny sarany rehetra azo ampiharina ao anatin\'izany ny sarany raikitra, sarany isan-jato, ary sarany ambony/ambany. Izy io dia mampiseho anao ny vidiny manontolo ary manoro hevitra fanatsarana.';
 
   @override
+  String get faqMinMaxUsage =>
+      'Inona no dikan\'ny \'Vola Kely\' sy \'Vola Be\'?';
+
+  @override
+  String get faqMinMaxUsageAnswer =>
+      'Ny \'Vola Kely\' sy \'Vola Be\' dia mamaritra ny elanelam-bola tafiditra amin\'ny intervalle sara. Ohatra, raha manana Min=1 ary Max=1000 ny intervalle, dia mihatra amin\'ny vola rehetra eo anelanelan\'ny 1 sy 1000 izany. Rehefa mamorona na manova intervalle, ataovy azo antoka fa ny Min dia latsaky na mitovy amin\'ny Max ary tsy mifandona ny intervalle mba hisorohana ny kajy sara misafotofoto.';
+
+  @override
   String get faqDataSecurity => 'Azo antoka ve ny angon-drakitra?';
 
   @override
@@ -1298,7 +1306,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get enteredAmount => 'Vola nampidirina';
 
   @override
-  String get netAmountSent => 'Vola madio nalefa';
+  String get netAmountSent => 'Vola madio alaina';
 
   @override
   String get totalSpent => 'Total naloa';
