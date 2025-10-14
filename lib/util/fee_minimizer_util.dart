@@ -7,7 +7,7 @@ import '../../util/constant_util.dart';
 import '../../l10n/app_localizations.dart';
 
 // ========================================
-// ÉTAPE 3 : Classe utilitaire Decimal améliorée
+// STEP 3: Enhanced Decimal utility class
 // ========================================
 class _DecimalHelper {
   /// Convert double to Decimal with maximum precision
@@ -146,7 +146,7 @@ class FeeOptimizerUtil {
         minOperations,
       );
 
-      // ✅ VALIDATION CRITIQUE : Vérifier que les frais ne sont pas nuls
+      // ✅ CRITICAL VALIDATION: Check that fees are not zero
       if (result.details.isNotEmpty) {
         bool hasInvalidFees = false;
         for (final detail in result.details) {
@@ -319,7 +319,7 @@ class FeeOptimizerUtil {
         fee = opt.feeValue;
       }
 
-            // ✅ CORRECTION: Utiliser tolérance dynamique au lieu de 0.01 fixe
+      // ✅ FIX: Use dynamic tolerance instead of hardcoded 0.01
       final totalAmountDecimal = _DecimalHelper.toDecimal(totalAmount);
       final netAmountDecimal = _DecimalHelper.toDecimal(netAmount);
       final feeDecimal = _DecimalHelper.toDecimal(fee);
@@ -583,7 +583,7 @@ class FeeOptimizerUtil {
           amount = targetAmount - opt.feeValue;
         }
 
-        // ✅ PAS D'ARRONDI - juste contraindre aux limites
+        // ✅ NO ROUNDING - just constrain to limits
         amount = max(opt.min, min(opt.max, amount));
 
         final fee = opt.getFeeForAmount(amount);
@@ -701,7 +701,7 @@ class FeeOptimizerUtil {
         fee = opt.feeValue;
       }
 
-      // ✅ CORRECTION: Utiliser tolérance dynamique au lieu de 0.01 fixe
+      // ✅ FIX: Use dynamic tolerance instead of hardcoded 0.01
       final totalAmountDecimal = _DecimalHelper.toDecimal(totalAmount);
       final netAmountDecimal = _DecimalHelper.toDecimal(netAmount);
       final feeDecimal = _DecimalHelper.toDecimal(fee);
@@ -877,7 +877,7 @@ class FeeOptimizerUtil {
     for (int i = 1; i < numSamples; i++) {
       final amt = opt.max - (step * i);
       if (amt >= opt.min) {
-        // ✅ PAS D'ARRONDI - valeur exacte
+        // ✅ NO ROUNDING - exact value
         samples.add(amt);
       }
     }
