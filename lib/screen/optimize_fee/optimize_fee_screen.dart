@@ -801,42 +801,62 @@ class _State extends State<OptimizeFeeScreen> {
     final currencyProvider = context.read<CurrencyProvider>();
     final currencySymbol = currencyProvider.currencySymbol;
 
-    // The total amount is always the one entered by the user
+    // Budget disponible
     final userAmount = _amount;
 
-    // Data with optimization
+    // ===== AVEC OPTIMISATION =====
     final optimizedNetAmount = _convertedResult!.netAmount;
     final optimizedTotalFees = _convertedResult!.totalFees;
-    final optimizedTotalAmount = _convertedResult!.totalAmount; // Total amount spent
+    final optimizedTotalAmount = _convertedResult!.totalAmount;
 
-    // Data without optimization (maximum direct amount)
-    final nonOptMaxNetAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']);
-    final nonOptMaxFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']);
+    // ===== SANS OPTIMISATION (montant max) =====
+    final nonOptMaxNetAmount = currencyProvider.convertFromAriary(
+      _nonOptimizedComparison!['maxNetAmount'],
+    );
+    final nonOptMaxFee = currencyProvider.convertFromAriary(
+      _nonOptimizedComparison!['maxFee'],
+    );
 
-    // Data without optimization (if we send the same net amount with ONE single operation)
-    final nonOptSameNetTotalAmount = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']);
-    final nonOptSameFee = currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']);
-
-    // The net amount is the same as optimization by definition
+    // ===== SANS OPTIMISATION (même montant net) =====
+    final nonOptSameNetTotalAmount = currencyProvider.convertFromAriary(
+      _nonOptimizedComparison!['sameNetTotalAmount'],
+    );
+    final nonOptSameFee = currencyProvider.convertFromAriary(
+      _nonOptimizedComparison!['sameNetFee'],
+    );
     final nonOptSingleOpNetAmount = optimizedNetAmount;
 
-    // Gains vs maximum amount (1 single operation max)
-    final netGainVsMax = optimizedNetAmount - nonOptMaxNetAmount; // Net amount gain
-    final feeSavingsVsMax = nonOptMaxFee - optimizedTotalFees; // Fee savings
-    final totalGainVsMax = netGainVsMax + feeSavingsVsMax; // Total gain
+    // ========================================
+    // CALCUL CORRECT DES GAINS/PERTES
+    // ========================================
+    
+    // Comparaison 1: Sans optimisation (montant max)
+    // Qui gagne en NET ? nonOpt - optimized
+    final netDifferenceVsMax = nonOptMaxNetAmount - optimizedNetAmount;
+    // Qui gagne en FRAIS ? nonOpt - optimized (positif = sans opt perd plus)
+    final feeDifferenceVsMax = nonOptMaxFee - optimizedTotalFees;
+    
+    // Total: Si positif → Sans optimisation est MEILLEURE
+    //        Si négatif → Optimisation est MEILLEURE
+    final totalGainLossVsMax = netDifferenceVsMax - feeDifferenceVsMax;
 
-    // DEBUG: Add debug logs to verify calculations
-    print('DEBUG Comparison:');
-    print('  Optimized net: ${optimizedNetAmount}');
-    print('  Non-opt max net: ${nonOptMaxNetAmount}');
-    print('  Net gain: ${netGainVsMax}');
-    print('  Fee savings: ${feeSavingsVsMax}');
-    print('  Total gain: ${totalGainVsMax}');
-    print('  Should show: ${totalGainVsMax > 0.01 ? "GAIN (green)" : totalGainVsMax < -0.01 ? "LOSS (red)" : "EQUAL (grey)"}');
-
-    // For the comparison "same net amount"
-    final feeDifferenceVsSameNet = optimizedTotalFees - nonOptSameFee; // Fee difference (negative = savings)
+    // Comparaison 2: Sans optimisation (même net)
+    // Qui gagne en FRAIS ? nonOpt - optimized
+    final feeDifferenceVsSameNet = nonOptSameFee - optimizedTotalFees;
+    
+    // Si positif → Sans opt perd plus (optimisation meilleure)
+    // Si négatif → Sans opt perd moins (sans opt meilleure)
+    
     final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
+
+    // DEBUG
+    // print('=== COMPARAISON DEBUG ===');
+    // print('Optimisation: net=$optimizedNetAmount, fees=$optimizedTotalFees');
+    // print('Sans opt (max): net=$nonOptMaxNetAmount, fees=$nonOptMaxFee');
+    // print('Net difference: $netDifferenceVsMax');
+    // print('Fee difference: $feeDifferenceVsMax');
+    // print('Total gain/loss: $totalGainLossVsMax');
+    // print('Result: ${totalGainLossVsMax > 0.01 ? "SANS OPT GAGNE" : totalGainLossVsMax < -0.01 ? "OPTIMISATION GAGNE" : "ÉGAL"}');
 
     return SurfaceCard(
       child: Column(
@@ -847,14 +867,14 @@ class _State extends State<OptimizeFeeScreen> {
               Icon(
                 Icons.compare_arrows,
                 size: 18,
-                color: context.colorScheme.secondary,
+                color: context.colorScheme.primary,
               ),
               Global.gapSm,
               Flexible(
                 child: Text(
                   AppLocalizations.of(context).comparisonWithWithoutOptimization,
-                  style: ThemeUtil.titleMedium.copyWith(
-                    color: context.colorScheme.secondary,
+                  style: ThemeUtil.titleSmall.copyWith(
+                    color: context.colorScheme.primary,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -863,26 +883,20 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           Global.gapLg,
 
-          // Section 1: With optimization
+          // ===== SECTION 1: AVEC OPTIMISATION =====
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
               color: Colors.green.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
-              border: Border.all(
-                color: Colors.green.withValues(alpha: 0.3),
-              ),
+              border: Border.all(color: Colors.green.withValues(alpha: 0.3)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.check_circle,
-                      size: 16,
-                      color: Colors.green,
-                    ),
+                    Icon(Icons.check_circle, size: 16, color: Colors.green),
                     Global.gapSm,
                     Text(
                       AppLocalizations.of(context).withOptimization,
@@ -922,21 +936,21 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // ============ SECTION 2: Without optimization (maximum amount) ============
+          // ===== SECTION 2: SANS OPTIMISATION (MONTANT MAX) =====
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              // ✅ CORRECTION: Inverser les conditions de couleur
-              color: totalGainVsMax > 0.01
-                  ? Colors.green.withValues(alpha: 0.1)  // Optimisation GAGNE (vert)
-                  : totalGainVsMax < -0.01
-                      ? Colors.red.withValues(alpha: 0.1)  // Optimisation PERD (rouge)
+              // ✅ CORRECTION: Sans opt GAGNE si totalGainLossVsMax > 0
+              color: totalGainLossVsMax > 0.01
+                  ? Colors.green.withValues(alpha: 0.1)
+                  : totalGainLossVsMax < -0.01
+                      ? Colors.red.withValues(alpha: 0.1)
                       : Colors.grey.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: totalGainVsMax > 0.01
+                color: totalGainLossVsMax > 0.01
                     ? Colors.green.withValues(alpha: 0.3)
-                    : totalGainVsMax < -0.01
+                    : totalGainLossVsMax < -0.01
                         ? Colors.red.withValues(alpha: 0.3)
                         : Colors.grey.withValues(alpha: 0.3),
               ),
@@ -947,15 +961,15 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      totalGainVsMax > 0.01
-                          ? Icons.check_circle  // ✅ Optimisation meilleure
-                          : totalGainVsMax < -0.01
-                              ? Icons.trending_down  // Optimisation moins bonne
+                      totalGainLossVsMax > 0.01
+                          ? Icons.check_circle
+                          : totalGainLossVsMax < -0.01
+                              ? Icons.trending_down
                               : Icons.balance,
                       size: 16,
-                      color: totalGainVsMax > 0.01
+                      color: totalGainLossVsMax > 0.01
                           ? Colors.green.shade700
-                          : totalGainVsMax < -0.01
+                          : totalGainLossVsMax < -0.01
                               ? Colors.red.shade700
                               : Colors.grey.shade700,
                     ),
@@ -964,9 +978,9 @@ class _State extends State<OptimizeFeeScreen> {
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationMaxAmount,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: totalGainVsMax > 0.01
+                          color: totalGainLossVsMax > 0.01
                               ? Colors.green.shade700
-                              : totalGainVsMax < -0.01
+                              : totalGainLossVsMax < -0.01
                                   ? Colors.red.shade700
                                   : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
@@ -983,9 +997,9 @@ class _State extends State<OptimizeFeeScreen> {
                 _buildComparisonRow(
                   AppLocalizations.of(context).netAmountSent,
                   '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
-                  valueColor: totalGainVsMax > 0.01
+                  valueColor: totalGainLossVsMax > 0.01
                       ? Colors.green.shade700
-                      : totalGainVsMax < -0.01
+                      : totalGainLossVsMax < -0.01
                           ? Colors.red.shade700
                           : Colors.grey.shade700,
                 ),
@@ -999,42 +1013,43 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
 
-                // ✅ CORRECTION: Message de comparaison
                 Global.gapSm,
                 Divider(
-                  color: totalGainVsMax > 0.01
+                  color: totalGainLossVsMax > 0.01
                       ? Colors.green.withValues(alpha: 0.3)
-                      : totalGainVsMax < -0.01
-                          ? Colors.red.withValues(alpha: 0.3)
-                          : Colors.grey.withValues(alpha: 0.3),
+                      : totalGainLossVsMax < -0.01
+                        ? Colors.red.withValues(alpha: 0.3)
+                        : Colors.grey.withValues(alpha: 0.3),
                 ),
                 Global.gapSm,
-                if (totalGainVsMax.abs() > 0.01) ...[
+
+                // ✅ MESSAGE CORRECT
+                if (totalGainLossVsMax.abs() > 0.01) ...[
                   Row(
                     children: [
                       Icon(
-                        // ✅ CORRECTION: Inverser les icônes
-                        totalGainVsMax > 0 ? Icons.trending_up : Icons.trending_down,
+                        totalGainLossVsMax > 0 ? Icons.trending_up : Icons.trending_down,
                         size: 14,
-                        color: totalGainVsMax > 0
+                        color: totalGainLossVsMax > 0
                             ? Colors.green.shade700
                             : Colors.red.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          // ✅ CORRECTION: Inverser les messages
-                          totalGainVsMax > 0
+                          totalGainLossVsMax > 0
                               ? AppLocalizations.of(context).transactionGainsVsOptimized(
-                                  ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
+                                  ConstantUtil.formatCurrencyAmount(totalGainLossVsMax.abs()),
                                   currencySymbol,
                                 )
                               : AppLocalizations.of(context).transactionLosesVsOptimized(
-                                  ConstantUtil.formatCurrencyAmount(totalGainVsMax.abs()),
+                                  ConstantUtil.formatCurrencyAmount(totalGainLossVsMax.abs()),
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: totalGainVsMax > 0 ? Colors.green.shade700 : Colors.red.shade700,
+                            color: totalGainLossVsMax > 0
+                                ? Colors.green.shade700
+                                : Colors.red.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1044,11 +1059,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ] else ...[
                   Row(
                     children: [
-                      Icon(
-                        Icons.balance,
-                        size: 14,
-                        color: Colors.grey.shade700,
-                      ),
+                      Icon(Icons.balance, size: 14, color: Colors.grey.shade700),
                       Global.gapSm,
                       Expanded(
                         child: Text(
@@ -1068,10 +1079,11 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // ============ SECTION 3: Without optimization (same net amount) ============
+          // ===== SECTION 3: SANS OPTIMISATION (MÊME NET) =====
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
+              // ✅ CORRECTION: Si fee diff > 0 → sans opt perd plus (rouge)
               color: feeDifferenceVsSameNet > 0.01
                   ? Colors.red.withValues(alpha: 0.1)
                   : feeDifferenceVsSameNet < -0.01
@@ -1148,29 +1160,31 @@ class _State extends State<OptimizeFeeScreen> {
                   '1',
                 ),
 
-                // Message de comparaison ou d'égalité
                 Global.gapSm,
                 Divider(
                   color: feeDifferenceVsSameNet > 0.01
                       ? Colors.red.withValues(alpha: 0.3)
                       : feeDifferenceVsSameNet < -0.01
-                          ? Colors.green.withValues(alpha: 0.3)
-                          : Colors.grey.withValues(alpha: 0.3),
+                        ? Colors.green.withValues(alpha: 0.3)
+                        : Colors.grey.withValues(alpha: 0.3),
                 ),
                 Global.gapSm,
+
+                // ✅ MESSAGE CORRECT
                 if (feeDifferenceVsSameNet.abs() > 0.01) ...[
-                  // Message sur les frais
                   Row(
                     children: [
                       Icon(
-                        feeDifferenceVsSameNet < 0 ? Icons.check_circle : Icons.trending_down,
+                        feeDifferenceVsSameNet > 0 ? Icons.trending_down : Icons.trending_up,
                         size: 14,
-                        color: feeDifferenceVsSameNet < 0 ? Colors.green.shade700 : Colors.red.shade700,
+                        color: feeDifferenceVsSameNet > 0
+                            ? Colors.red.shade700
+                            : Colors.green.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          feeDifferenceVsSameNet < 0
+                          feeDifferenceVsSameNet > 0
                               ? AppLocalizations.of(context).transactionLosesVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
                                   currencySymbol,
@@ -1180,7 +1194,9 @@ class _State extends State<OptimizeFeeScreen> {
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: feeDifferenceVsSameNet < 0 ? Colors.green.shade700 : Colors.red.shade700,
+                            color: feeDifferenceVsSameNet > 0
+                                ? Colors.red.shade700
+                                : Colors.green.shade700,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -1190,11 +1206,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ] else ...[
                   Row(
                     children: [
-                      Icon(
-                        Icons.balance,
-                        size: 14,
-                        color: Colors.grey.shade700,
-                      ),
+                      Icon(Icons.balance, size: 14, color: Colors.grey.shade700),
                       Global.gapSm,
                       Expanded(
                         child: Text(
