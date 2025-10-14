@@ -346,6 +346,11 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
         category: 'general',
       ),
       FaqItem(
+        question: AppLocalizations.of(context).faqMinMaxUsage,
+        answer: AppLocalizations.of(context).faqMinMaxUsageAnswer,
+        category: 'general',
+      ),
+      FaqItem(
         question: AppLocalizations.of(context).faqDataSecurity,
         answer: AppLocalizations.of(context).faqDataSecurityAnswer,
         category: 'general',
