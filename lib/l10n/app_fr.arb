@@ -1443,13 +1443,13 @@
   "@faqHowToCalculateFeesAnswer": {
     "description": "Réponse FAQ"
   },
-  "faqMinMaxUsage": "Que signifient 'Montant Min' et 'Montant Max' ?",
-  "@faqMinMaxUsage": {
-    "description": "Question FAQ sur l'utilisation des montants min et max"
+  "faqMinMaxTransactionRange": "Que signifient «\u00A0min transactions\u00A0» et «\u00A0max transactions\u00A0» ?",
+  "@faqMinMaxTransactionRange": {
+    "description": "Question FAQ : signification du nombre min/max de transactions"
   },
-  "faqMinMaxUsageAnswer": "'Montant Min' et 'Montant Max' définissent la plage inclusive des valeurs de transaction couvertes par un intervalle de frais. Par exemple, si un intervalle a Min=1 et Max=1000, les frais s'appliquent à toute transaction comprise entre 1 et 1000 inclus. Lors de la création ou de la modification d'intervalles, assurez-vous que Min est inférieur ou égal à Max et que les intervalles ne se chevauchent pas pour éviter des calculs de frais ambigus.",
-  "@faqMinMaxUsageAnswer": {
-    "description": "Réponse FAQ sur l'utilisation des montants min et max"
+  "faqMinMaxTransactionRangeAnswer": "\u00AB\u00A0Min transactions\u00A0\u00BB et \u00AB\u00A0Max transactions\u00A0\u00BB d\u00E9finissent respectivement le nombre minimum et maximum d'op\u00E9rations que l'optimiseur peut utiliser pour r\u00E9partir le montant saisi. Par exemple, si vous saisissez 10\u202F000 Ar et mettez Min transactions = 2, l'optimiseur ne proposera que des solutions qui divisent le montant en au moins 2 op\u00E9rations. Assurez-vous que Min \u2264 Max et que ces valeurs conviennent au d\u00E9coupage souhait\u00E9. Ce param\u00E8tre contraint le r\u00E9sultat \u00E0 un nombre d'op\u00E9rations dans cet intervalle.",
+  "@faqMinMaxTransactionRangeAnswer": {
+    "description": "R\u00E9ponse FAQ : signification du nombre min/max de transactions"
   },
   "faqDataSecurity": "Mes données sont-elles sécurisées ?",
   "@faqDataSecurity": {

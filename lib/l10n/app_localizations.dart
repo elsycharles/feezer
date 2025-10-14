@@ -2037,17 +2037,17 @@ abstract class AppLocalizations {
   /// **'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.'**
   String get faqHowToCalculateFeesAnswer;
 
-  /// FAQ question about min and max amount usage
+  /// FAQ question: meaning of min/max number of transactions
   ///
   /// In en, this message translates to:
-  /// **'What do \'Min Amount\' and \'Max Amount\' mean?'**
-  String get faqMinMaxUsage;
+  /// **'What do \'Min transactions\' and \'Max transactions\' mean?'**
+  String get faqMinMaxTransactionRange;
 
-  /// FAQ answer about min and max amount usage
+  /// FAQ answer: meaning of min/max number of transactions
   ///
   /// In en, this message translates to:
-  /// **'\'Min Amount\' and \'Max Amount\' define the inclusive range of transaction values covered by a fee interval. For example, if an interval has Min=1 and Max=1000, the fee applies to any transaction amount between 1 and 1000 inclusive. When creating or editing intervals, ensure that Min is less than or equal to Max and that intervals do not overlap to avoid ambiguous fee calculations.'**
-  String get faqMinMaxUsageAnswer;
+  /// **'\'Min transactions\' and \'Max transactions\' set the minimum and maximum number of operations the optimizer may use to split your entered amount. For example, if you enter 10,000 Ar and set Min transactions = 2, the optimizer will only consider solutions that split the amount into at least 2 operations. Ensure Min ≤ Max and that the values make sense for your intended split. This constrains the optimizer to produce results with a number of transactions within the specified range.'**
+  String get faqMinMaxTransactionRangeAnswer;
 
   /// FAQ question
   ///

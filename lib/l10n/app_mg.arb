@@ -1623,13 +1623,13 @@
   "@faqHowToCalculateFeesAnswer": {
     "description": "FAQ answer"
   },
-  "faqMinMaxUsage": "Inona no dikan'ny 'Vola Kely' sy 'Vola Be'?",
-  "@faqMinMaxUsage": {
-    "description": "FAQ question momba ny fampiasana min sy max"
+  "faqMinMaxTransactionRange": "Inona no dikan'ny \u00AB Min transactions \u00BB sy \u00AB Max transactions \u00BB?",
+  "@faqMinMaxTransactionRange": {
+    "description": "Fanontaniana FAQ: dikan'ny isan'ny fifanakalozana min/max"
   },
-  "faqMinMaxUsageAnswer": "Ny 'Vola Kely' sy 'Vola Be' dia mamaritra ny elanelam-bola tafiditra amin'ny intervalle sara. Ohatra, raha manana Min=1 ary Max=1000 ny intervalle, dia mihatra amin'ny vola rehetra eo anelanelan'ny 1 sy 1000 izany. Rehefa mamorona na manova intervalle, ataovy azo antoka fa ny Min dia latsaky na mitovy amin'ny Max ary tsy mifandona ny intervalle mba hisorohana ny kajy sara misafotofoto.",
-  "@faqMinMaxUsageAnswer": {
-    "description": "FAQ answer momba ny fampiasana min sy max"
+  "faqMinMaxTransactionRangeAnswer": "Ny \u00AB Min transactions \u00BB sy \u00AB Max transactions \u00BB dia mamaritra ny isan'ny fifanakalozana kely indrindra sy lehibe indrindra azo ampiasain'ny mpanatsara mba hizara ny vola napetraka. Ohatra, raha manoratra 10\u202F000 Ar ianao ary mampiditra Min transactions = 2 dia hikaroka vahaolana izay misy farafahakeliny 2 fifanakalozana ihany ny mpanatsara. Ataovy izay hahazoana antoka fa Min \u2264 Max ary mety amin'ny fikasanao ny sandany. Ireo fepetra ireo dia manery ny mpanatsara hahazo vokatra miaraka amin'ny isan'ny fifanakalozana ao anatin'ny elanelana napetrakao.",
+  "@faqMinMaxTransactionRangeAnswer": {
+    "description": "Valin'ny FAQ: dikan'ny isan'ny fifanakalozana min/max"
   },
   "faqDataSecurity": "Azo antoka ve ny angon-drakitra?",
   "@faqDataSecurity": {
