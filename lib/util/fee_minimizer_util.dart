@@ -1184,8 +1184,24 @@ class FeeOptimizerUtil {
     double remaining,
     Map<String, int> counts,
   ) {
-    // Convert to Decimal for precise filtering
+    // Convertir en Decimal pour des calculs précis
+    final totalDecimal = Decimal.parse(totalAmount.toString());
+    final netDecimal = Decimal.parse(netAmount.toString());
+    final feesDecimal = Decimal.parse(totalFees.toString());
+    
+    // Calculer le restant avec précision
+    final remainingDecimal = totalDecimal - netDecimal - feesDecimal;
+    
+    // Si très proche de zéro ou négatif, mettre à zéro
     final zero = Decimal.zero;
+    final tolerance = Decimal.parse('1e-10');
+    
+    double finalRemaining;
+    if (remainingDecimal.abs() < tolerance || remainingDecimal < zero) {
+      finalRemaining = 0.0;
+    } else {
+      finalRemaining = remainingDecimal.toDouble();
+    }
 
     // Filter entries with count = 0 or truly zero amount
     final filteredCounts = Map<String, int>.from(counts)
@@ -1212,7 +1228,7 @@ class FeeOptimizerUtil {
       totalAmount: totalAmount,
       netAmount: netAmount,
       totalFees: totalFees,
-      remaining: remaining,
+      remaining: finalRemaining,
       details: details,
     );
   }
