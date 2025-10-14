@@ -1138,6 +1138,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Entrez le montant de votre transaction et sélectionnez un fournisseur. L\'application calculera tous les frais applicables incluant les frais fixes, les frais en pourcentage et les frais minimum/maximum. Elle vous montre ensuite le coût total et suggère des optimisations.';
 
   @override
+  String get faqMinMaxUsage =>
+      'Que signifient \'Montant Min\' et \'Montant Max\' ?';
+
+  @override
+  String get faqMinMaxUsageAnswer =>
+      '\'Montant Min\' et \'Montant Max\' définissent la plage inclusive des valeurs de transaction couvertes par un intervalle de frais. Par exemple, si un intervalle a Min=1 et Max=1000, les frais s\'appliquent à toute transaction comprise entre 1 et 1000 inclus. Lors de la création ou de la modification d\'intervalles, assurez-vous que Min est inférieur ou égal à Max et que les intervalles ne se chevauchent pas pour éviter des calculs de frais ambigus.';
+
+  @override
   String get faqDataSecurity => 'Mes données sont-elles sécurisées ?';
 
   @override

@@ -1443,6 +1443,14 @@
   "@faqHowToCalculateFeesAnswer": {
     "description": "Réponse FAQ"
   },
+  "faqMinMaxUsage": "Que signifient 'Montant Min' et 'Montant Max' ?",
+  "@faqMinMaxUsage": {
+    "description": "Question FAQ sur l'utilisation des montants min et max"
+  },
+  "faqMinMaxUsageAnswer": "'Montant Min' et 'Montant Max' définissent la plage inclusive des valeurs de transaction couvertes par un intervalle de frais. Par exemple, si un intervalle a Min=1 et Max=1000, les frais s'appliquent à toute transaction comprise entre 1 et 1000 inclus. Lors de la création ou de la modification d'intervalles, assurez-vous que Min est inférieur ou égal à Max et que les intervalles ne se chevauchent pas pour éviter des calculs de frais ambigus.",
+  "@faqMinMaxUsageAnswer": {
+    "description": "Réponse FAQ sur l'utilisation des montants min et max"
+  },
   "faqDataSecurity": "Mes données sont-elles sécurisées ?",
   "@faqDataSecurity": {
     "description": "Question FAQ"
