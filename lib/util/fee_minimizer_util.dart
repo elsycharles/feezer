@@ -7,17 +7,20 @@ import '../../util/constant_util.dart';
 import '../../l10n/app_localizations.dart';
 
 // ========================================
-// ÉTAPE 3 : Classe utilitaire Decimal
+// ÉTAPE 3 : Classe utilitaire Decimal améliorée
 // ========================================
 class _DecimalHelper {
+  /// Convert double to Decimal with maximum precision
   static Decimal toDecimal(double value) {
     return Decimal.parse(value.toString());
   }
-  
+
+  /// Convert Decimal to double (may lose precision, use only for final display)
   static double toDouble(Decimal value) {
     return value.toDouble();
   }
-  
+
+  /// Calculate fee with full precision
   static Decimal calculateFee({
     required Decimal amount,
     required Decimal feeValue,
@@ -26,12 +29,13 @@ class _DecimalHelper {
     if (isPercentage) {
       final hundred = Decimal.fromInt(100);
       final result = (amount * feeValue) / hundred;
-      return result.toDecimal(scaleOnInfinitePrecision: 10);
+      return result.toDecimal(scaleOnInfinitePrecision: ConstantUtil.maxDecimalScale);
     } else {
       return feeValue;
     }
   }
-  
+
+  /// Calculate net amount from budget with full precision
   static Decimal calculateNetAmount({
     required Decimal budget,
     required Decimal feeValue,
@@ -40,20 +44,27 @@ class _DecimalHelper {
     if (isPercentage) {
       final hundred = Decimal.fromInt(100);
       final one = Decimal.fromInt(1);
-      final feeRatio = (feeValue / hundred).toDecimal(scaleOnInfinitePrecision: 10);
+      final feeRatio = (feeValue / hundred).toDecimal(scaleOnInfinitePrecision: ConstantUtil.maxDecimalScale);
       final denominator = one + feeRatio;
       final result = budget / denominator;
-      return result.toDecimal(scaleOnInfinitePrecision: 10);
+      return result.toDecimal(scaleOnInfinitePrecision: ConstantUtil.maxDecimalScale);
     } else {
       return budget - feeValue;
     }
   }
-  
+
+  /// Calculate total cost with full precision
   static Decimal calculateTotalCost({
     required Decimal amount,
     required Decimal fee,
   }) {
     return amount + fee;
+  }
+
+  /// Safe comparison: check if a <= b with tolerance
+  static bool isLessOrEqual(Decimal a, Decimal b, {Decimal? tolerance}) {
+    final tol = tolerance ?? ConstantUtil.calculateTolerance(b);
+    return a <= b + tol;
   }
 }
 
@@ -308,9 +319,15 @@ class FeeOptimizerUtil {
         fee = opt.feeValue;
       }
 
-      // ✅ CORRECTION: Pas d'arrondi pour une seule opération
+            // ✅ CORRECTION: Utiliser tolérance dynamique au lieu de 0.01 fixe
+      final totalAmountDecimal = _DecimalHelper.toDecimal(totalAmount);
+      final netAmountDecimal = _DecimalHelper.toDecimal(netAmount);
+      final feeDecimal = _DecimalHelper.toDecimal(fee);
+      final totalCostDecimal = netAmountDecimal + feeDecimal;
+      final tolerance = ConstantUtil.calculateTolerance(totalAmountDecimal);
+
       if (netAmount >= opt.min && netAmount <= opt.max &&
-          netAmount > 0 && (netAmount + fee) <= totalAmount + 0.01) {
+          netAmount > 0 && _DecimalHelper.isLessOrEqual(totalCostDecimal, totalAmountDecimal, tolerance: tolerance)) {
         final result = _buildResult(
           totalAmount,
           netAmount,
@@ -509,9 +526,11 @@ class FeeOptimizerUtil {
     final totalCostRational = (amountPerOpDecimal + feeDecimal) * countDecimal;
     final totalCostDecimal = totalCostRational;
 
-    // Tolerance for floating point errors
-    final tolerance = _DecimalHelper.toDecimal(0.01);
-    if (totalCostDecimal > totalDecimal + tolerance) return null;
+    // ✅ FIXED: Use dynamic tolerance instead of hardcoded 0.01
+    final tolerance = ConstantUtil.calculateTolerance(totalDecimal);
+    if (ConstantUtil.isDecimalGreater(totalCostDecimal, totalDecimal, tolerance: tolerance)) {
+      return null;
+    }
 
     // Convert to double for result
     final amountPerOp = _DecimalHelper.toDouble(amountPerOpDecimal);
@@ -542,7 +561,11 @@ class FeeOptimizerUtil {
     double totalFees = 0;
 
     for (int i = 0; i < targetCount; i++) {
-      if (budget <= 0.01) break;
+      final budgetDecimal = _DecimalHelper.toDecimal(budget);
+      final tolerance = ConstantUtil.calculateTolerance(budgetDecimal);
+
+      // Stop if remaining budget is negligible
+      if (budgetDecimal <= tolerance) break;
 
       final remaining = budget;
       final remainingOperations = targetCount - i;
@@ -566,7 +589,15 @@ class FeeOptimizerUtil {
         final fee = opt.getFeeForAmount(amount);
         final totalCost = amount + fee;
 
-        if (totalCost > remaining + 0.01 || amount < opt.min) continue;
+        // ✅ FIXED: Use dynamic tolerance for comparison
+        final costDecimal = _DecimalHelper.toDecimal(totalCost);
+        final remainingDecimal = _DecimalHelper.toDecimal(remaining);
+        final costTolerance = ConstantUtil.calculateTolerance(remainingDecimal);
+
+        if (ConstantUtil.isDecimalGreater(costDecimal, remainingDecimal, tolerance: costTolerance) ||
+            amount < opt.min) {
+          continue;
+        }
 
         final efficiency = amount / (fee + 0.0001);
         final utilization = amount / opt.max;
@@ -670,11 +701,15 @@ class FeeOptimizerUtil {
         fee = opt.feeValue;
       }
 
-      // ✅ CORRECTION: Pas d'arrondi ici pour conserver la précision
-      // netAmount reste tel quel pour une seule opération
+      // ✅ CORRECTION: Utiliser tolérance dynamique au lieu de 0.01 fixe
+      final totalAmountDecimal = _DecimalHelper.toDecimal(totalAmount);
+      final netAmountDecimal = _DecimalHelper.toDecimal(netAmount);
+      final feeDecimal = _DecimalHelper.toDecimal(fee);
+      final totalCostDecimal = netAmountDecimal + feeDecimal;
+      final tolerance = ConstantUtil.calculateTolerance(totalAmountDecimal);
 
       if (netAmount >= minAmount && netAmount <= maxAmount &&
-          netAmount > 0 && (netAmount + fee) <= totalAmount + 0.01) {
+          netAmount > 0 && _DecimalHelper.isLessOrEqual(totalCostDecimal, totalAmountDecimal, tolerance: tolerance)) {
         final efficiency = netAmount / (fee + 0.0001);
 
         if (bestSingleOp == null || efficiency > bestSingleOp.score) {
@@ -1083,9 +1118,11 @@ class FeeOptimizerUtil {
         fee: feeDecimal,
       );
 
-      // Check budget with tolerance
-      final tolerance = _DecimalHelper.toDecimal(0.01);
-      if (totalCostDecimal > budgetDecimal + tolerance) continue;
+      // ✅ FIXED: Use dynamic tolerance
+      final tolerance = ConstantUtil.calculateTolerance(budgetDecimal);
+      if (ConstantUtil.isDecimalGreater(totalCostDecimal, budgetDecimal, tolerance: tolerance)) {
+        continue;
+      }
 
       // Calculate score
       final minFee = _DecimalHelper.toDecimal(1e-15);
@@ -1196,6 +1233,10 @@ class FeeOptimizerUtil {
     }
   }
 
+  // ========================================
+  // 5. Improve _buildResult to handle extremely small values
+  // ========================================
+
   static FeeOptimizerResult _buildResult(
     double totalAmount,
     double netAmount,
@@ -1203,14 +1244,19 @@ class FeeOptimizerUtil {
     double remaining,
     Map<String, int> counts,
   ) {
-    // Filter entries with count = 0 or amount = 0
+    // Convert to Decimal for precise filtering
+    final zero = Decimal.zero;
+
+    // Filter entries with count = 0 or truly zero amount
     final filteredCounts = Map<String, int>.from(counts)
       ..removeWhere((key, value) {
         if (value <= 0) return true;
+
         final parts = key.split('-');
-        final amount = double.parse(parts[0]);
-        // ✅ NE PAS filtrer si amount > 0, même si très petit
-        return amount <= 0;
+        final amountDecimal = Decimal.parse(parts[0]);
+
+        // Only filter if amount is truly zero (not just very small)
+        return amountDecimal == zero;
       });
 
     final details = filteredCounts.entries.map((entry) {

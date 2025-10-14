@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -801,63 +802,58 @@ class _State extends State<OptimizeFeeScreen> {
     final currencyProvider = context.read<CurrencyProvider>();
     final currencySymbol = currencyProvider.currencySymbol;
 
-    // Budget disponible
-    final userAmount = _amount;
+    // Convert all values to Decimal for precise calculations
+    final userAmountDecimal = Decimal.parse(_amount.toString());
 
-    // ===== AVEC OPTIMISATION =====
-    final optimizedNetAmount = _convertedResult!.netAmount;
-    final optimizedTotalFees = _convertedResult!.totalFees;
-    final optimizedTotalAmount = _convertedResult!.totalAmount;
+    final optimizedNetDecimal = Decimal.parse(_convertedResult!.netAmount.toString());
+    final optimizedFeesDecimal = Decimal.parse(_convertedResult!.totalFees.toString());
+    final optimizedTotalDecimal = Decimal.parse(_convertedResult!.totalAmount.toString());
 
-    // ===== SANS OPTIMISATION (montant max) =====
-    final nonOptMaxNetAmount = currencyProvider.convertFromAriary(
-      _nonOptimizedComparison!['maxNetAmount'],
+    final nonOptMaxNetDecimal = Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxNetAmount']).toString()
     );
-    final nonOptMaxFee = currencyProvider.convertFromAriary(
-      _nonOptimizedComparison!['maxFee'],
+    final nonOptMaxFeeDecimal = Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['maxFee']).toString()
     );
 
-    // ===== SANS OPTIMISATION (même montant net) =====
-    final nonOptSameNetTotalAmount = currencyProvider.convertFromAriary(
-      _nonOptimizedComparison!['sameNetTotalAmount'],
-    );
-    final nonOptSameFee = currencyProvider.convertFromAriary(
-      _nonOptimizedComparison!['sameNetFee'],
-    );
-    final nonOptSingleOpNetAmount = optimizedNetAmount;
-
-    // ========================================
-    // CALCUL CORRECT DES GAINS/PERTES
-    // ========================================
-    
-    // Comparaison 1: Sans optimisation (montant max)
-    // Qui gagne en NET ? nonOpt - optimized
-    final netDifferenceVsMax = nonOptMaxNetAmount - optimizedNetAmount;
-    // Qui gagne en FRAIS ? nonOpt - optimized (positif = sans opt perd plus)
-    final feeDifferenceVsMax = nonOptMaxFee - optimizedTotalFees;
-    
-    // Total: Si positif → Sans optimisation est MEILLEURE
-    //        Si négatif → Optimisation est MEILLEURE
+    // Calculate differences with full precision
+    final netDifferenceVsMax = nonOptMaxNetDecimal - optimizedNetDecimal;
+    final feeDifferenceVsMax = nonOptMaxFeeDecimal - optimizedFeesDecimal;
     final totalGainLossVsMax = netDifferenceVsMax - feeDifferenceVsMax;
 
-    // Comparaison 2: Sans optimisation (même net)
-    // Qui gagne en FRAIS ? nonOpt - optimized
-    final feeDifferenceVsSameNet = nonOptSameFee - optimizedTotalFees;
-    
-    // Si positif → Sans opt perd plus (optimisation meilleure)
-    // Si négatif → Sans opt perd moins (sans opt meilleure)
-    
-    final exceedsBudget = nonOptSameNetTotalAmount > userAmount;
+    // Calculate same net comparison
+    final nonOptSameNetTotalDecimal = Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetTotalAmount']).toString()
+    );
+    final nonOptSameFeeDecimal = Decimal.parse(
+      currencyProvider.convertFromAriary(_nonOptimizedComparison!['sameNetFee']).toString()
+    );
+    final feeDifferenceVsSameNet = nonOptSameFeeDecimal - optimizedFeesDecimal;
 
-    // DEBUG
-    // print('=== COMPARAISON DEBUG ===');
-    // print('Optimisation: net=$optimizedNetAmount, fees=$optimizedTotalFees');
-    // print('Sans opt (max): net=$nonOptMaxNetAmount, fees=$nonOptMaxFee');
-    // print('Net difference: $netDifferenceVsMax');
-    // print('Fee difference: $feeDifferenceVsMax');
-    // print('Total gain/loss: $totalGainLossVsMax');
-    // print('Result: ${totalGainLossVsMax > 0.01 ? "SANS OPT GAGNE" : totalGainLossVsMax < -0.01 ? "OPTIMISATION GAGNE" : "ÉGAL"}');
+    // Check if exceeds budget
+    final exceedsBudget = ConstantUtil.isDecimalGreater(nonOptSameNetTotalDecimal, userAmountDecimal);
 
+    // Use dynamic tolerance for comparison
+    final tolerance = ConstantUtil.calculateTolerance(totalGainLossVsMax);
+
+    // Determine optimization result with precise comparison
+    final bool optimizationIsBetter = ConstantUtil.isDecimalLess(
+      totalGainLossVsMax,
+      -Decimal.zero,
+      tolerance: tolerance
+    );
+    final bool noOptIsBetter = ConstantUtil.isDecimalGreater(
+      totalGainLossVsMax,
+      Decimal.zero,
+      tolerance: tolerance
+    );
+    final bool areEqual = ConstantUtil.areDecimalsEqual(
+      totalGainLossVsMax,
+      Decimal.zero,
+      tolerance: tolerance
+    );
+
+    // Rest of the comparison UI with proper formatting
     return SurfaceCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -910,21 +906,21 @@ class _State extends State<OptimizeFeeScreen> {
                 Global.gapSm,
                 _buildComparisonRow(
                   AppLocalizations.of(context).availableBudget,
-                  '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).netAmountSent,
-                  '${ConstantUtil.formatCurrencyAmount(optimizedNetAmount)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(optimizedNetDecimal)} $currencySymbol',
                   valueColor: Colors.green.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalFees,
-                  '${ConstantUtil.formatCurrencyAmount(optimizedTotalFees)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(optimizedFeesDecimal)} $currencySymbol',
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalSpent,
-                  '${ConstantUtil.formatCurrencyAmount(optimizedTotalAmount)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(optimizedTotalDecimal)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).numberOfOperations,
@@ -940,17 +936,16 @@ class _State extends State<OptimizeFeeScreen> {
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              // ✅ CORRECTION: Sans opt GAGNE si totalGainLossVsMax > 0
-              color: totalGainLossVsMax > 0.01
+              color: noOptIsBetter
                   ? Colors.green.withValues(alpha: 0.1)
-                  : totalGainLossVsMax < -0.01
+                  : optimizationIsBetter
                       ? Colors.red.withValues(alpha: 0.1)
                       : Colors.grey.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: totalGainLossVsMax > 0.01
+                color: noOptIsBetter
                     ? Colors.green.withValues(alpha: 0.3)
-                    : totalGainLossVsMax < -0.01
+                    : optimizationIsBetter
                         ? Colors.red.withValues(alpha: 0.3)
                         : Colors.grey.withValues(alpha: 0.3),
               ),
@@ -961,15 +956,15 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      totalGainLossVsMax > 0.01
+                      noOptIsBetter
                           ? Icons.check_circle
-                          : totalGainLossVsMax < -0.01
+                          : optimizationIsBetter
                               ? Icons.trending_down
                               : Icons.balance,
                       size: 16,
-                      color: totalGainLossVsMax > 0.01
+                      color: noOptIsBetter
                           ? Colors.green.shade700
-                          : totalGainLossVsMax < -0.01
+                          : optimizationIsBetter
                               ? Colors.red.shade700
                               : Colors.grey.shade700,
                     ),
@@ -978,9 +973,9 @@ class _State extends State<OptimizeFeeScreen> {
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationMaxAmount,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: totalGainLossVsMax > 0.01
+                          color: noOptIsBetter
                               ? Colors.green.shade700
-                              : totalGainLossVsMax < -0.01
+                              : optimizationIsBetter
                                   ? Colors.red.shade700
                                   : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
@@ -992,20 +987,20 @@ class _State extends State<OptimizeFeeScreen> {
                 Global.gapSm,
                 _buildComparisonRow(
                   AppLocalizations.of(context).availableBudget,
-                  '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).netAmountSent,
-                  '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetAmount)} $currencySymbol',
-                  valueColor: totalGainLossVsMax > 0.01
+                  '${ConstantUtil.formatCurrencyAmount(nonOptMaxNetDecimal)} $currencySymbol',
+                  valueColor: noOptIsBetter
                       ? Colors.green.shade700
-                      : totalGainLossVsMax < -0.01
+                      : optimizationIsBetter
                           ? Colors.red.shade700
                           : Colors.grey.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalFees,
-                  '${ConstantUtil.formatCurrencyAmount(nonOptMaxFee)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptMaxFeeDecimal)} $currencySymbol',
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
@@ -1015,29 +1010,29 @@ class _State extends State<OptimizeFeeScreen> {
 
                 Global.gapSm,
                 Divider(
-                  color: totalGainLossVsMax > 0.01
+                  color: noOptIsBetter
                       ? Colors.green.withValues(alpha: 0.3)
-                      : totalGainLossVsMax < -0.01
+                      : optimizationIsBetter
                         ? Colors.red.withValues(alpha: 0.3)
                         : Colors.grey.withValues(alpha: 0.3),
                 ),
                 Global.gapSm,
 
-                // ✅ MESSAGE CORRECT
-                if (totalGainLossVsMax.abs() > 0.01) ...[
+                // Show difference message if not equal
+                if (!areEqual) ...[
                   Row(
                     children: [
                       Icon(
-                        totalGainLossVsMax > 0 ? Icons.trending_up : Icons.trending_down,
+                        noOptIsBetter ? Icons.trending_up : Icons.trending_down,
                         size: 14,
-                        color: totalGainLossVsMax > 0
+                        color: noOptIsBetter
                             ? Colors.green.shade700
                             : Colors.red.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          totalGainLossVsMax > 0
+                          noOptIsBetter
                               ? AppLocalizations.of(context).transactionGainsVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(totalGainLossVsMax.abs()),
                                   currencySymbol,
@@ -1047,7 +1042,7 @@ class _State extends State<OptimizeFeeScreen> {
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: totalGainLossVsMax > 0
+                            color: noOptIsBetter
                                 ? Colors.green.shade700
                                 : Colors.red.shade700,
                             fontWeight: FontWeight.w600,
@@ -1083,17 +1078,16 @@ class _State extends State<OptimizeFeeScreen> {
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
-              // ✅ CORRECTION: Si fee diff > 0 → sans opt perd plus (rouge)
-              color: feeDifferenceVsSameNet > 0.01
+              color: feeDifferenceVsSameNet > Decimal.zero
                   ? Colors.red.withValues(alpha: 0.1)
-                  : feeDifferenceVsSameNet < -0.01
+                  : feeDifferenceVsSameNet < Decimal.zero
                       ? Colors.green.withValues(alpha: 0.1)
                       : Colors.grey.withValues(alpha: 0.1),
               borderRadius: Global.borderMd,
               border: Border.all(
-                color: feeDifferenceVsSameNet > 0.01
+                color: feeDifferenceVsSameNet > Decimal.zero
                     ? Colors.red.withValues(alpha: 0.3)
-                    : feeDifferenceVsSameNet < -0.01
+                    : feeDifferenceVsSameNet < Decimal.zero
                         ? Colors.green.withValues(alpha: 0.3)
                         : Colors.grey.withValues(alpha: 0.3),
               ),
@@ -1104,15 +1098,15 @@ class _State extends State<OptimizeFeeScreen> {
                 Row(
                   children: [
                     Icon(
-                      feeDifferenceVsSameNet > 0.01
+                      feeDifferenceVsSameNet > Decimal.zero
                           ? Icons.trending_down
-                          : feeDifferenceVsSameNet < -0.01
+                          : feeDifferenceVsSameNet < Decimal.zero
                               ? Icons.check_circle
                               : Icons.balance,
                       size: 16,
-                      color: feeDifferenceVsSameNet > 0.01
+                      color: feeDifferenceVsSameNet > Decimal.zero
                           ? Colors.red.shade700
-                          : feeDifferenceVsSameNet < -0.01
+                          : feeDifferenceVsSameNet < Decimal.zero
                               ? Colors.green.shade700
                               : Colors.grey.shade700,
                     ),
@@ -1121,9 +1115,9 @@ class _State extends State<OptimizeFeeScreen> {
                       child: Text(
                         AppLocalizations.of(context).withoutOptimizationSameNet,
                         style: ThemeUtil.titleSmall.copyWith(
-                          color: feeDifferenceVsSameNet > 0.01
+                          color: feeDifferenceVsSameNet > Decimal.zero
                               ? Colors.red.shade700
-                              : feeDifferenceVsSameNet < -0.01
+                              : feeDifferenceVsSameNet < Decimal.zero
                                   ? Colors.green.shade700
                                   : Colors.grey.shade700,
                           fontWeight: FontWeight.w700,
@@ -1135,25 +1129,25 @@ class _State extends State<OptimizeFeeScreen> {
                 Global.gapSm,
                 _buildComparisonRow(
                   AppLocalizations.of(context).availableBudget,
-                  '${ConstantUtil.formatCurrencyAmount(userAmount)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).netAmountSent,
-                  '${ConstantUtil.formatCurrencyAmount(nonOptSingleOpNetAmount)} $currencySymbol',
-                  valueColor: feeDifferenceVsSameNet > 0.01
+                  '${ConstantUtil.formatCurrencyAmount(optimizedNetDecimal)} $currencySymbol',
+                  valueColor: feeDifferenceVsSameNet > Decimal.zero
                       ? Colors.red.shade700
-                      : feeDifferenceVsSameNet < -0.01
+                      : feeDifferenceVsSameNet < Decimal.zero
                           ? Colors.green.shade700
                           : Colors.grey.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalFees,
-                  '${ConstantUtil.formatCurrencyAmount(nonOptSameFee)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameFeeDecimal)} $currencySymbol',
                   valueColor: Colors.red.shade700,
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).totalSpent,
-                  '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalAmount)} $currencySymbol',
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalDecimal)} $currencySymbol',
                 ),
                 _buildComparisonRow(
                   AppLocalizations.of(context).numberOfOperations,
@@ -1162,29 +1156,29 @@ class _State extends State<OptimizeFeeScreen> {
 
                 Global.gapSm,
                 Divider(
-                  color: feeDifferenceVsSameNet > 0.01
+                  color: feeDifferenceVsSameNet > Decimal.zero
                       ? Colors.red.withValues(alpha: 0.3)
-                      : feeDifferenceVsSameNet < -0.01
+                      : feeDifferenceVsSameNet < Decimal.zero
                         ? Colors.green.withValues(alpha: 0.3)
                         : Colors.grey.withValues(alpha: 0.3),
                 ),
                 Global.gapSm,
 
-                // ✅ MESSAGE CORRECT
-                if (feeDifferenceVsSameNet.abs() > 0.01) ...[
+                // Show difference message if not equal
+                if (feeDifferenceVsSameNet.abs() > tolerance) ...[
                   Row(
                     children: [
                       Icon(
-                        feeDifferenceVsSameNet > 0 ? Icons.trending_down : Icons.trending_up,
+                        feeDifferenceVsSameNet > Decimal.zero ? Icons.trending_down : Icons.trending_up,
                         size: 14,
-                        color: feeDifferenceVsSameNet > 0
+                        color: feeDifferenceVsSameNet > Decimal.zero
                             ? Colors.red.shade700
                             : Colors.green.shade700,
                       ),
                       Global.gapSm,
                       Expanded(
                         child: Text(
-                          feeDifferenceVsSameNet > 0
+                          feeDifferenceVsSameNet > Decimal.zero
                               ? AppLocalizations.of(context).transactionLosesVsOptimized(
                                   ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
                                   currencySymbol,
@@ -1194,7 +1188,7 @@ class _State extends State<OptimizeFeeScreen> {
                                   currencySymbol,
                                 ),
                           style: ThemeUtil.bodySmall.copyWith(
-                            color: feeDifferenceVsSameNet > 0
+                            color: feeDifferenceVsSameNet > Decimal.zero
                                 ? Colors.red.shade700
                                 : Colors.green.shade700,
                             fontWeight: FontWeight.w600,

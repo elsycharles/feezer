@@ -147,11 +147,12 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onTextChanged(String value) {
     _isUserTyping = true;
-    final doubleValue = ConstantUtil.parseLocalizedNumber(value);
-    if (doubleValue != null &&
-        doubleValue >= widget.min &&
-        doubleValue <= widget.max) {
-      widget.onChanged(doubleValue);
+    final decimalValue = ConstantUtil.parseLocalizedNumber(value);
+    if (decimalValue != null) {
+      final doubleValue = decimalValue.toDouble();
+      if (doubleValue >= widget.min && doubleValue <= widget.max) {
+        widget.onChanged(doubleValue);
+      }
     } else if (value.isEmpty) {
       widget.onChanged(widget.min);
     }
