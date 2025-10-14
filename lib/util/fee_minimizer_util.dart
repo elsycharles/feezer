@@ -1329,11 +1329,7 @@ class FeeOptimizerUtil {
       }
     }
 
-    // Return null if no valid interval was found for either calculation
-    if (!foundValidMaxInterval && !foundValidSameNetInterval) {
-      return null;
-    }
-
+    // Always return data with validity flags
     return {
       'maxNetAmount': maxNetAmount,
       'maxFee': maxFee,

@@ -796,62 +796,7 @@ class _State extends State<OptimizeFeeScreen> {
   );
 
   Widget _buildComparisonSection() {
-    if (_nonOptimizedComparison == null) {
-      return SurfaceCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  Icons.compare_arrows,
-                  size: 18,
-                  color: context.colorScheme.primary,
-                ),
-                Global.gapSm,
-                Flexible(
-                  child: Text(
-                    AppLocalizations.of(context).comparisonWithWithoutOptimization,
-                    style: ThemeUtil.titleSmall.copyWith(
-                      color: context.colorScheme.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Global.gapLg,
-            Container(
-              padding: Global.padMd,
-              decoration: BoxDecoration(
-                color: Colors.orange.withValues(alpha: 0.1),
-                borderRadius: Global.borderMd,
-                border: Border.all(color: Colors.orange.withValues(alpha: 0.3)),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.warning_amber,
-                    size: 16,
-                    color: Colors.orange.shade700,
-                  ),
-                  Global.gapSm,
-                  Expanded(
-                    child: Text(
-                      AppLocalizations.of(context).noValidIntervalForComparison,
-                      style: ThemeUtil.bodyMedium.copyWith(
-                        color: Colors.orange.shade700,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      );
-    }
+    if (_nonOptimizedComparison == null) return const SizedBox.shrink();
 
     final hasValidMaxInterval = _nonOptimizedComparison!['hasValidMaxInterval'] as bool? ?? false;
     final hasValidSameNetInterval = _nonOptimizedComparison!['hasValidSameNetInterval'] as bool? ?? false;
@@ -936,7 +881,7 @@ class _State extends State<OptimizeFeeScreen> {
           ),
           Global.gapLg,
 
-          // ===== SECTION 1: AVEC OPTIMISATION =====
+          // ===== SECTION 1: WITH OPTIMIZATION =====
           Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
@@ -989,7 +934,7 @@ class _State extends State<OptimizeFeeScreen> {
 
           Global.gapMd,
 
-          // ===== SECTION 2: SANS OPTIMISATION (MONTANT MAX) =====
+          // ===== SECTION 2: WITHOUT OPTIMIZATION (MAX AMOUNT) =====
           if (hasValidMaxInterval) ...[
             Container(
               padding: Global.padMd,
@@ -1132,60 +1077,93 @@ class _State extends State<OptimizeFeeScreen> {
             Global.gapMd,
           ],
 
-          // ===== SECTION 3: SANS OPTIMISATION (MÊME NET) =====
-          if (hasValidSameNetInterval) ...[
-            Container(
-              padding: Global.padMd,
-              decoration: BoxDecoration(
-                color: feeDifferenceVsSameNet > Decimal.zero
-                    ? Colors.red.withValues(alpha: 0.1)
-                    : feeDifferenceVsSameNet < Decimal.zero
-                        ? Colors.green.withValues(alpha: 0.1)
-                        : Colors.grey.withValues(alpha: 0.1),
-                borderRadius: Global.borderMd,
-                border: Border.all(
-                  color: feeDifferenceVsSameNet > Decimal.zero
-                      ? Colors.red.withValues(alpha: 0.3)
+          // ===== SECTION 3: WITHOUT OPTIMIZATION (SAME NET) =====
+          Container(
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: !hasValidSameNetInterval
+                  ? Colors.orange.withValues(alpha: 0.1)
+                  : feeDifferenceVsSameNet > Decimal.zero
+                      ? Colors.red.withValues(alpha: 0.1)
                       : feeDifferenceVsSameNet < Decimal.zero
-                          ? Colors.green.withValues(alpha: 0.3)
-                          : Colors.grey.withValues(alpha: 0.3),
-                ),
+                          ? Colors.green.withValues(alpha: 0.1)
+                          : Colors.grey.withValues(alpha: 0.1),
+              borderRadius: Global.borderMd,
+              border: Border.all(
+                color: !hasValidSameNetInterval
+                    ? Colors.orange.withValues(alpha: 0.3)
+                    : feeDifferenceVsSameNet > Decimal.zero
+                        ? Colors.red.withValues(alpha: 0.3)
+                        : feeDifferenceVsSameNet < Decimal.zero
+                            ? Colors.green.withValues(alpha: 0.3)
+                            : Colors.grey.withValues(alpha: 0.3),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      !hasValidSameNetInterval
+                          ? Icons.warning_amber
+                          : feeDifferenceVsSameNet > Decimal.zero
+                              ? Icons.trending_down
+                              : feeDifferenceVsSameNet < Decimal.zero
+                                  ? Icons.check_circle
+                                  : Icons.balance,
+                      size: 16,
+                      color: !hasValidSameNetInterval
+                          ? Colors.orange.shade700
+                          : feeDifferenceVsSameNet > Decimal.zero
+                              ? Colors.red.shade700
+                              : feeDifferenceVsSameNet < Decimal.zero
+                                  ? Colors.green.shade700
+                                  : Colors.grey.shade700,
+                    ),
+                    Global.gapSm,
+                    Flexible(
+                      child: Text(
+                        AppLocalizations.of(context).withoutOptimizationSameNet,
+                        style: ThemeUtil.titleSmall.copyWith(
+                          color: !hasValidSameNetInterval
+                              ? Colors.orange.shade700
+                              : feeDifferenceVsSameNet > Decimal.zero
+                                  ? Colors.red.shade700
+                                  : feeDifferenceVsSameNet < Decimal.zero
+                                      ? Colors.green.shade700
+                                      : Colors.grey.shade700,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Global.gapSm,
+
+                if (!hasValidSameNetInterval) ...[
+                  // Show warning when no valid interval found
                   Row(
                     children: [
                       Icon(
-                        feeDifferenceVsSameNet > Decimal.zero
-                            ? Icons.trending_down
-                            : feeDifferenceVsSameNet < Decimal.zero
-                                ? Icons.check_circle
-                                : Icons.balance,
-                        size: 16,
-                        color: feeDifferenceVsSameNet > Decimal.zero
-                            ? Colors.red.shade700
-                            : feeDifferenceVsSameNet < Decimal.zero
-                                ? Colors.green.shade700
-                                : Colors.grey.shade700,
+                        Icons.info_outline,
+                        size: 14,
+                        color: Colors.orange.shade700,
                       ),
                       Global.gapSm,
-                      Flexible(
+                      Expanded(
                         child: Text(
-                          AppLocalizations.of(context).withoutOptimizationSameNet,
-                          style: ThemeUtil.titleSmall.copyWith(
-                            color: feeDifferenceVsSameNet > Decimal.zero
-                                ? Colors.red.shade700
-                                : feeDifferenceVsSameNet < Decimal.zero
-                                    ? Colors.green.shade700
-                                    : Colors.grey.shade700,
-                            fontWeight: FontWeight.w700,
+                          AppLocalizations.of(context).noValidIntervalForComparison,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.orange.shade700,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Global.gapSm,
+                ] else ...[
+                  // Show comparison when valid interval exists
                   _buildComparisonRow(
                     AppLocalizations.of(context).availableBudget,
                     '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
@@ -1218,8 +1196,8 @@ class _State extends State<OptimizeFeeScreen> {
                     color: feeDifferenceVsSameNet > Decimal.zero
                         ? Colors.red.withValues(alpha: 0.3)
                         : feeDifferenceVsSameNet < Decimal.zero
-                          ? Colors.green.withValues(alpha: 0.3)
-                          : Colors.grey.withValues(alpha: 0.3),
+                            ? Colors.green.withValues(alpha: 0.3)
+                            : Colors.grey.withValues(alpha: 0.3),
                   ),
                   Global.gapSm,
 
@@ -1297,9 +1275,9 @@ class _State extends State<OptimizeFeeScreen> {
                     ),
                   ],
                 ],
-              ),
+              ],
             ),
-          ],
+          ),
         ],
       ),
     );
