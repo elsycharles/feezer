@@ -34,6 +34,7 @@ class ConstantUtil {
   /// - Up to 10 significant decimals for small amounts (< 1)
   /// - 2-4 decimals for normal amounts (≥ 1)
   /// - Removes trailing zeros
+  /// - Adds spaces as thousand separators for amounts ≥ 1000
   static String formatCurrencyAmount(dynamic amount, {int? decimals}) {
     // Convert to Decimal for precise calculations
     final Decimal amountDecimal;
@@ -64,8 +65,8 @@ class ConstantUtil {
       return _formatSmallAmount(amountDecimal, decimals);
     }
 
-    // For normal amounts (≥ 1), use 2-4 decimals
-    return _formatNormalAmount(amountDecimal, decimals);
+    // For normal amounts (≥ 1), use 2-4 decimals and add thousand separators
+    return _addThousandSeparators(_formatNormalAmount(amountDecimal, decimals));
   }
 
   /// Format extremely small numbers in scientific notation
