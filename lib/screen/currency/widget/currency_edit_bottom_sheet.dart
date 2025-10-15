@@ -8,7 +8,7 @@ import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/loading_button.dart';
 import '../../../widget/app_toast.dart';
-import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // Pour ThousandsSeparatorInputFormatter
+import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
 
 /// Clean currency editor
 class CurrencyEditBottomSheet extends StatefulWidget {
