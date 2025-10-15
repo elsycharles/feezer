@@ -27,21 +27,21 @@ class CurrencyCard extends StatelessWidget {
   });
 
   String _formatRate(double rate) {
-    // Pour les très grands nombres (> 1e15), utiliser une représentation plus précise
+    // For very large numbers (> 1e15), use a more precise representation
     String valueStr;
     
     if (rate.abs() > 1e15) {
-      // Utiliser toStringAsFixed(0) pour les très grands entiers
+      // Use toStringAsFixed(0) for very large integers
       if (rate == rate.toInt()) {
         valueStr = rate.toInt().toString();
       } else {
         valueStr = rate.toStringAsFixed(0);
       }
     } else if (rate == rate.toInt()) {
-      // Pour les entiers normaux
+      // For regular integers
       valueStr = rate.toInt().toString();
     } else {
-      // Pour les décimaux - conserver les décimales significatives
+      // For decimals - keep significant decimal digits
       String tempStr = rate.toString();
       if (tempStr.contains('.')) {
         List<String> parts = tempStr.split('.');
@@ -56,12 +56,12 @@ class CurrencyCard extends StatelessWidget {
       }
     }
     
-    // Séparer partie entière et décimale
+    // Split integer and decimal parts
     List<String> parts = valueStr.split('.');
     String integerPart = parts[0];
     String decimalPart = parts.length > 1 ? parts[1] : '';
     
-    // Formater la partie entière avec des espaces
+    // Format the integer part with spaces
     String formatted = '';
     int count = 0;
     for (int i = integerPart.length - 1; i >= 0; i--) {
@@ -72,7 +72,7 @@ class CurrencyCard extends StatelessWidget {
       count++;
     }
     
-    // Ajouter la partie décimale si elle existe
+    // Append the decimal part if it exists
     if (decimalPart.isNotEmpty) {
       formatted += '.$decimalPart';
     }
