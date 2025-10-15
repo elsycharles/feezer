@@ -6,8 +6,12 @@ import '../../../styles/global.dart';
 import '../../../provider/currency_provider.dart';
 import '../../../util/constant_util.dart';
 
-// Nouveau formatter personnalisé pour les espaces
+// Formatter personnalisé avec vérification de limite
 class ThousandsSeparatorInputFormatter extends TextInputFormatter {
+  final double max;
+  
+  ThousandsSeparatorInputFormatter({required this.max});
+
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
@@ -24,6 +28,16 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
     // Vérifier que c'est bien un nombre valide
     if (!RegExp(r'^\d*\.?\d*$').hasMatch(digitsOnly)) {
       return oldValue;
+    }
+
+    // Vérifier si la valeur dépasse la limite
+    final numericValue = double.tryParse(digitsOnly);
+    if (numericValue != null && numericValue > max) {
+      // Si on essaie d'ajouter des caractères (nouveau texte plus long), bloquer
+      if (newValue.text.replaceAll(' ', '').length > oldValue.text.replaceAll(' ', '').length) {
+        return oldValue; // Retourner l'ancienne valeur pour bloquer
+      }
+      // Sinon (suppression), permettre la modification
     }
 
     // Séparer la partie entière et décimale
@@ -243,7 +257,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
               ),
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
-                ThousandsSeparatorInputFormatter(),
+                ThousandsSeparatorInputFormatter(max: widget.max),
                 LengthLimitingTextInputFormatter(30), // Augmenté pour les grands nombres
               ],
               style: ThemeUtil.titleLarge.copyWith(
