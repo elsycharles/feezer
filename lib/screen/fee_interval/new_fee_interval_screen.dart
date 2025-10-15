@@ -8,13 +8,13 @@ import '../../model/fee_interval_model.dart';
 import '../../styles/global.dart';
 import '../../util/theme_util.dart';
 import '../../util/extensions_util.dart';
-import '../../util/validation_util.dart';
 import '../../util/constant_util.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
 import '../../provider/currency_provider.dart';
+import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // Pour ThousandsSeparatorInputFormatter
 
 /// Clean screen for creating new fee intervals
 class NewFeeIntervalScreen extends StatefulWidget {
@@ -102,12 +102,21 @@ class _State extends State<NewFeeIntervalScreen> {
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMinimumAmount,
     keyboardType: TextInputType.number,
-    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-    validator: (value) => ValidationUtil.nonNegativeNumber(
-      value,
-      context,
-      AppLocalizations.of(context).minimumAmount,
-    ),
+    inputFormatters: [
+      FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+      ThousandsSeparatorInputFormatter(max: 99999999999.0),
+    ],
+    validator: (value) {
+      if (value?.isEmpty ?? true) {
+        return AppLocalizations.of(context).thisFieldIsRequired;
+      }
+      final cleanValue = value!.replaceAll(' ', '');
+      final amount = double.tryParse(cleanValue);
+      if (amount == null || amount < 0) {
+        return AppLocalizations.of(context).pleaseEnterValidAmount;
+      }
+      return null;
+    },
     required: true,
   );
 
@@ -118,7 +127,10 @@ class _State extends State<NewFeeIntervalScreen> {
     icon: Icons.money,
     hintText: AppLocalizations.of(context).enterMaximumAmount,
     keyboardType: TextInputType.number,
-    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+    inputFormatters: [
+      FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+      ThousandsSeparatorInputFormatter(max: 99999999999.0),
+    ],
     validator: _validateMaxAmount,
     required: true,
   );
@@ -223,19 +235,28 @@ class _State extends State<NewFeeIntervalScreen> {
     keyboardType: TextInputType.number,
     inputFormatters: _feeType == FeeType.percentage
         ? [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))]
-        : [FilteringTextInputFormatter.digitsOnly],
+        : [
+            FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+            ThousandsSeparatorInputFormatter(max: 99999999999.0),
+          ],
     validator: (value) {
+      if (value?.isEmpty ?? true) {
+        return _feeType == FeeType.percentage
+            ? AppLocalizations.of(context).pleaseEnterPercentage
+            : AppLocalizations.of(context).pleaseEnterFeeAmount;
+      }
+      
       if (_feeType == FeeType.percentage) {
-        final num? numValue = num.tryParse(value ?? '');
+        final num? numValue = num.tryParse(value!);
         if (numValue == null || numValue < 0 || numValue > 100) {
           return AppLocalizations.of(context).percentageMustBeBetween0And100;
         }
       } else {
-        return ValidationUtil.positiveNumber(
-          value,
-          context,
-          AppLocalizations.of(context).feeAmount,
-        );
+        final cleanValue = value!.replaceAll(' ', '');
+        final amount = double.tryParse(cleanValue);
+        if (amount == null || amount <= 0) {
+          return AppLocalizations.of(context).pleaseEnterValidAmount;
+        }
       }
       return null;
     },
@@ -277,21 +298,23 @@ class _State extends State<NewFeeIntervalScreen> {
   );
 
   String? _validateMaxAmount(String? value) {
-    // First validate it's a positive number
-    final basicValidation = ValidationUtil.positiveNumber(
-      value,
-      context,
-      AppLocalizations.of(context).maximumAmount,
-    );
-    if (basicValidation != null) return basicValidation;
+    if (value?.isEmpty ?? true) {
+      return AppLocalizations.of(context).thisFieldIsRequired;
+    }
 
-    // Then check it's greater than min amount
-    final amountDecimal = ConstantUtil.parseLocalizedNumber(value!);
+    final cleanValue = value!.replaceAll(' ', '');
+    final amountDecimal = ConstantUtil.parseLocalizedNumber(cleanValue);
     if (amountDecimal == null) {
       return AppLocalizations.of(context).invalidAmount;
     }
     final amount = amountDecimal.toDouble();
-    final minAmount = double.tryParse(_minAmountController.text) ?? 0;
+    
+    if (amount < 0) {
+      return AppLocalizations.of(context).pleaseEnterValidAmount;
+    }
+    
+    final minCleanValue = _minAmountController.text.replaceAll(' ', '');
+    final minAmount = double.tryParse(minCleanValue) ?? 0;
     if (amount <= minAmount) {
       return AppLocalizations.of(context).maxAmountMustBeGreater;
     }
@@ -307,34 +330,23 @@ class _State extends State<NewFeeIntervalScreen> {
 
       if (mounted) {
         final now = DateTime.now();
+        
+        final minCleanValue = _minAmountController.text.trim().replaceAll(' ', '');
+        final maxCleanValue = _maxAmountController.text.trim().replaceAll(' ', '');
+        final feeCleanValue = _feeController.text.trim().replaceAll(' ', '');
+        
         final feeInterval = FeeInterval(
           id: now.millisecondsSinceEpoch.toString(),
           minAmount: context.read<CurrencyProvider>().convertToAriary(
-            (ConstantUtil.parseLocalizedNumber(
-                  _minAmountController.text.trim(),
-                ) ??
-                Decimal.zero)
-                .toDouble(),
+            (ConstantUtil.parseLocalizedNumber(minCleanValue) ?? Decimal.zero).toDouble(),
           ),
           maxAmount: context.read<CurrencyProvider>().convertToAriary(
-            (ConstantUtil.parseLocalizedNumber(
-                  _maxAmountController.text.trim(),
-                ) ??
-                Decimal.zero)
-                .toDouble(),
+            (ConstantUtil.parseLocalizedNumber(maxCleanValue) ?? Decimal.zero).toDouble(),
           ),
           fee: _feeType == FeeType.percentage
-              ? ((ConstantUtil.parseLocalizedNumber(
-                      _feeController.text.trim(),
-                    ) ??
-                    Decimal.zero)
-                    .toDouble())
+              ? ((ConstantUtil.parseLocalizedNumber(feeCleanValue) ?? Decimal.zero).toDouble())
               : context.read<CurrencyProvider>().convertToAriary(
-                  (ConstantUtil.parseLocalizedNumber(
-                        _feeController.text.trim(),
-                      ) ??
-                      Decimal.zero)
-                      .toDouble(),
+                  (ConstantUtil.parseLocalizedNumber(feeCleanValue) ?? Decimal.zero).toDouble(),
                 ),
           feeType: _feeType,
           creationDateTime: now,
