@@ -6,7 +6,7 @@ import '../../../styles/global.dart';
 import '../../../provider/currency_provider.dart';
 import '../../../util/constant_util.dart';
 
-// Formatter personnalisé avec vérification de limite
+// Custom formatter with limit checking
 class ThousandsSeparatorInputFormatter extends TextInputFormatter {
   final double max;
   
@@ -17,35 +17,35 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    // Si le texte est vide, on retourne tel quel
+    // If the text is empty, return it as-is
     if (newValue.text.isEmpty) {
       return newValue;
     }
 
-    // Enlever tous les espaces existants
+    // Remove all existing spaces
     String digitsOnly = newValue.text.replaceAll(' ', '');
 
-    // Vérifier que c'est bien un nombre valide
+    // Ensure the string is a valid number
     if (!RegExp(r'^\d*\.?\d*$').hasMatch(digitsOnly)) {
       return oldValue;
     }
 
-    // Vérifier si la valeur dépasse la limite
+    // Check if the value exceeds the limit
     final numericValue = double.tryParse(digitsOnly);
     if (numericValue != null && numericValue > max) {
-      // Si on essaie d'ajouter des caractères (nouveau texte plus long), bloquer
+      // If we're trying to add characters (new text longer), block the change
       if (newValue.text.replaceAll(' ', '').length > oldValue.text.replaceAll(' ', '').length) {
-        return oldValue; // Retourner l'ancienne valeur pour bloquer
+        return oldValue; // Return the previous value to block the input
       }
       // Sinon (suppression), permettre la modification
     }
 
-    // Séparer la partie entière et décimale
+  // Split integer and decimal parts
     List<String> parts = digitsOnly.split('.');
     String integerPart = parts[0];
     String decimalPart = parts.length > 1 ? parts[1] : '';
 
-    // Formater la partie entière avec des espaces
+  // Format the integer part with spaces
     String formatted = '';
     int count = 0;
     for (int i = integerPart.length - 1; i >= 0; i--) {
@@ -56,19 +56,19 @@ class ThousandsSeparatorInputFormatter extends TextInputFormatter {
       count++;
     }
 
-    // Ajouter la partie décimale si elle existe
+    // Append the decimal part if it exists
     if (decimalPart.isNotEmpty) {
       formatted += '.$decimalPart';
     } else if (digitsOnly.endsWith('.')) {
       formatted += '.';
     }
 
-    // Calculer la nouvelle position du curseur
+  // Compute the new cursor position
     int originalCursorPos = newValue.selection.baseOffset;
     int spacesBeforeCursor = newValue.text.substring(0, originalCursorPos).split(' ').length - 1;
     int digitsBeforeCursor = originalCursorPos - spacesBeforeCursor;
     
-    // Compter les espaces dans le texte formaté jusqu'à la position du curseur
+  // Count spaces in the formatted text up to the cursor position
     int newSpacesBeforeCursor = 0;
     int digitCount = 0;
     for (int i = 0; i < formatted.length && digitCount < digitsBeforeCursor; i++) {
@@ -136,8 +136,8 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   void _onFocusChanged() {
     if (!_focusNode.hasFocus) {
       _isUserTyping = false;
-      // CORRECTION: Ne pas reformater depuis widget.value
-      // Le texte dans _controller est déjà correct et formaté
+      // NOTE: Do not reformat from widget.value
+      // The text in _controller is already correctly formatted
     }
   }
 
@@ -151,22 +151,22 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   }
 
   String _formatValue(double value) {
-    // Pour les très grands nombres (> 1e15), utiliser une représentation plus précise
+    // For very large numbers (> 1e15), use a more precise representation
     String valueStr;
     
     if (value.abs() > 1e15) {
-      // Utiliser toStringAsFixed(0) pour les très grands entiers
+      // Use toStringAsFixed(0) for very large integers
       if (value == value.toInt()) {
         valueStr = value.toInt().toString();
       } else {
-        // Pour les décimaux très grands, conserver la précision
+        // For very large decimals, preserve precision
         valueStr = value.toStringAsFixed(0);
       }
     } else if (value == value.toInt()) {
-      // Pour les entiers normaux
+      // For normal integers
       valueStr = value.toInt().toString();
     } else {
-      // Pour les décimaux - conserver les décimales significatives
+      // For decimals - keep significant decimal digits
       String tempStr = value.toString();
       if (tempStr.contains('.')) {
         List<String> parts = tempStr.split('.');
@@ -181,12 +181,12 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
       }
     }
     
-    // Séparer partie entière et décimale
+    // Split integer and decimal parts
     List<String> parts = valueStr.split('.');
     String integerPart = parts[0];
     String decimalPart = parts.length > 1 ? parts[1] : '';
     
-    // Formater la partie entière avec des espaces
+    // Format the integer part with spaces
     String formatted = '';
     int count = 0;
     for (int i = integerPart.length - 1; i >= 0; i--) {
@@ -197,7 +197,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
       count++;
     }
     
-    // Ajouter la partie décimale si elle existe
+    // Append the decimal part if it exists
     if (decimalPart.isNotEmpty) {
       formatted += '.$decimalPart';
     }
@@ -258,7 +258,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
                 ThousandsSeparatorInputFormatter(max: widget.max),
-                LengthLimitingTextInputFormatter(30), // Augmenté pour les grands nombres
+                LengthLimitingTextInputFormatter(30), // Increased for large numbers
               ],
               style: ThemeUtil.titleLarge.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
@@ -280,14 +280,14 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   void _onTextChanged(String value) {
     _isUserTyping = true;
     
-    // Enlever les espaces pour la conversion
+  // Remove spaces for conversion
     String cleanValue = value.replaceAll(' ', '');
     
     final decimalValue = ConstantUtil.parseLocalizedNumber(cleanValue);
     if (decimalValue != null) {
       final doubleValue = decimalValue.toDouble();
       if (doubleValue >= widget.min && doubleValue <= widget.max) {
-        // Sauvegarder le texte actuel comme dernier texte valide
+  // Save the current text as the last valid text
         _lastValidText = value;
         widget.onChanged(doubleValue);
       }
