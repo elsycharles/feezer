@@ -1661,7 +1661,7 @@
   },
   "netAmountSent": "Montant net",
   "@netAmountSent": {
-    "description": "Label for net amount sent in comparison"
+    "description": "Label for net amount in comparison"
   },
   "totalFees": "Frais totaux",
   "@totalFees": {
