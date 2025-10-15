@@ -1297,7 +1297,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enteredAmount => 'Entered amount';
 
   @override
-  String get netAmountSent => 'Net amount sent';
+  String get netAmountSent => 'Net amount';
 
   @override
   String get totalSpent => 'Total spent';

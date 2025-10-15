@@ -1840,9 +1840,9 @@
   "@availableBudget": {
     "description": "Label for available budget in comparison"
   },
-  "netAmountSent": "Net amount sent",
+  "netAmountSent": "Net amount",
   "@netAmountSent": {
-    "description": "Label for net amount sent in comparison"
+    "description": "Label for net amount in comparison"
   },
   "totalFees": "Total fees",
   "@totalFees": {

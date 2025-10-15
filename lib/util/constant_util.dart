@@ -34,6 +34,7 @@ class ConstantUtil {
   /// - Up to 10 significant decimals for small amounts (< 1)
   /// - 2-4 decimals for normal amounts (≥ 1)
   /// - Removes trailing zeros
+  /// - Adds spaces as thousand separators for amounts ≥ 1000
   static String formatCurrencyAmount(dynamic amount, {int? decimals}) {
     // Convert to Decimal for precise calculations
     final Decimal amountDecimal;
@@ -64,8 +65,8 @@ class ConstantUtil {
       return _formatSmallAmount(amountDecimal, decimals);
     }
 
-    // For normal amounts (≥ 1), use 2-4 decimals
-    return _formatNormalAmount(amountDecimal, decimals);
+    // For normal amounts (≥ 1), use 2-4 decimals and add thousand separators
+    return _addThousandSeparators(_formatNormalAmount(amountDecimal, decimals));
   }
 
   /// Format extremely small numbers in scientific notation
@@ -124,6 +125,42 @@ class ConstantUtil {
     // Remove decimal point if no decimals remain
     if (result.endsWith('.')) {
       result = result.substring(0, result.length - 1);
+    }
+
+    return result;
+  }
+
+  /// Add spaces as thousand separators to a formatted number string
+  static String _addThousandSeparators(String value) {
+    if (!value.contains('.')) {
+      // No decimal part, format integer part only
+      return _formatIntegerPart(value);
+    }
+
+    // Split into integer and decimal parts
+    final parts = value.split('.');
+    final integerPart = _formatIntegerPart(parts[0]);
+    final decimalPart = parts.length > 1 ? parts[1] : '';
+
+    return decimalPart.isNotEmpty ? '$integerPart.$decimalPart' : integerPart;
+  }
+
+  /// Format the integer part of a number with spaces as thousand separators
+  static String _formatIntegerPart(String integerPart) {
+    if (integerPart.length <= 3) {
+      return integerPart;
+    }
+
+    String result = '';
+    int count = 0;
+
+    // Process from right to left
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        result = ' $result';
+      }
+      result = integerPart[i] + result;
+      count++;
     }
 
     return result;
