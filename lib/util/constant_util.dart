@@ -129,6 +129,42 @@ class ConstantUtil {
     return result;
   }
 
+  /// Add spaces as thousand separators to a formatted number string
+  static String _addThousandSeparators(String value) {
+    if (!value.contains('.')) {
+      // No decimal part, format integer part only
+      return _formatIntegerPart(value);
+    }
+
+    // Split into integer and decimal parts
+    final parts = value.split('.');
+    final integerPart = _formatIntegerPart(parts[0]);
+    final decimalPart = parts.length > 1 ? parts[1] : '';
+
+    return decimalPart.isNotEmpty ? '$integerPart.$decimalPart' : integerPart;
+  }
+
+  /// Format the integer part of a number with spaces as thousand separators
+  static String _formatIntegerPart(String integerPart) {
+    if (integerPart.length <= 3) {
+      return integerPart;
+    }
+
+    String result = '';
+    int count = 0;
+
+    // Process from right to left
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        result = ' $result';
+      }
+      result = integerPart[i] + result;
+      count++;
+    }
+
+    return result;
+  }
+
   /// Parse and format a localized number string
   /// Combines parseLocalizedNumber and formatCurrencyAmount
   static String? formatLocalizedNumber(String value, {int? decimals}) {
