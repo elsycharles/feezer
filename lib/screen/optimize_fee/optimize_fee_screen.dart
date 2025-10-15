@@ -1163,117 +1163,119 @@ class _State extends State<OptimizeFeeScreen> {
                     ],
                   ),
                 ] else ...[
-                  // Show comparison when valid interval exists
-                  _buildComparisonRow(
-                    AppLocalizations.of(context).enteredAmount,
-                    '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
-                  ),
-                  _buildComparisonRow(
-                    AppLocalizations.of(context).netAmountSent,
-                    '${ConstantUtil.formatCurrencyAmount(optimizedNetDecimal)} $currencySymbol',
-                    valueColor: feeDifferenceVsSameNet > Decimal.zero
-                        ? Colors.red.shade700
-                        : feeDifferenceVsSameNet < Decimal.zero
-                            ? Colors.green.shade700
-                            : Colors.grey.shade700,
-                  ),
-                  _buildComparisonRow(
-                    AppLocalizations.of(context).totalFees,
-                    '${ConstantUtil.formatCurrencyAmount(nonOptSameFeeDecimal)} $currencySymbol',
-                    valueColor: Colors.red.shade700,
-                  ),
-                  _buildComparisonRow(
-                    AppLocalizations.of(context).totalSpent,
-                    '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalDecimal)} $currencySymbol',
-                  ),
-                  _buildComparisonRow(
-                    AppLocalizations.of(context).numberOfOperations,
-                    '1',
-                  ),
+                                  Global.gapSm,
 
-                  Global.gapSm,
-                  Divider(
-                    color: feeDifferenceVsSameNet > Decimal.zero
-                        ? Colors.red.withValues(alpha: 0.3)
-                        : feeDifferenceVsSameNet < Decimal.zero
-                            ? Colors.green.withValues(alpha: 0.3)
-                            : Colors.grey.withValues(alpha: 0.3),
-                  ),
-                  Global.gapSm,
+                // Show comparison (always possible now with splitting)
+                _buildComparisonRow(
+                  AppLocalizations.of(context).enteredAmount,
+                  '${ConstantUtil.formatCurrencyAmount(userAmountDecimal)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).netAmountSent,
+                  '${ConstantUtil.formatCurrencyAmount(optimizedNetDecimal)} $currencySymbol',
+                  valueColor: feeDifferenceVsSameNet > Decimal.zero
+                      ? Colors.red.shade700
+                      : feeDifferenceVsSameNet < Decimal.zero
+                          ? Colors.green.shade700
+                          : Colors.grey.shade700,
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).totalFees,
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameFeeDecimal)} $currencySymbol',
+                  valueColor: Colors.red.shade700,
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).totalSpent,
+                  '${ConstantUtil.formatCurrencyAmount(nonOptSameNetTotalDecimal)} $currencySymbol',
+                ),
+                _buildComparisonRow(
+                  AppLocalizations.of(context).numberOfOperations,
+                  '${hasValidSameNetInterval ? (_nonOptimizedComparison!['sameNetOperations'] as int? ?? 1) : 1}',
+                ),
 
-                  // Show difference message if not equal
-                  if (feeDifferenceVsSameNet.abs() > tolerance) ...[
-                    Row(
-                      children: [
-                        Icon(
-                          feeDifferenceVsSameNet > Decimal.zero ? Icons.trending_down : Icons.trending_up,
-                          size: 14,
-                          color: feeDifferenceVsSameNet > Decimal.zero
-                              ? Colors.red.shade700
-                              : Colors.green.shade700,
-                        ),
-                        Global.gapSm,
-                        Expanded(
-                          child: Text(
-                            feeDifferenceVsSameNet > Decimal.zero
-                                ? AppLocalizations.of(context).transactionLosesVsOptimized(
-                                    ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
-                                    currencySymbol,
-                                  )
-                                : AppLocalizations.of(context).transactionGainsVsOptimized(
-                                    ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
-                                    currencySymbol,
-                                  ),
-                            style: ThemeUtil.bodySmall.copyWith(
-                              color: feeDifferenceVsSameNet > Decimal.zero
-                                  ? Colors.red.shade700
-                                  : Colors.green.shade700,
-                              fontWeight: FontWeight.w600,
-                            ),
+                Global.gapSm,
+                Divider(
+                  color: feeDifferenceVsSameNet > Decimal.zero
+                      ? Colors.red.withValues(alpha: 0.3)
+                      : feeDifferenceVsSameNet < Decimal.zero
+                          ? Colors.green.withValues(alpha: 0.3)
+                          : Colors.grey.withValues(alpha: 0.3),
+                ),
+                Global.gapSm,
+
+                // Show difference message if not equal
+                if (feeDifferenceVsSameNet.abs() > tolerance) ...[
+                  Row(
+                    children: [
+                      Icon(
+                        feeDifferenceVsSameNet > Decimal.zero ? Icons.trending_down : Icons.trending_up,
+                        size: 14,
+                        color: feeDifferenceVsSameNet > Decimal.zero
+                            ? Colors.red.shade700
+                            : Colors.green.shade700,
+                      ),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          feeDifferenceVsSameNet > Decimal.zero
+                              ? AppLocalizations.of(context).transactionLosesVsOptimized(
+                                  ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
+                                  currencySymbol,
+                                )
+                              : AppLocalizations.of(context).transactionGainsVsOptimized(
+                                  ConstantUtil.formatCurrencyAmount(feeDifferenceVsSameNet.abs()),
+                                  currencySymbol,
+                                ),
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: feeDifferenceVsSameNet > Decimal.zero
+                                ? Colors.red.shade700
+                                : Colors.green.shade700,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ] else ...[
-                    Row(
-                      children: [
-                        Icon(Icons.balance, size: 14, color: Colors.grey.shade700),
-                        Global.gapSm,
-                        Expanded(
-                          child: Text(
-                            AppLocalizations.of(context).transactionSameResultAsOptimized,
-                            style: ThemeUtil.bodySmall.copyWith(
-                              color: Colors.grey.shade700,
-                              fontWeight: FontWeight.w600,
-                            ),
+                      ),
+                    ],
+                  ),
+                ] else ...[
+                  Row(
+                    children: [
+                      Icon(Icons.balance, size: 14, color: Colors.grey.shade700),
+                      Global.gapSm,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).transactionSameResultAsOptimized,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.grey.shade700,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
+                ],
 
-                  if (exceedsBudget) ...[
-                    Global.gapXs,
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.warning_amber,
-                          size: 14,
-                          color: Colors.red.shade700,
-                        ),
-                        Global.gapXs,
-                        Expanded(
-                          child: Text(
-                            AppLocalizations.of(context).exceedsEnteredAmount,
-                            style: ThemeUtil.bodySmall.copyWith(
-                              color: Colors.red.shade700,
-                              fontWeight: FontWeight.w600,
-                            ),
+                if (exceedsBudget) ...[
+                  Global.gapXs,
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber,
+                        size: 14,
+                        color: Colors.red.shade700,
+                      ),
+                      Global.gapXs,
+                      Expanded(
+                        child: Text(
+                          AppLocalizations.of(context).exceedsEnteredAmount,
+                          style: ThemeUtil.bodySmall.copyWith(
+                            color: Colors.red.shade700,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
+                ],
                 ],
               ],
             ),
