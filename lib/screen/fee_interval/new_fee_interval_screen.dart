@@ -14,7 +14,7 @@ import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
 import '../../provider/currency_provider.dart';
-import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // Pour ThousandsSeparatorInputFormatter
+import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
 
 /// Clean screen for creating new fee intervals
 class NewFeeIntervalScreen extends StatefulWidget {
