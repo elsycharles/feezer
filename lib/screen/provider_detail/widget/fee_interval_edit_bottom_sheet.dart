@@ -13,7 +13,7 @@ import '../../../util/theme_util.dart';
 import '../../../widget/app_toast.dart';
 import '../../../widget/loading_button.dart';
 import '../../../provider/currency_provider.dart';
-import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // Pour ThousandsSeparatorInputFormatter
+import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
 
 /// Clean fee interval editor
 class FeeIntervalEditBottomSheet extends StatefulWidget {
