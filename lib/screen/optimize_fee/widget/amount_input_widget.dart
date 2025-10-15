@@ -6,6 +6,77 @@ import '../../../styles/global.dart';
 import '../../../provider/currency_provider.dart';
 import '../../../util/constant_util.dart';
 
+// Nouveau formatter personnalisé pour les espaces
+class ThousandsSeparatorInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    // Si le texte est vide, on retourne tel quel
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+
+    // Enlever tous les espaces existants
+    String digitsOnly = newValue.text.replaceAll(' ', '');
+
+    // Vérifier que c'est bien un nombre valide
+    if (!RegExp(r'^\d*\.?\d*$').hasMatch(digitsOnly)) {
+      return oldValue;
+    }
+
+    // Séparer la partie entière et décimale
+    List<String> parts = digitsOnly.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+
+    // Formater la partie entière avec des espaces
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
+    }
+
+    // Ajouter la partie décimale si elle existe
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    } else if (digitsOnly.endsWith('.')) {
+      formatted += '.';
+    }
+
+    // Calculer la nouvelle position du curseur
+    int originalCursorPos = newValue.selection.baseOffset;
+    int spacesBeforeCursor = newValue.text.substring(0, originalCursorPos).split(' ').length - 1;
+    int digitsBeforeCursor = originalCursorPos - spacesBeforeCursor;
+    
+    // Compter les espaces dans le texte formaté jusqu'à la position du curseur
+    int newSpacesBeforeCursor = 0;
+    int digitCount = 0;
+    for (int i = 0; i < formatted.length && digitCount < digitsBeforeCursor; i++) {
+      if (formatted[i] == ' ') {
+        newSpacesBeforeCursor++;
+      } else if (formatted[i] != '.') {
+        digitCount++;
+      } else if (formatted[i] == '.') {
+        digitCount++;
+      }
+    }
+    
+    int newCursorPos = digitsBeforeCursor + newSpacesBeforeCursor;
+    newCursorPos = newCursorPos.clamp(0, formatted.length);
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: newCursorPos),
+    );
+  }
+}
+
 class AmountInputWidget extends StatefulWidget {
   const AmountInputWidget({
     super.key,
@@ -33,10 +104,8 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   @override
   void initState() {
     super.initState();
-    // Initialize with formatted value to avoid showing .0 for integers
     _controller = TextEditingController(text: _formatValue(widget.value));
     _focusNode = FocusNode();
-    // Add focus listeners to manage typing state
     _focusNode.addListener(_onFocusChanged);
   }
 
@@ -50,7 +119,6 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onFocusChanged() {
     if (!_focusNode.hasFocus) {
-      // Quand le focus est perdu, formater proprement la valeur
       _isUserTyping = false;
       _controller.text = _formatValue(widget.value);
     }
@@ -59,19 +127,38 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   @override
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
-    // Do not update if user has focus OR is typing
     if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
       _controller.text = _formatValue(widget.value);
     }
   }
 
-  // New method to format value
   String _formatValue(double value) {
-    // If it's an integer, we don't display the .0
-    if (value == value.toInt()) {
-      return value.toInt().toString();
+    String valueStr = value == value.toInt() 
+        ? value.toInt().toString() 
+        : value.toString();
+    
+    // Séparer partie entière et décimale
+    List<String> parts = valueStr.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+    
+    // Formater la partie entière avec des espaces
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
     }
-    return value.toString();
+    
+    // Ajouter la partie décimale si elle existe
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    }
+    
+    return formatted;
   }
 
   @override
@@ -125,8 +212,9 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                 decimal: true,
               ),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                LengthLimitingTextInputFormatter(11),
+                FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+                ThousandsSeparatorInputFormatter(),
+                LengthLimitingTextInputFormatter(20),
               ],
               style: ThemeUtil.titleLarge.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
@@ -147,15 +235,18 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onTextChanged(String value) {
     _isUserTyping = true;
-    final decimalValue = ConstantUtil.parseLocalizedNumber(value);
+    
+    // Enlever les espaces pour la conversion
+    String cleanValue = value.replaceAll(' ', '');
+    
+    final decimalValue = ConstantUtil.parseLocalizedNumber(cleanValue);
     if (decimalValue != null) {
       final doubleValue = decimalValue.toDouble();
       if (doubleValue >= widget.min && doubleValue <= widget.max) {
         widget.onChanged(doubleValue);
       }
-    } else if (value.isEmpty) {
+    } else if (cleanValue.isEmpty) {
       widget.onChanged(widget.min);
     }
-    // No need to reset to false here, let onFocusChanged handle it
   }
 }
