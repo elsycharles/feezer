@@ -1008,7 +1008,7 @@ class _State extends State<OptimizeFeeScreen> {
                   ),
                   _buildComparisonRow(
                     AppLocalizations.of(context).numberOfOperations,
-                    '1',
+                    '${hasValidMaxInterval ? (_nonOptimizedComparison!['maxOperations'] as int? ?? 1) : 1}',
                   ),
 
                   Global.gapSm,
