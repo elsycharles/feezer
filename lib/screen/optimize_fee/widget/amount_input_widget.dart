@@ -83,7 +83,7 @@ class AmountInputWidget extends StatefulWidget {
     required this.value,
     required this.onChanged,
     this.min = 0.0,
-    this.max = 999999.0,
+    this.max = 99999999999.0,
     this.label = 'Amount',
   });
 
@@ -100,11 +100,13 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   late final TextEditingController _controller;
   late FocusNode _focusNode;
   bool _isUserTyping = false;
+  String _lastValidText = '';
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(text: _formatValue(widget.value));
+    _lastValidText = _formatValue(widget.value);
+    _controller = TextEditingController(text: _lastValidText);
     _focusNode = FocusNode();
     _focusNode.addListener(_onFocusChanged);
   }
@@ -120,7 +122,8 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   void _onFocusChanged() {
     if (!_focusNode.hasFocus) {
       _isUserTyping = false;
-      _controller.text = _formatValue(widget.value);
+      // CORRECTION: Ne pas reformater depuis widget.value
+      // Le texte dans _controller est déjà correct et formaté
     }
   }
 
@@ -128,14 +131,41 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
     if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
-      _controller.text = _formatValue(widget.value);
+      _lastValidText = _formatValue(widget.value);
+      _controller.text = _lastValidText;
     }
   }
 
   String _formatValue(double value) {
-    String valueStr = value == value.toInt() 
-        ? value.toInt().toString() 
-        : value.toString();
+    // Pour les très grands nombres (> 1e15), utiliser une représentation plus précise
+    String valueStr;
+    
+    if (value.abs() > 1e15) {
+      // Utiliser toStringAsFixed(0) pour les très grands entiers
+      if (value == value.toInt()) {
+        valueStr = value.toInt().toString();
+      } else {
+        // Pour les décimaux très grands, conserver la précision
+        valueStr = value.toStringAsFixed(0);
+      }
+    } else if (value == value.toInt()) {
+      // Pour les entiers normaux
+      valueStr = value.toInt().toString();
+    } else {
+      // Pour les décimaux - conserver les décimales significatives
+      String tempStr = value.toString();
+      if (tempStr.contains('.')) {
+        List<String> parts = tempStr.split('.');
+        String decimalPart = parts[1].replaceAll(RegExp(r'0+$'), '');
+        if (decimalPart.isEmpty) {
+          valueStr = parts[0];
+        } else {
+          valueStr = '${parts[0]}.$decimalPart';
+        }
+      } else {
+        valueStr = tempStr;
+      }
+    }
     
     // Séparer partie entière et décimale
     List<String> parts = valueStr.split('.');
@@ -214,7 +244,7 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
               inputFormatters: [
                 FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
                 ThousandsSeparatorInputFormatter(),
-                LengthLimitingTextInputFormatter(20),
+                LengthLimitingTextInputFormatter(30), // Augmenté pour les grands nombres
               ],
               style: ThemeUtil.titleLarge.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
@@ -243,6 +273,8 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
     if (decimalValue != null) {
       final doubleValue = decimalValue.toDouble();
       if (doubleValue >= widget.min && doubleValue <= widget.max) {
+        // Sauvegarder le texte actuel comme dernier texte valide
+        _lastValidText = value;
         widget.onChanged(doubleValue);
       }
     } else if (cleanValue.isEmpty) {
