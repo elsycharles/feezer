@@ -2349,10 +2349,10 @@ abstract class AppLocalizations {
   /// **'Entered amount'**
   String get enteredAmount;
 
-  /// Label for net amount sent in comparison
+  /// Label for net amount in comparison
   ///
   /// In en, this message translates to:
-  /// **'Net amount sent'**
+  /// **'Net amount'**
   String get netAmountSent;
 
   /// Label for total amount spent in comparison

@@ -13,6 +13,7 @@ import '../../../util/theme_util.dart';
 import '../../../widget/app_toast.dart';
 import '../../../widget/loading_button.dart';
 import '../../../provider/currency_provider.dart';
+import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
 
 /// Clean fee interval editor
 class FeeIntervalEditBottomSheet extends StatefulWidget {
@@ -45,7 +46,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   late FeeType _feeType;
   late final _minAmountController = TextEditingController(
     text: widget.feeInterval.minAmount != null
-        ? ConstantUtil.formatCurrencyAmount(
+        ? _formatAmount(
             context.read<CurrencyProvider>().convertFromAriary(
               widget.feeInterval.minAmount!,
             ),
@@ -54,7 +55,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
   );
   late final _maxAmountController = TextEditingController(
     text: widget.feeInterval.maxAmount != null
-        ? ConstantUtil.formatCurrencyAmount(
+        ? _formatAmount(
             context.read<CurrencyProvider>().convertFromAriary(
               widget.feeInterval.maxAmount!,
             ),
@@ -65,7 +66,7 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     text: widget.feeInterval.fee != null
         ? widget.feeInterval.feeType == FeeType.percentage
               ? widget.feeInterval.fee!.toStringAsFixed(2)
-              : ConstantUtil.formatCurrencyAmount(
+              : _formatAmount(
                   context.read<CurrencyProvider>().convertFromAriary(
                     widget.feeInterval.fee!,
                   ),
@@ -87,6 +88,47 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     super.dispose();
   }
 
+  String _formatAmount(double value) {
+    String valueStr;
+    
+    if (value == value.toInt()) {
+      valueStr = value.toInt().toString();
+    } else {
+      String tempStr = value.toString();
+      if (tempStr.contains('.')) {
+        List<String> parts = tempStr.split('.');
+        String decimalPart = parts[1].replaceAll(RegExp(r'0+$'), '');
+        if (decimalPart.isEmpty) {
+          valueStr = parts[0];
+        } else {
+          valueStr = '${parts[0]}.$decimalPart';
+        }
+      } else {
+        valueStr = tempStr;
+      }
+    }
+    
+    List<String> parts = valueStr.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+    
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
+    }
+    
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    }
+    
+    return formatted;
+  }
+
   @override
   Widget build(BuildContext context) => Form(
     key: _formKey,
@@ -98,7 +140,10 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           controller: _minAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+            ThousandsSeparatorInputFormatter(max: 99999999999.0),
+          ],
           validator: _validateMinAmount,
           required: true,
         ),
@@ -109,7 +154,10 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           controller: _maxAmountController,
           icon: Icons.money,
           keyboardType: TextInputType.number,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+            ThousandsSeparatorInputFormatter(max: 99999999999.0),
+          ],
           validator: _validateMaxAmount,
           required: true,
         ),
@@ -125,7 +173,10 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           keyboardType: TextInputType.number,
           inputFormatters: _feeType == FeeType.percentage
               ? [FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*'))]
-              : [FilteringTextInputFormatter.digitsOnly],
+              : [
+                  FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+                  ThousandsSeparatorInputFormatter(max: 99999999999.0),
+                ],
           validator: _validateFee,
           required: true,
         ),
@@ -235,7 +286,8 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     if (value?.isEmpty ?? true) {
       return AppLocalizations.of(context).pleaseEnterMinAmount;
     }
-    final amount = double.tryParse(value!);
+    final cleanValue = value!.replaceAll(' ', '');
+    final amount = double.tryParse(cleanValue);
     if (amount == null || amount < 0) {
       return AppLocalizations.of(context).pleaseEnterValidAmount;
     }
@@ -246,12 +298,14 @@ class _State extends State<FeeIntervalEditBottomSheet> {
     if (value?.isEmpty ?? true) {
       return AppLocalizations.of(context).pleaseEnterMaxAmount;
     }
-    final amount = double.tryParse(value!);
+    final cleanValue = value!.replaceAll(' ', '');
+    final amount = double.tryParse(cleanValue);
     if (amount == null || amount < 0) {
       return AppLocalizations.of(context).pleaseEnterValidAmount;
     }
 
-    final minAmount = double.tryParse(_minAmountController.text) ?? 0;
+    final minCleanValue = _minAmountController.text.replaceAll(' ', '');
+    final minAmount = double.tryParse(minCleanValue) ?? 0;
     if (amount <= minAmount) {
       return AppLocalizations.of(context).maxAmountMustBeGreaterThanMinAmount;
     }
@@ -264,14 +318,21 @@ class _State extends State<FeeIntervalEditBottomSheet> {
           ? AppLocalizations.of(context).pleaseEnterPercentage
           : AppLocalizations.of(context).pleaseEnterFeeAmount;
     }
-    final fee = double.tryParse(value!);
-    if (fee == null || fee < 0) {
-      return _feeType == FeeType.percentage
-          ? AppLocalizations.of(context).pleaseEnterValidPercentage
-          : AppLocalizations.of(context).pleaseEnterValidFee;
-    }
-    if (_feeType == FeeType.percentage && fee > 100) {
-      return AppLocalizations.of(context).percentageCannotExceed100;
+    
+    if (_feeType == FeeType.percentage) {
+      final fee = double.tryParse(value!);
+      if (fee == null || fee < 0) {
+        return AppLocalizations.of(context).pleaseEnterValidPercentage;
+      }
+      if (fee > 100) {
+        return AppLocalizations.of(context).percentageCannotExceed100;
+      }
+    } else {
+      final cleanValue = value!.replaceAll(' ', '');
+      final fee = double.tryParse(cleanValue);
+      if (fee == null || fee < 0) {
+        return AppLocalizations.of(context).pleaseEnterValidFee;
+      }
     }
     return null;
   }
@@ -281,40 +342,27 @@ class _State extends State<FeeIntervalEditBottomSheet> {
       setState(() => _isLoading = true);
 
       try {
+        final minCleanValue = _minAmountController.text.trim().replaceAll(' ', '');
+        final maxCleanValue = _maxAmountController.text.trim().replaceAll(' ', '');
+        final feeCleanValue = _feeController.text.trim().replaceAll(' ', '');
+
         final feeInterval = FeeInterval(
           id: widget.feeInterval.id,
           minAmount: context.read<CurrencyProvider>().convertToAriary(
-            (ConstantUtil.parseLocalizedNumber(
-                  _minAmountController.text.trim(),
-                ) ??
-                Decimal.zero)
-                .toDouble(),
+            (ConstantUtil.parseLocalizedNumber(minCleanValue) ?? Decimal.zero).toDouble(),
           ),
           maxAmount: context.read<CurrencyProvider>().convertToAriary(
-            (ConstantUtil.parseLocalizedNumber(
-                  _maxAmountController.text.trim(),
-                ) ??
-                Decimal.zero)
-                .toDouble(),
+            (ConstantUtil.parseLocalizedNumber(maxCleanValue) ?? Decimal.zero).toDouble(),
           ),
           fee: _feeType == FeeType.percentage
-              ? ((ConstantUtil.parseLocalizedNumber(
-                      _feeController.text.trim(),
-                    ) ??
-                    Decimal.zero)
-                    .toDouble())
+              ? ((ConstantUtil.parseLocalizedNumber(feeCleanValue) ?? Decimal.zero).toDouble())
               : context.read<CurrencyProvider>().convertToAriary(
-                  (ConstantUtil.parseLocalizedNumber(
-                        _feeController.text.trim(),
-                      ) ??
-                      Decimal.zero)
-                      .toDouble(),
+                  (ConstantUtil.parseLocalizedNumber(feeCleanValue) ?? Decimal.zero).toDouble(),
                 ),
           feeType: _feeType,
           creationDateTime: widget.feeInterval.creationDatetime,
         );
 
-        // Simulate async operation
         await Future.delayed(const Duration(milliseconds: 300));
 
         if (mounted) {

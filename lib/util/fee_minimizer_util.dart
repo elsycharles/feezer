@@ -1277,80 +1277,163 @@ class FeeOptimizerUtil {
     return best;
   }
 
+  // Calculate maximum net amount by greedily splitting across intervals
+  static Map<String, dynamic> _calculateMaxNetBySplitting(
+    double totalAmount,
+    List<FeeInterval> intervals,
+  ) {
+    if (totalAmount <= 0 || intervals.isEmpty) {
+      return {'netAmount': 0.0, 'totalFees': 0.0, 'operations': 0};
+    }
+
+    // Sort intervals by max amount descending (largest intervals first)
+    final sortedIntervals = intervals
+        .where((interval) => (interval.minAmount ?? 0) >= 0)
+        .toList()
+      ..sort((a, b) => (b.maxAmount ?? double.infinity).compareTo(a.maxAmount ?? double.infinity));
+
+    double remainingBudget = totalAmount;
+    double totalNetAmount = 0;
+    double totalFees = 0;
+    int operations = 0;
+
+    for (final interval in sortedIntervals) {
+      if (remainingBudget <= 0) break;
+
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+      final feeValue = interval.fee ?? 0;
+
+      // Skip if minimum amount is too high
+      if (minAmount > remainingBudget) continue;
+
+      // Calculate how much we can take in this interval
+      double takeAmount = remainingBudget;
+
+      // For percentage fees, we need to solve for net amount
+      if (interval.feeType == FeeType.percentage) {
+        // budget = net + net * (fee/100) = net * (1 + fee/100)
+        // net = budget / (1 + fee/100)
+        final netFromBudget = remainingBudget / (1 + feeValue / 100.0);
+        takeAmount = min(netFromBudget, maxAmount);
+      } else {
+        // For fixed fees, net = budget - fee, but ensure we can afford the fee
+        if (remainingBudget > feeValue) {
+          takeAmount = min(remainingBudget - feeValue, maxAmount);
+        } else {
+          continue; // Can't afford the fee
+        }
+      }
+
+      // Ensure we meet minimum
+      if (takeAmount < minAmount) continue;
+
+      // Calculate actual fee and cost
+      final actualFee = interval.feeType == FeeType.percentage
+          ? takeAmount * (feeValue / 100.0)
+          : feeValue;
+      final totalCost = takeAmount + actualFee;
+
+      // Check if we can afford this
+      if (totalCost > remainingBudget + 0.01) continue;
+
+      // Take this amount
+      totalNetAmount += takeAmount;
+      totalFees += actualFee;
+      remainingBudget -= totalCost;
+      operations++;
+    }
+
+    return {
+      'netAmount': totalNetAmount,
+      'totalFees': totalFees,
+      'operations': operations,
+    };
+  }
+
+  // Calculate minimum cost to achieve a target net amount by splitting across intervals
+  // Same logic as max amount but with fixed net target instead of fixed budget
+  static Map<String, dynamic> _calculateMinCostForNetAmount(
+    double targetNetAmount,
+    List<FeeInterval> intervals,
+  ) {
+    if (targetNetAmount <= 0 || intervals.isEmpty) {
+      return {'totalFees': 0.0, 'operations': 0};
+    }
+
+    // Sort intervals by max amount descending (largest intervals first) - SAME AS MAX AMOUNT
+    final sortedIntervals = intervals
+        .where((interval) => (interval.minAmount ?? 0) >= 0)
+        .toList()
+      ..sort((a, b) => (b.maxAmount ?? double.infinity).compareTo(a.maxAmount ?? double.infinity));
+
+    double remainingNet = targetNetAmount;
+    double totalFees = 0;
+    int operations = 0;
+
+    for (final interval in sortedIntervals) {
+      if (remainingNet <= 0) break;
+
+      final minAmount = interval.minAmount ?? 0;
+      final maxAmount = interval.maxAmount ?? double.infinity;
+      final feeValue = interval.fee ?? 0;
+
+      // Calculate how much net we can take in this interval - SAME LOGIC AS MAX AMOUNT
+      double takeNetAmount = min(remainingNet, maxAmount);
+
+      // Ensure we meet minimum
+      if (takeNetAmount < minAmount) continue;
+
+      // Calculate fee for this amount
+      final actualFee = interval.feeType == FeeType.percentage
+          ? takeNetAmount * (feeValue / 100.0)
+          : feeValue;
+
+      // Take this amount
+      totalFees += actualFee;
+      remainingNet -= takeNetAmount;
+      operations++;
+    }
+
+    // If we couldn't achieve the target net amount, return invalid result
+    if (remainingNet > 0.01) {
+      return {'totalFees': 0.0, 'operations': 0};
+    }
+
+    return {
+      'totalFees': totalFees,
+      'operations': operations,
+    };
+  }
+
   static Map<String, dynamic>? calculateNonOptimizedComparison(
     double amountInAriary,
     List<FeeInterval> intervals,
     FeeOptimizerResult optimizedResult,
   ) {
-    // Find the maximum net amount with available budget
-    double maxNetAmount = 0;
-    double maxFee = 0;
-    bool foundValidMaxInterval = false;
+    // Calculate maximum net amount by splitting across intervals (greedy approach)
+    final splitResult = _calculateMaxNetBySplitting(amountInAriary, intervals);
+    final maxNetAmount = splitResult['netAmount'] as double;
+    final maxFee = splitResult['totalFees'] as double;
+    final maxOperations = splitResult['operations'] as int;
+    final foundValidMaxInterval = maxNetAmount > 0;
 
-    for (final interval in intervals) {
-      final minAmount = interval.minAmount ?? 0;
-      final maxAmount = interval.maxAmount ?? double.infinity;
-
-      // Calculate maximum possible net amount in this interval
-      double netAmount;
-
-      if (interval.feeType == FeeType.percentage) {
-        // budget = netAmount + netAmount * (fee/100)
-        // budget = netAmount * (1 + fee/100)
-        // netAmount = budget / (1 + fee/100)
-        netAmount = amountInAriary / (1 + (interval.fee ?? 0) / 100.0);
-      } else {
-        netAmount = amountInAriary - (interval.fee ?? 0);
-      }
-
-      // Limit to interval max
-      netAmount = min(netAmount, maxAmount);
-
-      // Check if valid
-      if (netAmount >= minAmount && netAmount <= maxAmount && netAmount > 0) {
-        final fee = interval.feeType == FeeType.percentage
-            ? netAmount * ((interval.fee ?? 0) / 100.0)
-            : (interval.fee ?? 0);
-
-        final totalCost = netAmount + fee;
-
-        // Check that it doesn't exceed budget (with tolerance)
-        if (totalCost <= amountInAriary + 0.01) {
-          foundValidMaxInterval = true;
-          if (netAmount > maxNetAmount) {
-            maxNetAmount = netAmount;
-            maxFee = fee;
-          }
-        }
-      }
-    }
-
-    // Calculate if we take the same net amount as optimization
-    double sameNetFee = 0;
-    double sameNetTotalAmount = 0;
-    bool foundValidSameNetInterval = false;
+    // Calculate if we take the same net amount as optimization by splitting
     final optimizedNetAmount = optimizedResult.netAmount;
-
-    for (final interval in intervals) {
-      final minAmount = interval.minAmount ?? 0;
-      final maxAmount = interval.maxAmount ?? double.infinity;
-
-      if (optimizedNetAmount >= minAmount && optimizedNetAmount <= maxAmount) {
-        foundValidSameNetInterval = true;
-        sameNetFee = interval.feeType == FeeType.percentage
-            ? optimizedNetAmount * ((interval.fee ?? 0) / 100.0)
-            : (interval.fee ?? 0);
-        sameNetTotalAmount = optimizedNetAmount + sameNetFee;
-        break;
-      }
-    }
+    final sameNetResult = _calculateMinCostForNetAmount(optimizedNetAmount, intervals);
+    final sameNetFee = sameNetResult['totalFees'] as double;
+    final sameNetTotalAmount = optimizedNetAmount + sameNetFee;
+    final sameNetOperations = sameNetResult['operations'] as int;
+    final foundValidSameNetInterval = sameNetOperations > 0;
 
     // Always return data with validity flags
     return {
       'maxNetAmount': maxNetAmount,
       'maxFee': maxFee,
+      'maxOperations': maxOperations,
       'sameNetFee': sameNetFee,
       'sameNetTotalAmount': sameNetTotalAmount,
+      'sameNetOperations': sameNetOperations,
       'hasValidMaxInterval': foundValidMaxInterval,
       'hasValidSameNetInterval': foundValidSameNetInterval,
     };

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/currency_model.dart';
@@ -12,6 +13,7 @@ import '../../widget/app_toast.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
 import '../../util/navigation_util.dart';
+import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
 
 /// Clean screen for creating new currencies
 class NewCurrencyScreen extends StatefulWidget {
@@ -150,6 +152,10 @@ class _State extends State<NewCurrencyScreen> {
                       label: AppLocalizations.of(context).exchangeRate,
                       icon: Icons.trending_up,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+                        ThousandsSeparatorInputFormatter(max: 99999999999.0),
+                      ],
                       required: true,
                       validator: (value) {
                         if (value?.isEmpty ?? true) {
@@ -157,7 +163,8 @@ class _State extends State<NewCurrencyScreen> {
                             context,
                           ).thisFieldIsRequired;
                         }
-                        final rate = double.tryParse(value!);
+                        final cleanValue = value!.replaceAll(' ', '');
+                        final rate = double.tryParse(cleanValue);
                         if (rate == null || rate <= 0) {
                           return AppLocalizations.of(
                             context,
@@ -196,7 +203,7 @@ class _State extends State<NewCurrencyScreen> {
         code: _codeController.text.trim().toUpperCase(),
         name: _nameController.text.trim(),
         symbol: _symbolController.text.trim(),
-        rate: double.parse(_rateController.text),
+        rate: double.parse(_rateController.text.replaceAll(' ', '')),
       );
 
       final db = DatabaseUtil();

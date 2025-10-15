@@ -6,13 +6,98 @@ import '../../../styles/global.dart';
 import '../../../provider/currency_provider.dart';
 import '../../../util/constant_util.dart';
 
+// Custom formatter with limit checking
+class ThousandsSeparatorInputFormatter extends TextInputFormatter {
+  final double max;
+  
+  ThousandsSeparatorInputFormatter({required this.max});
+
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    // If the text is empty, return it as-is
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+
+    // Remove all existing spaces
+    String digitsOnly = newValue.text.replaceAll(' ', '');
+
+    // Ensure the string is a valid number
+    if (!RegExp(r'^\d*\.?\d*$').hasMatch(digitsOnly)) {
+      return oldValue;
+    }
+
+    // Check if the value exceeds the limit
+    final numericValue = double.tryParse(digitsOnly);
+    if (numericValue != null && numericValue > max) {
+      // If we're trying to add characters (new text longer), block the change
+      if (newValue.text.replaceAll(' ', '').length > oldValue.text.replaceAll(' ', '').length) {
+        return oldValue; // Return the previous value to block the input
+      }
+      // Sinon (suppression), permettre la modification
+    }
+
+  // Split integer and decimal parts
+    List<String> parts = digitsOnly.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+
+  // Format the integer part with spaces
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
+    }
+
+    // Append the decimal part if it exists
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    } else if (digitsOnly.endsWith('.')) {
+      formatted += '.';
+    }
+
+  // Compute the new cursor position
+    int originalCursorPos = newValue.selection.baseOffset;
+    int spacesBeforeCursor = newValue.text.substring(0, originalCursorPos).split(' ').length - 1;
+    int digitsBeforeCursor = originalCursorPos - spacesBeforeCursor;
+    
+  // Count spaces in the formatted text up to the cursor position
+    int newSpacesBeforeCursor = 0;
+    int digitCount = 0;
+    for (int i = 0; i < formatted.length && digitCount < digitsBeforeCursor; i++) {
+      if (formatted[i] == ' ') {
+        newSpacesBeforeCursor++;
+      } else if (formatted[i] != '.') {
+        digitCount++;
+      } else if (formatted[i] == '.') {
+        digitCount++;
+      }
+    }
+    
+    int newCursorPos = digitsBeforeCursor + newSpacesBeforeCursor;
+    newCursorPos = newCursorPos.clamp(0, formatted.length);
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: newCursorPos),
+    );
+  }
+}
+
 class AmountInputWidget extends StatefulWidget {
   const AmountInputWidget({
     super.key,
     required this.value,
     required this.onChanged,
     this.min = 0.0,
-    this.max = 999999.0,
+    this.max = 99999999999.0,
     this.label = 'Amount',
   });
 
@@ -29,14 +114,14 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
   late final TextEditingController _controller;
   late FocusNode _focusNode;
   bool _isUserTyping = false;
+  String _lastValidText = '';
 
   @override
   void initState() {
     super.initState();
-    // Initialize with formatted value to avoid showing .0 for integers
-    _controller = TextEditingController(text: _formatValue(widget.value));
+    _lastValidText = _formatValue(widget.value);
+    _controller = TextEditingController(text: _lastValidText);
     _focusNode = FocusNode();
-    // Add focus listeners to manage typing state
     _focusNode.addListener(_onFocusChanged);
   }
 
@@ -50,28 +135,74 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onFocusChanged() {
     if (!_focusNode.hasFocus) {
-      // Quand le focus est perdu, formater proprement la valeur
       _isUserTyping = false;
-      _controller.text = _formatValue(widget.value);
+      // NOTE: Do not reformat from widget.value
+      // The text in _controller is already correctly formatted
     }
   }
 
   @override
   void didUpdateWidget(AmountInputWidget old) {
     super.didUpdateWidget(old);
-    // Do not update if user has focus OR is typing
     if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
-      _controller.text = _formatValue(widget.value);
+      _lastValidText = _formatValue(widget.value);
+      _controller.text = _lastValidText;
     }
   }
 
-  // New method to format value
   String _formatValue(double value) {
-    // If it's an integer, we don't display the .0
-    if (value == value.toInt()) {
-      return value.toInt().toString();
+    // For very large numbers (> 1e15), use a more precise representation
+    String valueStr;
+    
+    if (value.abs() > 1e15) {
+      // Use toStringAsFixed(0) for very large integers
+      if (value == value.toInt()) {
+        valueStr = value.toInt().toString();
+      } else {
+        // For very large decimals, preserve precision
+        valueStr = value.toStringAsFixed(0);
+      }
+    } else if (value == value.toInt()) {
+      // For normal integers
+      valueStr = value.toInt().toString();
+    } else {
+      // For decimals - keep significant decimal digits
+      String tempStr = value.toString();
+      if (tempStr.contains('.')) {
+        List<String> parts = tempStr.split('.');
+        String decimalPart = parts[1].replaceAll(RegExp(r'0+$'), '');
+        if (decimalPart.isEmpty) {
+          valueStr = parts[0];
+        } else {
+          valueStr = '${parts[0]}.$decimalPart';
+        }
+      } else {
+        valueStr = tempStr;
+      }
     }
-    return value.toString();
+    
+    // Split integer and decimal parts
+    List<String> parts = valueStr.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+    
+    // Format the integer part with spaces
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
+    }
+    
+    // Append the decimal part if it exists
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    }
+    
+    return formatted;
   }
 
   @override
@@ -125,8 +256,9 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
                 decimal: true,
               ),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
-                LengthLimitingTextInputFormatter(11),
+                FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+                ThousandsSeparatorInputFormatter(max: widget.max),
+                LengthLimitingTextInputFormatter(30), // Increased for large numbers
               ],
               style: ThemeUtil.titleLarge.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
@@ -147,15 +279,20 @@ class _AmountInputWidgetState extends State<AmountInputWidget> {
 
   void _onTextChanged(String value) {
     _isUserTyping = true;
-    final decimalValue = ConstantUtil.parseLocalizedNumber(value);
+    
+  // Remove spaces for conversion
+    String cleanValue = value.replaceAll(' ', '');
+    
+    final decimalValue = ConstantUtil.parseLocalizedNumber(cleanValue);
     if (decimalValue != null) {
       final doubleValue = decimalValue.toDouble();
       if (doubleValue >= widget.min && doubleValue <= widget.max) {
+  // Save the current text as the last valid text
+        _lastValidText = value;
         widget.onChanged(doubleValue);
       }
-    } else if (value.isEmpty) {
+    } else if (cleanValue.isEmpty) {
       widget.onChanged(widget.min);
     }
-    // No need to reset to false here, let onFocusChanged handle it
   }
 }
