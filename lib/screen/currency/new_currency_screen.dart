@@ -13,7 +13,7 @@ import '../../widget/app_toast.dart';
 import '../../util/database_util.dart';
 import '../../util/constant_util.dart';
 import '../../util/navigation_util.dart';
-import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // Pour ThousandsSeparatorInputFormatter
+import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
 
 /// Clean screen for creating new currencies
 class NewCurrencyScreen extends StatefulWidget {
