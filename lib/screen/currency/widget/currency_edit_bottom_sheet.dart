@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide BottomSheet;
+import 'package:flutter/services.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/currency_model.dart';
@@ -7,6 +8,7 @@ import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/loading_button.dart';
 import '../../../widget/app_toast.dart';
+import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // Pour ThousandsSeparatorInputFormatter
 
 /// Clean currency editor
 class CurrencyEditBottomSheet extends StatefulWidget {
@@ -46,7 +48,7 @@ class _State extends State<CurrencyEditBottomSheet> {
     text: widget.currency.symbol,
   );
   late final _rateController = TextEditingController(
-    text: widget.currency.rate.toString(),
+    text: _formatRate(widget.currency.rate),
   );
 
   @override
@@ -56,6 +58,47 @@ class _State extends State<CurrencyEditBottomSheet> {
     _symbolController.dispose();
     _rateController.dispose();
     super.dispose();
+  }
+
+  String _formatRate(double value) {
+    String valueStr;
+    
+    if (value == value.toInt()) {
+      valueStr = value.toInt().toString();
+    } else {
+      String tempStr = value.toString();
+      if (tempStr.contains('.')) {
+        List<String> parts = tempStr.split('.');
+        String decimalPart = parts[1].replaceAll(RegExp(r'0+$'), '');
+        if (decimalPart.isEmpty) {
+          valueStr = parts[0];
+        } else {
+          valueStr = '${parts[0]}.$decimalPart';
+        }
+      } else {
+        valueStr = tempStr;
+      }
+    }
+    
+    List<String> parts = valueStr.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+    
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
+    }
+    
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    }
+    
+    return formatted;
   }
 
   @override
@@ -115,12 +158,17 @@ class _State extends State<CurrencyEditBottomSheet> {
           controller: _rateController,
           icon: Icons.trending_up,
           keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
+            ThousandsSeparatorInputFormatter(max: 99999999999.0),
+          ],
           required: true,
           validator: (value) {
             if (value?.isEmpty ?? true) {
               return AppLocalizations.of(context).thisFieldIsRequired;
             }
-            final rate = double.tryParse(value!);
+            final cleanValue = value!.replaceAll(' ', '');
+            final rate = double.tryParse(cleanValue);
             if (rate == null || rate <= 0) {
               return AppLocalizations.of(context).pleaseEnterValidPositiveRate;
             }
@@ -147,7 +195,7 @@ class _State extends State<CurrencyEditBottomSheet> {
           code: _codeController.text.trim().toUpperCase(),
           name: _nameController.text.trim(),
           symbol: _symbolController.text.trim(),
-          rate: double.parse(_rateController.text),
+          rate: double.parse(_rateController.text.replaceAll(' ', '')),
         );
 
         // Simulate async operation
