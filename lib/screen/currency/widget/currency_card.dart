@@ -26,6 +26,60 @@ class CurrencyCard extends StatelessWidget {
     this.trailing,
   });
 
+  String _formatRate(double rate) {
+    // Pour les très grands nombres (> 1e15), utiliser une représentation plus précise
+    String valueStr;
+    
+    if (rate.abs() > 1e15) {
+      // Utiliser toStringAsFixed(0) pour les très grands entiers
+      if (rate == rate.toInt()) {
+        valueStr = rate.toInt().toString();
+      } else {
+        valueStr = rate.toStringAsFixed(0);
+      }
+    } else if (rate == rate.toInt()) {
+      // Pour les entiers normaux
+      valueStr = rate.toInt().toString();
+    } else {
+      // Pour les décimaux - conserver les décimales significatives
+      String tempStr = rate.toString();
+      if (tempStr.contains('.')) {
+        List<String> parts = tempStr.split('.');
+        String decimalPart = parts[1].replaceAll(RegExp(r'0+$'), '');
+        if (decimalPart.isEmpty) {
+          valueStr = parts[0];
+        } else {
+          valueStr = '${parts[0]}.$decimalPart';
+        }
+      } else {
+        valueStr = tempStr;
+      }
+    }
+    
+    // Séparer partie entière et décimale
+    List<String> parts = valueStr.split('.');
+    String integerPart = parts[0];
+    String decimalPart = parts.length > 1 ? parts[1] : '';
+    
+    // Formater la partie entière avec des espaces
+    String formatted = '';
+    int count = 0;
+    for (int i = integerPart.length - 1; i >= 0; i--) {
+      if (count > 0 && count % 3 == 0) {
+        formatted = ' $formatted';
+      }
+      formatted = integerPart[i] + formatted;
+      count++;
+    }
+    
+    // Ajouter la partie décimale si elle existe
+    if (decimalPart.isNotEmpty) {
+      formatted += '.$decimalPart';
+    }
+    
+    return formatted;
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -124,7 +178,7 @@ class CurrencyCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${AppLocalizations.of(context).rateLabel} ${currency.rate}',
+                    '${AppLocalizations.of(context).rateLabel} ${_formatRate(currency.rate)}',
                     style: ThemeUtil.bodySmall.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
