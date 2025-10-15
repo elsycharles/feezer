@@ -1123,11 +1123,11 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqMinMaxTransactionRange =>
-      'Inona no dikan\'ny « Min transactions » sy « Max transactions »?';
+      'Inona no dikan\'ny « fifampiraharahana kely » sy « fifampiraharahana lehibe »?';
 
   @override
   String get faqMinMaxTransactionRangeAnswer =>
-      'Ny « Min transactions » sy « Max transactions » dia mamaritra ny isan\'ny fifanakalozana kely indrindra sy lehibe indrindra azo ampiasain\'ny mpanatsara mba hizara ny vola napetraka. Ohatra, raha manoratra 10 000 Ar ianao ary mampiditra Min transactions = 2 dia hikaroka vahaolana izay misy farafahakeliny 2 fifanakalozana ihany ny mpanatsara. Ataovy izay hahazoana antoka fa Min ≤ Max ary mety amin\'ny fikasanao ny sandany. Ireo fepetra ireo dia manery ny mpanatsara hahazo vokatra miaraka amin\'ny isan\'ny fifanakalozana ao anatin\'ny elanelana napetrakao.';
+      'Ny « fifampiraharahana kely » sy « fifampiraharahana lehibe » dia mamaritra ny isan\'ny fifanakalozana kely indrindra sy lehibe indrindra azo ampiasain\'ny mpanatsara mba hizara ny vola napetraka. Ohatra, raha manoratra 10 000 Ar ianao ary mampiditra Min transactions = 2 dia hikaroka vahaolana izay misy farafahakeliny 2 fifanakalozana ihany ny mpanatsara. Ataovy izay hahazoana antoka fa Min ≤ Max ary mety amin\'ny fikasanao ny sandany. Ireo fepetra ireo dia manery ny mpanatsara hahazo vokatra miaraka amin\'ny isan\'ny fifanakalozana ao anatin\'ny elanelana napetrakao.';
 
   @override
   String get faqDataSecurity => 'Azo antoka ve ny angon-drakitra?';
