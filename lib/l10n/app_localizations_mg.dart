@@ -346,28 +346,28 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get termsResponsibilitiesContent =>
-      'Ianao no tompon\'andraikitra amin\'ny fitazonana ny tsiambaratelon\'ny mombamomba ny kaontinao ary amin\'ny asa rehetra izay mitranga ao ambanin\'ny kaontinao. Manaiky ianao ny hanome mombamomba marina sy feno amin\'ny fampiasana ny serivisinay ary hanavao ireo mombamomba ireo raha ilaina.';
+      'Ianao no tompon\'andraikitra amin\'ny fitazonana ny tsiambaratelon\'ny mombamomba ny kaontinao ary amin\'ny asa rehetra izay mitranga ao ambanin\'ny kaontinao. Manaiky ianao ny hanome mombamomba marina sy feno amin\'ny fampiasana ny serivisinay ary hanavao ireo mombamomba ireo raha ilaina. Tokony hahazo antoka ianao fa manaraka ny fepetra sy fanapahan-kevitry ny mpanome serivisy mobile money anao.';
 
   @override
   String get termsServiceTitle => 'Fanoritsoritana ny Serivisy';
 
   @override
   String get termsServiceContent =>
-      'Feezer dia fitaovana fanamainana saram-bola izay manampy anao hanisa sy hanatsara ny vidin\'ny fifampiraharahana amin\'ny banky. Ny serivisinay dia manome fanisana saram-bola, soso-kevitra fanatsarana fifampiraharahana, ary votoaty fanabeazana momba ny saram-bola amin\'ny banky. Miezaka izahay ny hanome mombamomba marina, saingy ny fanisana rehetra dia vinavinanana ary tokony hohamarinina amin\'ny orinasam-bola.';
+      'Feezer dia fitaovana fanamainana saram-bola izay manampy anao hanisa sy hanatsara ny vidin\'ny fifampiraharahana mobile money. Ny serivisinay dia manome fanisana saram-bola, soso-kevitra fanatsarana fifampiraharahana, ary votoaty fanabeazana momba ny saram-bola amin\'ny mobile money. Miezaka izahay ny hanome mombamomba marina, saingy ny fanisana rehetra dia vinavinanana ary tokony hohamarinina amin\'ny mpanome serivisy mobile money anao.';
 
   @override
   String get termsPrivacyTitle => 'Tsiambaratelo sy Fiarovana Data';
 
   @override
   String get termsPrivacyContent =>
-      'Ny tsiambaratelonao dia zava-dehibe ho anay. Feezer dia manangona mombamomba manokana kely indrindra ilaina amin\'ny fanomezana ny serivisinay. Tsy amidy, tsy miantsena, na tsy mamindra ny mombamomba manokana anao amin\'ny olon-kafa izahay raha tsy misy ny faneken\'anao, afa-tsy araka ny voalaza ao amin\'ny Politikan\'ny Tsiambaratelo. Mametraka fepetra fiarovana mety izahay mba hiarovana ny datanao.';
+      'Ny tsiambaratelonao dia zava-dehibe ho anay. Feezer dia manangona mombamomba manokana kely indrindra ilaina amin\'ny fanomezana ny serivisinay. Tsy amidy, tsy miantsena, na tsy mamindra ny mombamomba manokana anao amin\'ny olon-kafa izahay raha tsy misy ny faneken\'anao, afa-tsy araka ny voalaza ao amin\'ny Politikan\'ny Tsiambaratelo. Mametraka fepetra fiarovana mety izahay mba hiarovana ny datanao tsy ho azon\'ny olon-kafa tsy nahazo alalana.';
 
   @override
   String get termsLiabilityTitle => 'Famaritana ny Adidy';
 
   @override
   String get termsLiabilityContent =>
-      'Feezer dia manome serivisy fanisana saram-bola ho an\'ny fanazavana fotsiny. Tsy tompon\'andraikitra amin\'ny fahaverezan-bola, fahasimbana, na fanapahan-kevitra natao mifototra amin\'ny mombamomba omen\'ny app anay izahay. Tokony hohamarinina foana amin\'ny orinasam-bola ny fanisana ary hiresaka amin\'ny mpanolo-tsaina ara-bola ho an\'ny fanapahan-kevitra ara-bola lehibe.';
+      'Feezer dia manome serivisy fanisana saram-bola ho an\'ny fanazavana fotsiny. Tsy tompon\'andraikitra amin\'ny fahaverezan-bola, fahasimbana, na fanapahan-kevitra natao mifototra amin\'ny mombamomba omen\'ny app anay izahay. Tokony hohamarinina foana amin\'ny mpanome serivisy mobile money anao ny fanisana ary tokony hahazo antoka ianao fa mahalala ny saram-bola alain\'ny mpanome anao. Tsy misy fifandraisana aminay amin\'ny mpanome serivisy mobile money.';
 
   @override
   String get termsTerminationTitle => 'Famaranana';
@@ -381,7 +381,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get termsGoverningLawContent =>
-      'Ireo Fepetra fampiasana ireo dia hofehezina sy hohajaina araka ny lalàn\'ny faritany izay iasan\'ny serivisinay. Ny adin-tsaina rehetra avy amin\'ireo fepetra ireo dia ho voavaha amin\'ny alalan\'ny arbitration binding araka ny fitsipika amin\'ny association arbitration mety.';
+      'Ireo Fepetra fampiasana ireo dia hofehezina sy hohajaina araka ny lalàn\'ny faritany izay iasan\'ny serivisinay. Ny adin-tsaina rehetra avy amin\'ireo fepetra ireo dia ho voavaha amin\'ny alalan\'ny lalana ara-dalàna mety araka ny lalàna eo an-toerana.';
 
   @override
   String get termsContactTitle => 'Mombamomba ny Fifandraisana';
