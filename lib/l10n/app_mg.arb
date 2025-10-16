@@ -243,7 +243,7 @@
   "@manageYourProviders": {
     "description": "Header title for provider management section"
   },
-  "centralizeProviders": "Atambaro eo amin'ny toerana iray ny mpiara-miasa banky sy mobile money.",
+  "centralizeProviders": "Atambaro eo amin'ny toerana iray ny mpamatsy serivisy ara-bola finday.",
   "@centralizeProviders": {
     "description": "Description for provider management functionality"
   },
@@ -345,7 +345,7 @@
   "@termsIntroductionTitle": {
     "description": "Terms of use introduction section title"
   },
-  "termsIntroductionContent": "Tongasoa eto amin'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin'ny banky. Amin'ny fampiasana Feezer, manaiky ianao ny ho voafehin'ireo fepetra ireo. Azafady vakio tsara ireo alohan'ny hampiasana ny serivisinay.",
+  "termsIntroductionContent": "Tongasoa eto amin'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin'ny mobile money. Amin'ny fampiasana Feezer, manaiky ianao ny ho voafehin'ireo fepetra ireo. Azafady vakio tsara ireo alohan'ny hampiasana ny serivisinay.",
   "@termsIntroductionContent": {
     "description": "Terms of use introduction section content"
   },
@@ -1635,7 +1635,7 @@
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Ny angon-drakitra ara-bola dia voatahiry ao amin'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin'ny fitaovanao ary tsy alefa any aiza na aiza.",
+  "faqDataSecurityAnswer": "Ny angon-drakitra ara-bola dia voatahiry ao amin'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin'ny ambaratonga ara-bola. Ny angona rehetra dia mijanona ao amin'ny fitaovanao ary tsy alefa any aiza na aiza.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
@@ -1767,7 +1767,7 @@
   "@faqQuestion3": {
     "description": "Third FAQ question"
   },
-  "faqAnswer3": "Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga banky izahay. Ny angon-drakitrao dia tsy tehirizina ao amin'ny server anay ary ny kajy rehetra dia atao eo amin'ny fitaovanao ihany.",
+  "faqAnswer3": "Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga ara-bola izahay. Ny angon-drakitrao dia tsy tehirizina ao amin'ny server anay ary ny kajy rehetra dia atao eo amin'ny fitaovanao ihany.",
   "@faqAnswer3": {
     "description": "Third FAQ answer"
   },
@@ -1783,7 +1783,7 @@
   "@faqQuestion5": {
     "description": "Fifth FAQ question"
   },
-  "faqAnswer5": "Eny, afaka tehirizina ny mpamatsy banky sy fomba fandoavam-bola tiavinao ho an'ny fidirana haingana rehefa manao kajy vaovao.",
+  "faqAnswer5": "Eny, afaka tehirizina ny mpamatsy mobile money sy fomba fandoavam-bola tiavinao ho an'ny fidirana haingana rehefa manao kajy vaovao.",
   "@faqAnswer5": {
     "description": "Fifth FAQ answer"
   },
