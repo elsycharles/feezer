@@ -135,7 +135,7 @@
   "@manageYourProviders": {
     "description": "Header title for provider management section"
   },
-  "centralizeProviders": "Centralisez les partenaires bancaires et de mobile money en un seul endroit.",
+  "centralizeProviders": "Centralisez les fournisseurs de services financiers mobiles en un seul endroit.",
   "@centralizeProviders": {
     "description": "Description for provider management functionality"
   },
@@ -237,7 +237,7 @@
   "@termsIntroductionTitle": {
     "description": "Terms of use introduction section title"
   },
-  "termsIntroductionContent": "Bienvenue sur Feezer ! Ces Conditions d'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais bancaires. En utilisant Feezer, vous acceptez d'être lié par ces conditions. Veuillez les lire attentivement avant d'utiliser notre service.",
+  "termsIntroductionContent": "Bienvenue sur Feezer ! Ces Conditions d'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais de mobile money. En utilisant Feezer, vous acceptez d'être lié par ces conditions. Veuillez les lire attentivement avant d'utiliser notre service.",
   "@termsIntroductionContent": {
     "description": "Terms of use introduction section content"
   },
@@ -1423,7 +1423,7 @@
   "@faqWhatIsFeeMinimizer": {
     "description": "Question FAQ"
   },
-  "faqWhatIsFeeMinimizerAnswer": "Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.",
+  "faqWhatIsFeeMinimizerAnswer": "Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais de mobile money.",
   "@faqWhatIsFeeMinimizerAnswer": {
     "description": "Réponse FAQ"
   },
@@ -1603,7 +1603,7 @@
   "@faqQuestion5": {
     "description": "Cinquième question FAQ"
   },
-  "faqAnswer5": "Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.",
+  "faqAnswer5": "Oui, vous pouvez sauvegarder vos fournisseurs de mobile money et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.",
   "@faqAnswer5": {
     "description": "Cinquième réponse FAQ"
   },
