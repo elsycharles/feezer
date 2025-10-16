@@ -480,7 +480,7 @@ class FeeOptimizerUtil {
     final totalCost = DecimalUtil.toDouble(totalCostDecimal);
 
     return _buildResult(
-      totalAmount,
+      totalNet + totalFees,
       totalNet,
       totalFees,
       totalAmount - totalCost,
@@ -567,7 +567,7 @@ class FeeOptimizerUtil {
     final actualCount = counts.values.fold(0, (sum, count) => sum + count);
     if (actualCount < targetCount) return null;
 
-    return _buildResult(totalAmount, totalNet, totalFees, budget, counts);
+    return _buildResult(totalNet + totalFees, totalNet, totalFees, budget, counts);
   }
 
   static FeeOptimizerResult _ultraHighAmountStrategy(
@@ -596,7 +596,7 @@ class FeeOptimizerUtil {
     final totalFees = realFee * targetOps;
     final remaining = totalAmount - (operationCost * targetOps);
 
-    return _buildResult(totalAmount, netAmount, totalFees, remaining, {
+    return _buildResult(netAmount + totalFees, netAmount, totalFees, remaining, {
       '${bestOption.max}-$realFee': targetOps,
     });
   }
@@ -664,7 +664,7 @@ class FeeOptimizerUtil {
 
     if (bestSingleOp != null) {
       final singleOpResult = _buildResult(
-        totalAmount,
+        bestSingleOp.amount + bestSingleOp.fee,
         bestSingleOp.amount,
         bestSingleOp.fee,
         totalAmount - bestSingleOp.amount - bestSingleOp.fee,
@@ -722,7 +722,7 @@ class FeeOptimizerUtil {
       }
     }
 
-    return _buildResult(totalAmount, totalNet, totalFees, budget, counts);
+    return _buildResult(totalNet + totalFees, totalNet, totalFees, budget, counts);
   }
 
   static FeeOptimizerResult _repeatedOperationsOptimized(
@@ -747,7 +747,7 @@ class FeeOptimizerUtil {
 
       if (netAmount >= opt.min && netAmount <= opt.max && netAmount > 0) {
         final singleOpResult = _buildResult(
-          totalAmount,
+          netAmount + fee,
           netAmount,
           fee,
           totalAmount - netAmount - fee,
@@ -794,7 +794,7 @@ class FeeOptimizerUtil {
         if (net > bestResult.netAmount ||
             (net == bestResult.netAmount && fees < bestResult.totalFees)) {
           final counts = <String, int>{'$amount-$fee': count};
-          bestResult = _buildResult(totalAmount, net, fees, remaining, counts);
+          bestResult = _buildResult(net + fees, net, fees, remaining, counts);
         }
       }
     }
@@ -1099,7 +1099,7 @@ class FeeOptimizerUtil {
     }
 
     final remaining = totalAmount - netAmount - totalFees;
-    return _buildResult(totalAmount, netAmount, totalFees, remaining, counts);
+    return _buildResult(netAmount + totalFees, netAmount, totalFees, remaining, counts);
   }
 
   static String _generateCacheKey(
