@@ -8,7 +8,6 @@ import '../../widget/app_bar.dart' as custom;
 import 'widget/search_field.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_toast.dart';
-import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
 import '../../util/extensions_util.dart';
 import '../../util/theme_util.dart';
@@ -32,7 +31,6 @@ class _State extends State<CurrencyListScreen> {
   final _searchController = TextEditingController();
   final _currencies = <Currency>[];
   final _selectedIds = <String>{};
-  bool _isLoading = true;
 
   List<Currency> get _filtered {
     final query = _searchController.text.toLowerCase();
@@ -56,7 +54,6 @@ class _State extends State<CurrencyListScreen> {
   }
 
   Future<void> _loadCurrencies() async {
-    setState(() => _isLoading = true);
     final db = DatabaseUtil();
     final currencyMaps = await db.query(ConstantUtil.tableCurrencies);
     final loadedCurrencies = currencyMaps
@@ -67,7 +64,6 @@ class _State extends State<CurrencyListScreen> {
         _currencies
           ..clear()
           ..addAll(loadedCurrencies);
-        _isLoading = false;
       });
     }
   }
@@ -124,8 +120,6 @@ class _State extends State<CurrencyListScreen> {
     );
 
     if (confirmed == true && mounted) {
-      setState(() => _isLoading = true);
-
       final db = DatabaseUtil();
       for (final id in _selectedIds) {
         await db.delete(
@@ -142,7 +136,6 @@ class _State extends State<CurrencyListScreen> {
         );
         setState(() {
           _selectedIds.clear();
-          _isLoading = false;
         });
         await _loadCurrencies();
       }
@@ -199,21 +192,19 @@ class _State extends State<CurrencyListScreen> {
         bottomNavigationBar: _selectedIds.isEmpty
             ? _buildAddCurrencyButton(context.colorScheme)
             : null,
-        body: _isLoading
-            ? const AppLoading()
-            : SafeArea(
-                child: RefreshableScreen(
-                  onRefresh: _loadCurrencies,
-                  child: Column(
-                    children: [
-                      Global.gapMd,
-                      CurrencyHeader(
-                        totalCount: _currencies.length,
-                        filteredCount: _filtered.length,
-                        selectedCount: _selectedIds.length,
-                      ),
-                      Global.gapLg,
-                      Padding(
+        body: SafeArea(
+            child: RefreshableScreen(
+              onRefresh: _loadCurrencies,
+              child: Column(
+                children: [
+                  Global.gapMd,
+                  CurrencyHeader(
+                    totalCount: _currencies.length,
+                    filteredCount: _filtered.length,
+                    selectedCount: _selectedIds.length,
+                  ),
+                  Global.gapLg,
+                  Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: SearchField(
                           controller: _searchController,
