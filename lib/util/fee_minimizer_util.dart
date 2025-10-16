@@ -577,28 +577,18 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    final bestOption = _findMostEfficientOption(options);
-    if (bestOption == null) {
-      return _buildResult(totalAmount, 0, 0, totalAmount, {});
-    }
+    // ✅ Use greedy approach instead of simplified single-option strategy
+    final greedyResult = _greedyOptimizedFast(totalAmount, options, precision);
 
-    // ✅ Calculate real fee at maximum amount
-    final realFee = bestOption.getFeeForAmount(bestOption.max);
-    final operationCost = bestOption.max + realFee;
-    
-    final maxPossibleOps = (totalAmount / operationCost).floor();
-
-    int targetOps = maxPossibleOps;
-    if (maxOperations > 0) targetOps = min(targetOps, maxOperations);
-    if (minOperations > 0) targetOps = max(targetOps, minOperations);
-
-    final netAmount = bestOption.max * targetOps;
-    final totalFees = realFee * targetOps;
-    final remaining = totalAmount - (operationCost * targetOps);
-
-    return _buildResult(netAmount + totalFees, netAmount, totalFees, remaining, {
-      '${bestOption.max}-$realFee': targetOps,
-    });
+    // Apply constraints if needed
+    return _applyConstraintsOptimized(
+      greedyResult,
+      totalAmount,
+      options,
+      precision,
+      maxOperations,
+      minOperations,
+    );
   }
 
   static FeeOptimizerResult _highAmountStrategy(
@@ -608,11 +598,18 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Use a combination of the 2-3 best options
-    final topOptions = _getTopOptions(options, 3);
-    return _hybridOptimization(
+    // ✅ Try multiple strategies and select best
+    final results = <FeeOptimizerResult>[
+      _greedyOptimizedFast(totalAmount, options, precision),
+      _repeatedOperationsOptimized(totalAmount, options, precision),
+    ];
+
+    final bestResult = _selectBest(results);
+
+    return _applyConstraintsOptimized(
+      bestResult,
       totalAmount,
-      topOptions,
+      options,
       precision,
       maxOperations,
       minOperations,
@@ -950,50 +947,6 @@ class FeeOptimizerUtil {
     return _buildResultFromCounts(totalAmount, counts);
   }
 
-  static FeeOptimizerResult _hybridOptimization(
-    double totalAmount,
-    List<_FeeOption> options,
-    double precision,
-    int maxOperations,
-    int minOperations,
-  ) {
-    final counts = <String, int>{};
-    double budget = totalAmount;
-    int totalOps = 0;
-
-    for (final opt in options) {
-      if (budget <= 0) break;
-      if (maxOperations > 0 && totalOps >= maxOperations) break;
-
-      // ✅ Use real fee
-      final optFee = opt.getFeeForAmount(opt.max);
-      final cost = opt.max + optFee;
-      
-      final maxCount = maxOperations > 0
-          ? min((budget / cost).floor(), maxOperations - totalOps)
-          : (budget / cost).floor();
-
-      if (maxCount > 0) {
-        final count = min(maxCount, _maxSafeOperations - totalOps);
-        counts['${opt.max}-$optFee'] = count;
-        budget -= cost * count;
-        totalOps += count;
-      }
-    }
-
-    while (totalOps < minOperations && budget > 0) {
-      final best = _findBestOperationFast(budget, options, precision);
-      if (best == null) break;
-
-      final key = '${best.amount}-${best.fee}';
-      counts[key] = (counts[key] ?? 0) + 1;
-      budget -= best.amount + best.fee;
-      totalOps++;
-    }
-
-    return _buildResultFromCounts(totalAmount, counts);
-  }
-
   static _FeeOption? _findMostEfficientOption(List<_FeeOption> options) {
     if (options.isEmpty) return null;
 
@@ -1012,19 +965,6 @@ class FeeOptimizerUtil {
     }
 
     return best;
-  }
-
-  static List<_FeeOption> _getTopOptions(List<_FeeOption> options, int count) {
-    final sorted = List<_FeeOption>.from(options)
-      ..sort((a, b) {
-        // ✅ Calculate real efficiency at maximum amount
-        final feeA = a.getFeeForAmount(a.max);
-        final feeB = b.getFeeForAmount(b.max);
-        final effA = a.max / (feeA + 0.0001);
-        final effB = b.max / (feeB + 0.0001);
-        return effB.compareTo(effA);
-      });
-    return sorted.take(count).toList();
   }
 
   static _BestOperation? _findBestOperationFast(
