@@ -248,7 +248,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get centralizeProviders =>
-      'Centralisez les partenaires bancaires et de mobile money en un seul endroit.';
+      'Centralisez les fournisseurs de services financiers mobiles en un seul endroit.';
 
   @override
   String get activeProvider => 'Fournisseur actif';
@@ -333,7 +333,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get termsIntroductionContent =>
-      'Bienvenue sur Feezer ! Ces Conditions d\'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais bancaires. En utilisant Feezer, vous acceptez d\'être lié par ces conditions. Veuillez les lire attentivement avant d\'utiliser notre service.';
+      'Bienvenue sur Feezer ! Ces Conditions d\'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais de mobile money. En utilisant Feezer, vous acceptez d\'être lié par ces conditions. Veuillez les lire attentivement avant d\'utiliser notre service.';
 
   @override
   String get termsAcceptanceTitle => 'Acceptation des Conditions';
@@ -1120,7 +1120,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.';
+      'Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais de mobile money.';
 
   @override
   String get faqHowToAddProvider => 'Comment ajouter un nouveau fournisseur ?';
@@ -1277,7 +1277,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqAnswer5 =>
-      'Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
+      'Oui, vous pouvez sauvegarder vos fournisseurs de mobile money et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
 
   @override
   String get faqQuestion6 => 'Comment ajouter un nouveau fournisseur ?';

@@ -1099,7 +1099,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.';
+      'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize mobile money fees.';
 
   @override
   String get faqHowToAddProvider => 'How do I add a new provider?';
@@ -1128,7 +1128,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqDataSecurityAnswer =>
-      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.';
+      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide financial-level security features. All data remains on your device and is not transmitted anywhere.';
 
   @override
   String get faqOfflineMode => 'Does the app work offline?';
@@ -1255,7 +1255,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqAnswer5 =>
-      'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
+      'Yes, you can save your preferred mobile money providers and payment methods for quick access when making new calculations.';
 
   @override
   String get faqQuestion6 => 'How do I add a new provider?';

@@ -247,7 +247,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get centralizeProviders =>
-      'Atambaro eo amin\'ny toerana iray ny mpiara-miasa banky sy mobile money.';
+      'Atambaro eo amin\'ny toerana iray ny mpamatsy serivisy ara-bola finday.';
 
   @override
   String get activeProvider => 'Mpanome tolotra mavitrika';
@@ -332,7 +332,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get termsIntroductionContent =>
-      'Tongasoa eto amin\'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin\'ny banky. Amin\'ny fampiasana Feezer, manaiky ianao ny ho voafehin\'ireo fepetra ireo. Azafady vakio tsara ireo alohan\'ny hampiasana ny serivisinay.';
+      'Tongasoa eto amin\'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin\'ny mobile money. Amin\'ny fampiasana Feezer, manaiky ianao ny ho voafehin\'ireo fepetra ireo. Azafady vakio tsara ireo alohan\'ny hampiasana ny serivisinay.';
 
   @override
   String get termsAcceptanceTitle => 'Fanekena ny Fepetra';
@@ -1134,7 +1134,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqDataSecurityAnswer =>
-      'Ny angon-drakitra ara-bola dia voatahiry ao amin\'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin\'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin\'ny fitaovanao ary tsy alefa any aiza na aiza.';
+      'Ny angon-drakitra ara-bola dia voatahiry ao amin\'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin\'ny ambaratonga ara-bola. Ny angona rehetra dia mijanona ao amin\'ny fitaovanao ary tsy alefa any aiza na aiza.';
 
   @override
   String get faqOfflineMode => 'Miasa ve ny app nefa tsy misy internet?';
@@ -1249,7 +1249,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqAnswer3 =>
-      'Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga banky izahay. Ny angon-drakitrao dia tsy tehirizina ao amin\'ny server anay ary ny kajy rehetra dia atao eo amin\'ny fitaovanao ihany.';
+      'Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga ara-bola izahay. Ny angon-drakitrao dia tsy tehirizina ao amin\'ny server anay ary ny kajy rehetra dia atao eo amin\'ny fitaovanao ihany.';
 
   @override
   String get faqQuestion4 =>
@@ -1264,7 +1264,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqAnswer5 =>
-      'Eny, afaka tehirizina ny mpamatsy banky sy fomba fandoavam-bola tiavinao ho an\'ny fidirana haingana rehefa manao kajy vaovao.';
+      'Eny, afaka tehirizina ny mpamatsy mobile money sy fomba fandoavam-bola tiavinao ho an\'ny fidirana haingana rehefa manao kajy vaovao.';
 
   @override
   String get faqQuestion6 => 'Ahoana no fomba hanampiana mpamatsy vola vaovao?';
