@@ -1283,7 +1283,7 @@ class FeeOptimizerUtil {
     List<FeeInterval> intervals,
   ) {
     if (totalAmount <= 0 || intervals.isEmpty) {
-      return {'netAmount': 0.0, 'totalFees': 0.0, 'operations': 0};
+      return {'netAmount': 0.0, 'totalFees': 0.0, 'operations': 0, 'details': <FeeOptimizerDetail>[]};
     }
 
     // Sort intervals by max amount descending (largest intervals first)
@@ -1296,6 +1296,7 @@ class FeeOptimizerUtil {
     double totalNetAmount = 0;
     double totalFees = 0;
     int operations = 0;
+    final List<FeeOptimizerDetail> details = [];
 
     for (final interval in sortedIntervals) {
       if (remainingBudget <= 0) break;
@@ -1342,12 +1343,20 @@ class FeeOptimizerUtil {
       totalFees += actualFee;
       remainingBudget -= totalCost;
       operations++;
+
+      // Add detail for this operation
+      details.add(FeeOptimizerDetail(
+        amount: takeAmount,
+        fee: actualFee,
+        count: 1,
+      ));
     }
 
     return {
       'netAmount': totalNetAmount,
       'totalFees': totalFees,
       'operations': operations,
+      'details': details,
     };
   }
 
@@ -1358,7 +1367,7 @@ class FeeOptimizerUtil {
     List<FeeInterval> intervals,
   ) {
     if (targetNetAmount <= 0 || intervals.isEmpty) {
-      return {'totalFees': 0.0, 'operations': 0};
+      return {'totalFees': 0.0, 'operations': 0, 'details': <FeeOptimizerDetail>[]};
     }
 
     // Sort intervals by max amount descending (largest intervals first) - SAME AS MAX AMOUNT
@@ -1370,6 +1379,7 @@ class FeeOptimizerUtil {
     double remainingNet = targetNetAmount;
     double totalFees = 0;
     int operations = 0;
+    final List<FeeOptimizerDetail> details = [];
 
     for (final interval in sortedIntervals) {
       if (remainingNet <= 0) break;
@@ -1393,16 +1403,24 @@ class FeeOptimizerUtil {
       totalFees += actualFee;
       remainingNet -= takeNetAmount;
       operations++;
+
+      // Add detail for this operation
+      details.add(FeeOptimizerDetail(
+        amount: takeNetAmount,
+        fee: actualFee,
+        count: 1,
+      ));
     }
 
     // If we couldn't achieve the target net amount, return invalid result
     if (remainingNet > 0.01) {
-      return {'totalFees': 0.0, 'operations': 0};
+      return {'totalFees': 0.0, 'operations': 0, 'details': <FeeOptimizerDetail>[]};
     }
 
     return {
       'totalFees': totalFees,
       'operations': operations,
+      'details': details,
     };
   }
 
@@ -1416,6 +1434,7 @@ class FeeOptimizerUtil {
     final maxNetAmount = splitResult['netAmount'] as double;
     final maxFee = splitResult['totalFees'] as double;
     final maxOperations = splitResult['operations'] as int;
+    final maxDetails = splitResult['details'] as List<FeeOptimizerDetail>;
     final foundValidMaxInterval = maxNetAmount > 0;
 
     // Calculate if we take the same net amount as optimization by splitting
@@ -1424,6 +1443,7 @@ class FeeOptimizerUtil {
     final sameNetFee = sameNetResult['totalFees'] as double;
     final sameNetTotalAmount = optimizedNetAmount + sameNetFee;
     final sameNetOperations = sameNetResult['operations'] as int;
+    final sameNetDetails = sameNetResult['details'] as List<FeeOptimizerDetail>;
     final foundValidSameNetInterval = sameNetOperations > 0;
 
     // Always return data with validity flags
@@ -1431,9 +1451,11 @@ class FeeOptimizerUtil {
       'maxNetAmount': maxNetAmount,
       'maxFee': maxFee,
       'maxOperations': maxOperations,
+      'maxDetails': maxDetails,
       'sameNetFee': sameNetFee,
       'sameNetTotalAmount': sameNetTotalAmount,
       'sameNetOperations': sameNetOperations,
+      'sameNetDetails': sameNetDetails,
       'hasValidMaxInterval': foundValidMaxInterval,
       'hasValidSameNetInterval': foundValidSameNetInterval,
     };
