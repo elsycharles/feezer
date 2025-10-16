@@ -94,7 +94,7 @@ class SettingsScreen extends StatelessWidget {
                 _buildSettingTile(
                   context,
                   AppLocalizations.of(context).version,
-                  '1.0.1',
+                  '1.0.2',
                   Icons.info_outline,
                   showArrow: false,
                 ),
