@@ -1299,57 +1299,55 @@ class FeeOptimizerUtil {
     final List<FeeOptimizerDetail> details = [];
 
     for (final interval in sortedIntervals) {
-      if (remainingBudget <= 0) break;
-
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
       final feeValue = interval.fee ?? 0;
 
-      // Skip if minimum amount is too high
-      if (minAmount > remainingBudget) continue;
+      // Keep taking from this interval until we can't anymore
+      while (remainingBudget >= minAmount && remainingBudget > 0) {
+        // Calculate how much we can take in this interval
+        double takeAmount = remainingBudget;
 
-      // Calculate how much we can take in this interval
-      double takeAmount = remainingBudget;
-
-      // For percentage fees, we need to solve for net amount
-      if (interval.feeType == FeeType.percentage) {
-        // budget = net + net * (fee/100) = net * (1 + fee/100)
-        // net = budget / (1 + fee/100)
-        final netFromBudget = remainingBudget / (1 + feeValue / 100.0);
-        takeAmount = min(netFromBudget, maxAmount);
-      } else {
-        // For fixed fees, net = budget - fee, but ensure we can afford the fee
-        if (remainingBudget > feeValue) {
-          takeAmount = min(remainingBudget - feeValue, maxAmount);
+        // For percentage fees, we need to solve for net amount
+        if (interval.feeType == FeeType.percentage) {
+          // budget = net + net * (fee/100) = net * (1 + fee/100)
+          // net = budget / (1 + fee/100)
+          final netFromBudget = remainingBudget / (1 + feeValue / 100.0);
+          takeAmount = min(netFromBudget, maxAmount);
         } else {
-          continue; // Can't afford the fee
+          // For fixed fees, net = budget - fee, but ensure we can afford the fee
+          if (remainingBudget > feeValue) {
+            takeAmount = min(remainingBudget - feeValue, maxAmount);
+          } else {
+            break; // Can't afford the fee, move to next interval
+          }
         }
+
+        // Ensure we meet minimum
+        if (takeAmount < minAmount) break;
+
+        // Calculate actual fee and cost
+        final actualFee = interval.feeType == FeeType.percentage
+            ? takeAmount * (feeValue / 100.0)
+            : feeValue;
+        final totalCost = takeAmount + actualFee;
+
+        // Check if we can afford this
+        if (totalCost > remainingBudget + 0.01) break;
+
+        // Take this amount
+        totalNetAmount += takeAmount;
+        totalFees += actualFee;
+        remainingBudget -= totalCost;
+        operations++;
+
+        // Add detail for this operation
+        details.add(FeeOptimizerDetail(
+          amount: takeAmount,
+          fee: actualFee,
+          count: 1,
+        ));
       }
-
-      // Ensure we meet minimum
-      if (takeAmount < minAmount) continue;
-
-      // Calculate actual fee and cost
-      final actualFee = interval.feeType == FeeType.percentage
-          ? takeAmount * (feeValue / 100.0)
-          : feeValue;
-      final totalCost = takeAmount + actualFee;
-
-      // Check if we can afford this
-      if (totalCost > remainingBudget + 0.01) continue;
-
-      // Take this amount
-      totalNetAmount += takeAmount;
-      totalFees += actualFee;
-      remainingBudget -= totalCost;
-      operations++;
-
-      // Add detail for this operation
-      details.add(FeeOptimizerDetail(
-        amount: takeAmount,
-        fee: actualFee,
-        count: 1,
-      ));
     }
 
     return {
@@ -1382,34 +1380,35 @@ class FeeOptimizerUtil {
     final List<FeeOptimizerDetail> details = [];
 
     for (final interval in sortedIntervals) {
-      if (remainingNet <= 0) break;
-
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
       final feeValue = interval.fee ?? 0;
 
-      // Calculate how much net we can take in this interval - SAME LOGIC AS MAX AMOUNT
-      double takeNetAmount = min(remainingNet, maxAmount);
+      // Keep taking from this interval until remaining net is too small
+      while (remainingNet >= minAmount && remainingNet > 0) {
+        // Calculate how much net we can take in this interval
+        double takeNetAmount = min(remainingNet, maxAmount);
 
-      // Ensure we meet minimum
-      if (takeNetAmount < minAmount) continue;
+        // Ensure we meet minimum
+        if (takeNetAmount < minAmount) break;
 
-      // Calculate fee for this amount
-      final actualFee = interval.feeType == FeeType.percentage
-          ? takeNetAmount * (feeValue / 100.0)
-          : feeValue;
+        // Calculate fee for this amount
+        final actualFee = interval.feeType == FeeType.percentage
+            ? takeNetAmount * (feeValue / 100.0)
+            : feeValue;
 
-      // Take this amount
-      totalFees += actualFee;
-      remainingNet -= takeNetAmount;
-      operations++;
+        // Take this amount
+        totalFees += actualFee;
+        remainingNet -= takeNetAmount;
+        operations++;
 
-      // Add detail for this operation
-      details.add(FeeOptimizerDetail(
-        amount: takeNetAmount,
-        fee: actualFee,
-        count: 1,
-      ));
+        // Add detail for this operation
+        details.add(FeeOptimizerDetail(
+          amount: takeNetAmount,
+          fee: actualFee,
+          count: 1,
+        ));
+      }
     }
 
     // If we couldn't achieve the target net amount, return invalid result
