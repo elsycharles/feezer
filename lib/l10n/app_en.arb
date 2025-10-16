@@ -1607,7 +1607,7 @@
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
   },
-  "faqWhatIsFeeMinimizerAnswer": "Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.",
+  "faqWhatIsFeeMinimizerAnswer": "Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize mobile money fees.",
   "@faqWhatIsFeeMinimizerAnswer": {
     "description": "FAQ answer"
   },
@@ -1639,7 +1639,7 @@
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.",
+  "faqDataSecurityAnswer": "Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide financial-level security features. All data remains on your device and is not transmitted anywhere.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
@@ -1792,7 +1792,7 @@
   "@faqQuestion5": {
     "description": "Fifth FAQ question"
   },
-  "faqAnswer5": "Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.",
+  "faqAnswer5": "Yes, you can save your preferred mobile money providers and payment methods for quick access when making new calculations.",
   "@faqAnswer5": {
     "description": "Fifth FAQ answer"
   },
