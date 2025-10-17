@@ -248,7 +248,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get centralizeProviders =>
-      'Centralisez les partenaires bancaires et de mobile money en un seul endroit.';
+      'Centralisez les fournisseurs de services financiers mobiles en un seul endroit.';
 
   @override
   String get activeProvider => 'Fournisseur actif';
@@ -333,7 +333,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get termsIntroductionContent =>
-      'Bienvenue sur Feezer ! Ces Conditions d\'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais bancaires. En utilisant Feezer, vous acceptez d\'être lié par ces conditions. Veuillez les lire attentivement avant d\'utiliser notre service.';
+      'Bienvenue sur Feezer ! Ces Conditions d\'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais de mobile money. En utilisant Feezer, vous acceptez d\'être lié par ces conditions. Veuillez les lire attentivement avant d\'utiliser notre service.';
 
   @override
   String get termsAcceptanceTitle => 'Acceptation des Conditions';
@@ -347,42 +347,42 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get termsResponsibilitiesContent =>
-      'Vous êtes responsable du maintien de la confidentialité des informations de votre compte et de toutes les activités qui se déroulent sous votre compte. Vous acceptez de fournir des informations exactes et complètes lors de l\'utilisation de notre service et de mettre à jour ces informations si nécessaire.';
+      'Vous êtes responsable du maintien de la confidentialité des informations de votre compte et de toutes les activités qui se déroulent sous votre compte. Vous acceptez de fournir des informations exactes et complètes lors de l\'utilisation de notre service et de mettre à jour ces informations si nécessaire. Vous devez vous assurer de respecter les termes et conditions de votre fournisseur de services de mobile money.';
 
   @override
   String get termsServiceTitle => 'Description du Service';
 
   @override
   String get termsServiceContent =>
-      'Feezer est un outil de minimisation des frais qui vous aide à calculer et optimiser les coûts des transactions bancaires. Notre service fournit des calculs de frais, des suggestions d\'optimisation des transactions et du contenu éducatif sur les frais bancaires. Nous nous efforçons de fournir des informations exactes, mais tous les calculs sont des estimations et doivent être vérifiés auprès de vos établissements financiers.';
+      'Feezer est un outil de minimisation des frais qui vous aide à calculer et optimiser les coûts de transaction mobile money. Notre service fournit des calculs de frais, des suggestions d\'optimisation des transactions et du contenu éducatif sur les frais de mobile money. Nous nous efforçons de fournir des informations exactes, mais tous les calculs sont des estimations et doivent être vérifiés auprès de votre fournisseur de services de mobile money.';
 
   @override
   String get termsPrivacyTitle => 'Confidentialité et Protection des Données';
 
   @override
   String get termsPrivacyContent =>
-      'Votre confidentialité est importante pour nous. Feezer collecte un minimum d\'informations personnelles nécessaires pour fournir notre service. Nous ne vendons, n\'échangeons ni ne transférons vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans notre Politique de Confidentialité. Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos données.';
+      'Votre confidentialité est importante pour nous. Feezer collecte un minimum d\'informations personnelles nécessaires pour fournir notre service. Nous ne vendons, n\'échangeons ni ne transférons vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans notre Politique de Confidentialité. Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos données contre tout accès non autorisé.';
 
   @override
   String get termsLiabilityTitle => 'Limitation de Responsabilité';
 
   @override
   String get termsLiabilityContent =>
-      'Feezer fournit des services de calcul de frais à des fins d\'information uniquement. Nous ne sommes pas responsables des pertes financières, dommages ou décisions prises sur la base des informations fournies par notre application. Les utilisateurs doivent toujours vérifier les calculs auprès de leurs établissements financiers et consulter des conseillers financiers pour les décisions financières importantes.';
+      'Feezer fournit des services de calcul de frais à des fins d\'information uniquement. Nous ne sommes pas responsables des pertes financières, dommages ou décisions prises sur la base des informations fournies par notre application. Les utilisateurs doivent toujours vérifier les calculs auprès de leur fournisseur de services de mobile money et comprendre les frais facturés par leur fournisseur. Nous ne sommes affiliés à aucun fournisseur de services de mobile money.';
 
   @override
   String get termsTerminationTitle => 'Résiliation';
 
   @override
   String get termsTerminationContent =>
-      'Nous nous réservons le droit de résilier ou suspendre votre compte et l\'accès à notre service à notre seule discrétion, sans préavis, pour un comportement que nous croyons violer ces Conditions d\'utilisation ou nuisible aux autres utilisateurs, à nous ou à des tiers, ou pour toute autre raison.';
+      'Nous nous réservons le droit de résilier ou suspendre votre compte et l\'accès à notre service à notre seule discrétion, sans préavis, pour tout comportement que nous estimons violer ces Conditions d\'Utilisation ou nuisible aux autres utilisateurs, à nous-mêmes ou à des tiers, ou pour toute autre raison.';
 
   @override
-  String get termsGoverningLawTitle => 'Loi Applicable';
+  String get termsGoverningLawTitle => 'Droit Applicable';
 
   @override
   String get termsGoverningLawContent =>
-      'Ces Conditions d\'utilisation sont régies et interprétées conformément aux lois de la juridiction dans laquelle notre service opère. Tout différend découlant de ces conditions sera résolu par arbitrage obligatoire conformément aux règles de l\'association d\'arbitrage appropriée.';
+      'Ces Conditions d\'Utilisation sont régies et interprétées conformément aux lois de la juridiction dans laquelle notre service opère. Tout litige découlant de ces conditions sera résolu par les voies légales appropriées conformément aux lois locales applicables.';
 
   @override
   String get termsContactTitle => 'Informations de Contact';
@@ -1120,7 +1120,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais bancaires.';
+      'Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais de mobile money.';
 
   @override
   String get faqHowToAddProvider => 'Comment ajouter un nouveau fournisseur ?';
@@ -1277,7 +1277,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqAnswer5 =>
-      'Oui, vous pouvez sauvegarder vos fournisseurs bancaires et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
+      'Oui, vous pouvez sauvegarder vos fournisseurs de mobile money et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.';
 
   @override
   String get faqQuestion6 => 'Comment ajouter un nouveau fournisseur ?';

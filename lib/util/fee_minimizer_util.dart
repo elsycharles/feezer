@@ -480,7 +480,7 @@ class FeeOptimizerUtil {
     final totalCost = DecimalUtil.toDouble(totalCostDecimal);
 
     return _buildResult(
-      totalAmount,
+      totalNet + totalFees,
       totalNet,
       totalFees,
       totalAmount - totalCost,
@@ -567,7 +567,7 @@ class FeeOptimizerUtil {
     final actualCount = counts.values.fold(0, (sum, count) => sum + count);
     if (actualCount < targetCount) return null;
 
-    return _buildResult(totalAmount, totalNet, totalFees, budget, counts);
+    return _buildResult(totalNet + totalFees, totalNet, totalFees, budget, counts);
   }
 
   static FeeOptimizerResult _ultraHighAmountStrategy(
@@ -577,28 +577,18 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    final bestOption = _findMostEfficientOption(options);
-    if (bestOption == null) {
-      return _buildResult(totalAmount, 0, 0, totalAmount, {});
-    }
+    // ✅ Use greedy approach instead of simplified single-option strategy
+    final greedyResult = _greedyOptimizedFast(totalAmount, options, precision);
 
-    // ✅ Calculate real fee at maximum amount
-    final realFee = bestOption.getFeeForAmount(bestOption.max);
-    final operationCost = bestOption.max + realFee;
-    
-    final maxPossibleOps = (totalAmount / operationCost).floor();
-
-    int targetOps = maxPossibleOps;
-    if (maxOperations > 0) targetOps = min(targetOps, maxOperations);
-    if (minOperations > 0) targetOps = max(targetOps, minOperations);
-
-    final netAmount = bestOption.max * targetOps;
-    final totalFees = realFee * targetOps;
-    final remaining = totalAmount - (operationCost * targetOps);
-
-    return _buildResult(totalAmount, netAmount, totalFees, remaining, {
-      '${bestOption.max}-$realFee': targetOps,
-    });
+    // Apply constraints if needed
+    return _applyConstraintsOptimized(
+      greedyResult,
+      totalAmount,
+      options,
+      precision,
+      maxOperations,
+      minOperations,
+    );
   }
 
   static FeeOptimizerResult _highAmountStrategy(
@@ -608,11 +598,18 @@ class FeeOptimizerUtil {
     int maxOperations,
     int minOperations,
   ) {
-    // Use a combination of the 2-3 best options
-    final topOptions = _getTopOptions(options, 3);
-    return _hybridOptimization(
+    // ✅ Try multiple strategies and select best
+    final results = <FeeOptimizerResult>[
+      _greedyOptimizedFast(totalAmount, options, precision),
+      _repeatedOperationsOptimized(totalAmount, options, precision),
+    ];
+
+    final bestResult = _selectBest(results);
+
+    return _applyConstraintsOptimized(
+      bestResult,
       totalAmount,
-      topOptions,
+      options,
       precision,
       maxOperations,
       minOperations,
@@ -664,7 +661,7 @@ class FeeOptimizerUtil {
 
     if (bestSingleOp != null) {
       final singleOpResult = _buildResult(
-        totalAmount,
+        bestSingleOp.amount + bestSingleOp.fee,
         bestSingleOp.amount,
         bestSingleOp.fee,
         totalAmount - bestSingleOp.amount - bestSingleOp.fee,
@@ -722,7 +719,7 @@ class FeeOptimizerUtil {
       }
     }
 
-    return _buildResult(totalAmount, totalNet, totalFees, budget, counts);
+    return _buildResult(totalNet + totalFees, totalNet, totalFees, budget, counts);
   }
 
   static FeeOptimizerResult _repeatedOperationsOptimized(
@@ -747,7 +744,7 @@ class FeeOptimizerUtil {
 
       if (netAmount >= opt.min && netAmount <= opt.max && netAmount > 0) {
         final singleOpResult = _buildResult(
-          totalAmount,
+          netAmount + fee,
           netAmount,
           fee,
           totalAmount - netAmount - fee,
@@ -794,7 +791,7 @@ class FeeOptimizerUtil {
         if (net > bestResult.netAmount ||
             (net == bestResult.netAmount && fees < bestResult.totalFees)) {
           final counts = <String, int>{'$amount-$fee': count};
-          bestResult = _buildResult(totalAmount, net, fees, remaining, counts);
+          bestResult = _buildResult(net + fees, net, fees, remaining, counts);
         }
       }
     }
@@ -950,50 +947,6 @@ class FeeOptimizerUtil {
     return _buildResultFromCounts(totalAmount, counts);
   }
 
-  static FeeOptimizerResult _hybridOptimization(
-    double totalAmount,
-    List<_FeeOption> options,
-    double precision,
-    int maxOperations,
-    int minOperations,
-  ) {
-    final counts = <String, int>{};
-    double budget = totalAmount;
-    int totalOps = 0;
-
-    for (final opt in options) {
-      if (budget <= 0) break;
-      if (maxOperations > 0 && totalOps >= maxOperations) break;
-
-      // ✅ Use real fee
-      final optFee = opt.getFeeForAmount(opt.max);
-      final cost = opt.max + optFee;
-      
-      final maxCount = maxOperations > 0
-          ? min((budget / cost).floor(), maxOperations - totalOps)
-          : (budget / cost).floor();
-
-      if (maxCount > 0) {
-        final count = min(maxCount, _maxSafeOperations - totalOps);
-        counts['${opt.max}-$optFee'] = count;
-        budget -= cost * count;
-        totalOps += count;
-      }
-    }
-
-    while (totalOps < minOperations && budget > 0) {
-      final best = _findBestOperationFast(budget, options, precision);
-      if (best == null) break;
-
-      final key = '${best.amount}-${best.fee}';
-      counts[key] = (counts[key] ?? 0) + 1;
-      budget -= best.amount + best.fee;
-      totalOps++;
-    }
-
-    return _buildResultFromCounts(totalAmount, counts);
-  }
-
   static _FeeOption? _findMostEfficientOption(List<_FeeOption> options) {
     if (options.isEmpty) return null;
 
@@ -1012,19 +965,6 @@ class FeeOptimizerUtil {
     }
 
     return best;
-  }
-
-  static List<_FeeOption> _getTopOptions(List<_FeeOption> options, int count) {
-    final sorted = List<_FeeOption>.from(options)
-      ..sort((a, b) {
-        // ✅ Calculate real efficiency at maximum amount
-        final feeA = a.getFeeForAmount(a.max);
-        final feeB = b.getFeeForAmount(b.max);
-        final effA = a.max / (feeA + 0.0001);
-        final effB = b.max / (feeB + 0.0001);
-        return effB.compareTo(effA);
-      });
-    return sorted.take(count).toList();
   }
 
   static _BestOperation? _findBestOperationFast(
@@ -1099,7 +1039,7 @@ class FeeOptimizerUtil {
     }
 
     final remaining = totalAmount - netAmount - totalFees;
-    return _buildResult(totalAmount, netAmount, totalFees, remaining, counts);
+    return _buildResult(netAmount + totalFees, netAmount, totalFees, remaining, counts);
   }
 
   static String _generateCacheKey(
@@ -1283,7 +1223,7 @@ class FeeOptimizerUtil {
     List<FeeInterval> intervals,
   ) {
     if (totalAmount <= 0 || intervals.isEmpty) {
-      return {'netAmount': 0.0, 'totalFees': 0.0, 'operations': 0};
+      return {'netAmount': 0.0, 'totalFees': 0.0, 'operations': 0, 'details': <FeeOptimizerDetail>[]};
     }
 
     // Sort intervals by max amount descending (largest intervals first)
@@ -1296,58 +1236,65 @@ class FeeOptimizerUtil {
     double totalNetAmount = 0;
     double totalFees = 0;
     int operations = 0;
+    final List<FeeOptimizerDetail> details = [];
 
     for (final interval in sortedIntervals) {
-      if (remainingBudget <= 0) break;
-
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
       final feeValue = interval.fee ?? 0;
 
-      // Skip if minimum amount is too high
-      if (minAmount > remainingBudget) continue;
+      // Keep taking from this interval until we can't anymore
+      while (remainingBudget >= minAmount && remainingBudget > 0) {
+        // Calculate how much we can take in this interval
+        double takeAmount = remainingBudget;
 
-      // Calculate how much we can take in this interval
-      double takeAmount = remainingBudget;
-
-      // For percentage fees, we need to solve for net amount
-      if (interval.feeType == FeeType.percentage) {
-        // budget = net + net * (fee/100) = net * (1 + fee/100)
-        // net = budget / (1 + fee/100)
-        final netFromBudget = remainingBudget / (1 + feeValue / 100.0);
-        takeAmount = min(netFromBudget, maxAmount);
-      } else {
-        // For fixed fees, net = budget - fee, but ensure we can afford the fee
-        if (remainingBudget > feeValue) {
-          takeAmount = min(remainingBudget - feeValue, maxAmount);
+        // For percentage fees, we need to solve for net amount
+        if (interval.feeType == FeeType.percentage) {
+          // budget = net + net * (fee/100) = net * (1 + fee/100)
+          // net = budget / (1 + fee/100)
+          final netFromBudget = remainingBudget / (1 + feeValue / 100.0);
+          takeAmount = min(netFromBudget, maxAmount);
         } else {
-          continue; // Can't afford the fee
+          // For fixed fees, net = budget - fee, but ensure we can afford the fee
+          if (remainingBudget > feeValue) {
+            takeAmount = min(remainingBudget - feeValue, maxAmount);
+          } else {
+            break; // Can't afford the fee, move to next interval
+          }
         }
+
+        // Ensure we meet minimum
+        if (takeAmount < minAmount) break;
+
+        // Calculate actual fee and cost
+        final actualFee = interval.feeType == FeeType.percentage
+            ? takeAmount * (feeValue / 100.0)
+            : feeValue;
+        final totalCost = takeAmount + actualFee;
+
+        // Check if we can afford this
+        if (totalCost > remainingBudget + 0.01) break;
+
+        // Take this amount
+        totalNetAmount += takeAmount;
+        totalFees += actualFee;
+        remainingBudget -= totalCost;
+        operations++;
+
+        // Add detail for this operation
+        details.add(FeeOptimizerDetail(
+          amount: takeAmount,
+          fee: actualFee,
+          count: 1,
+        ));
       }
-
-      // Ensure we meet minimum
-      if (takeAmount < minAmount) continue;
-
-      // Calculate actual fee and cost
-      final actualFee = interval.feeType == FeeType.percentage
-          ? takeAmount * (feeValue / 100.0)
-          : feeValue;
-      final totalCost = takeAmount + actualFee;
-
-      // Check if we can afford this
-      if (totalCost > remainingBudget + 0.01) continue;
-
-      // Take this amount
-      totalNetAmount += takeAmount;
-      totalFees += actualFee;
-      remainingBudget -= totalCost;
-      operations++;
     }
 
     return {
       'netAmount': totalNetAmount,
       'totalFees': totalFees,
       'operations': operations,
+      'details': details,
     };
   }
 
@@ -1358,7 +1305,7 @@ class FeeOptimizerUtil {
     List<FeeInterval> intervals,
   ) {
     if (targetNetAmount <= 0 || intervals.isEmpty) {
-      return {'totalFees': 0.0, 'operations': 0};
+      return {'totalFees': 0.0, 'operations': 0, 'details': <FeeOptimizerDetail>[]};
     }
 
     // Sort intervals by max amount descending (largest intervals first) - SAME AS MAX AMOUNT
@@ -1370,39 +1317,49 @@ class FeeOptimizerUtil {
     double remainingNet = targetNetAmount;
     double totalFees = 0;
     int operations = 0;
+    final List<FeeOptimizerDetail> details = [];
 
     for (final interval in sortedIntervals) {
-      if (remainingNet <= 0) break;
-
       final minAmount = interval.minAmount ?? 0;
       final maxAmount = interval.maxAmount ?? double.infinity;
       final feeValue = interval.fee ?? 0;
 
-      // Calculate how much net we can take in this interval - SAME LOGIC AS MAX AMOUNT
-      double takeNetAmount = min(remainingNet, maxAmount);
+      // Keep taking from this interval until remaining net is too small
+      while (remainingNet >= minAmount && remainingNet > 0) {
+        // Calculate how much net we can take in this interval
+        double takeNetAmount = min(remainingNet, maxAmount);
 
-      // Ensure we meet minimum
-      if (takeNetAmount < minAmount) continue;
+        // Ensure we meet minimum
+        if (takeNetAmount < minAmount) break;
 
-      // Calculate fee for this amount
-      final actualFee = interval.feeType == FeeType.percentage
-          ? takeNetAmount * (feeValue / 100.0)
-          : feeValue;
+        // Calculate fee for this amount
+        final actualFee = interval.feeType == FeeType.percentage
+            ? takeNetAmount * (feeValue / 100.0)
+            : feeValue;
 
-      // Take this amount
-      totalFees += actualFee;
-      remainingNet -= takeNetAmount;
-      operations++;
+        // Take this amount
+        totalFees += actualFee;
+        remainingNet -= takeNetAmount;
+        operations++;
+
+        // Add detail for this operation
+        details.add(FeeOptimizerDetail(
+          amount: takeNetAmount,
+          fee: actualFee,
+          count: 1,
+        ));
+      }
     }
 
     // If we couldn't achieve the target net amount, return invalid result
     if (remainingNet > 0.01) {
-      return {'totalFees': 0.0, 'operations': 0};
+      return {'totalFees': 0.0, 'operations': 0, 'details': <FeeOptimizerDetail>[]};
     }
 
     return {
       'totalFees': totalFees,
       'operations': operations,
+      'details': details,
     };
   }
 
@@ -1416,6 +1373,7 @@ class FeeOptimizerUtil {
     final maxNetAmount = splitResult['netAmount'] as double;
     final maxFee = splitResult['totalFees'] as double;
     final maxOperations = splitResult['operations'] as int;
+    final maxDetails = splitResult['details'] as List<FeeOptimizerDetail>;
     final foundValidMaxInterval = maxNetAmount > 0;
 
     // Calculate if we take the same net amount as optimization by splitting
@@ -1424,6 +1382,7 @@ class FeeOptimizerUtil {
     final sameNetFee = sameNetResult['totalFees'] as double;
     final sameNetTotalAmount = optimizedNetAmount + sameNetFee;
     final sameNetOperations = sameNetResult['operations'] as int;
+    final sameNetDetails = sameNetResult['details'] as List<FeeOptimizerDetail>;
     final foundValidSameNetInterval = sameNetOperations > 0;
 
     // Always return data with validity flags
@@ -1431,9 +1390,11 @@ class FeeOptimizerUtil {
       'maxNetAmount': maxNetAmount,
       'maxFee': maxFee,
       'maxOperations': maxOperations,
+      'maxDetails': maxDetails,
       'sameNetFee': sameNetFee,
       'sameNetTotalAmount': sameNetTotalAmount,
       'sameNetOperations': sameNetOperations,
+      'sameNetDetails': sameNetDetails,
       'hasValidMaxInterval': foundValidMaxInterval,
       'hasValidSameNetInterval': foundValidSameNetInterval,
     };

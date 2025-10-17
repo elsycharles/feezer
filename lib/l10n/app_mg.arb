@@ -243,7 +243,7 @@
   "@manageYourProviders": {
     "description": "Header title for provider management section"
   },
-  "centralizeProviders": "Atambaro eo amin'ny toerana iray ny mpiara-miasa banky sy mobile money.",
+  "centralizeProviders": "Atambaro eo amin'ny toerana iray ny mpamatsy serivisy ara-bola finday.",
   "@centralizeProviders": {
     "description": "Description for provider management functionality"
   },
@@ -345,7 +345,7 @@
   "@termsIntroductionTitle": {
     "description": "Terms of use introduction section title"
   },
-  "termsIntroductionContent": "Tongasoa eto amin'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin'ny banky. Amin'ny fampiasana Feezer, manaiky ianao ny ho voafehin'ireo fepetra ireo. Azafady vakio tsara ireo alohan'ny hampiasana ny serivisinay.",
+  "termsIntroductionContent": "Tongasoa eto amin'ny Feezer! Ireo Fepetra fampiasana ireo no miandraikitra ny fampiasana ny app mobile anay izay natao hanampy anao hamerina ny saram-bola amin'ny mobile money. Amin'ny fampiasana Feezer, manaiky ianao ny ho voafehin'ireo fepetra ireo. Azafady vakio tsara ireo alohan'ny hampiasana ny serivisinay.",
   "@termsIntroductionContent": {
     "description": "Terms of use introduction section content"
   },
@@ -361,7 +361,7 @@
   "@termsResponsibilitiesTitle": {
     "description": "Terms of use user responsibilities section title"
   },
-  "termsResponsibilitiesContent": "Ianao no tompon'andraikitra amin'ny fitazonana ny tsiambaratelon'ny mombamomba ny kaontinao ary amin'ny asa rehetra izay mitranga ao ambanin'ny kaontinao. Manaiky ianao ny hanome mombamomba marina sy feno amin'ny fampiasana ny serivisinay ary hanavao ireo mombamomba ireo raha ilaina.",
+  "termsResponsibilitiesContent": "Ianao no tompon'andraikitra amin'ny fitazonana ny tsiambaratelon'ny mombamomba ny kaontinao ary amin'ny asa rehetra izay mitranga ao ambanin'ny kaontinao. Manaiky ianao ny hanome mombamomba marina sy feno amin'ny fampiasana ny serivisinay ary hanavao ireo mombamomba ireo raha ilaina. Tokony hahazo antoka ianao fa manaraka ny fepetra sy fanapahan-kevitry ny mpanome serivisy mobile money anao.",
   "@termsResponsibilitiesContent": {
     "description": "Terms of use user responsibilities section content"
   },
@@ -369,7 +369,7 @@
   "@termsServiceTitle": {
     "description": "Terms of use service description section title"
   },
-  "termsServiceContent": "Feezer dia fitaovana fanamainana saram-bola izay manampy anao hanisa sy hanatsara ny vidin'ny fifampiraharahana amin'ny banky. Ny serivisinay dia manome fanisana saram-bola, soso-kevitra fanatsarana fifampiraharahana, ary votoaty fanabeazana momba ny saram-bola amin'ny banky. Miezaka izahay ny hanome mombamomba marina, saingy ny fanisana rehetra dia vinavinanana ary tokony hohamarinina amin'ny orinasam-bola.",
+  "termsServiceContent": "Feezer dia fitaovana fanamainana saram-bola izay manampy anao hanisa sy hanatsara ny vidin'ny fifampiraharahana mobile money. Ny serivisinay dia manome fanisana saram-bola, soso-kevitra fanatsarana fifampiraharahana, ary votoaty fanabeazana momba ny saram-bola amin'ny mobile money. Miezaka izahay ny hanome mombamomba marina, saingy ny fanisana rehetra dia vinavinanana ary tokony hohamarinina amin'ny mpanome serivisy mobile money anao.",
   "@termsServiceContent": {
     "description": "Terms of use service description section content"
   },
@@ -377,7 +377,7 @@
   "@termsPrivacyTitle": {
     "description": "Terms of use privacy section title"
   },
-  "termsPrivacyContent": "Ny tsiambaratelonao dia zava-dehibe ho anay. Feezer dia manangona mombamomba manokana kely indrindra ilaina amin'ny fanomezana ny serivisinay. Tsy amidy, tsy miantsena, na tsy mamindra ny mombamomba manokana anao amin'ny olon-kafa izahay raha tsy misy ny faneken'anao, afa-tsy araka ny voalaza ao amin'ny Politikan'ny Tsiambaratelo. Mametraka fepetra fiarovana mety izahay mba hiarovana ny datanao.",
+  "termsPrivacyContent": "Ny tsiambaratelonao dia zava-dehibe ho anay. Feezer dia manangona mombamomba manokana kely indrindra ilaina amin'ny fanomezana ny serivisinay. Tsy amidy, tsy miantsena, na tsy mamindra ny mombamomba manokana anao amin'ny olon-kafa izahay raha tsy misy ny faneken'anao, afa-tsy araka ny voalaza ao amin'ny Politikan'ny Tsiambaratelo. Mametraka fepetra fiarovana mety izahay mba hiarovana ny datanao tsy ho azon'ny olon-kafa tsy nahazo alalana.",
   "@termsPrivacyContent": {
     "description": "Terms of use privacy section content"
   },
@@ -385,7 +385,7 @@
   "@termsLiabilityTitle": {
     "description": "Terms of use liability section title"
   },
-  "termsLiabilityContent": "Feezer dia manome serivisy fanisana saram-bola ho an'ny fanazavana fotsiny. Tsy tompon'andraikitra amin'ny fahaverezan-bola, fahasimbana, na fanapahan-kevitra natao mifototra amin'ny mombamomba omen'ny app anay izahay. Tokony hohamarinina foana amin'ny orinasam-bola ny fanisana ary hiresaka amin'ny mpanolo-tsaina ara-bola ho an'ny fanapahan-kevitra ara-bola lehibe.",
+  "termsLiabilityContent": "Feezer dia manome serivisy fanisana saram-bola ho an'ny fanazavana fotsiny. Tsy tompon'andraikitra amin'ny fahaverezan-bola, fahasimbana, na fanapahan-kevitra natao mifototra amin'ny mombamomba omen'ny app anay izahay. Tokony hohamarinina foana amin'ny mpanome serivisy mobile money anao ny fanisana ary tokony hahazo antoka ianao fa mahalala ny saram-bola alain'ny mpanome anao. Tsy misy fifandraisana aminay amin'ny mpanome serivisy mobile money.",
   "@termsLiabilityContent": {
     "description": "Terms of use liability section content"
   },
@@ -401,7 +401,7 @@
   "@termsGoverningLawTitle": {
     "description": "Terms of use governing law section title"
   },
-  "termsGoverningLawContent": "Ireo Fepetra fampiasana ireo dia hofehezina sy hohajaina araka ny lalàn'ny faritany izay iasan'ny serivisinay. Ny adin-tsaina rehetra avy amin'ireo fepetra ireo dia ho voavaha amin'ny alalan'ny arbitration binding araka ny fitsipika amin'ny association arbitration mety.",
+  "termsGoverningLawContent": "Ireo Fepetra fampiasana ireo dia hofehezina sy hohajaina araka ny lalàn'ny faritany izay iasan'ny serivisinay. Ny adin-tsaina rehetra avy amin'ireo fepetra ireo dia ho voavaha amin'ny alalan'ny lalana ara-dalàna mety araka ny lalàna eo an-toerana.",
   "@termsGoverningLawContent": {
     "description": "Terms of use governing law section content"
   },
@@ -1635,7 +1635,7 @@
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Ny angon-drakitra ara-bola dia voatahiry ao amin'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin'ny ambaratonga banky. Ny angona rehetra dia mijanona ao amin'ny fitaovanao ary tsy alefa any aiza na aiza.",
+  "faqDataSecurityAnswer": "Ny angon-drakitra ara-bola dia voatahiry ao amin'ny fitaovanao tsy misy fanafenana na fomba fiarovana fanampiny. Io app io dia tsy manome endri-javatra fiarovana amin'ny ambaratonga ara-bola. Ny angona rehetra dia mijanona ao amin'ny fitaovanao ary tsy alefa any aiza na aiza.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
@@ -1767,7 +1767,7 @@
   "@faqQuestion3": {
     "description": "Third FAQ question"
   },
-  "faqAnswer3": "Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga banky izahay. Ny angon-drakitrao dia tsy tehirizina ao amin'ny server anay ary ny kajy rehetra dia atao eo amin'ny fitaovanao ihany.",
+  "faqAnswer3": "Eny, mampiasa fanafenana sy fomba fiarovana ambaratonga ara-bola izahay. Ny angon-drakitrao dia tsy tehirizina ao amin'ny server anay ary ny kajy rehetra dia atao eo amin'ny fitaovanao ihany.",
   "@faqAnswer3": {
     "description": "Third FAQ answer"
   },
@@ -1783,7 +1783,7 @@
   "@faqQuestion5": {
     "description": "Fifth FAQ question"
   },
-  "faqAnswer5": "Eny, afaka tehirizina ny mpamatsy banky sy fomba fandoavam-bola tiavinao ho an'ny fidirana haingana rehefa manao kajy vaovao.",
+  "faqAnswer5": "Eny, afaka tehirizina ny mpamatsy mobile money sy fomba fandoavam-bola tiavinao ho an'ny fidirana haingana rehefa manao kajy vaovao.",
   "@faqAnswer5": {
     "description": "Fifth FAQ answer"
   },

@@ -329,7 +329,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsIntroductionContent =>
-      'Welcome to Feezer! These Terms of Use govern your use of our mobile application designed to help you minimize banking fees. By using Feezer, you agree to be bound by these terms. Please read them carefully before using our service.';
+      'Welcome to Feezer! These Terms of Use govern your use of our mobile application designed to help you minimize mobile money fees. By using Feezer, you agree to be bound by these terms. Please read them carefully before using our service.';
 
   @override
   String get termsAcceptanceTitle => 'Acceptance of Terms';
@@ -343,28 +343,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsResponsibilitiesContent =>
-      'You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information when using our service and to update this information as necessary.';
+      'You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information when using our service and to update this information as necessary. You must ensure that you comply with the terms and conditions of your mobile money service provider.';
 
   @override
   String get termsServiceTitle => 'Service Description';
 
   @override
   String get termsServiceContent =>
-      'Feezer is a fee minimization tool that helps you calculate and optimize banking transaction costs. Our service provides fee calculations, transaction optimization suggestions, and educational content about banking fees. We strive to provide accurate information, but all calculations are estimates and should be verified with your financial institutions.';
+      'Feezer is a fee minimization tool that helps you calculate and optimize mobile money transaction costs. Our service provides fee calculations, transaction optimization suggestions, and educational content about mobile money fees. We strive to provide accurate information, but all calculations are estimates and should be verified with your mobile money service provider.';
 
   @override
   String get termsPrivacyTitle => 'Privacy and Data Protection';
 
   @override
   String get termsPrivacyContent =>
-      'Your privacy is important to us. Feezer collects minimal personal information necessary to provide our service. We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in our Privacy Policy. We implement appropriate security measures to protect your data.';
+      'Your privacy is important to us. Feezer collects minimal personal information necessary to provide our service. We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in our Privacy Policy. We implement appropriate security measures to protect your data against unauthorized access.';
 
   @override
   String get termsLiabilityTitle => 'Limitation of Liability';
 
   @override
   String get termsLiabilityContent =>
-      'Feezer provides fee calculation services for informational purposes only. We are not responsible for any financial losses, damages, or decisions made based on the information provided by our application. Users should always verify calculations with their financial institutions and consult with financial advisors for important financial decisions.';
+      'Feezer provides fee calculation services for informational purposes only. We are not responsible for any financial losses, damages, or decisions made based on the information provided by our application. Users should always verify calculations with their mobile money service provider and understand the fees charged by their provider. We are not affiliated with any mobile money service provider.';
 
   @override
   String get termsTerminationTitle => 'Termination';
@@ -378,7 +378,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsGoverningLawContent =>
-      'These Terms of Use shall be governed by and construed in accordance with the laws of the jurisdiction in which our service operates. Any disputes arising from these terms shall be resolved through binding arbitration in accordance with the rules of the appropriate arbitration association.';
+      'These Terms of Use shall be governed by and construed in accordance with the laws of the jurisdiction in which our service operates. Any disputes arising from these terms shall be resolved through appropriate legal channels in accordance with applicable local laws.';
 
   @override
   String get termsContactTitle => 'Contact Information';
@@ -1099,7 +1099,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize banking fees.';
+      'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize mobile money fees.';
 
   @override
   String get faqHowToAddProvider => 'How do I add a new provider?';
@@ -1128,7 +1128,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqDataSecurityAnswer =>
-      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide banking-level security features. All data remains on your device and is not transmitted anywhere.';
+      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide financial-level security features. All data remains on your device and is not transmitted anywhere.';
 
   @override
   String get faqOfflineMode => 'Does the app work offline?';
@@ -1255,7 +1255,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqAnswer5 =>
-      'Yes, you can save your preferred banking providers and payment methods for quick access when making new calculations.';
+      'Yes, you can save your preferred mobile money providers and payment methods for quick access when making new calculations.';
 
   @override
   String get faqQuestion6 => 'How do I add a new provider?';
