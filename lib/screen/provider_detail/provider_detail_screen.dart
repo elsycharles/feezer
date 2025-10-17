@@ -36,7 +36,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   final Set<String> _selectedIds = {};
   final TextEditingController _feeMinController = TextEditingController();
   final TextEditingController _feeMaxController = TextEditingController();
-  bool _isLoading = true;
 
   @override
   void initState() {
@@ -56,7 +55,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   Future<void> _loadFeeIntervals() async {
-    setState(() => _isLoading = true);
     final db = DatabaseUtil();
     final feeIntervalMaps = await db.query(
       ConstantUtil.tableFeeIntervals,
@@ -72,7 +70,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
           ..clear()
           ..addAll(loadedIntervals);
         _filteredIntervals = _feeIntervals;
-        _isLoading = false;
       });
     }
   }
@@ -102,20 +99,18 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
         body: SafeArea(
-          child: _isLoading
-              ? const AppLoading.overlay()
-              : CustomScrollView(
-                  // Use BouncingScrollPhysics for better UX on all platforms
-                  physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
-                  ),
-                  slivers: [
-                    // Header section
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          _buildHeader(),
-                          Global.gapMd,
+            child: CustomScrollView(
+              // Use BouncingScrollPhysics for better UX on all platforms
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+              slivers: [
+                // Header section
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: [
+                      _buildHeader(),
+                      Global.gapMd,
                           _buildSearchBar(colorScheme),
                           if (_selectedIds.isNotEmpty) ...[
                             Global.gapMd,

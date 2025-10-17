@@ -22,6 +22,7 @@ import 'widget/transaction_input_widget.dart';
 import '../../widget/collapsible_card.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/surface_card.dart';
+import '../../widget/bottom_sheet.dart' as custom_bottom_sheet;
 import '../../util/database_util.dart';
 import '../../provider/currency_provider.dart';
 import '../../util/fee_minimizer_util.dart';
@@ -772,28 +773,101 @@ class _State extends State<OptimizeFeeScreen> {
     );
   }
 
-  Widget _buildHeaderCell(String text) => Text(
-    text,
-    style: ThemeUtil.labelMedium.copyWith(
-      color: context.colorScheme.onSurfaceVariant,
-      fontWeight: FontWeight.w600,
-      letterSpacing: 0.2,
-    ),
-    textAlign: TextAlign.center,
-    softWrap: true,
-    overflow: TextOverflow.visible,
-  );
-
-  Widget _buildTableCell(String text, {bool isGreen = false}) => Text(
-    text,
-    style: ThemeUtil.bodyMedium.copyWith(
-      color: isGreen ? ThemeUtil.success : context.colorScheme.onSurface,
-      fontWeight: isGreen ? FontWeight.w600 : FontWeight.normal,
-    ),
-    textAlign: TextAlign.center,
-    softWrap: true,
-    overflow: TextOverflow.visible,
-  );
+  Widget _buildTransactionDetailsTable(List<FeeOptimizerDetail> details, String currencySymbol) {
+    return SurfaceCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.list_alt,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
+              Global.gapSm,
+              Flexible(
+                child: Text(
+                  AppLocalizations.of(context).transactionDetails,
+                  style: ThemeUtil.titleMedium.copyWith(
+                    color: context.colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Global.gapMd,
+          Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: Global.padMd,
+            decoration: BoxDecoration(
+              color: context.colorScheme.surfaceContainerHighest.withValues(
+                alpha: 0.5,
+              ),
+              borderRadius: Global.borderMd,
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: _buildHeaderCell(AppLocalizations.of(context).amount),
+                ),
+                Expanded(
+                  child: _buildHeaderCell(AppLocalizations.of(context).fee),
+                ),
+                Expanded(
+                  child: _buildHeaderCell(AppLocalizations.of(context).count),
+                ),
+                Expanded(
+                  child: _buildHeaderCell(AppLocalizations.of(context).total),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: details.map((detail) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: Global.padMd,
+                constraints: const BoxConstraints(minHeight: 56),
+                decoration: BoxDecoration(
+                  color: context.colorScheme.surface,
+                  borderRadius: Global.borderMd,
+                  border: Border.all(
+                    color: context.colorScheme.outline.withValues(alpha: 0.08),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: _buildTableCell(
+                        '${ConstantUtil.formatCurrencyAmount(Decimal.parse(detail.amount.toString()))} $currencySymbol',
+                      ),
+                    ),
+                    Expanded(
+                      child: _buildTableCell(
+                        '${ConstantUtil.formatCurrencyAmount(Decimal.parse(detail.fee.toString()))} $currencySymbol',
+                        isGreen: false,
+                      ),
+                    ),
+                    Expanded(child: _buildTableCell(detail.count.toString())),
+                    Expanded(
+                      child: _buildTableCell(
+                        '${ConstantUtil.formatCurrencyAmount(Decimal.parse(detail.totalCost.toString()))} $currencySymbol',
+                        isGreen: true,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildComparisonSection() {
     if (_nonOptimizedComparison == null) return const SizedBox.shrink();
@@ -936,7 +1010,10 @@ class _State extends State<OptimizeFeeScreen> {
 
           // ===== SECTION 2: WITHOUT OPTIMIZATION (MAX AMOUNT) =====
           if (hasValidMaxInterval) ...[
-            Container(
+            InkWell(
+              onTap: _showNonOptimizedMaxAmountDetails,
+              borderRadius: Global.borderMd,
+              child: Container(
               padding: Global.padMd,
               decoration: BoxDecoration(
                 color: noOptIsBetter
@@ -1074,11 +1151,15 @@ class _State extends State<OptimizeFeeScreen> {
                 ],
               ),
             ),
+            ),
             Global.gapMd,
           ],
 
           // ===== SECTION 3: WITHOUT OPTIMIZATION (SAME NET) =====
-          Container(
+          InkWell(
+            onTap: _showNonOptimizedSameNetDetails,
+            borderRadius: Global.borderMd,
+            child: Container(
             padding: Global.padMd,
             decoration: BoxDecoration(
               color: !hasValidSameNetInterval
@@ -1279,7 +1360,7 @@ class _State extends State<OptimizeFeeScreen> {
                 ],
               ],
             ),
-          ),
+          ),),
         ],
       ),
     );
@@ -1534,4 +1615,103 @@ class _State extends State<OptimizeFeeScreen> {
       setState(() => _isOptimizing = false);
     }
   }
+
+  void _showNonOptimizedMaxAmountDetails() {
+    if (_nonOptimizedComparison == null) return;
+
+    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+    final currencySymbol = currencyProvider.selectedCurrency?.symbol ?? '';
+    final hasValidMaxInterval = _nonOptimizedComparison!['hasValidMaxInterval'] as bool? ?? false;
+    final maxDetails = _nonOptimizedComparison!['maxDetails'] as List<FeeOptimizerDetail>? ?? [];
+
+    custom_bottom_sheet.BottomSheet.show(
+      context,
+      AppLocalizations.of(context).withoutOptimizationMaxAmount,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildComparisonRow(
+            AppLocalizations.of(context).enteredAmount,
+            '${ConstantUtil.formatCurrencyAmount(Decimal.parse(_amount.toString()))} $currencySymbol',
+          ),
+          if (hasValidMaxInterval && maxDetails.isNotEmpty) ...[
+            Global.gapMd,
+            _buildTransactionDetailsTable(maxDetails, currencySymbol),
+          ] else ...[
+            Padding(
+              padding: Global.padSm,
+              child: Text(
+                AppLocalizations.of(context).noValidIntervalForComparison,
+                style: ThemeUtil.bodySmall.copyWith(
+                  color: Colors.orange.shade700,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  void _showNonOptimizedSameNetDetails() {
+    if (_nonOptimizedComparison == null) return;
+
+    final currencyProvider = Provider.of<CurrencyProvider>(context, listen: false);
+    final currencySymbol = currencyProvider.selectedCurrency?.symbol ?? '';
+    final hasValidSameNetInterval = _nonOptimizedComparison!['hasValidSameNetInterval'] as bool? ?? false;
+    final sameNetDetails = _nonOptimizedComparison!['sameNetDetails'] as List<FeeOptimizerDetail>? ?? [];
+
+    custom_bottom_sheet.BottomSheet.show(
+      context,
+      AppLocalizations.of(context).withoutOptimizationSameNet,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildComparisonRow(
+            AppLocalizations.of(context).enteredAmount,
+            '${ConstantUtil.formatCurrencyAmount(Decimal.parse(_amount.toString()))} $currencySymbol',
+          ),
+          if (hasValidSameNetInterval && sameNetDetails.isNotEmpty) ...[
+            Global.gapMd,
+            _buildTransactionDetailsTable(sameNetDetails, currencySymbol),
+          ] else ...[
+            Padding(
+              padding: Global.padSm,
+              child: Text(
+                AppLocalizations.of(context).noValidIntervalForComparison,
+                style: ThemeUtil.bodySmall.copyWith(
+                  color: Colors.orange.shade700,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeaderCell(String text) => Text(
+    text,
+    style: ThemeUtil.labelMedium.copyWith(
+      color: context.colorScheme.onSurfaceVariant,
+      fontWeight: FontWeight.w600,
+      letterSpacing: 0.2,
+    ),
+    textAlign: TextAlign.center,
+    softWrap: true,
+    overflow: TextOverflow.visible,
+  );
+
+  Widget _buildTableCell(String text, {bool isGreen = false}) => Text(
+    text,
+    style: ThemeUtil.bodyMedium.copyWith(
+      color: isGreen ? ThemeUtil.success : context.colorScheme.onSurface,
+      fontWeight: isGreen ? FontWeight.w600 : FontWeight.normal,
+    ),
+    textAlign: TextAlign.center,
+    softWrap: true,
+    overflow: TextOverflow.visible,
+  );
 }

@@ -31,7 +31,6 @@ class _State extends State<ProviderListScreen> {
   final _searchController = TextEditingController();
   final _providers = <Provider>[];
   final _selectedIds = <String>{};
-  bool _isLoading = true;
 
   List<Provider> get _filtered {
     final query = _searchController.text.toLowerCase();
@@ -52,7 +51,6 @@ class _State extends State<ProviderListScreen> {
   }
 
   Future<void> _loadProviders() async {
-    setState(() => _isLoading = true);
     final db = DatabaseUtil();
     final providerMaps = await db.query(ConstantUtil.tableProviders);
     final loadedProviders = providerMaps
@@ -63,7 +61,6 @@ class _State extends State<ProviderListScreen> {
         _providers
           ..clear()
           ..addAll(loadedProviders);
-        _isLoading = false;
       });
     }
   }
@@ -167,15 +164,13 @@ class _State extends State<ProviderListScreen> {
                 ],
                 Global.gapMd,
                 Expanded(
-                  child: _isLoading
-                      ? const AppLoading.overlay()
-                      : CustomScrollView(
-                          slivers: [
-                            _buildProviderSliver(),
-                            SliverToBoxAdapter(child: Global.gapMd),
-                            SliverToBoxAdapter(child: SizedBox(height: 80)),
-                          ],
-                        ),
+                  child: CustomScrollView(
+                    slivers: [
+                      _buildProviderSliver(),
+                      SliverToBoxAdapter(child: Global.gapMd),
+                      SliverToBoxAdapter(child: SizedBox(height: 80)),
+                    ],
+                  ),
                 ),
               ],
             ),
