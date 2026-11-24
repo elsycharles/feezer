@@ -19,6 +19,19 @@ class PreferenceUtil {
     await prefs.setBool(_keyFirstLaunch, false);
   }
 
+  static const String _keyLastGrid = 'last_grid_id';
+
+  /// Grid selected the last time the optimizer was used.
+  static Future<String?> lastGridId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_keyLastGrid);
+  }
+
+  static Future<void> setLastGridId(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_keyLastGrid, id);
+  }
+
   /// Gets the saved theme mode
   static Future<AppThemeMode> getThemeMode() async {
     final prefs = await SharedPreferences.getInstance();
