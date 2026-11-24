@@ -1,224 +1,33 @@
 {
   "@@locale": "fr",
-  "appTitle": "Feezer",
-  "onboardingTitle1": "Arrêtez de perdre de l'argent avec les frais d'argent mobile",
-  "onboardingDescription1": "Les frais d'argent mobile peuvent s'accumuler rapidement. Feezer vous aide à minimiser les coûts sur chaque transaction.",
-  "onboardingTitle2": "Optimisation intelligente de l'argent mobile",
-  "onboardingDescription2": "Calculez automatiquement le moyen le plus rentable de gérer vos transferts d'argent mobile et paiements.",
-  "onboardingTitle3": "Économisez plus sur les transactions mobiles",
-  "onboardingDescription3": "Obtenez des stratégies d'optimisation des frais d'argent mobile personnalisées et regardez vos économies croître à chaque transaction.",
+  "onboardingTitle1": "Payez moins de frais",
+  "onboardingDescription1": "Entrez un montant : Feezer le découpe en opérations qui coûtent le moins de frais possible.",
+  "onboardingTitle2": "Les vrais frais des opérateurs",
+  "onboardingDescription2": "MVola, Orange Money, Airtel Money : les grilles viennent des tarifs officiels des opérateurs et se mettent à jour en un geste.",
+  "onboardingTitle3": "Retraits et transferts",
+  "onboardingDescription3": "Choisissez l'opérateur et l'opération. Vos données restent sur votre téléphone, même sans internet.",
   "next": "Suivant",
-  "skip": "Ignorer",
+  "skip": "Passer",
   "getStarted": "Commencer",
-  "back": "Retour",
   "cancel": "Annuler",
-  "save": "Enregistrer",
-  "confirmDeleteCurrencies": "Êtes-vous sûr de vouloir supprimer {count} devises ?",
-  "@confirmDeleteCurrencies": {
-    "description": "Confirmation message for deleting currencies",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "operationCount": "{count} opérations",
-  "@operationCount": {
-    "description": "Texte d'affichage pour le nombre d'opérations avec le compte",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
   "delete": "Supprimer",
-  "edit": "Modifier",
-  "create": "Créer",
-  "confirm": "Confirmer",
-  "optimizeFee": "Optimiser les Frais",
-  "providers": "Fournisseurs",
   "settings": "Paramètres",
-  "createInterval": "Créer l'intervalle",
+  "createInterval": "Ajouter le palier",
   "optimize": "Optimiser",
-  "amount": "Montant",
-  "provider": "Fournisseur",
-  "minTransactions": "Transactions min",
-  "maxTransactions": "Transactions max",
   "pleaseEnterValidAmount": "Veuillez saisir un montant valide",
-  "pleaseSelectProvider": "Veuillez sélectionner un fournisseur",
-  "invalidTransactionRange": "Les transactions min doivent être inférieures aux transactions max",
-  "mvola": "MVola",
-  "orangeMoney": "Orange Money",
-  "airtelMoney": "Airtel Money",
-  "mobileFinancialServices": "Services financiers mobiles",
+  "pleaseSelectProvider": "Choisissez un opérateur",
   "appearance": "Apparence",
-  "theme": "Thème",
   "language": "Langue",
-  "english": "Anglais",
-  "french": "Français",
-  "malagasy": "Malgache",
   "system": "Système",
   "light": "Clair",
   "dark": "Sombre",
-  "comingSoon": "Bientôt Disponible",
-  "thisFeatureWillBeAvailableSoon": "Cette fonctionnalité sera bientôt disponible !",
-  "feeIntervals": "Intervalles de frais",
-  "newFeeInterval": "Nouvel intervalle de frais",
-  "minAmount": "Montant Min",
-  "maxAmount": "Montant Max",
-  "feePercentage": "Pourcentage de Frais",
-  "fixedFee": "Frais Fixes",
-  "pleaseEnterMinAmount": "Veuillez saisir le montant minimum",
-  "pleaseEnterMaxAmount": "Veuillez saisir le montant maximum",
-  "pleaseEnterValidFeePercentage": "Veuillez saisir un pourcentage de frais valide",
+  "newFeeInterval": "Nouveau palier",
   "maxAmountMustBeGreaterThanMinAmount": "Le montant maximum doit être supérieur au montant minimum",
-  "optimizationResults": "Résultats d'optimisation",
-  "interval": "Intervalle",
   "fee": "Frais",
-  "count": "Nombre",
-  "total": "Total",
-  "transactionDetails": "Détails de Transaction",
-  "@transactionDetails": {
-    "description": "Transaction details section title"
-  },
-  "currencySymbol": "Ar",
-  "@currencySymbol": {
-    "description": "Currency symbol for Ariary"
-  },
-  "totalAmount": "Montant Total",
-  "@totalAmount": {
-    "description": "Total amount metric title"
-  },
-  "netAmount": "Montant Net",
-  "@netAmount": {
-    "description": "Net amount after fees metric title"
-  },
-  "totalFees": "Frais totaux",
-  "@totalFees": {
-    "description": "Label for total fees in comparison"
-  },
-  "efficiency": "Efficacité",
-  "@efficiency": {
-    "description": "Optimization efficiency metric title"
-  },
-  "operations": "Opérations",
-  "@operations": {
-    "description": "Number of operations metric title"
-  },
-  "remaining": "Restant",
-  "@remaining": {
-    "description": "Remaining amount metric title"
-  },
-  "noOptimizationResultsFound": "Aucun résultat d'optimisation trouvé. Veuillez vérifier vos paramètres d'entrée.",
-  "@noOptimizationResultsFound": {
-    "description": "Message when no optimization results are found for the given parameters"
-  },
-  "tapOptimizeToSeeResults": "Appuyez sur 'Optimiser' pour voir les résultats",
-  "@tapOptimizeToSeeResults": {
-    "description": "Instructions for getting results"
-  },
-  "error": "Erreur",
-  "screenNotFound": "Écran {route} introuvable",
-  "goHome": "Accueil",
-  "noProvidersFound": "Aucun fournisseur trouvé",
-  "@noProvidersFound": {
-    "description": "Message shown when no providers are available"
-  },
-  "searchProviders": "Rechercher des fournisseurs...",
-  "@searchProviders": {
-    "description": "Placeholder text for provider search field"
-  },
-  "manageYourProviders": "Gérer vos fournisseurs",
-  "@manageYourProviders": {
-    "description": "Header title for provider management section"
-  },
-  "centralizeProviders": "Centralisez les fournisseurs de services financiers mobiles en un seul endroit.",
-  "@centralizeProviders": {
-    "description": "Description for provider management functionality"
-  },
-  "activeProvider": "Fournisseur actif",
-  "@activeProvider": {
-    "description": "Label for single active provider count"
-  },
-  "activeProviders": "Fournisseurs actifs",
-  "@activeProviders": {
-    "description": "Label for multiple active providers count"
-  },
-  "deleteThisProvider": "Supprimer ce fournisseur ?",
-  "@deleteThisProvider": {
-    "description": "Confirmation message for deleting a single provider"
-  },
-  "deleteProvidersCount": "Supprimer {count} fournisseurs ?",
-  "@deleteProvidersCount": {
-    "description": "Confirmation message for deleting multiple providers",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "deleteProvider": "Supprimer le fournisseur",
-  "@deleteProvider": {
-    "description": "Title for delete provider dialog"
-  },
-  "deleteProviders": "Supprimer les fournisseurs",
-  "@deleteProviders": {
-    "description": "Title for delete multiple providers dialog"
-  },
-  "providerDeletedSuccessfully": "{count, plural, =1{1 fournisseur supprimé avec succès} other{{count} fournisseurs supprimés avec succès}}",
-  "@providerDeletedSuccessfully": {
-    "description": "Success message after deleting provider(s)"
-  },
-  "deleteProviderWarning": "Cela supprimera également tous les intervalles de frais associés.",
-  "@deleteProviderWarning": {
-    "description": "Warning message when deleting providers about fee intervals"
-  },
-  "editProvider": "Modifier le fournisseur",
-  "@editProvider": {
-    "description": "Title for edit provider bottom sheet"
-  },
-  "providerName": "Nom du fournisseur",
-  "@providerName": {
-    "description": "Label for provider name field"
-  },
-  "description": "Description",
-  "@description": {
-    "description": "Label for description field"
-  },
-  "newProvider": "Nouveau fournisseur",
-  "@newProvider": {
-    "description": "Title for new provider screen"
-  },
-  "createNewProvider": "Créer un nouveau fournisseur",
-  "@createNewProvider": {
-    "description": "Header title for creating a new provider"
-  },
-  "enterProviderName": "Saisissez le nom du fournisseur",
-  "@enterProviderName": {
-    "description": "Hint text for provider name field"
-  },
-  "providerCreatedSuccessfully": "Fournisseur créé avec succès",
-  "@providerCreatedSuccessfully": {
-    "description": "Success message when a provider is created"
-  },
-  "systemDefault": "Par défaut du système",
-  "@systemDefault": {
-    "description": "System default language option"
-  },
-  "general": "Général",
-  "@general": {
-    "description": "General settings section"
-  },
+  "noOptimizationResultsFound": "Aucun résultat. Vérifiez le montant et la grille choisie.",
   "about": "À propos",
   "@about": {
     "description": "About section"
-  },
-  "version": "Version",
-  "@version": {
-    "description": "Version label"
   },
   "faqAndContact": "FAQ et contact",
   "@faqAndContact": {
@@ -228,274 +37,40 @@
   "@termsOfUse": {
     "description": "Terms of use option"
   },
-  "termsAndPrivacyPolicy": "Conditions et politique de confidentialité",
-  "@termsAndPrivacyPolicy": {
-    "description": "Terms and privacy policy description"
-  },
   "termsIntroductionTitle": "Introduction",
-  "@termsIntroductionTitle": {
-    "description": "Terms of use introduction section title"
-  },
-  "termsIntroductionContent": "Bienvenue sur Feezer ! Ces Conditions d'utilisation régissent votre utilisation de notre application mobile conçue pour vous aider à minimiser les frais de mobile money. En utilisant Feezer, vous acceptez d'être lié par ces conditions. Veuillez les lire attentivement avant d'utiliser notre service.",
-  "@termsIntroductionContent": {
-    "description": "Terms of use introduction section content"
-  },
-  "termsAcceptanceTitle": "Acceptation des Conditions",
-  "@termsAcceptanceTitle": {
-    "description": "Terms of use acceptance section title"
-  },
-  "termsAcceptanceContent": "En accédant et utilisant Feezer, vous acceptez et vous engagez à respecter les termes et dispositions de cet accord. Si vous n'acceptez pas de vous conformer aux conditions ci-dessus, veuillez ne pas utiliser ce service.",
-  "@termsAcceptanceContent": {
-    "description": "Terms of use acceptance section content"
-  },
-  "termsResponsibilitiesTitle": "Responsabilités de l'Utilisateur",
-  "@termsResponsibilitiesTitle": {
-    "description": "Terms of use user responsibilities section title"
-  },
-  "termsResponsibilitiesContent": "Vous êtes responsable du maintien de la confidentialité des informations de votre compte et de toutes les activités qui se déroulent sous votre compte. Vous acceptez de fournir des informations exactes et complètes lors de l'utilisation de notre service et de mettre à jour ces informations si nécessaire. Vous devez vous assurer de respecter les termes et conditions de votre fournisseur de services de mobile money.",
-  "@termsResponsibilitiesContent": {
-    "description": "Terms of use user responsibilities section content"
-  },
-  "termsServiceTitle": "Description du Service",
-  "@termsServiceTitle": {
-    "description": "Terms of use service description section title"
-  },
-  "termsServiceContent": "Feezer est un outil de minimisation des frais qui vous aide à calculer et optimiser les coûts de transaction mobile money. Notre service fournit des calculs de frais, des suggestions d'optimisation des transactions et du contenu éducatif sur les frais de mobile money. Nous nous efforçons de fournir des informations exactes, mais tous les calculs sont des estimations et doivent être vérifiés auprès de votre fournisseur de services de mobile money.",
-  "@termsServiceContent": {
-    "description": "Terms of use service description section content"
-  },
-  "termsPrivacyTitle": "Confidentialité et Protection des Données",
-  "@termsPrivacyTitle": {
-    "description": "Terms of use privacy section title"
-  },
-  "termsPrivacyContent": "Votre confidentialité est importante pour nous. Feezer collecte un minimum d'informations personnelles nécessaires pour fournir notre service. Nous ne vendons, n'échangeons ni ne transférons vos informations personnelles à des tiers sans votre consentement, sauf comme décrit dans notre Politique de Confidentialité. Nous mettons en œuvre des mesures de sécurité appropriées pour protéger vos données contre tout accès non autorisé.",
-  "@termsPrivacyContent": {
-    "description": "Terms of use privacy section content"
-  },
-  "termsLiabilityTitle": "Limitation de Responsabilité",
-  "@termsLiabilityTitle": {
-    "description": "Terms of use liability section title"
-  },
-  "termsLiabilityContent": "Feezer fournit des services de calcul de frais à des fins d'information uniquement. Nous ne sommes pas responsables des pertes financières, dommages ou décisions prises sur la base des informations fournies par notre application. Les utilisateurs doivent toujours vérifier les calculs auprès de leur fournisseur de services de mobile money et comprendre les frais facturés par leur fournisseur. Nous ne sommes affiliés à aucun fournisseur de services de mobile money.",
-  "@termsLiabilityContent": {
-    "description": "Terms of use liability section content"
-  },
-  "termsTerminationTitle": "Résiliation",
-  "@termsTerminationTitle": {
-    "description": "Terms of use termination section title"
-  },
-  "termsTerminationContent": "Nous nous réservons le droit de résilier ou suspendre votre compte et l'accès à notre service à notre seule discrétion, sans préavis, pour tout comportement que nous estimons violer ces Conditions d'Utilisation ou nuisible aux autres utilisateurs, à nous-mêmes ou à des tiers, ou pour toute autre raison.",
-  "@termsTerminationContent": {
-    "description": "Terms of use termination section content"
-  },
-  "termsGoverningLawTitle": "Droit Applicable",
-  "@termsGoverningLawTitle": {
-    "description": "Terms of use governing law section title"
-  },
-  "termsGoverningLawContent": "Ces Conditions d'Utilisation sont régies et interprétées conformément aux lois de la juridiction dans laquelle notre service opère. Tout litige découlant de ces conditions sera résolu par les voies légales appropriées conformément aux lois locales applicables.",
-  "@termsGoverningLawContent": {
-    "description": "Terms of use governing law section content"
-  },
-  "termsContactTitle": "Informations de Contact",
-  "@termsContactTitle": {
-    "description": "Terms of use contact section title"
-  },
-  "termsContactContent": "Si vous avez des questions concernant ces Conditions d'utilisation, veuillez nous contacter via la section support de l'application ou par email à elsy.s.charles@gmail.com. Nous répondrons à vos demandes aussi rapidement que possible.",
-  "@termsContactContent": {
-    "description": "Terms of use contact section content"
-  },
-  "featureComingNextVersion": "Fonctionnalité disponible dans la prochaine version",
-  "@featureComingNextVersion": {
-    "description": "Message for upcoming features"
-  },
-  "financialProvider": "Fournisseur financier",
-  "@financialProvider": {
-    "description": "Financial provider section title"
-  },
-  "chooseProviderToAnalyze": "Choisissez le fournisseur que vous souhaitez analyser",
-  "@chooseProviderToAnalyze": {
-    "description": "Instructions for provider selection"
-  },
-  "amountToOptimize": "Montant à optimiser",
-  "@amountToOptimize": {
-    "description": "Title for amount optimization section"
-  },
-  "enterTransactionAmountToOptimize": "Saisissez le montant de transaction que vous souhaitez optimiser",
-  "@enterTransactionAmountToOptimize": {
-    "description": "Instructions for amount input"
-  },
-  "@amount": {
-    "description": "Amount label"
-  },
-  "transactionRange": "Plage de transactions",
-  "@transactionRange": {
-    "description": "Transaction range section title"
-  },
-  "defineMinMaxTransactions": "Définissez le nombre minimum et maximum de transactions",
-  "@defineMinMaxTransactions": {
-    "description": "Instructions for transaction range"
-  },
-  "@minTransactions": {
-    "description": "Minimum transactions label"
-  },
-  "@maxTransactions": {
-    "description": "Maximum transactions label"
-  },
-  "readyToOptimize": "Prêt à optimiser",
-  "@readyToOptimize": {
-    "description": "Ready to optimize message"
-  },
-  "clickOptimizeButtonToAnalyze": "Cliquez sur le bouton Optimiser pour analyser la meilleure structure de frais pour vos transactions",
-  "@clickOptimizeButtonToAnalyze": {
-    "description": "Instructions for optimization"
-  },
-  "@optimizationResults": {
-    "description": "Optimization results title"
-  },
-  "@interval": {
-    "description": "Interval column header"
-  },
+  "termsIntroductionContent": "Ces conditions s'appliquent à l'application Feezer, qui aide à réduire les frais d'argent mobile. En utilisant Feezer, vous les acceptez.",
+  "termsAcceptanceTitle": "Acceptation",
+  "termsAcceptanceContent": "Si vous n'acceptez pas ces conditions, n'utilisez pas l'application. Elles peuvent évoluer avec les nouvelles versions de Feezer.",
+  "termsServiceTitle": "Le service",
+  "termsServiceContent": "À partir de grilles de frais, Feezer calcule comment découper un retrait ou un transfert pour payer moins de frais. Les grilles officielles sont lues sur les sites des opérateurs et peuvent changer à tout moment : vérifiez toujours les frais auprès de votre opérateur.",
+  "termsPrivacyTitle": "Confidentialité",
+  "termsPrivacyContent": "Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone. La mise à jour des frais télécharge un fichier public, sans envoyer vos données.",
+  "termsLiabilityTitle": "Responsabilité",
+  "termsLiabilityContent": "Les résultats sont donnés à titre indicatif. Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais réellement facturés, ni des décisions prises à partir de ses calculs.",
+  "termsTerminationTitle": "Arrêt",
+  "termsTerminationContent": "Vous pouvez arrêter d'utiliser Feezer à tout moment : désinstaller l'application efface ses données de votre téléphone.",
+  "termsGoverningLawTitle": "Droit applicable",
+  "termsGoverningLawContent": "Ces conditions sont régies par les lois applicables là où Feezer est utilisé. Tout litige sera traité par les voies légales prévues par ces lois.",
+  "termsContactTitle": "Contact",
+  "termsContactContent": "Une question ? Écrivez-nous depuis Aide et support, ou à elsy.s.charles@gmail.com.",
   "@fee": {
     "description": "Fee column header"
   },
-  "@count": {
-    "description": "Count column header"
-  },
-  "providerDetails": "Détails du fournisseur",
-  "@providerDetails": {
-    "description": "Provider details screen title"
-  },
-  "noFeeIntervalsFound": "Aucun intervalle de frais trouvé",
-  "@noFeeIntervalsFound": {
-    "description": "Message when no fee intervals exist"
-  },
-  "@feeIntervals": {
-    "description": "Fee intervals section title"
-  },
-  "feeInterval": "Intervalle de frais",
-  "@feeInterval": {
-    "description": "Fee interval column header"
-  },
-  "searchByFeeRange": "Rechercher par plage de frais",
-  "@searchByFeeRange": {
-    "description": "Search by fee range placeholder"
-  },
-  "addFeeInterval": "Ajouter un intervalle de frais",
-  "@addFeeInterval": {
-    "description": "Add fee interval button"
-  },
-  "minFee": "Frais min",
-  "@minFee": {
-    "description": "Minimum fee placeholder"
-  },
-  "maxFee": "Frais max",
-  "@maxFee": {
-    "description": "Maximum fee placeholder"
-  },
-  "deleteFeeIntervals": "Supprimer les intervalles de frais",
-  "@deleteFeeIntervals": {
-    "description": "Delete fee intervals title"
-  },
-  "@newFeeInterval": {
-    "description": "New fee interval screen title"
-  },
-  "createNewFeeInterval": "Créer un nouvel intervalle de frais",
-  "@createNewFeeInterval": {
-    "description": "Create new fee interval header"
-  },
-  "defineNewFeeStructure": "Définir une nouvelle structure de frais pour les montants de transaction",
-  "@defineNewFeeStructure": {
-    "description": "Fee interval creation instructions"
-  },
-  "enterMinimumAmount": "Saisissez le montant minimum",
-  "@enterMinimumAmount": {
-    "description": "Minimum amount input placeholder"
-  },
-  "enterMaximumAmount": "Saisissez le montant maximum",
-  "@enterMaximumAmount": {
-    "description": "Maximum amount input placeholder"
-  },
-  "enterFeeAmount": "Saisissez le montant des frais",
-  "@enterFeeAmount": {
-    "description": "Fee amount input placeholder"
-  },
-  "@createInterval": {
-    "description": "Create interval button"
-  },
-  "maxAmountMustBeGreater": "Le montant max doit être supérieur au montant min",
-  "@maxAmountMustBeGreater": {
-    "description": "Validation message for amount range"
-  },
-  "feeIntervalCreatedSuccessfully": "Intervalle de frais créé avec succès",
-  "@feeIntervalCreatedSuccessfully": {
-    "description": "Success message for fee interval creation"
-  },
-  "addNewFinancialServiceProvider": "Ajouter un nouveau fournisseur de services financiers à votre liste",
-  "@addNewFinancialServiceProvider": {
-    "description": "Description for adding new provider"
-  },
-  "enterDescription": "Saisissez la description",
-  "@enterDescription": {
-    "description": "Description input placeholder"
-  },
-  "createProvider": "Créer le fournisseur",
-  "@createProvider": {
-    "description": "Create provider button"
-  },
-  "clearSelection": "Effacer la sélection",
-  "@clearSelection": {
-    "description": "Clear selection tooltip"
-  },
-  "selectAll": "Tout sélectionner",
-  "@selectAll": {
-    "description": "Select all tooltip"
-  },
+  "noFeeIntervalsFound": "Cette grille n'a encore aucun palier. Ajoutez-les dans l'onglet Opérateurs.",
+  "addFeeInterval": "Ajouter un palier",
+  "deleteFeeIntervals": "Supprimer le palier",
+  "feeIntervalCreatedSuccessfully": "Palier ajouté",
   "icon": "Icône",
   "@icon": {
     "description": "Icon label"
-  },
-  "tapToSelectIcon": "Appuyez pour sélectionner l'icône",
-  "@tapToSelectIcon": {
-    "description": "Icon selection instruction"
-  },
-  "clearSearch": "Effacer la recherche",
-  "@clearSearch": {
-    "description": "Clear search tooltip"
-  },
-  "selectIcon": "Sélectionner l'icône",
-  "@selectIcon": {
-    "description": "Select icon dialog title"
   },
   "thisFieldIsRequired": "Ce champ est obligatoire",
   "@thisFieldIsRequired": {
     "description": "Required field validation message"
   },
-  "pressAgainToExit": "Appuyez à nouveau pour quitter",
-  "@pressAgainToExit": {
-    "description": "Double back to exit message"
-  },
-  "providerUpdatedSuccessfully": "Fournisseur mis à jour avec succès",
-  "@providerUpdatedSuccessfully": {
-    "description": "Provider update success message"
-  },
-  "feeIntervalUpdatedSuccessfully": "Intervalle de frais mis à jour avec succès",
-  "@feeIntervalUpdatedSuccessfully": {
-    "description": "Fee interval update success message"
-  },
-  "feeIntervalDeletedSuccessfully": "{count, plural, =1{1 intervalle de frais supprimé avec succès} other{{count} intervalles de frais supprimés avec succès}}",
-  "@feeIntervalDeletedSuccessfully": {
-    "description": "Fee interval deletion success message",
-    "placeholders": {
-      "count": {
-        "type": "num",
-        "format": "compact"
-      }
-    }
-  },
-  "editFeeInterval": "Modifier l'intervalle de frais",
-  "@editFeeInterval": {
-    "description": "Edit fee interval dialog title"
-  },
+  "feeIntervalUpdatedSuccessfully": "Palier modifié",
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{Palier supprimé} other{{count} paliers supprimés}}",
+  "editFeeInterval": "Modifier le palier",
   "minTransactionsCannotBeGreaterThanMax": "Le minimum de transactions ne peut pas être supérieur au maximum",
   "@minTransactionsCannotBeGreaterThanMax": {
     "description": "Validation error for transaction range"
@@ -504,33 +79,8 @@
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
   },
-  "mustBeAtLeastNCharacters": "Doit contenir au moins {count} caractères",
-  "@mustBeAtLeastNCharacters": {
-    "description": "Validation error for minimum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "enterValidNumber": "Saisissez un nombre valide",
-  "@enterValidNumber": {
-    "description": "Validation error for numeric fields"
-  },
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
-  },
-  "pleaseEnterFeeAmount": "Veuillez saisir le montant des frais",
-  "@pleaseEnterFeeAmount": {
-    "description": "Validation error for fee amount field"
-  },
-  "details": "Détails",
-  "@details": {
-    "description": "Details tooltip"
-  },
-  "@total": {
-    "description": "Total column header"
   },
   "minimumAmount": "Montant minimum",
   "@minimumAmount": {
@@ -540,351 +90,21 @@
   "@maximumAmount": {
     "description": "Maximum amount validation field name"
   },
-  "feeAmount": "Montant des frais",
-  "@feeAmount": {
-    "description": "Fee amount validation field name"
-  },
-  "traditionalBanking": "Banque traditionnelle",
-  "@traditionalBanking": {
-    "description": "Traditional banking description"
-  },
-  "mobileMoney": "Mobile money",
-  "@mobileMoney": {
-    "description": "Mobile money description"
-  },
-  "@mobileFinancialServices": {
-    "description": "Mobile financial services description"
-  },
-  "selected": "sélectionnés",
-  "@selected": {
-    "description": "Selected items text"
-  },
-  "feeOptimizer": "Optimiseur de frais",
-  "@feeOptimizer": {
-    "description": "Fee optimizer button text"
-  },
-  "totalFeeIntervals": "Total des intervalles de frais",
-  "@totalFeeIntervals": {
-    "description": "Total fee intervals label"
-  },
   "helpAndSupport": "Aide et support",
-  "@helpAndSupport": {
-    "description": "Help and support menu item"
-  },
   "addNewProvider": "Ajouter un nouveau fournisseur",
   "@addNewProvider": {
     "description": "Add new provider button text"
   },
-  "tryAdjustingYourSearchRange": "Essayez d'ajuster votre plage de recherche",
-  "@tryAdjustingYourSearchRange": {
-    "description": "Search range adjustment message"
-  },
-  "chooseTheme": "Choisir le thème",
-  "@chooseTheme": {
-    "description": "Choose theme dialog title"
-  },
-  "alwaysUseLightTheme": "Toujours utiliser le thème clair",
-  "@alwaysUseLightTheme": {
-    "description": "Light theme description"
-  },
-  "alwaysUseDarkTheme": "Toujours utiliser le thème sombre",
-  "@alwaysUseDarkTheme": {
-    "description": "Dark theme description"
-  },
-  "followSystemSettings": "Suivre les paramètres système",
-  "@followSystemSettings": {
-    "description": "System theme description"
-  },
-  "saveChanges": "Enregistrer les modifications",
-  "@saveChanges": {
-    "description": "Save changes button text"
-  },
-  "minimumAmountAr": "Montant minimum (Ar)",
-  "@minimumAmountAr": {
-    "description": "Minimum amount field label with currency"
-  },
-  "maximumAmountAr": "Montant maximum (Ar)",
-  "@maximumAmountAr": {
-    "description": "Maximum amount field label with currency"
-  },
-  "feeAr": "Frais (Ar)",
-  "@feeAr": {
-    "description": "Fee field label with currency"
-  },
-  "confirmDeleteIntervals": "Êtes-vous sûr de vouloir supprimer {count} intervalle{count, plural, =1{} other{s}} sélectionné{count, plural, =1{} other{s}} ?",
-  "@confirmDeleteIntervals": {
-    "description": "Confirmation message for deleting fee intervals",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "fieldIsRequired": "{fieldName} est requis",
-  "@fieldIsRequired": {
-    "description": "Validation error for required field with field name",
-    "placeholders": {
-      "fieldName": {
-        "type": "String",
-        "example": "Montant minimum"
-      }
-    }
-  },
-  "mustBeGreaterThanZero": "Doit être supérieur à 0",
-  "@mustBeGreaterThanZero": {
-    "description": "Validation error for positive numbers"
-  },
-  "mustBeLessThanNCharacters": "Doit contenir moins de {count} caractères",
-  "@mustBeLessThanNCharacters": {
-    "description": "Validation error for maximum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "50"
-      }
-    }
-  },
-  "deleteCurrencies": "Supprimer les devises",
-  "@deleteCurrencies": {
-    "description": "Title for delete currencies confirmation dialog"
-  },
-  "currencyDeletedSuccessfully": "Devise supprimée avec succès",
-  "@currencyDeletedSuccessfully": {
-    "description": "Success message when currency is deleted"
-  },
-  "currencies": "Devises",
-  "@currencies": {
-    "description": "Title for currencies screen"
-  },
-  "searchCurrencies": "Rechercher des devises...",
-  "@searchCurrencies": {
-    "description": "Placeholder text for currency search field"
-  },
-  "noCurrenciesFound": "Aucune devise trouvée",
-  "@noCurrenciesFound": {
-    "description": "Message when no currencies are found"
-  },
-  "centralizeCurrencies": "Centralisez vos devises en un seul endroit",
-  "@centralizeCurrencies": {
-    "description": "Description text for empty currencies state"
-  },
-  "addNewCurrency": "Ajouter une nouvelle devise",
-  "@addNewCurrency": {
-    "description": "Button text to add a new currency"
-  },
-  "newCurrency": "Nouvelle devise",
-  "@newCurrency": {
-    "description": "Title for new currency screen"
-  },
-  "createNewCurrency": "Créer une nouvelle devise",
-  "@createNewCurrency": {
-    "description": "Header text for new currency creation"
-  },
-  "currencyCode": "Code de la devise",
-  "@currencyCode": {
-    "description": "Label for currency code field"
-  },
-  "currencyName": "Nom de la devise",
-  "@currencyName": {
-    "description": "Label for currency name field"
-  },
-  "currencySymbolLabel": "Symbole de la devise",
-  "@currencySymbolLabel": {
-    "description": "Label for currency symbol field"
-  },
-  "exchangeRate": "Taux de change",
-  "@exchangeRate": {
-    "description": "Label for exchange rate field"
-  },
-  "currencyCreatedSuccessfully": "Devise créée avec succès",
-  "@currencyCreatedSuccessfully": {
-    "description": "Success message when currency is created"
-  },
-  "manageYourCurrencies": "Gérez vos devises",
-  "@manageYourCurrencies": {
-    "description": "Header text for currency management"
-  },
-  "totalCurrencies": "Total des devises",
-  "@totalCurrencies": {
-    "description": "Label for total currencies count"
-  },
-  "activeCurrencies": "Devises actives",
-  "@activeCurrencies": {
-    "description": "Label for active currencies count"
-  },
-  "editCurrency": "Modifier la devise",
-  "@editCurrency": {
-    "description": "Title for edit currency bottom sheet"
-  },
-  "currencyUpdatedSuccessfully": "Devise mise à jour avec succès",
-  "@currencyUpdatedSuccessfully": {
-    "description": "Success message when currency is updated"
-  },
-  "addNewCurrencyDescription": "Ajoutez une nouvelle devise à votre collection",
-  "@addNewCurrencyDescription": {
-    "description": "Description text for adding new currency"
-  },
-  "currencyCodeMustBe3Characters": "Le code de devise doit contenir exactement 3 caractères",
-  "@currencyCodeMustBe3Characters": {
-    "description": "Validation message for currency code length"
-  },
-  "currencyCodeMustContainOnlyUppercase": "Le code de devise ne doit contenir que des lettres majuscules",
-  "@currencyCodeMustContainOnlyUppercase": {
-    "description": "Validation message for currency code format"
-  },
-  "pleaseEnterValidPositiveRate": "Veuillez saisir un taux positif valide",
-  "@pleaseEnterValidPositiveRate": {
-    "description": "Validation message for exchange rate"
-  },
-  "failedToCreateCurrency": "Échec de la création de la devise",
-  "@failedToCreateCurrency": {
-    "description": "Error message when currency creation fails"
-  },
-  "failedToUpdateCurrency": "Échec de la mise à jour de la devise",
-  "@failedToUpdateCurrency": {
-    "description": "Error message when currency update fails"
-  },
-  "codeMustBe3Characters": "Le code doit contenir 3 caractères",
-  "@codeMustBe3Characters": {
-    "description": "Short validation message for currency code length"
-  },
-  "invalidRate": "Taux invalide",
-  "@invalidRate": {
-    "description": "Validation message for invalid exchange rate"
-  },
-  "rateLabel": "Taux :",
-  "@rateLabel": {
-    "description": "Label for exchange rate display in currency card"
-  },
-  "optimizationFailedNoValidSolution": "Optimisation échouée : Aucune solution valide trouvée",
-  "@optimizationFailedNoValidSolution": {
-    "description": "Message d'erreur lorsque l'optimisation ne trouve pas de solution valide"
-  },
-  "optimizationIncomplete": "Optimisation incomplète : Seulement {percentage}% du montant couvert. Envisagez d'ajuster les limites de transaction ou les intervalles de frais.",
-  "@optimizationIncomplete": {
-    "description": "Message d'avertissement lorsque l'optimisation couvre moins que le montant attendu",
-    "placeholders": {
-      "percentage": {
-        "type": "String",
-        "example": "75.5"
-      }
-    }
-  },
-  "amountExceedsMaximumLimit": "Le montant dépasse la limite maximale ({amount} {currency})",
-  "@amountExceedsMaximumLimit": {
-    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "1 000 000"
-      },
-      "currency": {
-        "type": "String",
-        "example": "EUR"
-      }
-    }
-  },
+  "saveChanges": "Enregistrer",
+  "confirmDeleteIntervals": "{count, plural, =1{Ce palier sera retiré de la grille.} other{Ces {count} paliers seront retirés de la grille.}}",
   "failedToCalculateOptimization": "Échec du calcul de l'optimisation",
   "@failedToCalculateOptimization": {
     "description": "Message d'erreur générique lorsque le calcul d'optimisation échoue"
   },
-  "amountExceedsMaximumAllowedLimit": "Le montant dépasse la limite maximale autorisée",
-  "@amountExceedsMaximumAllowedLimit": {
-    "description": "Message d'erreur pour le montant dépassant la limite maximale autorisée"
-  },
-  "invalidTransactionRangeConstraints": "Contraintes de plage de transaction invalides",
-  "@invalidTransactionRangeConstraints": {
-    "description": "Message d'erreur pour les contraintes de plage de transaction invalides"
-  },
-  "noValidFeeIntervalsAvailable": "Aucun intervalle de frais valide disponible",
-  "@noValidFeeIntervalsAvailable": {
-    "description": "Message d'erreur lorsqu'aucun intervalle de frais valide n'est disponible pour le fournisseur"
-  },
-  "amountMustBePositive": "Le montant doit être positif",
-  "@amountMustBePositive": {
-    "description": "Message d'erreur lorsque le montant n'est pas positif"
-  },
-  "amountTooHigh": "Montant trop élevé",
-  "@amountTooHigh": {
-    "description": "Message d'erreur lorsque le montant dépasse la limite maximale autorisée"
-  },
-  "noOptionsAvailable": "Aucune option disponible",
-  "@noOptionsAvailable": {
-    "description": "Message d'erreur lorsqu'aucune option de frais n'est disponible"
-  },
-  "maxOperationsMustBePositive": "maxOperations doit être >= 0",
-  "@maxOperationsMustBePositive": {
-    "description": "Message d'erreur lorsque maxOperations est négatif"
-  },
-  "minOperationsMustBePositive": "minOperations doit être >= 0",
-  "@minOperationsMustBePositive": {
-    "description": "Message d'erreur lorsque minOperations est négatif"
-  },
-  "minOperationsCannotBeGreaterThanMaxOperations": "minOperations ne peut pas être supérieur à maxOperations",
-  "@minOperationsCannotBeGreaterThanMaxOperations": {
-    "description": "Message d'erreur lorsque minOperations est supérieur à maxOperations"
-  },
-  "importExportData": "Import/Export de données",
-  "@importExportData": {
-    "description": "Titre du menu Import/Export de données"
-  },
-  "csvImportExportInfo": "Gestion des données CSV",
-  "@csvImportExportInfo": {
-    "description": "Titre des informations d'import/export CSV"
-  },
-  "csvImportExportDescription": "Importez ou exportez vos fournisseurs et intervalles de frais via des fichiers CSV",
-  "@csvImportExportDescription": {
-    "description": "Description de la fonctionnalité d'import/export CSV"
-  },
-  "importData": "Importer des données",
-  "@importData": {
-    "description": "Titre de la section d'import de données"
-  },
-  "exportData": "Exporter des données",
-  "@exportData": {
-    "description": "Titre de la section d'export de données"
-  },
-  "templates": "Modèles CSV",
-  "@templates": {
-    "description": "Titre de la section des modèles CSV"
-  },
-  "exportCombined": "Exporter combiné",
-  "@exportCombined": {
-    "description": "Titre de l'option d'export de données combinées"
-  },
-  "exportCombinedDescription": "Exporter les fournisseurs avec leurs intervalles de frais",
-  "@exportCombinedDescription": {
-    "description": "Description de l'export de données combinées"
-  },
-  "downloadProviderTemplate": "Modèle fournisseurs",
-  "@downloadProviderTemplate": {
-    "description": "Option de téléchargement du modèle CSV fournisseurs"
-  },
-  "csvTemplateForProviders": "Télécharger le modèle CSV pour importer des fournisseurs",
-  "@csvTemplateForProviders": {
-    "description": "Description du téléchargement du modèle fournisseurs"
-  },
-  "downloadFeeTemplate": "Modèle intervalles de frais",
-  "@downloadFeeTemplate": {
-    "description": "Option de téléchargement du modèle CSV intervalles de frais"
-  },
-  "csvTemplateForFees": "Télécharger le modèle CSV pour importer des frais",
-  "@csvTemplateForFees": {
-    "description": "Description du téléchargement du modèle intervalles de frais"
-  },
-  "downloadCombinedTemplate": "Modèle combiné",
-  "@downloadCombinedTemplate": {
-    "description": "Option de téléchargement du modèle CSV combiné"
-  },
-  "csvTemplateForCombined": "Télécharger le modèle CSV pour l'import combiné",
-  "@csvTemplateForCombined": {
-    "description": "Description du téléchargement du modèle combiné"
-  },
-  "importSuccessful": "Import réussi",
-  "@importSuccessful": {
-    "description": "Titre du message de succès d'import"
-  },
+  "importExportData": "Import / export",
+  "importData": "Importer",
+  "exportData": "Exporter",
+  "importSuccessful": "Import terminé",
   "importFailed": "Échec de l'importation : {error}",
   "@importFailed": {
     "description": "Message d'échec d'importation générique",
@@ -894,10 +114,6 @@
         "example": "Format CSV invalide"
       }
     }
-  },
-  "exportSuccessful": "Exportation réussie",
-  "@exportSuccessful": {
-    "description": "Message de succès lorsque l'exportation se termine avec succès"
   },
   "exportFailed": "Échec de l'exportation : {error}",
   "@exportFailed": {
@@ -909,70 +125,8 @@
       }
     }
   },
-  "templateDownloaded": "Modèle téléchargé",
-  "@templateDownloaded": {
-    "description": "Message de succès du téléchargement de modèle"
-  },
-  "failedToDownloadTemplate": "Échec du téléchargement du modèle",
-  "@failedToDownloadTemplate": {
-    "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
-  },
-  "file": "Fichier",
-  "@file": {
-    "description": "File option text"
-  },
-  "text": "Texte",
-  "@text": {
-    "description": "Text option text"
-  },
-  "pasteCsvContentHere": "Collez votre contenu CSV ici...",
-  "@pasteCsvContentHere": {
-    "description": "Hint text for CSV text input field"
-  },
-  "fileSelected": "Fichier sélectionné",
-  "@fileSelected": {
-    "description": "Text shown when a file is selected"
-  },
-  "csvFilesOnly": "Fichiers CSV uniquement",
-  "@csvFilesOnly": {
-    "description": "Text indicating only CSV files are accepted"
-  },
-  "csvContentPreview": "Aperçu du contenu CSV :",
-  "@csvContentPreview": {
-    "description": "Title for CSV content preview section"
-  },
-  "failedToSelectFile": "Échec de la sélection du fichier",
-  "@failedToSelectFile": {
-    "description": "Error message when file selection fails"
-  },
-  "failedToPreviewTemplate": "Échec de l'aperçu du modèle",
-  "@failedToPreviewTemplate": {
-    "description": "Error message when template preview fails"
-  },
-  "failedToReadFile": "Impossible de lire le fichier",
-  "@failedToReadFile": {
-    "description": "Message d'échec de lecture de fichier"
-  },
-  "providersImported": "{count} fournisseur(s) importé(s)",
-  "@providersImported": {
-    "description": "Message indiquant le nombre de fournisseurs importés",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "feeIntervalsImported": "{count} intervalle(s) de frais importé(s)",
-  "@feeIntervalsImported": {
-    "description": "Message indiquant le nombre d'intervalles de frais importés",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "10"
-      }
-    }
-  },
+  "providersImported": "{count} grille(s) importée(s)",
+  "feeIntervalsImported": "{count} palier(s) importé(s)",
   "errorsEncountered": "{count} erreur(s) rencontrée(s)",
   "@errorsEncountered": {
     "description": "Message indiquant le nombre d'erreurs rencontrées",
@@ -983,89 +137,11 @@
       }
     }
   },
-  "dataManagement": "Gestion des données",
-  "@dataManagement": {
-    "description": "Titre du guide gestion des données"
-  },
-  "backup": "Sauvegarde",
-  "@backup": {
-    "description": "Titre de l'option de sauvegarde"
-  },
-  "backupYourData": "Sauvegarder vos fournisseurs et frais",
-  "@backupYourData": {
-    "description": "Description de la fonctionnalité de sauvegarde"
-  },
-  "reset": "Réinitialiser",
-  "@reset": {
-    "description": "Titre de l'option de réinitialisation"
-  },
-  "clearAllData": "Effacer toutes les données",
-  "@clearAllData": {
-    "description": "Description de la fonctionnalité de réinitialisation"
-  },
-  "confirmReset": "Confirmer la réinitialisation",
-  "@confirmReset": {
-    "description": "Titre de la boîte de dialogue de confirmation de réinitialisation"
-  },
-  "resetWarningMessage": "Ceci supprimera définitivement tous vos fournisseurs et intervalles de frais. Cette action est irréversible.",
-  "@resetWarningMessage": {
-    "description": "Message d'avertissement pour la réinitialisation des données"
-  },
-  "dataResetSuccessful": "Données réinitialisées avec succès",
-  "@dataResetSuccessful": {
-    "description": "Message de succès de la réinitialisation des données"
-  },
-  "resetFailed": "Échec de la réinitialisation",
-  "@resetFailed": {
-    "description": "Message d'échec de la réinitialisation des données"
-  },
-  "csvManagement": "Gestion CSV",
-  "@csvManagement": {
-    "description": "Titre de l'écran de gestion CSV"
-  },
-  "previewTemplate": "Aperçu du modèle",
-  "@previewTemplate": {
-    "description": "Texte du bouton d'aperçu du modèle"
-  },
-  "preview": "Aperçu",
-  "@preview": {
-    "description": "Texte du bouton d'aperçu"
-  },
-  "download": "Télécharger",
-  "@download": {
-    "description": "Texte du bouton de téléchargement"
-  },
-  "templatePreview": "Aperçu du modèle",
-  "@templatePreview": {
-    "description": "Titre de la boîte de dialogue d'aperçu du modèle"
-  },
-  "close": "Fermer",
-  "@close": {
-    "description": "Texte du bouton de fermeture"
-  },
-  "importDataDescription": "Importer des fournisseurs et intervalles de frais depuis un fichier CSV. Le système détectera automatiquement le type de données selon les colonnes.",
-  "@importDataDescription": {
-    "description": "Description de l'action d'importation des données"
-  },
-  "exportDataDescription": "Exporter tous les fournisseurs et leurs intervalles de frais vers un fichier CSV combiné.",
-  "@exportDataDescription": {
-    "description": "Description de l'action d'exportation des données"
-  },
-  "copy": "Copier",
-  "@copy": {
-    "description": "Texte du bouton pour copier le contenu"
-  },
-  "copiedToClipboard": "Copié dans le presse-papiers",
-  "@copiedToClipboard": {
-    "description": "Message affiché lorsque le contenu est copié dans le presse-papiers"
-  },
+  "importDataDescription": "Ajoutez des grilles depuis un fichier CSV (une ligne par palier).",
+  "exportDataDescription": "Enregistrez toutes vos grilles et leurs paliers dans un fichier CSV.",
   "csvContentCannotBeEmpty": "Le contenu CSV ne peut pas être vide",
   "@csvContentCannotBeEmpty": {
     "description": "Message d'erreur lorsque le texte CSV saisi est vide"
-  },
-  "clickImportToSelectFile": "Cliquez pour séléctionner un fichier csv",
-  "@clickImportToSelectFile": {
-    "description": "Texte d'instruction pour l'option d'importation de fichier"
   },
   "chooseWhereToSave": "Choisir où enregistrer le fichier",
   "@chooseWhereToSave": {
@@ -1087,82 +163,9 @@
   "@noDataRowsFound": {
     "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
   },
-  "rowProviderNameRequired": "Ligne {rowNumber} : Le nom du fournisseur est requis",
-  "@rowProviderNameRequired": {
-    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "rowProviderAlreadyExists": "Ligne {rowNumber} : Le fournisseur \"{name}\" existe déjà",
-  "@rowProviderAlreadyExists": {
-    "description": "Message d'erreur lorsque le fournisseur existe déjà dans la base de données",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "name": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "rowGenericError": "Ligne {rowNumber} : {error}",
-  "@rowGenericError": {
-    "description": "Message d'erreur générique pour le traitement de ligne CSV",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "error": {
-        "type": "String",
-        "example": "Format de données invalide"
-      }
-    }
-  },
-  "rowProviderNameRequiredFee": "Ligne {rowNumber} : Le nom du fournisseur est requis",
-  "@rowProviderNameRequiredFee": {
-    "description": "Message d'erreur lorsque le nom du fournisseur est manquant dans la ligne CSV d'intervalle de frais",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "rowProviderNotFound": "Ligne {rowNumber} : Fournisseur \"{providerName}\" introuvable",
-  "@rowProviderNotFound": {
-    "description": "Message d'erreur lorsque le fournisseur référencé dans le CSV n'existe pas",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "rowIntervalOverlaps": "Ligne {rowNumber} : L'intervalle chevauche un intervalle existant ({overlap})",
-  "@rowIntervalOverlaps": {
-    "description": "Message d'erreur lorsque l'intervalle de frais chevauche un intervalle existant",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "overlap": {
-        "type": "String",
-        "example": "1000-2000"
-      }
-    }
-  },
+  "rowProviderNameRequired": "Ligne {rowNumber} : le nom de l'opérateur est obligatoire",
+  "rowProviderAlreadyExists": "Ligne {rowNumber} : la grille « {name} » existe déjà",
+  "rowIntervalOverlaps": "Ligne {rowNumber} : ce palier chevauche un palier existant ({overlap})",
   "rowInvalidAmounts": "Ligne {rowNumber} : Montants invalides (min : {minStr}, max : {maxStr}, frais : {feeStr})",
   "@rowInvalidAmounts": {
     "description": "Message d'erreur lorsque les montants dans la ligne CSV sont invalides",
@@ -1227,549 +230,192 @@
       }
     }
   },
-  "importedProvidersAndFees": "{providersCount} fournisseur(s) et {feesCount} intervalle(s) de frais importé(s)",
-  "@importedProvidersAndFees": {
-    "description": "Message de succès montrant le nombre de fournisseurs et d'intervalles de frais importés",
-    "placeholders": {
-      "providersCount": {
-        "type": "int",
-        "example": "2"
-      },
-      "feesCount": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "providerInvalidProviderId": "Fournisseur \"{providerName}\" : ID de fournisseur invalide",
-  "@providerInvalidProviderId": {
-    "description": "Message d'erreur lorsque l'ID du fournisseur est invalide lors de l'importation",
-    "placeholders": {
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "providerNoFeeIntervals": "Fournisseur \"{providerName}\" : Aucun intervalle de frais trouvé",
-  "@providerNoFeeIntervals": {
-    "description": "Message d'erreur lorsque le fournisseur n'a pas d'intervalles de frais lors de l'importation",
-    "placeholders": {
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "providerImportError": "Fournisseur \"{providerName}\" : {error}",
-  "@providerImportError": {
-    "description": "Message d'erreur générique pour l'importation de fournisseur",
-    "placeholders": {
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      },
-      "error": {
-        "type": "String",
-        "example": "Erreur de base de données"
-      }
-    }
-  },
-  "rowIntervalOverlapsCombined": "Ligne {rowNumber} : L'intervalle chevauche un intervalle existant ({overlap})",
-  "@rowIntervalOverlapsCombined": {
-    "description": "Message d'erreur pour les intervalles qui se chevauchent dans l'importation combinée",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "overlap": {
-        "type": "String",
-        "example": "1000-2000"
-      }
-    }
-  },
+  "importedProvidersAndFees": "{providersCount} grille(s) et {feesCount} palier(s) importés",
   "noDataToExport": "Aucune donnée à exporter",
   "@noDataToExport": {
     "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
   },
-  "providerNameColumnNotFound": "Colonne du nom du fournisseur introuvable",
-  "@providerNameColumnNotFound": {
-    "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
-  },
-  "pullToRefresh": "Tirez vers le bas pour actualiser",
-  "@pullToRefresh": {
-    "description": "Texte d'indication affiché lorsque l'utilisateur peut tirer vers le bas pour actualiser le contenu"
-  },
-  "refreshing": "Actualisation...",
-  "@refreshing": {
-    "description": "Texte affiché lorsque le contenu est en cours d'actualisation"
-  },
-  "feeType": "Type de frais",
-  "@feeType": {
-    "description": "Étiquette pour le sélecteur de type de frais"
-  },
+  "providerNameColumnNotFound": "Colonne du nom de l'opérateur introuvable",
   "fixedAmount": "Montant fixe",
-  "@fixedAmount": {
-    "description": "Option pour montant de frais fixe"
-  },
   "percentage": "Pourcentage",
   "@percentage": {
     "description": "Option pour frais basé sur pourcentage"
-  },
-  "enterPercentage": "Entrez le pourcentage",
-  "@enterPercentage": {
-    "description": "Placeholder pour la saisie de pourcentage"
   },
   "percentageMustBeBetween0And100": "Le pourcentage doit être entre 0 et 100",
   "@percentageMustBeBetween0And100": {
     "description": "Erreur de validation pour la saisie de pourcentage"
   },
-  "invalidAmount": "Montant invalide",
-  "@invalidAmount": {
-    "description": "Message d'erreur pour un montant invalide"
-  },
-  "pleaseEnterPercentage": "Veuillez entrer le pourcentage",
-  "@pleaseEnterPercentage": {
-    "description": "Message de validation pour un pourcentage manquant"
-  },
-  "pleaseEnterValidPercentage": "Veuillez entrer un pourcentage valide",
-  "@pleaseEnterValidPercentage": {
-    "description": "Message de validation pour un pourcentage invalide"
-  },
-  "percentageCannotExceed100": "Le pourcentage ne peut pas dépasser 100",
-  "@percentageCannotExceed100": {
-    "description": "Erreur de validation quand le pourcentage dépasse 100"
-  },
-  "searchHelpTopics": "Rechercher des sujets d'aide...",
-  "@searchHelpTopics": {
-    "description": "Texte d'espace réservé pour le champ de recherche d'aide"
-  },
   "faq": "FAQ",
   "@faq": {
     "description": "Titre de l'onglet Questions fréquemment posées"
   },
-  "contact": "Contact",
-  "@contact": {
-    "description": "Titre de l'onglet Contact"
-  },
-  "faqWhatIsFeeMinimizer": "Qu'est-ce que Feezer ou Fee Minimizer ?",
-  "@faqWhatIsFeeMinimizer": {
-    "description": "Question FAQ"
-  },
-  "faqWhatIsFeeMinimizerAnswer": "Feezer ou Fee Minimizer est une application mobile qui aide les utilisateurs à calculer et optimiser les frais de transaction auprès de différents fournisseurs financiers. Elle analyse vos détails de transaction et suggère les options les plus rentables pour minimiser les frais de mobile money.",
-  "@faqWhatIsFeeMinimizerAnswer": {
-    "description": "Réponse FAQ"
-  },
-  "faqHowToAddProvider": "Comment ajouter un nouveau fournisseur ?",
-  "@faqHowToAddProvider": {
-    "description": "Question FAQ"
-  },
-  "faqHowToAddProviderAnswer": "Pour ajouter un nouveau fournisseur, allez à l'écran Fournisseurs et appuyez sur le bouton '+'. Remplissez les détails du fournisseur incluant le nom, la description et la structure des frais. Vous pouvez également importer des données de fournisseur en utilisant des fichiers CSV. Il n'y a pas de fournisseurs favoris - vous avez un contrôle total pour ajouter et supprimer des fournisseurs selon vos besoins.",
-  "@faqHowToAddProviderAnswer": {
-    "description": "Réponse FAQ"
-  },
-  "faqHowToCalculateFees": "Comment fonctionne le calcul des frais ?",
-  "@faqHowToCalculateFees": {
-    "description": "Question FAQ"
-  },
-  "faqHowToCalculateFeesAnswer": "Entrez le montant de votre transaction et sélectionnez un fournisseur. L'application calculera tous les frais applicables incluant les frais fixes, les frais en pourcentage et les frais minimum/maximum. Elle vous montre ensuite le coût total et suggère des optimisations.",
-  "@faqHowToCalculateFeesAnswer": {
-    "description": "Réponse FAQ"
-  },
-  "faqMinMaxTransactionRange": "Que signifient « min transactions » et « max transactions » ?",
-  "@faqMinMaxTransactionRange": {
-    "description": "Question FAQ : signification du nombre min/max de transactions"
-  },
-  "faqMinMaxTransactionRangeAnswer": "« Min transactions » et « Max transactions » définissent respectivement le nombre minimum et maximum d'opérations que l'optimiseur peut utiliser pour répartir le montant saisi. Par exemple, si vous saisissez 10 000 Ar et mettez Min transactions = 2, l'optimiseur ne proposera que des solutions qui divisent le montant en au moins 2 opérations. Assurez-vous que Min ≤ Max et que ces valeurs conviennent au découpage souhaité. Ce paramètre contraint le résultat à un nombre d'opérations dans cet intervalle.",
-  "@faqMinMaxTransactionRangeAnswer": {
-    "description": "Réponse FAQ : signification du nombre min/max de transactions"
-  },
-  "faqDataSecurity": "Mes données sont-elles sécurisées ?",
-  "@faqDataSecurity": {
-    "description": "Question FAQ"
-  },
-  "faqDataSecurityAnswer": "Vos données financières sont stockées localement sur votre appareil sans cryptage ni mesures de sécurité supplémentaires. Cette application ne fournit pas de fonctionnalités de sécurité de niveau bancaire. Toutes les données restent sur votre appareil et ne sont transmises nulle part.",
-  "@faqDataSecurityAnswer": {
-    "description": "Réponse FAQ"
-  },
-  "faqOfflineMode": "L'application fonctionne-t-elle hors ligne ?",
-  "@faqOfflineMode": {
-    "description": "Question FAQ"
-  },
-  "faqOfflineModeAnswer": "Oui, Feezer ou Fee Minimizer fonctionne complètement hors ligne. Toutes vos données et calculs sont stockés localement sur votre appareil. Vous pouvez utiliser toutes les fonctionnalités sans connexion internet.",
-  "@faqOfflineModeAnswer": {
-    "description": "Réponse FAQ"
-  },
-  "faqExportData": "Comment exporter mes données ?",
-  "@faqExportData": {
-    "description": "Question FAQ"
-  },
-  "faqExportDataAnswer": "Allez dans Paramètres > Gestion des données > Gestion CSV. Vous pouvez exporter les fournisseurs, devises et intervalles de frais sous forme de fichiers CSV. Ceux-ci peuvent être utilisés pour la sauvegarde ou l'importation dans d'autres instances de l'application.",
-  "@faqExportDataAnswer": {
-    "description": "Réponse FAQ"
-  },
-  "emailSupport": "Support par email",
-  "@emailSupport": {
-    "description": "Titre de l'option support par email"
-  },
-  "phoneSupport": "Support téléphonique",
-  "@phoneSupport": {
-    "description": "Titre de l'option support téléphonique"
-  },
+  "faqWhatIsFeeMinimizer": "Qu'est-ce que Feezer ?",
+  "faqWhatIsFeeMinimizerAnswer": "Feezer calcule comment découper un retrait ou un transfert d'argent mobile pour payer le moins de frais possible, à partir des grilles officielles des opérateurs.",
+  "faqHowToAddProvider": "Comment ajouter une grille ?",
+  "faqHowToAddProviderAnswer": "Dans l'onglet Opérateurs, touchez « Ajouter », donnez le nom de l'opérateur et l'opération, puis ajoutez les paliers (minimum, maximum et frais). Vous pouvez aussi importer un fichier CSV.",
+  "faqHowToCalculateFees": "Comment se fait le calcul ?",
+  "faqHowToCalculateFeesAnswer": "Choisissez l'opérateur et l'opération, puis entrez le montant disponible (frais compris). Feezer essaie toutes les combinaisons de paliers et garde celle qui fait recevoir le plus. Le résultat est comparé à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.",
+  "faqMinMaxTransactionRange": "À quoi sert le nombre d'opérations ?",
+  "faqMinMaxTransactionRangeAnswer": "C'est facultatif. Il limite le nombre de retraits ou d'envois du découpage, par exemple « au plus 2 » si vous ne voulez pas en faire plus de deux. Feezer indique ce que cette limite vous coûte.",
+  "faqDataSecurity": "Mes données sont-elles partagées ?",
+  "faqDataSecurityAnswer": "Non. Vos grilles et vos montants restent sur votre téléphone ; Feezer n'a pas de compte et n'envoie rien. La mise à jour des frais télécharge seulement un fichier public.",
+  "faqOfflineMode": "Faut-il internet ?",
+  "faqOfflineModeAnswer": "Non. Les calculs se font sur votre téléphone. Internet ne sert qu'à mettre à jour les frais.",
+  "faqExportData": "Comment sauvegarder mes grilles ?",
+  "faqExportDataAnswer": "Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le plus tard ou sur un autre téléphone.",
   "website": "Site web",
   "@website": {
     "description": "Méthode de contact site web"
   },
-  "responseTime": "Temps de réponse",
-  "@responseTime": {
-    "description": "Titre de la section temps de réponse"
-  },
-  "responseTimeDescription": "Nous répondons généralement aux demandes de support dans les 24 heures pendant les jours ouvrables.",
-  "@responseTimeDescription": {
-    "description": "Description du temps de réponse"
-  },
-  "gettingStarted": "Premiers pas",
-  "@gettingStarted": {
-    "description": "Titre du guide premiers pas"
-  },
-  "gettingStartedDescription": "Apprenez les bases de l'utilisation de Feezer ou Fee Minimizer",
-  "@gettingStartedDescription": {
-    "description": "Description du guide premiers pas"
-  },
-  "providerManagement": "Gestion des fournisseurs",
-  "@providerManagement": {
-    "description": "Titre du guide gestion des fournisseurs"
-  },
-  "providerManagementDescription": "Comment ajouter, modifier et gérer les fournisseurs financiers",
-  "@providerManagementDescription": {
-    "description": "Description du guide gestion des fournisseurs"
-  },
-  "feeCalculation": "Calcul des frais",
-  "@feeCalculation": {
-    "description": "Titre du guide calcul des frais"
-  },
-  "feeCalculationDescription": "Comprendre comment les frais sont calculés et optimisés",
-  "@feeCalculationDescription": {
-    "description": "Description du guide calcul des frais"
-  },
-  "dataManagementDescription": "Importer, exporter et sauvegarder vos données",
-  "@dataManagementDescription": {
-    "description": "Description du guide gestion des données"
-  },
-  "videoTutorials": "Tutoriels vidéo",
-  "@videoTutorials": {
-    "description": "Titre de la section tutoriels vidéo"
-  },
-  "videoTutorialsDescription": "Regardez des guides vidéo étape par étape pour maîtriser Feezer ou Fee Minimizer",
-  "@videoTutorialsDescription": {
-    "description": "Description des tutoriels vidéo"
-  },
-  "watchTutorials": "Voir les tutoriels",
-  "@watchTutorials": {
-    "description": "Texte du bouton voir les tutoriels"
-  },
-  "shareYourThoughts": "Partagez vos pensées",
-  "@shareYourThoughts": {
-    "description": "Titre de la section commentaires"
-  },
-  "feedbackDescription": "Aidez-nous à améliorer Feezer ou Fee Minimizer en partageant vos commentaires et suggestions",
-  "@feedbackDescription": {
-    "description": "Description des commentaires"
-  },
-  "contactUs": "Contactez-nous",
-  "@contactUs": {
-    "description": "Titre de la section contactez-nous"
-  },
-  "contactDescription": "Entrez en contact avec notre équipe de support pour obtenir de l'aide sur vos questions ou problèmes.",
-  "@contactDescription": {
-    "description": "Description de la section contact"
-  },
+  "contactUs": "Nous contacter",
   "email": "Email",
   "@email": {
     "description": "Méthode de contact email"
   },
-  "phone": "Téléphone",
-  "@phone": {
-    "description": "Méthode de contact téléphone"
-  },
-  "faqQuestion1": "Comment minimiser les frais de transaction ?",
-  "@faqQuestion1": {
-    "description": "Première question FAQ"
-  },
-  "faqAnswer1": "Notre application calcule automatiquement la manière la plus rentable de gérer vos transactions en comparant différents fournisseurs et méthodes de paiement.",
-  "@faqAnswer1": {
-    "description": "Première réponse FAQ"
-  },
-  "faqQuestion2": "Quelles devises sont prises en charge ?",
-  "@faqQuestion2": {
-    "description": "Deuxième question FAQ"
-  },
-  "faqAnswer2": "Nous prenons en charge toutes les principales devises mondiales incluant USD, EUR, GBP, JPY, et bien d'autres. L'application gère automatiquement les taux de conversion des devises.",
-  "@faqAnswer2": {
-    "description": "Deuxième réponse FAQ"
-  },
-  "faqQuestion3": "Mes données financières sont-elles sécurisées ?",
-  "@faqQuestion3": {
-    "description": "Troisième question FAQ"
-  },
-  "faqAnswer3": "Oui, nous utilisons un cryptage et des mesures de sécurité de niveau bancaire. Vos données ne sont jamais stockées sur nos serveurs et tous les calculs sont effectués localement sur votre appareil.",
-  "@faqAnswer3": {
-    "description": "Troisième réponse FAQ"
-  },
-  "faqQuestion4": "Comment mettre à jour les taux de change ?",
-  "@faqQuestion4": {
-    "description": "Quatrième question FAQ"
-  },
-  "faqAnswer4": "Les taux de change sont automatiquement mis à jour en temps réel à partir de fournisseurs de données financières fiables. Vous pouvez également actualiser manuellement les taux dans les paramètres.",
-  "@faqAnswer4": {
-    "description": "Quatrième réponse FAQ"
-  },
-  "faqQuestion5": "Puis-je sauvegarder mes fournisseurs préférés ?",
-  "@faqQuestion5": {
-    "description": "Cinquième question FAQ"
-  },
-  "faqAnswer5": "Oui, vous pouvez sauvegarder vos fournisseurs de mobile money et méthodes de paiement préférés pour un accès rapide lors de nouveaux calculs.",
-  "@faqAnswer5": {
-    "description": "Cinquième réponse FAQ"
-  },
-  "faqQuestion6": "Comment ajouter un nouveau fournisseur ?",
-  "@faqQuestion6": {
-    "description": "Sixième question FAQ"
-  },
-  "faqAnswer6": "Appuyez sur le bouton '+' dans l'écran de liste des fournisseurs. Saisissez le nom du fournisseur, la description, et choisissez une icône. Vous pouvez ensuite ajouter des intervalles de frais pour différents montants de transaction.",
-  "@faqAnswer6": {
-    "description": "Sixième réponse FAQ"
-  },
-  "faqQuestion7": "Qu'est-ce que les intervalles de frais ?",
-  "@faqQuestion7": {
-    "description": "Septième question FAQ"
-  },
-  "faqAnswer7": "Les intervalles de frais définissent la structure de coût pour chaque fournisseur. Vous pouvez définir des frais fixes (ex. : 2,50 €) ou des frais en pourcentage (ex. : 1,5 %) pour différentes plages de montants de transaction.",
-  "@faqAnswer7": {
-    "description": "Septième réponse FAQ"
-  },
-  "faqQuestion8": "Comment fonctionne l'optimisation ?",
-  "@faqQuestion8": {
-    "description": "Huitième question FAQ"
-  },
-  "faqAnswer8": "Feezer analyse toutes les structures de frais de vos fournisseurs et calcule la manière optimale de diviser votre transaction en plusieurs opérations pour minimiser les frais totaux tout en respectant vos contraintes.",
-  "@faqAnswer8": {
-    "description": "Huitième réponse FAQ"
-  },
-  "faqCurrencyRates": "Comment fonctionnent les taux de change ?",
-  "@faqCurrencyRates": {
-    "description": "FAQ question"
-  },
-  "faqCurrencyRatesAnswer": "L'application ne met pas à jour automatiquement les taux de change des devises. Vous avez un contrôle total et pouvez définir manuellement vos propres taux de change pour une personnalisation complète. Cela vous donne une flexibilité totale pour utiliser les taux qui conviennent à vos besoins, et fonctionne parfaitement hors ligne.",
-  "@faqCurrencyRatesAnswer": {
-    "description": "FAQ answer"
-  },
-  "comparisonWithWithoutOptimization": "Comparaison avec/sans optimisation",
-  "@comparisonWithWithoutOptimization": {
-    "description": "Title for the comparison section showing optimized vs non-optimized results"
-  },
-  "withOptimization": "Avec optimisation",
-  "@withOptimization": {
-    "description": "Label for the optimized results section"
-  },
-  "withoutOptimizationMaxAmount": "Sans optimisation (montant max)",
-  "@withoutOptimizationMaxAmount": {
-    "description": "Label for the non-optimized results section using maximum amount"
-  },
-  "withoutOptimizationSameNet": "Sans optimisation (même montant net)",
-  "@withoutOptimizationSameNet": {
-    "description": "Label for the non-optimized results section using same net amount"
-  },
-  "enteredAmount": "Montant saisi",
-  "@availableBudget": {
-    "description": "Label for available budget in comparison"
-  },
-  "netAmountSent": "Montant net",
-  "@netAmountSent": {
-    "description": "Label for net amount in comparison"
-  },
-  "totalSpent": "Total dépensé",
-  "@totalSpent": {
-    "description": "Label for total amount spent in comparison"
-  },
-  "numberOfOperations": "Nombre d'opérations",
-  "@numberOfOperations": {
-    "description": "Label for number of operations in comparison"
-  },
-  "youLoseAmount": "Vous perdez {amount} {currency}",
-  "@youLoseAmount": {
-    "description": "Message when optimization results in loss",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "youGainAmount": "Vous gagnez {amount} {currency}",
-  "@youGainAmount": {
-    "description": "Message when optimization results in gain",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "sameResultAsOptimization": "Même résultat que l'optimisation",
-  "@sameResultAsOptimization": {
-    "description": "Message when non-optimized result is same as optimized"
-  },
-  "netAmountLess": "• Montant net en moins: {amount} {currency}",
-  "@netAmountLess": {
-    "description": "Detail showing net amount loss",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "netAmountMore": "• Montant net en plus: {amount} {currency}",
-  "@netAmountMore": {
-    "description": "Detail showing net amount gain",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "feesLess": "• Frais en moins: {amount} {currency}",
-  "@feesLess": {
-    "description": "Detail showing fee savings",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "feesMore": "• Frais en plus: {amount} {currency}",
-  "@feesMore": {
-    "description": "Detail showing additional fees",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "optimizationCostsMoreFees": "L'optimisation coûte {amount} {currency} de frais en plus",
-  "@optimizationCostsMoreFees": {
-    "description": "Message when optimization costs more than single transaction",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "dueToTransactionConstraints": "• Ceci est dû aux contraintes de transactions (min: {min}, max: {max})",
-  "@dueToTransactionConstraints": {
-    "description": "Explanation for optimization cost due to transaction limits",
-    "placeholders": {
-      "min": {
-        "type": "String"
-      },
-      "max": {
-        "type": "String"
-      }
-    }
-  },
   "exceedsEnteredAmount": "Dépasse le montant saisi",
-  "@exceedsAvailableBudget": {
-    "description": "Warning that result exceeds available budget"
-  },
-  "youSaveFees": "Vous économisez {amount} {currency} de frais",
-  "@youSaveFees": {
-    "description": "Message showing savings from optimization",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "totalSavingsWithOptimization": "Économie totale avec optimisation: {amount} {currency}",
-  "@totalSavingsWithOptimization": {
-    "description": "Summary of total savings achieved with optimization",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "transactionGainsVsOptimized": "Cette transaction gagne {amount} {currency} par rapport à l'optimisation",
-  "@transactionGainsVsOptimized": {
-    "description": "Message showing gain when a non-optimized transaction performs better",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "transactionLosesVsOptimized": "Cette transaction perd {amount} {currency} par rapport à l'optimisation",
-  "@transactionLosesVsOptimized": {
-    "description": "Message showing loss when a non-optimized transaction performs worse",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "transactionSameResultAsOptimized": "Cette transaction a le même résultat que l'optimisation",
-  "@transactionSameResultAsOptimized": {
-    "description": "Message showing when a non-optimized transaction has the same result as optimization",
-    "placeholders": {}
-  },
-  "noValidIntervalForComparison": "Le montant saisi ne se trouve dans aucun intervalle de frais valide. Impossible d'effectuer la comparaison sans optimisation.",
-  "@noValidIntervalForComparison": {
-    "description": "Message affiché lorsque le montant saisi ne se trouve dans aucun intervalle de frais valide pour la comparaison",
-    "placeholders": {}
-  },
-  "optimizationBudgetTooSmall": "Le montant est trop faible pour effectuer une transaction avec ce fournisseur.",
-  "optimizationConstraintsUnsatisfiable": "Aucun plan ne respecte la plage de transactions pour ce montant.",
-  "optimizationNotProven": "Recherche très vaste : ce plan est excellent, mais son optimalité n'a pas pu être entièrement vérifiée.",
-  "feeIntervalOverlaps": "Cet intervalle chevauche un intervalle existant ({range})",
-  "providerNameAlreadyExists": "Un fournisseur avec ce nom existe déjà",
-  "baseCurrencyCannotBeDeleted": "L'Ariary est la devise de base et ne peut pas être supprimé",
-  "baseCurrencyRateIsFixed": "Le taux de la devise de base est toujours 1",
-  "failedToUpdateFeeInterval": "Échec de la mise à jour de l'intervalle de frais",
-  "failedToDeleteFeeIntervals": "Échec de la suppression des intervalles de frais",
-  "failedToCreateProvider": "Échec de la création du fournisseur",
+  "optimizationBudgetTooSmall": "Le montant est trop faible pour une opération avec cette grille.",
+  "optimizationConstraintsUnsatisfiable": "Aucun découpage ne respecte ce nombre d'opérations pour ce montant.",
+  "optimizationNotProven": "Recherche très longue : ce découpage est excellent, mais n'a pas pu être prouvé comme le meilleur.",
+  "feeIntervalOverlaps": "Ce palier chevauche un palier existant ({range}).",
+  "failedToDeleteFeeIntervals": "Impossible de supprimer le palier",
   "failedToSaveChanges": "Échec de l'enregistrement des modifications",
-  "failedToLoadData": "Échec du chargement des données",
-  "currencyCodeAlreadyExists": "Une devise avec ce code existe déjà"
+  "tabOptimize": "Optimiser",
+  "optimizeTitle": "Payez moins de frais",
+  "optimizeSubtitle": "Feezer découpe votre montant en opérations qui coûtent le moins de frais.",
+  "add": "Ajouter",
+  "amountAvailable": "Montant disponible",
+  "amountHelper": "Frais compris : le total qui sortira de votre compte.",
+  "transferCount": "Nombre d'envois",
+  "transferCountHelp": "Facultatif. Limitez le nombre d'envois que le plan peut utiliser.",
+  "transferCountFree": "Sans limite",
+  "transferCountExactly": "Exactement {count}",
+  "transferCountRange": "Entre {min} et {max}",
+  "transferCountAtLeast": "Au moins {count}",
+  "transferCountAtMost": "Au plus {count}",
+  "minimumShort": "Minimum",
+  "maximumShort": "Maximum",
+  "anyCount": "Libre",
+  "recipientReceives": "Le destinataire reçoit",
+  "bestSplit": "Optimal",
+  "goodSplit": "Très bon",
+  "transferCountLabel": "{count, plural, =1{1 envoi} other{{count} envois}}",
+  "feesLabel": "Frais",
+  "debitedLabel": "Débité",
+  "leftLabel": "Reste",
+  "gainTitle": "+{amount} reçus en plus",
+  "gainVsClassic": "Par rapport à l'envoi du plus gros montant possible à chaque fois.",
+  "feesSavedTitle": "{amount} de frais économisés",
+  "feesSavedVsClassic": "La méthode habituelle coûterait plus cher pour le même montant.",
+  "alreadyOptimalTitle": "La méthode habituelle est déjà la meilleure",
+  "alreadyOptimalMessage": "Pour ce montant, découper n'apporte rien de plus.",
+  "limitCost": "Sans cette limite, {amount} de plus seraient reçus.",
+  "limitFree": "Cette limite ne vous coûte rien ici.",
+  "nearOptimalTitle": "Montant très élevé",
+  "planTitle": "Votre plan d'envoi",
+  "sendAmount": "Envoyer {amount}",
+  "feePerTransfer": "frais {amount} par envoi",
+  "compareTitle": "Comparaison",
+  "optimizedColumn": "Optimisé",
+  "classicColumn": "Habituel",
+  "receivedLabel": "Reçu",
+  "transfersLabel": "Envois",
+  "classicExplanation": "Méthode habituelle : envoyer le plus gros montant possible, puis le reste.",
+  "sameAmountByHand": "Même montant reçu, méthode habituelle",
+  "sameAmountByHandDetail": "Pour obtenir {net}, la méthode habituelle coûte {fees} de frais, soit {total} débités.",
+  "cannotSplitByHand": "La méthode habituelle ne permet pas d'obtenir ce montant.",
+  "classicPlan": "Plan habituel",
+  "showDetails": "Voir le détail",
+  "showLess": "Masquer le détail",
+  "noProvidersYet": "Aucune grille pour l'instant",
+  "noProvidersMessage": "Mettez à jour les frais officiels ou ajoutez votre propre grille.",
+  "tierCount": "{count, plural, =0{Aucun palier} =1{1 palier} other{{count} paliers}}",
+  "feesFrom": "frais dès {amount}",
+  "providerNameHint": "ex. MVola, Orange Money, ma banque",
+  "descriptionOptional": "Description (facultatif)",
+  "feeGrid": "Grille de frais",
+  "amountRange": "Montant envoyé",
+  "noIntervalsMessage": "Ajoutez les paliers de cette grille pour optimiser vos opérations.",
+  "gridHint": "Touchez un palier pour le modifier ou le supprimer.",
+  "intervalFormHelp": "Les frais s'appliquent quand le montant envoyé est entre le minimum et le maximum (inclus).",
+  "downloadingFees": "Lecture des grilles publiées…",
+  "feesDownloadFailed": "Vérifiez votre connexion puis réessayez.",
+  "feesAlreadyUpToDate": "Vos frais sont à jour",
+  "gridsOthersUnchanged": "Vos autres grilles ne changent pas.",
+  "updateAction": "Mettre à jour",
+  "feesUpdatedSuccessfully": "Frais mis à jour",
+  "importExportSubtitle": "Sauvegarder ou partager vos grilles (CSV)",
+  "replayIntroduction": "Revoir la présentation",
+  "faqFeeUpdate": "D'où viennent les frais ?",
+  "faqFeeUpdateAnswer": "Chaque jour, le projet public feezer-fee-tables lit les grilles officielles sur mvola.mg et orange.mg. La grille Airtel est recopiée à la main depuis ses tarifs, car son site ne peut pas être lu automatiquement. « Mettre à jour » télécharge ces grilles ; vos autres grilles ne changent pas.",
+  "ok": "OK",
+  "pasteCsv": "Coller du texte CSV",
+  "chooseCsvFile": "Choisir un fichier CSV",
+  "csvTemplate": "Modèle",
+  "csvTemplateDescription": "Partez d'un fichier prêt avec les colonnes attendues.",
+  "downloadTemplate": "Télécharger le modèle",
+  "csvFormat": "Format du fichier",
+  "csvFormatHelp": "Une ligne par palier. Les lignes ayant le même nom_fournisseur et le même type_operation forment une grille. type_operation vaut withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance ou transfer_unregistered (facultatif) ; type_frais vaut fixed ou percentage. Virgules ou points-virgules acceptés.",
+  "opWithdrawal": "Retrait",
+  "opTransferSame": "Transfert",
+  "opTransferSameApp": "Transfert via l'appli",
+  "opTransferOther": "Vers un autre opérateur",
+  "opTransferMicrofinance": "Vers une microfinance",
+  "opTransferUnregistered": "Vers un non-abonné",
+  "opCustom": "Autre",
+  "operators": "Opérateurs",
+  "operatorsSubtitle": "Les grilles de frais utilisées pour vos calculs.",
+  "operatorLabel": "Opérateur",
+  "operationLabel": "Opération",
+  "operatorName": "Nom de l'opérateur",
+  "gridCount": "{count, plural, =1{1 grille} other{{count} grilles}}",
+  "customGrids": "Ajoutées par vous",
+  "editedTag": "modifiée",
+  "newGrid": "Nouvelle grille",
+  "editGrid": "Modifier la grille",
+  "createGrid": "Créer la grille",
+  "gridCreated": "Grille créée",
+  "gridUpdated": "Grille modifiée",
+  "gridDeleted": "Grille supprimée",
+  "gridAlreadyExists": "La grille {name} existe déjà.",
+  "deleteGridTitle": "Supprimer la grille",
+  "deleteGridMessage": "La grille {name} et ses paliers seront supprimés.",
+  "optimizeWithGrid": "Optimiser avec cette grille",
+  "moreOptions": "Plus d'options",
+  "officialFees": "Frais officiels",
+  "feesCheckedOn": "Vérifiés sur les sites des opérateurs le {date}",
+  "feesNeverChecked": "Téléchargez les derniers frais publiés par les opérateurs.",
+  "sourceOfficial": "Grille officielle · {host}",
+  "sourceOfficialDated": "Grille officielle · {host} · {date}",
+  "sourceManual": "Grille recopiée des tarifs de l'opérateur",
+  "sourceManualDated": "Grille recopiée des tarifs de l'opérateur · {date}",
+  "sourceEdited": "Grille modifiée par vous",
+  "openSource": "Voir la page officielle",
+  "editPublishedGridWarning": "Cette grille vient des tarifs de l'opérateur. Si vous mettez à jour les frais plus tard, votre modification sera remplacée.",
+  "feesSection": "Frais",
+  "updateFeesTitle": "Mettre à jour les frais",
+  "feesDownloadFailedTitle": "Téléchargement impossible",
+  "updateReviewIntro": "Les opérateurs ont publié de nouveaux frais. Voici ce qui change :",
+  "effectiveSince": "en vigueur depuis le {date}",
+  "newTag": "Nouvelle",
+  "updatedTag": "Mise à jour",
+  "later": "Plus tard",
+  "retry": "Réessayer",
+  "withdrawalCount": "Nombre de retraits",
+  "withdrawalCountHelp": "Facultatif. Limitez le nombre de retraits que le plan peut utiliser.",
+  "cashYouReceive": "Vous recevez en espèces",
+  "withdrawalCountLabel": "{count, plural, =1{1 retrait} other{{count} retraits}}",
+  "withdrawalsLabel": "Retraits",
+  "withdrawAmount": "Retirer {amount}",
+  "feePerWithdrawal": "frais {amount} par retrait",
+  "planTitleWithdrawal": "Votre plan de retrait",
+  "gainVsClassicWithdrawal": "Par rapport au retrait du plus gros montant possible à chaque fois.",
+  "classicExplanationWithdrawal": "Méthode habituelle : retirer le plus gros montant possible, puis le reste.",
+  "amountWithdrawn": "Montant retiré",
+  "noTiersYet": "Aucun palier pour l'instant",
+  "intervalFormHelpWithdrawal": "Les frais s'appliquent quand le montant retiré est entre le minimum et le maximum (inclus).",
+  "versionLabel": "Version {version}",
+  "free": "Gratuit",
+  "failedToLoadData": "Impossible de charger les données",
+  "failedToOpenLink": "Impossible d'ouvrir le lien",
+  "pressAgainToExit": "Appuyez encore pour quitter"
 }

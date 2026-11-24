@@ -1,30 +1,26 @@
 {
   "@@locale": "en",
-  "appTitle": "Feezer",
-  "@appTitle": {
-    "description": "The title of the application"
-  },
-  "onboardingTitle1": "Stop Losing Money to Mobile Money Fees",
+  "onboardingTitle1": "Pay less in fees",
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.",
+  "onboardingDescription1": "Enter an amount: Feezer splits it into the transactions that cost the least in fees.",
   "@onboardingDescription1": {
     "description": "First onboarding screen description"
   },
-  "onboardingTitle2": "Smart Mobile Money Optimization",
+  "onboardingTitle2": "Real operator fees",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
   },
-  "onboardingDescription2": "Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.",
+  "onboardingDescription2": "MVola, Orange Money, Airtel Money: the grids come from the operators' official rates and update in one tap.",
   "@onboardingDescription2": {
     "description": "Second onboarding screen description"
   },
-  "onboardingTitle3": "Save More on Mobile Transactions",
+  "onboardingTitle3": "Withdrawals and transfers",
   "@onboardingTitle3": {
     "description": "Third onboarding screen title"
   },
-  "onboardingDescription3": "Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.",
+  "onboardingDescription3": "Choose the operator and the operation. Your data stays on your phone, even offline.",
   "@onboardingDescription3": {
     "description": "Third onboarding screen description"
   },
@@ -36,51 +32,23 @@
   "@skip": {
     "description": "Skip button text"
   },
-  "getStarted": "Get Started",
+  "getStarted": "Get started",
   "@getStarted": {
     "description": "Get started button text"
-  },
-  "back": "Back",
-  "@back": {
-    "description": "Back button text"
   },
   "cancel": "Cancel",
   "@cancel": {
     "description": "Cancel button text"
   },
-  "save": "Save",
-  "@save": {
-    "description": "Save button text"
-  },
   "delete": "Delete",
   "@delete": {
     "description": "Delete button text"
-  },
-  "edit": "Edit",
-  "@edit": {
-    "description": "Edit button text"
-  },
-  "create": "Create",
-  "@create": {
-    "description": "Create button text"
-  },
-  "confirm": "Confirm",
-  "@confirm": {
-    "description": "Confirm button text"
-  },
-  "optimizeFee": "Optimize Fee",
-  "@optimizeFee": {
-    "description": "Optimize fee screen title"
-  },
-  "providers": "Providers",
-  "@providers": {
-    "description": "Providers screen title"
   },
   "settings": "Settings",
   "@settings": {
     "description": "Settings screen title"
   },
-  "createInterval": "Create Interval",
+  "createInterval": "Add the tier",
   "@createInterval": {
     "description": "Create interval button"
   },
@@ -88,73 +56,21 @@
   "@optimize": {
     "description": "Optimize button text"
   },
-  "amount": "Amount",
-  "@amount": {
-    "description": "Amount label"
-  },
-  "provider": "Provider",
-  "@provider": {
-    "description": "Provider label"
-  },
-  "minTransactions": "Min Transactions",
-  "@minTransactions": {
-    "description": "Minimum transactions label"
-  },
-  "maxTransactions": "Max Transactions",
-  "@maxTransactions": {
-    "description": "Maximum transactions label"
-  },
   "pleaseEnterValidAmount": "Please enter a valid amount",
   "@pleaseEnterValidAmount": {
     "description": "Error message for invalid amount"
   },
-  "pleaseSelectProvider": "Please select a provider",
+  "pleaseSelectProvider": "Choose an operator",
   "@pleaseSelectProvider": {
     "description": "Error message when no provider is selected"
-  },
-  "invalidTransactionRange": "Min transactions must be less than max transactions",
-  "@invalidTransactionRange": {
-    "description": "Error message for invalid transaction range"
-  },
-  "mvola": "MVola",
-  "@mvola": {
-    "description": "MVola provider name"
-  },
-  "orangeMoney": "Orange Money",
-  "@orangeMoney": {
-    "description": "Orange Money provider name"
-  },
-  "airtelMoney": "Airtel Money",
-  "@airtelMoney": {
-    "description": "Airtel Money provider name"
-  },
-  "mobileFinancialServices": "Mobile financial services",
-  "@mobileFinancialServices": {
-    "description": "Mobile financial services description"
   },
   "appearance": "Appearance",
   "@appearance": {
     "description": "Appearance section title"
   },
-  "theme": "Theme",
-  "@theme": {
-    "description": "Theme setting"
-  },
   "language": "Language",
   "@language": {
     "description": "Language setting"
-  },
-  "english": "English",
-  "@english": {
-    "description": "English language option"
-  },
-  "french": "French",
-  "@french": {
-    "description": "French language option"
-  },
-  "malagasy": "Malagasy",
-  "@malagasy": {
-    "description": "Malagasy language option"
   },
   "system": "System",
   "@system": {
@@ -168,232 +84,25 @@
   "@dark": {
     "description": "Dark theme option"
   },
-  "comingSoon": "Coming Soon",
-  "@comingSoon": {
-    "description": "Coming soon message"
-  },
-  "thisFeatureWillBeAvailableSoon": "This feature will be available soon!",
-  "@thisFeatureWillBeAvailableSoon": {
-    "description": "Coming soon feature message"
-  },
-  "feeIntervals": "Fee intervals",
-  "@feeIntervals": {
-    "description": "Fee intervals section title"
-  },
-  "newFeeInterval": "New Fee Interval",
+  "newFeeInterval": "New tier",
   "@newFeeInterval": {
     "description": "New fee interval screen title"
-  },
-  "minAmount": "Min Amount",
-  "@minAmount": {
-    "description": "Minimum amount label"
-  },
-  "maxAmount": "Max Amount",
-  "@maxAmount": {
-    "description": "Maximum amount label"
-  },
-  "feePercentage": "Fee Percentage",
-  "@feePercentage": {
-    "description": "Fee percentage label"
-  },
-  "fixedFee": "Fixed Fee",
-  "@fixedFee": {
-    "description": "Fixed fee label"
-  },
-  "pleaseEnterMinAmount": "Please enter minimum amount",
-  "@pleaseEnterMinAmount": {
-    "description": "Validation message for minimum amount"
-  },
-  "pleaseEnterMaxAmount": "Please enter maximum amount",
-  "@pleaseEnterMaxAmount": {
-    "description": "Validation message for maximum amount"
-  },
-  "pleaseEnterValidFeePercentage": "Please enter a valid fee percentage",
-  "@pleaseEnterValidFeePercentage": {
-    "description": "Validation message for fee percentage"
   },
   "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
   },
-  "optimizationResults": "Optimization Results",
-  "@optimizationResults": {
-    "description": "Optimization results title"
-  },
-  "interval": "Interval",
-  "@interval": {
-    "description": "Interval column header"
-  },
   "fee": "Fee",
   "@fee": {
     "description": "Fee column header"
   },
-  "count": "Count",
-  "@count": {
-    "description": "Count column header"
-  },
-  "total": "Total",
-  "@total": {
-    "description": "Total column header"
-  },
-  "transactionDetails": "Transaction Details",
-  "@transactionDetails": {
-    "description": "Transaction details section title"
-  },
-  "currencySymbol": "Ar",
-  "@currencySymbol": {
-    "description": "Currency symbol for Ariary"
-  },
-  "totalAmount": "Total Amount",
-  "@totalAmount": {
-    "description": "Total amount metric title"
-  },
-  "netAmount": "Net Amount",
-  "@netAmount": {
-    "description": "Net amount after fees metric title"
-  },
-  "totalFees": "Total fees",
-  "@totalFees": {
-    "description": "Label for total fees in comparison"
-  },
-  "efficiency": "Efficiency",
-  "@efficiency": {
-    "description": "Optimization efficiency metric title"
-  },
-  "operations": "Operations",
-  "@operations": {
-    "description": "Number of operations metric title"
-  },
-  "remaining": "Remaining",
-  "@remaining": {
-    "description": "Remaining amount metric title"
-  },
-  "@noResultsYet": {
-    "description": "Message when no optimization results"
-  },
-  "noOptimizationResultsFound": "No optimization results found. Please check your input parameters.",
+  "noOptimizationResultsFound": "No result. Check the amount and the chosen grid.",
   "@noOptimizationResultsFound": {
     "description": "Message when no optimization results are found for the given parameters"
-  },
-  "tapOptimizeToSeeResults": "Tap 'Optimize' to see results",
-  "@tapOptimizeToSeeResults": {
-    "description": "Instructions for getting results"
-  },
-  "error": "Error",
-  "@error": {
-    "description": "Error title"
-  },
-  "screenNotFound": "Screen {route} not found",
-  "@screenNotFound": {
-    "description": "Error message for route not found",
-    "placeholders": {
-      "route": {
-        "type": "String",
-        "example": "/settings"
-      }
-    }
-  },
-  "goHome": "Go Home",
-  "@goHome": {
-    "description": "Go to home screen button"
-  },
-  "noProvidersFound": "No providers found",
-  "@noProvidersFound": {
-    "description": "Message shown when no providers are available"
-  },
-  "searchProviders": "Search providers...",
-  "@searchProviders": {
-    "description": "Placeholder text for provider search field"
-  },
-  "manageYourProviders": "Manage your providers",
-  "@manageYourProviders": {
-    "description": "Header title for provider management section"
-  },
-  "centralizeProviders": "Centralize bank and mobile money partners in one place.",
-  "@centralizeProviders": {
-    "description": "Description for provider management functionality"
-  },
-  "activeProvider": "Active provider",
-  "@activeProvider": {
-    "description": "Label for single active provider count"
-  },
-  "activeProviders": "Active providers",
-  "@activeProviders": {
-    "description": "Label for multiple active providers count"
-  },
-  "deleteThisProvider": "Delete this provider?",
-  "@deleteThisProvider": {
-    "description": "Confirmation message for deleting a single provider"
-  },
-  "deleteProvidersCount": "Delete {count} providers?",
-  "@deleteProvidersCount": {
-    "description": "Confirmation message for deleting multiple providers",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "deleteProvider": "Delete Provider",
-  "@deleteProvider": {
-    "description": "Title for delete provider dialog"
-  },
-  "deleteProviders": "Delete Providers",
-  "@deleteProviders": {
-    "description": "Title for delete multiple providers dialog"
-  },
-  "providerDeletedSuccessfully": "{count, plural, =1{1 provider deleted successfully} other{{count} providers deleted successfully}}",
-  "@providerDeletedSuccessfully": {
-    "description": "Success message after deleting provider(s)"
-  },
-  "deleteProviderWarning": "This will also delete all associated fee intervals.",
-  "@deleteProviderWarning": {
-    "description": "Warning message when deleting providers about fee intervals"
-  },
-  "editProvider": "Edit Provider",
-  "@editProvider": {
-    "description": "Title for edit provider bottom sheet"
-  },
-  "providerName": "Provider Name",
-  "@providerName": {
-    "description": "Label for provider name field"
-  },
-  "description": "Description",
-  "@description": {
-    "description": "Label for description field"
-  },
-  "newProvider": "New Provider",
-  "@newProvider": {
-    "description": "Title for new provider screen"
-  },
-  "createNewProvider": "Create New Provider",
-  "@createNewProvider": {
-    "description": "Header title for creating a new provider"
-  },
-  "enterProviderName": "Enter provider name",
-  "@enterProviderName": {
-    "description": "Hint text for provider name field"
-  },
-  "providerCreatedSuccessfully": "Provider created successfully",
-  "@providerCreatedSuccessfully": {
-    "description": "Success message when a provider is created"
-  },
-  "systemDefault": "System default",
-  "@systemDefault": {
-    "description": "System default language option"
-  },
-  "general": "General",
-  "@general": {
-    "description": "General settings section"
   },
   "about": "About",
   "@about": {
     "description": "About section"
-  },
-  "version": "Version",
-  "@version": {
-    "description": "Version label"
   },
   "faqAndContact": "FAQ and contact",
   "@faqAndContact": {
@@ -403,241 +112,108 @@
   "@termsOfUse": {
     "description": "Terms of use option"
   },
-  "termsAndPrivacyPolicy": "Terms and privacy policy",
-  "@termsAndPrivacyPolicy": {
-    "description": "Terms and privacy policy description"
-  },
   "termsIntroductionTitle": "Introduction",
   "@termsIntroductionTitle": {
     "description": "Terms of use introduction section title"
   },
-  "termsIntroductionContent": "Welcome to Feezer! These Terms of Use govern your use of our mobile application designed to help you minimize mobile money fees. By using Feezer, you agree to be bound by these terms. Please read them carefully before using our service.",
+  "termsIntroductionContent": "These terms apply to the Feezer app, which helps you reduce mobile money fees. By using Feezer, you accept them.",
   "@termsIntroductionContent": {
     "description": "Terms of use introduction section content"
   },
-  "termsAcceptanceTitle": "Acceptance of Terms",
+  "termsAcceptanceTitle": "Acceptance",
   "@termsAcceptanceTitle": {
     "description": "Terms of use acceptance section title"
   },
-  "termsAcceptanceContent": "By accessing and using Feezer, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.",
+  "termsAcceptanceContent": "If you do not accept these terms, do not use the app. They may change with new versions of Feezer.",
   "@termsAcceptanceContent": {
     "description": "Terms of use acceptance section content"
   },
-  "termsResponsibilitiesTitle": "User Responsibilities",
-  "@termsResponsibilitiesTitle": {
-    "description": "Terms of use user responsibilities section title"
-  },
-  "termsResponsibilitiesContent": "You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information when using our service and to update this information as necessary. You must ensure that you comply with the terms and conditions of your mobile money service provider.",
-  "@termsResponsibilitiesContent": {
-    "description": "Terms of use user responsibilities section content"
-  },
-  "termsServiceTitle": "Service Description",
+  "termsServiceTitle": "The service",
   "@termsServiceTitle": {
     "description": "Terms of use service description section title"
   },
-  "termsServiceContent": "Feezer is a fee minimization tool that helps you calculate and optimize mobile money transaction costs. Our service provides fee calculations, transaction optimization suggestions, and educational content about mobile money fees. We strive to provide accurate information, but all calculations are estimates and should be verified with your mobile money service provider.",
+  "termsServiceContent": "From fee grids, Feezer calculates how to split a withdrawal or a transfer to pay less in fees. The official grids are read on the operators' websites and may change at any time: always check the fees with your operator.",
   "@termsServiceContent": {
     "description": "Terms of use service description section content"
   },
-  "termsPrivacyTitle": "Privacy and Data Protection",
+  "termsPrivacyTitle": "Privacy",
   "@termsPrivacyTitle": {
     "description": "Terms of use privacy section title"
   },
-  "termsPrivacyContent": "Your privacy is important to us. Feezer collects minimal personal information necessary to provide our service. We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in our Privacy Policy. We implement appropriate security measures to protect your data against unauthorized access.",
+  "termsPrivacyContent": "Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone. Updating the fees downloads a public file without sending your data.",
   "@termsPrivacyContent": {
     "description": "Terms of use privacy section content"
   },
-  "termsLiabilityTitle": "Limitation of Liability",
+  "termsLiabilityTitle": "Liability",
   "@termsLiabilityTitle": {
     "description": "Terms of use liability section title"
   },
-  "termsLiabilityContent": "Feezer provides fee calculation services for informational purposes only. We are not responsible for any financial losses, damages, or decisions made based on the information provided by our application. Users should always verify calculations with their mobile money service provider and understand the fees charged by their provider. We are not affiliated with any mobile money service provider.",
+  "termsLiabilityContent": "Results are given for information only. Feezer is not affiliated with any operator and is not responsible for the fees actually charged, nor for decisions made from its calculations.",
   "@termsLiabilityContent": {
     "description": "Terms of use liability section content"
   },
-  "termsTerminationTitle": "Termination",
+  "termsTerminationTitle": "Stopping",
   "@termsTerminationTitle": {
     "description": "Terms of use termination section title"
   },
-  "termsTerminationContent": "We reserve the right to terminate or suspend your account and access to our service at our sole discretion, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users, us, or third parties, or for any other reason.",
+  "termsTerminationContent": "You can stop using Feezer at any time: uninstalling the app erases its data from your phone.",
   "@termsTerminationContent": {
     "description": "Terms of use termination section content"
   },
-  "termsGoverningLawTitle": "Governing Law",
+  "termsGoverningLawTitle": "Governing law",
   "@termsGoverningLawTitle": {
     "description": "Terms of use governing law section title"
   },
-  "termsGoverningLawContent": "These Terms of Use shall be governed by and construed in accordance with the laws of the jurisdiction in which our service operates. Any disputes arising from these terms shall be resolved through appropriate legal channels in accordance with applicable local laws.",
+  "termsGoverningLawContent": "These terms are governed by the laws that apply where Feezer is used. Any dispute will be handled through the legal means provided by those laws.",
   "@termsGoverningLawContent": {
     "description": "Terms of use governing law section content"
   },
-  "termsContactTitle": "Contact Information",
+  "termsContactTitle": "Contact",
   "@termsContactTitle": {
     "description": "Terms of use contact section title"
   },
-  "termsContactContent": "If you have any questions about these Terms of Use, please contact us through the app's support section or via email at elsy.s.charles@gmail.com. We will respond to your inquiries as quickly as possible.",
+  "termsContactContent": "A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.",
   "@termsContactContent": {
     "description": "Terms of use contact section content"
   },
-  "featureComingNextVersion": "Feature coming in the next version",
-  "@featureComingNextVersion": {
-    "description": "Message for upcoming features"
-  },
-  "financialProvider": "Financial Provider",
-  "@financialProvider": {
-    "description": "Financial provider section title"
-  },
-  "chooseProviderToAnalyze": "Choose the provider you want to analyze",
-  "@chooseProviderToAnalyze": {
-    "description": "Instructions for provider selection"
-  },
-  "amountToOptimize": "Amount to Optimize",
-  "@amountToOptimize": {
-    "description": "Title for amount optimization section"
-  },
-  "enterTransactionAmountToOptimize": "Enter the transaction amount you want to optimize",
-  "@enterTransactionAmountToOptimize": {
-    "description": "Instructions for amount input"
-  },
-  "transactionRange": "Transaction Range",
-  "@transactionRange": {
-    "description": "Transaction range section title"
-  },
-  "defineMinMaxTransactions": "Define the minimum and maximum number of transactions",
-  "@defineMinMaxTransactions": {
-    "description": "Instructions for transaction range"
-  },
-  "readyToOptimize": "Ready to Optimize",
-  "@readyToOptimize": {
-    "description": "Ready to optimize message"
-  },
-  "clickOptimizeButtonToAnalyze": "Click the Optimize button to analyze the best fee structure for your transactions",
-  "@clickOptimizeButtonToAnalyze": {
-    "description": "Instructions for optimization"
-  },
-  "providerDetails": "Provider details",
-  "@providerDetails": {
-    "description": "Provider details screen title"
-  },
-  "noFeeIntervalsFound": "No fee intervals found",
+  "noFeeIntervalsFound": "This grid has no tier yet. Add them in the Operators tab.",
   "@noFeeIntervalsFound": {
     "description": "Message when no fee intervals exist"
   },
-  "feeInterval": "Fee interval",
-  "@feeInterval": {
-    "description": "Fee interval column header"
-  },
-  "searchByFeeRange": "Search by Fee Range",
-  "@searchByFeeRange": {
-    "description": "Search by fee range placeholder"
-  },
-  "addFeeInterval": "Add Fee Interval",
+  "addFeeInterval": "Add a tier",
   "@addFeeInterval": {
     "description": "Add fee interval button"
   },
-  "minFee": "Min fee",
-  "@minFee": {
-    "description": "Minimum fee placeholder"
-  },
-  "maxFee": "Max fee",
-  "@maxFee": {
-    "description": "Maximum fee placeholder"
-  },
-  "deleteFeeIntervals": "Delete Fee Intervals",
+  "deleteFeeIntervals": "Delete the tier",
   "@deleteFeeIntervals": {
     "description": "Delete fee intervals title"
   },
-  "createNewFeeInterval": "Create New Fee Interval",
-  "@createNewFeeInterval": {
-    "description": "Create new fee interval header"
-  },
-  "defineNewFeeStructure": "Define a new fee structure for transaction amounts",
-  "@defineNewFeeStructure": {
-    "description": "Fee interval creation instructions"
-  },
-  "enterMinimumAmount": "Enter minimum amount",
-  "@enterMinimumAmount": {
-    "description": "Minimum amount input placeholder"
-  },
-  "enterMaximumAmount": "Enter maximum amount",
-  "@enterMaximumAmount": {
-    "description": "Maximum amount input placeholder"
-  },
-  "enterFeeAmount": "Enter fee amount",
-  "@enterFeeAmount": {
-    "description": "Fee amount input placeholder"
-  },
-  "maxAmountMustBeGreater": "Max amount must be greater than min amount",
-  "@maxAmountMustBeGreater": {
-    "description": "Validation message for amount range"
-  },
-  "feeIntervalCreatedSuccessfully": "Fee interval created successfully",
+  "feeIntervalCreatedSuccessfully": "Tier added",
   "@feeIntervalCreatedSuccessfully": {
     "description": "Success message for fee interval creation"
   },
-  "addNewFinancialServiceProvider": "Add a new financial service provider to your list",
-  "@addNewFinancialServiceProvider": {
-    "description": "Description for adding new provider"
-  },
-  "enterDescription": "Enter description",
-  "@enterDescription": {
-    "description": "Description input placeholder"
-  },
-  "createProvider": "Create Provider",
-  "@createProvider": {
-    "description": "Create provider button"
-  },
-  "clearSelection": "Clear selection",
-  "@clearSelection": {
-    "description": "Clear selection tooltip"
-  },
-  "selectAll": "Select all",
-  "@selectAll": {
-    "description": "Select all tooltip"
-  },
   "icon": "Icon",
   "@icon": {
-    "description": "Icon label"
-  },
-  "tapToSelectIcon": "Tap to select icon",
-  "@tapToSelectIcon": {
-    "description": "Icon selection instruction"
-  },
-  "clearSearch": "Clear search",
-  "@clearSearch": {
-    "description": "Clear search tooltip"
-  },
-  "selectIcon": "Select Icon",
-  "@selectIcon": {
-    "description": "Select icon dialog title"
+    "description": "UI redesign"
   },
   "thisFieldIsRequired": "This field is required",
   "@thisFieldIsRequired": {
     "description": "Required field validation message"
   },
-  "pressAgainToExit": "Press again to exit",
-  "@pressAgainToExit": {
-    "description": "Double back to exit message"
-  },
-  "providerUpdatedSuccessfully": "Provider updated successfully",
-  "@providerUpdatedSuccessfully": {
-    "description": "Provider update success message"
-  },
-  "feeIntervalUpdatedSuccessfully": "Fee interval updated successfully",
+  "feeIntervalUpdatedSuccessfully": "Tier updated",
   "@feeIntervalUpdatedSuccessfully": {
     "description": "Fee interval update success message"
   },
-  "feeIntervalDeletedSuccessfully": "{count, plural, =1{1 fee interval deleted successfully} other{{count} fee intervals deleted successfully}}",
+  "feeIntervalDeletedSuccessfully": "{count, plural, =1{Tier deleted} other{{count} tiers deleted}}",
   "@feeIntervalDeletedSuccessfully": {
     "description": "Fee interval deletion success message",
     "placeholders": {
       "count": {
-        "type": "num",
-        "format": "compact"
+        "type": "int"
       }
     }
   },
-  "editFeeInterval": "Edit Fee Interval",
+  "editFeeInterval": "Edit the tier",
   "@editFeeInterval": {
     "description": "Edit fee interval dialog title"
   },
@@ -649,28 +225,6 @@
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
   },
-  "mustBeAtLeastNCharacters": "Must be at least {count} characters",
-  "@mustBeAtLeastNCharacters": {
-    "description": "Validation error for minimum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "enterValidNumber": "Enter a valid number",
-  "@enterValidNumber": {
-    "description": "Validation error for numeric fields"
-  },
-  "pleaseEnterFeeAmount": "Please enter fee amount",
-  "@pleaseEnterFeeAmount": {
-    "description": "Validation error for fee amount field"
-  },
-  "details": "Details",
-  "@details": {
-    "description": "Details tooltip"
-  },
   "minimumAmount": "Minimum amount",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"
@@ -679,31 +233,7 @@
   "@maximumAmount": {
     "description": "Maximum amount validation field name"
   },
-  "feeAmount": "Fee amount",
-  "@feeAmount": {
-    "description": "Fee amount validation field name"
-  },
-  "traditionalBanking": "Traditional banking",
-  "@traditionalBanking": {
-    "description": "Traditional banking description"
-  },
-  "mobileMoney": "Mobile money",
-  "@mobileMoney": {
-    "description": "Mobile money description"
-  },
-  "selected": "selected",
-  "@selected": {
-    "description": "Selected items text"
-  },
-  "feeOptimizer": "Fee Optimizer",
-  "@feeOptimizer": {
-    "description": "Fee optimizer button text"
-  },
-  "totalFeeIntervals": "Total Fee Intervals",
-  "@totalFeeIntervals": {
-    "description": "Total fee intervals label"
-  },
-  "helpAndSupport": "Help & Support",
+  "helpAndSupport": "Help & support",
   "@helpAndSupport": {
     "description": "Help and support menu item"
   },
@@ -711,233 +241,16 @@
   "@addNewProvider": {
     "description": "Add new provider button text"
   },
-  "tryAdjustingYourSearchRange": "Try adjusting your search range",
-  "@tryAdjustingYourSearchRange": {
-    "description": "Search range adjustment message"
-  },
-  "chooseTheme": "Choose Theme",
-  "@chooseTheme": {
-    "description": "Choose theme dialog title"
-  },
-  "alwaysUseLightTheme": "Always use light theme",
-  "@alwaysUseLightTheme": {
-    "description": "Light theme description"
-  },
-  "alwaysUseDarkTheme": "Always use dark theme",
-  "@alwaysUseDarkTheme": {
-    "description": "Dark theme description"
-  },
-  "followSystemSettings": "Follow system settings",
-  "@followSystemSettings": {
-    "description": "System theme description"
-  },
-  "saveChanges": "Save Changes",
+  "saveChanges": "Save changes",
   "@saveChanges": {
     "description": "Save changes button text"
   },
-  "minimumAmountAr": "Minimum Amount (Ar)",
-  "@minimumAmountAr": {
-    "description": "Minimum amount field label with currency"
-  },
-  "maximumAmountAr": "Maximum Amount (Ar)",
-  "@maximumAmountAr": {
-    "description": "Maximum amount field label with currency"
-  },
-  "feeAr": "Fee (Ar)",
-  "@feeAr": {
-    "description": "Fee field label with currency"
-  },
-  "confirmDeleteIntervals": "Are you sure you want to delete {count} selected interval{count, plural, =1{} other{s}}?",
+  "confirmDeleteIntervals": "{count, plural, =1{This tier will be removed from the grid.} other{These {count} tiers will be removed from the grid.}}",
   "@confirmDeleteIntervals": {
     "description": "Confirmation message for deleting fee intervals",
     "placeholders": {
       "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "fieldIsRequired": "{fieldName} is required",
-  "@fieldIsRequired": {
-    "description": "Validation error for required field with field name",
-    "placeholders": {
-      "fieldName": {
-        "type": "String",
-        "example": "Minimum amount"
-      }
-    }
-  },
-  "mustBeGreaterThanZero": "Must be greater than 0",
-  "@mustBeGreaterThanZero": {
-    "description": "Validation error for positive numbers"
-  },
-  "mustBeLessThanNCharacters": "Must be less than {count} characters",
-  "@mustBeLessThanNCharacters": {
-    "description": "Validation error for maximum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "50"
-      }
-    }
-  },
-  "deleteCurrencies": "Delete Currencies",
-  "@deleteCurrencies": {
-    "description": "Title for delete currencies confirmation dialog"
-  },
-  "currencyDeletedSuccessfully": "Currency deleted successfully",
-  "@currencyDeletedSuccessfully": {
-    "description": "Success message when currency is deleted"
-  },
-  "currencies": "Currencies",
-  "@currencies": {
-    "description": "Title for currencies screen"
-  },
-  "searchCurrencies": "Search currencies...",
-  "@searchCurrencies": {
-    "description": "Placeholder text for currency search field"
-  },
-  "noCurrenciesFound": "No currencies found",
-  "@noCurrenciesFound": {
-    "description": "Message when no currencies are found"
-  },
-  "centralizeCurrencies": "Centralize your currencies in one place",
-  "@centralizeCurrencies": {
-    "description": "Description text for empty currencies state"
-  },
-  "addNewCurrency": "Add new currency",
-  "@addNewCurrency": {
-    "description": "Button text to add a new currency"
-  },
-  "newCurrency": "New Currency",
-  "@newCurrency": {
-    "description": "Title for new currency screen"
-  },
-  "createNewCurrency": "Create New Currency",
-  "@createNewCurrency": {
-    "description": "Header text for new currency creation"
-  },
-  "currencyCode": "Currency Code",
-  "@currencyCode": {
-    "description": "Label for currency code field"
-  },
-  "currencyName": "Currency Name",
-  "@currencyName": {
-    "description": "Label for currency name field"
-  },
-  "currencySymbolLabel": "Currency Symbol",
-  "@currencySymbolLabel": {
-    "description": "Label for currency symbol field"
-  },
-  "exchangeRate": "Exchange Rate",
-  "@exchangeRate": {
-    "description": "Label for exchange rate field"
-  },
-  "currencyCreatedSuccessfully": "Currency created successfully",
-  "@currencyCreatedSuccessfully": {
-    "description": "Success message when currency is created"
-  },
-  "manageYourCurrencies": "Manage your currencies",
-  "@manageYourCurrencies": {
-    "description": "Header text for currency management"
-  },
-  "totalCurrencies": "Total Currencies",
-  "@totalCurrencies": {
-    "description": "Label for total currencies count"
-  },
-  "activeCurrencies": "Active Currencies",
-  "@activeCurrencies": {
-    "description": "Label for active currencies count"
-  },
-  "editCurrency": "Edit Currency",
-  "@editCurrency": {
-    "description": "Title for edit currency bottom sheet"
-  },
-  "currencyUpdatedSuccessfully": "Currency updated successfully",
-  "@currencyUpdatedSuccessfully": {
-    "description": "Success message when currency is updated"
-  },
-  "addNewCurrencyDescription": "Add a new currency to your collection",
-  "@addNewCurrencyDescription": {
-    "description": "Description text for adding new currency"
-  },
-  "currencyCodeMustBe3Characters": "Currency code must be exactly 3 characters",
-  "@currencyCodeMustBe3Characters": {
-    "description": "Validation message for currency code length"
-  },
-  "currencyCodeMustContainOnlyUppercase": "Currency code must contain only uppercase letters",
-  "@currencyCodeMustContainOnlyUppercase": {
-    "description": "Validation message for currency code format"
-  },
-  "pleaseEnterValidPositiveRate": "Please enter a valid positive rate",
-  "@pleaseEnterValidPositiveRate": {
-    "description": "Validation message for exchange rate"
-  },
-  "failedToCreateCurrency": "Failed to create currency",
-  "@failedToCreateCurrency": {
-    "description": "Error message when currency creation fails"
-  },
-  "failedToUpdateCurrency": "Failed to update currency",
-  "@failedToUpdateCurrency": {
-    "description": "Error message when currency update fails"
-  },
-  "codeMustBe3Characters": "Code must be 3 characters",
-  "@codeMustBe3Characters": {
-    "description": "Short validation message for currency code length"
-  },
-  "invalidRate": "Invalid rate",
-  "@invalidRate": {
-    "description": "Validation message for invalid exchange rate"
-  },
-  "rateLabel": "Rate:",
-  "@rateLabel": {
-    "description": "Label for exchange rate display in currency card"
-  },
-  "confirmDeleteCurrencies": "Are you sure you want to delete {count} currencies?",
-  "@confirmDeleteCurrencies": {
-    "description": "Confirmation message for deleting currencies",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
-  "operationCount": "{count} operations",
-  "@operationCount": {
-    "description": "Display text for number of operations with count",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "optimizationFailedNoValidSolution": "Optimization failed: No valid solution found",
-  "@optimizationFailedNoValidSolution": {
-    "description": "Error message when optimization fails to find a valid solution"
-  },
-  "optimizationIncomplete": "Optimization incomplete: Only {percentage}% of amount covered. Consider adjusting transaction limits or fee intervals.",
-  "@optimizationIncomplete": {
-    "description": "Warning message when optimization covers less than expected amount",
-    "placeholders": {
-      "percentage": {
-        "type": "String",
-        "example": "75.5"
-      }
-    }
-  },
-  "amountExceedsMaximumLimit": "Amount exceeds maximum limit ({amount} {currency})",
-  "@amountExceedsMaximumLimit": {
-    "description": "Error message when amount exceeds the maximum allowed limit",
-    "placeholders": {
-      "amount": {
-        "type": "String",
-        "example": "1,000,000"
-      },
-      "currency": {
-        "type": "String",
-        "example": "EUR"
+        "type": "int"
       }
     }
   },
@@ -945,99 +258,19 @@
   "@failedToCalculateOptimization": {
     "description": "Generic error message when optimization calculation fails"
   },
-  "amountExceedsMaximumAllowedLimit": "Amount exceeds maximum allowed limit",
-  "@amountExceedsMaximumAllowedLimit": {
-    "description": "Error message for amount exceeding maximum allowed limit"
-  },
-  "invalidTransactionRangeConstraints": "Invalid transaction range constraints",
-  "@invalidTransactionRangeConstraints": {
-    "description": "Error message for invalid transaction range constraints"
-  },
-  "noValidFeeIntervalsAvailable": "No valid fee intervals available",
-  "@noValidFeeIntervalsAvailable": {
-    "description": "Error message when no valid fee intervals are available for the provider"
-  },
-  "amountMustBePositive": "Amount must be positive",
-  "@amountMustBePositive": {
-    "description": "Error message when amount is not positive"
-  },
-  "amountTooHigh": "Amount too high",
-  "@amountTooHigh": {
-    "description": "Error message when amount exceeds maximum allowed limit"
-  },
-  "noOptionsAvailable": "No options available",
-  "@noOptionsAvailable": {
-    "description": "Error message when no fee options are available"
-  },
-  "maxOperationsMustBePositive": "maxOperations must be >= 0",
-  "@maxOperationsMustBePositive": {
-    "description": "Error message when maxOperations is negative"
-  },
-  "minOperationsMustBePositive": "minOperations must be >= 0",
-  "@minOperationsMustBePositive": {
-    "description": "Error message when minOperations is negative"
-  },
-  "minOperationsCannotBeGreaterThanMaxOperations": "minOperations cannot be greater than maxOperations",
-  "@minOperationsCannotBeGreaterThanMaxOperations": {
-    "description": "Error message when minOperations is greater than maxOperations"
-  },
-  "importExportData": "Import/Export Data",
+  "importExportData": "Import / export",
   "@importExportData": {
     "description": "Import/Export data menu title"
   },
-  "csvImportExportInfo": "CSV Data Management",
-  "@csvImportExportInfo": {
-    "description": "CSV import/export information title"
-  },
-  "csvImportExportDescription": "Import or export your providers and fee intervals using CSV files",
-  "@csvImportExportDescription": {
-    "description": "Description of CSV import/export functionality"
-  },
-  "importData": "Import Data",
+  "importData": "Import",
   "@importData": {
     "description": "Import data section title"
   },
-  "exportData": "Export Data",
+  "exportData": "Export",
   "@exportData": {
     "description": "Export data section title"
   },
-  "templates": "CSV Templates",
-  "@templates": {
-    "description": "CSV templates section title"
-  },
-  "exportCombined": "Export Combined",
-  "@exportCombined": {
-    "description": "Export combined data option title"
-  },
-  "exportCombinedDescription": "Export providers with their fee intervals",
-  "@exportCombinedDescription": {
-    "description": "Description for exporting combined data"
-  },
-  "downloadProviderTemplate": "Provider Template",
-  "@downloadProviderTemplate": {
-    "description": "Download provider CSV template option"
-  },
-  "csvTemplateForProviders": "Download CSV template for importing providers",
-  "@csvTemplateForProviders": {
-    "description": "Description for provider template download"
-  },
-  "downloadFeeTemplate": "Fee Intervals Template",
-  "@downloadFeeTemplate": {
-    "description": "Download fee intervals CSV template option"
-  },
-  "csvTemplateForFees": "Download CSV template for importing fees",
-  "@csvTemplateForFees": {
-    "description": "Description for fee intervals template download"
-  },
-  "downloadCombinedTemplate": "Combined Template",
-  "@downloadCombinedTemplate": {
-    "description": "Download combined CSV template option"
-  },
-  "csvTemplateForCombined": "Download CSV template for combined import",
-  "@csvTemplateForCombined": {
-    "description": "Description for combined template download"
-  },
-  "importSuccessful": "Import Successful",
+  "importSuccessful": "Import done",
   "@importSuccessful": {
     "description": "Import success message title"
   },
@@ -1051,10 +284,6 @@
       }
     }
   },
-  "exportSuccessful": "Export successful",
-  "@exportSuccessful": {
-    "description": "Success message when export completes successfully"
-  },
   "exportFailed": "Export failed: {error}",
   "@exportFailed": {
     "description": "Generic export failure message",
@@ -1065,35 +294,21 @@
       }
     }
   },
-  "templateDownloaded": "Template Downloaded",
-  "@templateDownloaded": {
-    "description": "Template download success message"
-  },
-  "failedToDownloadTemplate": "Failed to download template",
-  "@failedToDownloadTemplate": {
-    "description": "Error message when template download fails"
-  },
-  "failedToReadFile": "Failed to read file",
-  "@failedToReadFile": {
-    "description": "File reading failure message"
-  },
-  "providersImported": "{count} provider(s) imported",
+  "providersImported": "{count} grid(s) imported",
   "@providersImported": {
     "description": "Message showing number of providers imported",
     "placeholders": {
       "count": {
-        "type": "int",
-        "example": "5"
+        "type": "int"
       }
     }
   },
-  "feeIntervalsImported": "{count} fee interval(s) imported",
+  "feeIntervalsImported": "{count} tier(s) imported",
   "@feeIntervalsImported": {
     "description": "Message showing number of fee intervals imported",
     "placeholders": {
       "count": {
-        "type": "int",
-        "example": "10"
+        "type": "int"
       }
     }
   },
@@ -1107,89 +322,17 @@
       }
     }
   },
-  "dataManagement": "Data Management",
-  "@dataManagement": {
-    "description": "Data management guide title"
-  },
-  "backup": "Backup",
-  "@backup": {
-    "description": "Backup option title"
-  },
-  "backupYourData": "Backup your providers and fees",
-  "@backupYourData": {
-    "description": "Description for backup functionality"
-  },
-  "reset": "Reset",
-  "@reset": {
-    "description": "Reset option title"
-  },
-  "clearAllData": "Clear all data",
-  "@clearAllData": {
-    "description": "Description for reset functionality"
-  },
-  "confirmReset": "Confirm Reset",
-  "@confirmReset": {
-    "description": "Reset confirmation dialog title"
-  },
-  "resetWarningMessage": "This will permanently delete all your providers and fee intervals. This action cannot be undone.",
-  "@resetWarningMessage": {
-    "description": "Warning message for data reset"
-  },
-  "dataResetSuccessful": "Data reset successful",
-  "@dataResetSuccessful": {
-    "description": "Success message for data reset"
-  },
-  "resetFailed": "Reset failed",
-  "@resetFailed": {
-    "description": "Failure message for data reset"
-  },
-  "csvManagement": "CSV Management",
-  "@csvManagement": {
-    "description": "Title for CSV management screen"
-  },
-  "previewTemplate": "Preview Template",
-  "@previewTemplate": {
-    "description": "Preview template button text"
-  },
-  "preview": "Preview",
-  "@preview": {
-    "description": "Preview button text"
-  },
-  "download": "Download",
-  "@download": {
-    "description": "Download button text"
-  },
-  "templatePreview": "Template Preview",
-  "@templatePreview": {
-    "description": "Template preview dialog title"
-  },
-  "close": "Close",
-  "@close": {
-    "description": "Close button text"
-  },
-  "importDataDescription": "Import providers and fee intervals from CSV file. The system will automatically detect the data type based on columns.",
+  "importDataDescription": "Add grids from a CSV file (one row per tier).",
   "@importDataDescription": {
     "description": "Description for import data action"
   },
-  "exportDataDescription": "Export all providers and their fee intervals to a combined CSV file.",
+  "exportDataDescription": "Save all your grids and their tiers in a CSV file.",
   "@exportDataDescription": {
     "description": "Description for export data action"
   },
   "csvContentCannotBeEmpty": "CSV content cannot be empty",
   "@csvContentCannotBeEmpty": {
     "description": "Error message when CSV text input is empty"
-  },
-  "clickImportToSelectFile": "Click to select a CSV file",
-  "@clickImportToSelectFile": {
-    "description": "Instruction text for file import option"
-  },
-  "copy": "Copy",
-  "@copy": {
-    "description": "Button text for copying content"
-  },
-  "copiedToClipboard": "Copied to clipboard",
-  "@copiedToClipboard": {
-    "description": "Message shown when content is copied to clipboard"
   },
   "chooseWhereToSave": "Choose where to save the file",
   "@chooseWhereToSave": {
@@ -1203,38 +346,6 @@
   "@failedToSaveFile": {
     "description": "Error message when file save fails"
   },
-  "file": "File",
-  "@file": {
-    "description": "File option text"
-  },
-  "text": "Text",
-  "@text": {
-    "description": "Text option text"
-  },
-  "pasteCsvContentHere": "Paste your CSV content here...",
-  "@pasteCsvContentHere": {
-    "description": "Hint text for CSV text input field"
-  },
-  "fileSelected": "File Selected",
-  "@fileSelected": {
-    "description": "Text shown when a file is selected"
-  },
-  "csvFilesOnly": "CSV files only",
-  "@csvFilesOnly": {
-    "description": "Text indicating only CSV files are accepted"
-  },
-  "csvContentPreview": "CSV Content Preview:",
-  "@csvContentPreview": {
-    "description": "Title for CSV content preview section"
-  },
-  "failedToSelectFile": "Failed to select file",
-  "@failedToSelectFile": {
-    "description": "Error message when file selection fails"
-  },
-  "failedToPreviewTemplate": "Failed to preview template",
-  "@failedToPreviewTemplate": {
-    "description": "Error message when template preview fails"
-  },
   "csvFileIsEmpty": "CSV file is empty",
   "@csvFileIsEmpty": {
     "description": "Error message when CSV file contains no data"
@@ -1243,79 +354,36 @@
   "@noDataRowsFound": {
     "description": "Error message when CSV file has no valid data rows"
   },
-  "rowProviderNameRequired": "Row {rowNumber}: Provider name is required",
+  "rowProviderNameRequired": "Row {rowNumber}: the operator name is required",
   "@rowProviderNameRequired": {
     "description": "Error message when provider name is missing in CSV row",
     "placeholders": {
       "rowNumber": {
-        "type": "int",
-        "example": "5"
+        "type": "int"
       }
     }
   },
-  "rowProviderAlreadyExists": "Row {rowNumber}: Provider \"{name}\" already exists",
+  "rowProviderAlreadyExists": "Row {rowNumber}: the grid \"{name}\" already exists",
   "@rowProviderAlreadyExists": {
     "description": "Error message when provider already exists in database",
     "placeholders": {
       "rowNumber": {
-        "type": "int",
-        "example": "5"
+        "type": "int"
       },
       "name": {
-        "type": "String",
-        "example": "TELMA"
+        "type": "String"
       }
     }
   },
-  "rowGenericError": "Row {rowNumber}: {error}",
-  "@rowGenericError": {
-    "description": "Generic error message for CSV row processing",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "error": {
-        "type": "String",
-        "example": "Invalid data format"
-      }
-    }
-  },
-  "rowProviderNameRequiredFee": "Row {rowNumber}: Provider name is required",
-  "@rowProviderNameRequiredFee": {
-    "description": "Error message when provider name is missing in fee interval CSV row",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "rowProviderNotFound": "Row {rowNumber}: Provider \"{providerName}\" not found",
-  "@rowProviderNotFound": {
-    "description": "Error message when provider referenced in CSV doesn't exist",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "rowIntervalOverlaps": "Row {rowNumber}: Interval overlaps with existing interval ({overlap})",
+  "rowIntervalOverlaps": "Row {rowNumber}: this tier overlaps an existing tier ({overlap})",
   "@rowIntervalOverlaps": {
     "description": "Error message when fee interval overlaps with existing interval",
     "placeholders": {
       "rowNumber": {
-        "type": "int",
-        "example": "5"
+        "type": "int"
       },
       "overlap": {
-        "type": "String",
-        "example": "1000-2000"
+        "type": "String"
       }
     }
   },
@@ -1383,65 +451,15 @@
       }
     }
   },
-  "importedProvidersAndFees": "Imported {providersCount} provider(s) and {feesCount} fee interval(s)",
+  "importedProvidersAndFees": "Imported {providersCount} grid(s) and {feesCount} tier(s)",
   "@importedProvidersAndFees": {
     "description": "Success message showing number of imported providers and fee intervals",
     "placeholders": {
       "providersCount": {
-        "type": "int",
-        "example": "2"
+        "type": "int"
       },
       "feesCount": {
-        "type": "int",
-        "example": "5"
-      }
-    }
-  },
-  "providerInvalidProviderId": "Provider \"{providerName}\": Invalid provider ID",
-  "@providerInvalidProviderId": {
-    "description": "Error message when provider ID is invalid during import",
-    "placeholders": {
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "providerNoFeeIntervals": "Provider \"{providerName}\": No fee intervals found",
-  "@providerNoFeeIntervals": {
-    "description": "Error message when provider has no fee intervals during import",
-    "placeholders": {
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      }
-    }
-  },
-  "providerImportError": "Provider \"{providerName}\": {error}",
-  "@providerImportError": {
-    "description": "Generic error message for provider import",
-    "placeholders": {
-      "providerName": {
-        "type": "String",
-        "example": "TELMA"
-      },
-      "error": {
-        "type": "String",
-        "example": "Database error"
-      }
-    }
-  },
-  "rowIntervalOverlapsCombined": "Row {rowNumber}: Interval overlaps with existing interval ({overlap})",
-  "@rowIntervalOverlapsCombined": {
-    "description": "Error message for overlapping intervals in combined import",
-    "placeholders": {
-      "rowNumber": {
-        "type": "int",
-        "example": "5"
-      },
-      "overlap": {
-        "type": "String",
-        "example": "1000-2000"
+        "type": "int"
       }
     }
   },
@@ -1449,23 +467,11 @@
   "@noDataToExport": {
     "description": "Error message when there is no data available for export"
   },
-  "providerNameColumnNotFound": "Provider name column not found",
+  "providerNameColumnNotFound": "Operator name column not found",
   "@providerNameColumnNotFound": {
     "description": "Error message when provider name column is missing in CSV"
   },
-  "pullToRefresh": "Pull down to refresh",
-  "@pullToRefresh": {
-    "description": "Hint text shown when user can pull down to refresh content"
-  },
-  "refreshing": "Refreshing...",
-  "@refreshing": {
-    "description": "Text shown when content is being refreshed"
-  },
-  "feeType": "Fee Type",
-  "@feeType": {
-    "description": "Label for fee type selector"
-  },
-  "fixedAmount": "Fixed Amount",
+  "fixedAmount": "Fixed amount",
   "@fixedAmount": {
     "description": "Option for fixed fee amount"
   },
@@ -1473,458 +479,96 @@
   "@percentage": {
     "description": "Option for percentage-based fee"
   },
-  "enterPercentage": "Enter percentage",
-  "@enterPercentage": {
-    "description": "Placeholder for percentage input"
-  },
   "percentageMustBeBetween0And100": "Percentage must be between 0 and 100",
   "@percentageMustBeBetween0And100": {
     "description": "Validation error for percentage input"
-  },
-  "invalidAmount": "Invalid amount",
-  "@invalidAmount": {
-    "description": "Error message for invalid amount input"
-  },
-  "pleaseEnterPercentage": "Please enter percentage",
-  "@pleaseEnterPercentage": {
-    "description": "Validation message for missing percentage input"
-  },
-  "pleaseEnterValidPercentage": "Please enter a valid percentage",
-  "@pleaseEnterValidPercentage": {
-    "description": "Validation message for invalid percentage input"
-  },
-  "percentageCannotExceed100": "Percentage cannot exceed 100",
-  "@percentageCannotExceed100": {
-    "description": "Validation error when percentage exceeds 100"
-  },
-  "searchHelpTopics": "Search help topics...",
-  "@searchHelpTopics": {
-    "description": "Placeholder text for help search field"
   },
   "faq": "FAQ",
   "@faq": {
     "description": "Frequently Asked Questions tab title"
   },
-  "contact": "Contact",
-  "@contact": {
-    "description": "Contact tab title"
-  },
-  "faqWhatIsFeeMinimizer": "What is Feezer or Fee Minimizer?",
+  "faqWhatIsFeeMinimizer": "What is Feezer?",
   "@faqWhatIsFeeMinimizer": {
     "description": "FAQ question"
   },
-  "faqWhatIsFeeMinimizerAnswer": "Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize mobile money fees.",
+  "faqWhatIsFeeMinimizerAnswer": "Feezer works out how to split a mobile money withdrawal or transfer so you pay the least fees, using the operators' official fee grids.",
   "@faqWhatIsFeeMinimizerAnswer": {
     "description": "FAQ answer"
   },
-  "faqHowToAddProvider": "How do I add a new provider?",
+  "faqHowToAddProvider": "How do I add a grid?",
   "@faqHowToAddProvider": {
     "description": "FAQ question"
   },
-  "faqHowToAddProviderAnswer": "To add a new provider, go to the Providers screen and tap the '+' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.",
+  "faqHowToAddProviderAnswer": "In the Operators tab, tap \"Add\", enter the operator name and the operation, then add the tiers (minimum, maximum and fee). You can also import a CSV file.",
   "@faqHowToAddProviderAnswer": {
     "description": "FAQ answer"
   },
-  "faqHowToCalculateFees": "How does fee calculation work?",
+  "faqHowToCalculateFees": "How is it calculated?",
   "@faqHowToCalculateFees": {
     "description": "FAQ question"
   },
-  "faqHowToCalculateFeesAnswer": "Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.",
+  "faqHowToCalculateFeesAnswer": "Choose the operator and the operation, then enter the amount available (fees included). Feezer tries every combination of tiers and keeps the one that delivers the most. The result is compared with the usual way: withdrawing or sending the largest possible amount each time.",
   "@faqHowToCalculateFeesAnswer": {
     "description": "FAQ answer"
   },
-  "faqMinMaxTransactionRange": "What do 'Min transactions' and 'Max transactions' mean?",
+  "faqMinMaxTransactionRange": "What is the number of transactions for?",
   "@faqMinMaxTransactionRange": {
     "description": "FAQ question: meaning of min/max number of transactions"
   },
-  "faqMinMaxTransactionRangeAnswer": "'Min transactions' and 'Max transactions' set the minimum and maximum number of operations the optimizer may use to split your entered amount. For example, if you enter 10,000 Ar and set Min transactions = 2, the optimizer will only consider solutions that split the amount into at least 2 operations. Ensure Min ≤ Max and that the values make sense for your intended split. This constrains the optimizer to produce results with a number of transactions within the specified range.",
+  "faqMinMaxTransactionRangeAnswer": "It is optional. It limits how many withdrawals or transfers the split may use, for example \"at most 2\" if you do not want more than two. Feezer shows what the limit costs you.",
   "@faqMinMaxTransactionRangeAnswer": {
     "description": "FAQ answer: meaning of min/max number of transactions"
   },
-  "faqDataSecurity": "Is my data secure?",
+  "faqDataSecurity": "Is my data shared?",
   "@faqDataSecurity": {
     "description": "FAQ question"
   },
-  "faqDataSecurityAnswer": "Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide financial-level security features. All data remains on your device and is not transmitted anywhere.",
+  "faqDataSecurityAnswer": "No. Your grids and amounts stay on your phone; Feezer has no account and sends nothing. Updating the fees only downloads a public file.",
   "@faqDataSecurityAnswer": {
     "description": "FAQ answer"
   },
-  "faqOfflineMode": "Does the app work offline?",
+  "faqOfflineMode": "Do I need internet?",
   "@faqOfflineMode": {
     "description": "FAQ question"
   },
-  "faqOfflineModeAnswer": "Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.",
+  "faqOfflineModeAnswer": "No. Calculations run on your phone. Internet is only used to update the fees.",
   "@faqOfflineModeAnswer": {
     "description": "FAQ answer"
   },
-  "faqCurrencyRates": "How do currency exchange rates work?",
-  "@faqCurrencyRates": {
-    "description": "FAQ question"
-  },
-  "faqCurrencyRatesAnswer": "The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.",
-  "faqExportData": "How do I export my data?",
+  "faqExportData": "How do I back up my grids?",
   "@faqExportData": {
     "description": "FAQ question"
   },
-  "faqExportDataAnswer": "Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.",
+  "faqExportDataAnswer": "Settings › Import / export: export your grids to a CSV file, then import it later or on another phone.",
   "@faqExportDataAnswer": {
     "description": "FAQ answer"
-  },
-  "emailSupport": "Email Support",
-  "@emailSupport": {
-    "description": "Email support option title"
-  },
-  "phoneSupport": "Phone Support",
-  "@phoneSupport": {
-    "description": "Phone support option title"
   },
   "website": "Website",
   "@website": {
     "description": "Website contact method"
   },
-  "responseTime": "Response Time",
-  "@responseTime": {
-    "description": "Response time section title"
-  },
-  "responseTimeDescription": "We typically respond to support requests within 24 hours during business days.",
-  "@responseTimeDescription": {
-    "description": "Response time description"
-  },
-  "gettingStarted": "Getting Started",
-  "@gettingStarted": {
-    "description": "Getting started guide title"
-  },
-  "gettingStartedDescription": "Learn the basics of using Feezer or Fee Minimizer",
-  "@gettingStartedDescription": {
-    "description": "Getting started guide description"
-  },
-  "providerManagement": "Provider Management",
-  "@providerManagement": {
-    "description": "Provider management guide title"
-  },
-  "providerManagementDescription": "How to add, edit, and manage financial providers",
-  "@providerManagementDescription": {
-    "description": "Provider management guide description"
-  },
-  "feeCalculation": "Fee Calculation",
-  "@feeCalculation": {
-    "description": "Fee calculation guide title"
-  },
-  "feeCalculationDescription": "Understanding how fees are calculated and optimized",
-  "@feeCalculationDescription": {
-    "description": "Fee calculation guide description"
-  },
-  "dataManagementDescription": "Import, export, and backup your data",
-  "@dataManagementDescription": {
-    "description": "Data management guide description"
-  },
-  "videoTutorials": "Video Tutorials",
-  "@videoTutorials": {
-    "description": "Video tutorials section title"
-  },
-  "videoTutorialsDescription": "Watch step-by-step video guides to master Feezer or Fee Minimizer",
-  "@videoTutorialsDescription": {
-    "description": "Video tutorials description"
-  },
-  "watchTutorials": "Watch Tutorials",
-  "@watchTutorials": {
-    "description": "Watch tutorials button text"
-  },
-  "shareYourThoughts": "Share Your Thoughts",
-  "@shareYourThoughts": {
-    "description": "Feedback section title"
-  },
-  "feedbackDescription": "Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions",
-  "@feedbackDescription": {
-    "description": "Feedback description"
-  },
-  "contactUs": "Contact Us",
+  "contactUs": "Contact us",
   "@contactUs": {
     "description": "Contact us section title"
-  },
-  "contactDescription": "Get in touch with our support team for help with any questions or issues.",
-  "@contactDescription": {
-    "description": "Contact section description"
   },
   "email": "Email",
   "@email": {
     "description": "Email contact method"
   },
-  "phone": "Phone",
-  "@phone": {
-    "description": "Phone contact method"
-  },
-  "faqQuestion1": "How do I minimize transaction fees?",
-  "@faqQuestion1": {
-    "description": "First FAQ question"
-  },
-  "faqAnswer1": "Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.",
-  "@faqAnswer1": {
-    "description": "First FAQ answer"
-  },
-  "faqQuestion2": "What currencies are supported?",
-  "@faqQuestion2": {
-    "description": "Second FAQ question"
-  },
-  "faqAnswer2": "We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.",
-  "@faqAnswer2": {
-    "description": "Second FAQ answer"
-  },
-  "faqQuestion3": "Is my financial data secure?",
-  "@faqQuestion3": {
-    "description": "Third FAQ question"
-  },
-  "faqAnswer3": "Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.",
-  "@faqAnswer3": {
-    "description": "Third FAQ answer"
-  },
-  "faqQuestion4": "How do I update currency rates?",
-  "@faqQuestion4": {
-    "description": "Fourth FAQ question"
-  },
-  "faqAnswer4": "Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.",
-  "@faqAnswer4": {
-    "description": "Fourth FAQ answer"
-  },
-  "faqQuestion5": "Can I save my favorite providers?",
-  "@faqQuestion5": {
-    "description": "Fifth FAQ question"
-  },
-  "faqAnswer5": "Yes, you can save your preferred mobile money providers and payment methods for quick access when making new calculations.",
-  "@faqAnswer5": {
-    "description": "Fifth FAQ answer"
-  },
-  "faqQuestion6": "How do I add a new provider?",
-  "@faqQuestion6": {
-    "description": "Sixth FAQ question"
-  },
-  "faqAnswer6": "Tap the '+' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.",
-  "@faqAnswer6": {
-    "description": "Sixth FAQ answer"
-  },
-  "faqQuestion7": "What are fee intervals?",
-  "@faqQuestion7": {
-    "description": "Seventh FAQ question"
-  },
-  "faqAnswer7": "Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., $2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.",
-  "@faqAnswer7": {
-    "description": "Seventh FAQ answer"
-  },
-  "faqQuestion8": "How does the optimization work?",
-  "@faqQuestion8": {
-    "description": "Eighth FAQ question"
-  },
-  "faqAnswer8": "Feezer analyzes all your providers' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.",
-  "@faqAnswer8": {
-    "description": "Eighth FAQ answer"
-  },
-  "comparisonWithWithoutOptimization": "Comparison with/without optimization",
-  "@comparisonWithWithoutOptimization": {
-    "description": "Title for the comparison section showing optimized vs non-optimized results"
-  },
-  "withOptimization": "With optimization",
-  "@withOptimization": {
-    "description": "Label for the optimized results section"
-  },
-  "withoutOptimizationMaxAmount": "Without optimization (max amount)",
-  "@withoutOptimizationMaxAmount": {
-    "description": "Label for the non-optimized results section using maximum amount"
-  },
-  "withoutOptimizationSameNet": "Without optimization (same net amount)",
-  "@withoutOptimizationSameNet": {
-    "description": "Label for the non-optimized results section using same net amount"
-  },
-  "enteredAmount": "Entered amount",
-  "@availableBudget": {
-    "description": "Label for available budget in comparison"
-  },
-  "netAmountSent": "Net amount",
-  "@netAmountSent": {
-    "description": "Label for net amount in comparison"
-  },
-  "totalSpent": "Total spent",
-  "@totalSpent": {
-    "description": "Label for total amount spent in comparison"
-  },
-  "numberOfOperations": "Number of operations",
-  "@numberOfOperations": {
-    "description": "Label for number of operations in comparison"
-  },
-  "youLoseAmount": "You lose {amount} {currency}",
-  "@youLoseAmount": {
-    "description": "Message when optimization results in loss",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "youGainAmount": "You gain {amount} {currency}",
-  "@youGainAmount": {
-    "description": "Message when optimization results in gain",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "sameResultAsOptimization": "Same result as optimization",
-  "@sameResultAsOptimization": {
-    "description": "Message when non-optimized result is same as optimized"
-  },
-  "netAmountLess": "• Net amount less: {amount} {currency}",
-  "@netAmountLess": {
-    "description": "Detail showing net amount loss",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "netAmountMore": "• Net amount more: {amount} {currency}",
-  "@netAmountMore": {
-    "description": "Detail showing net amount gain",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "feesLess": "• Fees less: {amount} {currency}",
-  "@feesLess": {
-    "description": "Detail showing fee savings",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "feesMore": "• Fees more: {amount} {currency}",
-  "@feesMore": {
-    "description": "Detail showing additional fees",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "optimizationCostsMoreFees": "Optimization costs {amount} {currency} more in fees",
-  "@optimizationCostsMoreFees": {
-    "description": "Message when optimization costs more than single transaction",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "dueToTransactionConstraints": "• This is due to transaction constraints (min: {min}, max: {max})",
-  "@dueToTransactionConstraints": {
-    "description": "Explanation for optimization cost due to transaction limits",
-    "placeholders": {
-      "min": {
-        "type": "String"
-      },
-      "max": {
-        "type": "String"
-      }
-    }
-  },
   "exceedsEnteredAmount": "Exceeds entered amount",
-  "@exceedsAvailableBudget": {
-    "description": "Warning that result exceeds available budget"
-  },
-  "youSaveFees": "You save {amount} {currency} in fees",
-  "@youSaveFees": {
-    "description": "Message showing savings from optimization",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "totalSavingsWithOptimization": "Total savings with optimization: {amount} {currency}",
-  "@totalSavingsWithOptimization": {
-    "description": "Summary of total savings achieved with optimization",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "transactionGainsVsOptimized": "This transaction gains {amount} {currency} compared to optimization",
-  "@transactionGainsVsOptimized": {
-    "description": "Message showing gain when a non-optimized transaction performs better",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "transactionLosesVsOptimized": "This transaction loses {amount} {currency} compared to optimization",
-  "@transactionLosesVsOptimized": {
-    "description": "Message showing loss when a non-optimized transaction performs worse",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "transactionSameResultAsOptimized": "This transaction has the same result as optimization",
-  "@transactionSameResultAsOptimized": {
-    "description": "Message showing when a non-optimized transaction has the same result as optimization",
-    "placeholders": {}
-  },
-  "noValidIntervalForComparison": "The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.",
-  "@noValidIntervalForComparison": {
-    "description": "Message displayed when the entered amount is not within any valid fee interval for comparison",
-    "placeholders": {}
-  },
-  "optimizationBudgetTooSmall": "The amount is too small for any transaction with this provider.",
+  "optimizationBudgetTooSmall": "The amount is too small for a transaction with this grid.",
   "@optimizationBudgetTooSmall": {
     "description": "Optimizer / data validation message"
   },
-  "optimizationConstraintsUnsatisfiable": "No plan satisfies the transaction range for this amount.",
+  "optimizationConstraintsUnsatisfiable": "No split respects this number of transactions for this amount.",
   "@optimizationConstraintsUnsatisfiable": {
     "description": "Optimizer / data validation message"
   },
-  "optimizationNotProven": "Very large search: this plan is excellent, but its optimality could not be fully verified.",
+  "optimizationNotProven": "Very long search: this split is excellent but could not be proven to be the best.",
   "@optimizationNotProven": {
     "description": "Optimizer / data validation message"
   },
-  "feeIntervalOverlaps": "This interval overlaps an existing interval ({range})",
+  "feeIntervalOverlaps": "This tier overlaps an existing tier ({range}).",
   "@feeIntervalOverlaps": {
     "description": "Optimizer / data validation message",
     "placeholders": {
@@ -1933,40 +577,540 @@
       }
     }
   },
-  "providerNameAlreadyExists": "A provider with this name already exists",
-  "@providerNameAlreadyExists": {
-    "description": "Optimizer / data validation message"
-  },
-  "baseCurrencyCannotBeDeleted": "Ariary is the base currency and cannot be deleted",
-  "@baseCurrencyCannotBeDeleted": {
-    "description": "Optimizer / data validation message"
-  },
-  "baseCurrencyRateIsFixed": "The rate of the base currency is always 1",
-  "@baseCurrencyRateIsFixed": {
-    "description": "Optimizer / data validation message"
-  },
-  "failedToUpdateFeeInterval": "Failed to update fee interval",
-  "@failedToUpdateFeeInterval": {
-    "description": "Optimizer / data validation message"
-  },
-  "failedToDeleteFeeIntervals": "Failed to delete fee intervals",
+  "failedToDeleteFeeIntervals": "Could not delete the tier",
   "@failedToDeleteFeeIntervals": {
-    "description": "Optimizer / data validation message"
-  },
-  "failedToCreateProvider": "Failed to create provider",
-  "@failedToCreateProvider": {
     "description": "Optimizer / data validation message"
   },
   "failedToSaveChanges": "Failed to save changes",
   "@failedToSaveChanges": {
     "description": "Optimizer / data validation message"
   },
-  "failedToLoadData": "Failed to load data",
-  "@failedToLoadData": {
-    "description": "Optimizer / data validation message"
+  "tabOptimize": "Optimize",
+  "@tabOptimize": {
+    "description": "UI redesign"
   },
-  "currencyCodeAlreadyExists": "A currency with this code already exists",
-  "@currencyCodeAlreadyExists": {
-    "description": "Optimizer / data validation message"
-  }
+  "optimizeTitle": "Pay less in fees",
+  "@optimizeTitle": {
+    "description": "UI redesign"
+  },
+  "optimizeSubtitle": "Feezer splits your amount into the transactions that cost the least.",
+  "@optimizeSubtitle": {
+    "description": "UI redesign"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "UI redesign"
+  },
+  "amountAvailable": "Amount available",
+  "@amountAvailable": {
+    "description": "UI redesign"
+  },
+  "amountHelper": "Fees included: the total that will leave your account.",
+  "@amountHelper": {
+    "description": "UI redesign"
+  },
+  "transferCount": "Number of transfers",
+  "@transferCount": {
+    "description": "UI redesign"
+  },
+  "transferCountHelp": "Optional. Limit how many transfers the plan may use.",
+  "@transferCountHelp": {
+    "description": "UI redesign"
+  },
+  "transferCountFree": "No limit",
+  "@transferCountFree": {
+    "description": "UI redesign"
+  },
+  "transferCountExactly": "Exactly {count}",
+  "@transferCountExactly": {
+    "description": "UI redesign",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transferCountRange": "Between {min} and {max}",
+  "@transferCountRange": {
+    "description": "UI redesign",
+    "placeholders": {
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "transferCountAtLeast": "At least {count}",
+  "@transferCountAtLeast": {
+    "description": "UI redesign",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "transferCountAtMost": "At most {count}",
+  "@transferCountAtMost": {
+    "description": "UI redesign",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "minimumShort": "Minimum",
+  "@minimumShort": {
+    "description": "UI redesign"
+  },
+  "maximumShort": "Maximum",
+  "@maximumShort": {
+    "description": "UI redesign"
+  },
+  "anyCount": "Any",
+  "@anyCount": {
+    "description": "UI redesign"
+  },
+  "recipientReceives": "The recipient receives",
+  "@recipientReceives": {
+    "description": "UI redesign"
+  },
+  "bestSplit": "Optimal",
+  "@bestSplit": {
+    "description": "UI redesign"
+  },
+  "goodSplit": "Very good",
+  "@goodSplit": {
+    "description": "UI redesign"
+  },
+  "transferCountLabel": "{count, plural, =1{1 transfer} other{{count} transfers}}",
+  "@transferCountLabel": {
+    "description": "UI redesign",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feesLabel": "Fees",
+  "@feesLabel": {
+    "description": "UI redesign"
+  },
+  "debitedLabel": "Debited",
+  "@debitedLabel": {
+    "description": "UI redesign"
+  },
+  "leftLabel": "Left",
+  "@leftLabel": {
+    "description": "UI redesign"
+  },
+  "gainTitle": "+{amount} more received",
+  "@gainTitle": {
+    "description": "UI redesign",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "gainVsClassic": "Compared to sending the largest possible amount each time.",
+  "@gainVsClassic": {
+    "description": "UI redesign"
+  },
+  "feesSavedTitle": "{amount} of fees saved",
+  "@feesSavedTitle": {
+    "description": "UI redesign",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "feesSavedVsClassic": "The usual way would cost more for the same amount.",
+  "@feesSavedVsClassic": {
+    "description": "UI redesign"
+  },
+  "alreadyOptimalTitle": "The usual way is already the best",
+  "@alreadyOptimalTitle": {
+    "description": "UI redesign"
+  },
+  "alreadyOptimalMessage": "For this amount, splitting brings nothing more.",
+  "@alreadyOptimalMessage": {
+    "description": "UI redesign"
+  },
+  "limitCost": "Without this limit, {amount} more would be received.",
+  "@limitCost": {
+    "description": "UI redesign",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "limitFree": "This limit costs you nothing here.",
+  "@limitFree": {
+    "description": "UI redesign"
+  },
+  "nearOptimalTitle": "Very large amount",
+  "@nearOptimalTitle": {
+    "description": "UI redesign"
+  },
+  "planTitle": "Your transfer plan",
+  "@planTitle": {
+    "description": "UI redesign"
+  },
+  "sendAmount": "Send {amount}",
+  "@sendAmount": {
+    "description": "UI redesign",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "feePerTransfer": "fee {amount} per transfer",
+  "@feePerTransfer": {
+    "description": "UI redesign",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "compareTitle": "Comparison",
+  "@compareTitle": {
+    "description": "UI redesign"
+  },
+  "optimizedColumn": "Optimized",
+  "@optimizedColumn": {
+    "description": "UI redesign"
+  },
+  "classicColumn": "Usual",
+  "@classicColumn": {
+    "description": "UI redesign"
+  },
+  "receivedLabel": "Received",
+  "@receivedLabel": {
+    "description": "UI redesign"
+  },
+  "transfersLabel": "Transfers",
+  "@transfersLabel": {
+    "description": "UI redesign"
+  },
+  "classicExplanation": "Usual way: send the largest possible amount, then the rest.",
+  "@classicExplanation": {
+    "description": "UI redesign"
+  },
+  "sameAmountByHand": "Same amount received, usual way",
+  "@sameAmountByHand": {
+    "description": "UI redesign"
+  },
+  "sameAmountByHandDetail": "To get {net}, the usual way costs {fees} in fees, i.e. {total} debited.",
+  "@sameAmountByHandDetail": {
+    "description": "UI redesign",
+    "placeholders": {
+      "net": {
+        "type": "String"
+      },
+      "fees": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "cannotSplitByHand": "The usual way cannot reach this amount.",
+  "@cannotSplitByHand": {
+    "description": "UI redesign"
+  },
+  "classicPlan": "Usual plan",
+  "@classicPlan": {
+    "description": "UI redesign"
+  },
+  "showDetails": "Show details",
+  "@showDetails": {
+    "description": "UI redesign"
+  },
+  "showLess": "Hide details",
+  "@showLess": {
+    "description": "UI redesign"
+  },
+  "noProvidersYet": "No grid yet",
+  "@noProvidersYet": {
+    "description": "UI redesign"
+  },
+  "noProvidersMessage": "Update the official fees, or add your own grid.",
+  "@noProvidersMessage": {
+    "description": "UI redesign"
+  },
+  "tierCount": "{count, plural, =0{No tier} =1{1 tier} other{{count} tiers}}",
+  "@tierCount": {
+    "description": "UI redesign",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "feesFrom": "fees from {amount}",
+  "@feesFrom": {
+    "description": "UI redesign",
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "providerNameHint": "e.g. MVola, Orange Money, my bank",
+  "@providerNameHint": {
+    "description": "UI redesign"
+  },
+  "descriptionOptional": "Description (optional)",
+  "@descriptionOptional": {
+    "description": "UI redesign"
+  },
+  "feeGrid": "Fee grid",
+  "@feeGrid": {
+    "description": "UI redesign"
+  },
+  "amountRange": "Amount sent",
+  "@amountRange": {
+    "description": "UI redesign"
+  },
+  "noIntervalsMessage": "Add the tiers of this grid to optimize your transactions.",
+  "@noIntervalsMessage": {
+    "description": "UI redesign"
+  },
+  "gridHint": "Tap a tier to edit or delete it.",
+  "@gridHint": {
+    "description": "UI redesign"
+  },
+  "intervalFormHelp": "The fee applies when the amount sent is between the minimum and the maximum (included).",
+  "@intervalFormHelp": {
+    "description": "UI redesign"
+  },
+  "downloadingFees": "Reading the published fee grids…",
+  "@downloadingFees": {
+    "description": "UI redesign"
+  },
+  "feesDownloadFailed": "Check your connection and try again.",
+  "@feesDownloadFailed": {
+    "description": "UI redesign"
+  },
+  "feesAlreadyUpToDate": "Your fees are up to date",
+  "@feesAlreadyUpToDate": {
+    "description": "UI redesign"
+  },
+  "gridsOthersUnchanged": "Your other grids do not change.",
+  "@gridsOthersUnchanged": {
+    "description": "UI redesign"
+  },
+  "updateAction": "Update",
+  "@updateAction": {
+    "description": "UI redesign"
+  },
+  "feesUpdatedSuccessfully": "Fees updated",
+  "@feesUpdatedSuccessfully": {
+    "description": "UI redesign"
+  },
+  "importExportSubtitle": "Back up or share your grids (CSV)",
+  "@importExportSubtitle": {
+    "description": "UI redesign"
+  },
+  "replayIntroduction": "Replay the introduction",
+  "@replayIntroduction": {
+    "description": "UI redesign"
+  },
+  "faqFeeUpdate": "Where do the fees come from?",
+  "@faqFeeUpdate": {
+    "description": "UI redesign"
+  },
+  "faqFeeUpdateAnswer": "Every day, the public feezer-fee-tables project reads the official grids on mvola.mg and orange.mg. The Airtel grid is copied by hand from its rates, because its website cannot be read automatically. \"Update\" downloads these grids; your other grids stay the same.",
+  "@faqFeeUpdateAnswer": {
+    "description": "UI redesign"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "UI redesign"
+  },
+  "pasteCsv": "Paste CSV text",
+  "@pasteCsv": {
+    "description": "UI redesign"
+  },
+  "chooseCsvFile": "Choose a CSV file",
+  "@chooseCsvFile": {
+    "description": "UI redesign"
+  },
+  "csvTemplate": "Template",
+  "@csvTemplate": {
+    "description": "UI redesign"
+  },
+  "csvTemplateDescription": "Start from a ready-made file with the expected columns.",
+  "@csvTemplateDescription": {
+    "description": "UI redesign"
+  },
+  "downloadTemplate": "Download the template",
+  "@downloadTemplate": {
+    "description": "UI redesign"
+  },
+  "csvFormat": "File format",
+  "@csvFormat": {
+    "description": "UI redesign"
+  },
+  "csvFormatHelp": "One row per tier. Rows with the same provider_name and operation form one grid. operation is withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance or transfer_unregistered (optional); fee_type is fixed or percentage. Commas or semicolons are accepted.",
+  "@csvFormatHelp": {
+    "description": "UI redesign"
+  },
+  "opWithdrawal": "Withdrawal",
+  "opTransferSame": "Transfer",
+  "opTransferSameApp": "Transfer in the app",
+  "opTransferOther": "To another operator",
+  "opTransferMicrofinance": "To a microfinance",
+  "opTransferUnregistered": "To a non-subscriber",
+  "opCustom": "Other",
+  "operators": "Operators",
+  "operatorsSubtitle": "The fee grids used for your calculations.",
+  "operatorLabel": "Operator",
+  "operationLabel": "Operation",
+  "operatorName": "Operator name",
+  "gridCount": "{count, plural, =1{1 grid} other{{count} grids}}",
+  "@gridCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "customGrids": "Added by you",
+  "editedTag": "edited",
+  "newGrid": "New grid",
+  "editGrid": "Edit the grid",
+  "createGrid": "Create the grid",
+  "gridCreated": "Grid created",
+  "gridUpdated": "Grid updated",
+  "gridDeleted": "Grid deleted",
+  "gridAlreadyExists": "The grid {name} already exists.",
+  "@gridAlreadyExists": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteGridTitle": "Delete the grid",
+  "deleteGridMessage": "The grid {name} and its tiers will be deleted.",
+  "@deleteGridMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizeWithGrid": "Optimize with this grid",
+  "moreOptions": "More options",
+  "officialFees": "Official fees",
+  "feesCheckedOn": "Checked on the operators' websites on {date}",
+  "@feesCheckedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "feesNeverChecked": "Download the latest fees published by the operators.",
+  "sourceOfficial": "Official grid · {host}",
+  "@sourceOfficial": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceOfficialDated": "Official grid · {host} · {date}",
+  "@sourceOfficialDated": {
+    "placeholders": {
+      "host": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceManual": "Grid copied from the operator's rates",
+  "sourceManualDated": "Grid copied from the operator's rates · {date}",
+  "@sourceManualDated": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "sourceEdited": "Grid edited by you",
+  "openSource": "See the official page",
+  "editPublishedGridWarning": "This grid comes from the operator's rates. If you update the fees later, your change will be replaced.",
+  "feesSection": "Fees",
+  "updateFeesTitle": "Update the fees",
+  "feesDownloadFailedTitle": "Download failed",
+  "updateReviewIntro": "The operators published new fees. Here is what changes:",
+  "effectiveSince": "in force since {date}",
+  "@effectiveSince": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "newTag": "New",
+  "updatedTag": "Updated",
+  "later": "Later",
+  "retry": "Try again",
+  "withdrawalCount": "Number of withdrawals",
+  "withdrawalCountHelp": "Optional. Limit how many withdrawals the plan may use.",
+  "cashYouReceive": "You receive in cash",
+  "withdrawalCountLabel": "{count, plural, =1{1 withdrawal} other{{count} withdrawals}}",
+  "@withdrawalCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "withdrawalsLabel": "Withdrawals",
+  "withdrawAmount": "Withdraw {amount}",
+  "@withdrawAmount": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "feePerWithdrawal": "fee {amount} per withdrawal",
+  "@feePerWithdrawal": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "planTitleWithdrawal": "Your withdrawal plan",
+  "gainVsClassicWithdrawal": "Compared to withdrawing the largest possible amount each time.",
+  "classicExplanationWithdrawal": "Usual way: withdraw the largest possible amount, then the rest.",
+  "amountWithdrawn": "Amount withdrawn",
+  "noTiersYet": "No tier yet",
+  "intervalFormHelpWithdrawal": "The fee applies when the amount withdrawn is between the minimum and the maximum (included).",
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "free": "Free",
+  "failedToLoadData": "Could not load the data",
+  "failedToOpenLink": "Could not open the link",
+  "pressAgainToExit": "Press again to exit"
 }

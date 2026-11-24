@@ -9,28 +9,25 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Feezer';
-
-  @override
-  String get onboardingTitle1 => 'Stop Losing Money to Mobile Money Fees';
+  String get onboardingTitle1 => 'Pay less in fees';
 
   @override
   String get onboardingDescription1 =>
-      'Mobile money fees can add up quickly. Feezer helps you minimize costs on every transaction.';
+      'Enter an amount: Feezer splits it into the transactions that cost the least in fees.';
 
   @override
-  String get onboardingTitle2 => 'Smart Mobile Money Optimization';
+  String get onboardingTitle2 => 'Real operator fees';
 
   @override
   String get onboardingDescription2 =>
-      'Automatically calculate the most cost-effective way to handle your mobile money transfers and payments.';
+      'MVola, Orange Money, Airtel Money: the grids come from the operators\' official rates and update in one tap.';
 
   @override
-  String get onboardingTitle3 => 'Save More on Mobile Transactions';
+  String get onboardingTitle3 => 'Withdrawals and transfers';
 
   @override
   String get onboardingDescription3 =>
-      'Get personalized mobile money fee optimization strategies and watch your savings grow with every transaction.';
+      'Choose the operator and the operation. Your data stays on your phone, even offline.';
 
   @override
   String get next => 'Next';
@@ -39,95 +36,34 @@ class AppLocalizationsEn extends AppLocalizations {
   String get skip => 'Skip';
 
   @override
-  String get getStarted => 'Get Started';
-
-  @override
-  String get back => 'Back';
+  String get getStarted => 'Get started';
 
   @override
   String get cancel => 'Cancel';
 
   @override
-  String get save => 'Save';
-
-  @override
   String get delete => 'Delete';
-
-  @override
-  String get edit => 'Edit';
-
-  @override
-  String get create => 'Create';
-
-  @override
-  String get confirm => 'Confirm';
-
-  @override
-  String get optimizeFee => 'Optimize Fee';
-
-  @override
-  String get providers => 'Providers';
 
   @override
   String get settings => 'Settings';
 
   @override
-  String get createInterval => 'Create Interval';
+  String get createInterval => 'Add the tier';
 
   @override
   String get optimize => 'Optimize';
 
   @override
-  String get amount => 'Amount';
-
-  @override
-  String get provider => 'Provider';
-
-  @override
-  String get minTransactions => 'Min Transactions';
-
-  @override
-  String get maxTransactions => 'Max Transactions';
-
-  @override
   String get pleaseEnterValidAmount => 'Please enter a valid amount';
 
   @override
-  String get pleaseSelectProvider => 'Please select a provider';
-
-  @override
-  String get invalidTransactionRange =>
-      'Min transactions must be less than max transactions';
-
-  @override
-  String get mvola => 'MVola';
-
-  @override
-  String get orangeMoney => 'Orange Money';
-
-  @override
-  String get airtelMoney => 'Airtel Money';
-
-  @override
-  String get mobileFinancialServices => 'Mobile financial services';
+  String get pleaseSelectProvider => 'Choose an operator';
 
   @override
   String get appearance => 'Appearance';
 
   @override
-  String get theme => 'Theme';
-
-  @override
   String get language => 'Language';
-
-  @override
-  String get english => 'English';
-
-  @override
-  String get french => 'French';
-
-  @override
-  String get malagasy => 'Malagasy';
 
   @override
   String get system => 'System';
@@ -139,181 +75,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dark => 'Dark';
 
   @override
-  String get comingSoon => 'Coming Soon';
-
-  @override
-  String get thisFeatureWillBeAvailableSoon =>
-      'This feature will be available soon!';
-
-  @override
-  String get feeIntervals => 'Fee intervals';
-
-  @override
-  String get newFeeInterval => 'New Fee Interval';
-
-  @override
-  String get minAmount => 'Min Amount';
-
-  @override
-  String get maxAmount => 'Max Amount';
-
-  @override
-  String get feePercentage => 'Fee Percentage';
-
-  @override
-  String get fixedFee => 'Fixed Fee';
-
-  @override
-  String get pleaseEnterMinAmount => 'Please enter minimum amount';
-
-  @override
-  String get pleaseEnterMaxAmount => 'Please enter maximum amount';
-
-  @override
-  String get pleaseEnterValidFeePercentage =>
-      'Please enter a valid fee percentage';
+  String get newFeeInterval => 'New tier';
 
   @override
   String get maxAmountMustBeGreaterThanMinAmount =>
       'Max amount must be greater than min amount';
 
   @override
-  String get optimizationResults => 'Optimization Results';
-
-  @override
-  String get interval => 'Interval';
-
-  @override
   String get fee => 'Fee';
 
   @override
-  String get count => 'Count';
-
-  @override
-  String get total => 'Total';
-
-  @override
-  String get transactionDetails => 'Transaction Details';
-
-  @override
-  String get currencySymbol => 'Ar';
-
-  @override
-  String get totalAmount => 'Total Amount';
-
-  @override
-  String get netAmount => 'Net Amount';
-
-  @override
-  String get totalFees => 'Total fees';
-
-  @override
-  String get efficiency => 'Efficiency';
-
-  @override
-  String get operations => 'Operations';
-
-  @override
-  String get remaining => 'Remaining';
-
-  @override
   String get noOptimizationResultsFound =>
-      'No optimization results found. Please check your input parameters.';
-
-  @override
-  String get tapOptimizeToSeeResults => 'Tap \'Optimize\' to see results';
-
-  @override
-  String get error => 'Error';
-
-  @override
-  String screenNotFound(String route) {
-    return 'Screen $route not found';
-  }
-
-  @override
-  String get goHome => 'Go Home';
-
-  @override
-  String get noProvidersFound => 'No providers found';
-
-  @override
-  String get searchProviders => 'Search providers...';
-
-  @override
-  String get manageYourProviders => 'Manage your providers';
-
-  @override
-  String get centralizeProviders =>
-      'Centralize bank and mobile money partners in one place.';
-
-  @override
-  String get activeProvider => 'Active provider';
-
-  @override
-  String get activeProviders => 'Active providers';
-
-  @override
-  String get deleteThisProvider => 'Delete this provider?';
-
-  @override
-  String deleteProvidersCount(int count) {
-    return 'Delete $count providers?';
-  }
-
-  @override
-  String get deleteProvider => 'Delete Provider';
-
-  @override
-  String get deleteProviders => 'Delete Providers';
-
-  @override
-  String providerDeletedSuccessfully(num count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count providers deleted successfully',
-      one: '1 provider deleted successfully',
-    );
-    return '$_temp0';
-  }
-
-  @override
-  String get deleteProviderWarning =>
-      'This will also delete all associated fee intervals.';
-
-  @override
-  String get editProvider => 'Edit Provider';
-
-  @override
-  String get providerName => 'Provider Name';
-
-  @override
-  String get description => 'Description';
-
-  @override
-  String get newProvider => 'New Provider';
-
-  @override
-  String get createNewProvider => 'Create New Provider';
-
-  @override
-  String get enterProviderName => 'Enter provider name';
-
-  @override
-  String get providerCreatedSuccessfully => 'Provider created successfully';
-
-  @override
-  String get systemDefault => 'System default';
-
-  @override
-  String get general => 'General';
+      'No result. Check the amount and the chosen grid.';
 
   @override
   String get about => 'About';
-
-  @override
-  String get version => 'Version';
 
   @override
   String get faqAndContact => 'FAQ and contact';
@@ -322,209 +98,96 @@ class AppLocalizationsEn extends AppLocalizations {
   String get termsOfUse => 'Terms of Use';
 
   @override
-  String get termsAndPrivacyPolicy => 'Terms and privacy policy';
-
-  @override
   String get termsIntroductionTitle => 'Introduction';
 
   @override
   String get termsIntroductionContent =>
-      'Welcome to Feezer! These Terms of Use govern your use of our mobile application designed to help you minimize mobile money fees. By using Feezer, you agree to be bound by these terms. Please read them carefully before using our service.';
+      'These terms apply to the Feezer app, which helps you reduce mobile money fees. By using Feezer, you accept them.';
 
   @override
-  String get termsAcceptanceTitle => 'Acceptance of Terms';
+  String get termsAcceptanceTitle => 'Acceptance';
 
   @override
   String get termsAcceptanceContent =>
-      'By accessing and using Feezer, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.';
+      'If you do not accept these terms, do not use the app. They may change with new versions of Feezer.';
 
   @override
-  String get termsResponsibilitiesTitle => 'User Responsibilities';
-
-  @override
-  String get termsResponsibilitiesContent =>
-      'You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information when using our service and to update this information as necessary. You must ensure that you comply with the terms and conditions of your mobile money service provider.';
-
-  @override
-  String get termsServiceTitle => 'Service Description';
+  String get termsServiceTitle => 'The service';
 
   @override
   String get termsServiceContent =>
-      'Feezer is a fee minimization tool that helps you calculate and optimize mobile money transaction costs. Our service provides fee calculations, transaction optimization suggestions, and educational content about mobile money fees. We strive to provide accurate information, but all calculations are estimates and should be verified with your mobile money service provider.';
+      'From fee grids, Feezer calculates how to split a withdrawal or a transfer to pay less in fees. The official grids are read on the operators\' websites and may change at any time: always check the fees with your operator.';
 
   @override
-  String get termsPrivacyTitle => 'Privacy and Data Protection';
+  String get termsPrivacyTitle => 'Privacy';
 
   @override
   String get termsPrivacyContent =>
-      'Your privacy is important to us. Feezer collects minimal personal information necessary to provide our service. We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except as described in our Privacy Policy. We implement appropriate security measures to protect your data against unauthorized access.';
+      'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone. Updating the fees downloads a public file without sending your data.';
 
   @override
-  String get termsLiabilityTitle => 'Limitation of Liability';
+  String get termsLiabilityTitle => 'Liability';
 
   @override
   String get termsLiabilityContent =>
-      'Feezer provides fee calculation services for informational purposes only. We are not responsible for any financial losses, damages, or decisions made based on the information provided by our application. Users should always verify calculations with their mobile money service provider and understand the fees charged by their provider. We are not affiliated with any mobile money service provider.';
+      'Results are given for information only. Feezer is not affiliated with any operator and is not responsible for the fees actually charged, nor for decisions made from its calculations.';
 
   @override
-  String get termsTerminationTitle => 'Termination';
+  String get termsTerminationTitle => 'Stopping';
 
   @override
   String get termsTerminationContent =>
-      'We reserve the right to terminate or suspend your account and access to our service at our sole discretion, without prior notice, for conduct that we believe violates these Terms of Use or is harmful to other users, us, or third parties, or for any other reason.';
+      'You can stop using Feezer at any time: uninstalling the app erases its data from your phone.';
 
   @override
-  String get termsGoverningLawTitle => 'Governing Law';
+  String get termsGoverningLawTitle => 'Governing law';
 
   @override
   String get termsGoverningLawContent =>
-      'These Terms of Use shall be governed by and construed in accordance with the laws of the jurisdiction in which our service operates. Any disputes arising from these terms shall be resolved through appropriate legal channels in accordance with applicable local laws.';
+      'These terms are governed by the laws that apply where Feezer is used. Any dispute will be handled through the legal means provided by those laws.';
 
   @override
-  String get termsContactTitle => 'Contact Information';
+  String get termsContactTitle => 'Contact';
 
   @override
   String get termsContactContent =>
-      'If you have any questions about these Terms of Use, please contact us through the app\'s support section or via email at elsy.s.charles@gmail.com. We will respond to your inquiries as quickly as possible.';
+      'A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.';
 
   @override
-  String get featureComingNextVersion => 'Feature coming in the next version';
+  String get noFeeIntervalsFound =>
+      'This grid has no tier yet. Add them in the Operators tab.';
 
   @override
-  String get financialProvider => 'Financial Provider';
+  String get addFeeInterval => 'Add a tier';
 
   @override
-  String get chooseProviderToAnalyze =>
-      'Choose the provider you want to analyze';
+  String get deleteFeeIntervals => 'Delete the tier';
 
   @override
-  String get amountToOptimize => 'Amount to Optimize';
-
-  @override
-  String get enterTransactionAmountToOptimize =>
-      'Enter the transaction amount you want to optimize';
-
-  @override
-  String get transactionRange => 'Transaction Range';
-
-  @override
-  String get defineMinMaxTransactions =>
-      'Define the minimum and maximum number of transactions';
-
-  @override
-  String get readyToOptimize => 'Ready to Optimize';
-
-  @override
-  String get clickOptimizeButtonToAnalyze =>
-      'Click the Optimize button to analyze the best fee structure for your transactions';
-
-  @override
-  String get providerDetails => 'Provider details';
-
-  @override
-  String get noFeeIntervalsFound => 'No fee intervals found';
-
-  @override
-  String get feeInterval => 'Fee interval';
-
-  @override
-  String get searchByFeeRange => 'Search by Fee Range';
-
-  @override
-  String get addFeeInterval => 'Add Fee Interval';
-
-  @override
-  String get minFee => 'Min fee';
-
-  @override
-  String get maxFee => 'Max fee';
-
-  @override
-  String get deleteFeeIntervals => 'Delete Fee Intervals';
-
-  @override
-  String get createNewFeeInterval => 'Create New Fee Interval';
-
-  @override
-  String get defineNewFeeStructure =>
-      'Define a new fee structure for transaction amounts';
-
-  @override
-  String get enterMinimumAmount => 'Enter minimum amount';
-
-  @override
-  String get enterMaximumAmount => 'Enter maximum amount';
-
-  @override
-  String get enterFeeAmount => 'Enter fee amount';
-
-  @override
-  String get maxAmountMustBeGreater =>
-      'Max amount must be greater than min amount';
-
-  @override
-  String get feeIntervalCreatedSuccessfully =>
-      'Fee interval created successfully';
-
-  @override
-  String get addNewFinancialServiceProvider =>
-      'Add a new financial service provider to your list';
-
-  @override
-  String get enterDescription => 'Enter description';
-
-  @override
-  String get createProvider => 'Create Provider';
-
-  @override
-  String get clearSelection => 'Clear selection';
-
-  @override
-  String get selectAll => 'Select all';
+  String get feeIntervalCreatedSuccessfully => 'Tier added';
 
   @override
   String get icon => 'Icon';
 
   @override
-  String get tapToSelectIcon => 'Tap to select icon';
-
-  @override
-  String get clearSearch => 'Clear search';
-
-  @override
-  String get selectIcon => 'Select Icon';
-
-  @override
   String get thisFieldIsRequired => 'This field is required';
 
   @override
-  String get pressAgainToExit => 'Press again to exit';
+  String get feeIntervalUpdatedSuccessfully => 'Tier updated';
 
   @override
-  String get providerUpdatedSuccessfully => 'Provider updated successfully';
-
-  @override
-  String get feeIntervalUpdatedSuccessfully =>
-      'Fee interval updated successfully';
-
-  @override
-  String feeIntervalDeletedSuccessfully(num count) {
-    final intl.NumberFormat countNumberFormat = intl.NumberFormat.compact(
-      locale: localeName,
-    );
-    final String countString = countNumberFormat.format(count);
-
+  String feeIntervalDeletedSuccessfully(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$countString fee intervals deleted successfully',
-      one: '1 fee interval deleted successfully',
+      other: '$count tiers deleted',
+      one: 'Tier deleted',
     );
     return '$_temp0';
   }
 
   @override
-  String get editFeeInterval => 'Edit Fee Interval';
+  String get editFeeInterval => 'Edit the tier';
 
   @override
   String get minTransactionsCannotBeGreaterThanMax =>
@@ -534,210 +197,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseEnterValidFee => 'Please enter a valid fee';
 
   @override
-  String mustBeAtLeastNCharacters(int count) {
-    return 'Must be at least $count characters';
-  }
-
-  @override
-  String get enterValidNumber => 'Enter a valid number';
-
-  @override
-  String get pleaseEnterFeeAmount => 'Please enter fee amount';
-
-  @override
-  String get details => 'Details';
-
-  @override
   String get minimumAmount => 'Minimum amount';
 
   @override
   String get maximumAmount => 'Maximum amount';
 
   @override
-  String get feeAmount => 'Fee amount';
-
-  @override
-  String get traditionalBanking => 'Traditional banking';
-
-  @override
-  String get mobileMoney => 'Mobile money';
-
-  @override
-  String get selected => 'selected';
-
-  @override
-  String get feeOptimizer => 'Fee Optimizer';
-
-  @override
-  String get totalFeeIntervals => 'Total Fee Intervals';
-
-  @override
-  String get helpAndSupport => 'Help & Support';
+  String get helpAndSupport => 'Help & support';
 
   @override
   String get addNewProvider => 'Add new provider';
 
   @override
-  String get tryAdjustingYourSearchRange => 'Try adjusting your search range';
-
-  @override
-  String get chooseTheme => 'Choose Theme';
-
-  @override
-  String get alwaysUseLightTheme => 'Always use light theme';
-
-  @override
-  String get alwaysUseDarkTheme => 'Always use dark theme';
-
-  @override
-  String get followSystemSettings => 'Follow system settings';
-
-  @override
-  String get saveChanges => 'Save Changes';
-
-  @override
-  String get minimumAmountAr => 'Minimum Amount (Ar)';
-
-  @override
-  String get maximumAmountAr => 'Maximum Amount (Ar)';
-
-  @override
-  String get feeAr => 'Fee (Ar)';
+  String get saveChanges => 'Save changes';
 
   @override
   String confirmDeleteIntervals(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 's',
-      one: '',
+      other: 'These $count tiers will be removed from the grid.',
+      one: 'This tier will be removed from the grid.',
     );
-    return 'Are you sure you want to delete $count selected interval$_temp0?';
-  }
-
-  @override
-  String fieldIsRequired(String fieldName) {
-    return '$fieldName is required';
-  }
-
-  @override
-  String get mustBeGreaterThanZero => 'Must be greater than 0';
-
-  @override
-  String mustBeLessThanNCharacters(int count) {
-    return 'Must be less than $count characters';
-  }
-
-  @override
-  String get deleteCurrencies => 'Delete Currencies';
-
-  @override
-  String get currencyDeletedSuccessfully => 'Currency deleted successfully';
-
-  @override
-  String get currencies => 'Currencies';
-
-  @override
-  String get searchCurrencies => 'Search currencies...';
-
-  @override
-  String get noCurrenciesFound => 'No currencies found';
-
-  @override
-  String get centralizeCurrencies => 'Centralize your currencies in one place';
-
-  @override
-  String get addNewCurrency => 'Add new currency';
-
-  @override
-  String get newCurrency => 'New Currency';
-
-  @override
-  String get createNewCurrency => 'Create New Currency';
-
-  @override
-  String get currencyCode => 'Currency Code';
-
-  @override
-  String get currencyName => 'Currency Name';
-
-  @override
-  String get currencySymbolLabel => 'Currency Symbol';
-
-  @override
-  String get exchangeRate => 'Exchange Rate';
-
-  @override
-  String get currencyCreatedSuccessfully => 'Currency created successfully';
-
-  @override
-  String get manageYourCurrencies => 'Manage your currencies';
-
-  @override
-  String get totalCurrencies => 'Total Currencies';
-
-  @override
-  String get activeCurrencies => 'Active Currencies';
-
-  @override
-  String get editCurrency => 'Edit Currency';
-
-  @override
-  String get currencyUpdatedSuccessfully => 'Currency updated successfully';
-
-  @override
-  String get addNewCurrencyDescription =>
-      'Add a new currency to your collection';
-
-  @override
-  String get currencyCodeMustBe3Characters =>
-      'Currency code must be exactly 3 characters';
-
-  @override
-  String get currencyCodeMustContainOnlyUppercase =>
-      'Currency code must contain only uppercase letters';
-
-  @override
-  String get pleaseEnterValidPositiveRate =>
-      'Please enter a valid positive rate';
-
-  @override
-  String get failedToCreateCurrency => 'Failed to create currency';
-
-  @override
-  String get failedToUpdateCurrency => 'Failed to update currency';
-
-  @override
-  String get codeMustBe3Characters => 'Code must be 3 characters';
-
-  @override
-  String get invalidRate => 'Invalid rate';
-
-  @override
-  String get rateLabel => 'Rate:';
-
-  @override
-  String confirmDeleteCurrencies(int count) {
-    return 'Are you sure you want to delete $count currencies?';
-  }
-
-  @override
-  String operationCount(int count) {
-    return '$count operations';
-  }
-
-  @override
-  String get optimizationFailedNoValidSolution =>
-      'Optimization failed: No valid solution found';
-
-  @override
-  String optimizationIncomplete(String percentage) {
-    return 'Optimization incomplete: Only $percentage% of amount covered. Consider adjusting transaction limits or fee intervals.';
-  }
-
-  @override
-  String amountExceedsMaximumLimit(String amount, String currency) {
-    return 'Amount exceeds maximum limit ($amount $currency)';
+    return '$_temp0';
   }
 
   @override
@@ -745,83 +227,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Failed to calculate optimization';
 
   @override
-  String get amountExceedsMaximumAllowedLimit =>
-      'Amount exceeds maximum allowed limit';
+  String get importExportData => 'Import / export';
 
   @override
-  String get invalidTransactionRangeConstraints =>
-      'Invalid transaction range constraints';
+  String get importData => 'Import';
 
   @override
-  String get noValidFeeIntervalsAvailable => 'No valid fee intervals available';
+  String get exportData => 'Export';
 
   @override
-  String get amountMustBePositive => 'Amount must be positive';
-
-  @override
-  String get amountTooHigh => 'Amount too high';
-
-  @override
-  String get noOptionsAvailable => 'No options available';
-
-  @override
-  String get maxOperationsMustBePositive => 'maxOperations must be >= 0';
-
-  @override
-  String get minOperationsMustBePositive => 'minOperations must be >= 0';
-
-  @override
-  String get minOperationsCannotBeGreaterThanMaxOperations =>
-      'minOperations cannot be greater than maxOperations';
-
-  @override
-  String get importExportData => 'Import/Export Data';
-
-  @override
-  String get csvImportExportInfo => 'CSV Data Management';
-
-  @override
-  String get csvImportExportDescription =>
-      'Import or export your providers and fee intervals using CSV files';
-
-  @override
-  String get importData => 'Import Data';
-
-  @override
-  String get exportData => 'Export Data';
-
-  @override
-  String get templates => 'CSV Templates';
-
-  @override
-  String get exportCombined => 'Export Combined';
-
-  @override
-  String get exportCombinedDescription =>
-      'Export providers with their fee intervals';
-
-  @override
-  String get downloadProviderTemplate => 'Provider Template';
-
-  @override
-  String get csvTemplateForProviders =>
-      'Download CSV template for importing providers';
-
-  @override
-  String get downloadFeeTemplate => 'Fee Intervals Template';
-
-  @override
-  String get csvTemplateForFees => 'Download CSV template for importing fees';
-
-  @override
-  String get downloadCombinedTemplate => 'Combined Template';
-
-  @override
-  String get csvTemplateForCombined =>
-      'Download CSV template for combined import';
-
-  @override
-  String get importSuccessful => 'Import Successful';
+  String get importSuccessful => 'Import done';
 
   @override
   String importFailed(String error) {
@@ -829,30 +244,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get exportSuccessful => 'Export successful';
-
-  @override
   String exportFailed(String error) {
     return 'Export failed: $error';
   }
 
   @override
-  String get templateDownloaded => 'Template Downloaded';
-
-  @override
-  String get failedToDownloadTemplate => 'Failed to download template';
-
-  @override
-  String get failedToReadFile => 'Failed to read file';
-
-  @override
   String providersImported(int count) {
-    return '$count provider(s) imported';
+    return '$count grid(s) imported';
   }
 
   @override
   String feeIntervalsImported(int count) {
-    return '$count fee interval(s) imported';
+    return '$count tier(s) imported';
   }
 
   @override
@@ -861,70 +264,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get dataManagement => 'Data Management';
-
-  @override
-  String get backup => 'Backup';
-
-  @override
-  String get backupYourData => 'Backup your providers and fees';
-
-  @override
-  String get reset => 'Reset';
-
-  @override
-  String get clearAllData => 'Clear all data';
-
-  @override
-  String get confirmReset => 'Confirm Reset';
-
-  @override
-  String get resetWarningMessage =>
-      'This will permanently delete all your providers and fee intervals. This action cannot be undone.';
-
-  @override
-  String get dataResetSuccessful => 'Data reset successful';
-
-  @override
-  String get resetFailed => 'Reset failed';
-
-  @override
-  String get csvManagement => 'CSV Management';
-
-  @override
-  String get previewTemplate => 'Preview Template';
-
-  @override
-  String get preview => 'Preview';
-
-  @override
-  String get download => 'Download';
-
-  @override
-  String get templatePreview => 'Template Preview';
-
-  @override
-  String get close => 'Close';
-
-  @override
   String get importDataDescription =>
-      'Import providers and fee intervals from CSV file. The system will automatically detect the data type based on columns.';
+      'Add grids from a CSV file (one row per tier).';
 
   @override
   String get exportDataDescription =>
-      'Export all providers and their fee intervals to a combined CSV file.';
+      'Save all your grids and their tiers in a CSV file.';
 
   @override
   String get csvContentCannotBeEmpty => 'CSV content cannot be empty';
-
-  @override
-  String get clickImportToSelectFile => 'Click to select a CSV file';
-
-  @override
-  String get copy => 'Copy';
-
-  @override
-  String get copiedToClipboard => 'Copied to clipboard';
 
   @override
   String get chooseWhereToSave => 'Choose where to save the file';
@@ -936,30 +284,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get failedToSaveFile => 'Failed to save file';
 
   @override
-  String get file => 'File';
-
-  @override
-  String get text => 'Text';
-
-  @override
-  String get pasteCsvContentHere => 'Paste your CSV content here...';
-
-  @override
-  String get fileSelected => 'File Selected';
-
-  @override
-  String get csvFilesOnly => 'CSV files only';
-
-  @override
-  String get csvContentPreview => 'CSV Content Preview:';
-
-  @override
-  String get failedToSelectFile => 'Failed to select file';
-
-  @override
-  String get failedToPreviewTemplate => 'Failed to preview template';
-
-  @override
   String get csvFileIsEmpty => 'CSV file is empty';
 
   @override
@@ -967,32 +291,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String rowProviderNameRequired(int rowNumber) {
-    return 'Row $rowNumber: Provider name is required';
+    return 'Row $rowNumber: the operator name is required';
   }
 
   @override
   String rowProviderAlreadyExists(int rowNumber, String name) {
-    return 'Row $rowNumber: Provider \"$name\" already exists';
-  }
-
-  @override
-  String rowGenericError(int rowNumber, String error) {
-    return 'Row $rowNumber: $error';
-  }
-
-  @override
-  String rowProviderNameRequiredFee(int rowNumber) {
-    return 'Row $rowNumber: Provider name is required';
-  }
-
-  @override
-  String rowProviderNotFound(int rowNumber, String providerName) {
-    return 'Row $rowNumber: Provider \"$providerName\" not found';
+    return 'Row $rowNumber: the grid \"$name\" already exists';
   }
 
   @override
   String rowIntervalOverlaps(int rowNumber, String overlap) {
-    return 'Row $rowNumber: Interval overlaps with existing interval ($overlap)';
+    return 'Row $rowNumber: this tier overlaps an existing tier ($overlap)';
   }
 
   @override
@@ -1022,408 +331,622 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
-    return 'Imported $providersCount provider(s) and $feesCount fee interval(s)';
-  }
-
-  @override
-  String providerInvalidProviderId(String providerName) {
-    return 'Provider \"$providerName\": Invalid provider ID';
-  }
-
-  @override
-  String providerNoFeeIntervals(String providerName) {
-    return 'Provider \"$providerName\": No fee intervals found';
-  }
-
-  @override
-  String providerImportError(String providerName, String error) {
-    return 'Provider \"$providerName\": $error';
-  }
-
-  @override
-  String rowIntervalOverlapsCombined(int rowNumber, String overlap) {
-    return 'Row $rowNumber: Interval overlaps with existing interval ($overlap)';
+    return 'Imported $providersCount grid(s) and $feesCount tier(s)';
   }
 
   @override
   String get noDataToExport => 'No data to export';
 
   @override
-  String get providerNameColumnNotFound => 'Provider name column not found';
+  String get providerNameColumnNotFound => 'Operator name column not found';
 
   @override
-  String get pullToRefresh => 'Pull down to refresh';
-
-  @override
-  String get refreshing => 'Refreshing...';
-
-  @override
-  String get feeType => 'Fee Type';
-
-  @override
-  String get fixedAmount => 'Fixed Amount';
+  String get fixedAmount => 'Fixed amount';
 
   @override
   String get percentage => 'Percentage';
-
-  @override
-  String get enterPercentage => 'Enter percentage';
 
   @override
   String get percentageMustBeBetween0And100 =>
       'Percentage must be between 0 and 100';
 
   @override
-  String get invalidAmount => 'Invalid amount';
-
-  @override
-  String get pleaseEnterPercentage => 'Please enter percentage';
-
-  @override
-  String get pleaseEnterValidPercentage => 'Please enter a valid percentage';
-
-  @override
-  String get percentageCannotExceed100 => 'Percentage cannot exceed 100';
-
-  @override
-  String get searchHelpTopics => 'Search help topics...';
-
-  @override
   String get faq => 'FAQ';
 
   @override
-  String get contact => 'Contact';
-
-  @override
-  String get faqWhatIsFeeMinimizer => 'What is Feezer or Fee Minimizer?';
+  String get faqWhatIsFeeMinimizer => 'What is Feezer?';
 
   @override
   String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer or Fee Minimizer is a mobile application that helps users calculate and optimize transaction fees across different financial providers. It analyzes your transaction details and suggests the most cost-effective options to minimize mobile money fees.';
+      'Feezer works out how to split a mobile money withdrawal or transfer so you pay the least fees, using the operators\' official fee grids.';
 
   @override
-  String get faqHowToAddProvider => 'How do I add a new provider?';
+  String get faqHowToAddProvider => 'How do I add a grid?';
 
   @override
   String get faqHowToAddProviderAnswer =>
-      'To add a new provider, go to the Providers screen and tap the \'+\' button. Fill in the provider details including name, description, and fee structure. You can also import provider data using CSV files. There are no favorite providers - you have full control to add and remove providers as needed.';
+      'In the Operators tab, tap \"Add\", enter the operator name and the operation, then add the tiers (minimum, maximum and fee). You can also import a CSV file.';
 
   @override
-  String get faqHowToCalculateFees => 'How does fee calculation work?';
+  String get faqHowToCalculateFees => 'How is it calculated?';
 
   @override
   String get faqHowToCalculateFeesAnswer =>
-      'Enter your transaction amount and select a provider. The app will calculate all applicable fees including fixed fees, percentage fees, and minimum/maximum fees. It then shows you the total cost and suggests optimizations.';
+      'Choose the operator and the operation, then enter the amount available (fees included). Feezer tries every combination of tiers and keeps the one that delivers the most. The result is compared with the usual way: withdrawing or sending the largest possible amount each time.';
 
   @override
   String get faqMinMaxTransactionRange =>
-      'What do \'Min transactions\' and \'Max transactions\' mean?';
+      'What is the number of transactions for?';
 
   @override
   String get faqMinMaxTransactionRangeAnswer =>
-      '\'Min transactions\' and \'Max transactions\' set the minimum and maximum number of operations the optimizer may use to split your entered amount. For example, if you enter 10,000 Ar and set Min transactions = 2, the optimizer will only consider solutions that split the amount into at least 2 operations. Ensure Min ≤ Max and that the values make sense for your intended split. This constrains the optimizer to produce results with a number of transactions within the specified range.';
+      'It is optional. It limits how many withdrawals or transfers the split may use, for example \"at most 2\" if you do not want more than two. Feezer shows what the limit costs you.';
 
   @override
-  String get faqDataSecurity => 'Is my data secure?';
+  String get faqDataSecurity => 'Is my data shared?';
 
   @override
   String get faqDataSecurityAnswer =>
-      'Your financial data is stored locally on your device without encryption or additional security measures. This app does not provide financial-level security features. All data remains on your device and is not transmitted anywhere.';
+      'No. Your grids and amounts stay on your phone; Feezer has no account and sends nothing. Updating the fees only downloads a public file.';
 
   @override
-  String get faqOfflineMode => 'Does the app work offline?';
+  String get faqOfflineMode => 'Do I need internet?';
 
   @override
   String get faqOfflineModeAnswer =>
-      'Yes, Feezer or Fee Minimizer works completely offline. All your data and calculations are stored locally on your device. You can use all features without an internet connection.';
+      'No. Calculations run on your phone. Internet is only used to update the fees.';
 
   @override
-  String get faqCurrencyRates => 'How do currency exchange rates work?';
-
-  @override
-  String get faqCurrencyRatesAnswer =>
-      'The app does not automatically update currency exchange rates. You have full control and can manually set your own exchange rates for complete customization. This gives you total flexibility to use rates that suit your needs, and works perfectly offline.';
-
-  @override
-  String get faqExportData => 'How do I export my data?';
+  String get faqExportData => 'How do I back up my grids?';
 
   @override
   String get faqExportDataAnswer =>
-      'Go to Settings > Data Management > CSV Management. You can export providers, currencies, and fee intervals as CSV files. These can be used for backup or to import into other instances of the app.';
-
-  @override
-  String get emailSupport => 'Email Support';
-
-  @override
-  String get phoneSupport => 'Phone Support';
+      'Settings › Import / export: export your grids to a CSV file, then import it later or on another phone.';
 
   @override
   String get website => 'Website';
 
   @override
-  String get responseTime => 'Response Time';
-
-  @override
-  String get responseTimeDescription =>
-      'We typically respond to support requests within 24 hours during business days.';
-
-  @override
-  String get gettingStarted => 'Getting Started';
-
-  @override
-  String get gettingStartedDescription =>
-      'Learn the basics of using Feezer or Fee Minimizer';
-
-  @override
-  String get providerManagement => 'Provider Management';
-
-  @override
-  String get providerManagementDescription =>
-      'How to add, edit, and manage financial providers';
-
-  @override
-  String get feeCalculation => 'Fee Calculation';
-
-  @override
-  String get feeCalculationDescription =>
-      'Understanding how fees are calculated and optimized';
-
-  @override
-  String get dataManagementDescription =>
-      'Import, export, and backup your data';
-
-  @override
-  String get videoTutorials => 'Video Tutorials';
-
-  @override
-  String get videoTutorialsDescription =>
-      'Watch step-by-step video guides to master Feezer or Fee Minimizer';
-
-  @override
-  String get watchTutorials => 'Watch Tutorials';
-
-  @override
-  String get shareYourThoughts => 'Share Your Thoughts';
-
-  @override
-  String get feedbackDescription =>
-      'Help us improve Feezer or Fee Minimizer by sharing your feedback and suggestions';
-
-  @override
-  String get contactUs => 'Contact Us';
-
-  @override
-  String get contactDescription =>
-      'Get in touch with our support team for help with any questions or issues.';
+  String get contactUs => 'Contact us';
 
   @override
   String get email => 'Email';
 
   @override
-  String get phone => 'Phone';
-
-  @override
-  String get faqQuestion1 => 'How do I minimize transaction fees?';
-
-  @override
-  String get faqAnswer1 =>
-      'Our app automatically calculates the most cost-effective way to handle your transactions by comparing different providers and payment methods.';
-
-  @override
-  String get faqQuestion2 => 'What currencies are supported?';
-
-  @override
-  String get faqAnswer2 =>
-      'We support all major world currencies including USD, EUR, GBP, JPY, and many others. The app automatically handles currency conversion rates.';
-
-  @override
-  String get faqQuestion3 => 'Is my financial data secure?';
-
-  @override
-  String get faqAnswer3 =>
-      'Yes, we use bank-level encryption and security measures. Your data is never stored on our servers and all calculations are done locally on your device.';
-
-  @override
-  String get faqQuestion4 => 'How do I update currency rates?';
-
-  @override
-  String get faqAnswer4 =>
-      'Currency rates are automatically updated in real-time from reliable financial data providers. You can also manually refresh rates in the settings.';
-
-  @override
-  String get faqQuestion5 => 'Can I save my favorite providers?';
-
-  @override
-  String get faqAnswer5 =>
-      'Yes, you can save your preferred mobile money providers and payment methods for quick access when making new calculations.';
-
-  @override
-  String get faqQuestion6 => 'How do I add a new provider?';
-
-  @override
-  String get faqAnswer6 =>
-      'Tap the \'+\' button in the provider list screen. Enter the provider name, description, and choose an icon. You can then add fee intervals for different transaction amounts.';
-
-  @override
-  String get faqQuestion7 => 'What are fee intervals?';
-
-  @override
-  String get faqAnswer7 =>
-      'Fee intervals define the cost structure for each provider. You can set fixed fees (e.g., \$2.50) or percentage fees (e.g., 1.5%) for different transaction amount ranges.';
-
-  @override
-  String get faqQuestion8 => 'How does the optimization work?';
-
-  @override
-  String get faqAnswer8 =>
-      'Feezer analyzes all your providers\' fee structures and calculates the optimal way to split your transaction into multiple operations to minimize total fees while respecting your constraints.';
-
-  @override
-  String get comparisonWithWithoutOptimization =>
-      'Comparison with/without optimization';
-
-  @override
-  String get withOptimization => 'With optimization';
-
-  @override
-  String get withoutOptimizationMaxAmount =>
-      'Without optimization (max amount)';
-
-  @override
-  String get withoutOptimizationSameNet =>
-      'Without optimization (same net amount)';
-
-  @override
-  String get enteredAmount => 'Entered amount';
-
-  @override
-  String get netAmountSent => 'Net amount';
-
-  @override
-  String get totalSpent => 'Total spent';
-
-  @override
-  String get numberOfOperations => 'Number of operations';
-
-  @override
-  String youLoseAmount(String amount, String currency) {
-    return 'You lose $amount $currency';
-  }
-
-  @override
-  String youGainAmount(String amount, String currency) {
-    return 'You gain $amount $currency';
-  }
-
-  @override
-  String get sameResultAsOptimization => 'Same result as optimization';
-
-  @override
-  String netAmountLess(String amount, String currency) {
-    return '• Net amount less: $amount $currency';
-  }
-
-  @override
-  String netAmountMore(String amount, String currency) {
-    return '• Net amount more: $amount $currency';
-  }
-
-  @override
-  String feesLess(String amount, String currency) {
-    return '• Fees less: $amount $currency';
-  }
-
-  @override
-  String feesMore(String amount, String currency) {
-    return '• Fees more: $amount $currency';
-  }
-
-  @override
-  String optimizationCostsMoreFees(String amount, String currency) {
-    return 'Optimization costs $amount $currency more in fees';
-  }
-
-  @override
-  String dueToTransactionConstraints(String min, String max) {
-    return '• This is due to transaction constraints (min: $min, max: $max)';
-  }
-
-  @override
   String get exceedsEnteredAmount => 'Exceeds entered amount';
 
   @override
-  String youSaveFees(String amount, String currency) {
-    return 'You save $amount $currency in fees';
-  }
-
-  @override
-  String totalSavingsWithOptimization(String amount, String currency) {
-    return 'Total savings with optimization: $amount $currency';
-  }
-
-  @override
-  String transactionGainsVsOptimized(String amount, String currency) {
-    return 'This transaction gains $amount $currency compared to optimization';
-  }
-
-  @override
-  String transactionLosesVsOptimized(String amount, String currency) {
-    return 'This transaction loses $amount $currency compared to optimization';
-  }
-
-  @override
-  String get transactionSameResultAsOptimized =>
-      'This transaction has the same result as optimization';
-
-  @override
-  String get noValidIntervalForComparison =>
-      'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.';
-
-  @override
   String get optimizationBudgetTooSmall =>
-      'The amount is too small for any transaction with this provider.';
+      'The amount is too small for a transaction with this grid.';
 
   @override
   String get optimizationConstraintsUnsatisfiable =>
-      'No plan satisfies the transaction range for this amount.';
+      'No split respects this number of transactions for this amount.';
 
   @override
   String get optimizationNotProven =>
-      'Very large search: this plan is excellent, but its optimality could not be fully verified.';
+      'Very long search: this split is excellent but could not be proven to be the best.';
 
   @override
   String feeIntervalOverlaps(String range) {
-    return 'This interval overlaps an existing interval ($range)';
+    return 'This tier overlaps an existing tier ($range).';
   }
 
   @override
-  String get providerNameAlreadyExists =>
-      'A provider with this name already exists';
-
-  @override
-  String get baseCurrencyCannotBeDeleted =>
-      'Ariary is the base currency and cannot be deleted';
-
-  @override
-  String get baseCurrencyRateIsFixed =>
-      'The rate of the base currency is always 1';
-
-  @override
-  String get failedToUpdateFeeInterval => 'Failed to update fee interval';
-
-  @override
-  String get failedToDeleteFeeIntervals => 'Failed to delete fee intervals';
-
-  @override
-  String get failedToCreateProvider => 'Failed to create provider';
+  String get failedToDeleteFeeIntervals => 'Could not delete the tier';
 
   @override
   String get failedToSaveChanges => 'Failed to save changes';
 
   @override
-  String get failedToLoadData => 'Failed to load data';
+  String get tabOptimize => 'Optimize';
 
   @override
-  String get currencyCodeAlreadyExists =>
-      'A currency with this code already exists';
+  String get optimizeTitle => 'Pay less in fees';
+
+  @override
+  String get optimizeSubtitle =>
+      'Feezer splits your amount into the transactions that cost the least.';
+
+  @override
+  String get add => 'Add';
+
+  @override
+  String get amountAvailable => 'Amount available';
+
+  @override
+  String get amountHelper =>
+      'Fees included: the total that will leave your account.';
+
+  @override
+  String get transferCount => 'Number of transfers';
+
+  @override
+  String get transferCountHelp =>
+      'Optional. Limit how many transfers the plan may use.';
+
+  @override
+  String get transferCountFree => 'No limit';
+
+  @override
+  String transferCountExactly(int count) {
+    return 'Exactly $count';
+  }
+
+  @override
+  String transferCountRange(int min, int max) {
+    return 'Between $min and $max';
+  }
+
+  @override
+  String transferCountAtLeast(int count) {
+    return 'At least $count';
+  }
+
+  @override
+  String transferCountAtMost(int count) {
+    return 'At most $count';
+  }
+
+  @override
+  String get minimumShort => 'Minimum';
+
+  @override
+  String get maximumShort => 'Maximum';
+
+  @override
+  String get anyCount => 'Any';
+
+  @override
+  String get recipientReceives => 'The recipient receives';
+
+  @override
+  String get bestSplit => 'Optimal';
+
+  @override
+  String get goodSplit => 'Very good';
+
+  @override
+  String transferCountLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count transfers',
+      one: '1 transfer',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get feesLabel => 'Fees';
+
+  @override
+  String get debitedLabel => 'Debited';
+
+  @override
+  String get leftLabel => 'Left';
+
+  @override
+  String gainTitle(String amount) {
+    return '+$amount more received';
+  }
+
+  @override
+  String get gainVsClassic =>
+      'Compared to sending the largest possible amount each time.';
+
+  @override
+  String feesSavedTitle(String amount) {
+    return '$amount of fees saved';
+  }
+
+  @override
+  String get feesSavedVsClassic =>
+      'The usual way would cost more for the same amount.';
+
+  @override
+  String get alreadyOptimalTitle => 'The usual way is already the best';
+
+  @override
+  String get alreadyOptimalMessage =>
+      'For this amount, splitting brings nothing more.';
+
+  @override
+  String limitCost(String amount) {
+    return 'Without this limit, $amount more would be received.';
+  }
+
+  @override
+  String get limitFree => 'This limit costs you nothing here.';
+
+  @override
+  String get nearOptimalTitle => 'Very large amount';
+
+  @override
+  String get planTitle => 'Your transfer plan';
+
+  @override
+  String sendAmount(String amount) {
+    return 'Send $amount';
+  }
+
+  @override
+  String feePerTransfer(String amount) {
+    return 'fee $amount per transfer';
+  }
+
+  @override
+  String get compareTitle => 'Comparison';
+
+  @override
+  String get optimizedColumn => 'Optimized';
+
+  @override
+  String get classicColumn => 'Usual';
+
+  @override
+  String get receivedLabel => 'Received';
+
+  @override
+  String get transfersLabel => 'Transfers';
+
+  @override
+  String get classicExplanation =>
+      'Usual way: send the largest possible amount, then the rest.';
+
+  @override
+  String get sameAmountByHand => 'Same amount received, usual way';
+
+  @override
+  String sameAmountByHandDetail(String net, String fees, String total) {
+    return 'To get $net, the usual way costs $fees in fees, i.e. $total debited.';
+  }
+
+  @override
+  String get cannotSplitByHand => 'The usual way cannot reach this amount.';
+
+  @override
+  String get classicPlan => 'Usual plan';
+
+  @override
+  String get showDetails => 'Show details';
+
+  @override
+  String get showLess => 'Hide details';
+
+  @override
+  String get noProvidersYet => 'No grid yet';
+
+  @override
+  String get noProvidersMessage =>
+      'Update the official fees, or add your own grid.';
+
+  @override
+  String tierCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count tiers',
+      one: '1 tier',
+      zero: 'No tier',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String feesFrom(String amount) {
+    return 'fees from $amount';
+  }
+
+  @override
+  String get providerNameHint => 'e.g. MVola, Orange Money, my bank';
+
+  @override
+  String get descriptionOptional => 'Description (optional)';
+
+  @override
+  String get feeGrid => 'Fee grid';
+
+  @override
+  String get amountRange => 'Amount sent';
+
+  @override
+  String get noIntervalsMessage =>
+      'Add the tiers of this grid to optimize your transactions.';
+
+  @override
+  String get gridHint => 'Tap a tier to edit or delete it.';
+
+  @override
+  String get intervalFormHelp =>
+      'The fee applies when the amount sent is between the minimum and the maximum (included).';
+
+  @override
+  String get downloadingFees => 'Reading the published fee grids…';
+
+  @override
+  String get feesDownloadFailed => 'Check your connection and try again.';
+
+  @override
+  String get feesAlreadyUpToDate => 'Your fees are up to date';
+
+  @override
+  String get gridsOthersUnchanged => 'Your other grids do not change.';
+
+  @override
+  String get updateAction => 'Update';
+
+  @override
+  String get feesUpdatedSuccessfully => 'Fees updated';
+
+  @override
+  String get importExportSubtitle => 'Back up or share your grids (CSV)';
+
+  @override
+  String get replayIntroduction => 'Replay the introduction';
+
+  @override
+  String get faqFeeUpdate => 'Where do the fees come from?';
+
+  @override
+  String get faqFeeUpdateAnswer =>
+      'Every day, the public feezer-fee-tables project reads the official grids on mvola.mg and orange.mg. The Airtel grid is copied by hand from its rates, because its website cannot be read automatically. \"Update\" downloads these grids; your other grids stay the same.';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get pasteCsv => 'Paste CSV text';
+
+  @override
+  String get chooseCsvFile => 'Choose a CSV file';
+
+  @override
+  String get csvTemplate => 'Template';
+
+  @override
+  String get csvTemplateDescription =>
+      'Start from a ready-made file with the expected columns.';
+
+  @override
+  String get downloadTemplate => 'Download the template';
+
+  @override
+  String get csvFormat => 'File format';
+
+  @override
+  String get csvFormatHelp =>
+      'One row per tier. Rows with the same provider_name and operation form one grid. operation is withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance or transfer_unregistered (optional); fee_type is fixed or percentage. Commas or semicolons are accepted.';
+
+  @override
+  String get opWithdrawal => 'Withdrawal';
+
+  @override
+  String get opTransferSame => 'Transfer';
+
+  @override
+  String get opTransferSameApp => 'Transfer in the app';
+
+  @override
+  String get opTransferOther => 'To another operator';
+
+  @override
+  String get opTransferMicrofinance => 'To a microfinance';
+
+  @override
+  String get opTransferUnregistered => 'To a non-subscriber';
+
+  @override
+  String get opCustom => 'Other';
+
+  @override
+  String get operators => 'Operators';
+
+  @override
+  String get operatorsSubtitle => 'The fee grids used for your calculations.';
+
+  @override
+  String get operatorLabel => 'Operator';
+
+  @override
+  String get operationLabel => 'Operation';
+
+  @override
+  String get operatorName => 'Operator name';
+
+  @override
+  String gridCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count grids',
+      one: '1 grid',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get customGrids => 'Added by you';
+
+  @override
+  String get editedTag => 'edited';
+
+  @override
+  String get newGrid => 'New grid';
+
+  @override
+  String get editGrid => 'Edit the grid';
+
+  @override
+  String get createGrid => 'Create the grid';
+
+  @override
+  String get gridCreated => 'Grid created';
+
+  @override
+  String get gridUpdated => 'Grid updated';
+
+  @override
+  String get gridDeleted => 'Grid deleted';
+
+  @override
+  String gridAlreadyExists(String name) {
+    return 'The grid $name already exists.';
+  }
+
+  @override
+  String get deleteGridTitle => 'Delete the grid';
+
+  @override
+  String deleteGridMessage(String name) {
+    return 'The grid $name and its tiers will be deleted.';
+  }
+
+  @override
+  String get optimizeWithGrid => 'Optimize with this grid';
+
+  @override
+  String get moreOptions => 'More options';
+
+  @override
+  String get officialFees => 'Official fees';
+
+  @override
+  String feesCheckedOn(String date) {
+    return 'Checked on the operators\' websites on $date';
+  }
+
+  @override
+  String get feesNeverChecked =>
+      'Download the latest fees published by the operators.';
+
+  @override
+  String sourceOfficial(String host) {
+    return 'Official grid · $host';
+  }
+
+  @override
+  String sourceOfficialDated(String host, String date) {
+    return 'Official grid · $host · $date';
+  }
+
+  @override
+  String get sourceManual => 'Grid copied from the operator\'s rates';
+
+  @override
+  String sourceManualDated(String date) {
+    return 'Grid copied from the operator\'s rates · $date';
+  }
+
+  @override
+  String get sourceEdited => 'Grid edited by you';
+
+  @override
+  String get openSource => 'See the official page';
+
+  @override
+  String get editPublishedGridWarning =>
+      'This grid comes from the operator\'s rates. If you update the fees later, your change will be replaced.';
+
+  @override
+  String get feesSection => 'Fees';
+
+  @override
+  String get updateFeesTitle => 'Update the fees';
+
+  @override
+  String get feesDownloadFailedTitle => 'Download failed';
+
+  @override
+  String get updateReviewIntro =>
+      'The operators published new fees. Here is what changes:';
+
+  @override
+  String effectiveSince(String date) {
+    return 'in force since $date';
+  }
+
+  @override
+  String get newTag => 'New';
+
+  @override
+  String get updatedTag => 'Updated';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get withdrawalCount => 'Number of withdrawals';
+
+  @override
+  String get withdrawalCountHelp =>
+      'Optional. Limit how many withdrawals the plan may use.';
+
+  @override
+  String get cashYouReceive => 'You receive in cash';
+
+  @override
+  String withdrawalCountLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count withdrawals',
+      one: '1 withdrawal',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get withdrawalsLabel => 'Withdrawals';
+
+  @override
+  String withdrawAmount(String amount) {
+    return 'Withdraw $amount';
+  }
+
+  @override
+  String feePerWithdrawal(String amount) {
+    return 'fee $amount per withdrawal';
+  }
+
+  @override
+  String get planTitleWithdrawal => 'Your withdrawal plan';
+
+  @override
+  String get gainVsClassicWithdrawal =>
+      'Compared to withdrawing the largest possible amount each time.';
+
+  @override
+  String get classicExplanationWithdrawal =>
+      'Usual way: withdraw the largest possible amount, then the rest.';
+
+  @override
+  String get amountWithdrawn => 'Amount withdrawn';
+
+  @override
+  String get noTiersYet => 'No tier yet';
+
+  @override
+  String get intervalFormHelpWithdrawal =>
+      'The fee applies when the amount withdrawn is between the minimum and the maximum (included).';
+
+  @override
+  String versionLabel(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get free => 'Free';
+
+  @override
+  String get failedToLoadData => 'Could not load the data';
+
+  @override
+  String get failedToOpenLink => 'Could not open the link';
+
+  @override
+  String get pressAgainToExit => 'Press again to exit';
 }
