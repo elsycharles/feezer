@@ -98,53 +98,25 @@ class AppLocalizationsFr extends AppLocalizations {
   String get termsOfUse => 'Conditions d\'utilisation';
 
   @override
-  String get termsIntroductionTitle => 'Introduction';
-
-  @override
-  String get termsIntroductionContent =>
-      'Ces conditions s\'appliquent à l\'application Feezer, qui aide à réduire les frais d\'argent mobile. En utilisant Feezer, vous les acceptez.';
-
-  @override
-  String get termsAcceptanceTitle => 'Acceptation';
-
-  @override
-  String get termsAcceptanceContent =>
-      'Si vous n\'acceptez pas ces conditions, n\'utilisez pas l\'application. Elles peuvent évoluer avec les nouvelles versions de Feezer.';
-
-  @override
   String get termsServiceTitle => 'Le service';
 
   @override
   String get termsServiceContent =>
-      'À partir de grilles de frais, Feezer calcule comment découper un retrait ou un transfert pour payer moins de frais. Les grilles officielles sont lues sur les sites des opérateurs et peuvent changer à tout moment : vérifiez toujours les frais auprès de votre opérateur.';
+      'À partir des grilles de frais des opérateurs, Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais. En utilisant Feezer, vous acceptez ces conditions.';
 
   @override
-  String get termsPrivacyTitle => 'Confidentialité';
+  String get termsPrivacyTitle => 'Vos données';
 
   @override
   String get termsPrivacyContent =>
-      'Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone. La mise à jour des frais télécharge un fichier public, sans envoyer vos données.';
+      'Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone et sont effacés si vous désinstallez l\'application. La mise à jour des frais télécharge seulement un fichier public.';
 
   @override
   String get termsLiabilityTitle => 'Responsabilité';
 
   @override
   String get termsLiabilityContent =>
-      'Les résultats sont donnés à titre indicatif. Feezer n\'est affilié à aucun opérateur et n\'est pas responsable des frais réellement facturés, ni des décisions prises à partir de ses calculs.';
-
-  @override
-  String get termsTerminationTitle => 'Arrêt';
-
-  @override
-  String get termsTerminationContent =>
-      'Vous pouvez arrêter d\'utiliser Feezer à tout moment : désinstaller l\'application efface ses données de votre téléphone.';
-
-  @override
-  String get termsGoverningLawTitle => 'Droit applicable';
-
-  @override
-  String get termsGoverningLawContent =>
-      'Ces conditions sont régies par les lois applicables là où Feezer est utilisé. Tout litige sera traité par les voies légales prévues par ces lois.';
+      'Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais à tout moment, vérifiez-les avant chaque opération. Feezer n\'est affilié à aucun opérateur et n\'est pas responsable des frais réellement facturés.';
 
   @override
   String get termsContactTitle => 'Contact';
@@ -355,54 +327,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get faq => 'FAQ';
 
   @override
-  String get faqWhatIsFeeMinimizer => 'Qu\'est-ce que Feezer ?';
-
-  @override
-  String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer calcule comment découper un retrait ou un transfert d\'argent mobile pour payer le moins de frais possible, à partir des grilles officielles des opérateurs.';
-
-  @override
-  String get faqHowToAddProvider => 'Comment ajouter une grille ?';
-
-  @override
-  String get faqHowToAddProviderAnswer =>
-      'Dans l\'onglet Opérateurs, touchez « Ajouter », donnez le nom de l\'opérateur et l\'opération, puis ajoutez les paliers (minimum, maximum et frais). Vous pouvez aussi importer un fichier CSV.';
-
-  @override
-  String get faqHowToCalculateFees => 'Comment se fait le calcul ?';
-
-  @override
-  String get faqHowToCalculateFeesAnswer =>
-      'Choisissez l\'opérateur et l\'opération, puis entrez le montant disponible (frais compris). Feezer essaie toutes les combinaisons de paliers et garde celle qui fait recevoir le plus. Le résultat est comparé à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.';
-
-  @override
-  String get faqMinMaxTransactionRange =>
-      'À quoi sert le nombre d\'opérations ?';
-
-  @override
-  String get faqMinMaxTransactionRangeAnswer =>
-      'C\'est facultatif. Il limite le nombre de retraits ou d\'envois du découpage, par exemple « au plus 2 » si vous ne voulez pas en faire plus de deux. Feezer indique ce que cette limite vous coûte.';
-
-  @override
-  String get faqDataSecurity => 'Mes données sont-elles partagées ?';
-
-  @override
-  String get faqDataSecurityAnswer =>
-      'Non. Vos grilles et vos montants restent sur votre téléphone ; Feezer n\'a pas de compte et n\'envoie rien. La mise à jour des frais télécharge seulement un fichier public.';
-
-  @override
-  String get faqOfflineMode => 'Faut-il internet ?';
-
-  @override
-  String get faqOfflineModeAnswer =>
-      'Non. Les calculs se font sur votre téléphone. Internet ne sert qu\'à mettre à jour les frais.';
-
-  @override
   String get faqExportData => 'Comment sauvegarder mes grilles ?';
 
   @override
   String get faqExportDataAnswer =>
-      'Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le plus tard ou sur un autre téléphone.';
+      'Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le sur un autre téléphone ou après une réinstallation.';
 
   @override
   String get website => 'Site web';
@@ -695,7 +624,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'Chaque jour, le projet public feezer-fee-tables lit les grilles officielles sur mvola.mg et orange.mg. La grille Airtel est recopiée à la main depuis ses tarifs, car son site ne peut pas être lu automatiquement. « Mettre à jour » télécharge ces grilles ; vos autres grilles ne changent pas.';
+      'Des tarifs officiels des opérateurs : les grilles MVola et Orange Money sont lues chaque jour sur mvola.mg et orange.mg ; celle d\'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » dans l\'onglet Opérateurs pour avoir les dernières ; les grilles que vous avez ajoutées ne changent pas.';
 
   @override
   String get ok => 'OK';
@@ -986,4 +915,26 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get roundToHundredOff => 'Montants exacts, à l\'ariary près.';
+
+  @override
+  String get faqHowItWorks => 'Comment ça marche ?';
+
+  @override
+  String get faqHowItWorksAnswer =>
+      'Choisissez l\'opérateur, l\'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.';
+
+  @override
+  String get faqRounding => 'Pourquoi des montants arrondis à la centaine ?';
+
+  @override
+  String get faqRoundingAnswer =>
+      'Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Avec « Arrondir à la centaine », chaque montant du plan est un multiple de 100. C\'est activé par défaut pour les retraits ; désactivez-le pour des montants exacts.';
+
+  @override
+  String get faqPrivacy =>
+      'Faut-il internet ? Mes données sont-elles partagées ?';
+
+  @override
+  String get faqPrivacyAnswer =>
+      'Non. Les calculs se font sur votre téléphone, sans compte, et rien n\'est envoyé. Internet sert seulement à mettre à jour les frais (un fichier public).';
 }

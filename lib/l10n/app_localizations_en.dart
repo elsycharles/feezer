@@ -98,53 +98,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get termsOfUse => 'Terms of Use';
 
   @override
-  String get termsIntroductionTitle => 'Introduction';
-
-  @override
-  String get termsIntroductionContent =>
-      'These terms apply to the Feezer app, which helps you reduce mobile money fees. By using Feezer, you accept them.';
-
-  @override
-  String get termsAcceptanceTitle => 'Acceptance';
-
-  @override
-  String get termsAcceptanceContent =>
-      'If you do not accept these terms, do not use the app. They may change with new versions of Feezer.';
-
-  @override
   String get termsServiceTitle => 'The service';
 
   @override
   String get termsServiceContent =>
-      'From fee grids, Feezer calculates how to split a withdrawal or a transfer to pay less in fees. The official grids are read on the operators\' websites and may change at any time: always check the fees with your operator.';
+      'From the operators\' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.';
 
   @override
-  String get termsPrivacyTitle => 'Privacy';
+  String get termsPrivacyTitle => 'Your data';
 
   @override
   String get termsPrivacyContent =>
-      'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone. Updating the fees downloads a public file without sending your data.';
+      'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.';
 
   @override
   String get termsLiabilityTitle => 'Liability';
 
   @override
   String get termsLiabilityContent =>
-      'Results are given for information only. Feezer is not affiliated with any operator and is not responsible for the fees actually charged, nor for decisions made from its calculations.';
-
-  @override
-  String get termsTerminationTitle => 'Stopping';
-
-  @override
-  String get termsTerminationContent =>
-      'You can stop using Feezer at any time: uninstalling the app erases its data from your phone.';
-
-  @override
-  String get termsGoverningLawTitle => 'Governing law';
-
-  @override
-  String get termsGoverningLawContent =>
-      'These terms are governed by the laws that apply where Feezer is used. Any dispute will be handled through the legal means provided by those laws.';
+      'Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.';
 
   @override
   String get termsContactTitle => 'Contact';
@@ -354,54 +326,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get faq => 'FAQ';
 
   @override
-  String get faqWhatIsFeeMinimizer => 'What is Feezer?';
-
-  @override
-  String get faqWhatIsFeeMinimizerAnswer =>
-      'Feezer works out how to split a mobile money withdrawal or transfer so you pay the least fees, using the operators\' official fee grids.';
-
-  @override
-  String get faqHowToAddProvider => 'How do I add a grid?';
-
-  @override
-  String get faqHowToAddProviderAnswer =>
-      'In the Operators tab, tap \"Add\", enter the operator name and the operation, then add the tiers (minimum, maximum and fee). You can also import a CSV file.';
-
-  @override
-  String get faqHowToCalculateFees => 'How is it calculated?';
-
-  @override
-  String get faqHowToCalculateFeesAnswer =>
-      'Choose the operator and the operation, then enter the amount available (fees included). Feezer tries every combination of tiers and keeps the one that delivers the most. The result is compared with the usual way: withdrawing or sending the largest possible amount each time.';
-
-  @override
-  String get faqMinMaxTransactionRange =>
-      'What is the number of transactions for?';
-
-  @override
-  String get faqMinMaxTransactionRangeAnswer =>
-      'It is optional. It limits how many withdrawals or transfers the split may use, for example \"at most 2\" if you do not want more than two. Feezer shows what the limit costs you.';
-
-  @override
-  String get faqDataSecurity => 'Is my data shared?';
-
-  @override
-  String get faqDataSecurityAnswer =>
-      'No. Your grids and amounts stay on your phone; Feezer has no account and sends nothing. Updating the fees only downloads a public file.';
-
-  @override
-  String get faqOfflineMode => 'Do I need internet?';
-
-  @override
-  String get faqOfflineModeAnswer =>
-      'No. Calculations run on your phone. Internet is only used to update the fees.';
-
-  @override
   String get faqExportData => 'How do I back up my grids?';
 
   @override
   String get faqExportDataAnswer =>
-      'Settings › Import / export: export your grids to a CSV file, then import it later or on another phone.';
+      'Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.';
 
   @override
   String get website => 'Website';
@@ -690,7 +619,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'Every day, the public feezer-fee-tables project reads the official grids on mvola.mg and orange.mg. The Airtel grid is copied by hand from its rates, because its website cannot be read automatically. \"Update\" downloads these grids; your other grids stay the same.';
+      'From the operators\' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.';
 
   @override
   String get ok => 'OK';
@@ -980,4 +909,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get roundToHundredOff => 'Exact amounts, to the ariary.';
+
+  @override
+  String get faqHowItWorks => 'How does it work?';
+
+  @override
+  String get faqHowItWorksAnswer =>
+      'Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.';
+
+  @override
+  String get faqRounding => 'Why are the amounts rounded to the hundred?';
+
+  @override
+  String get faqRoundingAnswer =>
+      'Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.';
+
+  @override
+  String get faqPrivacy => 'Do I need internet? Is my data shared?';
+
+  @override
+  String get faqPrivacyAnswer =>
+      'No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file).';
 }

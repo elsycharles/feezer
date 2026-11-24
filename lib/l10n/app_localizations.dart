@@ -268,30 +268,6 @@ abstract class AppLocalizations {
   /// **'Terms of Use'**
   String get termsOfUse;
 
-  /// Terms of use introduction section title
-  ///
-  /// In en, this message translates to:
-  /// **'Introduction'**
-  String get termsIntroductionTitle;
-
-  /// Terms of use introduction section content
-  ///
-  /// In en, this message translates to:
-  /// **'These terms apply to the Feezer app, which helps you reduce mobile money fees. By using Feezer, you accept them.'**
-  String get termsIntroductionContent;
-
-  /// Terms of use acceptance section title
-  ///
-  /// In en, this message translates to:
-  /// **'Acceptance'**
-  String get termsAcceptanceTitle;
-
-  /// Terms of use acceptance section content
-  ///
-  /// In en, this message translates to:
-  /// **'If you do not accept these terms, do not use the app. They may change with new versions of Feezer.'**
-  String get termsAcceptanceContent;
-
   /// Terms of use service description section title
   ///
   /// In en, this message translates to:
@@ -301,19 +277,19 @@ abstract class AppLocalizations {
   /// Terms of use service description section content
   ///
   /// In en, this message translates to:
-  /// **'From fee grids, Feezer calculates how to split a withdrawal or a transfer to pay less in fees. The official grids are read on the operators\' websites and may change at any time: always check the fees with your operator.'**
+  /// **'From the operators\' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.'**
   String get termsServiceContent;
 
   /// Terms of use privacy section title
   ///
   /// In en, this message translates to:
-  /// **'Privacy'**
+  /// **'Your data'**
   String get termsPrivacyTitle;
 
   /// Terms of use privacy section content
   ///
   /// In en, this message translates to:
-  /// **'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone. Updating the fees downloads a public file without sending your data.'**
+  /// **'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.'**
   String get termsPrivacyContent;
 
   /// Terms of use liability section title
@@ -325,32 +301,8 @@ abstract class AppLocalizations {
   /// Terms of use liability section content
   ///
   /// In en, this message translates to:
-  /// **'Results are given for information only. Feezer is not affiliated with any operator and is not responsible for the fees actually charged, nor for decisions made from its calculations.'**
+  /// **'Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.'**
   String get termsLiabilityContent;
-
-  /// Terms of use termination section title
-  ///
-  /// In en, this message translates to:
-  /// **'Stopping'**
-  String get termsTerminationTitle;
-
-  /// Terms of use termination section content
-  ///
-  /// In en, this message translates to:
-  /// **'You can stop using Feezer at any time: uninstalling the app erases its data from your phone.'**
-  String get termsTerminationContent;
-
-  /// Terms of use governing law section title
-  ///
-  /// In en, this message translates to:
-  /// **'Governing law'**
-  String get termsGoverningLawTitle;
-
-  /// Terms of use governing law section content
-  ///
-  /// In en, this message translates to:
-  /// **'These terms are governed by the laws that apply where Feezer is used. Any dispute will be handled through the legal means provided by those laws.'**
-  String get termsGoverningLawContent;
 
   /// Terms of use contact section title
   ///
@@ -666,85 +618,13 @@ abstract class AppLocalizations {
   /// FAQ question
   ///
   /// In en, this message translates to:
-  /// **'What is Feezer?'**
-  String get faqWhatIsFeeMinimizer;
-
-  /// FAQ answer
-  ///
-  /// In en, this message translates to:
-  /// **'Feezer works out how to split a mobile money withdrawal or transfer so you pay the least fees, using the operators\' official fee grids.'**
-  String get faqWhatIsFeeMinimizerAnswer;
-
-  /// FAQ question
-  ///
-  /// In en, this message translates to:
-  /// **'How do I add a grid?'**
-  String get faqHowToAddProvider;
-
-  /// FAQ answer
-  ///
-  /// In en, this message translates to:
-  /// **'In the Operators tab, tap \"Add\", enter the operator name and the operation, then add the tiers (minimum, maximum and fee). You can also import a CSV file.'**
-  String get faqHowToAddProviderAnswer;
-
-  /// FAQ question
-  ///
-  /// In en, this message translates to:
-  /// **'How is it calculated?'**
-  String get faqHowToCalculateFees;
-
-  /// FAQ answer
-  ///
-  /// In en, this message translates to:
-  /// **'Choose the operator and the operation, then enter the amount available (fees included). Feezer tries every combination of tiers and keeps the one that delivers the most. The result is compared with the usual way: withdrawing or sending the largest possible amount each time.'**
-  String get faqHowToCalculateFeesAnswer;
-
-  /// FAQ question: meaning of min/max number of transactions
-  ///
-  /// In en, this message translates to:
-  /// **'What is the number of transactions for?'**
-  String get faqMinMaxTransactionRange;
-
-  /// FAQ answer: meaning of min/max number of transactions
-  ///
-  /// In en, this message translates to:
-  /// **'It is optional. It limits how many withdrawals or transfers the split may use, for example \"at most 2\" if you do not want more than two. Feezer shows what the limit costs you.'**
-  String get faqMinMaxTransactionRangeAnswer;
-
-  /// FAQ question
-  ///
-  /// In en, this message translates to:
-  /// **'Is my data shared?'**
-  String get faqDataSecurity;
-
-  /// FAQ answer
-  ///
-  /// In en, this message translates to:
-  /// **'No. Your grids and amounts stay on your phone; Feezer has no account and sends nothing. Updating the fees only downloads a public file.'**
-  String get faqDataSecurityAnswer;
-
-  /// FAQ question
-  ///
-  /// In en, this message translates to:
-  /// **'Do I need internet?'**
-  String get faqOfflineMode;
-
-  /// FAQ answer
-  ///
-  /// In en, this message translates to:
-  /// **'No. Calculations run on your phone. Internet is only used to update the fees.'**
-  String get faqOfflineModeAnswer;
-
-  /// FAQ question
-  ///
-  /// In en, this message translates to:
   /// **'How do I back up my grids?'**
   String get faqExportData;
 
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'Settings › Import / export: export your grids to a CSV file, then import it later or on another phone.'**
+  /// **'Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.'**
   String get faqExportDataAnswer;
 
   /// Website contact method
@@ -1212,7 +1092,7 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Every day, the public feezer-fee-tables project reads the official grids on mvola.mg and orange.mg. The Airtel grid is copied by hand from its rates, because its website cannot be read automatically. \"Update\" downloads these grids; your other grids stay the same.'**
+  /// **'From the operators\' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.'**
   String get faqFeeUpdateAnswer;
 
   /// UI redesign
@@ -1682,6 +1562,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exact amounts, to the ariary.'**
   String get roundToHundredOff;
+
+  /// No description provided for @faqHowItWorks.
+  ///
+  /// In en, this message translates to:
+  /// **'How does it work?'**
+  String get faqHowItWorks;
+
+  /// No description provided for @faqHowItWorksAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.'**
+  String get faqHowItWorksAnswer;
+
+  /// No description provided for @faqRounding.
+  ///
+  /// In en, this message translates to:
+  /// **'Why are the amounts rounded to the hundred?'**
+  String get faqRounding;
+
+  /// No description provided for @faqRoundingAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.'**
+  String get faqRoundingAnswer;
+
+  /// No description provided for @faqPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Do I need internet? Is my data shared?'**
+  String get faqPrivacy;
+
+  /// No description provided for @faqPrivacyAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file).'**
+  String get faqPrivacyAnswer;
 }
 
 class _AppLocalizationsDelegate

@@ -98,53 +98,25 @@ class AppLocalizationsMg extends AppLocalizations {
   String get termsOfUse => 'Fepetra fampiasana';
 
   @override
-  String get termsIntroductionTitle => 'Fampidirana';
-
-  @override
-  String get termsIntroductionContent =>
-      'Mihatra amin\'ny fampiharana Feezer, izay manampy anao hampihena ny saran\'ny vola finday, ireto fepetra ireto. Raha mampiasa an\'i Feezer ianao dia manaiky azy ireo.';
-
-  @override
-  String get termsAcceptanceTitle => 'Fanekena';
-
-  @override
-  String get termsAcceptanceContent =>
-      'Raha tsy manaiky ireo fepetra ireo ianao dia aza mampiasa ny fampiharana. Mety hiova izy ireo miaraka amin\'ny dikan-teny vaovaon\'i Feezer.';
-
-  @override
   String get termsServiceTitle => 'Ny tolotra';
 
   @override
   String get termsServiceContent =>
-      'Avy amin\'ny tabilaon\'ny sarany, manisa ny fomba hizarana fisintonana na famindrana i Feezer mba handoavana sarany kely kokoa. Vakiana amin\'ny tranokalan\'ny mpandraharaha ny tabilao ofisialy ary mety hiova na oviana na oviana: hamarino foana amin\'ny mpandraharahanao ny sarany.';
+      'Avy amin\'ny tabilaon\'ny saran\'ny mpandraharaha, manisa ny fomba hizarana fisintonana na famindrana i Feezer mba handoavana sarany kely indrindra. Raha mampiasa an\'i Feezer ianao dia manaiky ireo fepetra ireo.';
 
   @override
-  String get termsPrivacyTitle => 'Tsiambaratelo';
+  String get termsPrivacyTitle => 'Ny angon-drakitrao';
 
   @override
   String get termsPrivacyContent =>
-      'Tsy mila kaonty i Feezer ary tsy manangona angon-drakitra manokana. Mijanona ao amin\'ny findainao ny tabilao sy ny kajinao. Ny fanavaozana ny sarany dia maka rakitra ho an\'ny besinimaro fotsiny, tsy mandefa ny angon-drakitrao.';
+      'Tsy mila kaonty i Feezer ary tsy manangona angon-drakitra manokana. Mijanona ao amin\'ny findainao ny tabilao sy ny kajinao, ary voafafa raha esorinao ilay fampiharana. Rakitra ho an\'ny besinimaro ihany no alain\'ny fanavaozana ny sarany.';
 
   @override
   String get termsLiabilityTitle => 'Andraikitra';
 
   @override
   String get termsLiabilityContent =>
-      'Ho fampahafantarana fotsiny ny valiny. Tsy mifandray amin\'ny mpandraharaha na iray aza i Feezer ary tsy tompon\'andraikitra amin\'ny sarany tena aloa, na amin\'ny fanapahan-kevitra noraisina avy amin\'ny kajiny.';
-
-  @override
-  String get termsTerminationTitle => 'Fijanonana';
-
-  @override
-  String get termsTerminationContent =>
-      'Afaka mijanona tsy mampiasa an\'i Feezer ianao na oviana na oviana: voafafa ao amin\'ny findainao ny angon-drakiny rehefa esorina ilay fampiharana.';
-
-  @override
-  String get termsGoverningLawTitle => 'Lalàna mifehy';
-
-  @override
-  String get termsGoverningLawContent =>
-      'Fehezin\'ny lalàna mihatra any amin\'ny toerana ampiasana an\'i Feezer ireo fepetra ireo. Hovahana amin\'ny fomba ara-dalàna voalazan\'ireo lalàna ireo ny disadisa rehetra.';
+      'Ho fampahafantarana fotsiny ny valiny: mety hanova ny sarany na oviana na oviana ny mpandraharaha, koa hamarino alohan\'ny fifanakalozana tsirairay. Tsy mifandray amin\'ny mpandraharaha na iray aza i Feezer ary tsy tompon\'andraikitra amin\'ny sarany tena aloa.';
 
   @override
   String get termsContactTitle => 'Fifandraisana';
@@ -356,54 +328,11 @@ class AppLocalizationsMg extends AppLocalizations {
   String get faq => 'Fanontaniana matetika';
 
   @override
-  String get faqWhatIsFeeMinimizer => 'Inona no atao hoe Feezer?';
-
-  @override
-  String get faqWhatIsFeeMinimizerAnswer =>
-      'Manisa ny fomba hizarana fisintonana na famindram-bola finday i Feezer mba handoavanao sarany kely indrindra, araka ny tabilao ofisialin\'ny mpandraharaha.';
-
-  @override
-  String get faqHowToAddProvider => 'Ahoana no hanampiana tabilao?';
-
-  @override
-  String get faqHowToAddProviderAnswer =>
-      'Ao amin\'ny Mpandraharaha, tsindrio « Hanampy », soraty ny anaran\'ny mpandraharaha sy ny fifanakalozana, dia ampio ny ambaratonga (farafahakeliny, farafahabetsany ary sarany). Azonao atao koa ny mampiditra rakitra CSV.';
-
-  @override
-  String get faqHowToCalculateFees => 'Ahoana no anaovana ny kajy?';
-
-  @override
-  String get faqHowToCalculateFeesAnswer =>
-      'Fidio ny mpandraharaha sy ny fifanakalozana, dia ampidiro ny vola azo ampiasaina (tafiditra ny sarany). Andramin\'i Feezer ny fitambarana rehetra ary tehiriziny izay mahazo vola betsaka indrindra. Ampitahaina amin\'ny fomba mahazatra ny valiny: misintona na mandefa ny vola betsaka indrindra azo atao isaky ny mandeha.';
-
-  @override
-  String get faqMinMaxTransactionRange =>
-      'Inona no ilana ny isan\'ny fifanakalozana?';
-
-  @override
-  String get faqMinMaxTransactionRangeAnswer =>
-      'Tsy voatery izy. Mametra ny isan\'ny fisintonana na fandefasana azo atao izy, ohatra « farafahabetsany 2 » raha tsy te hanao mihoatra ny roa ianao. Asehon\'i Feezer izay vidin\'io fetra io.';
-
-  @override
-  String get faqDataSecurity => 'Zaraina amin\'olona ve ny angon-drakitro?';
-
-  @override
-  String get faqDataSecurityAnswer =>
-      'Tsia. Mijanona ao amin\'ny findainao ny tabilao sy ny vola; tsy misy kaonty i Feezer ary tsy mandefa na inona na inona. Rakitra ho an\'ny besinimaro ihany no alain\'ny fanavaozana ny sarany.';
-
-  @override
-  String get faqOfflineMode => 'Mila aterineto ve?';
-
-  @override
-  String get faqOfflineModeAnswer =>
-      'Tsia. Ao amin\'ny findainao no anaovana ny kajy. Ny fanavaozana ny sarany ihany no mila aterineto.';
-
-  @override
   String get faqExportData => 'Ahoana no hitahirizana ny tabilaoko?';
 
   @override
   String get faqExportDataAnswer =>
-      'Fandrindrana › Hampiditra / hamoaka: avoahy ho rakitra CSV ny tabilaonao, dia ampidiro indray any aoriana na amin\'ny finday hafa.';
+      'Fandrindrana › Hampiditra / hamoaka: avoahy ho rakitra CSV ny tabilaonao, dia ampidiro amin\'ny finday hafa na rehefa avy namerina nametraka ny fampiharana.';
 
   @override
   String get website => 'Tranonkala';
@@ -695,7 +624,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'Isan\'andro, mamaky ny tabilao ofisialy ao amin\'ny mvola.mg sy orange.mg ny tetikasa feezer-fee-tables. Nadika tamin\'ny tanana avy amin\'ny sarany ny tabilaon\'i Airtel, satria tsy azo vakiana ho azy ny tranokalany. Ny « Havaozina » no maka ireo tabilao ireo; tsy miova ny tabilao hafa anananao.';
+      'Avy amin\'ny saran\'ny mpandraharaha ofisialy: vakiana isan\'andro ao amin\'ny mvola.mg sy orange.mg ny tabilaon\'i MVola sy Orange Money; nadika avy amin\'ny sarany navoaka ny an\'i Airtel Money. Tsindrio « Havaozina » ao amin\'ny Mpandraharaha mba hahazoana ny farany; tsy miova ireo tabilao nampidirinao.';
 
   @override
   String get ok => 'Eny';
@@ -987,4 +916,25 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get roundToHundredOff => 'Vola marina, hatramin\'ny ariary iray.';
+
+  @override
+  String get faqHowItWorks => 'Ahoana no fiasany?';
+
+  @override
+  String get faqHowItWorksAnswer =>
+      'Fidio ny mpandraharaha, ny fifanakalozana (fisintonana, famindrana…) ary ny vola azo ampiasaina, tafiditra ny sarany. Tadiavin\'i Feezer ny fizarana mahazo vola betsaka indrindra amin\'ny sarany kely indrindra, ary ampitahainy amin\'ny fomba mahazatra: misintona na mandefa ny vola betsaka indrindra azo atao isaky ny mandeha.';
+
+  @override
+  String get faqRounding => 'Nahoana no boribory amin\'ny zato ny vola?';
+
+  @override
+  String get faqRoundingAnswer =>
+      'Taratasim-bola ihany no omena any amin\'ny toeram-pisintonana: tsy azo sintonina ny 10 040. Miaraka amin\'ny « Boribory amin\'ny zato », isaky ny 100 ny vola rehetra ao amin\'ny drafitra. Mandeha ho azy izy ho an\'ny fisintonana; esory raha mila vola marina ianao.';
+
+  @override
+  String get faqPrivacy => 'Mila aterineto ve? Zaraina ve ny angon-drakitro?';
+
+  @override
+  String get faqPrivacyAnswer =>
+      'Tsia. Ao amin\'ny findainao no anaovana ny kajy, tsy misy kaonty, ary tsy misy alefa. Ny fanavaozana ny sarany ihany no mila aterineto (rakitra ho an\'ny besinimaro).';
 }
