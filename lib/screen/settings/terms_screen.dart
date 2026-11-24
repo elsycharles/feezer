@@ -11,13 +11,9 @@ class TermsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final sections = [
-      (l10n.termsIntroductionTitle, l10n.termsIntroductionContent),
-      (l10n.termsAcceptanceTitle, l10n.termsAcceptanceContent),
       (l10n.termsServiceTitle, l10n.termsServiceContent),
       (l10n.termsPrivacyTitle, l10n.termsPrivacyContent),
       (l10n.termsLiabilityTitle, l10n.termsLiabilityContent),
-      (l10n.termsTerminationTitle, l10n.termsTerminationContent),
-      (l10n.termsGoverningLawTitle, l10n.termsGoverningLawContent),
       (l10n.termsContactTitle, l10n.termsContactContent),
     ];
     return Scaffold(
