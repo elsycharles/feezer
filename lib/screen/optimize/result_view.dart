@@ -68,6 +68,9 @@ class ResultView extends StatelessWidget {
         OptimizationStatus.budgetTooSmall => l10n.optimizationBudgetTooSmall,
         OptimizationStatus.constraintsUnsatisfiable =>
           l10n.optimizationConstraintsUnsatisfiable,
+        OptimizationStatus.stepTooLarge => l10n.optimizationStepTooLarge(
+          context.money(outcome.step),
+        ),
         OptimizationStatus.success => l10n.noOptimizationResultsFound,
       };
       return FadeSlideIn(
@@ -131,7 +134,17 @@ class ResultView extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SectionLabel(words.plan),
+              SectionLabel(
+                words.plan,
+                trailing: outcome.step > 0
+                    ? Text(
+                        l10n.amountStepMultiples(context.money(outcome.step)),
+                        style: context.text.labelSmall?.copyWith(
+                          color: context.colors.onSurfaceVariant,
+                        ),
+                      )
+                    : null,
+              ),
               _PlanCard(result: result, words: words),
             ],
           ),
