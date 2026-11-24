@@ -954,4 +954,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String onlyOperation(String operation, String operator) {
     return 'Only “$operation” is available for $operator.';
   }
+
+  @override
+  String amountStepMultiples(String amount) {
+    return 'Multiples of $amount';
+  }
+
+  @override
+  String optimizationStepTooLarge(String amount) {
+    return 'No tier of this grid accepts amounts in multiples of $amount. Turn off rounding.';
+  }
+
+  @override
+  String get roundToHundred => 'Round to the hundred';
+
+  @override
+  String roundToHundredOnWithdrawal(String example, String wrong) {
+    return 'Every withdrawal is a multiple of 100: $example, never $wrong.';
+  }
+
+  @override
+  String roundToHundredOnTransfer(String example, String wrong) {
+    return 'Every transfer is a multiple of 100: $example, never $wrong.';
+  }
+
+  @override
+  String get roundToHundredOff => 'Exact amounts, to the ariary.';
 }

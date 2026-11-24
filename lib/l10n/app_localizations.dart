@@ -1646,6 +1646,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Only “{operation}” is available for {operator}.'**
   String onlyOperation(String operation, String operator);
+
+  /// No description provided for @amountStepMultiples.
+  ///
+  /// In en, this message translates to:
+  /// **'Multiples of {amount}'**
+  String amountStepMultiples(String amount);
+
+  /// No description provided for @optimizationStepTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'No tier of this grid accepts amounts in multiples of {amount}. Turn off rounding.'**
+  String optimizationStepTooLarge(String amount);
+
+  /// No description provided for @roundToHundred.
+  ///
+  /// In en, this message translates to:
+  /// **'Round to the hundred'**
+  String get roundToHundred;
+
+  /// No description provided for @roundToHundredOnWithdrawal.
+  ///
+  /// In en, this message translates to:
+  /// **'Every withdrawal is a multiple of 100: {example}, never {wrong}.'**
+  String roundToHundredOnWithdrawal(String example, String wrong);
+
+  /// No description provided for @roundToHundredOnTransfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Every transfer is a multiple of 100: {example}, never {wrong}.'**
+  String roundToHundredOnTransfer(String example, String wrong);
+
+  /// No description provided for @roundToHundredOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Exact amounts, to the ariary.'**
+  String get roundToHundredOff;
 }
 
 class _AppLocalizationsDelegate

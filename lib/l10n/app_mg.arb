@@ -427,5 +427,11 @@
   "failedToLoadData": "Tsy voaray ny angon-drakitra",
   "failedToOpenLink": "Tsy nety nisokatra ny rohy",
   "pressAgainToExit": "Tsindrio indray mba hivoaka",
-  "onlyOperation": "« {operation} » ihany no misy ho an'i {operator}."
+  "onlyOperation": "« {operation} » ihany no misy ho an'i {operator}.",
+  "amountStepMultiples": "Isaky ny {amount}",
+  "optimizationStepTooLarge": "Tsy misy ambaratonga amin'ity tabilao ity manaiky vola isaky ny {amount}. Esory ny boribory.",
+  "roundToHundred": "Boribory amin'ny zato",
+  "roundToHundredOnWithdrawal": "Isaky ny 100 ny fisintonana tsirairay: {example}, fa tsy {wrong} mihitsy.",
+  "roundToHundredOnTransfer": "Isaky ny 100 ny fandefasana tsirairay: {example}, fa tsy {wrong} mihitsy.",
+  "roundToHundredOff": "Vola marina, hatramin'ny ariary iray."
 }
