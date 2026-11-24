@@ -1,5 +1,5 @@
-name: fee_minimizer
-description: "Mobile application built with Flutter that helps users calculate and optimize transaction fees across different financial providers"
+name: feezer
+description: "Feezer: split mobile money withdrawals and transfers to pay the least fees."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -35,14 +35,14 @@ dependencies:
   intl: any
   shared_preferences: ^2.3.4
   provider: ^6.1.2
-  flutter_svg: ^2.0.9
   sqflite: ^2.4.2
   path: any
   # CSV Import/Export dependencies
   csv: ^6.0.0
   file_picker: ^13.4.1
-  path_provider: ^2.1.2
   url_launcher: ^6.2.6
+  http: ^1.6.0
+  package_info_plus: ^10.2.2
 
 dev_dependencies:
   flutter_test:
@@ -62,9 +62,16 @@ dev_dependencies:
 
 
 flutter_launcher_icons:
+  # Icons are drawn by tool/brand/make_logo.py.
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/icon.png"
+  remove_alpha_ios: true
+  image_path: "tool/brand/launcher/icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "tool/brand/launcher/icon_foreground.png"
+  adaptive_icon_foreground_inset: 0
+  adaptive_icon_monochrome: "tool/brand/launcher/icon_monochrome.png"
+
 # The following section is specific to Flutter packages.
 flutter:
   generate: true
@@ -77,7 +84,7 @@ flutter:
   # Assets configuration
   assets:
     - assets/images/
-    - assets/icons/
+    - assets/data/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

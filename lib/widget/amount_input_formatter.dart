@@ -3,13 +3,18 @@ import 'package:flutter/services.dart';
 import '../util/constant_util.dart';
 
 /// Formats amount fields while typing: digits grouped by thousands with
-/// spaces, a single decimal separator (`.` or `,`, normalized to `.`), and
-/// an optional maximum value.
+/// spaces, a single decimal separator (`.` or `,` typed, shown as
+/// [decimalSeparator]) and an optional maximum value.
 class AmountInputFormatter extends TextInputFormatter {
-  AmountInputFormatter({this.max, this.maxDecimals = 6});
+  AmountInputFormatter({
+    this.max,
+    this.maxDecimals = 2,
+    this.decimalSeparator = ',',
+  });
 
   final double? max;
   final int maxDecimals;
+  final String decimalSeparator;
 
   @override
   TextEditingValue formatEditUpdate(
@@ -56,7 +61,9 @@ class AmountInputFormatter extends TextInputFormatter {
     final value = double.tryParse(cleaned);
     if (max != null && value != null && value > max!) return oldValue;
 
-    final formatted = ConstantUtil.groupThousands(cleaned);
+    final formatted = ConstantUtil.groupThousands(
+      cleaned,
+    ).replaceFirst('.', decimalSeparator);
     // Place the cursor after the same number of kept characters.
     var offset = 0;
     var seen = 0;

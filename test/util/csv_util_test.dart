@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fee_minimizer/l10n/app_localizations.dart';
-import 'package:fee_minimizer/model/fee_interval_model.dart';
-import 'package:fee_minimizer/util/csv_util.dart';
+import 'package:feezer/l10n/app_localizations.dart';
+import 'package:feezer/model/fee_interval_model.dart';
+import 'package:feezer/util/csv_util.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -57,19 +57,17 @@ void main() {
       feeType: type,
     );
 
-    test('fixed fees are converted to Ariary, percentages are not', () {
+    test('amounts are read as is, comma decimals accepted', () {
       final fixed = CsvUtil.toInterval(
-        row(min: '1', max: '10', fee: '0,5'),
-        5200,
+        row(min: '1', max: '10 000', fee: '0,5'),
         l10n,
       ).interval!;
-      expect(fixed.minAmount, 5200);
-      expect(fixed.maxAmount, 52000);
-      expect(fixed.fee, 2600);
+      expect(fixed.minAmount, 1);
+      expect(fixed.maxAmount, 10000);
+      expect(fixed.fee, 0.5);
 
       final percentage = CsvUtil.toInterval(
         row(min: '1', max: '10', fee: '2.5', type: '%'),
-        5200,
         l10n,
       ).interval!;
       expect(percentage.fee, 2.5);
@@ -78,17 +76,16 @@ void main() {
 
     test('validation errors are localized', () {
       expect(
-        CsvUtil.toInterval(row(min: 'x', max: '10', fee: '1'), 1, l10n).error,
+        CsvUtil.toInterval(row(min: 'x', max: '10', fee: '1'), l10n).error,
         contains('Row 3'),
       );
       expect(
-        CsvUtil.toInterval(row(min: '10', max: '5', fee: '1'), 1, l10n).error,
+        CsvUtil.toInterval(row(min: '10', max: '5', fee: '1'), l10n).error,
         contains('Row 3'),
       );
       expect(
         CsvUtil.toInterval(
           row(min: '1', max: '5', fee: '150', type: 'percentage'),
-          1,
           l10n,
         ).error,
         contains('Row 3'),
@@ -101,7 +98,7 @@ void main() {
       final rows = CsvUtil.parseRows(CsvUtil.getImportTemplate(locale))!;
       expect(rows, hasLength(4));
       for (final r in rows) {
-        expect(CsvUtil.toInterval(r, 1, l10n).interval, isNotNull);
+        expect(CsvUtil.toInterval(r, l10n).interval, isNotNull);
       }
     }
   });

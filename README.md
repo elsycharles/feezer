@@ -1,8 +1,13 @@
-# Feezer (fee_minimizer)
+# Feezer
 
-Flutter app that tells you how to split a money transfer (mobile money, bank…)
-into transactions so that the recipient gets **as much as possible** for a
-given budget, while paying **the least fees**.
+Flutter app that tells you how to split a mobile money **withdrawal or
+transfer** into transactions so that you get **as much as possible** from the
+money you have, while paying **the least fees**.
+
+Choose the operator (MVola, Orange Money, Airtel Money… or your own grids),
+then the operation (withdrawal, transfer, to another operator…), enter the
+amount available, and Feezer shows the cheapest plan next to the usual way of
+doing it.
 
 ## Architecture
 
@@ -11,20 +16,55 @@ lib/
   core/optimizer/   Pure Dart, no Flutter: the optimization engine
     fee_tier.dart          normalized fee interval
     fee_optimizer.dart     exact optimizer
-    naive_strategy.dart    "by hand" strategies (comparison baseline)
+    naive_strategy.dart    "usual way" strategies (comparison baseline)
     fee_comparison.dart    optimized plan vs. baselines
-  data/             SQLite access (sqflite)
-    app_database.dart      schema, migrations, seeding
-    *_repository.dart      providers, fee intervals, currencies
-  model/            immutable models
-  provider/         app state (ChangeNotifier): currency, locale, theme
-  screen/ widget/   UI
-  util/             formatting, CSV import/export, navigation, theme
+  data/             SQLite access (sqflite) and official fee grids
+    app_database.dart      schema, migrations, change notifications
+    *_repository.dart      grids (operator + operation) and their tiers
+    fee_table_service.dart download, compare and apply the official grids
+    default_data.dart      grids bundled with the app (first launch, upgrades)
+  model/            immutable models (grid, tier, operation, results)
+  provider/         app state (ChangeNotifier): locale, theme
+  theme/            design tokens: colors, typography, spacing, motion
+  screen/           home (tabs), optimize, operators, settings, onboarding
+  widget/           shared components (buttons, cards, pills, skeletons…)
+  util/             money and date labels, CSV import/export, navigation
+tool/
+  brand/            the logo, drawn from exact geometry, and launcher icons
+  screenshots_test.dart   renders every screen to build/screenshots/
 ```
 
-All amounts are **stored in Ariary** (base currency). The selected currency is
-only used to convert amounts on input and display; percentage fees are never
-converted.
+Amounts are shown without currency, formatted as money (`10 050`, `1 234,50`).
+
+## Official fees
+
+A grid is an operator and an operation. The official grids are read every day
+from the operators' websites by the public repository
+[elsycharles/feezer-fee-tables](https://github.com/elsycharles/feezer-fee-tables),
+which publishes them as `fees.json`:
+
+| Operator | Source |
+| --- | --- |
+| MVola | mvola.mg rates page (HTML) |
+| Orange Money | orange.mg rates (PDF) |
+| Airtel Money | copied by hand: airtel.mg cannot be read automatically |
+
+* The app ships a copy (`assets/data/fees.json`), installed on first launch so
+  it works offline. Grids seeded by the 1.x versions are replaced only if the
+  user never changed them.
+* **Update** (Operators tab or Settings) downloads `fees.json`, lists the grids
+  that are new or changed, and applies them after confirmation. Other grids
+  are never touched.
+* A downloaded grid edited in the app is marked *edited by you*; the next
+  update shows it as changed and restores the official tiers if confirmed.
+
+## Design
+
+Flat surfaces, no gradients, Inter, one blue taken from the logo. Every
+tappable surface shrinks slightly when pressed and shows a calm ripple and a
+hover tint; tabs fade through, results count up and appear section by
+section, sheets and expanding cards animate their size. Tokens live in
+`lib/theme/app_theme.dart`, components in `lib/widget/common.dart`.
 
 ## Optimization algorithm
 
@@ -63,7 +103,20 @@ flutter test
 
 Tests include an exact brute-force reference (dynamic programming over integer
 costs) used to verify the optimizer on thousands of random fee tables and
-budgets, database migration tests (`sqflite_common_ffi`) and a UI smoke test.
+budgets, database tests (`sqflite_common_ffi`: migrations, seeding, official
+grid updates, CSV) and a UI flow test in both themes.
 
 Localizations live in `lib/l10n/*.arb` (English, French, Malagasy); regenerate
 with `flutter gen-l10n`.
+
+Tools:
+
+```sh
+python3 tool/brand/make_logo.py            # logo, launcher and splash images
+dart run flutter_launcher_icons            # Android / iOS launcher icons
+flutter test tool/screenshots_test.dart    # every screen, light and dark
+```
+
+The logo is the original artwork (`tool/brand/logo_original.png`) redrawn
+from measured geometry: 60° slants, one radius for the soft corners, flat
+colors. `make_logo.py` needs Pillow and NumPy.

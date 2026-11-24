@@ -1,59 +1,35 @@
 import 'package:flutter/material.dart';
 
-/// Navigation utilities for safe and consistent navigation throughout the app
-class NavigationUtil {
-  /// Lets screens know when they become visible again (see [RouteAware]).
-  static final RouteObserver<ModalRoute<void>> routeObserver =
-      RouteObserver<ModalRoute<void>>();
+import '../model/provider_model.dart';
+import '../screen/home/home_shell.dart';
+import '../screen/providers/provider_form.dart';
 
-  static const String onboardingRoute = '/onboarding';
+/// Route names and navigation helpers.
+abstract final class NavigationUtil {
   static const String homeRoute = '/';
-  static const String providersRoute = '/providers';
-  static const String settingsRoute = '/settings';
-  static const String newProviderRoute = '/new-provider';
+  static const String onboardingRoute = '/onboarding';
   static const String providerDetailRoute = '/provider';
-  static const String newFeeIntervalRoute = '/new-fee-interval';
-  static const String currenciesRoute = '/currencies';
-  static const String newCurrencyRoute = '/new-currency';
-  static const String csvManagementRoute = '/csv-management';
-  static const String helpSupportRoute = '/help-support';
-  static const String termsOfUseRoute = '/terms-of-use';
+  static const String dataRoute = '/data';
+  static const String helpRoute = '/help';
+  static const String termsRoute = '/terms';
 
-  /// Safely pops with a result using Navigator. If no pages to pop, navigates to fallback route.
-  ///
-  /// [context] - BuildContext for navigation
-  /// [result] - Result to return when popping
-  /// [fallbackRoute] - Route to navigate to if stack is empty (defaults to home route)
-  static void safeBackWithResult<T>(
-    BuildContext context,
-    T result, {
-    String? fallbackRoute,
-  }) {
-    final navigator = Navigator.of(context);
-    if (navigator.canPop()) {
-      navigator.pop<T>(result);
-      return;
+  /// Key of the tab shell, to switch tabs from pushed screens.
+  static final GlobalKey<HomeShellState> shellKey = GlobalKey<HomeShellState>();
+
+  static Future<void> openProvider(BuildContext context, Provider provider) =>
+      Navigator.of(context).pushNamed(providerDetailRoute, arguments: provider);
+
+  /// Creates a provider, then opens it so its fee grid can be filled.
+  static Future<void> openNewProvider(BuildContext context) async {
+    final provider = await showProviderForm(context);
+    if (provider != null && context.mounted) {
+      await openProvider(context, provider);
     }
-    navigator.pushNamedAndRemoveUntil(
-      fallbackRoute ?? NavigationUtil.homeRoute,
-      (route) => false,
-    );
   }
 
-  NavigationUtil._();
-
-  /// Navigate (replace) to [route]
-  static void goTo(BuildContext context, String route, {Object? extra}) {
-    Navigator.of(
-      context,
-    ).pushNamedAndRemoveUntil(route, (route) => false, arguments: extra);
+  /// Goes back to the optimizer tab with [provider] selected.
+  static void optimizeWith(BuildContext context, Provider provider) {
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    shellKey.currentState?.optimizeWith(provider);
   }
-
-  /// Pushes [route] and returns its result. Routes producing a result are
-  /// declared with their type in `MyApp.onGenerateRoute`.
-  static Future<T?> pushTo<T>(
-    BuildContext context,
-    String route, {
-    Object? extra,
-  }) => Navigator.of(context).pushNamed<T>(route, arguments: extra);
 }

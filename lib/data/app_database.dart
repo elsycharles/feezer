@@ -1,7 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../util/provider_data.dart';
 
 /// Table and column names.
 abstract final class Db {
@@ -9,12 +8,13 @@ abstract final class Db {
 
   /// v1: providers + fee_intervals, v2: currencies, v3: fee_type,
   /// v4: foreign keys, index on fee_intervals.provider_id, unused tables
-  /// removed.
-  static const int version = 4;
+  /// removed, v5: currencies removed (amounts are shown without currency),
+  /// v6: operation and source of each grid, app_meta table.
+  static const int version = 6;
 
   static const String providers = 'providers';
   static const String feeIntervals = 'fee_intervals';
-  static const String currencies = 'currencies';
+  static const String meta = 'app_meta';
 
   static const String id = 'id';
   static const String creationDatetime = 'creation_datetime';
@@ -22,16 +22,18 @@ abstract final class Db {
   static const String name = 'name';
   static const String description = 'description';
   static const String iconName = 'icon_name';
+  static const String operation = 'operation';
+  static const String sourceUrl = 'source_url';
+  static const String sourceType = 'source_type';
+  static const String effectiveDate = 'effective_date';
+  static const String key = 'key';
+  static const String value = 'value';
 
   static const String providerId = 'provider_id';
   static const String minAmount = 'min_amount';
   static const String maxAmount = 'max_amount';
   static const String fee = 'fee';
   static const String feeType = 'fee_type';
-
-  static const String code = 'code';
-  static const String symbol = 'symbol';
-  static const String rate = 'rate';
 }
 
 /// Single access point to the SQLite database.
@@ -41,6 +43,12 @@ class AppDatabase {
   static final AppDatabase instance = AppDatabase._();
 
   Future<Database>? _database;
+
+  /// Incremented after every write to providers or fee intervals, so screens
+  /// can reload (they listen to it).
+  static final ValueNotifier<int> changes = ValueNotifier(0);
+
+  static void notifyChanged() => changes.value++;
 
   /// Lazily opened database. Concurrent callers share the same opening
   /// future, so the file is never opened twice.
@@ -67,7 +75,11 @@ class AppDatabase {
         ${Db.name} TEXT NOT NULL,
         ${Db.description} TEXT NOT NULL,
         ${Db.iconName} TEXT DEFAULT 'business',
-        ${Db.creationDatetime} INTEGER NOT NULL
+        ${Db.creationDatetime} INTEGER NOT NULL,
+        ${Db.operation} TEXT,
+        ${Db.sourceUrl} TEXT,
+        ${Db.sourceType} TEXT,
+        ${Db.effectiveDate} TEXT
       )
     ''');
     await db.execute('''
@@ -84,8 +96,8 @@ class AppDatabase {
         ON DELETE CASCADE
       )
     ''');
-    await _createCurrencies(db);
     await _createIndexes(db);
+    await _createMeta(db);
   }
 
   static Future<void> upgradeSchema(
@@ -93,7 +105,6 @@ class AppDatabase {
     int oldVersion,
     int newVersion,
   ) async {
-    if (oldVersion < 2) await _createCurrencies(db);
     if (oldVersion < 3) {
       final columns = await db.rawQuery(
         'PRAGMA table_info(${Db.feeIntervals})',
@@ -117,54 +128,50 @@ class AppDatabase {
       );
       await _createIndexes(db);
     }
+    if (oldVersion < 5) {
+      await db.execute('DROP TABLE IF EXISTS currencies');
+    }
+    if (oldVersion < 6) {
+      for (final column in [
+        Db.operation,
+        Db.sourceUrl,
+        Db.sourceType,
+        Db.effectiveDate,
+      ]) {
+        await db.execute('ALTER TABLE ${Db.providers} ADD COLUMN $column TEXT');
+      }
+      await _createMeta(db);
+    }
   }
 
-  static Future<void> _createCurrencies(Database db) => db.execute('''
-    CREATE TABLE IF NOT EXISTS ${Db.currencies} (
-      ${Db.id} TEXT PRIMARY KEY,
-      ${Db.code} TEXT NOT NULL UNIQUE,
-      ${Db.name} TEXT NOT NULL,
-      ${Db.symbol} TEXT NOT NULL,
-      ${Db.rate} REAL NOT NULL,
-      ${Db.creationDatetime} INTEGER NOT NULL
+  static Future<void> _createMeta(Database db) => db.execute('''
+    CREATE TABLE IF NOT EXISTS ${Db.meta} (
+      ${Db.key} TEXT PRIMARY KEY,
+      ${Db.value} TEXT
     )
   ''');
+
+  /// Small key/value store kept with the data (e.g. seed version).
+  Future<String?> getMeta(String key) async {
+    final db = await database;
+    final rows = await db.query(
+      Db.meta,
+      where: '${Db.key} = ?',
+      whereArgs: [key],
+    );
+    return rows.isEmpty ? null : rows.first[Db.value] as String?;
+  }
+
+  Future<void> setMeta(String key, String value) async {
+    final db = await database;
+    await db.insert(Db.meta, {
+      Db.key: key,
+      Db.value: value,
+    }, conflictAlgorithm: ConflictAlgorithm.replace);
+  }
 
   static Future<void> _createIndexes(Database db) => db.execute(
     'CREATE INDEX IF NOT EXISTS idx_fee_intervals_provider '
     'ON ${Db.feeIntervals} (${Db.providerId})',
   );
-
-  /// Inserts the default providers on first launch (empty providers table).
-  Future<void> seedDefaultData() async {
-    final db = await database;
-    final count = Sqflite.firstIntValue(
-      await db.rawQuery('SELECT COUNT(*) FROM ${Db.providers}'),
-    );
-    if ((count ?? 0) > 0) return;
-
-    await db.transaction((txn) async {
-      final now = DateTime.now().millisecondsSinceEpoch;
-      for (final provider in ProviderData.defaultProviders) {
-        final providerId = await txn.insert(Db.providers, {
-          Db.name: provider.name,
-          Db.description: provider.description,
-          Db.iconName: provider.iconName,
-          Db.creationDatetime: now,
-        });
-        final batch = txn.batch();
-        for (final interval in provider.feeIntervals) {
-          batch.insert(Db.feeIntervals, {
-            Db.providerId: providerId,
-            Db.minAmount: interval.minAmount,
-            Db.maxAmount: interval.maxAmount,
-            Db.fee: interval.fee,
-            Db.feeType: interval.feeType.index,
-            Db.creationDatetime: now,
-          });
-        }
-        await batch.commit(noResult: true);
-      }
-    });
-  }
 }

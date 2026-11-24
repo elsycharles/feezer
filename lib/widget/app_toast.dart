@@ -1,141 +1,114 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import '../util/theme_util.dart';
 
-/// Enum for toast types
-enum ToastType { success, error, info, warning }
+import '../theme/app_theme.dart';
 
-/// Custom toast widget with beautiful design
-class AppToast extends StatefulWidget {
-  final String message;
-  final Color backgroundColor;
-  final Color textColor;
-  final Color borderColor;
-  final IconData icon;
-  final VoidCallback onDismiss;
+enum ToastType { success, error, warning, info }
 
-  const AppToast({
-    super.key,
-    required this.message,
-    required this.backgroundColor,
-    required this.textColor,
-    required this.borderColor,
-    required this.icon,
-    required this.onDismiss,
-  });
+/// Short message shown at the top of the screen, above every route and
+/// modal sheet. A new toast replaces the previous one.
+class AppToast {
+  const AppToast._();
 
-  /// Static method to show toast with theme-based styling
+  static OverlayEntry? _current;
+  static GlobalKey<_ToastState>? _key;
+  static Timer? _timer;
+
+  static void success(BuildContext context, String message) =>
+      show(context, message, type: ToastType.success);
+
+  static void error(BuildContext context, String message) =>
+      show(context, message, type: ToastType.error);
+
+  static void warning(BuildContext context, String message) =>
+      show(context, message, type: ToastType.warning);
+
+  static void info(BuildContext context, String message) =>
+      show(context, message, type: ToastType.info);
+
   static void show(
     BuildContext context,
     String message, {
     ToastType type = ToastType.info,
   }) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    late Color backgroundColor;
-    late Color textColor;
-    late Color borderColor;
-    late IconData icon;
-
-    switch (type) {
-      case ToastType.success:
-        backgroundColor = ThemeUtil.success.withValues(alpha: 0.95);
-        textColor = Colors.white;
-        borderColor = ThemeUtil.success;
-        icon = Icons.check_circle;
-        break;
-      case ToastType.error:
-        backgroundColor = ThemeUtil.error.withValues(alpha: 0.95);
-        textColor = Colors.white;
-        borderColor = ThemeUtil.error;
-        icon = Icons.error;
-        break;
-      case ToastType.warning:
-        backgroundColor = ThemeUtil.warning.withValues(alpha: 0.95);
-        textColor = Colors.white;
-        borderColor = ThemeUtil.warning;
-        icon = Icons.warning;
-        break;
-      case ToastType.info:
-        backgroundColor = isDark
-            ? colorScheme.surface.withValues(alpha: 0.98)
-            : colorScheme.surface.withValues(alpha: 0.98);
-        textColor = colorScheme.onSurface;
-        borderColor = colorScheme.primary.withValues(alpha: 0.3);
-        icon = Icons.info;
-        break;
-    }
-
-    final overlay = Overlay.of(context, rootOverlay: true);
-    late OverlayEntry overlayEntry;
-
-    overlayEntry = OverlayEntry(
-      builder: (context) => AppToast(
+    final overlay = Overlay.maybeOf(context, rootOverlay: true);
+    if (overlay == null) return;
+    _removeNow();
+    final key = GlobalKey<_ToastState>();
+    late final OverlayEntry entry;
+    entry = OverlayEntry(
+      builder: (_) => _Toast(
+        key: key,
         message: message,
-        backgroundColor: backgroundColor,
-        textColor: textColor,
-        borderColor: borderColor,
-        icon: icon,
-        onDismiss: () => overlayEntry.remove(),
+        type: type,
+        onDismiss: () => _hide(entry),
       ),
     );
+    _current = entry;
+    _key = key;
+    overlay.insert(entry);
+    _timer = Timer(
+      Duration(milliseconds: 2600 + message.length * 25),
+      () => _hide(entry),
+    );
+  }
 
-    overlay.insert(overlayEntry);
-
-    // Auto dismiss after 5 seconds
-    Future.delayed(const Duration(seconds: 5), () {
-      if (overlayEntry.mounted) {
-        overlayEntry.remove();
-      }
+  /// Plays the exit animation, then removes [entry].
+  static void _hide(OverlayEntry entry) {
+    if (!identical(_current, entry)) return;
+    _timer?.cancel();
+    _timer = null;
+    final state = _key?.currentState;
+    if (state == null) {
+      _removeNow();
+      return;
+    }
+    state.hide().whenComplete(() {
+      if (identical(_current, entry)) _removeNow();
     });
   }
 
-  /// Convenience methods for specific toast types
-  static void success(BuildContext context, String message) {
-    show(context, message, type: ToastType.success);
+  static void _removeNow() {
+    _timer?.cancel();
+    _timer = null;
+    final entry = _current;
+    _current = null;
+    _key = null;
+    if (entry != null && entry.mounted) entry.remove();
   }
-
-  static void error(BuildContext context, String message) {
-    show(context, message, type: ToastType.error);
-  }
-
-  static void warning(BuildContext context, String message) {
-    show(context, message, type: ToastType.warning);
-  }
-
-  static void info(BuildContext context, String message) {
-    show(context, message, type: ToastType.info);
-  }
-
-  @override
-  State<AppToast> createState() => _AppToastState();
 }
 
-class _AppToastState extends State<AppToast>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Offset> _slideAnimation;
-  late Animation<double> _fadeAnimation;
+class _Toast extends StatefulWidget {
+  const _Toast({
+    super.key,
+    required this.message,
+    required this.type,
+    required this.onDismiss,
+  });
+
+  final String message;
+  final ToastType type;
+  final VoidCallback onDismiss;
 
   @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
+  State<_Toast> createState() => _ToastState();
+}
 
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, 1),
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
+class _ToastState extends State<_Toast> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 280),
+    reverseDuration: const Duration(milliseconds: 180),
+  )..forward();
+  late final Animation<double> _curve = CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeOutCubic,
+    reverseCurve: Curves.easeInCubic,
+  );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-
-    _controller.forward();
-  }
+  Future<void> hide() =>
+      _controller.reverse().orCancel.catchError((Object _) {});
 
   @override
   void dispose() {
@@ -144,63 +117,82 @@ class _AppToastState extends State<AppToast>
   }
 
   @override
-  Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+  Widget build(BuildContext context) => AnimatedBuilder(
+    animation: _curve,
+    builder: (context, child) => Opacity(
+      opacity: _curve.value,
+      child: Transform.translate(
+        offset: Offset(0, -16 * (1 - _curve.value)),
+        child: child,
+      ),
+    ),
+    child: _ToastBody(
+      message: widget.message,
+      type: widget.type,
+      onDismiss: widget.onDismiss,
+    ),
+  );
+}
 
-    return Positioned(
-      bottom: mediaQuery.padding.bottom + 75,
-      left: 16,
-      right: 16,
-      child: SlideTransition(
-        position: _slideAnimation,
-        child: FadeTransition(
-          opacity: _fadeAnimation,
+class _ToastBody extends StatelessWidget {
+  const _ToastBody({
+    required this.message,
+    required this.type,
+    required this.onDismiss,
+  });
+
+  final String message;
+  final ToastType type;
+  final VoidCallback onDismiss;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    final palette = context.palette;
+    final (icon, accent) = switch (type) {
+      ToastType.success => (Icons.check_circle_rounded, palette.success),
+      ToastType.error => (Icons.error_rounded, colors.error),
+      ToastType.warning => (Icons.warning_rounded, palette.warning),
+      ToastType.info => (Icons.info_rounded, colors.inversePrimary),
+    };
+    final radius = BorderRadius.circular(Space.radiusMd);
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(Space.lg, Space.sm, Space.lg, 0),
           child: Material(
-            color: Colors.transparent,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: widget.backgroundColor,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: widget.borderColor, width: 1.5),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.1),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+            color: colors.inverseSurface,
+            elevation: 6,
+            shadowColor: Colors.black38,
+            borderRadius: radius,
+            child: InkWell(
+              borderRadius: radius,
+              onTap: onDismiss,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 520),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Space.lg,
+                    vertical: Space.md,
                   ),
-                  BoxShadow(
-                    color: widget.borderColor.withValues(alpha: 0.2),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Icon(widget.icon, color: widget.textColor, size: 20),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Text(
-                      widget.message,
-                      style: ThemeUtil.bodyMedium.copyWith(
-                        color: widget.textColor,
-                        fontWeight: FontWeight.w500,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(icon, color: accent, size: 22),
+                      Space.gapMd,
+                      Flexible(
+                        child: Text(
+                          message,
+                          style: context.text.bodyMedium?.copyWith(
+                            color: colors.onInverseSurface,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: () {
-                      _controller.reverse().then((_) => widget.onDismiss());
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: widget.textColor.withValues(alpha: 0.7),
-                      size: 18,
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),

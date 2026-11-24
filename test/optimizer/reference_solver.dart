@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:fee_minimizer/core/optimizer/fee_tier.dart';
+import 'package:feezer/core/optimizer/fee_tier.dart';
 
 /// Brute-force reference: exact dynamic programming over integer costs, for
 /// fixed-fee tiers with integer bounds. Slow (O(budget * tiers)) but simple.

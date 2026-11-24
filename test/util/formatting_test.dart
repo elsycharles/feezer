@@ -1,25 +1,33 @@
-import 'package:fee_minimizer/util/constant_util.dart';
-import 'package:fee_minimizer/widget/amount_input_formatter.dart';
+import 'package:feezer/util/constant_util.dart';
+import 'package:feezer/util/money.dart';
+import 'package:feezer/widget/amount_input_formatter.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('formatCurrencyAmount', () {
-    test('groups thousands and trims zeros', () {
-      expect(ConstantUtil.formatCurrencyAmount(1234567), '1 234 567');
-      expect(ConstantUtil.formatCurrencyAmount(1234.5), '1 234.5');
-      expect(ConstantUtil.formatCurrencyAmount(1234.567), '1 234.57');
-      expect(ConstantUtil.formatCurrencyAmount(0), '0');
-      expect(ConstantUtil.formatCurrencyAmount(0.0123), '0.0123');
+  group('Money', () {
+    const nbsp = '\u00A0';
+    test('groups thousands with no-break spaces, no currency', () {
+      expect(Money.format(1234567), '1${nbsp}234${nbsp}567');
+      expect(Money.format(10050), '10${nbsp}050');
+      expect(Money.format(0), '0');
+      expect(Money.format(999), '999');
+    });
+
+    test('two decimals only for fractional amounts', () {
+      expect(Money.format(1234.5), '1${nbsp}234,50');
+      expect(Money.format(1234.5, decimalSeparator: '.'), '1${nbsp}234.50');
+      expect(Money.format(12.004), '12');
     });
 
     test('negative amounts', () {
-      expect(ConstantUtil.formatCurrencyAmount(-123), '-123');
-      expect(ConstantUtil.formatCurrencyAmount(-1234), '-1 234');
+      expect(Money.format(-123), '-123');
+      expect(Money.format(-1234), '-1${nbsp}234');
     });
 
-    test('fixed decimals', () {
-      expect(ConstantUtil.formatCurrencyAmount(12, decimals: 2), '12.00');
+    test('percentages', () {
+      expect(Money.percent(2.5), '2,5$nbsp%');
+      expect(Money.percent(1), '1$nbsp%');
     });
   });
 
@@ -65,10 +73,12 @@ void main() {
       expect(value.selection.baseOffset, value.text.length);
     });
 
-    test('comma is a decimal separator and only one is kept', () {
-      expect(type('12,5').text, '12.5');
-      expect(type('1.2.3').text, '1.23');
-      expect(type(',5').text, '0.5');
+    test('comma or dot typed, shown with the locale separator', () {
+      expect(type('12,5').text, '12,5');
+      expect(type('12.5').text, '12,5');
+      expect(type('1.2.3').text, '1,23');
+      expect(type(',5').text, '0,5');
+      expect(ConstantUtil.parseLocalizedNumber(type('1234,5').text), 1234.5);
     });
 
     test('max is enforced', () {

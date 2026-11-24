@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Downloads the reference fee grids. -->
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:label="Feezer"
         android:name="${applicationName}"

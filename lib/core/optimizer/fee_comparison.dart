@@ -59,12 +59,6 @@ class FeeComparison {
         optimized.budget + 1e-9 * (optimized.budget + 1);
   }
 
-  FeeComparison scaled(double factor) => FeeComparison(
-    optimized: optimized.scaled(factor),
-    withoutOptimization: withoutOptimization.scaled(factor),
-    sameNetWithoutOptimization: sameNetWithoutOptimization?.scaled(factor),
-  );
-
   static FeeOptimizerResult _toResult(
     double budget,
     List<FeeTier> tiers,

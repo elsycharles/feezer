@@ -18,7 +18,6 @@ enum OptimizationStatus {
 /// Result of a fee optimization (or of a baseline strategy used for
 /// comparison).
 ///
-/// All amounts are expressed in the base currency (Ariary).
 class FeeOptimizerResult {
   const FeeOptimizerResult({
     required this.budget,
@@ -99,17 +98,6 @@ class FeeOptimizerResult {
 
   /// Share of the spent money that reaches the recipient, in percent.
   double get efficiency => totalSpent > 0 ? netAmount / totalSpent * 100 : 0;
-
-  /// Returns a copy where every amount is multiplied by [factor]
-  /// (used to convert from Ariary to the display currency).
-  FeeOptimizerResult scaled(double factor) => FeeOptimizerResult(
-    budget: budget * factor,
-    netAmount: netAmount * factor,
-    totalFees: totalFees * factor,
-    details: [for (final d in details) d.scaled(factor)],
-    status: status,
-    isProvenOptimal: isProvenOptimal,
-  );
 
   @override
   String toString() =>
