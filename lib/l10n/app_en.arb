@@ -237,7 +237,7 @@
   "@helpAndSupport": {
     "description": "Help and support menu item"
   },
-  "addNewProvider": "Add new provider",
+  "addNewProvider": "Add an operator",
   "@addNewProvider": {
     "description": "Add new provider button text"
   },

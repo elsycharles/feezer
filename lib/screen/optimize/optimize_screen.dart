@@ -476,40 +476,38 @@ class _OperatorPicker extends StatelessWidget {
         ],
       );
     }
-    final entries = map.entries.toList();
-    return SizedBox(
-      height: 50,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        clipBehavior: Clip.none,
-        itemCount: entries.length + 1,
-        separatorBuilder: (_, _) => Space.gapSm,
-        itemBuilder: (context, index) {
-          if (index == entries.length) {
-            return ChoicePill(
-              label: entries.isEmpty ? l10n.addNewProvider : l10n.add,
-              selected: false,
-              onTap: onAdd,
-              leading: Icon(
-                Icons.add_rounded,
-                size: 20,
-                color: context.colors.primary,
-              ),
-            );
-          }
-          final grid = entries[index].value.first;
-          return ChoicePill(
-            label: grid.name,
-            selected: entries[index].key == selectedKey,
-            onTap: () => onSelected(entries[index].key),
+    // Wraps onto several lines: every operator stays visible, whatever the
+    // screen width or the number of operators.
+    return Wrap(
+      spacing: Space.sm,
+      runSpacing: Space.sm,
+      children: [
+        for (final MapEntry(:key, :value) in map.entries)
+          ChoicePill(
+            label: value.first.name,
+            selected: key == selectedKey,
+            onTap: () => onSelected(key),
             leading: ProviderAvatar(
-              name: grid.name,
-              iconName: grid.iconName,
+              name: value.first.name,
+              iconName: value.first.iconName,
               size: 30,
             ),
-          );
-        },
-      ),
+          ),
+        ChoicePill(
+          label: map.isEmpty ? l10n.addNewProvider : l10n.add,
+          selected: false,
+          onTap: onAdd,
+          // Same height as the operator avatars.
+          leading: SizedBox.square(
+            dimension: 30,
+            child: Icon(
+              Icons.add_rounded,
+              size: 20,
+              color: context.colors.primary,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

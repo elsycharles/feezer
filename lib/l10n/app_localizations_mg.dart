@@ -206,7 +206,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get helpAndSupport => 'Fanampiana';
 
   @override
-  String get addNewProvider => 'Hanampy mpanome tolotra vaovao';
+  String get addNewProvider => 'Hanampy mpandraharaha';
 
   @override
   String get saveChanges => 'Tehirizina';

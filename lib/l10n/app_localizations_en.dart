@@ -206,7 +206,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get helpAndSupport => 'Help & support';
 
   @override
-  String get addNewProvider => 'Add new provider';
+  String get addNewProvider => 'Add an operator';
 
   @override
   String get saveChanges => 'Save changes';
