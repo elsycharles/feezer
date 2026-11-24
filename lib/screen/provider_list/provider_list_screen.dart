@@ -9,14 +9,12 @@ import 'widget/search_field.dart';
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
 import '../../widget/app_toast.dart';
-import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
 import 'widget/provider_header.dart';
 import 'widget/provider_tile.dart';
 import 'widget/provider_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
-import '../../util/database_util.dart';
-import '../../util/constant_util.dart';
+import '../../data/provider_repository.dart';
 import '../../widget/refreshable_screen.dart';
 
 /// Clean provider list screen
@@ -28,12 +26,13 @@ class ProviderListScreen extends StatefulWidget {
 }
 
 class _State extends State<ProviderListScreen> {
+  final _repository = ProviderRepository();
   final _searchController = TextEditingController();
   final _providers = <Provider>[];
   final _selectedIds = <String>{};
 
   List<Provider> get _filtered {
-    final query = _searchController.text.toLowerCase();
+    final query = _searchController.text.trim().toLowerCase();
     return query.isEmpty
         ? _providers
         : _providers
@@ -51,17 +50,19 @@ class _State extends State<ProviderListScreen> {
   }
 
   Future<void> _loadProviders() async {
-    final db = DatabaseUtil();
-    final providerMaps = await db.query(ConstantUtil.tableProviders);
-    final loadedProviders = providerMaps
-        .map((map) => Provider.fromMap(map))
-        .toList();
-    if (mounted) {
+    try {
+      final providers = await _repository.getAll();
+      if (!mounted) return;
       setState(() {
         _providers
           ..clear()
-          ..addAll(loadedProviders);
+          ..addAll(providers);
+        _selectedIds.removeWhere((id) => !providers.any((p) => p.id == id));
       });
+    } catch (_) {
+      if (mounted) {
+        AppToast.error(context, AppLocalizations.of(context).failedToLoadData);
+      }
     }
   }
 
@@ -157,7 +158,9 @@ class _State extends State<ProviderListScreen> {
                       onClearSelection: _clearSelection,
                       onDelete: _deleteSelected,
                       onEdit: _isSingleSelection ? _editSelected : null,
-                      onDetails: _isSingleSelection ? _showSelectedDetails : null,
+                      onDetails: _isSingleSelection
+                          ? _showSelectedDetails
+                          : null,
                       margin: EdgeInsets.zero,
                     ),
                   ),
@@ -228,20 +231,27 @@ class _State extends State<ProviderListScreen> {
   // Action methods
   void _editSelected() {
     if (_selectedIds.length == 1) {
-      final provider = _providers.firstWhere((p) => p.id == _selectedIds.first);
-      ProviderEditBottomSheet.show(context, provider, _editProvider);
+      final provider = _providers
+          .where((p) => p.id == _selectedIds.first)
+          .firstOrNull;
+      if (provider != null) {
+        ProviderEditBottomSheet.show(context, provider, _editProvider);
+      }
     }
   }
 
   void _showSelectedDetails() {
     if (_selectedIds.length == 1) {
-      final provider = _providers.firstWhere((p) => p.id == _selectedIds.first);
-      _showProviderDetails(provider);
+      final provider = _providers
+          .where((p) => p.id == _selectedIds.first)
+          .firstOrNull;
+      if (provider != null) _showProviderDetails(provider);
     }
   }
 
   Future<void> _deleteSelected() async {
-    final count = _selectedIds.length;
+    final ids = Set.of(_selectedIds);
+    final count = ids.length;
     final l10n = AppLocalizations.of(context);
     final message = count == 1
         ? '${l10n.deleteThisProvider}\n\n${l10n.deleteProviderWarning}'
@@ -252,60 +262,40 @@ class _State extends State<ProviderListScreen> {
       count > 1 ? l10n.deleteProviders : l10n.deleteProvider,
       message,
     );
-
-    if (confirmed == true && mounted) {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) => const AppLoading.overlay(),
-      );
-      final db = DatabaseUtil();
-      for (final id in _selectedIds) {
-        await db.database.then((database) async {
-          // First delete all fee intervals associated with this provider
-          await database.delete(
-            ConstantUtil.tableFeeIntervals,
-            where: '${ConstantUtil.columnProviderId} = ?',
-            whereArgs: [int.tryParse(id)],
-          );
-          // Then delete the provider
-          await database.delete(
-            ConstantUtil.tableProviders,
-            where: '${ConstantUtil.columnId} = ?',
-            whereArgs: [int.tryParse(id)],
-          );
-        });
-      }
-      await Future.delayed(const Duration(milliseconds: 400));
-      if (mounted) {
-        Navigator.of(context).pop();
-        AppToast.success(context, l10n.providerDeletedSuccessfully(count));
-        await _loadProviders();
-        setState(() => _selectedIds.clear());
-      }
+    if (confirmed != true || !mounted) return;
+    try {
+      await _repository.delete(ids);
+      if (!mounted) return;
+      setState(_selectedIds.clear);
+      AppToast.success(context, l10n.providerDeletedSuccessfully(count));
+    } catch (_) {
+      if (mounted) AppToast.error(context, l10n.failedToSaveChanges);
     }
-  }
-
-  void _editProvider(Provider provider) async {
-    final db = DatabaseUtil();
-    await db.database.then((database) {
-      database.update(
-        ConstantUtil.tableProviders,
-        Provider.toMap(provider),
-        where: '${ConstantUtil.columnId} = ?',
-        whereArgs: [int.tryParse(provider.id)],
-      );
-    });
     await _loadProviders();
   }
 
-  void _showProviderDetails(Provider provider) {
-    NavigationUtil.pushTo(
+  Future<String?> _editProvider(Provider provider) async {
+    final l10n = AppLocalizations.of(context);
+    try {
+      final duplicate = await _repository.findByName(
+        provider.name,
+        excludeId: provider.id,
+      );
+      if (duplicate != null) return l10n.providerNameAlreadyExists;
+      await _repository.update(provider);
+      await _loadProviders();
+      return null;
+    } catch (_) {
+      return l10n.failedToSaveChanges;
+    }
+  }
+
+  Future<void> _showProviderDetails(Provider provider) async {
+    await NavigationUtil.pushTo<void>(
       context,
       NavigationUtil.providerDetailRoute,
       extra: provider,
     );
+    await _loadProviders();
   }
 }
-
-// All test data removed. Provider list is now fully dynamic from DB.
