@@ -11,7 +11,7 @@ class HelpScreen extends StatelessWidget {
 
   static const _email = 'elsy.s.charles@gmail.com';
   static const _whatsapp = 'https://wa.me/261348421634';
-  static const _website = 'https://elsy-charles.vercel.app/';
+  static const _website = 'https://elsycharles.github.io/';
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class HelpScreen extends StatelessWidget {
               MenuRow(
                 icon: Icons.language_rounded,
                 title: l10n.website,
-                subtitle: 'elsy-charles.vercel.app',
+                subtitle: Uri.parse(_website).host,
                 trailing: const SizedBox.shrink(),
                 onTap: () => LinkUtil.open(context, Uri.parse(_website)),
               ),
