@@ -15,7 +15,7 @@
   "save": "Enregistrer",
   "confirmDeleteCurrencies": "Êtes-vous sûr de vouloir supprimer {count} devises ?",
   "@confirmDeleteCurrencies": {
-    "description": "Message de confirmation pour la suppression de devises",
+    "description": "Confirmation message for deleting currencies",
     "placeholders": {
       "count": {
         "type": "int",
@@ -40,12 +40,12 @@
   "optimizeFee": "Optimiser les Frais",
   "providers": "Fournisseurs",
   "settings": "Paramètres",
-  "createInterval": "Créer un Intervalle",
+  "createInterval": "Créer l'intervalle",
   "optimize": "Optimiser",
   "amount": "Montant",
   "provider": "Fournisseur",
-  "minTransactions": "Transactions Min",
-  "maxTransactions": "Transactions Max",
+  "minTransactions": "Transactions min",
+  "maxTransactions": "Transactions max",
   "pleaseEnterValidAmount": "Veuillez saisir un montant valide",
   "pleaseSelectProvider": "Veuillez sélectionner un fournisseur",
   "invalidTransactionRange": "Les transactions min doivent être inférieures aux transactions max",
@@ -64,8 +64,8 @@
   "dark": "Sombre",
   "comingSoon": "Bientôt Disponible",
   "thisFeatureWillBeAvailableSoon": "Cette fonctionnalité sera bientôt disponible !",
-  "feeIntervals": "Intervalles de Frais",
-  "newFeeInterval": "Nouvel Intervalle de Frais",
+  "feeIntervals": "Intervalles de frais",
+  "newFeeInterval": "Nouvel intervalle de frais",
   "minAmount": "Montant Min",
   "maxAmount": "Montant Max",
   "feePercentage": "Pourcentage de Frais",
@@ -73,8 +73,8 @@
   "pleaseEnterMinAmount": "Veuillez saisir le montant minimum",
   "pleaseEnterMaxAmount": "Veuillez saisir le montant maximum",
   "pleaseEnterValidFeePercentage": "Veuillez saisir un pourcentage de frais valide",
-  "maxAmountMustBeGreaterThanMinAmount": "Le montant max doit être supérieur au montant min",
-  "optimizationResults": "Résultats d'Optimisation",
+  "maxAmountMustBeGreaterThanMinAmount": "Le montant maximum doit être supérieur au montant minimum",
+  "optimizationResults": "Résultats d'optimisation",
   "interval": "Intervalle",
   "fee": "Frais",
   "count": "Nombre",
@@ -95,9 +95,9 @@
   "@netAmount": {
     "description": "Net amount after fees metric title"
   },
-  "totalFees": "Frais Totaux",
+  "totalFees": "Frais totaux",
   "@totalFees": {
-    "description": "Total fees metric title"
+    "description": "Label for total fees in comparison"
   },
   "efficiency": "Efficacité",
   "@efficiency": {
@@ -122,7 +122,6 @@
   "error": "Erreur",
   "screenNotFound": "Écran {route} introuvable",
   "goHome": "Accueil",
-
   "noProvidersFound": "Aucun fournisseur trouvé",
   "@noProvidersFound": {
     "description": "Message shown when no providers are available"
@@ -325,7 +324,6 @@
   "@enterTransactionAmountToOptimize": {
     "description": "Instructions for amount input"
   },
-  "amount": "Montant",
   "@amount": {
     "description": "Amount label"
   },
@@ -337,11 +335,9 @@
   "@defineMinMaxTransactions": {
     "description": "Instructions for transaction range"
   },
-  "minTransactions": "Transactions min",
   "@minTransactions": {
     "description": "Minimum transactions label"
   },
-  "maxTransactions": "Transactions max",
   "@maxTransactions": {
     "description": "Maximum transactions label"
   },
@@ -353,19 +349,15 @@
   "@clickOptimizeButtonToAnalyze": {
     "description": "Instructions for optimization"
   },
-  "optimizationResults": "Résultats d'optimisation",
   "@optimizationResults": {
     "description": "Optimization results title"
   },
-  "interval": "Intervalle",
   "@interval": {
     "description": "Interval column header"
   },
-  "fee": "Frais",
   "@fee": {
     "description": "Fee column header"
   },
-  "count": "Nombre",
   "@count": {
     "description": "Count column header"
   },
@@ -377,7 +369,6 @@
   "@noFeeIntervalsFound": {
     "description": "Message when no fee intervals exist"
   },
-  "feeIntervals": "Intervalles de frais",
   "@feeIntervals": {
     "description": "Fee intervals section title"
   },
@@ -405,7 +396,6 @@
   "@deleteFeeIntervals": {
     "description": "Delete fee intervals title"
   },
-  "newFeeInterval": "Nouvel intervalle de frais",
   "@newFeeInterval": {
     "description": "New fee interval screen title"
   },
@@ -429,7 +419,6 @@
   "@enterFeeAmount": {
     "description": "Fee amount input placeholder"
   },
-  "createInterval": "Créer l'intervalle",
   "@createInterval": {
     "description": "Create interval button"
   },
@@ -520,16 +509,15 @@
     "description": "Validation error for minimum length",
     "placeholders": {
       "count": {
-        "type": "num",
-        "format": "compact"
+        "type": "int",
+        "example": "3"
       }
     }
   },
   "enterValidNumber": "Saisissez un nombre valide",
   "@enterValidNumber": {
-    "description": "Validation error for number field"
+    "description": "Validation error for numeric fields"
   },
-  "maxAmountMustBeGreaterThanMinAmount": "Le montant maximum doit être supérieur au montant minimum",
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
   },
@@ -537,15 +525,10 @@
   "@pleaseEnterFeeAmount": {
     "description": "Validation error for fee amount field"
   },
-  "selectAll": "Tout sélectionner",
-  "@selectAll": {
-    "description": "Select all tooltip"
-  },
   "details": "Détails",
   "@details": {
     "description": "Details tooltip"
   },
-  "total": "Total",
   "@total": {
     "description": "Total column header"
   },
@@ -569,7 +552,6 @@
   "@mobileMoney": {
     "description": "Mobile money description"
   },
-  "mobileFinancialServices": "Services financiers mobiles",
   "@mobileFinancialServices": {
     "description": "Mobile financial services description"
   },
@@ -652,20 +634,6 @@
   "mustBeGreaterThanZero": "Doit être supérieur à 0",
   "@mustBeGreaterThanZero": {
     "description": "Validation error for positive numbers"
-  },
-  "enterValidNumber": "Saisissez un nombre valide",
-  "@enterValidNumber": {
-    "description": "Validation error for numeric fields"
-  },
-  "mustBeAtLeastNCharacters": "Doit contenir au moins {count} caractères",
-  "@mustBeAtLeastNCharacters": {
-    "description": "Validation error for minimum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
   },
   "mustBeLessThanNCharacters": "Doit contenir moins de {count} caractères",
   "@mustBeLessThanNCharacters": {
@@ -788,16 +756,6 @@
   "rateLabel": "Taux :",
   "@rateLabel": {
     "description": "Label for exchange rate display in currency card"
-  },
-  "confirmDeleteCurrencies": "Êtes-vous sûr de vouloir supprimer {count} devises ?",
-  "@confirmDeleteCurrencies": {
-    "description": "Confirmation message for deleting currencies",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
   },
   "optimizationFailedNoValidSolution": "Optimisation échouée : Aucune solution valide trouvée",
   "@optimizationFailedNoValidSolution": {
@@ -927,25 +885,37 @@
   "@importSuccessful": {
     "description": "Titre du message de succès d'import"
   },
-  "importFailed": "Échec de l'import",
+  "importFailed": "Échec de l'importation : {error}",
   "@importFailed": {
-    "description": "Titre du message d'échec d'import"
+    "description": "Message d'échec d'importation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Format CSV invalide"
+      }
+    }
   },
-  "exportSuccessful": "Export réussi",
+  "exportSuccessful": "Exportation réussie",
   "@exportSuccessful": {
-    "description": "Message de succès d'export"
+    "description": "Message de succès lorsque l'exportation se termine avec succès"
   },
-  "exportFailed": "Échec de l'export",
+  "exportFailed": "Échec de l'exportation : {error}",
   "@exportFailed": {
-    "description": "Message d'échec d'export"
+    "description": "Message d'échec d'exportation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erreur d'écriture de fichier"
+      }
+    }
   },
   "templateDownloaded": "Modèle téléchargé",
   "@templateDownloaded": {
     "description": "Message de succès du téléchargement de modèle"
   },
-    "failedToDownloadTemplate": "Échec du téléchargement du modèle",
+  "failedToDownloadTemplate": "Échec du téléchargement du modèle",
   "@failedToDownloadTemplate": {
-    "description": "Error message when template download fails"
+    "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
   },
   "file": "Fichier",
   "@file": {
@@ -1015,7 +985,7 @@
   },
   "dataManagement": "Gestion des données",
   "@dataManagement": {
-    "description": "Titre de la section de gestion des données"
+    "description": "Titre du guide gestion des données"
   },
   "backup": "Sauvegarde",
   "@backup": {
@@ -1053,10 +1023,6 @@
   "@csvManagement": {
     "description": "Titre de l'écran de gestion CSV"
   },
-  "dataManagement": "Gestion des données",
-  "@dataManagement": {
-    "description": "Titre de la section de gestion des données"
-  },
   "previewTemplate": "Aperçu du modèle",
   "@previewTemplate": {
     "description": "Texte du bouton d'aperçu du modèle"
@@ -1076,10 +1042,6 @@
   "close": "Fermer",
   "@close": {
     "description": "Texte du bouton de fermeture"
-  },
-  "dataManagement": "Gestion des données",
-  "@dataManagement": {
-    "description": "Titre de la section de gestion des données"
   },
   "importDataDescription": "Importer des fournisseurs et intervalles de frais depuis un fichier CSV. Le système détectera automatiquement le type de données selon les colonnes.",
   "@importDataDescription": {
@@ -1117,10 +1079,6 @@
   "@failedToSaveFile": {
     "description": "Message d'erreur lorsque l'enregistrement du fichier échoue"
   },
-  "failedToDownloadTemplate": "Échec du téléchargement du modèle",
-  "@failedToDownloadTemplate": {
-    "description": "Message d'erreur lorsque le téléchargement du modèle échoue"
-  },
   "csvFileIsEmpty": "Le fichier CSV est vide",
   "@csvFileIsEmpty": {
     "description": "Message d'erreur lorsque le fichier CSV ne contient aucune donnée"
@@ -1128,16 +1086,6 @@
   "noDataRowsFound": "Aucune ligne de données trouvée",
   "@noDataRowsFound": {
     "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
-  },
-  "importFailed": "Échec de l'importation : {error}",
-  "@importFailed": {
-    "description": "Message d'échec d'importation générique",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Format CSV invalide"
-      }
-    }
   },
   "rowProviderNameRequired": "Ligne {rowNumber} : Le nom du fournisseur est requis",
   "@rowProviderNameRequired": {
@@ -1345,20 +1293,6 @@
   "@noDataToExport": {
     "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
   },
-  "exportSuccessful": "Exportation réussie",
-  "@exportSuccessful": {
-    "description": "Message de succès lorsque l'exportation se termine avec succès"
-  },
-  "exportFailed": "Échec de l'exportation : {error}",
-  "@exportFailed": {
-    "description": "Message d'échec d'exportation générique",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Erreur d'écriture de fichier"
-      }
-    }
-  },
   "providerNameColumnNotFound": "Colonne du nom du fournisseur introuvable",
   "@providerNameColumnNotFound": {
     "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
@@ -1443,13 +1377,13 @@
   "@faqHowToCalculateFeesAnswer": {
     "description": "Réponse FAQ"
   },
-  "faqMinMaxTransactionRange": "Que signifient «\u00A0min transactions\u00A0» et «\u00A0max transactions\u00A0» ?",
+  "faqMinMaxTransactionRange": "Que signifient « min transactions » et « max transactions » ?",
   "@faqMinMaxTransactionRange": {
     "description": "Question FAQ : signification du nombre min/max de transactions"
   },
-  "faqMinMaxTransactionRangeAnswer": "\u00AB\u00A0Min transactions\u00A0\u00BB et \u00AB\u00A0Max transactions\u00A0\u00BB d\u00E9finissent respectivement le nombre minimum et maximum d'op\u00E9rations que l'optimiseur peut utiliser pour r\u00E9partir le montant saisi. Par exemple, si vous saisissez 10\u202F000 Ar et mettez Min transactions = 2, l'optimiseur ne proposera que des solutions qui divisent le montant en au moins 2 op\u00E9rations. Assurez-vous que Min \u2264 Max et que ces valeurs conviennent au d\u00E9coupage souhait\u00E9. Ce param\u00E8tre contraint le r\u00E9sultat \u00E0 un nombre d'op\u00E9rations dans cet intervalle.",
+  "faqMinMaxTransactionRangeAnswer": "« Min transactions » et « Max transactions » définissent respectivement le nombre minimum et maximum d'opérations que l'optimiseur peut utiliser pour répartir le montant saisi. Par exemple, si vous saisissez 10 000 Ar et mettez Min transactions = 2, l'optimiseur ne proposera que des solutions qui divisent le montant en au moins 2 opérations. Assurez-vous que Min ≤ Max et que ces valeurs conviennent au découpage souhaité. Ce paramètre contraint le résultat à un nombre d'opérations dans cet intervalle.",
   "@faqMinMaxTransactionRangeAnswer": {
-    "description": "R\u00E9ponse FAQ : signification du nombre min/max de transactions"
+    "description": "Réponse FAQ : signification du nombre min/max de transactions"
   },
   "faqDataSecurity": "Mes données sont-elles sécurisées ?",
   "@faqDataSecurity": {
@@ -1485,7 +1419,7 @@
   },
   "website": "Site web",
   "@website": {
-    "description": "Titre de l'option site web"
+    "description": "Méthode de contact site web"
   },
   "responseTime": "Temps de réponse",
   "@responseTime": {
@@ -1518,10 +1452,6 @@
   "feeCalculationDescription": "Comprendre comment les frais sont calculés et optimisés",
   "@feeCalculationDescription": {
     "description": "Description du guide calcul des frais"
-  },
-  "dataManagement": "Gestion des données",
-  "@dataManagement": {
-    "description": "Titre du guide gestion des données"
   },
   "dataManagementDescription": "Importer, exporter et sauvegarder vos données",
   "@dataManagementDescription": {
@@ -1562,10 +1492,6 @@
   "phone": "Téléphone",
   "@phone": {
     "description": "Méthode de contact téléphone"
-  },
-  "website": "Site web",
-  "@website": {
-    "description": "Méthode de contact site web"
   },
   "faqQuestion1": "Comment minimiser les frais de transaction ?",
   "@faqQuestion1": {
@@ -1662,10 +1588,6 @@
   "netAmountSent": "Montant net",
   "@netAmountSent": {
     "description": "Label for net amount in comparison"
-  },
-  "totalFees": "Frais totaux",
-  "@totalFees": {
-    "description": "Label for total fees in comparison"
   },
   "totalSpent": "Total dépensé",
   "@totalSpent": {
@@ -1836,5 +1758,18 @@
   "@noValidIntervalForComparison": {
     "description": "Message affiché lorsque le montant saisi ne se trouve dans aucun intervalle de frais valide pour la comparaison",
     "placeholders": {}
-  }
+  },
+  "optimizationBudgetTooSmall": "Le montant est trop faible pour effectuer une transaction avec ce fournisseur.",
+  "optimizationConstraintsUnsatisfiable": "Aucun plan ne respecte la plage de transactions pour ce montant.",
+  "optimizationNotProven": "Recherche très vaste : ce plan est excellent, mais son optimalité n'a pas pu être entièrement vérifiée.",
+  "feeIntervalOverlaps": "Cet intervalle chevauche un intervalle existant ({range})",
+  "providerNameAlreadyExists": "Un fournisseur avec ce nom existe déjà",
+  "baseCurrencyCannotBeDeleted": "L'Ariary est la devise de base et ne peut pas être supprimé",
+  "baseCurrencyRateIsFixed": "Le taux de la devise de base est toujours 1",
+  "failedToUpdateFeeInterval": "Échec de la mise à jour de l'intervalle de frais",
+  "failedToDeleteFeeIntervals": "Échec de la suppression des intervalles de frais",
+  "failedToCreateProvider": "Échec de la création du fournisseur",
+  "failedToSaveChanges": "Échec de l'enregistrement des modifications",
+  "failedToLoadData": "Échec du chargement des données",
+  "currencyCodeAlreadyExists": "Une devise avec ce code existe déjà"
 }
