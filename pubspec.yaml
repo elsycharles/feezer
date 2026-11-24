@@ -62,9 +62,16 @@ dev_dependencies:
 
 
 flutter_launcher_icons:
+  # Icons are drawn by tool/brand/make_logo.py.
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/icon.png"
+  remove_alpha_ios: true
+  image_path: "tool/brand/launcher/icon.png"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "tool/brand/launcher/icon_foreground.png"
+  adaptive_icon_foreground_inset: 0
+  adaptive_icon_monochrome: "tool/brand/launcher/icon_monochrome.png"
+
 # The following section is specific to Flutter packages.
 flutter:
   generate: true
