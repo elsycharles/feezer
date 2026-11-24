@@ -126,3 +126,23 @@ flutter test tool/screenshots_test.dart    # every screen, light and dark
 The logo is the original artwork (`tool/brand/logo_original.png`) redrawn
 from measured geometry: 60° slants, one radius for the soft corners, flat
 colors. `make_logo.py` needs Pillow and NumPy.
+
+## License
+
+Copyright (C) 2025-2026 Elsy Charles.
+
+The source code of Feezer is free software, released under the
+[GNU General Public License v3.0](LICENSE) or (at your option) any later
+version: you may use, study, modify and share it, including commercially, as
+long as derived works are released under the same license with their source
+code and keep the copyright notices.
+
+* The official fee grids (`assets/data/fees.json`, published by
+  [feezer-fee-tables](https://github.com/elsycharles/feezer-fee-tables)) are
+  licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+* The **Feezer name and logo** are not covered by these licenses: a modified
+  version must use another name and logo.
+* MVola, Orange Money and Airtel Money are trademarks of their respective
+  owners. Feezer is not affiliated with any operator.
+
+To report a security problem, see [SECURITY.md](SECURITY.md).

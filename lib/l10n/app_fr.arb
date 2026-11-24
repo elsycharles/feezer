@@ -37,20 +37,12 @@
   "@termsOfUse": {
     "description": "Terms of use option"
   },
-  "termsIntroductionTitle": "Introduction",
-  "termsIntroductionContent": "Ces conditions s'appliquent à l'application Feezer, qui aide à réduire les frais d'argent mobile. En utilisant Feezer, vous les acceptez.",
-  "termsAcceptanceTitle": "Acceptation",
-  "termsAcceptanceContent": "Si vous n'acceptez pas ces conditions, n'utilisez pas l'application. Elles peuvent évoluer avec les nouvelles versions de Feezer.",
   "termsServiceTitle": "Le service",
-  "termsServiceContent": "À partir de grilles de frais, Feezer calcule comment découper un retrait ou un transfert pour payer moins de frais. Les grilles officielles sont lues sur les sites des opérateurs et peuvent changer à tout moment : vérifiez toujours les frais auprès de votre opérateur.",
-  "termsPrivacyTitle": "Confidentialité",
-  "termsPrivacyContent": "Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone. La mise à jour des frais télécharge un fichier public, sans envoyer vos données.",
+  "termsServiceContent": "À partir des grilles de frais des opérateurs, Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais. En utilisant Feezer, vous acceptez ces conditions.",
+  "termsPrivacyTitle": "Vos données",
+  "termsPrivacyContent": "Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone et sont effacés si vous désinstallez l'application. La mise à jour des frais télécharge seulement un fichier public.",
   "termsLiabilityTitle": "Responsabilité",
-  "termsLiabilityContent": "Les résultats sont donnés à titre indicatif. Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais réellement facturés, ni des décisions prises à partir de ses calculs.",
-  "termsTerminationTitle": "Arrêt",
-  "termsTerminationContent": "Vous pouvez arrêter d'utiliser Feezer à tout moment : désinstaller l'application efface ses données de votre téléphone.",
-  "termsGoverningLawTitle": "Droit applicable",
-  "termsGoverningLawContent": "Ces conditions sont régies par les lois applicables là où Feezer est utilisé. Tout litige sera traité par les voies légales prévues par ces lois.",
+  "termsLiabilityContent": "Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais à tout moment, vérifiez-les avant chaque opération. Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais réellement facturés.",
   "termsContactTitle": "Contact",
   "termsContactContent": "Une question ? Écrivez-nous depuis Aide et support, ou à elsy.s.charles@gmail.com.",
   "@fee": {
@@ -249,20 +241,8 @@
   "@faq": {
     "description": "Titre de l'onglet Questions fréquemment posées"
   },
-  "faqWhatIsFeeMinimizer": "Qu'est-ce que Feezer ?",
-  "faqWhatIsFeeMinimizerAnswer": "Feezer calcule comment découper un retrait ou un transfert d'argent mobile pour payer le moins de frais possible, à partir des grilles officielles des opérateurs.",
-  "faqHowToAddProvider": "Comment ajouter une grille ?",
-  "faqHowToAddProviderAnswer": "Dans l'onglet Opérateurs, touchez « Ajouter », donnez le nom de l'opérateur et l'opération, puis ajoutez les paliers (minimum, maximum et frais). Vous pouvez aussi importer un fichier CSV.",
-  "faqHowToCalculateFees": "Comment se fait le calcul ?",
-  "faqHowToCalculateFeesAnswer": "Choisissez l'opérateur et l'opération, puis entrez le montant disponible (frais compris). Feezer essaie toutes les combinaisons de paliers et garde celle qui fait recevoir le plus. Le résultat est comparé à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.",
-  "faqMinMaxTransactionRange": "À quoi sert le nombre d'opérations ?",
-  "faqMinMaxTransactionRangeAnswer": "C'est facultatif. Il limite le nombre de retraits ou d'envois du découpage, par exemple « au plus 2 » si vous ne voulez pas en faire plus de deux. Feezer indique ce que cette limite vous coûte.",
-  "faqDataSecurity": "Mes données sont-elles partagées ?",
-  "faqDataSecurityAnswer": "Non. Vos grilles et vos montants restent sur votre téléphone ; Feezer n'a pas de compte et n'envoie rien. La mise à jour des frais télécharge seulement un fichier public.",
-  "faqOfflineMode": "Faut-il internet ?",
-  "faqOfflineModeAnswer": "Non. Les calculs se font sur votre téléphone. Internet ne sert qu'à mettre à jour les frais.",
   "faqExportData": "Comment sauvegarder mes grilles ?",
-  "faqExportDataAnswer": "Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le plus tard ou sur un autre téléphone.",
+  "faqExportDataAnswer": "Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le sur un autre téléphone ou après une réinstallation.",
   "website": "Site web",
   "@website": {
     "description": "Méthode de contact site web"
@@ -346,7 +326,7 @@
   "importExportSubtitle": "Sauvegarder ou partager vos grilles (CSV)",
   "replayIntroduction": "Revoir la présentation",
   "faqFeeUpdate": "D'où viennent les frais ?",
-  "faqFeeUpdateAnswer": "Chaque jour, le projet public feezer-fee-tables lit les grilles officielles sur mvola.mg et orange.mg. La grille Airtel est recopiée à la main depuis ses tarifs, car son site ne peut pas être lu automatiquement. « Mettre à jour » télécharge ces grilles ; vos autres grilles ne changent pas.",
+  "faqFeeUpdateAnswer": "Des tarifs officiels des opérateurs : les grilles MVola et Orange Money sont lues chaque jour sur mvola.mg et orange.mg ; celle d'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » dans l'onglet Opérateurs pour avoir les dernières ; les grilles que vous avez ajoutées ne changent pas.",
   "ok": "OK",
   "pasteCsv": "Coller du texte CSV",
   "chooseCsvFile": "Choisir un fichier CSV",
@@ -424,5 +404,11 @@
   "roundToHundred": "Arrondir à la centaine",
   "roundToHundredOnWithdrawal": "Chaque retrait est un multiple de 100 : {example}, jamais {wrong}.",
   "roundToHundredOnTransfer": "Chaque envoi est un multiple de 100 : {example}, jamais {wrong}.",
-  "roundToHundredOff": "Montants exacts, à l'ariary près."
+  "roundToHundredOff": "Montants exacts, à l'ariary près.",
+  "faqHowItWorks": "Comment ça marche ?",
+  "faqHowItWorksAnswer": "Choisissez l'opérateur, l'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.",
+  "faqRounding": "Pourquoi des montants arrondis à la centaine ?",
+  "faqRoundingAnswer": "Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Avec « Arrondir à la centaine », chaque montant du plan est un multiple de 100. C'est activé par défaut pour les retraits ; désactivez-le pour des montants exacts.",
+  "faqPrivacy": "Faut-il internet ? Mes données sont-elles partagées ?",
+  "faqPrivacyAnswer": "Non. Les calculs se font sur votre téléphone, sans compte, et rien n'est envoyé. Internet sert seulement à mettre à jour les frais (un fichier public)."
 }

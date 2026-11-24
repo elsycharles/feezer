@@ -112,35 +112,19 @@
   "@termsOfUse": {
     "description": "Terms of use option"
   },
-  "termsIntroductionTitle": "Introduction",
-  "@termsIntroductionTitle": {
-    "description": "Terms of use introduction section title"
-  },
-  "termsIntroductionContent": "These terms apply to the Feezer app, which helps you reduce mobile money fees. By using Feezer, you accept them.",
-  "@termsIntroductionContent": {
-    "description": "Terms of use introduction section content"
-  },
-  "termsAcceptanceTitle": "Acceptance",
-  "@termsAcceptanceTitle": {
-    "description": "Terms of use acceptance section title"
-  },
-  "termsAcceptanceContent": "If you do not accept these terms, do not use the app. They may change with new versions of Feezer.",
-  "@termsAcceptanceContent": {
-    "description": "Terms of use acceptance section content"
-  },
   "termsServiceTitle": "The service",
   "@termsServiceTitle": {
     "description": "Terms of use service description section title"
   },
-  "termsServiceContent": "From fee grids, Feezer calculates how to split a withdrawal or a transfer to pay less in fees. The official grids are read on the operators' websites and may change at any time: always check the fees with your operator.",
+  "termsServiceContent": "From the operators' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.",
   "@termsServiceContent": {
     "description": "Terms of use service description section content"
   },
-  "termsPrivacyTitle": "Privacy",
+  "termsPrivacyTitle": "Your data",
   "@termsPrivacyTitle": {
     "description": "Terms of use privacy section title"
   },
-  "termsPrivacyContent": "Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone. Updating the fees downloads a public file without sending your data.",
+  "termsPrivacyContent": "Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.",
   "@termsPrivacyContent": {
     "description": "Terms of use privacy section content"
   },
@@ -148,25 +132,9 @@
   "@termsLiabilityTitle": {
     "description": "Terms of use liability section title"
   },
-  "termsLiabilityContent": "Results are given for information only. Feezer is not affiliated with any operator and is not responsible for the fees actually charged, nor for decisions made from its calculations.",
+  "termsLiabilityContent": "Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.",
   "@termsLiabilityContent": {
     "description": "Terms of use liability section content"
-  },
-  "termsTerminationTitle": "Stopping",
-  "@termsTerminationTitle": {
-    "description": "Terms of use termination section title"
-  },
-  "termsTerminationContent": "You can stop using Feezer at any time: uninstalling the app erases its data from your phone.",
-  "@termsTerminationContent": {
-    "description": "Terms of use termination section content"
-  },
-  "termsGoverningLawTitle": "Governing law",
-  "@termsGoverningLawTitle": {
-    "description": "Terms of use governing law section title"
-  },
-  "termsGoverningLawContent": "These terms are governed by the laws that apply where Feezer is used. Any dispute will be handled through the legal means provided by those laws.",
-  "@termsGoverningLawContent": {
-    "description": "Terms of use governing law section content"
   },
   "termsContactTitle": "Contact",
   "@termsContactTitle": {
@@ -487,59 +455,11 @@
   "@faq": {
     "description": "Frequently Asked Questions tab title"
   },
-  "faqWhatIsFeeMinimizer": "What is Feezer?",
-  "@faqWhatIsFeeMinimizer": {
-    "description": "FAQ question"
-  },
-  "faqWhatIsFeeMinimizerAnswer": "Feezer works out how to split a mobile money withdrawal or transfer so you pay the least fees, using the operators' official fee grids.",
-  "@faqWhatIsFeeMinimizerAnswer": {
-    "description": "FAQ answer"
-  },
-  "faqHowToAddProvider": "How do I add a grid?",
-  "@faqHowToAddProvider": {
-    "description": "FAQ question"
-  },
-  "faqHowToAddProviderAnswer": "In the Operators tab, tap \"Add\", enter the operator name and the operation, then add the tiers (minimum, maximum and fee). You can also import a CSV file.",
-  "@faqHowToAddProviderAnswer": {
-    "description": "FAQ answer"
-  },
-  "faqHowToCalculateFees": "How is it calculated?",
-  "@faqHowToCalculateFees": {
-    "description": "FAQ question"
-  },
-  "faqHowToCalculateFeesAnswer": "Choose the operator and the operation, then enter the amount available (fees included). Feezer tries every combination of tiers and keeps the one that delivers the most. The result is compared with the usual way: withdrawing or sending the largest possible amount each time.",
-  "@faqHowToCalculateFeesAnswer": {
-    "description": "FAQ answer"
-  },
-  "faqMinMaxTransactionRange": "What is the number of transactions for?",
-  "@faqMinMaxTransactionRange": {
-    "description": "FAQ question: meaning of min/max number of transactions"
-  },
-  "faqMinMaxTransactionRangeAnswer": "It is optional. It limits how many withdrawals or transfers the split may use, for example \"at most 2\" if you do not want more than two. Feezer shows what the limit costs you.",
-  "@faqMinMaxTransactionRangeAnswer": {
-    "description": "FAQ answer: meaning of min/max number of transactions"
-  },
-  "faqDataSecurity": "Is my data shared?",
-  "@faqDataSecurity": {
-    "description": "FAQ question"
-  },
-  "faqDataSecurityAnswer": "No. Your grids and amounts stay on your phone; Feezer has no account and sends nothing. Updating the fees only downloads a public file.",
-  "@faqDataSecurityAnswer": {
-    "description": "FAQ answer"
-  },
-  "faqOfflineMode": "Do I need internet?",
-  "@faqOfflineMode": {
-    "description": "FAQ question"
-  },
-  "faqOfflineModeAnswer": "No. Calculations run on your phone. Internet is only used to update the fees.",
-  "@faqOfflineModeAnswer": {
-    "description": "FAQ answer"
-  },
   "faqExportData": "How do I back up my grids?",
   "@faqExportData": {
     "description": "FAQ question"
   },
-  "faqExportDataAnswer": "Settings › Import / export: export your grids to a CSV file, then import it later or on another phone.",
+  "faqExportDataAnswer": "Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.",
   "@faqExportDataAnswer": {
     "description": "FAQ answer"
   },
@@ -927,7 +847,7 @@
   "@faqFeeUpdate": {
     "description": "UI redesign"
   },
-  "faqFeeUpdateAnswer": "Every day, the public feezer-fee-tables project reads the official grids on mvola.mg and orange.mg. The Airtel grid is copied by hand from its rates, because its website cannot be read automatically. \"Update\" downloads these grids; your other grids stay the same.",
+  "faqFeeUpdateAnswer": "From the operators' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.",
   "@faqFeeUpdateAnswer": {
     "description": "UI redesign"
   },
@@ -1163,5 +1083,11 @@
       }
     }
   },
-  "roundToHundredOff": "Exact amounts, to the ariary."
+  "roundToHundredOff": "Exact amounts, to the ariary.",
+  "faqHowItWorks": "How does it work?",
+  "faqHowItWorksAnswer": "Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.",
+  "faqRounding": "Why are the amounts rounded to the hundred?",
+  "faqRoundingAnswer": "Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.",
+  "faqPrivacy": "Do I need internet? Is my data shared?",
+  "faqPrivacyAnswer": "No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file)."
 }

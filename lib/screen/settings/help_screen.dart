@@ -17,14 +17,11 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final faq = [
-      (l10n.faqWhatIsFeeMinimizer, l10n.faqWhatIsFeeMinimizerAnswer),
-      (l10n.faqHowToCalculateFees, l10n.faqHowToCalculateFeesAnswer),
-      (l10n.faqMinMaxTransactionRange, l10n.faqMinMaxTransactionRangeAnswer),
-      (l10n.faqHowToAddProvider, l10n.faqHowToAddProviderAnswer),
+      (l10n.faqHowItWorks, l10n.faqHowItWorksAnswer),
       (l10n.faqFeeUpdate, l10n.faqFeeUpdateAnswer),
+      (l10n.faqRounding, l10n.faqRoundingAnswer),
+      (l10n.faqPrivacy, l10n.faqPrivacyAnswer),
       (l10n.faqExportData, l10n.faqExportDataAnswer),
-      (l10n.faqOfflineMode, l10n.faqOfflineModeAnswer),
-      (l10n.faqDataSecurity, l10n.faqDataSecurityAnswer),
     ];
     return Scaffold(
       appBar: AppBar(title: Text(l10n.helpAndSupport)),
