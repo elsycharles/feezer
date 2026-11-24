@@ -1,4 +1,7 @@
-/// Clean Provider model with validation and utility methods
+import '../data/app_database.dart';
+import '../util/constant_util.dart';
+
+/// Financial service provider (mobile money operator, bank...).
 class Provider {
   Provider({
     required this.id,
@@ -8,40 +11,15 @@ class Provider {
     DateTime? creationDatetime,
   }) : creationDatetime = creationDatetime ?? DateTime.now();
 
+  /// Database id (empty before insertion).
   final String id;
   final String name;
   final String description;
   final String iconName;
   final DateTime creationDatetime;
 
-  /// Checks if provider data is valid
-  bool get isValid => id.trim().isNotEmpty && name.trim().isNotEmpty;
+  bool get isValid => name.trim().isNotEmpty;
 
-  /// Gets display name (truncated if too long)
-  String get displayName =>
-      name.length > 25 ? '${name.substring(0, 25)}...' : name;
-
-  /// Gets short description
-  String get shortDescription => description.length > 50
-      ? '${description.substring(0, 50)}...'
-      : description;
-
-  /// Checks if provider was created recently (within 7 days)
-  bool get isRecent => DateTime.now().difference(creationDatetime).inDays <= 7;
-
-  /// Gets formatted creation date
-  String get formattedCreationDate {
-    final now = DateTime.now();
-    final difference = now.difference(creationDatetime);
-
-    if (difference.inDays == 0) return 'Today';
-    if (difference.inDays == 1) return 'Yesterday';
-    if (difference.inDays < 7) return '${difference.inDays} days ago';
-
-    return '${creationDatetime.day}/${creationDatetime.month}/${creationDatetime.year}';
-  }
-
-  /// Creates a copy with updated values
   Provider copyWith({
     String? id,
     String? name,
@@ -56,32 +34,29 @@ class Provider {
     creationDatetime: creationDatetime ?? this.creationDatetime,
   );
 
-  static Provider fromMap(Map<String, dynamic> map) {
-    return Provider(
-      id: map['id'].toString(),
-      name: map['name'] ?? '',
-      description: map['description'] ?? '',
-      iconName: map['icon_name'] ?? 'business',
-      creationDatetime: DateTime.fromMillisecondsSinceEpoch(
-        map['creation_datetime'] ?? DateTime.now().millisecondsSinceEpoch,
-      ),
-    );
-  }
+  static Provider fromMap(Map<String, dynamic> map) => Provider(
+    id: map[Db.id].toString(),
+    name: (map[Db.name] as String?) ?? '',
+    description: (map[Db.description] as String?) ?? '',
+    iconName: (map[Db.iconName] as String?) ?? 'business',
+    creationDatetime: ConstantUtil.parseDateTime(map[Db.creationDatetime]),
+  );
 
+  /// Database row. The id is omitted when unknown so SQLite assigns one.
   static Map<String, dynamic> toMap(Provider provider) {
+    final id = int.tryParse(provider.id);
     return {
-      'id': int.tryParse(provider.id),
-      'name': provider.name,
-      'description': provider.description,
-      'icon_name': provider.iconName,
-      'creation_datetime': provider.creationDatetime.millisecondsSinceEpoch,
+      if (id != null) Db.id: id,
+      Db.name: provider.name,
+      Db.description: provider.description,
+      Db.iconName: provider.iconName,
+      Db.creationDatetime: provider.creationDatetime.millisecondsSinceEpoch,
     };
   }
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Provider && runtimeType == other.runtimeType && id == other.id;
+      identical(this, other) || other is Provider && id == other.id;
 
   @override
   int get hashCode => id.hashCode;
