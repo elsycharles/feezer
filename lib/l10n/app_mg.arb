@@ -426,5 +426,6 @@
   "free": "Maimaim-poana",
   "failedToLoadData": "Tsy voaray ny angon-drakitra",
   "failedToOpenLink": "Tsy nety nisokatra ny rohy",
-  "pressAgainToExit": "Tsindrio indray mba hivoaka"
+  "pressAgainToExit": "Tsindrio indray mba hivoaka",
+  "onlyOperation": "« {operation} » ihany no misy ho an'i {operator}."
 }

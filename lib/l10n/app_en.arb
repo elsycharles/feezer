@@ -1112,5 +1112,16 @@
   "free": "Free",
   "failedToLoadData": "Could not load the data",
   "failedToOpenLink": "Could not open the link",
-  "pressAgainToExit": "Press again to exit"
+  "pressAgainToExit": "Press again to exit",
+  "onlyOperation": "Only “{operation}” is available for {operator}.",
+  "@onlyOperation": {
+    "placeholders": {
+      "operation": {
+        "type": "String"
+      },
+      "operator": {
+        "type": "String"
+      }
+    }
+  }
 }

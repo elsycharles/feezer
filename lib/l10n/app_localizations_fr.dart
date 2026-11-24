@@ -955,4 +955,9 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get pressAgainToExit => 'Appuyez encore pour quitter';
+
+  @override
+  String onlyOperation(String operation, String operator) {
+    return 'Seule l\'opération « $operation » est disponible pour $operator.';
+  }
 }
