@@ -915,7 +915,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get roundToHundredOff => 'Vola marina, hatramin\'ny ariary iray.';
+  String get roundToHundredOff => 'Vola marina, tsy boribory.';
 
   @override
   String get faqHowItWorks => 'Ahoana no fiasany?';

@@ -413,7 +413,7 @@
   "roundToHundred": "Boribory amin'ny zato",
   "roundToHundredOnWithdrawal": "Isaky ny 100 ny fisintonana tsirairay: {example}, fa tsy {wrong} mihitsy.",
   "roundToHundredOnTransfer": "Isaky ny 100 ny fandefasana tsirairay: {example}, fa tsy {wrong} mihitsy.",
-  "roundToHundredOff": "Vola marina, hatramin'ny ariary iray.",
+  "roundToHundredOff": "Vola marina, tsy boribory.",
   "faqHowItWorks": "Ahoana no fiasany?",
   "faqHowItWorksAnswer": "Fidio ny mpandraharaha, ny fifanakalozana (fisintonana, famindrana…) ary ny vola azo ampiasaina, tafiditra ny sarany. Tadiavin'i Feezer ny fizarana mahazo vola betsaka indrindra amin'ny sarany kely indrindra, ary ampitahainy amin'ny fomba mahazatra: misintona na mandefa ny vola betsaka indrindra azo atao isaky ny mandeha.",
   "faqRounding": "Nahoana no boribory amin'ny zato ny vola?",

@@ -404,7 +404,7 @@
   "roundToHundred": "Arrondir à la centaine",
   "roundToHundredOnWithdrawal": "Chaque retrait est un multiple de 100 : {example}, jamais {wrong}.",
   "roundToHundredOnTransfer": "Chaque envoi est un multiple de 100 : {example}, jamais {wrong}.",
-  "roundToHundredOff": "Montants exacts, à l'ariary près.",
+  "roundToHundredOff": "Montants exacts, sans arrondi.",
   "faqHowItWorks": "Comment ça marche ?",
   "faqHowItWorksAnswer": "Choisissez l'opérateur, l'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.",
   "faqRounding": "Pourquoi des montants arrondis à la centaine ?",

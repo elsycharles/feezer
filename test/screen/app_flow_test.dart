@@ -196,7 +196,7 @@ void main() {
       );
       await tester.tap(rounding);
       await tester.pumpAndSettle();
-      expect(find.text('Exact amounts, to the ariary.'), findsOneWidget);
+      expect(find.text('Exact amounts, not rounded.'), findsOneWidget);
       await tester.ensureVisible(optimize);
       await tester.tap(optimize);
       await settle(tester, rounds: 40);

@@ -914,7 +914,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get roundToHundredOff => 'Montants exacts, à l\'ariary près.';
+  String get roundToHundredOff => 'Montants exacts, sans arrondi.';
 
   @override
   String get faqHowItWorks => 'Comment ça marche ?';
