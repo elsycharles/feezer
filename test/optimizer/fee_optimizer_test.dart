@@ -4,7 +4,7 @@ import 'package:fee_minimizer/core/optimizer/fee_optimizer.dart';
 import 'package:fee_minimizer/core/optimizer/fee_tier.dart';
 import 'package:fee_minimizer/model/fee_interval_model.dart';
 import 'package:fee_minimizer/model/fee_minimizer_result_model.dart';
-import 'package:fee_minimizer/util/provider_data.dart';
+import 'package:fee_minimizer/data/legacy_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'reference_solver.dart';
@@ -21,7 +21,7 @@ List<FeeTier> tiersOf(List<List<num>> rows, {FeeType type = FeeType.fixed}) =>
     ]);
 
 List<FeeTier> providerTiers(String name) => FeeTier.fromIntervals(
-  ProviderData.defaultProviders.firstWhere((p) => p.name == name).feeIntervals,
+  LegacyDefaults.providers.firstWhere((p) => p.name == name).feeIntervals,
 );
 
 /// Checks that a plan is executable: every amount belongs to a tier with the

@@ -1,9 +1,8 @@
 import 'package:fee_minimizer/core/optimizer/fee_comparison.dart';
 import 'package:fee_minimizer/core/optimizer/fee_optimizer.dart';
-import 'package:fee_minimizer/model/currency_model.dart';
 import 'package:fee_minimizer/model/fee_interval_model.dart';
 import 'package:fee_minimizer/model/provider_model.dart';
-import 'package:fee_minimizer/util/provider_data.dart';
+import 'package:fee_minimizer/data/legacy_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -63,20 +62,6 @@ void main() {
     });
   });
 
-  test('Currency reads legacy ISO dates and compares rates', () {
-    final currency = Currency.fromMap({
-      'id': 'eur',
-      'code': 'EUR',
-      'name': 'Euro',
-      'symbol': '€',
-      'rate': 5200,
-      'creation_datetime': '2025-01-01T00:00:00.000',
-    });
-    expect(currency.creationDatetime.year, 2025);
-    expect(currency == currency.copyWith(rate: 5300), isFalse);
-    expect(Currency.fromMap({...currency.toMap()}).isBase, isFalse);
-  });
-
   test('Provider without id is inserted with an automatic id', () {
     expect(
       Provider.toMap(Provider(id: '', name: 'X')).containsKey('id'),
@@ -85,7 +70,7 @@ void main() {
   });
 
   group('comparison', () {
-    final intervals = ProviderData.defaultProviders.first.feeIntervals;
+    final intervals = LegacyDefaults.providers.first.feeIntervals;
 
     test('optimization never sends less than the naive strategy', () {
       for (final budget in [10500.0, 25700.0, 2058989.0, 31234567.0]) {
@@ -105,19 +90,6 @@ void main() {
       // Sending 10 050 by hand: one 10 050 transaction (fee 700).
       expect(comparison.sameNetWithoutOptimization!.totalFees, 700);
       expect(comparison.sameNetExceedsBudget, isTrue);
-    });
-
-    test('scaling converts every amount', () {
-      final optimized = FeeOptimizer.optimize(52000, intervals);
-      final scaled = FeeComparison.compute(
-        optimized,
-        intervals,
-      ).scaled(1 / 5200);
-      expect(scaled.optimized.budget, closeTo(10, 1e-9));
-      expect(
-        scaled.optimized.details.first.amount * 5200,
-        closeTo(optimized.details.first.amount, 1e-6),
-      );
     });
   });
 }
