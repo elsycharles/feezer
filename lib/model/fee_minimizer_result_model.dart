@@ -13,6 +13,9 @@ enum OptimizationStatus {
 
   /// No plan satisfies the requested minimum/maximum number of transactions.
   constraintsUnsatisfiable,
+
+  /// No tier accepts an amount that is a multiple of the requested step.
+  stepTooLarge,
 }
 
 /// Result of a fee optimization (or of a baseline strategy used for

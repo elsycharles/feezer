@@ -21,8 +21,13 @@ class NaiveStrategy {
   static const int _maxSteps = 10000;
 
   /// Repeatedly sends the largest affordable amount until the remaining
-  /// budget cannot pay for any transaction.
-  static List<NaiveStep> maxNetPlan(double budget, List<FeeTier> tiers) {
+  /// budget cannot pay for any transaction. With a positive [step], amounts
+  /// are multiples of [step] ([tiers] must then be built with the same step).
+  static List<NaiveStep> maxNetPlan(
+    double budget,
+    List<FeeTier> tiers, {
+    double step = 0,
+  }) {
     final steps = <NaiveStep>[];
     if (tiers.isEmpty || !(budget > 0)) return steps;
     final eps = _eps(budget);
@@ -37,6 +42,7 @@ class NaiveStrategy {
         final tier = tiers[t];
         var amount = tier.netForCost(remaining);
         if (amount > tier.maxAmount) amount = tier.maxAmount;
+        amount = FeeTier.floorToStep(amount, step);
         if (amount < tier.minAmount - eps) continue;
         if (amount < tier.minAmount) amount = tier.minAmount;
         if (amount > bestAmount + eps ||

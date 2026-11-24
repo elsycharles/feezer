@@ -40,6 +40,16 @@ import 'naive_strategy.dart';
 /// transaction value, iterating over `K` only while the bound can still beat
 /// the best plan found.
 ///
+/// ## Amount step
+/// With a positive `step` (cash withdrawals: notes only), every transaction
+/// amount is a multiple of `step`. Tier bounds are rounded inwards to
+/// multiples of `step` and the budget is poured by whole steps; the greedy
+/// fill stays optimal because every step brings the same net amount. The
+/// continuous value of a count vector bounds its stepped value, so the
+/// pruning rules still hold; the counts of the reference tiers are found by
+/// closed form (fixed fees) or by scanning around the continuous optimum
+/// while the bound can still beat the best plan.
+///
 /// The search is exact; a safety limit on the number of evaluated count
 /// vectors keeps pathological inputs fast, in which case
 /// [FeeOptimizerResult.isProvenOptimal] is `false`.
@@ -59,29 +69,45 @@ class FeeOptimizer {
   /// Optimizes the transfer of [budget] (fees included) using [intervals].
   ///
   /// [minOperations] / [maxOperations] constrain the number of transactions;
-  /// `0` means "no constraint".
+  /// `0` means "no constraint". With a positive [step], every amount is a
+  /// multiple of [step].
   static FeeOptimizerResult optimize(
     double budget,
     Iterable<FeeInterval> intervals, {
     int minOperations = 0,
     int maxOperations = 0,
+    double step = 0,
     int leafLimit = defaultLeafLimit,
     Duration timeLimit = defaultTimeLimit,
-  }) => optimizeTiers(
-    budget,
-    FeeTier.fromIntervals(intervals),
-    minOperations: minOperations,
-    maxOperations: maxOperations,
-    leafLimit: leafLimit,
-    timeLimit: timeLimit,
-  );
+  }) {
+    final tiers = FeeTier.fromIntervals(intervals, step: step);
+    if (tiers.isEmpty &&
+        step > 0 &&
+        FeeTier.fromIntervals(intervals).isNotEmpty) {
+      return FeeOptimizerResult.empty(
+        budget.isFinite ? budget : 0,
+        OptimizationStatus.stepTooLarge,
+      );
+    }
+    return optimizeTiers(
+      budget,
+      tiers,
+      minOperations: minOperations,
+      maxOperations: maxOperations,
+      step: step,
+      leafLimit: leafLimit,
+      timeLimit: timeLimit,
+    );
+  }
 
-  /// Same as [optimize] with already normalized [tiers].
+  /// Same as [optimize] with already normalized [tiers] (built with the same
+  /// [step]).
   static FeeOptimizerResult optimizeTiers(
     double budget,
     List<FeeTier> tiers, {
     int minOperations = 0,
     int maxOperations = 0,
+    double step = 0,
     int leafLimit = defaultLeafLimit,
     Duration timeLimit = defaultTimeLimit,
   }) {
@@ -97,7 +123,13 @@ class FeeOptimizer {
         OptimizationStatus.budgetTooSmall,
       );
     }
-    return _Solver(budget, tiers, leafLimit, timeLimit).solve(
+    return _Solver(
+      budget,
+      tiers,
+      step > 0 ? step : 0,
+      leafLimit,
+      timeLimit,
+    ).solve(
       minOperations > 0 ? minOperations : 0,
       maxOperations > 0 ? maxOperations : 0,
     );
@@ -166,7 +198,7 @@ class _State {
 }
 
 class _Solver {
-  _Solver(this.budget, this.tiers, this.leafLimit, this.timeLimit)
+  _Solver(this.budget, this.tiers, this.step, this.leafLimit, this.timeLimit)
     : n = tiers.length,
       eps = 1e-12 * math.max(1.0, budget) + 1e-9,
       mins = [for (final t in tiers) t.minAmount],
@@ -188,6 +220,9 @@ class _Solver {
 
   final double budget;
   final List<FeeTier> tiers;
+
+  /// Every amount is a multiple of [step] (0: any amount).
+  final double step;
   final int leafLimit;
   final Duration timeLimit;
   final Stopwatch _clock = Stopwatch()..start();
@@ -318,7 +353,11 @@ class _Solver {
 
   /// Best net amount for [counts]; `-infinity` when the mandatory minimums
   /// exceed the budget. The fees are stored in [_lastFees].
-  double _evaluate(List<int> c) {
+  ///
+  /// With [continuous], the amount step is ignored: the result is then an
+  /// upper bound of the stepped value of the same counts.
+  double _evaluate(List<int> c, {bool continuous = false}) {
+    final stepped = step > 0 && !continuous;
     var mandatory = 0.0;
     for (var i = 0; i < n; i++) {
       final k = c[i];
@@ -335,6 +374,7 @@ class _Solver {
       final unit = 1 + rates[i];
       final capacity = k * (maxs[i] - mins[i]);
       var take = extra / unit;
+      if (stepped) take = FeeTier.floorToStep(take, step);
       if (take > capacity) take = capacity;
       extra -= take * unit;
       if (extra < 0) extra = 0;
@@ -414,8 +454,8 @@ class _Solver {
 
     // Seed with the naive plan: a valid, usually good, starting point.
     counts.fillRange(0, n, 0);
-    for (final step in NaiveStrategy.maxNetPlan(budget, tiers)) {
-      counts[step.tierIndex] += step.count;
+    for (final naive in NaiveStrategy.maxNetPlan(budget, tiers, step: step)) {
+      counts[naive.tierIndex] += naive.count;
     }
     _offerCurrent();
     counts.fillRange(0, n, 0);
@@ -649,13 +689,45 @@ class _Solver {
     final guess = _floorClamp((budget - maxCostSum) / his[r], 0, hi);
     final best = _argmaxConcave(0, hi, guess, (t) {
       counts[r] = t;
-      return _evaluate(counts);
+      return _evaluate(counts, continuous: true);
     });
-    for (var t = math.max(0, best - 1); t <= math.min(hi, best + 1); t++) {
-      counts[r] = t;
-      _offerCurrent();
+    if (step > 0) {
+      _scanStepped(0, hi, best, (t) => counts[r] = t);
+    } else {
+      for (var t = math.max(0, best - 1); t <= math.min(hi, best + 1); t++) {
+        counts[r] = t;
+        _offerCurrent();
+      }
     }
     counts[r] = 0;
+  }
+
+  /// Offers the stepped plans around [peak], the continuous optimum of a
+  /// concave count search on `[lo, hi]` ([apply] sets the count `t`).
+  ///
+  /// The continuous value bounds the stepped value and decreases away from
+  /// the peak, so each direction stops as soon as it cannot beat the best
+  /// plan. A safety limit marks the result as not proven optimal.
+  void _scanStepped(int lo, int hi, int peak, void Function(int t) apply) {
+    const maxScan = 512;
+    apply(peak);
+    _offerCurrent();
+    for (final direction in const [-1, 1]) {
+      for (var i = 1; ; i++) {
+        final t = peak + direction * i;
+        if (t < lo || t > hi || _stop) break;
+        apply(t);
+        if (_bestCounts != null &&
+            _evaluate(counts, continuous: true) <= _bestNet + eps) {
+          break;
+        }
+        if (i > maxScan) {
+          _truncated = true;
+          break;
+        }
+        _offerCurrent();
+      }
+    }
   }
 
   /// Exact closed form of [_leafSingle] (unconstrained count) when every tier
@@ -678,7 +750,10 @@ class _Solver {
     var covering = _ceilClamp((budget - maxCostSum - eps) / his[r], 0, 1 << 52);
     void consider(int t) {
       if (t < 0 || t > feasible || total + t == 0) return;
-      final budgetBound = budget - fees - t * fixeds[r];
+      final budgetBound = FeeTier.floorToStep(
+        budget - fees - t * fixeds[r],
+        step,
+      );
       final capacityBound = maxCostSum - fees + t * maxs[r];
       final net = budgetBound < capacityBound ? budgetBound : capacityBound;
       final planFees = fees + t * fixeds[r];
@@ -722,20 +797,44 @@ class _Solver {
             hi,
           )
         : lo;
-    double value(int t) {
+    void apply(int t) {
       counts[a] = t;
       counts[b] = total - t;
-      return _evaluate(counts);
     }
 
-    final best = _argmaxConcave(lo, hi, guess, value);
-    for (var t = math.max(lo, best - 1); t <= math.min(hi, best + 1); t++) {
-      counts[a] = t;
-      counts[b] = total - t;
-      _offerCurrent();
+    final best = _argmaxConcave(lo, hi, guess, (t) {
+      apply(t);
+      return _evaluate(counts, continuous: true);
+    });
+    if (step <= 0) {
+      for (var t = math.max(lo, best - 1); t <= math.min(hi, best + 1); t++) {
+        apply(t);
+        _offerCurrent();
+      }
+    } else if (_allFixed(a, b)) {
+      // Fixed fees: the stepped value is min(capacity, budget rounded down to
+      // the step), monotone on each side of the point where the capacity
+      // covers the budget, so the optimum is next to it or at a bound.
+      for (final t in {lo, hi, guess, guess + 1}) {
+        if (t < lo || t > hi) continue;
+        apply(t);
+        _offerCurrent();
+      }
+    } else {
+      _scanStepped(lo, hi, best, apply);
     }
     counts[a] = 0;
     counts[b] = 0;
+  }
+
+  /// Whether the current count vector, with tiers [a] and [b], only uses
+  /// fixed-fee tiers.
+  bool _allFixed(int a, int b) {
+    if (rates[a] != 0 || rates[b] != 0) return false;
+    for (var i = 0; i < n; i++) {
+      if (counts[i] != 0 && rates[i] != 0) return false;
+    }
+    return true;
   }
 
   /// First maximizer of a concave function on `[lo, hi]`, starting the search
@@ -879,7 +978,7 @@ class _Solver {
       if (k == 0) continue;
       final unit = 1 + rates[i];
       final width = maxs[i] - mins[i];
-      var take = extra / unit;
+      var take = FeeTier.floorToStep(extra / unit, step);
       if (take > k * width) take = k * width;
       extra -= take * unit;
       if (extra < 0) extra = 0;
