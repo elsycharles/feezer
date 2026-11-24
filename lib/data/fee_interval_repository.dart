@@ -25,6 +25,23 @@ class FeeIntervalRepository {
     return rows.map(FeeInterval.fromMap).toList();
   }
 
+  /// Number of intervals and cheapest fixed fee per provider id.
+  Future<Map<String, ({int count, double? minFee})>> summaries() async {
+    final db = await _database.database;
+    final rows = await db.rawQuery(
+      'SELECT ${Db.providerId} AS p, COUNT(*) AS c, '
+      'MIN(CASE WHEN ${Db.feeType} = 0 THEN ${Db.fee} END) AS f '
+      'FROM ${Db.feeIntervals} GROUP BY ${Db.providerId}',
+    );
+    return {
+      for (final row in rows)
+        '${row['p']}': (
+          count: (row['c'] as num).toInt(),
+          minFee: (row['f'] as num?)?.toDouble(),
+        ),
+    };
+  }
+
   /// First interval of the provider overlapping [candidate] (ignoring the
   /// interval being edited, [candidate.id]), or `null`.
   Future<FeeInterval?> findOverlap(
@@ -49,6 +66,7 @@ class FeeIntervalRepository {
     final db = executor ?? await _database.database;
     final map = FeeInterval.toMap(interval, providerId)..remove(Db.id);
     final id = await db.insert(Db.feeIntervals, map);
+    if (executor == null) AppDatabase.notifyChanged();
     return interval.copyWith(id: id.toString());
   }
 
@@ -60,6 +78,23 @@ class FeeIntervalRepository {
       where: '${Db.id} = ?',
       whereArgs: [int.tryParse(interval.id ?? '')],
     );
+    AppDatabase.notifyChanged();
+  }
+
+  /// Replaces every interval of the provider with [intervals].
+  Future<void> replaceAll(
+    String providerId,
+    List<FeeInterval> intervals, {
+    required DatabaseExecutor executor,
+  }) async {
+    await executor.delete(
+      Db.feeIntervals,
+      where: '${Db.providerId} = ?',
+      whereArgs: [int.tryParse(providerId)],
+    );
+    for (final interval in intervals) {
+      await insert(interval, providerId, executor: executor);
+    }
   }
 
   Future<void> delete(Iterable<String> ids) async {
@@ -71,5 +106,6 @@ class FeeIntervalRepository {
       where: '${Db.id} IN (${List.filled(parsed.length, '?').join(',')})',
       whereArgs: parsed,
     );
+    AppDatabase.notifyChanged();
   }
 }

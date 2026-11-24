@@ -1,8 +1,8 @@
 import '../model/fee_interval_model.dart';
 
-/// A provider shipped with the application (seeded on first launch).
-class DefaultProvider {
-  const DefaultProvider({
+/// A provider seeded by versions 1.x of the app (before official grids).
+class LegacyProvider {
+  const LegacyProvider({
     required this.name,
     required this.description,
     required this.iconName,
@@ -22,12 +22,14 @@ class DefaultProvider {
   ];
 }
 
-/// Default providers with their fee intervals (fixed fees, in Ariary).
-class ProviderData {
-  const ProviderData._();
+/// Grids seeded by versions 1.x of the app. They are only used to recognize
+/// unmodified copies on upgrade (replaced by the official grids) and as test
+/// data for the optimizer.
+class LegacyDefaults {
+  const LegacyDefaults._();
 
-  static const List<DefaultProvider> defaultProviders = [
-    DefaultProvider(
+  static const List<LegacyProvider> providers = [
+    LegacyProvider(
       name: 'YAS',
       description:
           'Principal opérateur télécom de Madagascar, anciennement Telma, offrant la 5G, la fibre et la plus large couverture nationale sous le groupe Axian Telecom.',
@@ -50,7 +52,7 @@ class ProviderData {
         (4000001.0, 5000000.0, 30000.0),
       ],
     ),
-    DefaultProvider(
+    LegacyProvider(
       name: 'ORANGE',
       description:
           'Groupe mondial de télécommunications offrant à Madagascar des services mobiles et Internet complets pour particuliers et entreprises.',
@@ -77,7 +79,7 @@ class ProviderData {
         (9000001.0, 10000000.0, 53900.0),
       ],
     ),
-    DefaultProvider(
+    LegacyProvider(
       name: 'AIRTEL',
       description:
           'Opérateur majeur en Afrique, misant sur la 4G et les services financiers mobiles, présent activement à Madagascar.',

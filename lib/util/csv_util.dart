@@ -1,16 +1,14 @@
 import 'dart:convert';
-import 'dart:io';
-
 import 'package:csv/csv.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../data/fee_interval_repository.dart';
 import '../data/provider_repository.dart';
 import '../l10n/app_localizations.dart';
 import '../model/fee_interval_model.dart';
+import '../model/fee_operation.dart';
 import '../model/provider_model.dart';
-import '../provider/currency_provider.dart';
 import 'constant_util.dart';
+import 'money.dart';
 
 /// Outcome of an import or export.
 class CsvResult {
@@ -64,6 +62,11 @@ abstract final class _Columns {
     'vola_farany_lehibe',
   ];
   static const fee = ['fee', 'fees', 'frais', 'commission', 'sara'];
+  static const operation = [
+    'operation',
+    'type_operation',
+    'karazana_fifanakalozana',
+  ];
   static const feeType = [
     'fee_type',
     'type_frais',
@@ -85,6 +88,7 @@ class CsvRow {
     this.max,
     this.fee,
     this.feeType,
+    this.operation,
   });
 
   /// Line number in the file (header = 1).
@@ -97,13 +101,14 @@ class CsvRow {
   final String? fee;
   final String? feeType;
 
+  /// Operation key (`withdrawal`, `transfer_same`...), optional.
+  final String? operation;
+
   bool get hasFeeData => min != null || max != null || fee != null;
 }
 
 /// CSV import/export of providers and their fee intervals.
 ///
-/// Amounts in files are expressed in the currency selected in the app;
-/// they are stored in Ariary. Percentage fees are never converted.
 class CsvUtil {
   const CsvUtil._();
 
@@ -158,6 +163,7 @@ class CsvUtil {
     final max = indexOf(_Columns.maxAmount);
     final fee = indexOf(_Columns.fee);
     final feeType = indexOf(_Columns.feeType);
+    final operation = indexOf(_Columns.operation);
 
     String? cell(List<String> row, int index) {
       if (index < 0 || index >= row.length) return null;
@@ -179,6 +185,7 @@ class CsvUtil {
           max: cell(row, max),
           fee: cell(row, fee),
           feeType: cell(row, feeType),
+          operation: cell(row, operation),
         ),
       );
     }
@@ -201,11 +208,10 @@ class CsvUtil {
     }
   }
 
-  /// Validates a fee row and converts it to an interval in Ariary, or
-  /// returns the localized error.
+  /// Validates a fee row and converts it to an interval, or returns the
+  /// localized error.
   static ({FeeInterval? interval, String? error}) toInterval(
     CsvRow row,
-    double exchangeRate,
     AppLocalizations l10n,
   ) {
     final min = row.min == null
@@ -233,8 +239,8 @@ class CsvUtil {
         interval: null,
         error: l10n.rowMinAmountGreaterThanMax(
           row.rowNumber,
-          ConstantUtil.formatCurrencyAmount(min),
-          ConstantUtil.formatCurrencyAmount(max),
+          Money.format(min),
+          Money.format(max),
         ),
       );
     }
@@ -242,10 +248,7 @@ class CsvUtil {
     if (type == FeeType.percentage && (fee < 0 || fee > 100)) {
       return (
         interval: null,
-        error: l10n.rowFeePercentageInvalid(
-          row.rowNumber,
-          ConstantUtil.formatPercentage(fee),
-        ),
+        error: l10n.rowFeePercentageInvalid(row.rowNumber, Money.percent(fee)),
       );
     }
     if (fee < 0) {
@@ -253,9 +256,9 @@ class CsvUtil {
     }
     return (
       interval: FeeInterval(
-        minAmount: min * exchangeRate,
-        maxAmount: max * exchangeRate,
-        fee: type == FeeType.percentage ? fee : fee * exchangeRate,
+        minAmount: min,
+        maxAmount: max,
+        fee: fee,
         feeType: type,
       ),
       error: null,
@@ -266,12 +269,11 @@ class CsvUtil {
   // Import
   // ---------------------------------------------------------------------------
 
-  /// Imports providers and fee intervals. Rows are grouped by provider name
-  /// (case insensitive); unknown providers are created, intervals are added
-  /// to existing ones when they do not overlap.
+  /// Imports fee grids. Rows are grouped by operator name (case insensitive)
+  /// and operation; unknown grids are created, tiers are added to existing
+  /// grids when they do not overlap (a downloaded grid is then marked edited).
   static Future<CsvResult> importFromCsv(
     String content,
-    CurrencyProvider currencyProvider,
     AppLocalizations l10n, {
     ProviderRepository? providers,
     FeeIntervalRepository? intervals,
@@ -301,7 +303,9 @@ class CsvUtil {
           errors.add(l10n.rowProviderNameRequired(row.rowNumber));
           continue;
         }
-        groups.putIfAbsent(name.toLowerCase(), () => []).add(row);
+        final key =
+            '${name.toLowerCase()}|${FeeOperation.fromKey(row.operation)?.key}';
+        groups.putIfAbsent(key, () => []).add(row);
       }
 
       var providersCreated = 0;
@@ -309,8 +313,10 @@ class CsvUtil {
       await providerRepository.transaction((txn) async {
         for (final group in groups.values) {
           final name = group.first.providerName!;
+          final operation = FeeOperation.fromKey(group.first.operation);
           var provider = await providerRepository.findByName(
             name,
+            operation: operation,
             executor: txn,
           );
           final feeRows = group.where((r) => r.hasFeeData).toList();
@@ -323,6 +329,7 @@ class CsvUtil {
                     group.map((r) => r.description).nonNulls.firstOrNull ?? '',
                 iconName:
                     group.map((r) => r.icon).nonNulls.firstOrNull ?? 'business',
+                operation: operation,
               ),
               executor: txn,
             );
@@ -334,12 +341,16 @@ class CsvUtil {
             continue;
           }
 
+          final grid = provider;
+          // A downloaded grid that receives tiers is no longer the published one.
+          var markEdited =
+              grid.isPublished && grid.sourceType != Provider.editedSource;
           final existing = await intervalRepository.getByProvider(
-            provider.id,
+            grid.id,
             executor: txn,
           );
           for (final row in feeRows) {
-            final parsed = toInterval(row, currencyProvider.exchangeRate, l10n);
+            final parsed = toInterval(row, l10n);
             final interval = parsed.interval;
             if (interval == null) {
               errors.add(parsed.error!);
@@ -348,24 +359,18 @@ class CsvUtil {
             final overlap = existing.where(interval.overlaps).firstOrNull;
             if (overlap != null) {
               errors.add(
-                l10n.rowIntervalOverlaps(
-                  row.rowNumber,
-                  overlap.formattedRangeWithSymbol(
-                    currencyProvider.currencySymbol,
-                    currencyProvider.exchangeRate,
-                  ),
-                ),
+                l10n.rowIntervalOverlaps(row.rowNumber, overlap.formattedRange),
               );
               continue;
             }
             existing.add(
-              await intervalRepository.insert(
-                interval,
-                provider.id,
-                executor: txn,
-              ),
+              await intervalRepository.insert(interval, grid.id, executor: txn),
             );
             feesAdded++;
+            if (markEdited) {
+              await providerRepository.markEdited(grid.id, executor: txn);
+              markEdited = false;
+            }
           }
         }
       });
@@ -392,7 +397,6 @@ class CsvUtil {
   /// Builds the CSV text of every provider (one row per fee interval).
   static Future<({String csv, int providers, int intervals})> buildExport({
     required String locale,
-    required double exchangeRate,
     ProviderRepository? providers,
     FeeIntervalRepository? intervals,
   }) async {
@@ -403,9 +407,10 @@ class CsvUtil {
     var intervalCount = 0;
     for (final provider in all) {
       final base = [provider.name, provider.description, provider.iconName];
+      final operation = provider.operation?.key ?? '';
       final list = await intervalRepository.getByProvider(provider.id);
       if (list.isEmpty) {
-        rows.add([...base, '', '', '', 'fixed']);
+        rows.add([...base, '', '', '', 'fixed', operation]);
         continue;
       }
       for (final interval in list) {
@@ -413,10 +418,11 @@ class CsvUtil {
         final fee = interval.fee ?? 0;
         rows.add([
           ...base,
-          _number((interval.minAmount ?? 0) / exchangeRate),
-          _number((interval.maxAmount ?? 0) / exchangeRate),
-          _number(interval.isPercentage ? fee : fee / exchangeRate),
+          _number(interval.minAmount ?? 0),
+          _number(interval.maxAmount ?? 0),
+          _number(fee),
           interval.isPercentage ? 'percentage' : 'fixed',
+          operation,
         ]);
       }
     }
@@ -425,48 +431,6 @@ class CsvUtil {
       providers: all.length,
       intervals: intervalCount,
     );
-  }
-
-  /// Exports every provider into a temporary file.
-  static Future<CsvResult> exportToCsv({
-    required String locale,
-    required CurrencyProvider currencyProvider,
-    required AppLocalizations l10n,
-  }) async {
-    try {
-      final export = await buildExport(
-        locale: locale,
-        exchangeRate: currencyProvider.exchangeRate,
-      );
-      if (export.providers == 0) {
-        return CsvResult(success: false, message: l10n.noDataToExport);
-      }
-      final path = await writeTemporaryFile(export.csv, 'export');
-      return CsvResult(
-        success: true,
-        providersCount: export.providers,
-        feeIntervalsCount: export.intervals,
-        filePath: path,
-      );
-    } catch (e) {
-      return CsvResult(
-        success: false,
-        message: l10n.exportFailed(e.toString()),
-      );
-    }
-  }
-
-  /// Writes [content] (UTF-8 with BOM so spreadsheets detect the encoding).
-  static Future<String> writeTemporaryFile(
-    String content,
-    String prefix,
-  ) async {
-    final directory = await getTemporaryDirectory();
-    final file = File(
-      '${directory.path}/${prefix}_${DateTime.now().millisecondsSinceEpoch}.csv',
-    );
-    await file.writeAsString('﻿$content', encoding: utf8);
-    return file.path;
   }
 
   static String _number(double value) {
@@ -486,6 +450,7 @@ class CsvUtil {
       'montant_max',
       'frais',
       'type_frais',
+      'type_operation',
     ],
     'mg' => const [
       'anarany_mpanome',
@@ -495,6 +460,7 @@ class CsvUtil {
       'vola_farany_lehibe',
       'sara',
       'karazany_sara',
+      'karazana_fifanakalozana',
     ],
     _ => const [
       'provider_name',
@@ -504,6 +470,7 @@ class CsvUtil {
       'max_amount',
       'fee',
       'fee_type',
+      'operation',
     ],
   };
 
@@ -511,32 +478,26 @@ class CsvUtil {
       const ListToCsvConverter().convert([
         headers(locale),
         [
-          'TELMA',
-          'Mobile provider',
+          'MVola',
+          'Mobile money',
           'phone_android',
           '100',
-          '5000',
-          '100',
-          'fixed',
-        ],
-        ['TELMA', '', '', '5001', '10000', '250', 'fixed'],
-        [
-          'AIRTEL',
-          'Another mobile provider',
-          'phone_android',
           '1000',
-          '2000',
-          '15',
+          '100',
           'fixed',
+          'withdrawal',
         ],
+        ['MVola', '', '', '1001', '5000', '150', 'fixed', 'withdrawal'],
+        ['MVola', '', '', '100', '5000', '70', 'fixed', 'transfer_same'],
         [
           'BANK',
-          'Bank transfer provider',
+          'Bank transfer',
           'account_balance',
           '1',
           '100000',
           '2.5',
           'percentage',
+          '',
         ],
       ]);
 }
