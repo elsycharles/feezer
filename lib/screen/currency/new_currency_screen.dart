@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../model/currency_model.dart';
@@ -10,10 +9,10 @@ import '../../widget/app_bar.dart' as custom;
 import '../../widget/form_field.dart' as custom_form;
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
-import '../../util/database_util.dart';
+import '../../data/currency_repository.dart';
 import '../../util/constant_util.dart';
 import '../../util/navigation_util.dart';
-import '../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
+import '../../widget/amount_input_formatter.dart';
 
 /// Clean screen for creating new currencies
 class NewCurrencyScreen extends StatefulWidget {
@@ -30,22 +29,6 @@ class _State extends State<NewCurrencyScreen> {
   late final _symbolController = TextEditingController();
   late final _rateController = TextEditingController(text: '1.0');
   bool _isCreating = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Reset loading state in case screen is reused
-    _isCreating = false;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Reset loading state when screen becomes visible again
-    if (mounted && _isCreating) {
-      setState(() => _isCreating = false);
-    }
-  }
 
   @override
   void dispose() {
@@ -108,7 +91,9 @@ class _State extends State<NewCurrencyScreen> {
                             context,
                           ).currencyCodeMustBe3Characters;
                         }
-                        if (!RegExp(r'^[A-Z]{3}$').hasMatch(value)) {
+                        if (!RegExp(
+                          r'^[A-Z]{3}$',
+                        ).hasMatch(value.toUpperCase())) {
                           return AppLocalizations.of(
                             context,
                           ).currencyCodeMustContainOnlyUppercase;
@@ -151,10 +136,11 @@ class _State extends State<NewCurrencyScreen> {
                       controller: _rateController,
                       label: AppLocalizations.of(context).exchangeRate,
                       icon: Icons.trending_up,
-                      keyboardType: TextInputType.number,
+                      keyboardType: const TextInputType.numberWithOptions(
+                        decimal: true,
+                      ),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
-                        ThousandsSeparatorInputFormatter(max: 99999999999.0),
+                        AmountInputFormatter(max: ConstantUtil.maxInputAmount),
                       ],
                       required: true,
                       validator: (value) {
@@ -163,8 +149,7 @@ class _State extends State<NewCurrencyScreen> {
                             context,
                           ).thisFieldIsRequired;
                         }
-                        final cleanValue = value!.replaceAll(' ', '');
-                        final rate = double.tryParse(cleanValue);
+                        final rate = ConstantUtil.parseLocalizedNumber(value!);
                         if (rate == null || rate <= 0) {
                           return AppLocalizations.of(
                             context,
@@ -181,7 +166,7 @@ class _State extends State<NewCurrencyScreen> {
             Container(
               padding: Global.padLg,
               child: LoadingButton(
-                onPressed: _createCurrency,
+                onPressed: _isCreating ? null : _createCurrency,
                 isLoading: _isCreating,
                 text: AppLocalizations.of(context).create,
               ),
@@ -194,34 +179,32 @@ class _State extends State<NewCurrencyScreen> {
 
   Future<void> _createCurrency() async {
     if (!_formKey.currentState!.validate()) return;
-
+    final l10n = AppLocalizations.of(context);
     setState(() => _isCreating = true);
-
     try {
+      final repository = CurrencyRepository();
+      final code = _codeController.text.trim().toUpperCase();
+      if (await repository.getByCode(code) != null) {
+        if (mounted) {
+          setState(() => _isCreating = false);
+          AppToast.error(context, l10n.currencyCodeAlreadyExists);
+        }
+        return;
+      }
       final currency = Currency(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
-        code: _codeController.text.trim().toUpperCase(),
+        code: code,
         name: _nameController.text.trim(),
         symbol: _symbolController.text.trim(),
-        rate: double.parse(_rateController.text.replaceAll(' ', '')),
+        rate: ConstantUtil.parseLocalizedNumber(_rateController.text)!,
       );
-
-      final db = DatabaseUtil();
-      await db.insert(ConstantUtil.tableCurrencies, currency.toMap());
-
+      await repository.insert(currency);
+      if (!mounted) return;
+      AppToast.success(context, l10n.currencyCreatedSuccessfully);
+      NavigationUtil.safeBackWithResult<Currency>(context, currency);
+    } catch (_) {
       if (mounted) {
-        AppToast.success(
-          context,
-          AppLocalizations.of(context).currencyCreatedSuccessfully,
-        );
-        NavigationUtil.safeBack(context);
-      }
-    } catch (e) {
-      if (mounted) {
-        AppToast.error(
-          context,
-          AppLocalizations.of(context).failedToCreateCurrency,
-        );
+        AppToast.error(context, l10n.failedToCreateCurrency);
         setState(() => _isCreating = false);
       }
     }

@@ -4,8 +4,7 @@ import '../../../provider/currency_provider.dart';
 import '../../../model/currency_model.dart';
 import '../../../widget/interactive_surface.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../util/database_util.dart';
-import '../../../util/constant_util.dart';
+import '../../../data/currency_repository.dart';
 import '../../../util/theme_util.dart';
 
 /// Currency selection modal with radio buttons
@@ -36,11 +35,7 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
   }
 
   Future<void> _loadCurrencies() async {
-    final db = DatabaseUtil();
-    final currencyMaps = await db.query(ConstantUtil.tableCurrencies);
-    final loadedCurrencies = currencyMaps
-        .map((map) => Currency.fromMap(map))
-        .toList();
+    final loadedCurrencies = await CurrencyRepository().getAll();
 
     if (mounted) {
       setState(() {
@@ -116,7 +111,7 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
                         context,
                         'Ariary (Ar)', // Always show Ariary as the system default
                         currencyProvider.selectedCurrency == null ||
-                            currencyProvider.selectedCurrency?.code == 'MGA',
+                            currencyProvider.selectedCurrency!.isBase,
                         () {
                           final currencyProvider = context
                               .read<CurrencyProvider>();
@@ -127,7 +122,7 @@ class _CurrencySelectionModalState extends State<CurrencySelectionModal> {
 
                       // Currency options (excluding Ariary since it's the system default)
                       ..._currencies
-                          .where((currency) => currency.code != 'MGA')
+                          .where((currency) => !currency.isBase)
                           .map(
                             (currency) => _buildCurrencyOption(
                               context,
