@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:path_provider/path_provider.dart';
 import '../../util/csv_util.dart';
 import '../../util/navigation_util.dart';
 import '../../util/theme_util.dart';
@@ -79,13 +78,6 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
 
   Future<void> _importCsvFromFile(PlatformFile file) async {
     try {
-      if (file.bytes == null && file.path == null) {
-        if (mounted) {
-          /* Lines 85-86 omitted */
-        }
-        return;
-      }
-
       setState(() => _isProcessing = true);
 
       final currencyProvider = Provider.of<CurrencyProvider>(
@@ -94,20 +86,19 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       );
       final localizations = AppLocalizations.of(context);
 
-      // Lire le contenu du fichier
-      final csvContent = file.bytes != null
-          ? String.fromCharCodes(file.bytes!)
-          : await File(file.path!).readAsString();
+      // Decode as UTF-8 (fallback Latin-1): String.fromCharCodes corrupted
+      // accented characters.
+      final bytes = await file.readAsBytes();
+      final csvContent = CsvUtil.decodeBytes(bytes);
 
       final importResult = await CsvUtil.importFromCsv(
         csvContent,
         currencyProvider,
-        createCsvLocalizations(localizations),
+        localizations,
       );
 
-      setState(() => _isProcessing = false);
-
       if (!mounted) return;
+      setState(() => _isProcessing = false);
 
       if (importResult.success) {
         _showImportResultDialog(importResult);
@@ -118,11 +109,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         );
       }
     } catch (e) {
-      setState(() => _isProcessing = false);
       if (mounted) {
+        setState(() => _isProcessing = false);
         AppToast.error(
           context,
-          '${AppLocalizations.of(context).importFailed}: ${e.toString()}',
+          AppLocalizations.of(context).importFailed('$e'),
         );
       }
     }
@@ -151,12 +142,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       final importResult = await CsvUtil.importFromCsv(
         csvText,
         currencyProvider,
-        createCsvLocalizations(localizations),
+        localizations,
       );
 
-      setState(() => _isProcessing = false);
-
       if (!mounted) return;
+      setState(() => _isProcessing = false);
 
       if (importResult.success) {
         _showImportResultDialog(importResult);
@@ -167,12 +157,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         );
       }
     } catch (e) {
-      setState(() => _isProcessing = false);
       if (mounted) {
-        AppToast.error(
-          context,
-          '${localizations.importFailed}: ${e.toString()}',
-        );
+        setState(() => _isProcessing = false);
+        AppToast.error(context, localizations.importFailed('$e'));
       }
     }
   }
@@ -189,7 +176,8 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       );
       // Use the actual current locale from the context, which respects system locale when not set
       final currentLocale = Localizations.localeOf(context);
-      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
+      final locale =
+          localeProvider.locale?.languageCode ?? currentLocale.languageCode;
       final currencyProvider = Provider.of<CurrencyProvider>(
         context,
         listen: false,
@@ -198,12 +186,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       final exportResult = await CsvUtil.exportToCsv(
         locale: locale,
         currencyProvider: currencyProvider,
-        localizations: createCsvLocalizations(localizations),
+        l10n: localizations,
       );
 
-      setState(() => _isProcessing = false);
-
       if (!mounted) return;
+      setState(() => _isProcessing = false);
 
       if (exportResult.success && exportResult.filePath != null) {
         await _saveFileToUserLocation(
@@ -217,12 +204,9 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
         );
       }
     } catch (e) {
-      setState(() => _isProcessing = false);
       if (mounted) {
-        AppToast.error(
-          context,
-          '${localizations.exportFailed}: ${e.toString()}',
-        );
+        setState(() => _isProcessing = false);
+        AppToast.error(context, localizations.exportFailed('$e'));
       }
     }
   }
@@ -237,21 +221,13 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       );
       // Use the actual current locale from the context, which respects system locale when not set
       final currentLocale = Localizations.localeOf(context);
-      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
+      final locale =
+          localeProvider.locale?.languageCode ?? currentLocale.languageCode;
 
       final template = CsvUtil.getImportTemplate(locale);
 
-      // Create temporary file
-      final directory = await getTemporaryDirectory();
-      final timestamp = DateTime.now().millisecondsSinceEpoch;
-      final tempFile = File('${directory.path}/template_$timestamp.csv');
-      await tempFile.writeAsString(template);
-
-      // Save with suggested name
-      await _saveFileToUserLocation(
-        tempFile.path,
-        'feezer_template.csv',
-      );
+      final path = await CsvUtil.writeTemporaryFile(template, 'template');
+      await _saveFileToUserLocation(path, 'feezer_template.csv');
     } catch (e) {
       if (mounted) {
         AppToast.error(
@@ -277,12 +253,11 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       final bytes = await sourceFile.readAsBytes();
 
       // Save with FilePicker (handles permissions automatically)
-      final result = await FilePicker.platform.saveFile(
+      final result = await FilePicker.saveFile(
         dialogTitle: chooseWhereToSaveText,
         fileName: suggestedName,
-        type: FileType.custom,
-        allowedExtensions: ['csv'],
-        bytes: bytes, // IMPORTANT: Passer les bytes sur mobile
+        mimeType: 'text/csv',
+        bytes: bytes,
       );
 
       if (result != null) {
@@ -310,7 +285,8 @@ class _CsvManagementScreenState extends State<CsvManagementScreen> {
       );
       // Use the actual current locale from the context, which respects system locale when not set
       final currentLocale = Localizations.localeOf(context);
-      final locale = localeProvider.locale?.languageCode ?? currentLocale.languageCode;
+      final locale =
+          localeProvider.locale?.languageCode ?? currentLocale.languageCode;
 
       final template = CsvUtil.getImportTemplate(locale);
 
@@ -723,15 +699,13 @@ class _ImportDialogState extends State<_ImportDialog> {
 
   Future<void> _selectFile() async {
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final files = await FilePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: ['csv'],
       );
 
-      if (result != null && result.files.isNotEmpty) {
-        setState(() {
-          _selectedFile = result.files.first;
-        });
+      if (files.isNotEmpty && mounted) {
+        setState(() => _selectedFile = files.first);
       }
     } catch (e) {
       if (mounted) {
@@ -1042,7 +1016,7 @@ class _FileUploadArea extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      _formatFileSize(selectedFile!.size),
+                      _formatFileSize(selectedFile!.lengthSync() ?? 0),
                       style: ThemeUtil.bodySmall.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
