@@ -126,3 +126,77 @@ class _MaxWindow {
     }
   }
 }
+
+/// Brute-force reference with an amount step: every transaction amount is a
+/// multiple of [step] (tiers already rounded with the same step), fixed
+/// integer fees. Dynamic programming over integer costs.
+class SteppedReference {
+  SteppedReference(this.tiers, this.step)
+    : assert(tiers.every((t) => !t.isPercentage)) {
+    for (final tier in tiers) {
+      for (
+        var amount = tier.minAmount.round();
+        amount <= tier.maxAmount.round();
+        amount += step
+      ) {
+        _items.add((amount + tier.fixedFee.round(), amount));
+      }
+    }
+  }
+
+  final List<FeeTier> tiers;
+  final int step;
+
+  /// `(cost, amount)` of every possible transaction.
+  final List<(int, int)> _items = [];
+
+  static const double _none = double.negativeInfinity;
+
+  /// Adds any number of transactions on top of [base] (best net per budget).
+  List<double> _unbounded(List<double> base) {
+    final best = List.of(base);
+    for (var b = 1; b < best.length; b++) {
+      if (best[b - 1] > best[b]) best[b] = best[b - 1];
+      for (final (cost, amount) in _items) {
+        if (cost <= b && best[b - cost] > _none) {
+          final value = best[b - cost] + amount;
+          if (value > best[b]) best[b] = value;
+        }
+      }
+    }
+    return best;
+  }
+
+  /// Adds exactly one transaction to [previous].
+  List<double> _layer(List<double> previous) {
+    final current = List<double>.filled(previous.length, _none);
+    for (var b = 0; b < previous.length; b++) {
+      if (b > 0 && current[b - 1] > current[b]) current[b] = current[b - 1];
+      for (final (cost, amount) in _items) {
+        if (cost <= b && previous[b - cost] > _none) {
+          final value = previous[b - cost] + amount;
+          if (value > current[b]) current[b] = value;
+        }
+      }
+    }
+    return current;
+  }
+
+  /// Best net amount for [budget] with between [minCount] and [maxCount]
+  /// transactions (`0`: no bound); `-infinity` when impossible.
+  double bestNet(int budget, {int minCount = 0, int maxCount = 0}) {
+    var layer = List<double>.filled(budget + 1, 0);
+    if (maxCount <= 0) {
+      for (var k = 0; k < minCount; k++) {
+        layer = _layer(layer);
+      }
+      return _unbounded(layer)[budget];
+    }
+    var best = _none;
+    for (var k = 1; k <= maxCount; k++) {
+      layer = _layer(layer);
+      if (k >= minCount && layer[budget] > best) best = layer[budget];
+    }
+    return best;
+  }
+}
