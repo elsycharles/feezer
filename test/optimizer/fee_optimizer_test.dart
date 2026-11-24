@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:fee_minimizer/core/optimizer/fee_optimizer.dart';
-import 'package:fee_minimizer/core/optimizer/fee_tier.dart';
-import 'package:fee_minimizer/model/fee_interval_model.dart';
-import 'package:fee_minimizer/model/fee_minimizer_result_model.dart';
-import 'package:fee_minimizer/data/legacy_defaults.dart';
+import 'package:feezer/core/optimizer/fee_optimizer.dart';
+import 'package:feezer/core/optimizer/fee_tier.dart';
+import 'package:feezer/model/fee_interval_model.dart';
+import 'package:feezer/model/fee_minimizer_result_model.dart';
+import 'package:feezer/data/legacy_defaults.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'reference_solver.dart';

@@ -1,6 +1,6 @@
-import 'package:fee_minimizer/util/constant_util.dart';
-import 'package:fee_minimizer/util/money.dart';
-import 'package:fee_minimizer/widget/amount_input_formatter.dart';
+import 'package:feezer/util/constant_util.dart';
+import 'package:feezer/util/money.dart';
+import 'package:feezer/widget/amount_input_formatter.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 

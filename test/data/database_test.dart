@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fee_minimizer/data/app_database.dart';
-import 'package:fee_minimizer/data/default_data.dart';
-import 'package:fee_minimizer/data/fee_interval_repository.dart';
-import 'package:fee_minimizer/data/fee_table_service.dart';
-import 'package:fee_minimizer/data/legacy_defaults.dart';
-import 'package:fee_minimizer/data/provider_repository.dart';
-import 'package:fee_minimizer/l10n/app_localizations.dart';
-import 'package:fee_minimizer/model/fee_interval_model.dart';
-import 'package:fee_minimizer/model/fee_operation.dart';
-import 'package:fee_minimizer/model/provider_model.dart';
-import 'package:fee_minimizer/util/csv_util.dart';
+import 'package:feezer/data/app_database.dart';
+import 'package:feezer/data/default_data.dart';
+import 'package:feezer/data/fee_interval_repository.dart';
+import 'package:feezer/data/fee_table_service.dart';
+import 'package:feezer/data/legacy_defaults.dart';
+import 'package:feezer/data/provider_repository.dart';
+import 'package:feezer/l10n/app_localizations.dart';
+import 'package:feezer/model/fee_interval_model.dart';
+import 'package:feezer/model/fee_operation.dart';
+import 'package:feezer/model/provider_model.dart';
+import 'package:feezer/util/csv_util.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' show Locale;
 import 'package:flutter_test/flutter_test.dart';

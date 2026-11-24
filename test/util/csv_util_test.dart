@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:fee_minimizer/l10n/app_localizations.dart';
-import 'package:fee_minimizer/model/fee_interval_model.dart';
-import 'package:fee_minimizer/util/csv_util.dart';
+import 'package:feezer/l10n/app_localizations.dart';
+import 'package:feezer/model/fee_interval_model.dart';
+import 'package:feezer/util/csv_util.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 

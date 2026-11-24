@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fee_minimizer/model/locale_model.dart';
+import 'package:feezer/model/locale_model.dart';
 
 /// Provider for managing app locale/language settings
 class LocaleProvider extends ChangeNotifier {

@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fee_minimizer/data/app_database.dart';
-import 'package:fee_minimizer/data/default_data.dart';
-import 'package:fee_minimizer/data/legacy_defaults.dart';
-import 'package:fee_minimizer/main.dart';
-import 'package:fee_minimizer/provider/locale_provider.dart';
-import 'package:fee_minimizer/provider/theme_provider.dart';
-import 'package:fee_minimizer/util/preference_util.dart';
+import 'package:feezer/data/app_database.dart';
+import 'package:feezer/data/default_data.dart';
+import 'package:feezer/data/legacy_defaults.dart';
+import 'package:feezer/main.dart';
+import 'package:feezer/provider/locale_provider.dart';
+import 'package:feezer/provider/theme_provider.dart';
+import 'package:feezer/util/preference_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';

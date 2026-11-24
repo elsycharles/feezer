@@ -8,12 +8,12 @@
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:fee_minimizer/data/app_database.dart';
-import 'package:fee_minimizer/data/default_data.dart';
-import 'package:fee_minimizer/main.dart';
-import 'package:fee_minimizer/provider/locale_provider.dart';
-import 'package:fee_minimizer/provider/theme_provider.dart';
-import 'package:fee_minimizer/util/navigation_util.dart';
+import 'package:feezer/data/app_database.dart';
+import 'package:feezer/data/default_data.dart';
+import 'package:feezer/main.dart';
+import 'package:feezer/provider/locale_provider.dart';
+import 'package:feezer/provider/theme_provider.dart';
+import 'package:feezer/util/navigation_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
