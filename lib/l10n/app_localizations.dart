@@ -451,7 +451,7 @@ abstract class AppLocalizations {
   /// Add new provider button text
   ///
   /// In en, this message translates to:
-  /// **'Add new provider'**
+  /// **'Add an operator'**
   String get addNewProvider;
 
   /// Save changes button text

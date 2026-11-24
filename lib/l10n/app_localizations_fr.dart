@@ -206,7 +206,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get helpAndSupport => 'Aide et support';
 
   @override
-  String get addNewProvider => 'Ajouter un nouveau fournisseur';
+  String get addNewProvider => 'Ajouter un opérateur';
 
   @override
   String get saveChanges => 'Enregistrer';

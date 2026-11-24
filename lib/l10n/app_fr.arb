@@ -91,7 +91,7 @@
     "description": "Maximum amount validation field name"
   },
   "helpAndSupport": "Aide et support",
-  "addNewProvider": "Ajouter un nouveau fournisseur",
+  "addNewProvider": "Ajouter un opérateur",
   "@addNewProvider": {
     "description": "Add new provider button text"
   },
