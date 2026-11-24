@@ -960,4 +960,30 @@ class AppLocalizationsFr extends AppLocalizations {
   String onlyOperation(String operation, String operator) {
     return 'Seule l\'opération « $operation » est disponible pour $operator.';
   }
+
+  @override
+  String amountStepMultiples(String amount) {
+    return 'Multiples de $amount';
+  }
+
+  @override
+  String optimizationStepTooLarge(String amount) {
+    return 'Aucun palier de cette grille n\'accepte des montants multiples de $amount. Désactivez l\'arrondi.';
+  }
+
+  @override
+  String get roundToHundred => 'Arrondir à la centaine';
+
+  @override
+  String roundToHundredOnWithdrawal(String example, String wrong) {
+    return 'Chaque retrait est un multiple de 100 : $example, jamais $wrong.';
+  }
+
+  @override
+  String roundToHundredOnTransfer(String example, String wrong) {
+    return 'Chaque envoi est un multiple de 100 : $example, jamais $wrong.';
+  }
+
+  @override
+  String get roundToHundredOff => 'Montants exacts, à l\'ariary près.';
 }

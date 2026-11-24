@@ -961,4 +961,30 @@ class AppLocalizationsMg extends AppLocalizations {
   String onlyOperation(String operation, String operator) {
     return '« $operation » ihany no misy ho an\'i $operator.';
   }
+
+  @override
+  String amountStepMultiples(String amount) {
+    return 'Isaky ny $amount';
+  }
+
+  @override
+  String optimizationStepTooLarge(String amount) {
+    return 'Tsy misy ambaratonga amin\'ity tabilao ity manaiky vola isaky ny $amount. Esory ny boribory.';
+  }
+
+  @override
+  String get roundToHundred => 'Boribory amin\'ny zato';
+
+  @override
+  String roundToHundredOnWithdrawal(String example, String wrong) {
+    return 'Isaky ny 100 ny fisintonana tsirairay: $example, fa tsy $wrong mihitsy.';
+  }
+
+  @override
+  String roundToHundredOnTransfer(String example, String wrong) {
+    return 'Isaky ny 100 ny fandefasana tsirairay: $example, fa tsy $wrong mihitsy.';
+  }
+
+  @override
+  String get roundToHundredOff => 'Vola marina, hatramin\'ny ariary iray.';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../core/optimizer/fee_comparison.dart';
 import '../../core/optimizer/fee_optimizer.dart';
@@ -24,13 +25,23 @@ import 'result_view.dart';
 
 /// Inputs of a background optimization.
 class _Request {
-  const _Request(this.budget, this.intervals, this.minOps, this.maxOps);
+  const _Request(
+    this.budget,
+    this.intervals,
+    this.minOps,
+    this.maxOps,
+    this.step,
+  );
 
   final double budget;
   final List<FeeInterval> intervals;
   final int minOps;
   final int maxOps;
+  final double step;
 }
+
+/// Rounded amounts are multiples of this step: 10 000, never 10 040.
+const int roundingStep = 100;
 
 /// Everything displayed after an optimization.
 class OptimizationOutcome {
@@ -38,6 +49,7 @@ class OptimizationOutcome {
     required this.comparison,
     required this.minOps,
     required this.maxOps,
+    this.step = 0,
     this.operation,
     this.unconstrained,
   });
@@ -45,6 +57,9 @@ class OptimizationOutcome {
   final FeeComparison comparison;
   final int minOps;
   final int maxOps;
+
+  /// Every amount is a multiple of [step] (0: any amount).
+  final double step;
   final FeeOperation? operation;
 
   /// Best plan without the transfer limits (only when limits were set).
@@ -68,6 +83,7 @@ class OptimizationOutcome {
     comparison: comparison,
     minOps: minOps,
     maxOps: maxOps,
+    step: step,
     operation: value,
     unconstrained: unconstrained,
   );
@@ -80,14 +96,24 @@ OptimizationOutcome _run(_Request request) {
     request.intervals,
     minOperations: request.minOps,
     maxOperations: request.maxOps,
+    step: request.step,
   );
   final hasLimits = request.minOps > 0 || request.maxOps > 0;
   return OptimizationOutcome(
-    comparison: FeeComparison.compute(result, request.intervals),
+    comparison: FeeComparison.compute(
+      result,
+      request.intervals,
+      step: request.step,
+    ),
     minOps: request.minOps,
     maxOps: request.maxOps,
+    step: request.step,
     unconstrained: hasLimits
-        ? FeeOptimizer.optimize(request.budget, request.intervals)
+        ? FeeOptimizer.optimize(
+            request.budget,
+            request.intervals,
+            step: request.step,
+          )
         : null,
   );
 }
@@ -110,6 +136,8 @@ class OptimizeScreenState extends State<OptimizeScreen> {
   String? _selectedId;
   int _minOps = 0;
   int _maxOps = 0;
+  int _withdrawalStep = PreferenceUtil.defaultWithdrawalStep;
+  int _transferStep = 0;
   bool _limitsExpanded = false;
   bool _running = false;
   OptimizationOutcome? _outcome;
@@ -119,6 +147,35 @@ class OptimizeScreenState extends State<OptimizeScreen> {
     super.initState();
     AppDatabase.changes.addListener(_onDataChanged);
     _load();
+    _loadSteps();
+  }
+
+  Future<void> _loadSteps() async {
+    final withdrawal = await PreferenceUtil.amountStep(withdrawal: true);
+    final transfer = await PreferenceUtil.amountStep(withdrawal: false);
+    if (!mounted) return;
+    setState(() {
+      _withdrawalStep = withdrawal > 0 ? roundingStep : 0;
+      _transferStep = transfer > 0 ? roundingStep : 0;
+    });
+  }
+
+  bool get _isWithdrawal => _selected?.operation == FeeOperation.withdrawal;
+
+  /// Step of the amounts for the selected operation (0: any amount).
+  int get _step => _isWithdrawal ? _withdrawalStep : _transferStep;
+
+  void _setRounded(bool rounded) {
+    final step = rounded ? roundingStep : 0;
+    final withdrawal = _isWithdrawal;
+    _invalidate(() {
+      if (withdrawal) {
+        _withdrawalStep = step;
+      } else {
+        _transferStep = step;
+      }
+    });
+    PreferenceUtil.setAmountStep(step, withdrawal: withdrawal);
   }
 
   @override
@@ -229,7 +286,13 @@ class OptimizeScreenState extends State<OptimizeScreen> {
     _reveal();
     try {
       final intervals = await _intervalRepository.getByProvider(grid.id);
-      final request = _Request(amount, intervals, _minOps, _maxOps);
+      final request = _Request(
+        amount,
+        intervals,
+        _minOps,
+        _maxOps,
+        _step.toDouble(),
+      );
       final outcome = (await compute(
         _run,
         request,
@@ -239,7 +302,8 @@ class OptimizeScreenState extends State<OptimizeScreen> {
           grid.id != _selectedId ||
           amount != _amount ||
           request.minOps != _minOps ||
-          request.maxOps != _maxOps;
+          request.maxOps != _maxOps ||
+          request.step != _step;
       setState(() {
         _running = false;
         if (!stale) _outcome = outcome;
@@ -415,6 +479,12 @@ class OptimizeScreenState extends State<OptimizeScreen> {
                           setState(() => _limitsExpanded = !_limitsExpanded),
                       onMinChanged: (v) => _invalidate(() => _minOps = v),
                       onMaxChanged: (v) => _invalidate(() => _maxOps = v),
+                    ),
+                    Space.gapMd,
+                    _RoundingCard(
+                      withdrawal: _isWithdrawal,
+                      rounded: _step > 0,
+                      onChanged: _setRounded,
                     ),
                     Space.gapXl,
                     AppButton(
@@ -592,6 +662,98 @@ class _AmountCard extends StatelessWidget {
   }
 }
 
+/// Card with a title and a summary, which expands to show [child].
+class _CollapsibleCard extends StatelessWidget {
+  const _CollapsibleCard({
+    required this.title,
+    required this.summary,
+    required this.expanded,
+    required this.onToggle,
+    required this.child,
+    this.summaryIsError = false,
+  });
+
+  final String title;
+  final String summary;
+  final bool summaryIsError;
+  final bool expanded;
+  final VoidCallback onToggle;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      color: context.colors.surfaceContainerLow,
+      borderRadius: BorderRadius.circular(Space.radiusLg),
+    ),
+    clipBehavior: Clip.antiAlias,
+    child: Column(
+      children: [
+        Pressable(
+          onTap: onToggle,
+          borderRadius: 0,
+          scale: 0.99,
+          child: Padding(
+            padding: const EdgeInsets.all(Space.lg),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title, style: context.text.titleSmall),
+                      const SizedBox(height: 2),
+                      AnimatedSwitcher(
+                        duration: Motion.medium,
+                        layoutBuilder: (current, previous) => Stack(
+                          alignment: Alignment.centerLeft,
+                          children: [...previous, ?current],
+                        ),
+                        child: Text(
+                          summary,
+                          key: ValueKey(summary),
+                          style: context.text.bodySmall?.copyWith(
+                            color: summaryIsError ? context.colors.error : null,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                AnimatedRotation(
+                  turns: expanded ? 0.5 : 0,
+                  duration: Motion.medium,
+                  curve: Motion.curve,
+                  child: Icon(
+                    Icons.expand_more_rounded,
+                    color: context.colors.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        AnimatedSize(
+          duration: Motion.medium,
+          curve: Motion.curve,
+          alignment: Alignment.topCenter,
+          child: !expanded
+              ? const SizedBox(width: double.infinity)
+              : Padding(
+                  padding: const EdgeInsets.fromLTRB(
+                    Space.lg,
+                    0,
+                    Space.lg,
+                    Space.lg,
+                  ),
+                  child: child,
+                ),
+        ),
+      ],
+    ),
+  );
+}
+
 class _LimitsCard extends StatelessWidget {
   const _LimitsCard({
     required this.withdrawal,
@@ -615,116 +777,124 @@ class _LimitsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final invalid = minOps > 0 && maxOps > 0 && minOps > maxOps;
-    final summary = transferLimitSummary(l10n, minOps, maxOps);
-    return Container(
-      decoration: BoxDecoration(
-        color: context.colors.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(Space.radiusLg),
-      ),
-      clipBehavior: Clip.antiAlias,
+    return _CollapsibleCard(
+      title: withdrawal ? l10n.withdrawalCount : l10n.transferCount,
+      summary: transferLimitSummary(l10n, minOps, maxOps),
+      summaryIsError: invalid,
+      expanded: expanded,
+      onToggle: onToggle,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Pressable(
-            onTap: onToggle,
-            borderRadius: 0,
-            scale: 0.99,
-            child: Padding(
-              padding: const EdgeInsets.all(Space.lg),
-              child: Row(
+          Text(
+            withdrawal ? l10n.withdrawalCountHelp : l10n.transferCountHelp,
+            style: context.text.bodySmall,
+          ),
+          Space.gapMd,
+          Row(
+            children: [
+              Expanded(
+                child: CountStepper(
+                  label: l10n.minimumShort,
+                  value: minOps,
+                  zeroLabel: l10n.anyCount,
+                  max: ConstantUtil.maxTransactionsInput,
+                  onChanged: onMinChanged,
+                ),
+              ),
+              Space.gapMd,
+              Expanded(
+                child: CountStepper(
+                  label: l10n.maximumShort,
+                  value: maxOps,
+                  zeroLabel: l10n.anyCount,
+                  max: ConstantUtil.maxTransactionsInput,
+                  onChanged: onMaxChanged,
+                ),
+              ),
+            ],
+          ),
+          if (invalid) ...[
+            Space.gapSm,
+            Text(
+              l10n.minTransactionsCannotBeGreaterThanMax,
+              style: context.text.bodySmall?.copyWith(
+                color: context.colors.error,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// Switch rounding every amount to the hundred (cash points only hand out
+/// notes: 10 000, never 10 040).
+class _RoundingCard extends StatelessWidget {
+  const _RoundingCard({
+    required this.withdrawal,
+    required this.rounded,
+    required this.onChanged,
+  });
+
+  final bool withdrawal;
+  final bool rounded;
+  final ValueChanged<bool> onChanged;
+
+  void _toggle(bool value) {
+    HapticFeedback.selectionClick();
+    onChanged(value);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final example = context.money(10000);
+    final wrong = context.money(10040);
+    final summary = !rounded
+        ? l10n.roundToHundredOff
+        : withdrawal
+        ? l10n.roundToHundredOnWithdrawal(example, wrong)
+        : l10n.roundToHundredOnTransfer(example, wrong);
+    return Pressable(
+      onTap: () => _toggle(!rounded),
+      color: context.colors.surfaceContainerLow,
+      scale: 0.99,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          Space.lg,
+          Space.md,
+          Space.md,
+          Space.md,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          withdrawal
-                              ? l10n.withdrawalCount
-                              : l10n.transferCount,
-                          style: context.text.titleSmall,
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          summary,
-                          style: context.text.bodySmall?.copyWith(
-                            color: invalid ? context.colors.error : null,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  AnimatedRotation(
-                    turns: expanded ? 0.5 : 0,
+                  Text(l10n.roundToHundred, style: context.text.titleSmall),
+                  const SizedBox(height: 2),
+                  AnimatedSwitcher(
                     duration: Motion.medium,
-                    curve: Motion.curve,
-                    child: Icon(
-                      Icons.expand_more_rounded,
-                      color: context.colors.onSurfaceVariant,
+                    layoutBuilder: (current, previous) => Stack(
+                      alignment: Alignment.centerLeft,
+                      children: [...previous, ?current],
+                    ),
+                    child: Text(
+                      summary,
+                      key: ValueKey(summary),
+                      style: context.text.bodySmall,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          AnimatedSize(
-            duration: Motion.medium,
-            curve: Motion.curve,
-            alignment: Alignment.topCenter,
-            child: !expanded
-                ? const SizedBox(width: double.infinity)
-                : Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      Space.lg,
-                      0,
-                      Space.lg,
-                      Space.lg,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          withdrawal
-                              ? l10n.withdrawalCountHelp
-                              : l10n.transferCountHelp,
-                          style: context.text.bodySmall,
-                        ),
-                        Space.gapMd,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CountStepper(
-                                label: l10n.minimumShort,
-                                value: minOps,
-                                zeroLabel: l10n.anyCount,
-                                max: ConstantUtil.maxTransactionsInput,
-                                onChanged: onMinChanged,
-                              ),
-                            ),
-                            Space.gapMd,
-                            Expanded(
-                              child: CountStepper(
-                                label: l10n.maximumShort,
-                                value: maxOps,
-                                zeroLabel: l10n.anyCount,
-                                max: ConstantUtil.maxTransactionsInput,
-                                onChanged: onMaxChanged,
-                              ),
-                            ),
-                          ],
-                        ),
-                        if (invalid) ...[
-                          Space.gapSm,
-                          Text(
-                            l10n.minTransactionsCannotBeGreaterThanMax,
-                            style: context.text.bodySmall?.copyWith(
-                              color: context.colors.error,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-          ),
-        ],
+            Space.gapMd,
+            Switch(value: rounded, onChanged: _toggle),
+          ],
+        ),
       ),
     );
   }

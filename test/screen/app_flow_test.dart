@@ -166,11 +166,42 @@ void main() {
       await tester.tap(find.text('Withdrawal'));
       await tester.pumpAndSettle();
       expect(find.text('Number of withdrawals'), findsOneWidget);
+      // Remove the "at most 1" limit set above.
+      final minus = find.byIcon(Icons.remove_rounded).last;
+      await tester.ensureVisible(minus);
+      await tester.pumpAndSettle();
+      await tester.tap(minus);
+      await tester.pumpAndSettle();
+      expect(find.text('No limit'), findsOneWidget);
       await tester.ensureVisible(optimize);
       await tester.tap(optimize);
       await settle(tester, rounds: 40);
       expect(find.text('You receive in cash'), findsOneWidget);
       expect(find.text('Your withdrawal plan'), findsOneWidget);
+      // Withdrawals default to notes of 100.
+      expect(find.text('Multiples of 100'), findsOneWidget);
+      expect(find.text('10${nbsp}100'), findsWidgets);
+
+      // Exact amounts: 10 125.
+      final rounding = find.text('Round to the hundred');
+      await tester.scrollUntilVisible(rounding, -300, scrollable: scrollable);
+      await tester.ensureVisible(rounding);
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'Every withdrawal is a multiple of 100: 10${nbsp}000, '
+          'never 10${nbsp}040.',
+        ),
+        findsOneWidget,
+      );
+      await tester.tap(rounding);
+      await tester.pumpAndSettle();
+      expect(find.text('Exact amounts, to the ariary.'), findsOneWidget);
+      await tester.ensureVisible(optimize);
+      await tester.tap(optimize);
+      await settle(tester, rounds: 40);
+      expect(find.text('Multiples of 100'), findsNothing);
+      expect(find.text('10${nbsp}125'), findsWidgets);
       expect(tester.takeException(), isNull);
 
       // Operators tab: one card per operator, one row per operation.

@@ -53,7 +53,14 @@ class FeeTier {
 
   /// Converts user intervals into sorted, deduplicated tiers, ignoring
   /// incomplete or invalid intervals.
-  static List<FeeTier> fromIntervals(Iterable<FeeInterval> intervals) {
+  ///
+  /// With a positive [step], every transaction amount must be a multiple of
+  /// [step]: bounds are rounded inwards to multiples of [step] and tiers
+  /// containing no multiple are dropped.
+  static List<FeeTier> fromIntervals(
+    Iterable<FeeInterval> intervals, {
+    double step = 0,
+  }) {
     final tiers = <FeeTier>[];
     for (final interval in intervals) {
       final min = interval.minAmount;
@@ -63,12 +70,21 @@ class FeeTier {
         continue;
       }
       if (!min.isFinite || !max.isFinite || !fee.isFinite) continue;
-      final effectiveMin = min > 0
+      var effectiveMin = min > 0
           ? min
           : (max < smallestAmount ? max : smallestAmount);
+      var effectiveMax = max;
+      if (step > 0) {
+        effectiveMin = ceilToStep(
+          effectiveMin < step ? step : effectiveMin,
+          step,
+        );
+        effectiveMax = floorToStep(max, step);
+        if (effectiveMin > effectiveMax) continue;
+      }
       final tier = FeeTier(
         minAmount: effectiveMin,
-        maxAmount: max,
+        maxAmount: effectiveMax,
         type: interval.feeType,
         value: fee,
       );
@@ -79,6 +95,20 @@ class FeeTier {
       return byMin != 0 ? byMin : a.maxAmount.compareTo(b.maxAmount);
     });
     return tiers;
+  }
+
+  /// Largest multiple of [step] not above [value] (tolerant to floating point
+  /// noise); [value] itself when [step] is not positive.
+  static double floorToStep(double value, double step) {
+    if (!(step > 0)) return value;
+    return (value / step + 1e-9).floorToDouble() * step;
+  }
+
+  /// Smallest multiple of [step] not below [value]; [value] itself when
+  /// [step] is not positive.
+  static double ceilToStep(double value, double step) {
+    if (!(step > 0)) return value;
+    return (value / step - 1e-9).ceilToDouble() * step;
   }
 
   @override

@@ -12,16 +12,17 @@ class FeeComparison {
     required this.sameNetWithoutOptimization,
   });
 
-  /// Computes the baselines for [optimized] (all amounts in base currency).
+  /// Computes the baselines for [optimized], with the same amount [step].
   factory FeeComparison.compute(
     FeeOptimizerResult optimized,
-    Iterable<FeeInterval> intervals,
-  ) {
-    final tiers = FeeTier.fromIntervals(intervals);
+    Iterable<FeeInterval> intervals, {
+    double step = 0,
+  }) {
+    final tiers = FeeTier.fromIntervals(intervals, step: step);
     final naive = _toResult(
       optimized.budget,
       tiers,
-      NaiveStrategy.maxNetPlan(optimized.budget, tiers),
+      NaiveStrategy.maxNetPlan(optimized.budget, tiers, step: step),
     );
     final sameNetPlan = NaiveStrategy.sameNetPlan(optimized.netAmount, tiers);
     return FeeComparison(

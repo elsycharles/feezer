@@ -418,5 +418,11 @@
   "failedToLoadData": "Impossible de charger les données",
   "failedToOpenLink": "Impossible d'ouvrir le lien",
   "pressAgainToExit": "Appuyez encore pour quitter",
-  "onlyOperation": "Seule l'opération « {operation} » est disponible pour {operator}."
+  "onlyOperation": "Seule l'opération « {operation} » est disponible pour {operator}.",
+  "amountStepMultiples": "Multiples de {amount}",
+  "optimizationStepTooLarge": "Aucun palier de cette grille n'accepte des montants multiples de {amount}. Désactivez l'arrondi.",
+  "roundToHundred": "Arrondir à la centaine",
+  "roundToHundredOnWithdrawal": "Chaque retrait est un multiple de 100 : {example}, jamais {wrong}.",
+  "roundToHundredOnTransfer": "Chaque envoi est un multiple de 100 : {example}, jamais {wrong}.",
+  "roundToHundredOff": "Montants exacts, à l'ariary près."
 }

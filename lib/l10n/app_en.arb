@@ -1123,5 +1123,45 @@
         "type": "String"
       }
     }
-  }
+  },
+  "amountStepMultiples": "Multiples of {amount}",
+  "@amountStepMultiples": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "optimizationStepTooLarge": "No tier of this grid accepts amounts in multiples of {amount}. Turn off rounding.",
+  "@optimizationStepTooLarge": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "roundToHundred": "Round to the hundred",
+  "roundToHundredOnWithdrawal": "Every withdrawal is a multiple of 100: {example}, never {wrong}.",
+  "@roundToHundredOnWithdrawal": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      },
+      "wrong": {
+        "type": "String"
+      }
+    }
+  },
+  "roundToHundredOnTransfer": "Every transfer is a multiple of 100: {example}, never {wrong}.",
+  "@roundToHundredOnTransfer": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      },
+      "wrong": {
+        "type": "String"
+      }
+    }
+  },
+  "roundToHundredOff": "Exact amounts, to the ariary."
 }
