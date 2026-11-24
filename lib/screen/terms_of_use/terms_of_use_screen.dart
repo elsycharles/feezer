@@ -94,7 +94,9 @@ class TermsOfUseScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: Global.spacingMd),
                       Text(
-                        AppLocalizations.of(context).termsResponsibilitiesContent,
+                        AppLocalizations.of(
+                          context,
+                        ).termsResponsibilitiesContent,
                         style: ThemeUtil.bodyMedium.copyWith(
                           color: colorScheme.onSurfaceVariant,
                           height: 1.6,

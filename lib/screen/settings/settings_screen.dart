@@ -103,14 +103,18 @@ class SettingsScreen extends StatelessWidget {
                   AppLocalizations.of(context).helpAndSupport,
                   AppLocalizations.of(context).faqAndContact,
                   Icons.help_outline,
-                  onTap: () => Navigator.of(context).pushNamed(NavigationUtil.helpSupportRoute),
+                  onTap: () => Navigator.of(
+                    context,
+                  ).pushNamed(NavigationUtil.helpSupportRoute),
                 ),
                 _buildSettingTile(
                   context,
                   AppLocalizations.of(context).termsOfUse,
                   AppLocalizations.of(context).termsAndPrivacyPolicy,
                   Icons.description_outlined,
-                  onTap: () => Navigator.of(context).pushNamed(NavigationUtil.termsOfUseRoute),
+                  onTap: () => Navigator.of(
+                    context,
+                  ).pushNamed(NavigationUtil.termsOfUseRoute),
                 ),
               ]),
             ],

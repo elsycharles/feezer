@@ -19,7 +19,10 @@ class CollapsibleCard extends StatefulWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
     this.margin = const EdgeInsets.symmetric(horizontal: 16),
     this.onExpandedChanged,
-  }) : assert(title != null || titleWidget != null, 'Either title or titleWidget must be provided');
+  }) : assert(
+         title != null || titleWidget != null,
+         'Either title or titleWidget must be provided',
+       );
 
   /// Title text displayed in the header
   final String? title;
@@ -111,17 +114,18 @@ class _CollapsibleCardState extends State<CollapsibleCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          widget.titleWidget ?? Text(
-                            widget.title!,
-                            style:
-                                widget.titleStyle ??
-                                ThemeUtil.titleMedium.copyWith(
-                                  color: colorScheme.onSurface,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                            // Add textDirection for better RTL support
-                            textDirection: TextDirection.ltr,
-                          ),
+                          widget.titleWidget ??
+                              Text(
+                                widget.title!,
+                                style:
+                                    widget.titleStyle ??
+                                    ThemeUtil.titleMedium.copyWith(
+                                      color: colorScheme.onSurface,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                // Add textDirection for better RTL support
+                                textDirection: TextDirection.ltr,
+                              ),
                           if (widget.subtitle != null) ...[
                             const SizedBox(height: 6),
                             Text(

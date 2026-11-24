@@ -25,9 +25,7 @@ class ContactCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Theme.of(context).dividerColor,
-          ),
+          border: Border.all(color: Theme.of(context).dividerColor),
         ),
         child: Row(
           children: [
@@ -37,11 +35,7 @@ class ContactCard extends StatelessWidget {
                 color: ThemeUtil.primaryColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                icon,
-                color: ThemeUtil.primaryColor,
-                size: 24,
-              ),
+              child: Icon(icon, color: ThemeUtil.primaryColor, size: 24),
             ),
             const SizedBox(width: 16),
             Expanded(
