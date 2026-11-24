@@ -65,7 +65,7 @@ class AppToast extends StatefulWidget {
         break;
     }
 
-    final overlay = Overlay.of(context);
+    final overlay = Overlay.of(context, rootOverlay: true);
     late OverlayEntry overlayEntry;
 
     overlayEntry = OverlayEntry(
