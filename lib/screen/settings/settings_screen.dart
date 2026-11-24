@@ -1,209 +1,216 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
-import '../../util/theme_util.dart';
-import '../../util/preference_util.dart';
-import '../../util/navigation_util.dart';
-import '../../widget/app_bar.dart' as custom;
-import '../../widget/surface_card.dart';
-import '../../widget/interactive_surface.dart';
-import '../../provider/theme_provider.dart';
-import '../../provider/locale_provider.dart';
-import '../../provider/currency_provider.dart';
-import '../../l10n/app_localizations.dart';
-import 'widget/theme_selection_modal.dart';
-import 'widget/language_selection_modal.dart';
-import 'widget/currency_selection_modal.dart';
-import '../../widget/refreshable_screen.dart';
 
-class SettingsScreen extends StatelessWidget {
+import '../../data/app_database.dart';
+import '../../data/fee_table_service.dart';
+import '../../l10n/app_localizations.dart';
+import '../../model/locale_model.dart';
+import '../../provider/locale_provider.dart';
+import '../../provider/theme_provider.dart';
+import '../../theme/app_theme.dart';
+import '../../util/date_label.dart';
+import '../../util/navigation_util.dart';
+import '../../util/preference_util.dart';
+import '../../widget/common.dart';
+import '../providers/fee_update_flow.dart';
+
+/// Settings tab.
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
-  Future<void> _onRefresh(BuildContext context) async {
-    // For settings screen, we could refresh currency data or just provide haptic feedback
-    // For now, we'll just wait a bit to simulate refresh
-    await Future.delayed(const Duration(milliseconds: 500));
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  String? _version;
+  DateTime? _lastCheck;
+
+  @override
+  void initState() {
+    super.initState();
+    AppDatabase.changes.addListener(_loadLastCheck);
+    _loadLastCheck();
+    PackageInfo.fromPlatform()
+        .then((info) {
+          if (mounted) setState(() => _version = info.version);
+        })
+        .catchError((_) {});
   }
 
   @override
+  void dispose() {
+    AppDatabase.changes.removeListener(_loadLastCheck);
+    super.dispose();
+  }
+
+  Future<void> _loadLastCheck() async {
+    final date = await FeeTableService.lastCheck();
+    if (mounted) setState(() => _lastCheck = date);
+  }
+
+  void _push(String route) => Navigator.of(context).pushNamed(route);
+
+  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context);
+    final themeProvider = context.watch<ThemeProvider>();
+    final localeProvider = context.watch<LocaleProvider>();
+    final current = localeProvider.currentSupportedLocale;
+    final checked = _lastCheck;
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: custom.AppBar(
-        title: AppLocalizations.of(context).settings,
-        menuExcludeRoutes: [NavigationUtil.settingsRoute],
-      ),
       body: SafeArea(
-        child: RefreshableScreen(
-          onRefresh: () => _onRefresh(context),
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              _buildSection(context, AppLocalizations.of(context).general, [
-                Consumer<ThemeProvider>(
-                  builder: (context, themeProvider, child) => _buildSettingTile(
-                    context,
-                    AppLocalizations.of(context).theme,
-                    _getThemeModeDisplayName(context, themeProvider.themeMode),
-                    Icons.palette_outlined,
-                    onTap: () => ThemeSelectionModal.show(context),
-                  ),
+        bottom: false,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(
+            Space.page,
+            Space.xl,
+            Space.page,
+            Space.xxl,
+          ),
+          children: [
+            Text(l10n.settings, style: context.text.headlineMedium),
+            Space.gapXl,
+            SectionLabel(l10n.appearance),
+            SectionCard(
+              child: SizedBox(
+                width: double.infinity,
+                child: SegmentedButton<AppThemeMode>(
+                  showSelectedIcon: false,
+                  segments: [
+                    ButtonSegment(
+                      value: AppThemeMode.light,
+                      icon: const Icon(Icons.light_mode_outlined),
+                      label: Text(l10n.light),
+                    ),
+                    ButtonSegment(
+                      value: AppThemeMode.dark,
+                      icon: const Icon(Icons.dark_mode_outlined),
+                      label: Text(l10n.dark),
+                    ),
+                    ButtonSegment(
+                      value: AppThemeMode.system,
+                      icon: const Icon(Icons.brightness_auto_outlined),
+                      label: Text(l10n.system),
+                    ),
+                  ],
+                  selected: {themeProvider.themeMode},
+                  onSelectionChanged: (value) =>
+                      themeProvider.setThemeMode(value.first),
                 ),
-                Consumer<LocaleProvider>(
-                  builder: (context, localeProvider, child) =>
-                      _buildSettingTile(
-                        context,
-                        AppLocalizations.of(context).language,
-                        localeProvider.currentSupportedLocale?.nativeName ??
-                            AppLocalizations.of(context).system,
-                        Icons.language_outlined,
-                        onTap: () => LanguageSelectionModal.show(context),
-                      ),
-                ),
-                Consumer<CurrencyProvider>(
-                  builder: (context, currencyProvider, child) =>
-                      _buildSettingTile(
-                        context,
-                        AppLocalizations.of(context).currencies,
-                        currencyProvider.selectedCurrency?.displayName ??
-                            AppLocalizations.of(context).system,
-                        Icons.currency_exchange_outlined,
-                        onTap: () => _showCurrencySelection(context),
-                      ),
-                ),
-              ]),
-              const SizedBox(height: 24),
-              _buildSection(
-                context,
-                AppLocalizations.of(context).dataManagement,
-                [
-                  _buildSettingTile(
-                    context,
-                    AppLocalizations.of(context).csvManagement,
-                    AppLocalizations.of(context).importExportData,
-                    Icons.file_download_outlined,
-                    onTap: () => Navigator.of(
-                      context,
-                    ).pushNamed(NavigationUtil.csvManagementRoute),
-                  ),
-                ],
               ),
-              const SizedBox(height: 24),
-              _buildSection(context, AppLocalizations.of(context).about, [
-                _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).version,
-                  '1.0.2',
-                  Icons.info_outline,
-                  showArrow: false,
-                ),
-                _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).helpAndSupport,
-                  AppLocalizations.of(context).faqAndContact,
-                  Icons.help_outline,
-                  onTap: () => Navigator.of(
-                    context,
-                  ).pushNamed(NavigationUtil.helpSupportRoute),
-                ),
-                _buildSettingTile(
-                  context,
-                  AppLocalizations.of(context).termsOfUse,
-                  AppLocalizations.of(context).termsAndPrivacyPolicy,
-                  Icons.description_outlined,
-                  onTap: () => Navigator.of(
-                    context,
-                  ).pushNamed(NavigationUtil.termsOfUseRoute),
-                ),
-              ]),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSection(
-    BuildContext context,
-    String title,
-    List<Widget> children,
-  ) {
-    final theme = Theme.of(context);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Text(
-            title,
-            style: theme.textTheme.titleSmall?.copyWith(
-              color: theme.colorScheme.primary,
-              fontWeight: FontWeight.w600,
             ),
-          ),
+            Space.gapMd,
+            MenuGroup(
+              children: [
+                MenuRow(
+                  icon: Icons.translate_rounded,
+                  title: l10n.language,
+                  subtitle: current?.nativeName ?? l10n.system,
+                  onTap: () => _pickLanguage(context, localeProvider),
+                ),
+              ],
+            ),
+            Space.gapXl,
+            SectionLabel(l10n.feesSection),
+            MenuGroup(
+              children: [
+                MenuRow(
+                  icon: Icons.sync_rounded,
+                  title: l10n.updateFeesTitle,
+                  subtitle: checked == null
+                      ? l10n.feesNeverChecked
+                      : l10n.feesCheckedOn(context.date(checked)),
+                  onTap: () async {
+                    await runFeeUpdate(context);
+                    await _loadLastCheck();
+                  },
+                ),
+                MenuRow(
+                  icon: Icons.import_export_rounded,
+                  title: l10n.importExportData,
+                  subtitle: l10n.importExportSubtitle,
+                  onTap: () => _push(NavigationUtil.dataRoute),
+                ),
+              ],
+            ),
+            Space.gapXl,
+            SectionLabel(l10n.about),
+            MenuGroup(
+              children: [
+                MenuRow(
+                  icon: Icons.help_outline_rounded,
+                  title: l10n.helpAndSupport,
+                  subtitle: l10n.faqAndContact,
+                  onTap: () => _push(NavigationUtil.helpRoute),
+                ),
+                MenuRow(
+                  icon: Icons.description_outlined,
+                  title: l10n.termsOfUse,
+                  onTap: () => _push(NavigationUtil.termsRoute),
+                ),
+                MenuRow(
+                  icon: Icons.replay_rounded,
+                  title: l10n.replayIntroduction,
+                  onTap: () => _push(NavigationUtil.onboardingRoute),
+                ),
+              ],
+            ),
+            Space.gapXxl,
+            Column(
+              children: [
+                Image.asset('assets/images/logo.png', width: 36, height: 36),
+                Space.gapSm,
+                Text('Feezer', style: context.text.titleSmall),
+                Text(
+                  _version == null ? '' : l10n.versionLabel(_version!),
+                  style: context.text.bodySmall,
+                ),
+              ],
+            ),
+          ],
         ),
-        SurfaceCard(
-          padding: EdgeInsets.zero,
-          child: Column(children: children),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSettingTile(
-    BuildContext context,
-    String title,
-    String subtitle,
-    IconData icon, {
-    VoidCallback? onTap,
-    bool showArrow = true,
-    Color? textColor,
-  }) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return InteractiveSurface(
-      onTap: onTap,
-      borderRadius: BorderRadius.zero,
-      builder: (context, hovered, pressed) => ListTile(
-        leading: Icon(icon, color: textColor ?? colorScheme.onSurface),
-        title: Text(
-          title,
-          style: ThemeUtil.bodyLarge.copyWith(
-            color: textColor ?? colorScheme.onSurface,
-          ),
-        ),
-        subtitle: Text(
-          subtitle,
-          style: ThemeUtil.bodyMedium.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-        ),
-        trailing: showArrow
-            ? Icon(Icons.chevron_right, color: colorScheme.onSurfaceVariant)
-            : null,
-        enabled: onTap != null,
       ),
     );
   }
 
-  void _showCurrencySelection(BuildContext context) {
-    CurrencySelectionModal.show(context);
-  }
-
-  String _getThemeModeDisplayName(
+  Future<void> _pickLanguage(
     BuildContext context,
-    AppThemeMode themeMode,
-  ) {
-    switch (themeMode) {
-      case AppThemeMode.light:
-        return AppLocalizations.of(context).light;
-      case AppThemeMode.dark:
-        return AppLocalizations.of(context).dark;
-      case AppThemeMode.system:
-        return AppLocalizations.of(context).system;
-    }
+    LocaleProvider provider,
+  ) async {
+    final l10n = AppLocalizations.of(context);
+    final selected = provider.locale?.languageCode;
+    await showAppSheet<void>(
+      context,
+      title: l10n.language,
+      builder: (sheetContext) {
+        Widget option(String label, String? code, VoidCallback onTap) =>
+            MenuRow(
+              icon: selected == code
+                  ? Icons.radio_button_checked_rounded
+                  : Icons.radio_button_unchecked_rounded,
+              color: selected == code ? sheetContext.colors.primary : null,
+              title: label,
+              trailing: const SizedBox.shrink(),
+              onTap: () {
+                onTap();
+                Navigator.of(sheetContext).pop();
+              },
+            );
+        return MenuGroup(
+          children: [
+            option(l10n.system, null, provider.clearLocale),
+            for (final locale in SupportedLocale.supportedLocales)
+              option(
+                locale.nativeName,
+                locale.locale.languageCode,
+                () => provider.setLocale(locale.locale),
+              ),
+          ],
+        );
+      },
+    );
   }
 }
