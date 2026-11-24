@@ -417,5 +417,6 @@
   "free": "Gratuit",
   "failedToLoadData": "Impossible de charger les données",
   "failedToOpenLink": "Impossible d'ouvrir le lien",
-  "pressAgainToExit": "Appuyez encore pour quitter"
+  "pressAgainToExit": "Appuyez encore pour quitter",
+  "onlyOperation": "Seule l'opération « {operation} » est disponible pour {operator}."
 }

@@ -956,4 +956,9 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get pressAgainToExit => 'Tsindrio indray mba hivoaka';
+
+  @override
+  String onlyOperation(String operation, String operator) {
+    return '« $operation » ihany no misy ho an\'i $operator.';
+  }
 }

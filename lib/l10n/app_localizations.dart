@@ -1640,6 +1640,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Press again to exit'**
   String get pressAgainToExit;
+
+  /// No description provided for @onlyOperation.
+  ///
+  /// In en, this message translates to:
+  /// **'Only “{operation}” is available for {operator}.'**
+  String onlyOperation(String operation, String operator);
 }
 
 class _AppLocalizationsDelegate

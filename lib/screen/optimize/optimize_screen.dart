@@ -330,7 +330,9 @@ class OptimizeScreenState extends State<OptimizeScreen> {
                       duration: Motion.medium,
                       curve: Motion.curve,
                       alignment: Alignment.topCenter,
-                      child: operatorGrids.length > 1
+                      // Always shown, even with a single operation, so the
+                      // kind of transaction is never implicit.
+                      child: operatorGrids.isNotEmpty
                           ? Padding(
                               padding: const EdgeInsets.only(top: Space.lg),
                               child: Column(
@@ -352,6 +354,24 @@ class OptimizeScreenState extends State<OptimizeScreen> {
                                         ),
                                     ],
                                   ),
+                                  if (operatorGrids.length == 1) ...[
+                                    Space.gapSm,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: Space.xs,
+                                      ),
+                                      child: Text(
+                                        l10n.onlyOperation(
+                                          GridLabels.operation(
+                                            l10n,
+                                            operatorGrids.single.operation,
+                                          ),
+                                          operatorGrids.single.name,
+                                        ),
+                                        style: context.text.bodySmall,
+                                      ),
+                                    ),
+                                  ],
                                 ],
                               ),
                             )
