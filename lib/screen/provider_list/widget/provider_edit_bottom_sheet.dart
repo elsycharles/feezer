@@ -18,12 +18,14 @@ class ProviderEditBottomSheet extends StatefulWidget {
   });
 
   final Provider provider;
-  final Function(Provider) onSave;
+
+  /// Persists the provider; returns an error message, or `null` on success.
+  final Future<String?> Function(Provider) onSave;
 
   static Future<void> show(
     BuildContext context,
     Provider provider,
-    Function(Provider) onSave,
+    Future<String?> Function(Provider) onSave,
   ) => BottomSheet.show(
     context,
     AppLocalizations.of(context).editProvider,
@@ -90,35 +92,25 @@ class _State extends State<ProviderEditBottomSheet> {
     ),
   );
 
-  void _save() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      try {
-        final provider = Provider(
-          id: widget.provider.id,
-          name: _nameController.text.trim(),
-          description: _descController.text.trim(),
-          iconName: _selectedIcon,
-          creationDatetime: widget.provider.creationDatetime,
-        );
-
-        // Simulate async operation
-        await Future.delayed(const Duration(milliseconds: 300));
-
-        if (mounted) {
-          Navigator.of(context).pop();
-          widget.onSave(provider);
-          AppToast.success(
-            context,
-            AppLocalizations.of(context).providerUpdatedSuccessfully,
-          );
-        }
-      } finally {
-        if (mounted) {
-          setState(() => _isLoading = false);
-        }
-      }
+  Future<void> _save() async {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _isLoading = true);
+    final provider = widget.provider.copyWith(
+      name: _nameController.text.trim(),
+      description: _descController.text.trim(),
+      iconName: _selectedIcon,
+    );
+    final error = await widget.onSave(provider);
+    if (!mounted) return;
+    setState(() => _isLoading = false);
+    if (error != null) {
+      AppToast.error(context, error);
+      return;
     }
+    AppToast.success(
+      context,
+      AppLocalizations.of(context).providerUpdatedSuccessfully,
+    );
+    Navigator.of(context).pop();
   }
 }

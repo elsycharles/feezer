@@ -15,8 +15,9 @@ import 'widget/currency_header.dart';
 import 'widget/currency_tile.dart';
 import 'widget/currency_edit_bottom_sheet.dart';
 import '../../widget/selection_action_bar.dart';
-import '../../util/database_util.dart';
-import '../../util/constant_util.dart';
+import '../../data/currency_repository.dart';
+import '../../provider/currency_provider.dart';
+import 'package:provider/provider.dart' show ReadContext;
 import '../../widget/refreshable_screen.dart';
 
 /// Clean currency list screen
@@ -28,6 +29,7 @@ class CurrencyListScreen extends StatefulWidget {
 }
 
 class _State extends State<CurrencyListScreen> {
+  final _repository = CurrencyRepository();
   final _searchController = TextEditingController();
   final _currencies = <Currency>[];
   final _selectedIds = <String>{};
@@ -54,17 +56,19 @@ class _State extends State<CurrencyListScreen> {
   }
 
   Future<void> _loadCurrencies() async {
-    final db = DatabaseUtil();
-    final currencyMaps = await db.query(ConstantUtil.tableCurrencies);
-    final loadedCurrencies = currencyMaps
-        .map((map) => Currency.fromMap(map))
-        .toList();
-    if (mounted) {
+    try {
+      final currencies = await _repository.getAll();
+      if (!mounted) return;
       setState(() {
         _currencies
           ..clear()
-          ..addAll(loadedCurrencies);
+          ..addAll(currencies);
+        _selectedIds.removeWhere((id) => !currencies.any((c) => c.id == id));
       });
+    } catch (_) {
+      if (mounted) {
+        AppToast.error(context, AppLocalizations.of(context).failedToLoadData);
+      }
     }
   }
 
@@ -80,66 +84,60 @@ class _State extends State<CurrencyListScreen> {
     await _loadCurrencies();
   }
 
-  void _editCurrency(Currency currency) async {
+  Future<void> _editCurrency(Currency currency) async {
     await CurrencyEditBottomSheet.show(context, currency, _updateCurrency);
   }
 
-  void _updateCurrency(Currency updatedCurrency) async {
+  Future<String?> _updateCurrency(Currency updated) async {
+    final l10n = AppLocalizations.of(context);
+    final currencyProvider = context.read<CurrencyProvider>();
     try {
-      final db = DatabaseUtil();
-      await db.update(
-        ConstantUtil.tableCurrencies,
-        updatedCurrency.toMap(),
-        where: '${ConstantUtil.columnId} = ?',
-        whereArgs: [updatedCurrency.id],
-      );
-
-      if (mounted) {
-        await _loadCurrencies();
+      final sameCode = await _repository.getByCode(updated.code);
+      if (sameCode != null && sameCode.id != updated.id) {
+        return l10n.currencyCodeAlreadyExists;
       }
-    } catch (e) {
-      if (mounted) {
-        AppToast.error(
-          context,
-          AppLocalizations.of(context).failedToUpdateCurrency,
-        );
-      }
+      await _repository.update(updated);
+      await currencyProvider.refreshSelectedCurrency();
+      await _loadCurrencies();
+      return null;
+    } catch (_) {
+      return l10n.failedToUpdateCurrency;
     }
   }
 
-  void _deleteCurrencies() async {
-    final count = _selectedIds.length;
+  Future<void> _deleteCurrencies() async {
+    final l10n = AppLocalizations.of(context);
+    final currencyProvider = context.read<CurrencyProvider>();
+    final deletable = _currencies
+        .where((c) => _selectedIds.contains(c.id) && !c.isBase)
+        .map((c) => c.id)
+        .toSet();
+    if (deletable.length < _selectedIds.length) {
+      AppToast.warning(context, l10n.baseCurrencyCannotBeDeleted);
+    }
+    if (deletable.isEmpty) return;
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (_) => _ConfirmationDialog(
-        title: AppLocalizations.of(context).deleteCurrencies,
-        message: AppLocalizations.of(context).confirmDeleteCurrencies(count),
-        confirmText: AppLocalizations.of(context).delete,
-        cancelText: AppLocalizations.of(context).cancel,
+        title: l10n.deleteCurrencies,
+        message: l10n.confirmDeleteCurrencies(deletable.length),
+        confirmText: l10n.delete,
+        cancelText: l10n.cancel,
       ),
     );
-
-    if (confirmed == true && mounted) {
-      final db = DatabaseUtil();
-      for (final id in _selectedIds) {
-        await db.delete(
-          ConstantUtil.tableCurrencies,
-          where: '${ConstantUtil.columnId} = ?',
-          whereArgs: [id],
-        );
-      }
-
-      if (mounted) {
-        AppToast.success(
-          context,
-          AppLocalizations.of(context).currencyDeletedSuccessfully,
-        );
-        setState(() {
-          _selectedIds.clear();
-        });
-        await _loadCurrencies();
-      }
+    if (confirmed != true || !mounted) return;
+    try {
+      await _repository.delete(deletable);
+      // The selected currency may have been deleted: fall back to Ariary.
+      await currencyProvider.refreshSelectedCurrency();
+      if (!mounted) return;
+      setState(_selectedIds.clear);
+      AppToast.success(context, l10n.currencyDeletedSuccessfully);
+    } catch (_) {
+      if (mounted) AppToast.error(context, l10n.failedToSaveChanges);
     }
+    await _loadCurrencies();
   }
 
   void _startSelection(String id) {
@@ -193,96 +191,90 @@ class _State extends State<CurrencyListScreen> {
             ? _buildAddCurrencyButton(context.colorScheme)
             : null,
         body: SafeArea(
-            child: RefreshableScreen(
-              onRefresh: _loadCurrencies,
-              child: Column(
-                children: [
-                  Global.gapMd,
-                  CurrencyHeader(
-                    totalCount: _currencies.length,
-                    filteredCount: _filtered.length,
-                    selectedCount: _selectedIds.length,
-                  ),
-                  Global.gapLg,
-                  Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: SearchField(
-                          controller: _searchController,
-                          hintText: AppLocalizations.of(context).searchCurrencies,
-                        ),
-                      ),
-                      if (_selectedIds.isNotEmpty) ...[
-                        Global.gapMd,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: SelectionActionBar(
-                            selectedCount: _selectedIds.length,
-                            totalCount: _filtered.length,
-                            onSelectAll: _selectAll,
-                            onClearSelection: _clearSelection,
-                            onDelete: _deleteCurrencies,
-                            onEdit: _selectedIds.length == 1
-                                ? () => _editCurrency(
-                                    _filtered.firstWhere(
-                                      (c) => c.id == _selectedIds.first,
-                                    ),
-                                  )
-                                : null,
-                            margin: EdgeInsets.zero,
-                          ),
-                        ),
-                      ],
-                      Global.gapMd,
-                      Expanded(
-                        child: _filtered.isEmpty
-                            ? Center(
-                                child: SearchEmptyState(
-                                  icon: Icons.currency_exchange,
-                                  title: _searchController.text.isEmpty
-                                      ? AppLocalizations.of(
-                                          context,
-                                        ).noCurrenciesFound
-                                      : AppLocalizations.of(
-                                          context,
-                                        ).noCurrenciesFound,
-                                  message: _searchController.text.isEmpty
-                                      ? AppLocalizations.of(
-                                          context,
-                                        ).centralizeCurrencies
-                                      : null,
-                                ),
-                              )
-                            : ListView.builder(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                ),
-                                itemCount: _filtered.length,
-                                itemBuilder: (context, index) {
-                                  final currency = _filtered[index];
-                                  return CurrencyTile(
-                                    currency: currency,
-                                    isSelected: _selectedIds.contains(
-                                      currency.id,
-                                    ),
-                                    showSelection: _selectedIds.isNotEmpty,
-                                    onSelectionChanged: (selected) =>
-                                        _toggleSelection(currency.id, selected),
-                                    onLongPress: () =>
-                                        _startSelection(currency.id),
-                                    onTap: _selectedIds.isNotEmpty
-                                        ? () => _toggleSelection(
-                                            currency.id,
-                                            !_selectedIds.contains(currency.id),
-                                          )
-                                        : () => _editCurrency(currency),
-                                  );
-                                },
-                              ),
-                      ),
-                    ],
+          child: RefreshableScreen(
+            onRefresh: _loadCurrencies,
+            child: Column(
+              children: [
+                Global.gapMd,
+                CurrencyHeader(
+                  totalCount: _currencies.length,
+                  filteredCount: _filtered.length,
+                  selectedCount: _selectedIds.length,
+                ),
+                Global.gapLg,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SearchField(
+                    controller: _searchController,
+                    hintText: AppLocalizations.of(context).searchCurrencies,
                   ),
                 ),
-              ),
+                if (_selectedIds.isNotEmpty) ...[
+                  Global.gapMd,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SelectionActionBar(
+                      selectedCount: _selectedIds.length,
+                      totalCount: _filtered.length,
+                      onSelectAll: _selectAll,
+                      onClearSelection: _clearSelection,
+                      onDelete: _deleteCurrencies,
+                      onEdit: _selectedIds.length == 1
+                          ? () {
+                              final currency = _currencies
+                                  .where((c) => c.id == _selectedIds.first)
+                                  .firstOrNull;
+                              if (currency != null) {
+                                _editCurrency(currency);
+                              }
+                            }
+                          : null,
+                      margin: EdgeInsets.zero,
+                    ),
+                  ),
+                ],
+                Global.gapMd,
+                Expanded(
+                  child: _filtered.isEmpty
+                      ? Center(
+                          child: SearchEmptyState(
+                            icon: Icons.currency_exchange,
+                            title: AppLocalizations.of(
+                              context,
+                            ).noCurrenciesFound,
+                            message: _searchController.text.isEmpty
+                                ? AppLocalizations.of(
+                                    context,
+                                  ).centralizeCurrencies
+                                : null,
+                          ),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          itemCount: _filtered.length,
+                          itemBuilder: (context, index) {
+                            final currency = _filtered[index];
+                            return CurrencyTile(
+                              currency: currency,
+                              isSelected: _selectedIds.contains(currency.id),
+                              showSelection: _selectedIds.isNotEmpty,
+                              onSelectionChanged: (selected) =>
+                                  _toggleSelection(currency.id, selected),
+                              onLongPress: () => _startSelection(currency.id),
+                              onTap: _selectedIds.isNotEmpty
+                                  ? () => _toggleSelection(
+                                      currency.id,
+                                      !_selectedIds.contains(currency.id),
+                                    )
+                                  : () => _editCurrency(currency),
+                            );
+                          },
+                        ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

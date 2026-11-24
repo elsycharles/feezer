@@ -1,80 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../util/theme_util.dart';
-import '../../../styles/global.dart';
 
+import '../../../styles/global.dart';
+import '../../../util/theme_util.dart';
+
+/// Integer field for the minimum / maximum number of transactions
+/// (empty means 0, i.e. no constraint). Values above [max] cannot be typed.
 class TransactionInputWidget extends StatefulWidget {
   const TransactionInputWidget({
     super.key,
     required this.label,
     required this.value,
     required this.onChanged,
-    this.min = 0,
-    this.max = 999999,
+    this.max = 999,
   });
 
   final String label;
   final int value;
   final ValueChanged<int> onChanged;
-  final int min, max;
+  final int max;
 
   @override
   State<TransactionInputWidget> createState() => _TransactionInputWidgetState();
 }
 
 class _TransactionInputWidgetState extends State<TransactionInputWidget> {
-  late final TextEditingController _controller;
-  late FocusNode _focusNode;
-  bool _isUserTyping = false;
+  late final TextEditingController _controller = TextEditingController(
+    text: _format(widget.value),
+  );
+  final FocusNode _focusNode = FocusNode();
+
+  static String _format(int value) => value == 0 ? '' : '$value';
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController(
-      text: widget.value == 0 ? '' : widget.value.toString(),
-    );
-    _focusNode = FocusNode();
-    _focusNode.addListener(_onFocusChanged);
-  }
-
-  @override
-  void dispose() {
-    _focusNode.removeListener(_onFocusChanged);
-    _controller.dispose();
-    _focusNode.dispose();
-    super.dispose();
-  }
-
-  void _onFocusChanged() {
-    if (!_focusNode.hasFocus) {
-      _isUserTyping = false;
-      setState(() {
-        _controller.text = widget.value == 0 ? '' : widget.value.toString();
-      });
-    }
+    _focusNode.addListener(() => setState(() {}));
   }
 
   @override
   void didUpdateWidget(TransactionInputWidget old) {
     super.didUpdateWidget(old);
-    if (old.value != widget.value && !_isUserTyping && !_focusNode.hasFocus) {
-      _controller.text = widget.value == 0 ? '' : widget.value.toString();
+    if (!_focusNode.hasFocus && _controller.text != _format(widget.value)) {
+      _controller.text = _format(widget.value);
     }
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final focused = _focusNode.hasFocus;
     return Container(
       decoration: BoxDecoration(
-        color: _focusNode.hasFocus
-            ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.08)
-            : Theme.of(context).colorScheme.surface,
+        color: focused
+            ? colorScheme.primary.withValues(alpha: 0.08)
+            : colorScheme.surface,
         borderRadius: Global.borderMd,
         border: Border.all(
-          color: _focusNode.hasFocus
-              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)
-              : Theme.of(context).colorScheme.outline.withValues(alpha: 0.12),
-          width: _focusNode.hasFocus ? 1.5 : 0.8,
+          color: focused
+              ? colorScheme.primary.withValues(alpha: 0.3)
+              : colorScheme.outline.withValues(alpha: 0.12),
+          width: focused ? 1.5 : 0.8,
         ),
       ),
       padding: const EdgeInsets.all(16),
@@ -84,7 +77,7 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
           Text(
             widget.label,
             style: ThemeUtil.labelMedium.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              color: colorScheme.onSurfaceVariant,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -95,43 +88,29 @@ class _TransactionInputWidgetState extends State<TransactionInputWidget> {
             keyboardType: TextInputType.number,
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
-              LengthLimitingTextInputFormatter(7),
+              TextInputFormatter.withFunction(
+                (oldValue, newValue) =>
+                    (int.tryParse(newValue.text) ?? 0) > widget.max
+                    ? oldValue
+                    : newValue,
+              ),
             ],
-            style: ThemeUtil.titleMedium.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+            style: ThemeUtil.titleMedium.copyWith(color: colorScheme.onSurface),
             decoration: InputDecoration(
               border: InputBorder.none,
-              isDense: false,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 8,
                 vertical: 10,
               ),
               hintText: '0',
               hintStyle: TextStyle(
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
               ),
             ),
-            onChanged: _onTextChanged,
+            onChanged: (text) => widget.onChanged(int.tryParse(text) ?? 0),
           ),
         ],
       ),
     );
-  }
-
-  void _onTextChanged(String value) {
-    _isUserTyping = true;
-
-    if (value.isEmpty) {
-      widget.onChanged(0);
-      return;
-    }
-
-    final intValue = int.tryParse(value);
-    if (intValue != null && intValue >= widget.min && intValue <= widget.max) {
-      widget.onChanged(intValue);
-    }
   }
 }

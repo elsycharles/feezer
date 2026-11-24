@@ -1387,4 +1387,52 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get noValidIntervalForComparison =>
       'Ny vola nampidirina dia tsy ao anatin\'ny elanelam-para sara manan-kery. Tsy afaka manao famantarana raha tsy misy fanatsarana.';
+
+  @override
+  String get optimizationBudgetTooSmall =>
+      'Kely loatra ny vola hanaovana fandefasana amin\'ity mpanome ity.';
+
+  @override
+  String get optimizationConstraintsUnsatisfiable =>
+      'Tsy misy drafitra mifanaraka amin\'ny isan\'ny fandefasana voafaritra ho an\'ity vola ity.';
+
+  @override
+  String get optimizationNotProven =>
+      'Fikarohana be dia be: tsara ity drafitra ity, saingy tsy voamarina tanteraka fa izy no tsara indrindra.';
+
+  @override
+  String feeIntervalOverlaps(String range) {
+    return 'Mifanindry amin\'ny elanelana efa misy ($range) ity elanelana ity';
+  }
+
+  @override
+  String get providerNameAlreadyExists =>
+      'Efa misy mpanome mitovy anarana amin\'izany';
+
+  @override
+  String get baseCurrencyCannotBeDeleted =>
+      'Ny Ariary no vola fototra ka tsy azo fafana';
+
+  @override
+  String get baseCurrencyRateIsFixed => '1 foana ny tahan\'ny vola fototra';
+
+  @override
+  String get failedToUpdateFeeInterval =>
+      'Tsy nahomby ny fanavaozana ny elanelan-tsara';
+
+  @override
+  String get failedToDeleteFeeIntervals =>
+      'Tsy nahomby ny famafana ny elanelan-tsara';
+
+  @override
+  String get failedToCreateProvider => 'Tsy nahomby ny famoronana mpanome';
+
+  @override
+  String get failedToSaveChanges => 'Tsy nahomby ny fitehirizana ny fanovana';
+
+  @override
+  String get failedToLoadData => 'Tsy nahomby ny fakana ny angona';
+
+  @override
+  String get currencyCodeAlreadyExists => 'Efa misy vola manana io kaody io';
 }

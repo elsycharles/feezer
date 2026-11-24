@@ -54,3 +54,5 @@ app.*.map.json
 # Key files
 key.properties
 *.jks
+# Gradle reports generated inside android/
+/android/build/

@@ -9,7 +9,6 @@ import '../../styles/global.dart';
 import '../../widget/app_bar.dart' as custom;
 import '../../widget/confirmation_modal.dart';
 import '../../widget/search_empty_state.dart';
-import '../../widget/app_loading.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/collapsible_card.dart';
 import 'widget/provider_header_card.dart';
@@ -17,8 +16,10 @@ import 'widget/fee_interval_tile.dart';
 import '../../widget/selection_action_bar.dart';
 import 'widget/fee_interval_edit_bottom_sheet.dart';
 import '../../widget/app_toast.dart';
-import '../../util/database_util.dart';
+import '../../data/fee_interval_repository.dart';
+import '../../provider/currency_provider.dart';
 import '../../util/constant_util.dart';
+import 'package:provider/provider.dart' show ReadContext;
 
 /// Provider details screen with fee intervals management
 class ProviderDetailScreen extends StatefulWidget {
@@ -31,8 +32,9 @@ class ProviderDetailScreen extends StatefulWidget {
 }
 
 class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
-  late List<FeeInterval> _feeIntervals;
-  late List<FeeInterval> _filteredIntervals;
+  final _repository = FeeIntervalRepository();
+  List<FeeInterval> _feeIntervals = const [];
+  List<FeeInterval> _filteredIntervals = const [];
   final Set<String> _selectedIds = {};
   final TextEditingController _feeMinController = TextEditingController();
   final TextEditingController _feeMaxController = TextEditingController();
@@ -40,8 +42,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _feeIntervals = [];
-    _filteredIntervals = [];
     _feeMinController.addListener(_filterIntervals);
     _feeMaxController.addListener(_filterIntervals);
     _loadFeeIntervals();
@@ -55,22 +55,18 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   Future<void> _loadFeeIntervals() async {
-    final db = DatabaseUtil();
-    final feeIntervalMaps = await db.query(
-      ConstantUtil.tableFeeIntervals,
-      where: '${ConstantUtil.columnProviderId} = ?',
-      whereArgs: [int.tryParse(widget.provider.id)],
-    );
-    final loadedIntervals = feeIntervalMaps
-        .map((map) => FeeInterval.fromMap(map))
-        .toList();
-    if (mounted) {
+    try {
+      final intervals = await _repository.getByProvider(widget.provider.id);
+      if (!mounted) return;
       setState(() {
-        _feeIntervals
-          ..clear()
-          ..addAll(loadedIntervals);
-        _filteredIntervals = _feeIntervals;
+        _feeIntervals = intervals;
+        _selectedIds.removeWhere((id) => !intervals.any((i) => i.id == id));
+        _applyFilter();
       });
+    } catch (_) {
+      if (mounted) {
+        AppToast.error(context, AppLocalizations.of(context).failedToLoadData);
+      }
     }
   }
 
@@ -99,38 +95,38 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
         ),
         bottomNavigationBar: _buildAddButton(colorScheme),
         body: SafeArea(
-            child: CustomScrollView(
-              // Use BouncingScrollPhysics for better UX on all platforms
-              physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
-              ),
-              slivers: [
-                // Header section
-                SliverToBoxAdapter(
-                  child: Column(
-                    children: [
-                      _buildHeader(),
+          child: CustomScrollView(
+            // Use BouncingScrollPhysics for better UX on all platforms
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            slivers: [
+              // Header section
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    _buildHeader(),
+                    Global.gapMd,
+                    _buildSearchBar(colorScheme),
+                    if (_selectedIds.isNotEmpty) ...[
                       Global.gapMd,
-                          _buildSearchBar(colorScheme),
-                          if (_selectedIds.isNotEmpty) ...[
-                            Global.gapMd,
-                            _buildSelectionBar(),
-                          ],
-                          Global.gapMd,
-                          _buildIntervalsTitle(),
-                          Global.gapSm,
-                          // Fixed header for intervals
-                          if (_filteredIntervals.isNotEmpty)
-                            _buildIntervalsHeaderRow(),
-                        ],
-                      ),
-                    ),
-                    // Intervals list - now properly integrated in the main scroll
-                    _buildIntervalSliver(),
-                    // Bottom padding for FAB
-                    const SliverToBoxAdapter(child: SizedBox(height: 100)),
+                      _buildSelectionBar(),
+                    ],
+                    Global.gapMd,
+                    _buildIntervalsTitle(),
+                    Global.gapSm,
+                    // Fixed header for intervals
+                    if (_filteredIntervals.isNotEmpty)
+                      _buildIntervalsHeaderRow(),
                   ],
                 ),
+              ),
+              // Intervals list - now properly integrated in the main scroll
+              _buildIntervalSliver(),
+              // Bottom padding for FAB
+              const SliverToBoxAdapter(child: SizedBox(height: 100)),
+            ],
+          ),
         ),
       ),
     );
@@ -329,20 +325,23 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     ),
   );
 
-  void _addInterval() async {
-    final result = await NavigationUtil.pushTo<FeeInterval>(
+  Future<void> _addInterval() async {
+    final l10n = AppLocalizations.of(context);
+    final interval = await NavigationUtil.pushTo<FeeInterval>(
       context,
       NavigationUtil.newFeeIntervalRoute,
+      extra: widget.provider.id,
     );
-    if (result != null) {
-      final db = DatabaseUtil();
-      final insertedId = await db.insert(
-        ConstantUtil.tableFeeIntervals,
-        FeeInterval.toMap(result, widget.provider.id),
-      );
-      final savedInterval = result.copyWith(id: insertedId.toString());
-      setState(() => _feeIntervals.add(savedInterval));
+    if (interval == null || !mounted) return;
+    try {
+      await _repository.insert(interval, widget.provider.id);
+      if (mounted) {
+        AppToast.success(context, l10n.feeIntervalCreatedSuccessfully);
+      }
+    } catch (_) {
+      if (mounted) AppToast.error(context, l10n.failedToSaveChanges);
     }
+    await _loadFeeIntervals();
   }
 
   void _onIntervalTap(FeeInterval interval) {
@@ -389,7 +388,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   Widget _buildFeeMinField(ColorScheme colorScheme) => TextField(
     controller: _feeMinController,
-    keyboardType: TextInputType.number,
+    keyboardType: const TextInputType.numberWithOptions(decimal: true),
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).minFee,
       hintStyle: ThemeUtil.bodySmall.copyWith(
@@ -416,7 +415,7 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
 
   Widget _buildFeeMaxField(ColorScheme colorScheme) => TextField(
     controller: _feeMaxController,
-    keyboardType: TextInputType.number,
+    keyboardType: const TextInputType.numberWithOptions(decimal: true),
     decoration: InputDecoration(
       hintText: AppLocalizations.of(context).maxFee,
       hintStyle: ThemeUtil.bodySmall.copyWith(
@@ -441,24 +440,25 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
     style: ThemeUtil.bodySmall.copyWith(color: colorScheme.onSurface),
   );
 
-  void _filterIntervals() {
-    setState(() {
-      final feeMinText = _feeMinController.text.trim();
-      final feeMaxText = _feeMaxController.text.trim();
+  void _filterIntervals() => setState(_applyFilter);
 
-      if (feeMinText.isEmpty && feeMaxText.isEmpty) {
-        _filteredIntervals = _feeIntervals;
-        return;
-      }
-
-      final feeMin = double.tryParse(feeMinText) ?? 0.0;
-      final feeMax = double.tryParse(feeMaxText) ?? double.infinity;
-
-      _filteredIntervals = _feeIntervals.where((interval) {
-        final intervalFee = interval.fee ?? 0.0;
-        return intervalFee >= feeMin && intervalFee <= feeMax;
-      }).toList();
-    });
+  /// Filters by fee: fixed fees are compared in the display currency,
+  /// percentage fees by their percentage.
+  void _applyFilter() {
+    final min = ConstantUtil.parseLocalizedNumber(_feeMinController.text);
+    final max = ConstantUtil.parseLocalizedNumber(_feeMaxController.text);
+    if (min == null && max == null) {
+      _filteredIntervals = _feeIntervals;
+      return;
+    }
+    final currency = context.read<CurrencyProvider>();
+    _filteredIntervals = _feeIntervals.where((interval) {
+      final fee = interval.isPercentage
+          ? (interval.fee ?? 0)
+          : currency.convertFromAriary(interval.fee ?? 0);
+      return fee >= (min ?? double.negativeInfinity) &&
+          fee <= (max ?? double.infinity);
+    }).toList();
   }
 
   void _clearSearch() {
@@ -467,85 +467,62 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
   }
 
   void _editInterval(FeeInterval interval) {
-    FeeIntervalEditBottomSheet.show(context, interval, (updatedInterval) async {
+    final l10n = AppLocalizations.of(context);
+    FeeIntervalEditBottomSheet.show(context, interval, widget.provider.id, (
+      updated,
+    ) async {
       try {
-        final db = DatabaseUtil();
-        await db.update(
-          ConstantUtil.tableFeeIntervals,
-          FeeInterval.toMap(updatedInterval, widget.provider.id),
-          where: '${ConstantUtil.columnId} = ?',
-          whereArgs: [int.tryParse(updatedInterval.id ?? '')],
-        );
-        await _loadFeeIntervals(); // Reload from DB
-      } catch (e) {
+        await _repository.update(updated, widget.provider.id);
+        await _loadFeeIntervals();
         if (mounted) {
-          AppToast.error(context, 'Failed to update fee interval');
+          AppToast.success(context, l10n.feeIntervalUpdatedSuccessfully);
         }
+        return true;
+      } catch (_) {
+        if (mounted) AppToast.error(context, l10n.failedToUpdateFeeInterval);
+        return false;
       }
     });
   }
 
   void _editSelectedInterval() {
     if (_selectedIds.length == 1) {
-      final interval = _feeIntervals.firstWhere(
-        (i) => i.id == _selectedIds.first,
-      );
-      _editInterval(interval);
+      final interval = _feeIntervals
+          .where((i) => i.id == _selectedIds.first)
+          .firstOrNull;
+      if (interval != null) _editInterval(interval);
     }
   }
 
   void _onOptimizeFees() {
-    NavigationUtil.pushTo(
+    // Opens the optimizer with this provider preselected.
+    NavigationUtil.goTo(
       context,
       NavigationUtil.homeRoute,
       extra: widget.provider,
     );
-
-    // Future: Navigate to FeeOptimizationScreen with min/max transaction amounts
-    // Could pass provider data via extra: widget.provider
   }
 
-  void _deleteSelectedIntervals() async {
-    final count = _selectedIds.length;
+  Future<void> _deleteSelectedIntervals() async {
+    final l10n = AppLocalizations.of(context);
+    final ids = Set.of(_selectedIds);
     final confirmed = await ConfirmationModal.show(
       context,
-      AppLocalizations.of(context).deleteFeeIntervals,
-      AppLocalizations.of(context).confirmDeleteIntervals(count),
+      l10n.deleteFeeIntervals,
+      l10n.confirmDeleteIntervals(ids.length),
     );
-
-    if (confirmed == true && mounted) {
-      // Show loading overlay
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) => const AppLoading.overlay(),
+    if (confirmed != true || !mounted) return;
+    try {
+      await _repository.delete(ids);
+      if (!mounted) return;
+      setState(_selectedIds.clear);
+      AppToast.success(
+        context,
+        l10n.feeIntervalDeletedSuccessfully(ids.length),
       );
-
-      try {
-        final db = DatabaseUtil();
-        for (final id in _selectedIds) {
-          await db.delete(
-            ConstantUtil.tableFeeIntervals,
-            where: '${ConstantUtil.columnId} = ?',
-            whereArgs: [int.tryParse(id)],
-          );
-        }
-
-        if (mounted) {
-          Navigator.of(context).pop(); // Close loading dialog
-          AppToast.success(
-            context,
-            AppLocalizations.of(context).feeIntervalDeletedSuccessfully(count),
-          );
-          await _loadFeeIntervals(); // Reload from DB
-          _selectedIds.clear();
-        }
-      } catch (e) {
-        if (mounted) {
-          Navigator.of(context).pop(); // Close loading dialog
-          AppToast.error(context, 'Failed to delete fee intervals');
-        }
-      }
+    } catch (_) {
+      if (mounted) AppToast.error(context, l10n.failedToDeleteFeeIntervals);
     }
+    await _loadFeeIntervals();
   }
 }

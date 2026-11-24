@@ -1399,4 +1399,54 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get noValidIntervalForComparison =>
       'Le montant saisi ne se trouve dans aucun intervalle de frais valide. Impossible d\'effectuer la comparaison sans optimisation.';
+
+  @override
+  String get optimizationBudgetTooSmall =>
+      'Le montant est trop faible pour effectuer une transaction avec ce fournisseur.';
+
+  @override
+  String get optimizationConstraintsUnsatisfiable =>
+      'Aucun plan ne respecte la plage de transactions pour ce montant.';
+
+  @override
+  String get optimizationNotProven =>
+      'Recherche très vaste : ce plan est excellent, mais son optimalité n\'a pas pu être entièrement vérifiée.';
+
+  @override
+  String feeIntervalOverlaps(String range) {
+    return 'Cet intervalle chevauche un intervalle existant ($range)';
+  }
+
+  @override
+  String get providerNameAlreadyExists =>
+      'Un fournisseur avec ce nom existe déjà';
+
+  @override
+  String get baseCurrencyCannotBeDeleted =>
+      'L\'Ariary est la devise de base et ne peut pas être supprimé';
+
+  @override
+  String get baseCurrencyRateIsFixed =>
+      'Le taux de la devise de base est toujours 1';
+
+  @override
+  String get failedToUpdateFeeInterval =>
+      'Échec de la mise à jour de l\'intervalle de frais';
+
+  @override
+  String get failedToDeleteFeeIntervals =>
+      'Échec de la suppression des intervalles de frais';
+
+  @override
+  String get failedToCreateProvider => 'Échec de la création du fournisseur';
+
+  @override
+  String get failedToSaveChanges =>
+      'Échec de l\'enregistrement des modifications';
+
+  @override
+  String get failedToLoadData => 'Échec du chargement des données';
+
+  @override
+  String get currencyCodeAlreadyExists => 'Une devise avec ce code existe déjà';
 }

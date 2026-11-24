@@ -1,83 +1,112 @@
-/// Default provider data with fee intervals
+import '../model/fee_interval_model.dart';
+
+/// A provider shipped with the application (seeded on first launch).
+class DefaultProvider {
+  const DefaultProvider({
+    required this.name,
+    required this.description,
+    required this.iconName,
+    required this.tiers,
+  });
+
+  final String name;
+  final String description;
+  final String iconName;
+
+  /// `(minAmount, maxAmount, fixedFee)` in Ariary.
+  final List<(double, double, double)> tiers;
+
+  List<FeeInterval> get feeIntervals => [
+    for (final (min, max, fee) in tiers)
+      FeeInterval(minAmount: min, maxAmount: max, fee: fee),
+  ];
+}
+
+/// Default providers with their fee intervals (fixed fees, in Ariary).
 class ProviderData {
-  static const List<Map<String, dynamic>> defaultProviders = [
-    {
-      'name': 'YAS',
-      'description': 'Principal opérateur télécom de Madagascar, anciennement Telma, offrant la 5G, la fibre et la plus large couverture nationale sous le groupe Axian Telecom.',
-      'iconName': 'phone_android',
+  const ProviderData._();
+
+  static const List<DefaultProvider> defaultProviders = [
+    DefaultProvider(
+      name: 'YAS',
+      description:
+          'Principal opérateur télécom de Madagascar, anciennement Telma, offrant la 5G, la fibre et la plus large couverture nationale sous le groupe Axian Telecom.',
+      iconName: 'phone_android',
       // Updated fee intervals for YAS (values supplied by user) - 14/10/2025
-      'feeIntervals': [
-        {'minAmount': 100.0, 'maxAmount': 1000.0, 'fee': 100.0, 'feeType': 0},
-        {'minAmount': 1001.0, 'maxAmount': 5000.0, 'fee': 175.0, 'feeType': 0},
-        {'minAmount': 5001.0, 'maxAmount': 10000.0, 'fee': 350.0, 'feeType': 0},
-        {'minAmount': 10001.0, 'maxAmount': 20000.0, 'fee': 700.0, 'feeType': 0},
-        {'minAmount': 20001.0, 'maxAmount': 25000.0, 'fee': 700.0, 'feeType': 0},
-        {'minAmount': 25001.0, 'maxAmount': 50000.0, 'fee': 1500.0, 'feeType': 0},
-        {'minAmount': 50001.0, 'maxAmount': 100000.0, 'fee': 2000.0, 'feeType': 0},
-        {'minAmount': 100001.0, 'maxAmount': 250000.0, 'fee': 3500.0, 'feeType': 0},
-        {'minAmount': 250001.0, 'maxAmount': 500000.0, 'fee': 4800.0, 'feeType': 0},
-        {'minAmount': 500001.0, 'maxAmount': 1000000.0, 'fee': 9000.0, 'feeType': 0},
-        {'minAmount': 1000001.0, 'maxAmount': 2000000.0, 'fee': 15000.0, 'feeType': 0},
-        {'minAmount': 2000001.0, 'maxAmount': 3000000.0, 'fee': 20000.0, 'feeType': 0},
-        {'minAmount': 3000001.0, 'maxAmount': 4000000.0, 'fee': 25000.0, 'feeType': 0},
-        {'minAmount': 4000001.0, 'maxAmount': 5000000.0, 'fee': 30000.0, 'feeType': 0},
+      tiers: [
+        (100.0, 1000.0, 100.0),
+        (1001.0, 5000.0, 175.0),
+        (5001.0, 10000.0, 350.0),
+        (10001.0, 20000.0, 700.0),
+        (20001.0, 25000.0, 700.0),
+        (25001.0, 50000.0, 1500.0),
+        (50001.0, 100000.0, 2000.0),
+        (100001.0, 250000.0, 3500.0),
+        (250001.0, 500000.0, 4800.0),
+        (500001.0, 1000000.0, 9000.0),
+        (1000001.0, 2000000.0, 15000.0),
+        (2000001.0, 3000000.0, 20000.0),
+        (3000001.0, 4000000.0, 25000.0),
+        (4000001.0, 5000000.0, 30000.0),
       ],
-    },
-    {
-      'name': 'ORANGE',
-      'description': 'Groupe mondial de télécommunications offrant à Madagascar des services mobiles et Internet complets pour particuliers et entreprises.',
-      'iconName': 'phone_android',
-      'feeIntervals': [
-        {'minAmount': 200.0, 'maxAmount': 1000.0, 'fee': 100.0, 'feeType': 0},
-        {'minAmount': 1001.0, 'maxAmount': 5000.0, 'fee': 140.0, 'feeType': 0},
-        {'minAmount': 5001.0, 'maxAmount': 10000.0, 'fee': 275.0, 'feeType': 0},
-        {'minAmount': 10001.0, 'maxAmount': 20000.0, 'fee': 500.0, 'feeType': 0},
-        {'minAmount': 20001.0, 'maxAmount': 25000.0, 'fee': 650.0, 'feeType': 0},
-        {'minAmount': 25001.0, 'maxAmount': 50000.0, 'fee': 1300.0, 'feeType': 0},
-        {'minAmount': 50001.0, 'maxAmount': 100000.0, 'fee': 1900.0, 'feeType': 0},
-        {'minAmount': 100001.0, 'maxAmount': 250000.0, 'fee': 3400.0, 'feeType': 0},
-        {'minAmount': 250001.0, 'maxAmount': 500000.0, 'fee': 4800.0, 'feeType': 0},
-        {'minAmount': 500001.0, 'maxAmount': 1000000.0, 'fee': 8700.0, 'feeType': 0},
-        {'minAmount': 1000001.0, 'maxAmount': 2000000.0, 'fee': 14700.0, 'feeType': 0},
-        {'minAmount': 2000001.0, 'maxAmount': 3000000.0, 'fee': 19600.0, 'feeType': 0},
-        {'minAmount': 3000001.0, 'maxAmount': 4000000.0, 'fee': 24500.0, 'feeType': 0},
-        {'minAmount': 4000001.0, 'maxAmount': 5000000.0, 'fee': 29400.0, 'feeType': 0},
-        {'minAmount': 5000001.0, 'maxAmount': 6000000.0, 'fee': 34300.0, 'feeType': 0},
-        {'minAmount': 6000001.0, 'maxAmount': 7000000.0, 'fee': 39200.0, 'feeType': 0},
-        {'minAmount': 7000001.0, 'maxAmount': 8000000.0, 'fee': 44100.0, 'feeType': 0},
-        {'minAmount': 8000001.0, 'maxAmount': 9000000.0, 'fee': 49000.0, 'feeType': 0},
-        {'minAmount': 9000001.0, 'maxAmount': 10000000.0, 'fee': 53900.0, 'feeType': 0},
+    ),
+    DefaultProvider(
+      name: 'ORANGE',
+      description:
+          'Groupe mondial de télécommunications offrant à Madagascar des services mobiles et Internet complets pour particuliers et entreprises.',
+      iconName: 'phone_android',
+      tiers: [
+        (200.0, 1000.0, 100.0),
+        (1001.0, 5000.0, 140.0),
+        (5001.0, 10000.0, 275.0),
+        (10001.0, 20000.0, 500.0),
+        (20001.0, 25000.0, 650.0),
+        (25001.0, 50000.0, 1300.0),
+        (50001.0, 100000.0, 1900.0),
+        (100001.0, 250000.0, 3400.0),
+        (250001.0, 500000.0, 4800.0),
+        (500001.0, 1000000.0, 8700.0),
+        (1000001.0, 2000000.0, 14700.0),
+        (2000001.0, 3000000.0, 19600.0),
+        (3000001.0, 4000000.0, 24500.0),
+        (4000001.0, 5000000.0, 29400.0),
+        (5000001.0, 6000000.0, 34300.0),
+        (6000001.0, 7000000.0, 39200.0),
+        (7000001.0, 8000000.0, 44100.0),
+        (8000001.0, 9000000.0, 49000.0),
+        (9000001.0, 10000000.0, 53900.0),
       ],
-    },
-    {
-      'name': 'AIRTEL',
-      'description': 'Opérateur majeur en Afrique, misant sur la 4G et les services financiers mobiles, présent activement à Madagascar.',
-      'iconName': 'phone_android',
-      'feeIntervals': [
-        {'minAmount': 300.0, 'maxAmount': 1000.0, 'fee': 100.0, 'feeType': 0},
-        {'minAmount': 1001.0, 'maxAmount': 5000.0, 'fee': 140.0, 'feeType': 0},
-        {'minAmount': 5001.0, 'maxAmount': 10000.0, 'fee': 275.0, 'feeType': 0},
-        {'minAmount': 10001.0, 'maxAmount': 20000.0, 'fee': 550.0, 'feeType': 0},
-        {'minAmount': 20001.0, 'maxAmount': 25000.0, 'fee': 650.0, 'feeType': 0},
-        {'minAmount': 25001.0, 'maxAmount': 30000.0, 'fee': 1300.0, 'feeType': 0},
-        {'minAmount': 30001.0, 'maxAmount': 35000.0, 'fee': 1300.0, 'feeType': 0},
-        {'minAmount': 35001.0, 'maxAmount': 40000.0, 'fee': 1300.0, 'feeType': 0},
-        {'minAmount': 40001.0, 'maxAmount': 50000.0, 'fee': 1300.0, 'feeType': 0},
-        {'minAmount': 50001.0, 'maxAmount': 60000.0, 'fee': 1900.0, 'feeType': 0},
-        {'minAmount': 60001.0, 'maxAmount': 100000.0, 'fee': 1900.0, 'feeType': 0},
-        {'minAmount': 100001.0, 'maxAmount': 250000.0, 'fee': 3400.0, 'feeType': 0},
-        {'minAmount': 250001.0, 'maxAmount': 500000.0, 'fee': 4800.0, 'feeType': 0},
-        {'minAmount': 500001.0, 'maxAmount': 1000000.0, 'fee': 8800.0, 'feeType': 0},
-        {'minAmount': 1000001.0, 'maxAmount': 2000000.0, 'fee': 14700.0, 'feeType': 0},
-        {'minAmount': 2000001.0, 'maxAmount': 3000000.0, 'fee': 19600.0, 'feeType': 0},
-        {'minAmount': 3000001.0, 'maxAmount': 4000000.0, 'fee': 24500.0, 'feeType': 0},
-        {'minAmount': 4000001.0, 'maxAmount': 5000000.0, 'fee': 29400.0, 'feeType': 0},
-        {'minAmount': 5000001.0, 'maxAmount': 6000000.0, 'fee': 34300.0, 'feeType': 0},
-        {'minAmount': 6000001.0, 'maxAmount': 7000000.0, 'fee': 39200.0, 'feeType': 0},
-        {'minAmount': 7000001.0, 'maxAmount': 8000000.0, 'fee': 44100.0, 'feeType': 0},
-        {'minAmount': 8000001.0, 'maxAmount': 9000000.0, 'fee': 49000.0, 'feeType': 0},
-        {'minAmount': 9000001.0, 'maxAmount': 10000000.0, 'fee': 53900.0, 'feeType': 0},
+    ),
+    DefaultProvider(
+      name: 'AIRTEL',
+      description:
+          'Opérateur majeur en Afrique, misant sur la 4G et les services financiers mobiles, présent activement à Madagascar.',
+      iconName: 'phone_android',
+      tiers: [
+        (300.0, 1000.0, 100.0),
+        (1001.0, 5000.0, 140.0),
+        (5001.0, 10000.0, 275.0),
+        (10001.0, 20000.0, 550.0),
+        (20001.0, 25000.0, 650.0),
+        (25001.0, 30000.0, 1300.0),
+        (30001.0, 35000.0, 1300.0),
+        (35001.0, 40000.0, 1300.0),
+        (40001.0, 50000.0, 1300.0),
+        (50001.0, 60000.0, 1900.0),
+        (60001.0, 100000.0, 1900.0),
+        (100001.0, 250000.0, 3400.0),
+        (250001.0, 500000.0, 4800.0),
+        (500001.0, 1000000.0, 8800.0),
+        (1000001.0, 2000000.0, 14700.0),
+        (2000001.0, 3000000.0, 19600.0),
+        (3000001.0, 4000000.0, 24500.0),
+        (4000001.0, 5000000.0, 29400.0),
+        (5000001.0, 6000000.0, 34300.0),
+        (6000001.0, 7000000.0, 39200.0),
+        (7000001.0, 8000000.0, 44100.0),
+        (8000001.0, 9000000.0, 49000.0),
+        (9000001.0, 10000000.0, 53900.0),
       ],
-    },
+    ),
   ];
 }

@@ -1,4 +1,8 @@
-/// Clean Currency model with validation and utility methods
+import '../data/app_database.dart';
+import '../util/constant_util.dart';
+
+/// Display currency. All amounts are stored in the base currency (Ariary);
+/// [rate] is the number of Ariary for one unit of this currency.
 class Currency {
   Currency({
     required this.id,
@@ -9,14 +13,18 @@ class Currency {
     DateTime? creationDatetime,
   }) : creationDatetime = creationDatetime ?? DateTime.now();
 
+  /// Code of the base currency in which every amount is stored.
+  static const String baseCode = 'MGA';
+
   final String id;
-  final String code; // ISO code like 'EUR', 'USD', 'MGA'
-  final String name; // Full name like 'Euro', 'US Dollar', 'Ariary'
-  final String symbol; // Symbol like '€', '$', 'Ar'
-  final double rate; // Exchange rate relative to base currency
+  final String code;
+  final String name;
+  final String symbol;
+  final double rate;
   final DateTime creationDatetime;
 
-  /// Checks if currency data is valid
+  bool get isBase => code == baseCode;
+
   bool get isValid =>
       id.trim().isNotEmpty &&
       code.trim().isNotEmpty &&
@@ -24,28 +32,8 @@ class Currency {
       symbol.trim().isNotEmpty &&
       rate > 0;
 
-  /// Gets display name with symbol
   String get displayName => '$name ($symbol)';
 
-  /// Gets short display name
-  String get shortDisplayName => '$code $symbol';
-
-  /// Checks if currency was created recently (within 7 days)
-  bool get isRecent => DateTime.now().difference(creationDatetime).inDays <= 7;
-
-  /// Gets formatted creation date
-  String get formattedCreationDate {
-    final now = DateTime.now();
-    final difference = now.difference(creationDatetime);
-
-    if (difference.inDays == 0) return 'Today';
-    if (difference.inDays == 1) return 'Yesterday';
-    if (difference.inDays < 7) return '${difference.inDays} days ago';
-
-    return '${creationDatetime.day}/${creationDatetime.month}/${creationDatetime.year}';
-  }
-
-  /// Creates a copy with updated values
   Currency copyWith({
     String? id,
     String? code,
@@ -53,51 +41,43 @@ class Currency {
     String? symbol,
     double? rate,
     DateTime? creationDatetime,
-  }) {
-    return Currency(
-      id: id ?? this.id,
-      code: code ?? this.code,
-      name: name ?? this.name,
-      symbol: symbol ?? this.symbol,
-      rate: rate ?? this.rate,
-      creationDatetime: creationDatetime ?? this.creationDatetime,
-    );
-  }
+  }) => Currency(
+    id: id ?? this.id,
+    code: code ?? this.code,
+    name: name ?? this.name,
+    symbol: symbol ?? this.symbol,
+    rate: rate ?? this.rate,
+    creationDatetime: creationDatetime ?? this.creationDatetime,
+  );
 
-  /// Creates currency from database map
-  factory Currency.fromMap(Map<String, dynamic> map) {
-    return Currency(
-      id: map['id'].toString(),
-      code: map['code'] as String,
-      name: map['name'] as String,
-      symbol: map['symbol'] as String,
-      rate: (map['rate'] as num?)?.toDouble() ?? 1.0,
-      creationDatetime: DateTime.parse(map['creation_datetime'] as String),
-    );
-  }
+  factory Currency.fromMap(Map<String, dynamic> map) => Currency(
+    id: map[Db.id].toString(),
+    code: (map[Db.code] as String?) ?? '',
+    name: (map[Db.name] as String?) ?? '',
+    symbol: (map[Db.symbol] as String?) ?? '',
+    rate: (map[Db.rate] as num?)?.toDouble() ?? 1.0,
+    // Older versions stored an ISO string in this INTEGER column.
+    creationDatetime: ConstantUtil.parseDateTime(map[Db.creationDatetime]),
+  );
 
-  /// Converts currency to database map
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'code': code,
-      'name': name,
-      'symbol': symbol,
-      'rate': rate,
-      'creation_datetime': creationDatetime.toIso8601String(),
-    };
-  }
+  Map<String, dynamic> toMap() => {
+    Db.id: id,
+    Db.code: code,
+    Db.name: name,
+    Db.symbol: symbol,
+    Db.rate: rate,
+    Db.creationDatetime: creationDatetime.millisecondsSinceEpoch,
+  };
 
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is Currency && other.id == id;
-  }
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Currency && other.id == id && other.rate == rate;
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode => Object.hash(id, rate);
 
   @override
   String toString() =>
-      'Currency(id: $id, code: $code, name: $name, symbol: $symbol, rate: $rate)';
+      'Currency(id: $id, code: $code, symbol: $symbol, rate: $rate)';
 }

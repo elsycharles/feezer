@@ -2462,6 +2462,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.'**
   String get noValidIntervalForComparison;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'The amount is too small for any transaction with this provider.'**
+  String get optimizationBudgetTooSmall;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'No plan satisfies the transaction range for this amount.'**
+  String get optimizationConstraintsUnsatisfiable;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Very large search: this plan is excellent, but its optimality could not be fully verified.'**
+  String get optimizationNotProven;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'This interval overlaps an existing interval ({range})'**
+  String feeIntervalOverlaps(String range);
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'A provider with this name already exists'**
+  String get providerNameAlreadyExists;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Ariary is the base currency and cannot be deleted'**
+  String get baseCurrencyCannotBeDeleted;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'The rate of the base currency is always 1'**
+  String get baseCurrencyRateIsFixed;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to update fee interval'**
+  String get failedToUpdateFeeInterval;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete fee intervals'**
+  String get failedToDeleteFeeIntervals;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to create provider'**
+  String get failedToCreateProvider;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save changes'**
+  String get failedToSaveChanges;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load data'**
+  String get failedToLoadData;
+
+  /// Optimizer / data validation message
+  ///
+  /// In en, this message translates to:
+  /// **'A currency with this code already exists'**
+  String get currencyCodeAlreadyExists;
 }
 
 class _AppLocalizationsDelegate

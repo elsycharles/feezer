@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart' hide BottomSheet;
-import 'package:flutter/services.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../model/currency_model.dart';
@@ -8,7 +7,8 @@ import '../../../widget/bottom_sheet.dart';
 import '../../../widget/form_field.dart' as custom_form;
 import '../../../widget/loading_button.dart';
 import '../../../widget/app_toast.dart';
-import '../../../screen/optimize_fee/widget/amount_input_widget.dart'; // For ThousandsSeparatorInputFormatter
+import '../../../util/constant_util.dart';
+import '../../../widget/amount_input_formatter.dart';
 
 /// Clean currency editor
 class CurrencyEditBottomSheet extends StatefulWidget {
@@ -19,12 +19,14 @@ class CurrencyEditBottomSheet extends StatefulWidget {
   });
 
   final Currency currency;
-  final Function(Currency) onSave;
+
+  /// Persists the currency; returns an error message, or `null` on success.
+  final Future<String?> Function(Currency) onSave;
 
   static Future<void> show(
     BuildContext context,
     Currency currency,
-    Function(Currency) onSave,
+    Future<String?> Function(Currency) onSave,
   ) => BottomSheet.show(
     context,
     AppLocalizations.of(context).editCurrency,
@@ -48,7 +50,7 @@ class _State extends State<CurrencyEditBottomSheet> {
     text: widget.currency.symbol,
   );
   late final _rateController = TextEditingController(
-    text: _formatRate(widget.currency.rate),
+    text: ConstantUtil.formatAmountInput(widget.currency.rate),
   );
 
   @override
@@ -58,47 +60,6 @@ class _State extends State<CurrencyEditBottomSheet> {
     _symbolController.dispose();
     _rateController.dispose();
     super.dispose();
-  }
-
-  String _formatRate(double value) {
-    String valueStr;
-    
-    if (value == value.toInt()) {
-      valueStr = value.toInt().toString();
-    } else {
-      String tempStr = value.toString();
-      if (tempStr.contains('.')) {
-        List<String> parts = tempStr.split('.');
-        String decimalPart = parts[1].replaceAll(RegExp(r'0+$'), '');
-        if (decimalPart.isEmpty) {
-          valueStr = parts[0];
-        } else {
-          valueStr = '${parts[0]}.$decimalPart';
-        }
-      } else {
-        valueStr = tempStr;
-      }
-    }
-    
-    List<String> parts = valueStr.split('.');
-    String integerPart = parts[0];
-    String decimalPart = parts.length > 1 ? parts[1] : '';
-    
-    String formatted = '';
-    int count = 0;
-    for (int i = integerPart.length - 1; i >= 0; i--) {
-      if (count > 0 && count % 3 == 0) {
-        formatted = ' $formatted';
-      }
-      formatted = integerPart[i] + formatted;
-      count++;
-    }
-    
-    if (decimalPart.isNotEmpty) {
-      formatted += '.$decimalPart';
-    }
-    
-    return formatted;
   }
 
   @override
@@ -118,7 +79,7 @@ class _State extends State<CurrencyEditBottomSheet> {
             if (value!.length != 3) {
               return AppLocalizations.of(context).codeMustBe3Characters;
             }
-            if (!RegExp(r'^[A-Z]{3}$').hasMatch(value)) {
+            if (!RegExp(r'^[A-Z]{3}$').hasMatch(value.toUpperCase())) {
               return AppLocalizations.of(
                 context,
               ).currencyCodeMustContainOnlyUppercase;
@@ -153,28 +114,34 @@ class _State extends State<CurrencyEditBottomSheet> {
           },
         ),
         Global.gapLg,
-        custom_form.FormField(
-          label: AppLocalizations.of(context).exchangeRate,
-          controller: _rateController,
-          icon: Icons.trending_up,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'[\d\s\.]')),
-            ThousandsSeparatorInputFormatter(max: 99999999999.0),
-          ],
-          required: true,
-          validator: (value) {
-            if (value?.isEmpty ?? true) {
-              return AppLocalizations.of(context).thisFieldIsRequired;
-            }
-            final cleanValue = value!.replaceAll(' ', '');
-            final rate = double.tryParse(cleanValue);
-            if (rate == null || rate <= 0) {
-              return AppLocalizations.of(context).pleaseEnterValidPositiveRate;
-            }
-            return null;
-          },
-        ),
+        if (widget.currency.isBase)
+          Text(
+            AppLocalizations.of(context).baseCurrencyRateIsFixed,
+            style: Theme.of(context).textTheme.bodySmall,
+          )
+        else
+          custom_form.FormField(
+            label: AppLocalizations.of(context).exchangeRate,
+            controller: _rateController,
+            icon: Icons.trending_up,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              AmountInputFormatter(max: ConstantUtil.maxInputAmount),
+            ],
+            required: true,
+            validator: (value) {
+              if (value?.trim().isEmpty ?? true) {
+                return AppLocalizations.of(context).thisFieldIsRequired;
+              }
+              final rate = ConstantUtil.parseLocalizedNumber(value!);
+              if (rate == null || rate <= 0) {
+                return AppLocalizations.of(
+                  context,
+                ).pleaseEnterValidPositiveRate;
+              }
+              return null;
+            },
+          ),
         Global.gapXl,
         LoadingButton(
           text: AppLocalizations.of(context).saveChanges,
@@ -185,35 +152,30 @@ class _State extends State<CurrencyEditBottomSheet> {
     ),
   );
 
-  void _save() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isLoading = true);
-
-      try {
-        final currency = Currency(
-          id: widget.currency.id,
-          code: _codeController.text.trim().toUpperCase(),
-          name: _nameController.text.trim(),
-          symbol: _symbolController.text.trim(),
-          rate: double.parse(_rateController.text.replaceAll(' ', '')),
-        );
-
-        // Simulate async operation
-        await Future.delayed(const Duration(milliseconds: 300));
-
-        if (mounted) {
-          Navigator.of(context).pop();
-          widget.onSave(currency);
-          AppToast.success(
-            context,
-            AppLocalizations.of(context).currencyUpdatedSuccessfully,
-          );
-        }
-      } finally {
-        if (mounted) {
-          setState(() => _isLoading = false);
-        }
-      }
+  Future<void> _save() async {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _isLoading = true);
+    final base = widget.currency.isBase;
+    final currency = widget.currency.copyWith(
+      // The base currency keeps its code and a rate of 1.
+      code: base
+          ? widget.currency.code
+          : _codeController.text.trim().toUpperCase(),
+      name: _nameController.text.trim(),
+      symbol: _symbolController.text.trim(),
+      rate: base ? 1 : ConstantUtil.parseLocalizedNumber(_rateController.text),
+    );
+    final error = await widget.onSave(currency);
+    if (!mounted) return;
+    setState(() => _isLoading = false);
+    if (error != null) {
+      AppToast.error(context, error);
+      return;
     }
+    AppToast.success(
+      context,
+      AppLocalizations.of(context).currencyUpdatedSuccessfully,
+    );
+    Navigator.of(context).pop();
   }
 }

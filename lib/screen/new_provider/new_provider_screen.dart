@@ -10,15 +10,14 @@ import '../../widget/form_field.dart' as custom_form;
 import '../../widget/icon_selector_field.dart';
 import '../../widget/loading_button.dart';
 import '../../widget/app_toast.dart';
-import '../../util/database_util.dart';
-import '../../util/constant_util.dart';
+import '../../data/provider_repository.dart';
 import '../../util/navigation_util.dart';
 
 /// Clean screen for creating new providers
+/// Creates a provider, then replaces itself with the provider detail screen
+/// (the created provider is returned to the caller).
 class NewProviderScreen extends StatefulWidget {
-  const NewProviderScreen({super.key, this.onProviderAdded});
-
-  final Function(Provider)? onProviderAdded;
+  const NewProviderScreen({super.key});
 
   @override
   State<NewProviderScreen> createState() => _State();
@@ -30,22 +29,6 @@ class _State extends State<NewProviderScreen> {
   late final _descriptionController = TextEditingController();
   String _selectedIcon = 'business';
   bool _isCreating = false;
-
-  @override
-  void initState() {
-    super.initState();
-    // Reset loading state in case screen is reused
-    _isCreating = false;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Reset loading state when screen becomes visible again
-    if (mounted && _isCreating) {
-      setState(() => _isCreating = false);
-    }
-  }
 
   @override
   void dispose() {
@@ -157,7 +140,7 @@ class _State extends State<NewProviderScreen> {
           flex: 2,
           child: LoadingButton(
             text: AppLocalizations.of(context).createProvider,
-            onPressed: _create,
+            onPressed: _isCreating ? null : _create,
             isLoading: _isCreating,
           ),
         ),
@@ -165,43 +148,39 @@ class _State extends State<NewProviderScreen> {
     ),
   );
 
-  void _create() async {
-    if (_formKey.currentState!.validate()) {
-      setState(() => _isCreating = true);
-      try {
-        final now = DateTime.now();
-        final provider = Provider(
-          id: now.microsecondsSinceEpoch.toString(),
-          name: _nameController.text.trim(),
-          description: _descriptionController.text.trim(),
-          iconName: _selectedIcon,
-          creationDatetime: now,
-        );
-        final db = DatabaseUtil();
-        await db.insert(ConstantUtil.tableProviders, Provider.toMap(provider));
-        widget.onProviderAdded?.call(provider);
-
-        // Ensure loading is visible for at least 800ms for better UX
-        await Future.delayed(const Duration(milliseconds: 800));
-
-        if (mounted) {
-          AppToast.success(
-            context,
-            AppLocalizations.of(context).providerCreatedSuccessfully,
-          );
-          // Keep loading visible during navigation transition
-          await NavigationUtil.pushTo(
-            context,
-            NavigationUtil.providerDetailRoute,
-            extra: provider,
-          );
-        }
-      } catch (e) {
-        // Stop loading on error
+  Future<void> _create() async {
+    if (!_formKey.currentState!.validate()) return;
+    final l10n = AppLocalizations.of(context);
+    setState(() => _isCreating = true);
+    try {
+      final repository = ProviderRepository();
+      final name = _nameController.text.trim();
+      if (await repository.findByName(name) != null) {
         if (mounted) {
           setState(() => _isCreating = false);
-          AppToast.error(context, 'Failed to create provider: $e');
+          AppToast.error(context, l10n.providerNameAlreadyExists);
         }
+        return;
+      }
+      final provider = await repository.insert(
+        Provider(
+          id: '',
+          name: name,
+          description: _descriptionController.text.trim(),
+          iconName: _selectedIcon,
+        ),
+      );
+      if (!mounted) return;
+      AppToast.success(context, l10n.providerCreatedSuccessfully);
+      await Navigator.of(context).pushReplacementNamed(
+        NavigationUtil.providerDetailRoute,
+        arguments: provider,
+        result: provider,
+      );
+    } catch (_) {
+      if (mounted) {
+        setState(() => _isCreating = false);
+        AppToast.error(context, l10n.failedToCreateProvider);
       }
     }
   }

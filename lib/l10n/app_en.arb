@@ -82,7 +82,7 @@
   },
   "createInterval": "Create Interval",
   "@createInterval": {
-    "description": "Create interval button text"
+    "description": "Create interval button"
   },
   "optimize": "Optimize",
   "@optimize": {
@@ -176,13 +176,13 @@
   "@thisFeatureWillBeAvailableSoon": {
     "description": "Coming soon feature message"
   },
-  "feeIntervals": "Fee Intervals",
+  "feeIntervals": "Fee intervals",
   "@feeIntervals": {
-    "description": "Fee intervals title"
+    "description": "Fee intervals section title"
   },
   "newFeeInterval": "New Fee Interval",
   "@newFeeInterval": {
-    "description": "New fee interval title"
+    "description": "New fee interval screen title"
   },
   "minAmount": "Min Amount",
   "@minAmount": {
@@ -214,7 +214,7 @@
   },
   "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
   "@maxAmountMustBeGreaterThanMinAmount": {
-    "description": "Validation message for amount range"
+    "description": "Validation error for amount range"
   },
   "optimizationResults": "Optimization Results",
   "@optimizationResults": {
@@ -252,9 +252,9 @@
   "@netAmount": {
     "description": "Net amount after fees metric title"
   },
-  "totalFees": "Total Fees",
+  "totalFees": "Total fees",
   "@totalFees": {
-    "description": "Total fees metric title"
+    "description": "Label for total fees in comparison"
   },
   "efficiency": "Efficiency",
   "@efficiency": {
@@ -499,10 +499,6 @@
   "@enterTransactionAmountToOptimize": {
     "description": "Instructions for amount input"
   },
-  "amount": "Amount",
-  "@amount": {
-    "description": "Amount label"
-  },
   "transactionRange": "Transaction Range",
   "@transactionRange": {
     "description": "Transaction range section title"
@@ -510,14 +506,6 @@
   "defineMinMaxTransactions": "Define the minimum and maximum number of transactions",
   "@defineMinMaxTransactions": {
     "description": "Instructions for transaction range"
-  },
-  "minTransactions": "Min Transactions",
-  "@minTransactions": {
-    "description": "Minimum transactions label"
-  },
-  "maxTransactions": "Max Transactions",
-  "@maxTransactions": {
-    "description": "Maximum transactions label"
   },
   "readyToOptimize": "Ready to Optimize",
   "@readyToOptimize": {
@@ -527,22 +515,6 @@
   "@clickOptimizeButtonToAnalyze": {
     "description": "Instructions for optimization"
   },
-  "optimizationResults": "Optimization Results",
-  "@optimizationResults": {
-    "description": "Optimization results title"
-  },
-  "interval": "Interval",
-  "@interval": {
-    "description": "Interval column header"
-  },
-  "fee": "Fee",
-  "@fee": {
-    "description": "Fee column header"
-  },
-  "count": "Count",
-  "@count": {
-    "description": "Count column header"
-  },
   "providerDetails": "Provider details",
   "@providerDetails": {
     "description": "Provider details screen title"
@@ -550,10 +522,6 @@
   "noFeeIntervalsFound": "No fee intervals found",
   "@noFeeIntervalsFound": {
     "description": "Message when no fee intervals exist"
-  },
-  "feeIntervals": "Fee intervals",
-  "@feeIntervals": {
-    "description": "Fee intervals section title"
   },
   "feeInterval": "Fee interval",
   "@feeInterval": {
@@ -579,10 +547,6 @@
   "@deleteFeeIntervals": {
     "description": "Delete fee intervals title"
   },
-  "newFeeInterval": "New Fee Interval",
-  "@newFeeInterval": {
-    "description": "New fee interval screen title"
-  },
   "createNewFeeInterval": "Create New Fee Interval",
   "@createNewFeeInterval": {
     "description": "Create new fee interval header"
@@ -602,10 +566,6 @@
   "enterFeeAmount": "Enter fee amount",
   "@enterFeeAmount": {
     "description": "Fee amount input placeholder"
-  },
-  "createInterval": "Create Interval",
-  "@createInterval": {
-    "description": "Create interval button"
   },
   "maxAmountMustBeGreater": "Max amount must be greater than min amount",
   "@maxAmountMustBeGreater": {
@@ -694,34 +654,22 @@
     "description": "Validation error for minimum length",
     "placeholders": {
       "count": {
-        "type": "num",
-        "format": "compact"
+        "type": "int",
+        "example": "3"
       }
     }
   },
   "enterValidNumber": "Enter a valid number",
   "@enterValidNumber": {
-    "description": "Validation error for number field"
-  },
-  "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
-  "@maxAmountMustBeGreaterThanMinAmount": {
-    "description": "Validation error for amount range"
+    "description": "Validation error for numeric fields"
   },
   "pleaseEnterFeeAmount": "Please enter fee amount",
   "@pleaseEnterFeeAmount": {
     "description": "Validation error for fee amount field"
   },
-  "selectAll": "Select all",
-  "@selectAll": {
-    "description": "Select all tooltip"
-  },
   "details": "Details",
   "@details": {
     "description": "Details tooltip"
-  },
-  "total": "Total",
-  "@total": {
-    "description": "Total column header"
   },
   "minimumAmount": "Minimum amount",
   "@minimumAmount": {
@@ -742,10 +690,6 @@
   "mobileMoney": "Mobile money",
   "@mobileMoney": {
     "description": "Mobile money description"
-  },
-  "mobileFinancialServices": "Mobile financial services",
-  "@mobileFinancialServices": {
-    "description": "Mobile financial services description"
   },
   "selected": "selected",
   "@selected": {
@@ -826,20 +770,6 @@
   "mustBeGreaterThanZero": "Must be greater than 0",
   "@mustBeGreaterThanZero": {
     "description": "Validation error for positive numbers"
-  },
-  "enterValidNumber": "Enter a valid number",
-  "@enterValidNumber": {
-    "description": "Validation error for numeric fields"
-  },
-  "mustBeAtLeastNCharacters": "Must be at least {count} characters",
-  "@mustBeAtLeastNCharacters": {
-    "description": "Validation error for minimum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
   },
   "mustBeLessThanNCharacters": "Must be less than {count} characters",
   "@mustBeLessThanNCharacters": {
@@ -1111,17 +1041,29 @@
   "@importSuccessful": {
     "description": "Import success message title"
   },
-  "importFailed": "Import Failed",
+  "importFailed": "Import failed: {error}",
   "@importFailed": {
-    "description": "Import failure message title"
+    "description": "Generic import failure message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Invalid CSV format"
+      }
+    }
   },
-  "exportSuccessful": "Export Successful",
+  "exportSuccessful": "Export successful",
   "@exportSuccessful": {
-    "description": "Export success message"
+    "description": "Success message when export completes successfully"
   },
-  "exportFailed": "Export Failed",
+  "exportFailed": "Export failed: {error}",
   "@exportFailed": {
-    "description": "Export failure message"
+    "description": "Generic export failure message",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "File write error"
+      }
+    }
   },
   "templateDownloaded": "Template Downloaded",
   "@templateDownloaded": {
@@ -1129,7 +1071,7 @@
   },
   "failedToDownloadTemplate": "Failed to download template",
   "@failedToDownloadTemplate": {
-    "description": "Template download failure message"
+    "description": "Error message when template download fails"
   },
   "failedToReadFile": "Failed to read file",
   "@failedToReadFile": {
@@ -1167,7 +1109,7 @@
   },
   "dataManagement": "Data Management",
   "@dataManagement": {
-    "description": "Data management section title"
+    "description": "Data management guide title"
   },
   "backup": "Backup",
   "@backup": {
@@ -1205,10 +1147,6 @@
   "@csvManagement": {
     "description": "Title for CSV management screen"
   },
-  "dataManagement": "Data Management",
-  "@dataManagement": {
-    "description": "Data management section title"
-  },
   "previewTemplate": "Preview Template",
   "@previewTemplate": {
     "description": "Preview template button text"
@@ -1229,16 +1167,12 @@
   "@close": {
     "description": "Close button text"
   },
-  "dataManagement": "Data Management",
-  "@dataManagement": {
-    "description": "Data management section title"
-  },
   "importDataDescription": "Import providers and fee intervals from CSV file. The system will automatically detect the data type based on columns.",
   "@importDataDescription": {
     "description": "Description for import data action"
   },
   "exportDataDescription": "Export all providers and their fee intervals to a combined CSV file.",
-    "@exportDataDescription": {
+  "@exportDataDescription": {
     "description": "Description for export data action"
   },
   "csvContentCannotBeEmpty": "CSV content cannot be empty",
@@ -1268,10 +1202,6 @@
   "failedToSaveFile": "Failed to save file",
   "@failedToSaveFile": {
     "description": "Error message when file save fails"
-  },
-  "failedToDownloadTemplate": "Failed to download template",
-  "@failedToDownloadTemplate": {
-    "description": "Error message when template download fails"
   },
   "file": "File",
   "@file": {
@@ -1312,16 +1242,6 @@
   "noDataRowsFound": "No data rows found",
   "@noDataRowsFound": {
     "description": "Error message when CSV file has no valid data rows"
-  },
-  "importFailed": "Import failed: {error}",
-  "@importFailed": {
-    "description": "Generic import failure message",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Invalid CSV format"
-      }
-    }
   },
   "rowProviderNameRequired": "Row {rowNumber}: Provider name is required",
   "@rowProviderNameRequired": {
@@ -1529,20 +1449,6 @@
   "@noDataToExport": {
     "description": "Error message when there is no data available for export"
   },
-  "exportSuccessful": "Export successful",
-  "@exportSuccessful": {
-    "description": "Success message when export completes successfully"
-  },
-  "exportFailed": "Export failed: {error}",
-  "@exportFailed": {
-    "description": "Generic export failure message",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "File write error"
-      }
-    }
-  },
   "providerNameColumnNotFound": "Provider name column not found",
   "@providerNameColumnNotFound": {
     "description": "Error message when provider name column is missing in CSV"
@@ -1674,7 +1580,7 @@
   },
   "website": "Website",
   "@website": {
-    "description": "Website option title"
+    "description": "Website contact method"
   },
   "responseTime": "Response Time",
   "@responseTime": {
@@ -1707,10 +1613,6 @@
   "feeCalculationDescription": "Understanding how fees are calculated and optimized",
   "@feeCalculationDescription": {
     "description": "Fee calculation guide description"
-  },
-  "dataManagement": "Data Management",
-  "@dataManagement": {
-    "description": "Data management guide title"
   },
   "dataManagementDescription": "Import, export, and backup your data",
   "@dataManagementDescription": {
@@ -1751,10 +1653,6 @@
   "phone": "Phone",
   "@phone": {
     "description": "Phone contact method"
-  },
-  "website": "Website",
-  "@website": {
-    "description": "Website contact method"
   },
   "faqQuestion1": "How do I minimize transaction fees?",
   "@faqQuestion1": {
@@ -1844,10 +1742,6 @@
   "@netAmountSent": {
     "description": "Label for net amount in comparison"
   },
-  "totalFees": "Total fees",
-  "@totalFees": {
-    "description": "Label for total fees in comparison"
-  },
   "totalSpent": "Total spent",
   "@totalSpent": {
     "description": "Label for total amount spent in comparison"
@@ -1911,18 +1805,6 @@
   "feesLess": "• Fees less: {amount} {currency}",
   "@feesLess": {
     "description": "Detail showing fee savings",
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      },
-      "currency": {
-        "type": "String"
-      }
-    }
-  },
-  "feesMore": "• Fees more: {amount} {currency}",
-  "@feesMore": {
-    "description": "Detail showing additional fees",
     "placeholders": {
       "amount": {
         "type": "String"
@@ -2029,5 +1911,62 @@
   "@noValidIntervalForComparison": {
     "description": "Message displayed when the entered amount is not within any valid fee interval for comparison",
     "placeholders": {}
+  },
+  "optimizationBudgetTooSmall": "The amount is too small for any transaction with this provider.",
+  "@optimizationBudgetTooSmall": {
+    "description": "Optimizer / data validation message"
+  },
+  "optimizationConstraintsUnsatisfiable": "No plan satisfies the transaction range for this amount.",
+  "@optimizationConstraintsUnsatisfiable": {
+    "description": "Optimizer / data validation message"
+  },
+  "optimizationNotProven": "Very large search: this plan is excellent, but its optimality could not be fully verified.",
+  "@optimizationNotProven": {
+    "description": "Optimizer / data validation message"
+  },
+  "feeIntervalOverlaps": "This interval overlaps an existing interval ({range})",
+  "@feeIntervalOverlaps": {
+    "description": "Optimizer / data validation message",
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "providerNameAlreadyExists": "A provider with this name already exists",
+  "@providerNameAlreadyExists": {
+    "description": "Optimizer / data validation message"
+  },
+  "baseCurrencyCannotBeDeleted": "Ariary is the base currency and cannot be deleted",
+  "@baseCurrencyCannotBeDeleted": {
+    "description": "Optimizer / data validation message"
+  },
+  "baseCurrencyRateIsFixed": "The rate of the base currency is always 1",
+  "@baseCurrencyRateIsFixed": {
+    "description": "Optimizer / data validation message"
+  },
+  "failedToUpdateFeeInterval": "Failed to update fee interval",
+  "@failedToUpdateFeeInterval": {
+    "description": "Optimizer / data validation message"
+  },
+  "failedToDeleteFeeIntervals": "Failed to delete fee intervals",
+  "@failedToDeleteFeeIntervals": {
+    "description": "Optimizer / data validation message"
+  },
+  "failedToCreateProvider": "Failed to create provider",
+  "@failedToCreateProvider": {
+    "description": "Optimizer / data validation message"
+  },
+  "failedToSaveChanges": "Failed to save changes",
+  "@failedToSaveChanges": {
+    "description": "Optimizer / data validation message"
+  },
+  "failedToLoadData": "Failed to load data",
+  "@failedToLoadData": {
+    "description": "Optimizer / data validation message"
+  },
+  "currencyCodeAlreadyExists": "A currency with this code already exists",
+  "@currencyCodeAlreadyExists": {
+    "description": "Optimizer / data validation message"
   }
 }

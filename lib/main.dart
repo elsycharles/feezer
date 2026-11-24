@@ -1,35 +1,36 @@
-import 'package:fee_minimizer/util/constant_util.dart';
-import 'package:fee_minimizer/util/theme_util.dart';
-import 'package:fee_minimizer/provider/theme_provider.dart';
-import 'package:fee_minimizer/provider/locale_provider.dart';
-import 'package:fee_minimizer/provider/currency_provider.dart';
-import 'package:fee_minimizer/l10n/app_localizations.dart';
-import 'package:fee_minimizer/l10n/localization_delegate.dart';
-import 'package:fee_minimizer/screen/provider_list/provider_list_screen.dart';
-import 'package:fee_minimizer/screen/onboarding/onboarding_screen.dart';
-import 'package:fee_minimizer/screen/settings/settings_screen.dart';
-import 'package:fee_minimizer/screen/settings/csv_management_screen.dart';
-import 'package:fee_minimizer/screen/new_provider/new_provider_screen.dart';
-import 'package:fee_minimizer/screen/provider_detail/provider_detail_screen.dart';
-import 'package:fee_minimizer/screen/optimize_fee/optimize_fee_screen.dart';
-import 'package:fee_minimizer/screen/fee_interval/new_fee_interval_screen.dart';
-import 'package:fee_minimizer/screen/currency/currency_list_screen.dart';
-import 'package:fee_minimizer/screen/currency/new_currency_screen.dart';
-import 'package:fee_minimizer/screen/help_support/help_support_screen.dart';
-import 'package:fee_minimizer/screen/terms_of_use/terms_of_use_screen.dart';
-import 'package:fee_minimizer/model/provider_model.dart' as model;
-import 'package:fee_minimizer/model/currency_model.dart';
-import 'package:fee_minimizer/model/fee_interval_model.dart';
-import 'package:fee_minimizer/util/preference_util.dart';
-import 'package:fee_minimizer/util/database_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-void main() async {
+import 'data/app_database.dart';
+import 'l10n/app_localizations.dart';
+import 'l10n/localization_delegate.dart';
+import 'model/currency_model.dart';
+import 'model/fee_interval_model.dart';
+import 'model/provider_model.dart' as model;
+import 'provider/currency_provider.dart';
+import 'provider/locale_provider.dart';
+import 'provider/theme_provider.dart';
+import 'screen/currency/currency_list_screen.dart';
+import 'screen/currency/new_currency_screen.dart';
+import 'screen/fee_interval/new_fee_interval_screen.dart';
+import 'screen/help_support/help_support_screen.dart';
+import 'screen/new_provider/new_provider_screen.dart';
+import 'screen/onboarding/onboarding_screen.dart';
+import 'screen/optimize_fee/optimize_fee_screen.dart';
+import 'screen/provider_detail/provider_detail_screen.dart';
+import 'screen/provider_list/provider_list_screen.dart';
+import 'screen/settings/csv_management_screen.dart';
+import 'screen/settings/settings_screen.dart';
+import 'screen/terms_of_use/terms_of_use_screen.dart';
+import 'util/constant_util.dart';
+import 'util/navigation_util.dart';
+import 'util/preference_util.dart';
+import 'util/theme_util.dart';
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize providers
   final themeProvider = ThemeProvider();
   final localeProvider = LocaleProvider();
   final currencyProvider = CurrencyProvider();
@@ -38,129 +39,114 @@ void main() async {
     themeProvider.initializeTheme(),
     localeProvider.initializeLocale(),
     currencyProvider.initializeCurrency(),
+    AppDatabase.instance.seedDefaultData(),
   ]);
-
-  // Seed default data if needed
-  await DatabaseUtil().seedDefaultData();
-
-  // Check if first launch
   final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
 
   runApp(
-    MyApp(
-      themeProvider: themeProvider,
-      localeProvider: localeProvider,
-      currencyProvider: currencyProvider,
-      initialRoute: isFirstLaunch ? '/onboarding' : '/',
-    ),
-  );
-}
-
-class MyApp extends StatelessWidget {
-  final ThemeProvider themeProvider;
-  final LocaleProvider localeProvider;
-  final CurrencyProvider currencyProvider;
-  final String initialRoute;
-
-  const MyApp({
-    super.key,
-    required this.themeProvider,
-    required this.localeProvider,
-    required this.currencyProvider,
-    required this.initialRoute,
-  });
-
-  Map<String, WidgetBuilder> get routes => {
-    '/': (context) {
-      final args =
-          ModalRoute.of(context)?.settings.arguments as model.Provider?;
-      return OptimizeFeeScreen(defaultProvider: args);
-    },
-    '/onboarding': (_) => const OnboardingScreen(),
-    '/providers': (_) => const ProviderListScreen(),
-    '/settings': (_) => const SettingsScreen(),
-    '/help-support': (_) => const HelpSupportScreen(),
-    '/terms-of-use': (_) => const TermsOfUseScreen(),
-    '/currencies': (_) => const CurrencyListScreen(),
-    '/provider': (context) {
-      final args =
-          ModalRoute.of(context)?.settings.arguments as model.Provider?;
-      if (args != null) {
-        return ProviderDetailScreen(provider: args);
-      }
-      return ProviderDetailScreen(
-        provider: model.Provider(
-          id: 'unknown',
-          name: 'Loading...',
-          description: 'Loading provider details...',
-          iconName: 'business',
-        ),
-      );
-    },
-  };
-
-  Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case '/new-provider':
-        return MaterialPageRoute<model.Provider>(
-          builder: (_) => const NewProviderScreen(),
-          settings: settings,
-        );
-      case '/new-fee-interval':
-        return MaterialPageRoute<FeeInterval>(
-          builder: (_) => const NewFeeIntervalScreen(),
-          settings: settings,
-        );
-      case '/new-currency':
-        return MaterialPageRoute<Currency>(
-          builder: (_) => const NewCurrencyScreen(),
-          settings: settings,
-        );
-      case '/csv-management':
-        return MaterialPageRoute(
-          builder: (_) => const CsvManagementScreen(),
-          settings: settings,
-        );
-      default:
-        return null;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
+    MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: themeProvider),
         ChangeNotifierProvider.value(value: localeProvider),
         ChangeNotifierProvider.value(value: currencyProvider),
       ],
-      child: Consumer3<ThemeProvider, LocaleProvider, CurrencyProvider>(
-        builder:
-            (context, themeProvider, localeProvider, currencyProvider, child) {
-              return MediaQuery(
-                data: MediaQuery.of(
-                  context,
-                ).copyWith(textScaler: TextScaler.linear(1.0)),
-                child: MaterialApp(
-                  title: ConstantUtil.appName,
-                  routes: routes,
-                  onGenerateRoute: onGenerateRoute,
-                  initialRoute: initialRoute,
-                  theme: ThemeUtil.lightTheme,
-                  darkTheme: ThemeUtil.darkTheme,
-                  themeMode: themeProvider.flutterThemeMode,
-                  locale: localeProvider.locale,
-                  localizationsDelegates: const [
-                    AppLocalizations.delegate,
-                    FallbackMaterialLocalizationsDelegate(),
-                    GlobalWidgetsLocalizations.delegate,
-                    FallbackCupertinoLocalizationsDelegate(),
-                  ],
-                  supportedLocales: AppLocalizations.supportedLocales,
-                ),
-              );
-            },
+      child: FeezerApp(
+        initialRoute: isFirstLaunch
+            ? NavigationUtil.onboardingRoute
+            : NavigationUtil.homeRoute,
       ),
+    ),
+  );
+}
+
+class FeezerApp extends StatelessWidget {
+  const FeezerApp({super.key, required this.initialRoute});
+
+  final String initialRoute;
+
+  static final Map<String, WidgetBuilder> _routes = {
+    NavigationUtil.homeRoute: (context) => OptimizeFeeScreen(
+      defaultProvider:
+          ModalRoute.of(context)?.settings.arguments as model.Provider?,
+    ),
+    NavigationUtil.onboardingRoute: (_) => const OnboardingScreen(),
+    NavigationUtil.providersRoute: (_) => const ProviderListScreen(),
+    NavigationUtil.settingsRoute: (_) => const SettingsScreen(),
+    NavigationUtil.helpSupportRoute: (_) => const HelpSupportScreen(),
+    NavigationUtil.termsOfUseRoute: (_) => const TermsOfUseScreen(),
+    NavigationUtil.currenciesRoute: (_) => const CurrencyListScreen(),
+    NavigationUtil.csvManagementRoute: (_) => const CsvManagementScreen(),
+  };
+
+  /// Routes that need arguments or return a typed result.
+  static Route<dynamic>? _onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case NavigationUtil.providerDetailRoute:
+        final provider = settings.arguments;
+        if (provider is! model.Provider) return null;
+        return MaterialPageRoute<void>(
+          builder: (_) => ProviderDetailScreen(provider: provider),
+          settings: settings,
+        );
+      case NavigationUtil.newProviderRoute:
+        return MaterialPageRoute<model.Provider>(
+          builder: (_) => const NewProviderScreen(),
+          settings: settings,
+        );
+      case NavigationUtil.newFeeIntervalRoute:
+        return MaterialPageRoute<FeeInterval>(
+          builder: (_) =>
+              NewFeeIntervalScreen(providerId: settings.arguments as String?),
+          settings: settings,
+        );
+      case NavigationUtil.newCurrencyRoute:
+        return MaterialPageRoute<Currency>(
+          builder: (_) => const NewCurrencyScreen(),
+          settings: settings,
+        );
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final themeMode = context.select<ThemeProvider, ThemeMode>(
+      (p) => p.flutterThemeMode,
+    );
+    final locale = context.select<LocaleProvider, Locale?>((p) => p.locale);
+    return MaterialApp(
+      title: ConstantUtil.appName,
+      debugShowCheckedModeBanner: false,
+      routes: _routes,
+      onGenerateRoute: _onGenerateRoute,
+      onUnknownRoute: (settings) => MaterialPageRoute<void>(
+        builder: (_) => const OptimizeFeeScreen(),
+        settings: settings,
+      ),
+      initialRoute: initialRoute,
+      navigatorObservers: [NavigationUtil.routeObserver],
+      theme: ThemeUtil.lightTheme,
+      darkTheme: ThemeUtil.darkTheme,
+      themeMode: themeMode,
+      locale: locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        FallbackMaterialLocalizationsDelegate(),
+        GlobalWidgetsLocalizations.delegate,
+        FallbackCupertinoLocalizationsDelegate(),
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
+      // The design uses fixed font sizes: keep the system text scale within
+      // a range the layouts support instead of ignoring it.
+      builder: (context, child) {
+        final mediaQuery = MediaQuery.of(context);
+        return MediaQuery(
+          data: mediaQuery.copyWith(
+            textScaler: mediaQuery.textScaler.clamp(maxScaleFactor: 1.3),
+          ),
+          child: child!,
+        );
+      },
     );
   }
 }

@@ -1378,4 +1378,52 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get noValidIntervalForComparison =>
       'The entered amount is not within any valid fee interval. Unable to perform comparison without optimization.';
+
+  @override
+  String get optimizationBudgetTooSmall =>
+      'The amount is too small for any transaction with this provider.';
+
+  @override
+  String get optimizationConstraintsUnsatisfiable =>
+      'No plan satisfies the transaction range for this amount.';
+
+  @override
+  String get optimizationNotProven =>
+      'Very large search: this plan is excellent, but its optimality could not be fully verified.';
+
+  @override
+  String feeIntervalOverlaps(String range) {
+    return 'This interval overlaps an existing interval ($range)';
+  }
+
+  @override
+  String get providerNameAlreadyExists =>
+      'A provider with this name already exists';
+
+  @override
+  String get baseCurrencyCannotBeDeleted =>
+      'Ariary is the base currency and cannot be deleted';
+
+  @override
+  String get baseCurrencyRateIsFixed =>
+      'The rate of the base currency is always 1';
+
+  @override
+  String get failedToUpdateFeeInterval => 'Failed to update fee interval';
+
+  @override
+  String get failedToDeleteFeeIntervals => 'Failed to delete fee intervals';
+
+  @override
+  String get failedToCreateProvider => 'Failed to create provider';
+
+  @override
+  String get failedToSaveChanges => 'Failed to save changes';
+
+  @override
+  String get failedToLoadData => 'Failed to load data';
+
+  @override
+  String get currencyCodeAlreadyExists =>
+      'A currency with this code already exists';
 }

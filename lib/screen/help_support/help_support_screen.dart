@@ -123,18 +123,24 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
 
       // Add text before match
       if (index > start) {
-        spans.add(TextSpan(text: text.substring(start, index), style: baseStyle));
+        spans.add(
+          TextSpan(text: text.substring(start, index), style: baseStyle),
+        );
       }
 
       // Add highlighted match
       final endIndex = index + query.length;
-      spans.add(TextSpan(
-        text: text.substring(index, endIndex),
-        style: baseStyle.copyWith(
-          backgroundColor: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
-          fontWeight: FontWeight.w600,
+      spans.add(
+        TextSpan(
+          text: text.substring(index, endIndex),
+          style: baseStyle.copyWith(
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.primary.withValues(alpha: 0.3),
+            fontWeight: FontWeight.w600,
+          ),
         ),
-      ));
+      );
 
       start = endIndex;
     }
@@ -215,11 +221,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                   color: colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
-                  Icons.email,
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
+                child: Icon(Icons.email, color: colorScheme.primary, size: 24),
               ),
               title: Text(
                 AppLocalizations.of(context).email,
@@ -255,11 +257,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
                   color: colorScheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(
-                  Icons.phone,
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
+                child: Icon(Icons.phone, color: colorScheme.primary, size: 24),
               ),
               title: Text(
                 AppLocalizations.of(context).phone,
@@ -378,7 +376,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
 
     return allItems.where((item) {
       return item.question.toLowerCase().contains(_searchQuery) ||
-             item.answer.toLowerCase().contains(_searchQuery);
+          item.answer.toLowerCase().contains(_searchQuery);
     }).toList();
   }
 
@@ -386,9 +384,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: 'elsy.s.charles@gmail.com',
-      queryParameters: {
-        'subject': 'Feezer Support Request',
-      },
+      queryParameters: {'subject': 'Feezer Support Request'},
     );
 
     try {
@@ -398,7 +394,9 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Aucune application mail trouvée. Veuillez installer une application mail.'),
+              content: Text(
+                'Aucune application mail trouvée. Veuillez installer une application mail.',
+              ),
             ),
           );
         }
@@ -407,7 +405,9 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Erreur lors de l\'ouverture de l\'application mail.'),
+            content: Text(
+              'Erreur lors de l\'ouverture de l\'application mail.',
+            ),
           ),
         );
       }
@@ -417,7 +417,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
   Future<void> _launchPhone() async {
     // Try WhatsApp direct scheme first, then fallback to web URL
     Uri phoneUri = Uri.parse('whatsapp://send?phone=261348421634');
-    
+
     try {
       if (await canLaunchUrl(phoneUri)) {
         await launchUrl(phoneUri, mode: LaunchMode.platformDefault);
@@ -430,7 +430,9 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('WhatsApp n\'est pas installé ou le lien est invalide.'),
+                content: Text(
+                  'WhatsApp n\'est pas installé ou le lien est invalide.',
+                ),
               ),
             );
           }
@@ -445,9 +447,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Impossible d\'ouvrir WhatsApp.'),
-              ),
+              const SnackBar(content: Text('Impossible d\'ouvrir WhatsApp.')),
             );
           }
         }
@@ -472,9 +472,7 @@ class _HelpSupportScreenState extends State<HelpSupportScreen>
       } else {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Aucun navigateur web trouvé.'),
-            ),
+            const SnackBar(content: Text('Aucun navigateur web trouvé.')),
           );
         }
       }

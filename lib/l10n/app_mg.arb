@@ -29,29 +29,29 @@
   "@next": {
     "description": "Next button text"
   },
-  "skip": "Halevina",
+  "skip": "Dingana",
   "@skip": {
     "description": "Skip button text"
   },
-  "getStarted": "Manomboka",
+  "getStarted": "Hanomboka",
   "@getStarted": {
     "description": "Get started button text"
   },
-  "back": "Miverina",
+  "back": "Hiverina",
   "@back": {
     "description": "Back button text"
   },
-  "cancel": "Hanafoana",
+  "cancel": "Aoka ihany",
   "@cancel": {
     "description": "Cancel button text"
   },
-  "save": "Tehirizina",
+  "save": "Tahiry",
   "@save": {
     "description": "Save button text"
   },
-  "confirmDeleteCurrencies": "Tianao ve ny hamafa {count} vola ?",
+  "confirmDeleteCurrencies": "Tena te hanala {count} vola ve ianao ?",
   "@confirmDeleteCurrencies": {
-    "description": "Hafatra fanamafisana ny famafana vola",
+    "description": "Confirmation message for deleting currencies",
     "placeholders": {
       "count": {
         "type": "int",
@@ -69,10 +69,7 @@
       }
     }
   },
-  "delete": "Hamafa",
-  "@onboardingDescription3": {
-    "description": "Third onboarding screen description"
-  },
+  "delete": "Fafao",
   "@pressAgainToExit": {
     "description": "Double back to exit message"
   },
@@ -111,16 +108,16 @@
     "description": "Validation error for minimum length",
     "placeholders": {
       "count": {
-        "type": "num",
-        "format": "compact"
+        "type": "int",
+        "example": "3"
       }
     }
   },
-  "enterValidNumber": "Ampidiro ny isa manan-kery",
+  "enterValidNumber": "Ampidiro isa manan-kery",
   "@enterValidNumber": {
-    "description": "Validation error for number field"
+    "description": "Validation error for numeric fields"
   },
-  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be indrindra dia tokony ho mihoatra noho ny kely indrindra",
+  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be dia tsy maintsy mihoatra ny vola kely",
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
   },
@@ -136,7 +133,7 @@
   "@details": {
     "description": "Details tooltip"
   },
-  "total": "Totaliny",
+  "total": "Totalin'ny",
   "@total": {
     "description": "Total column header"
   },
@@ -156,9 +153,9 @@
   "@netAmount": {
     "description": "Net amount after fees metric title"
   },
-  "totalFees": "Totalin'ny sara",
+  "totalFees": "Sara total",
   "@totalFees": {
-    "description": "Total fees metric title"
+    "description": "Label for total fees in comparison"
   },
   "efficiency": "Fahombiazana",
   "@efficiency": {
@@ -172,25 +169,18 @@
   "@remaining": {
     "description": "Remaining amount metric title"
   },
-  "next": "Manaraka",
-  "skip": "Dingana",
-  "getStarted": "Hanomboka",
-  "back": "Hiverina",
-  "cancel": "Aoka ihany",
-  "save": "Tahiry",
-  "delete": "Fafao",
   "edit": "Ovay",
   "create": "Mamorona",
   "confirm": "Hamafy",
   "optimizeFee": "Hanatsara ny Sara",
   "providers": "Mpanome tolotra",
   "settings": "Fandrindrana",
-  "createInterval": "Mamorona Elanelana",
+  "createInterval": "Mamorona elanelana",
   "optimize": "Atsikafo",
   "amount": "Vola",
   "provider": "Mpanome tolotra",
-  "minTransactions": "Fifampiraharahana Kely",
-  "maxTransactions": "Fifampiraharahana Be",
+  "minTransactions": "Fifampiraharahana faran'izay kely",
+  "maxTransactions": "Fifampiraharahana faran'izay lehibe",
   "pleaseEnterValidAmount": "Ampidiro ny vola manan-kery azafady",
   "pleaseSelectProvider": "Fidio ny mpanome tolotra azafady",
   "invalidTransactionRange": "Ny fifampiraharahana kely dia tsy maintsy latsaky ny fifampiraharahana be",
@@ -209,8 +199,8 @@
   "dark": "Maizina",
   "comingSoon": "Ho Avy Tsy Ho Ela",
   "thisFeatureWillBeAvailableSoon": "Ho avy tsy ho ela io endri-javatra io!",
-  "feeIntervals": "Elanelana Sara",
-  "newFeeInterval": "Elanelana Sara Vaovao",
+  "feeIntervals": "Elanelam-para",
+  "newFeeInterval": "Elanelam-para vaovao",
   "minAmount": "Vola Kely",
   "maxAmount": "Vola Be",
   "feePercentage": "Isan-jaton'ny Sara",
@@ -218,19 +208,16 @@
   "pleaseEnterMinAmount": "Ampidiro ny vola kely azafady",
   "pleaseEnterMaxAmount": "Ampidiro ny vola be azafady",
   "pleaseEnterValidFeePercentage": "Ampidiro ny isan-jaton'ny sara manan-kery azafady",
-  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be dia tsy maintsy mihoatra ny vola kely",
-  "optimizationResults": "Valin'ny Fanatsarana",
+  "optimizationResults": "Valin'ny fanatsiana",
   "interval": "Elanelana",
   "fee": "Sara",
   "count": "Isa",
-  "total": "Totalin'ny",
   "noResultsYet": "Mbola tsy misy valiny",
   "noOptimizationResultsFound": "Tsy misy valin'ny fanatsarana hita. Azafady, hamarino ny parametatra nampidirinao.",
   "tapOptimizeToSeeResults": "Tsindrio ny 'Atsikafo' hahitana ny valiny",
   "error": "Diso",
   "screenNotFound": "Tsy hita ny écran {route}",
   "goHome": "Hody",
-
   "noProvidersFound": "Tsy misy mpanome tolotra hita",
   "@noProvidersFound": {
     "description": "Message shown when no providers are available"
@@ -433,7 +420,6 @@
   "@enterTransactionAmountToOptimize": {
     "description": "Instructions for amount input"
   },
-  "amount": "Vola",
   "@amount": {
     "description": "Amount label"
   },
@@ -445,11 +431,9 @@
   "@defineMinMaxTransactions": {
     "description": "Instructions for transaction range"
   },
-  "minTransactions": "Fifampiraharahana faran'izay kely",
   "@minTransactions": {
     "description": "Minimum transactions label"
   },
-  "maxTransactions": "Fifampiraharahana faran'izay lehibe",
   "@maxTransactions": {
     "description": "Maximum transactions label"
   },
@@ -461,19 +445,15 @@
   "@clickOptimizeButtonToAnalyze": {
     "description": "Instructions for optimization"
   },
-  "optimizationResults": "Valin'ny fanatsiana",
   "@optimizationResults": {
     "description": "Optimization results title"
   },
-  "interval": "Elanelana",
   "@interval": {
     "description": "Interval column header"
   },
-  "fee": "Sara",
   "@fee": {
     "description": "Fee column header"
   },
-  "count": "Isa",
   "@count": {
     "description": "Count column header"
   },
@@ -485,7 +465,6 @@
   "@noFeeIntervalsFound": {
     "description": "Message when no fee intervals exist"
   },
-  "feeIntervals": "Elanelam-para",
   "@feeIntervals": {
     "description": "Fee intervals section title"
   },
@@ -513,7 +492,6 @@
   "@deleteFeeIntervals": {
     "description": "Delete fee intervals title"
   },
-  "newFeeInterval": "Elanelam-para vaovao",
   "@newFeeInterval": {
     "description": "New fee interval screen title"
   },
@@ -537,7 +515,6 @@
   "@enterFeeAmount": {
     "description": "Fee amount input placeholder"
   },
-  "createInterval": "Mamorona elanelana",
   "@createInterval": {
     "description": "Create interval button"
   },
@@ -565,10 +542,6 @@
   "@clearSelection": {
     "description": "Clear selection tooltip"
   },
-  "selectAll": "Fidio daholo",
-  "@selectAll": {
-    "description": "Select all tooltip"
-  },
   "icon": "Sary",
   "@icon": {
     "description": "Icon label"
@@ -590,9 +563,6 @@
     "description": "Required field validation message"
   },
   "pressAgainToExit": "Tsindrio indray mba hivoaka",
-  "@pressAgainToExit": {
-    "description": "Double back to exit message"
-  },
   "minimumAmount": "Vola faran'izay kely",
   "@minimumAmount": {
     "description": "Minimum amount validation field name"
@@ -613,7 +583,6 @@
   "@mobileMoney": {
     "description": "Mobile money description"
   },
-  "mobileFinancialServices": "Serivisy ara-bola finday",
   "@mobileFinancialServices": {
     "description": "Mobile financial services description"
   },
@@ -657,7 +626,7 @@
   "@followSystemSettings": {
     "description": "System theme description"
   },
-    "saveChanges": "Tehirizo ny fanovana",
+  "saveChanges": "Tehirizo ny fanovana",
   "@saveChanges": {
     "description": "Save changes button text"
   },
@@ -696,20 +665,6 @@
   "mustBeGreaterThanZero": "Tokony ho mihoatra noho ny aotra",
   "@mustBeGreaterThanZero": {
     "description": "Validation error for positive numbers"
-  },
-  "enterValidNumber": "Ampidiro isa manan-kery",
-  "@enterValidNumber": {
-    "description": "Validation error for numeric fields"
-  },
-  "mustBeAtLeastNCharacters": "Tokony ho {count} litera fara fahakeliny",
-  "@mustBeAtLeastNCharacters": {
-    "description": "Validation error for minimum length",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
   },
   "mustBeLessThanNCharacters": "Tokony ho latsaky ny {count} litera",
   "@mustBeLessThanNCharacters": {
@@ -833,16 +788,6 @@
   "@rateLabel": {
     "description": "Label for exchange rate display in currency card"
   },
-  "confirmDeleteCurrencies": "Tena te hanala {count} vola ve ianao ?",
-  "@confirmDeleteCurrencies": {
-    "description": "Confirmation message for deleting currencies",
-    "placeholders": {
-      "count": {
-        "type": "int",
-        "example": "3"
-      }
-    }
-  },
   "optimizationFailedNoValidSolution": "Tsy nahomby ny fanatsarana : Tsy misy vahaolana mety hita",
   "@optimizationFailedNoValidSolution": {
     "description": "Message d'erreur lorsque l'optimisation ne trouve pas de solution valide"
@@ -955,17 +900,29 @@
   "@importSuccessful": {
     "description": "Import success message"
   },
-  "exportSuccessful": "Nahomby ny fampidinana",
+  "exportSuccessful": "Nahomby ny fanavoahana",
   "@exportSuccessful": {
-    "description": "Export success message"
+    "description": "Message de succès lorsque l'exportation se termine avec succès"
   },
-  "importFailed": "Tsy nahomby ny fampidirana",
+  "importFailed": "Tsy nahomby ny fanafarana : {error}",
   "@importFailed": {
-    "description": "Import failed message"
+    "description": "Message d'échec d'importation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Format CSV invalide"
+      }
+    }
   },
-  "exportFailed": "Tsy nahomby ny fampidinana",
+  "exportFailed": "Tsy nahomby ny fanavoahana : {error}",
   "@exportFailed": {
-    "description": "Export failed message"
+    "description": "Message d'échec d'exportation générique",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Erreur d'écriture de fichier"
+      }
+    }
   },
   "providersImportedSuccessfully": "{count, plural, =1{Mpanome tolotra 1 voampiditra soa aman-tsara} other{Mpanome tolotra {count} voampiditra soa aman-tsara}}",
   "@providersImportedSuccessfully": {
@@ -991,9 +948,9 @@
   "@dataImportedSuccessfully": {
     "description": "Success message for general data import"
   },
-  "noDataToExport": "Tsy misy angona hampidina",
+  "noDataToExport": "Tsy misy angona havoaka",
   "@noDataToExport": {
-    "description": "Message when no data is available for export"
+    "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
   },
   "invalidCsvFormat": "Tsy mety ny endrika CSV",
   "@invalidCsvFormat": {
@@ -1091,13 +1048,9 @@
   "@shareData": {
     "description": "Share data description"
   },
-  "dataManagement": "Fitantanana angona",
+  "dataManagement": "Data Management",
   "@dataManagement": {
-    "description": "Data management section title"
-  },
-  "csvManagement": "Fitantanana CSV",
-  "@csvManagement": {
-    "description": "Title for CSV management screen"
+    "description": "Data management guide title"
   },
   "previewTemplate": "Jereo modely",
   "@previewTemplate": {
@@ -1118,10 +1071,6 @@
   "close": "Hidio",
   "@close": {
     "description": "Close button text"
-  },
-  "dataManagement": "Fitantanana angona",
-  "@dataManagement": {
-    "description": "Titre de la section de gestion des données"
   },
   "importDataDescription": "Ampidiro ny mpanome sy ny intervalle sara avy amin'ny rakitra CSV. Hahalalala ho azy ny rafitra ny karazana angona araka ny tsanganana.",
   "@importDataDescription": {
@@ -1202,16 +1151,6 @@
   "noDataRowsFound": "Tsy misy andalana angona hita",
   "@noDataRowsFound": {
     "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
-  },
-  "importFailed": "Tsy nahomby ny fanafarana : {error}",
-  "@importFailed": {
-    "description": "Message d'échec d'importation générique",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Format CSV invalide"
-      }
-    }
   },
   "rowProviderNameRequired": "Andalana {rowNumber} : Ilaina ny anaran'ny mpanome",
   "@rowProviderNameRequired": {
@@ -1415,24 +1354,6 @@
       }
     }
   },
-  "noDataToExport": "Tsy misy angona havoaka",
-  "@noDataToExport": {
-    "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
-  },
-  "exportSuccessful": "Nahomby ny fanavoahana",
-  "@exportSuccessful": {
-    "description": "Message de succès lorsque l'exportation se termine avec succès"
-  },
-  "exportFailed": "Tsy nahomby ny fanavoahana : {error}",
-  "@exportFailed": {
-    "description": "Message d'échec d'exportation générique",
-    "placeholders": {
-      "error": {
-        "type": "String",
-        "example": "Erreur d'écriture de fichier"
-      }
-    }
-  },
   "providerNameColumnNotFound": "Tsy hita ny tsanganana anaran'ny mpanome",
   "@providerNameColumnNotFound": {
     "description": "Message d'erreur lorsque la colonne du nom du fournisseur est manquante dans le CSV"
@@ -1623,11 +1544,11 @@
   "@faqHowToCalculateFeesAnswer": {
     "description": "FAQ answer"
   },
-  "faqMinMaxTransactionRange": "Inona no dikan'ny \u00AB fifampiraharahana kely \u00BB sy \u00AB fifampiraharahana lehibe \u00BB?",
+  "faqMinMaxTransactionRange": "Inona no dikan'ny « fifampiraharahana kely » sy « fifampiraharahana lehibe »?",
   "@faqMinMaxTransactionRange": {
     "description": "Fanontaniana FAQ: dikan'ny isan'ny fifanakalozana min/max"
   },
-  "faqMinMaxTransactionRangeAnswer": "Ny \u00AB fifampiraharahana kely \u00BB sy \u00AB fifampiraharahana lehibe \u00BB dia mamaritra ny isan'ny fifanakalozana kely indrindra sy lehibe indrindra azo ampiasain'ny mpanatsara mba hizara ny vola napetraka. Ohatra, raha manoratra 10\u202F000 Ar ianao ary mampiditra Min transactions = 2 dia hikaroka vahaolana izay misy farafahakeliny 2 fifanakalozana ihany ny mpanatsara. Ataovy izay hahazoana antoka fa Min \u2264 Max ary mety amin'ny fikasanao ny sandany. Ireo fepetra ireo dia manery ny mpanatsara hahazo vokatra miaraka amin'ny isan'ny fifanakalozana ao anatin'ny elanelana napetrakao.",
+  "faqMinMaxTransactionRangeAnswer": "Ny « fifampiraharahana kely » sy « fifampiraharahana lehibe » dia mamaritra ny isan'ny fifanakalozana kely indrindra sy lehibe indrindra azo ampiasain'ny mpanatsara mba hizara ny vola napetraka. Ohatra, raha manoratra 10 000 Ar ianao ary mampiditra Min transactions = 2 dia hikaroka vahaolana izay misy farafahakeliny 2 fifanakalozana ihany ny mpanatsara. Ataovy izay hahazoana antoka fa Min ≤ Max ary mety amin'ny fikasanao ny sandany. Ireo fepetra ireo dia manery ny mpanatsara hahazo vokatra miaraka amin'ny isan'ny fifanakalozana ao anatin'ny elanelana napetrakao.",
   "@faqMinMaxTransactionRangeAnswer": {
     "description": "Valin'ny FAQ: dikan'ny isan'ny fifanakalozana min/max"
   },
@@ -1665,7 +1586,7 @@
   },
   "website": "Tranonkala",
   "@website": {
-    "description": "Website option title"
+    "description": "Website contact method"
   },
   "responseTime": "Fotoana famaliana",
   "@responseTime": {
@@ -1698,10 +1619,6 @@
   "feeCalculationDescription": "Understanding how fees are calculated and optimized",
   "@feeCalculationDescription": {
     "description": "Fee calculation guide description"
-  },
-  "dataManagement": "Data Management",
-  "@dataManagement": {
-    "description": "Data management guide title"
   },
   "dataManagementDescription": "Import, export, and backup your data",
   "@dataManagementDescription": {
@@ -1742,10 +1659,6 @@
   "phone": "Finday",
   "@phone": {
     "description": "Phone contact method"
-  },
-  "website": "Tranonkala",
-  "@website": {
-    "description": "Website contact method"
   },
   "faqQuestion1": "Ahoana no fomba hanalana ny sara fifampiraharahana?",
   "@faqQuestion1": {
@@ -1842,10 +1755,6 @@
   "netAmountSent": "Vola madio alaina",
   "@netAmountSent": {
     "description": "Label for net amount in comparison"
-  },
-  "totalFees": "Sara total",
-  "@totalFees": {
-    "description": "Label for total fees in comparison"
   },
   "totalSpent": "Total naloa",
   "@totalSpent": {
@@ -2016,5 +1925,18 @@
   "@noValidIntervalForComparison": {
     "description": "Message displayed when the entered amount is not within any valid fee interval for comparison",
     "placeholders": {}
-  }
+  },
+  "optimizationBudgetTooSmall": "Kely loatra ny vola hanaovana fandefasana amin'ity mpanome ity.",
+  "optimizationConstraintsUnsatisfiable": "Tsy misy drafitra mifanaraka amin'ny isan'ny fandefasana voafaritra ho an'ity vola ity.",
+  "optimizationNotProven": "Fikarohana be dia be: tsara ity drafitra ity, saingy tsy voamarina tanteraka fa izy no tsara indrindra.",
+  "feeIntervalOverlaps": "Mifanindry amin'ny elanelana efa misy ({range}) ity elanelana ity",
+  "providerNameAlreadyExists": "Efa misy mpanome mitovy anarana amin'izany",
+  "baseCurrencyCannotBeDeleted": "Ny Ariary no vola fototra ka tsy azo fafana",
+  "baseCurrencyRateIsFixed": "1 foana ny tahan'ny vola fototra",
+  "failedToUpdateFeeInterval": "Tsy nahomby ny fanavaozana ny elanelan-tsara",
+  "failedToDeleteFeeIntervals": "Tsy nahomby ny famafana ny elanelan-tsara",
+  "failedToCreateProvider": "Tsy nahomby ny famoronana mpanome",
+  "failedToSaveChanges": "Tsy nahomby ny fitehirizana ny fanovana",
+  "failedToLoadData": "Tsy nahomby ny fakana ny angona",
+  "currencyCodeAlreadyExists": "Efa misy vola manana io kaody io"
 }

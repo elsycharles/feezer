@@ -19,18 +19,13 @@ class PreferenceUtil {
     await prefs.setBool(_keyFirstLaunch, false);
   }
 
-  /// Resets the first launch status (useful for testing)
-  static Future<void> resetFirstLaunch() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove(_keyFirstLaunch);
-  }
-
   /// Gets the saved theme mode
   static Future<AppThemeMode> getThemeMode() async {
     final prefs = await SharedPreferences.getInstance();
-    final themeModeIndex =
-        prefs.getInt(_keyThemeMode) ?? AppThemeMode.system.index;
-    return AppThemeMode.values[themeModeIndex];
+    final index = prefs.getInt(_keyThemeMode) ?? AppThemeMode.system.index;
+    return index >= 0 && index < AppThemeMode.values.length
+        ? AppThemeMode.values[index]
+        : AppThemeMode.system;
   }
 
   /// Saves the theme mode preference

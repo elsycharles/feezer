@@ -29,7 +29,7 @@ class CurrencyCard extends StatelessWidget {
   String _formatRate(double rate) {
     // For very large numbers (> 1e15), use a more precise representation
     String valueStr;
-    
+
     if (rate.abs() > 1e15) {
       // Use toStringAsFixed(0) for very large integers
       if (rate == rate.toInt()) {
@@ -55,12 +55,12 @@ class CurrencyCard extends StatelessWidget {
         valueStr = tempStr;
       }
     }
-    
+
     // Split integer and decimal parts
     List<String> parts = valueStr.split('.');
     String integerPart = parts[0];
     String decimalPart = parts.length > 1 ? parts[1] : '';
-    
+
     // Format the integer part with spaces
     String formatted = '';
     int count = 0;
@@ -71,12 +71,12 @@ class CurrencyCard extends StatelessWidget {
       formatted = integerPart[i] + formatted;
       count++;
     }
-    
+
     // Append the decimal part if it exists
     if (decimalPart.isNotEmpty) {
       formatted += '.$decimalPart';
     }
-    
+
     return formatted;
   }
 
