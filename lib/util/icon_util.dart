@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
 
-/// Utility class for provider icons
-class IconUtil {
+/// Icons of operators without brand colors. Names are stored in the database,
+/// so existing names must stay readable.
+abstract final class IconUtil {
   static const Map<String, IconData> _icons = {
-    'business': Icons.business,
-    'account_balance': Icons.account_balance,
-    'phone_android': Icons.phone_android,
-    'credit_card': Icons.credit_card,
-    'account_balance_wallet': Icons.account_balance_wallet,
-    'payment': Icons.payment,
-    'money': Icons.monetization_on,
-    'savings': Icons.savings,
-    'currency_exchange': Icons.currency_exchange,
-    'wallet': Icons.wallet,
-    'card_membership': Icons.card_membership,
-    'mobile_friendly': Icons.mobile_friendly,
-    'store': Icons.store,
-    'local_atm': Icons.local_atm,
-    'bank': Icons.account_balance,
-    'group': Icons.people_alt,
+    'phone_android': Icons.phone_android_rounded,
+    'account_balance': Icons.account_balance_outlined,
+    'account_balance_wallet': Icons.account_balance_wallet_outlined,
+    'credit_card': Icons.credit_card_rounded,
+    'store': Icons.storefront_outlined,
+    'savings': Icons.savings_outlined,
+    'local_atm': Icons.local_atm_rounded,
+    'business': Icons.business_rounded,
+    'payment': Icons.payment_rounded,
+    'money': Icons.payments_outlined,
+    'currency_exchange': Icons.currency_exchange_rounded,
+    'wallet': Icons.wallet_rounded,
+    'card_membership': Icons.card_membership_rounded,
+    'mobile_friendly': Icons.mobile_friendly_rounded,
+    'bank': Icons.account_balance_outlined,
+    'group': Icons.people_alt_outlined,
   };
 
-  static IconData getIcon(String iconName) =>
-      _icons[iconName] ?? Icons.business;
+  /// Icons offered in the form.
+  static const List<String> choices = [
+    'phone_android',
+    'account_balance',
+    'account_balance_wallet',
+    'credit_card',
+    'store',
+    'savings',
+    'local_atm',
+    'business',
+  ];
 
-  static List<String> get availableIcons => _icons.keys.toList();
+  static IconData getIcon(String iconName) =>
+      _icons[iconName] ?? Icons.business_rounded;
 }
