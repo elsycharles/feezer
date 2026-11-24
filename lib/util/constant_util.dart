@@ -43,36 +43,6 @@ class ConstantUtil {
   // Formatting
   // ---------------------------------------------------------------------------
 
-  /// Formats an amount for display: thousands separated by spaces, at most two
-  /// decimals for amounts >= 1 (more for smaller amounts), trailing zeros
-  /// removed. [decimals] forces a fixed number of decimals.
-  static String formatCurrencyAmount(num amount, {int? decimals}) {
-    final value = amount.toDouble();
-    if (!value.isFinite) return value.toString();
-    if (value == 0) {
-      return decimals != null && decimals > 0 ? '0.${'0' * decimals}' : '0';
-    }
-
-    final negative = value < 0;
-    final abs = value.abs();
-    String text;
-    if (decimals != null) {
-      text = abs.toStringAsFixed(decimals);
-    } else if (abs >= 1) {
-      text = _trimZeros(abs.toStringAsFixed(2));
-    } else if (abs >= 1e-6) {
-      text = _trimZeros(abs.toStringAsFixed(10));
-    } else {
-      return value.toStringAsExponential(4);
-    }
-    final formatted = _groupThousands(text);
-    return negative && formatted != '0' ? '-$formatted' : formatted;
-  }
-
-  /// Formats a percentage (up to 4 significant decimals, no trailing zeros).
-  static String formatPercentage(num value) =>
-      _trimZeros(value.toDouble().toStringAsFixed(4));
-
   /// Text used to prefill an amount field (spaces as thousand separators, no
   /// rounding beyond the precision of the value).
   static String formatAmountInput(double value) {

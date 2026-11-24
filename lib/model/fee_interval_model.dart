@@ -1,13 +1,13 @@
 import '../data/app_database.dart';
 import '../util/constant_util.dart';
+import '../util/money.dart';
 
 /// Type of fee calculation.
 enum FeeType { fixed, percentage }
 
 /// Fee applied to transactions whose amount is in `[minAmount, maxAmount]`.
 ///
-/// Amounts and fixed fees are stored in the base currency (Ariary); a
-/// percentage fee is stored as a number between 0 and 100.
+/// A percentage fee is stored as a number between 0 and 100.
 class FeeInterval {
   FeeInterval({
     this.id,
@@ -61,31 +61,13 @@ class FeeInterval {
     return minAmount! <= other.maxAmount! && other.minAmount! <= maxAmount!;
   }
 
-  /// Fee of one transaction of [amount] (in base currency).
+  /// Fee of one transaction of [amount].
   double feeFor(double amount) =>
       isPercentage ? amount * (fee ?? 0) / 100 : (fee ?? 0);
 
-  /// Range converted with [exchangeRate] (base currency per display unit).
-  String formattedRangeWithSymbol(
-    String currencySymbol, [
-    double exchangeRate = 1.0,
-  ]) {
-    final min = (minAmount ?? 0) / exchangeRate;
-    final max = (maxAmount ?? 0) / exchangeRate;
-    return '${ConstantUtil.formatCurrencyAmount(min)} - '
-        '${ConstantUtil.formatCurrencyAmount(max)} $currencySymbol';
-  }
-
-  /// Fee converted with [exchangeRate] (percentages are not converted).
-  String formattedFeeWithSymbol(
-    String currencySymbol, [
-    double exchangeRate = 1.0,
-  ]) {
-    final value = fee ?? 0;
-    if (isPercentage) return '${ConstantUtil.formatPercentage(value)}%';
-    return '${ConstantUtil.formatCurrencyAmount(value / exchangeRate)} '
-        '$currencySymbol';
-  }
+  /// `min – max` formatted as money (used in messages).
+  String get formattedRange =>
+      '${Money.format(minAmount ?? 0)} – ${Money.format(maxAmount ?? 0)}';
 
   static FeeInterval fromMap(Map<String, dynamic> map) {
     final typeIndex = (map[Db.feeType] as num?)?.toInt() ?? 0;

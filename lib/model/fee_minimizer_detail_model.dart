@@ -24,12 +24,6 @@ class FeeOptimizerDetail {
   /// Fees of the whole group.
   double get totalFees => fee * count;
 
-  FeeOptimizerDetail scaled(double factor) => FeeOptimizerDetail(
-    amount: amount * factor,
-    fee: fee * factor,
-    count: count,
-  );
-
   FeeOptimizerDetail copyWith({double? amount, double? fee, int? count}) =>
       FeeOptimizerDetail(
         amount: amount ?? this.amount,
