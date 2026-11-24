@@ -908,7 +908,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get roundToHundredOff => 'Exact amounts, to the ariary.';
+  String get roundToHundredOff => 'Exact amounts, not rounded.';
 
   @override
   String get faqHowItWorks => 'How does it work?';

@@ -1560,7 +1560,7 @@ abstract class AppLocalizations {
   /// No description provided for @roundToHundredOff.
   ///
   /// In en, this message translates to:
-  /// **'Exact amounts, to the ariary.'**
+  /// **'Exact amounts, not rounded.'**
   String get roundToHundredOff;
 
   /// No description provided for @faqHowItWorks.

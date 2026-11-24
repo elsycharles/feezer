@@ -1083,7 +1083,7 @@
       }
     }
   },
-  "roundToHundredOff": "Exact amounts, to the ariary.",
+  "roundToHundredOff": "Exact amounts, not rounded.",
   "faqHowItWorks": "How does it work?",
   "faqHowItWorksAnswer": "Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.",
   "faqRounding": "Why are the amounts rounded to the hundred?",
