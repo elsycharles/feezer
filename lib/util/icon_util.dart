@@ -25,11 +25,4 @@ class IconUtil {
       _icons[iconName] ?? Icons.business;
 
   static List<String> get availableIcons => _icons.keys.toList();
-
-  static String getIconName(IconData icon) => _icons.entries
-      .firstWhere(
-        (e) => e.value == icon,
-        orElse: () => const MapEntry('business', Icons.business),
-      )
-      .key;
 }

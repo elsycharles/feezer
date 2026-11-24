@@ -10,17 +10,6 @@ class ThemeProvider extends ChangeNotifier {
   ThemeMode get flutterThemeMode =>
       PreferenceUtil.convertToFlutterThemeMode(_themeMode);
 
-  String get themeModeDisplayName {
-    switch (_themeMode) {
-      case AppThemeMode.light:
-        return 'Light';
-      case AppThemeMode.dark:
-        return 'Dark';
-      case AppThemeMode.system:
-        return 'System';
-    }
-  }
-
   /// Initialize theme from saved preferences
   Future<void> initializeTheme() async {
     _themeMode = await PreferenceUtil.getThemeMode();

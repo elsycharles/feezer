@@ -125,7 +125,11 @@ class ThemeUtil {
     color: textLight,
   );
 
-  static ThemeData get lightTheme {
+  /// Built once: rebuilding ThemeData on every app rebuild is wasteful.
+  static final ThemeData lightTheme = _buildLightTheme();
+  static final ThemeData darkTheme = _buildDarkTheme();
+
+  static ThemeData _buildLightTheme() {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -253,7 +257,7 @@ class ThemeUtil {
     );
   }
 
-  static ThemeData get darkTheme {
+  static ThemeData _buildDarkTheme() {
     final baseScheme = ColorScheme.fromSeed(
       seedColor: primaryColor,
       brightness: Brightness.dark,
@@ -492,28 +496,6 @@ class ThemeUtil {
   static Color _shade(Color color, double amount) =>
       Color.lerp(color, Colors.black, amount) ?? color;
 
-  static Color getStatusColor(String status) {
-    switch (status.toLowerCase()) {
-      case 'success':
-      case 'completed':
-      case 'active':
-        return success;
-      case 'warning':
-      case 'pending':
-        return warning;
-      case 'error':
-      case 'failed':
-      case 'inactive':
-        return error;
-      case 'info':
-      case 'processing':
-        return info;
-      default:
-        return primaryColor;
-    }
-  }
-
-  /// Get the appropriate surface color based on theme
   static Color getSurfaceColor(BuildContext context) {
     return Theme.of(context).colorScheme.surface;
   }
