@@ -89,6 +89,12 @@ maximum number of transactions.
    envelope of a single transaction's value, only while the bound can still
    beat the best plan.
 
+5. With an amount step (withdrawals default to multiples of 100, since cash
+   points hand out notes; configurable per withdrawal / transfer), tier bounds
+   are rounded inwards to the step and the budget is poured by whole steps.
+   The continuous value still bounds every plan, so the search stays exact; it
+   is checked against a stepped brute-force reference.
+
 The result is **proven optimal**. A safety limit (time / number of evaluated
 vectors) keeps extreme inputs responsive; the plan is then still valid and
 flagged as not proven optimal. The optimizer runs in a background isolate.
