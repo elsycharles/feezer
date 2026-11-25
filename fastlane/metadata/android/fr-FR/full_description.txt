@@ -1,0 +1,26 @@
+Feezer calcule comment découper un retrait ou un transfert d'argent mobile pour payer le moins de frais possible. Conçu pour Madagascar : MVola (Yas, ex-Telma), Orange Money et Airtel Money.
+
+Les frais du mobile money sont calculés par paliers. Selon le montant, faire deux opérations au lieu d'une peut vous faire recevoir plus d'argent pour le même solde. Feezer trouve le découpage idéal à votre place et vous dit exactement quoi faire.
+
+Comment ça marche
+1. Choisissez l'opérateur : MVola, Orange Money, Airtel Money ou votre propre grille.
+2. Choisissez l'opération : retrait, transfert, transfert via l'appli, vers un autre opérateur, vers une microfinance ou vers un non-abonné.
+3. Entrez le montant disponible, frais compris.
+4. Feezer affiche le plan : combien retirer ou envoyer à chaque fois, les frais de chaque opération et ce que vous recevez.
+
+Ce que Feezer vous apporte
+• Le découpage optimal, calculé exactement, pas une estimation.
+• La comparaison avec la méthode habituelle (le plus gros montant possible à chaque fois) : vous voyez combien vous gagnez ou économisez.
+• Des montants arrondis à la centaine pour les retraits, car les points de retrait ne donnent que des billets : 10 000, jamais 10 040.
+• Un nombre d'opérations limité si vous le souhaitez, avec ce que cette limite vous coûte.
+
+Des frais officiels, à jour
+Les grilles de MVola et d'Orange Money sont lues chaque jour sur les sites officiels des opérateurs ; celle d'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » pour télécharger les dernières grilles. Vous pouvez aussi créer vos propres grilles (banque, microfinance…) et les importer ou les exporter en CSV.
+
+Simple et privé
+• Fonctionne hors ligne : les grilles sont incluses dans l'application.
+• Aucun compte, aucune publicité, aucune donnée collectée : tout reste sur votre téléphone.
+• En français, en anglais et en malgache, en thème clair ou sombre.
+• Logiciel libre (licence GPL-3.0) : le code est public sur GitHub.
+
+Feezer n'est affilié à aucun opérateur. MVola, Orange Money et Airtel Money sont des marques de leurs propriétaires respectifs. Les frais peuvent changer à tout moment : vérifiez-les auprès de votre opérateur avant une opération.

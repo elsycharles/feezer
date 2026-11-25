@@ -1,0 +1,5 @@
+• Frais officiels par opération : retrait, transfert, vers un autre opérateur, vers une microfinance ou un non-abonné
+• Mise à jour des frais en un geste, avec la liste de ce qui change
+• Retraits arrondis à la centaine (10 000, jamais 10 040)
+• Nouvelle interface, en thème clair ou sombre
+• Fonctionne hors ligne, sans compte ni publicité
