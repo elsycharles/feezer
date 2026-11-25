@@ -1,0 +1,26 @@
+Feezer works out how to split a mobile money withdrawal or transfer so you pay the least fees possible. Made for Madagascar: MVola (Yas, formerly Telma), Orange Money and Airtel Money.
+
+Mobile money fees are charged by tiers. Depending on the amount, making two transactions instead of one can get you more money from the same balance. Feezer finds the right split for you and tells you exactly what to do.
+
+How it works
+1. Choose the operator: MVola, Orange Money, Airtel Money or your own fee grid.
+2. Choose the operation: withdrawal, transfer, transfer in the app, to another operator, to a microfinance or to a non-subscriber.
+3. Enter the amount available, fees included.
+4. Feezer shows the plan: how much to withdraw or send each time, the fee of each transaction and what you get.
+
+What Feezer gives you
+• The optimal split, calculated exactly, not an estimate.
+• A comparison with the usual way (the largest possible amount each time): you see how much you gain or save.
+• Withdrawals rounded to the hundred, because cash points only hand out notes: 10,000, never 10,040.
+• An optional limit on the number of transactions, with what that limit costs you.
+
+Official fees, kept up to date
+The MVola and Orange Money grids are read every day on the operators' official websites; the Airtel Money grid is copied from its published rates. Tap "Update" to download the latest grids. You can also create your own grids (bank, microfinance…) and import or export them as CSV.
+
+Simple and private
+• Works offline: the grids are included in the app.
+• No account, no ads, no data collected: everything stays on your phone.
+• In English, French and Malagasy, in light or dark theme.
+• Free software (GPL-3.0 license): the code is public on GitHub.
+
+Feezer is not affiliated with any operator. MVola, Orange Money and Airtel Money are trademarks of their respective owners. Fees can change at any time: check them with your operator before a transaction.

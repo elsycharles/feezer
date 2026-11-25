@@ -121,7 +121,14 @@ Tools:
 python3 tool/brand/make_logo.py            # logo, launcher and splash images
 dart run flutter_launcher_icons            # Android / iOS launcher icons
 flutter test tool/screenshots_test.dart    # every screen, light and dark
+flutter test tool/store_screenshots_test.dart && \
+  python3 tool/store/compose_store_assets.py   # Google Play images
 ```
+
+The Google Play listing (texts, icon, feature graphic, screenshots, in French
+and English) is in [`fastlane/metadata/android`](fastlane/metadata/android); the
+Play Console forms are answered in [`fastlane/GOOGLE_PLAY.md`](fastlane/GOOGLE_PLAY.md).
+The privacy policy is [`PRIVACY.md`](PRIVACY.md).
 
 The logo is the original artwork (`tool/brand/logo_original.png`) redrawn
 from measured geometry: 60° slants, one radius for the soft corners, flat

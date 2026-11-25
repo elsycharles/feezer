@@ -1,0 +1,5 @@
+• Official fees per operation: withdrawal, transfer, to another operator, to a microfinance or a non-subscriber
+• One-tap fee update, showing what changes
+• Withdrawals rounded to the hundred (10,000, never 10,040)
+• New interface, in light or dark theme
+• Works offline, with no account and no ads

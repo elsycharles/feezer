@@ -1,4 +1,4 @@
-package com.elsysc.feeminimizer.fee_minimizer;
+package com.feezer;
 
 import io.flutter.embedding.android.FlutterActivity;
 
