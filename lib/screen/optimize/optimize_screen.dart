@@ -136,8 +136,8 @@ class OptimizeScreenState extends State<OptimizeScreen> {
   String? _selectedId;
   int _minOps = 0;
   int _maxOps = 0;
-  int _withdrawalStep = PreferenceUtil.defaultWithdrawalStep;
-  int _transferStep = 0;
+  int _withdrawalStep = PreferenceUtil.defaultAmountStep;
+  int _transferStep = PreferenceUtil.defaultAmountStep;
   bool _limitsExpanded = false;
   bool _running = false;
   OptimizationOutcome? _outcome;

@@ -35,16 +35,17 @@ class PreferenceUtil {
   static const String _keyWithdrawalStep = 'amount_step_withdrawal';
   static const String _keyTransferStep = 'amount_step_transfer';
 
-  /// Cash points only hand out notes: withdrawals default to multiples of 100.
-  static const int defaultWithdrawalStep = 100;
+  /// Amounts are rounded to the hundred by default (cash points only hand
+  /// out notes), for withdrawals and transfers alike, until the user turns it
+  /// off.
+  static const int defaultAmountStep = 100;
 
   /// Every amount of a plan is a multiple of this step (0: any amount), for
   /// withdrawals or for transfers.
   static Future<int> amountStep({required bool withdrawal}) async {
     final prefs = await SharedPreferences.getInstance();
-    return withdrawal
-        ? prefs.getInt(_keyWithdrawalStep) ?? defaultWithdrawalStep
-        : prefs.getInt(_keyTransferStep) ?? 0;
+    return prefs.getInt(withdrawal ? _keyWithdrawalStep : _keyTransferStep) ??
+        defaultAmountStep;
   }
 
   static Future<void> setAmountStep(

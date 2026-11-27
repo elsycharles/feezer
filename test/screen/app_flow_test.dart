@@ -75,6 +75,8 @@ void main() {
         'first_launch': false,
         'theme_mode': mode.index,
         'selected_locale': 'en',
+        // Exact transfer amounts here; rounding is the default (see below).
+        'amount_step_transfer': 0,
       });
 
       late Directory dir;
