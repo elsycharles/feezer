@@ -4,33 +4,13 @@
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Enter an amount: Feezer splits it into the transactions that cost the least in fees.",
-  "@onboardingDescription1": {
-    "description": "First onboarding screen description"
-  },
-  "onboardingTitle2": "Real operator fees",
+  "onboardingTitle2": "In 3 steps",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
-  },
-  "onboardingDescription2": "MVola, Orange Money, Airtel Money: the grids come from the operators' official rates and update in one tap.",
-  "@onboardingDescription2": {
-    "description": "Second onboarding screen description"
-  },
-  "onboardingTitle3": "Withdrawals and transfers",
-  "@onboardingTitle3": {
-    "description": "Third onboarding screen title"
-  },
-  "onboardingDescription3": "Choose the operator and the operation. Your data stays on your phone, even offline.",
-  "@onboardingDescription3": {
-    "description": "Third onboarding screen description"
   },
   "next": "Next",
   "@next": {
     "description": "Next button text"
-  },
-  "skip": "Skip",
-  "@skip": {
-    "description": "Skip button text"
   },
   "getStarted": "Get started",
   "@getStarted": {
@@ -903,9 +883,28 @@
   "faqRoundingAnswer": "Cash points only hand out notes: you can't withdraw 10 040. You can turn rounding off at any time.",
   "faqPrivacy": "Is my data shared?",
   "faqPrivacyAnswer": "No. Feezer needs no account and nothing leaves your phone.",
+  "onboardingText1": "Feezer splits your withdrawals and transfers.",
+  "onboardingExample": "Example: {amount} in your account",
+  "onboardingOneGo": "In one go",
+  "onboardingWithFeezer": "With Feezer",
+  "onboardingStep1": "Pick the operator",
+  "onboardingStep2": "Enter the amount",
+  "onboardingStep3": "Follow the plan",
   "roundToHundredOn": "{example}, never {wrong}",
   "vsUsualWay": "Compared with the usual way",
   "csvFormatRows": "One row per tier; commas or semicolons.",
+  "faqInternet": "Do I need internet?",
+  "faqInternetAnswer": "No. Calculations run on your phone; internet is only used to update the fees.",
+  "termsIndependenceTitle": "Independence",
+  "termsIndependenceContent": "Feezer is not affiliated with any operator and is not responsible for the fees charged.",
+  "termsAcceptance": "By using Feezer, you accept these terms.",
+  "@onboardingExample": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
   "@roundToHundredOn": {
     "placeholders": {
       "example": {
@@ -915,10 +914,5 @@
         "type": "String"
       }
     }
-  },
-  "faqInternet": "Do I need internet?",
-  "faqInternetAnswer": "No. Calculations run on your phone; internet is only used to update the fees.",
-  "termsIndependenceTitle": "Independence",
-  "termsIndependenceContent": "Feezer is not affiliated with any operator and is not responsible for the fees charged.",
-  "termsAcceptance": "By using Feezer, you accept these terms."
+  }
 }

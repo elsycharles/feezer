@@ -12,28 +12,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onboardingTitle1 => 'Payez moins de frais';
 
   @override
-  String get onboardingDescription1 =>
-      'Entrez un montant : Feezer le découpe en opérations qui coûtent le moins de frais possible.';
-
-  @override
-  String get onboardingTitle2 => 'Les vrais frais des opérateurs';
-
-  @override
-  String get onboardingDescription2 =>
-      'MVola, Orange Money, Airtel Money : les grilles viennent des tarifs officiels des opérateurs et se mettent à jour en un geste.';
-
-  @override
-  String get onboardingTitle3 => 'Retraits et transferts';
-
-  @override
-  String get onboardingDescription3 =>
-      'Choisissez l\'opérateur et l\'opération. Vos données restent sur votre téléphone, même sans internet.';
+  String get onboardingTitle2 => 'En 3 étapes';
 
   @override
   String get next => 'Suivant';
-
-  @override
-  String get skip => 'Passer';
 
   @override
   String get getStarted => 'Commencer';
@@ -775,6 +757,29 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get faqPrivacyAnswer =>
       'Non. Feezer ne demande aucun compte et rien ne quitte votre téléphone.';
+
+  @override
+  String get onboardingText1 => 'Feezer découpe vos retraits et transferts.';
+
+  @override
+  String onboardingExample(String amount) {
+    return 'Exemple : $amount sur votre compte';
+  }
+
+  @override
+  String get onboardingOneGo => 'En une fois';
+
+  @override
+  String get onboardingWithFeezer => 'Avec Feezer';
+
+  @override
+  String get onboardingStep1 => 'Choisissez l\'opérateur';
+
+  @override
+  String get onboardingStep2 => 'Entrez le montant';
+
+  @override
+  String get onboardingStep3 => 'Suivez le plan';
 
   @override
   String roundToHundredOn(String example, String wrong) {

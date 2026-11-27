@@ -106,47 +106,17 @@ abstract class AppLocalizations {
   /// **'Pay less in fees'**
   String get onboardingTitle1;
 
-  /// First onboarding screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Enter an amount: Feezer splits it into the transactions that cost the least in fees.'**
-  String get onboardingDescription1;
-
   /// Second onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Real operator fees'**
+  /// **'In 3 steps'**
   String get onboardingTitle2;
-
-  /// Second onboarding screen description
-  ///
-  /// In en, this message translates to:
-  /// **'MVola, Orange Money, Airtel Money: the grids come from the operators\' official rates and update in one tap.'**
-  String get onboardingDescription2;
-
-  /// Third onboarding screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Withdrawals and transfers'**
-  String get onboardingTitle3;
-
-  /// Third onboarding screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Choose the operator and the operation. Your data stays on your phone, even offline.'**
-  String get onboardingDescription3;
 
   /// Next button text
   ///
   /// In en, this message translates to:
   /// **'Next'**
   String get next;
-
-  /// Skip button text
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get skip;
 
   /// Get started button text
   ///
@@ -1370,6 +1340,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No. Feezer needs no account and nothing leaves your phone.'**
   String get faqPrivacyAnswer;
+
+  /// No description provided for @onboardingText1.
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer splits your withdrawals and transfers.'**
+  String get onboardingText1;
+
+  /// No description provided for @onboardingExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: {amount} in your account'**
+  String onboardingExample(String amount);
+
+  /// No description provided for @onboardingOneGo.
+  ///
+  /// In en, this message translates to:
+  /// **'In one go'**
+  String get onboardingOneGo;
+
+  /// No description provided for @onboardingWithFeezer.
+  ///
+  /// In en, this message translates to:
+  /// **'With Feezer'**
+  String get onboardingWithFeezer;
+
+  /// No description provided for @onboardingStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick the operator'**
+  String get onboardingStep1;
+
+  /// No description provided for @onboardingStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount'**
+  String get onboardingStep2;
+
+  /// No description provided for @onboardingStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the plan'**
+  String get onboardingStep3;
 
   /// No description provided for @roundToHundredOn.
   ///

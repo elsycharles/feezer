@@ -12,28 +12,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get onboardingTitle1 => 'Mandoava sarany kely kokoa';
 
   @override
-  String get onboardingDescription1 =>
-      'Ampidiro ny vola: zarain\'i Feezer ho fifanakalozana mora indrindra izany.';
-
-  @override
-  String get onboardingTitle2 => 'Ny tena saran\'ny mpandraharaha';
-
-  @override
-  String get onboardingDescription2 =>
-      'MVola, Orange Money, Airtel Money: avy amin\'ny saran\'ny mpandraharaha ofisialy ny tabilao ary havaozina amin\'ny tsindry iray.';
-
-  @override
-  String get onboardingTitle3 => 'Fisintonana sy famindrana';
-
-  @override
-  String get onboardingDescription3 =>
-      'Fidio ny mpandraharaha sy ny fifanakalozana. Mijanona ao amin\'ny findainao ny angon-drakitrao, na tsy misy aterineto aza.';
+  String get onboardingTitle2 => 'Amin\'ny dingana 3';
 
   @override
   String get next => 'Manaraka';
-
-  @override
-  String get skip => 'Handingana';
 
   @override
   String get getStarted => 'Hanomboka';
@@ -778,6 +760,30 @@ class AppLocalizationsMg extends AppLocalizations {
   @override
   String get faqPrivacyAnswer =>
       'Tsia. Tsy mila kaonty i Feezer ary tsy misy miala amin\'ny findainao.';
+
+  @override
+  String get onboardingText1 =>
+      'Zarain\'i Feezer ny fisintonana sy famindranao.';
+
+  @override
+  String onboardingExample(String amount) {
+    return 'Ohatra: $amount ao amin\'ny kaontinao';
+  }
+
+  @override
+  String get onboardingOneGo => 'Indray mandeha';
+
+  @override
+  String get onboardingWithFeezer => 'Amin\'i Feezer';
+
+  @override
+  String get onboardingStep1 => 'Fidio ny mpandraharaha';
+
+  @override
+  String get onboardingStep2 => 'Ampidiro ny vola';
+
+  @override
+  String get onboardingStep3 => 'Araho ny drafitra';
 
   @override
   String roundToHundredOn(String example, String wrong) {

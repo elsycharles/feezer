@@ -1,16 +1,11 @@
 {
   "@@locale": "mg",
   "onboardingTitle1": "Mandoava sarany kely kokoa",
-  "onboardingDescription1": "Ampidiro ny vola: zarain'i Feezer ho fifanakalozana mora indrindra izany.",
-  "onboardingTitle2": "Ny tena saran'ny mpandraharaha",
-  "onboardingDescription2": "MVola, Orange Money, Airtel Money: avy amin'ny saran'ny mpandraharaha ofisialy ny tabilao ary havaozina amin'ny tsindry iray.",
-  "onboardingTitle3": "Fisintonana sy famindrana",
-  "onboardingDescription3": "Fidio ny mpandraharaha sy ny fifanakalozana. Mijanona ao amin'ny findainao ny angon-drakitrao, na tsy misy aterineto aza.",
+  "onboardingTitle2": "Amin'ny dingana 3",
   "next": "Manaraka",
   "@next": {
     "description": "Next button text"
   },
-  "skip": "Handingana",
   "getStarted": "Hanomboka",
   "cancel": "Aoka ihany",
   "@cancel": {
@@ -373,6 +368,13 @@
   "faqRoundingAnswer": "Taratasim-bola ihany no omena rehefa misintona: tsy azo sintonina ny 10 040. Azonao esorina amin'ny fotoana rehetra ny boribory.",
   "faqPrivacy": "Zaraina ve ny angon-drakitro?",
   "faqPrivacyAnswer": "Tsia. Tsy mila kaonty i Feezer ary tsy misy miala amin'ny findainao.",
+  "onboardingText1": "Zarain'i Feezer ny fisintonana sy famindranao.",
+  "onboardingExample": "Ohatra: {amount} ao amin'ny kaontinao",
+  "onboardingOneGo": "Indray mandeha",
+  "onboardingWithFeezer": "Amin'i Feezer",
+  "onboardingStep1": "Fidio ny mpandraharaha",
+  "onboardingStep2": "Ampidiro ny vola",
+  "onboardingStep3": "Araho ny drafitra",
   "roundToHundredOn": "{example}, fa tsy {wrong}",
   "vsUsualWay": "Raha oharina amin'ny fomba mahazatra",
   "csvFormatRows": "Andalana iray isaky ny ambaratonga; faingo na teboka sy faingo.",

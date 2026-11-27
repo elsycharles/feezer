@@ -12,28 +12,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingTitle1 => 'Pay less in fees';
 
   @override
-  String get onboardingDescription1 =>
-      'Enter an amount: Feezer splits it into the transactions that cost the least in fees.';
-
-  @override
-  String get onboardingTitle2 => 'Real operator fees';
-
-  @override
-  String get onboardingDescription2 =>
-      'MVola, Orange Money, Airtel Money: the grids come from the operators\' official rates and update in one tap.';
-
-  @override
-  String get onboardingTitle3 => 'Withdrawals and transfers';
-
-  @override
-  String get onboardingDescription3 =>
-      'Choose the operator and the operation. Your data stays on your phone, even offline.';
+  String get onboardingTitle2 => 'In 3 steps';
 
   @override
   String get next => 'Next';
-
-  @override
-  String get skip => 'Skip';
 
   @override
   String get getStarted => 'Get started';
@@ -771,6 +753,29 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get faqPrivacyAnswer =>
       'No. Feezer needs no account and nothing leaves your phone.';
+
+  @override
+  String get onboardingText1 => 'Feezer splits your withdrawals and transfers.';
+
+  @override
+  String onboardingExample(String amount) {
+    return 'Example: $amount in your account';
+  }
+
+  @override
+  String get onboardingOneGo => 'In one go';
+
+  @override
+  String get onboardingWithFeezer => 'With Feezer';
+
+  @override
+  String get onboardingStep1 => 'Pick the operator';
+
+  @override
+  String get onboardingStep2 => 'Enter the amount';
+
+  @override
+  String get onboardingStep3 => 'Follow the plan';
 
   @override
   String roundToHundredOn(String example, String wrong) {
