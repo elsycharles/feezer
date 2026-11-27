@@ -11,7 +11,7 @@ Comment ça marche
 Ce que Feezer vous apporte
 • Le découpage optimal, calculé exactement, pas une estimation.
 • La comparaison avec la méthode habituelle (le plus gros montant possible à chaque fois) : vous voyez combien vous gagnez ou économisez.
-• Des montants arrondis à la centaine pour les retraits, car les points de retrait ne donnent que des billets : 10 000, jamais 10 040.
+• Des montants arrondis à la centaine par défaut, car les points de retrait ne donnent que des billets : 10 000, jamais 10 040.
 • Un nombre d'opérations limité si vous le souhaitez, avec ce que cette limite vous coûte.
 
 Des frais officiels, à jour
