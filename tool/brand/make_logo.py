@@ -10,9 +10,14 @@ Usage (from the repository root):
     python3 -m pip install pillow numpy
     python3 tool/brand/make_logo.py
     dart run flutter_launcher_icons
+
+It also writes lib/widget/logo_geometry.dart, the same shapes as Flutter
+paths, for the animated logo of the launch screen.
 """
 
 import math
+import shutil
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -52,11 +57,9 @@ def unit(v):
     return v / np.linalg.norm(v)
 
 
-def corner(prev, vertex, nxt, radius, step=0.5):
-    """Points of a rounded corner at [vertex] between the edges to [prev] and [nxt]."""
+def corner_arc(prev, vertex, nxt, radius):
+    """Rounded corner at [vertex]: (start, end, center, start angle, sweep)."""
     vertex = np.asarray(vertex, float)
-    if radius <= 0:
-        return [vertex]
     d1, d2 = unit(np.asarray(prev) - vertex), unit(np.asarray(nxt) - vertex)
     phi = math.acos(np.clip(d1 @ d2, -1, 1))
     t = radius / math.tan(phi / 2)
@@ -65,6 +68,15 @@ def corner(prev, vertex, nxt, radius, step=0.5):
     a1 = math.atan2(p1[1] - center[1], p1[0] - center[0])
     a2 = math.atan2(p2[1] - center[1], p2[0] - center[0])
     sweep = (a2 - a1 + math.pi) % (2 * math.pi) - math.pi
+    return p1, p2, center, a1, sweep
+
+
+def corner(prev, vertex, nxt, radius, step=0.5):
+    """Points of a rounded corner at [vertex] between the edges to [prev] and [nxt]."""
+    vertex = np.asarray(vertex, float)
+    if radius <= 0:
+        return [vertex]
+    _, _, center, a1, sweep = corner_arc(prev, vertex, nxt, radius)
     n = max(2, int(abs(sweep) * radius / step))
     angles = (a1 + sweep * i / n for i in range(n + 1))
     return [center + radius * np.array([math.cos(a), math.sin(a)]) for a in angles]
@@ -85,18 +97,22 @@ def rounded(vertices, radii):
     return pts
 
 
-def top_bar():
+def top_bar_spec():
     vertices = [
         (slant_x(LEFT_C, TOP_Y2, -1), TOP_Y2),
         (slant_x(LEFT_C, TOP_Y1, -1), TOP_Y1),
         (slant_x(RIGHT_C, TOP_Y1, -1), TOP_Y1),
         (slant_x(RIGHT_C, TOP_Y2, -1), TOP_Y2),
     ]
-    return rounded(vertices, [SHARP, SOFT, SHARP, SOFT])
+    return vertices, [SHARP, SOFT, SHARP, SOFT]
 
 
-def stem():
-    """Middle bar and leg, as one outline."""
+def top_bar():
+    return rounded(*top_bar_spec())
+
+
+def stem_spec():
+    """Middle bar and leg, as one outline: vertices, radii and the closing curve."""
     v = np.array([slant_x(LEG_LEFT_C, MID_Y1, 1), MID_Y1])  # corner replaced by the big curve
     d_top, d_leg = np.array([1.0, 0.0]), np.array([0.5, math.sqrt(3) / 2])
     big_start = v + d_top * BIG_A1
@@ -113,30 +129,41 @@ def stem():
         big_end,
     ]
     radii = [0, SHARP, SOFT, 0, SOFT, SHARP, 0]
+    handle_leg = v + d_leg * BIG_A2 * (1 - BIG_H2)
+    handle_top = v + d_top * BIG_A1 * (1 - BIG_H1)
+    return vertices, radii, (handle_leg, handle_top)
+
+
+def stem():
+    vertices, radii, (handle_leg, handle_top) = stem_spec()
     pts = [np.asarray(vertices[0], float)]
     for i in range(1, len(vertices) - 1):
         pts += corner(vertices[i - 1], vertices[i], vertices[i + 1], radii[i])
-    handle_leg = v + d_leg * BIG_A2 * (1 - BIG_H2)
-    handle_top = v + d_top * BIG_A1 * (1 - BIG_H1)
-    pts += cubic(big_end, handle_leg, handle_top, big_start)
+    pts += cubic(vertices[-1], handle_leg, handle_top, vertices[0])
     return pts
 
 
-def upper_side():
-    """Region above the fold: the middle bar is the stem inside this region."""
+def upper_spec():
+    """Region above the fold: lines before the fold, the fold curve, lines after."""
     y_low = MID_Y2 + 40
     p0 = np.array([FOLD_X0, MID_Y2])
     p3 = np.array(FOLD_END)
     dist = np.linalg.norm(p3 - p0)
     direction = np.array([math.cos(math.radians(FOLD_ANGLE)), math.sin(math.radians(FOLD_ANGLE))])
-    fold = cubic(p0, p0 + np.array([-1, 0]) * dist * FOLD_H1, p3 - direction * dist * FOLD_H2, p3)
+    fold = (p0, p0 + np.array([-1, 0]) * dist * FOLD_H1, p3 - direction * dist * FOLD_H2, p3)
     beyond = p3 + direction * 60
-    return [
+    before = [
         (-300, 0), (1400, 0), (1400, y_low),
         (slant_x(LEG_UP_C, y_low, 1) + 1, y_low),
         (slant_x(LEG_UP_C, MID_Y2, 1) + 1, MID_Y2),
-        *fold, beyond, (-300, beyond[1]),
     ]
+    return before, fold, [beyond, (-300, beyond[1])]
+
+
+def upper_side():
+    """Region above the fold: the middle bar is the stem inside this region."""
+    before, fold, after = upper_spec()
+    return [*before, *cubic(*fold), *after]
 
 
 def render(size, transform, background=None, ss=8):
@@ -206,6 +233,109 @@ def save(img, path):
     print("wrote", path.relative_to(ROOT), img.size)
 
 
+def leg_reveal_range(direction, size=1024):
+    """Smallest and largest projection of the leg (below the fold) on [direction]."""
+
+    def mask(points):
+        img = Image.new("1", (size, size), 0)
+        ImageDraw.Draw(img).polygon([tuple(p) for p in points], fill=1)
+        return np.asarray(img, bool)
+
+    leg = mask(stem()) & ~mask(upper_side())
+    ys, xs = np.nonzero(leg)
+    proj = (xs + 0.5) * direction[0] + (ys + 0.5) * direction[1]
+    return float(proj.min()), float(proj.max())
+
+
+def write_dart_geometry(path="lib/widget/logo_geometry.dart"):
+    """Writes the mark as Flutter paths, for the animated logo."""
+
+    def num(v):
+        return f"{float(v):.3f}"
+
+    def pt(p):
+        return f"{num(p[0])}, {num(p[1])}"
+
+    def arc(prev, vertex, nxt, radius):
+        _, _, c, a1, sweep = corner_arc(prev, vertex, nxt, radius)
+        rect = f"{num(c[0] - radius)}, {num(c[1] - radius)}, {num(c[0] + radius)}, {num(c[1] + radius)}"
+        return f"    ..arcTo(const Rect.fromLTRB({rect}), {a1:.6f}, {sweep:.6f}, false)"
+
+    lines = []
+    # Top bar: four rounded corners.
+    vertices, radii = top_bar_spec()
+    first = corner_arc(vertices[-1], vertices[0], vertices[1], radii[0])[0]
+    top = [f"    ..moveTo({pt(first)})"]
+    n = len(vertices)
+    for i in range(n):
+        top.append(arc(vertices[i - 1], vertices[i], vertices[(i + 1) % n], radii[i]))
+    top.append("    ..close();")
+    # Stem: middle bar and leg.
+    vertices, radii, (h1, h2) = stem_spec()
+    stem_cmds = [f"    ..moveTo({pt(vertices[0])})"]
+    for i in range(1, len(vertices) - 1):
+        if radii[i] > 0:
+            stem_cmds.append(arc(vertices[i - 1], vertices[i], vertices[i + 1], radii[i]))
+        else:
+            stem_cmds.append(f"    ..lineTo({pt(vertices[i])})")
+    stem_cmds.append(f"    ..lineTo({pt(vertices[-1])})")
+    stem_cmds.append(f"    ..cubicTo({pt(h1)}, {pt(h2)}, {pt(vertices[0])})")
+    stem_cmds.append("    ..close();")
+    # Region above the fold.
+    before, (p0, c1, c2, p3), after = upper_spec()
+    upper = [f"    ..moveTo({pt(before[0])})"]
+    upper += [f"    ..lineTo({pt(p)})" for p in before[1:]]
+    upper.append(f"    ..lineTo({pt(p0)})")
+    upper.append(f"    ..cubicTo({pt(c1)}, {pt(c2)}, {pt(p3)})")
+    upper += [f"    ..lineTo({pt(p)})" for p in after]
+    upper.append("    ..close();")
+
+    x0, y0, x1, y1 = bounds()
+    leg_dir = (0.5, math.sqrt(3) / 2)
+    reveal_from, reveal_to = leg_reveal_range(leg_dir)
+
+    def color(c):
+        return "0xFF" + "".join(f"{v:02X}" for v in c)
+
+    text = f"""// Generated by tool/brand/make_logo.py: do not edit by hand.
+import 'dart:ui';
+
+/// The Feezer mark as exact paths, in the 1024 x 1024 space of the original
+/// artwork: the top bar, the stem (middle bar and folded leg) and the region
+/// above the fold, which splits the stem into the middle bar and the leg.
+abstract final class LogoGeometry {{
+  static const Color light = Color({color(LIGHT)});
+  static const Color mid = Color({color(MID)});
+  static const Color dark = Color({color(DARK)});
+
+  /// Bounding box of the mark.
+  static const Rect bounds = Rect.fromLTRB({num(x0)}, {num(y0)}, {num(x1)}, {num(y1)});
+
+  /// Direction of the leg, from the fold to its tip.
+  static const Offset legDirection = Offset({leg_dir[0]:.6f}, {leg_dir[1]:.6f});
+
+  /// Projections of the leg on [legDirection]: where it starts and ends.
+  static const double legFrom = {reveal_from - 2:.1f};
+  static const double legTo = {reveal_to + 2:.1f};
+
+  static Path topBar() => Path()
+{chr(10).join(top)}
+
+  static Path stem() => Path()
+{chr(10).join(stem_cmds)}
+
+  static Path upperSide() => Path()
+{chr(10).join(upper)}
+}}
+"""
+    target = ROOT / path
+    target.write_text(text)
+    # Same layout as the rest of the code, when the Dart SDK is on the PATH.
+    if shutil.which("dart"):
+        subprocess.run(["dart", "format", str(target)], check=False, capture_output=True)
+    print("wrote", target.relative_to(ROOT))
+
+
 def main():
     white = (255, 255, 255)
     # In-app logo: transparent, the mark fills the square.
@@ -220,11 +350,8 @@ def main():
     alpha = np.asarray(render((1024, 1024), adaptive))[..., 3]
     white_mark = np.dstack([np.full_like(alpha, 255)] * 3 + [alpha])
     save(Image.fromarray(white_mark, "RGBA"), "tool/brand/launcher/icon_monochrome.png")
-    # Android splash: before Android 12 (centered bitmap) and 12+ (icon in a circle).
-    res = "android/app/src/main/res/drawable-nodpi"
-    save(render((512, 512), placement(512, box_fraction=1.0)), f"{res}/splash_logo.png")
-    # Android 12+ splash icon: 288 dp canvas, content within a 192 dp circle.
-    save(render((1152, 1152), placement(1152, radius_fraction=0.3)), f"{res}/splash_icon.png")
+    # The launch screen is plain: the app draws the mark itself, animated.
+    write_dart_geometry()
     # Master copy.
     save(render((1024, 1024), placement(1024, box_fraction=0.9)), "tool/brand/logo.png")
 
