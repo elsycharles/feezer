@@ -1,0 +1,5 @@
+• New logo animation at launch
+• Clearer introduction: a real example and 3 steps
+• Pick the language right from the introduction
+• Shorter, simpler texts
+• Amounts rounded to the hundred by default, for withdrawals and transfers

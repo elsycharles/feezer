@@ -11,7 +11,7 @@ How it works
 What Feezer gives you
 • The optimal split, calculated exactly, not an estimate.
 • A comparison with the usual way (the largest possible amount each time): you see how much you gain or save.
-• Withdrawals rounded to the hundred, because cash points only hand out notes: 10,000, never 10,040.
+• Amounts rounded to the hundred by default, because cash points only hand out notes: 10,000, never 10,040.
 • An optional limit on the number of transactions, with what that limit costs you.
 
 Official fees, kept up to date
