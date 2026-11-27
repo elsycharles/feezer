@@ -54,13 +54,12 @@
     "description": "Terms of use option"
   },
   "termsServiceTitle": "Ny tolotra",
-  "termsServiceContent": "Avy amin'ny tabilaon'ny saran'ny mpandraharaha, manisa ny fomba hizarana fisintonana na famindrana i Feezer mba handoavana sarany kely indrindra. Raha mampiasa an'i Feezer ianao dia manaiky ireo fepetra ireo.",
+  "termsServiceContent": "Kajian'i Feezer ny fomba hizarana fisintonana na famindrana mba handoavana sarany kely indrindra, araka ny tabilaon'ny mpandraharaha.",
   "termsPrivacyTitle": "Ny angon-drakitrao",
-  "termsPrivacyContent": "Tsy mila kaonty i Feezer ary tsy manangona angon-drakitra manokana. Mijanona ao amin'ny findainao ny tabilao sy ny kajinao, ary voafafa raha esorinao ilay fampiharana. Rakitra ho an'ny besinimaro ihany no alain'ny fanavaozana ny sarany.",
+  "termsPrivacyContent": "Tsy misy kaonty, tsy misy angona angonina. Mijanona ao amin'ny findainao ny tabilao sy ny kajinao.",
   "termsLiabilityTitle": "Andraikitra",
-  "termsLiabilityContent": "Ho fampahafantarana fotsiny ny valiny: mety hanova ny sarany na oviana na oviana ny mpandraharaha, koa hamarino alohan'ny fifanakalozana tsirairay. Tsy mifandray amin'ny mpandraharaha na iray aza i Feezer ary tsy tompon'andraikitra amin'ny sarany tena aloa.",
+  "termsLiabilityContent": "Fampahafantarana fotsiny ny valiny: mety hanova ny sarany ny mpandraharaha. Hamarino alohan'ny fifanakalozana tsirairay.",
   "termsContactTitle": "Fifandraisana",
-  "termsContactContent": "Manana fanontaniana? Manorata aminay avy amin'ny Fanampiana, na amin'ny elsy.s.charles@gmail.com.",
   "@fee": {
     "description": "Fee column header"
   },
@@ -236,7 +235,7 @@
     "description": "Frequently Asked Questions tab title"
   },
   "faqExportData": "Ahoana no hitahirizana ny tabilaoko?",
-  "faqExportDataAnswer": "Fandrindrana › Hampiditra / hamoaka: avoahy ho rakitra CSV ny tabilaonao, dia ampidiro amin'ny finday hafa na rehefa avy namerina nametraka ny fampiharana.",
+  "faqExportDataAnswer": "Ao amin'ny Fandrindrana › Hampiditra / hamoaka, avoahy ho rakitra CSV izy ireo, dia ampidiro amin'ny finday hafa.",
   "website": "Tranonkala",
   "@website": {
     "description": "Website contact method"
@@ -301,7 +300,7 @@
   "feesUpdatedSuccessfully": "Voavao ny sarany",
   "replayIntroduction": "Hijery indray ny fampidirana",
   "faqFeeUpdate": "Avy aiza ny sarany?",
-  "faqFeeUpdateAnswer": "Avy amin'ny saran'ny mpandraharaha ofisialy: vakiana isan'andro ao amin'ny mvola.mg sy orange.mg ny tabilaon'i MVola sy Orange Money; nadika avy amin'ny sarany navoaka ny an'i Airtel Money. Tsindrio « Havaozina » ao amin'ny Mpandraharaha mba hahazoana ny farany; tsy miova ireo tabilao nampidirinao.",
+  "faqFeeUpdateAnswer": "Avy amin'ny sarany ofisialy an'i MVola, Orange Money ary Airtel Money. Tsindrio « Havaozina » hahazoana ny farany.",
   "ok": "Eny",
   "pasteCsv": "Hametaka lahatsoratra CSV",
   "chooseCsvFile": "Hisafidy rakitra CSV",
@@ -369,12 +368,17 @@
   "roundToHundred": "Boribory amin'ny zato",
   "roundToHundredOff": "Vola marina",
   "faqHowItWorks": "Ahoana no fiasany?",
-  "faqHowItWorksAnswer": "Fidio ny mpandraharaha, ny fifanakalozana (fisintonana, famindrana…) ary ny vola azo ampiasaina, tafiditra ny sarany. Tadiavin'i Feezer ny fizarana mahazo vola betsaka indrindra amin'ny sarany kely indrindra, ary ampitahainy amin'ny fomba mahazatra: misintona na mandefa ny vola betsaka indrindra azo atao isaky ny mandeha.",
-  "faqRounding": "Nahoana no boribory amin'ny zato ny vola?",
-  "faqRoundingAnswer": "Taratasim-bola ihany no omena any amin'ny toeram-pisintonana: tsy azo sintonina ny 10 040. Miaraka amin'ny « Boribory amin'ny zato », isaky ny 100 ny vola rehetra ao amin'ny drafitra. Mandeha ho azy izy ho an'ny fisintonana; esory raha mila vola marina ianao.",
-  "faqPrivacy": "Mila aterineto ve? Zaraina ve ny angon-drakitro?",
-  "faqPrivacyAnswer": "Tsia. Ao amin'ny findainao no anaovana ny kajy, tsy misy kaonty, ary tsy misy alefa. Ny fanavaozana ny sarany ihany no mila aterineto (rakitra ho an'ny besinimaro).",
+  "faqHowItWorksAnswer": "Fidio ny mpandraharaha, ny fifanakalozana ary ny vola azo ampiasaina. Tadiavin'i Feezer ny fizarana mora sarany indrindra.",
+  "faqRounding": "Nahoana no boribory amin'ny zato?",
+  "faqRoundingAnswer": "Taratasim-bola ihany no omena rehefa misintona: tsy azo sintonina ny 10 040. Azonao esorina amin'ny fotoana rehetra ny boribory.",
+  "faqPrivacy": "Zaraina ve ny angon-drakitro?",
+  "faqPrivacyAnswer": "Tsia. Tsy mila kaonty i Feezer ary tsy misy miala amin'ny findainao.",
   "roundToHundredOn": "{example}, fa tsy {wrong}",
   "vsUsualWay": "Raha oharina amin'ny fomba mahazatra",
-  "csvFormatRows": "Andalana iray isaky ny ambaratonga; faingo na teboka sy faingo."
+  "csvFormatRows": "Andalana iray isaky ny ambaratonga; faingo na teboka sy faingo.",
+  "faqInternet": "Mila aterineto ve?",
+  "faqInternetAnswer": "Tsia. Ao amin'ny findainao no anaovana ny kajy; ny fanavaozana ny sarany ihany no mila aterineto.",
+  "termsIndependenceTitle": "Fahaleovan-tena",
+  "termsIndependenceContent": "Tsy mifandray amin'ny mpandraharaha i Feezer ary tsy tompon'andraikitra amin'ny sarany aloa.",
+  "termsAcceptance": "Raha mampiasa an'i Feezer ianao dia manaiky ireo fepetra ireo."
 }

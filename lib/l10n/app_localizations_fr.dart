@@ -97,28 +97,24 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get termsServiceContent =>
-      'À partir des grilles de frais des opérateurs, Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais. En utilisant Feezer, vous acceptez ces conditions.';
+      'Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais, d\'après les grilles des opérateurs.';
 
   @override
   String get termsPrivacyTitle => 'Vos données';
 
   @override
   String get termsPrivacyContent =>
-      'Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone et sont effacés si vous désinstallez l\'application. La mise à jour des frais télécharge seulement un fichier public.';
+      'Aucun compte, aucune donnée collectée. Vos grilles et vos calculs restent sur votre téléphone.';
 
   @override
   String get termsLiabilityTitle => 'Responsabilité';
 
   @override
   String get termsLiabilityContent =>
-      'Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais à tout moment, vérifiez-les avant chaque opération. Feezer n\'est affilié à aucun opérateur et n\'est pas responsable des frais réellement facturés.';
+      'Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais. Vérifiez-les avant chaque opération.';
 
   @override
   String get termsContactTitle => 'Contact';
-
-  @override
-  String get termsContactContent =>
-      'Une question ? Écrivez-nous depuis Aide et support, ou à elsy.s.charles@gmail.com.';
 
   @override
   String get noFeeIntervalsFound => 'Cette grille n\'a aucun palier';
@@ -297,7 +293,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqExportDataAnswer =>
-      'Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le sur un autre téléphone ou après une réinstallation.';
+      'Dans Paramètres › Import / export, exportez-les en fichier CSV, puis importez-le sur un autre téléphone.';
 
   @override
   String get website => 'Site web';
@@ -517,7 +513,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'Des tarifs officiels des opérateurs : les grilles MVola et Orange Money sont lues chaque jour sur mvola.mg et orange.mg ; celle d\'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » dans l\'onglet Opérateurs pour avoir les dernières ; les grilles que vous avez ajoutées ne changent pas.';
+      'Des tarifs officiels de MVola, Orange Money et Airtel Money. Touchez « Mettre à jour » pour avoir les derniers.';
 
   @override
   String get ok => 'OK';
@@ -764,22 +760,21 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqHowItWorksAnswer =>
-      'Choisissez l\'opérateur, l\'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.';
+      'Choisissez l\'opérateur, l\'opération et le montant disponible. Feezer trouve le découpage qui coûte le moins de frais.';
 
   @override
-  String get faqRounding => 'Pourquoi des montants arrondis à la centaine ?';
+  String get faqRounding => 'Pourquoi arrondir à la centaine ?';
 
   @override
   String get faqRoundingAnswer =>
-      'Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Avec « Arrondir à la centaine », chaque montant du plan est un multiple de 100. C\'est activé par défaut pour les retraits ; désactivez-le pour des montants exacts.';
+      'Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Vous pouvez désactiver l\'arrondi à tout moment.';
 
   @override
-  String get faqPrivacy =>
-      'Faut-il internet ? Mes données sont-elles partagées ?';
+  String get faqPrivacy => 'Mes données sont-elles partagées ?';
 
   @override
   String get faqPrivacyAnswer =>
-      'Non. Les calculs se font sur votre téléphone, sans compte, et rien n\'est envoyé. Internet sert seulement à mettre à jour les frais (un fichier public).';
+      'Non. Feezer ne demande aucun compte et rien ne quitte votre téléphone.';
 
   @override
   String roundToHundredOn(String example, String wrong) {
@@ -792,4 +787,22 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get csvFormatRows =>
       'Une ligne par palier ; virgule ou point-virgule.';
+
+  @override
+  String get faqInternet => 'Faut-il internet ?';
+
+  @override
+  String get faqInternetAnswer =>
+      'Non. Les calculs se font sur votre téléphone ; internet sert seulement à mettre à jour les frais.';
+
+  @override
+  String get termsIndependenceTitle => 'Indépendance';
+
+  @override
+  String get termsIndependenceContent =>
+      'Feezer n\'est affilié à aucun opérateur et n\'est pas responsable des frais facturés.';
+
+  @override
+  String get termsAcceptance =>
+      'En utilisant Feezer, vous acceptez ces conditions.';
 }

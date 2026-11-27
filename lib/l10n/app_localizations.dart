@@ -271,7 +271,7 @@ abstract class AppLocalizations {
   /// Terms of use service description section content
   ///
   /// In en, this message translates to:
-  /// **'From the operators\' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.'**
+  /// **'Feezer works out how to split a withdrawal or a transfer to pay the least fees, from the operators\' fee grids.'**
   String get termsServiceContent;
 
   /// Terms of use privacy section title
@@ -283,7 +283,7 @@ abstract class AppLocalizations {
   /// Terms of use privacy section content
   ///
   /// In en, this message translates to:
-  /// **'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.'**
+  /// **'No account, no data collected. Your grids and calculations stay on your phone.'**
   String get termsPrivacyContent;
 
   /// Terms of use liability section title
@@ -295,7 +295,7 @@ abstract class AppLocalizations {
   /// Terms of use liability section content
   ///
   /// In en, this message translates to:
-  /// **'Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.'**
+  /// **'Results are indicative: operators can change their fees. Check them before each transaction.'**
   String get termsLiabilityContent;
 
   /// Terms of use contact section title
@@ -303,12 +303,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Contact'**
   String get termsContactTitle;
-
-  /// Terms of use contact section content
-  ///
-  /// In en, this message translates to:
-  /// **'A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.'**
-  String get termsContactContent;
 
   /// Message when no fee intervals exist
   ///
@@ -582,7 +576,7 @@ abstract class AppLocalizations {
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.'**
+  /// **'In Settings › Import / export, export them to a CSV file, then import it on another phone.'**
   String get faqExportDataAnswer;
 
   /// Website contact method
@@ -936,7 +930,7 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'From the operators\' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.'**
+  /// **'From the official rates of MVola, Orange Money and Airtel Money. Tap “Update” to get the latest.'**
   String get faqFeeUpdateAnswer;
 
   /// UI redesign
@@ -1350,31 +1344,31 @@ abstract class AppLocalizations {
   /// No description provided for @faqHowItWorksAnswer.
   ///
   /// In en, this message translates to:
-  /// **'Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.'**
+  /// **'Pick the operator, the operation and the amount available. Feezer finds the split that costs the least in fees.'**
   String get faqHowItWorksAnswer;
 
   /// No description provided for @faqRounding.
   ///
   /// In en, this message translates to:
-  /// **'Why are the amounts rounded to the hundred?'**
+  /// **'Why round to the hundred?'**
   String get faqRounding;
 
   /// No description provided for @faqRoundingAnswer.
   ///
   /// In en, this message translates to:
-  /// **'Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.'**
+  /// **'Cash points only hand out notes: you can\'t withdraw 10 040. You can turn rounding off at any time.'**
   String get faqRoundingAnswer;
 
   /// No description provided for @faqPrivacy.
   ///
   /// In en, this message translates to:
-  /// **'Do I need internet? Is my data shared?'**
+  /// **'Is my data shared?'**
   String get faqPrivacy;
 
   /// No description provided for @faqPrivacyAnswer.
   ///
   /// In en, this message translates to:
-  /// **'No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file).'**
+  /// **'No. Feezer needs no account and nothing leaves your phone.'**
   String get faqPrivacyAnswer;
 
   /// No description provided for @roundToHundredOn.
@@ -1394,6 +1388,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'One row per tier; commas or semicolons.'**
   String get csvFormatRows;
+
+  /// No description provided for @faqInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Do I need internet?'**
+  String get faqInternet;
+
+  /// No description provided for @faqInternetAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No. Calculations run on your phone; internet is only used to update the fees.'**
+  String get faqInternetAnswer;
+
+  /// No description provided for @termsIndependenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Independence'**
+  String get termsIndependenceTitle;
+
+  /// No description provided for @termsIndependenceContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer is not affiliated with any operator and is not responsible for the fees charged.'**
+  String get termsIndependenceContent;
+
+  /// No description provided for @termsAcceptance.
+  ///
+  /// In en, this message translates to:
+  /// **'By using Feezer, you accept these terms.'**
+  String get termsAcceptance;
 }
 
 class _AppLocalizationsDelegate

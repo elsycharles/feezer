@@ -34,13 +34,12 @@
     "description": "Terms of use option"
   },
   "termsServiceTitle": "Le service",
-  "termsServiceContent": "À partir des grilles de frais des opérateurs, Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais. En utilisant Feezer, vous acceptez ces conditions.",
+  "termsServiceContent": "Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais, d'après les grilles des opérateurs.",
   "termsPrivacyTitle": "Vos données",
-  "termsPrivacyContent": "Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone et sont effacés si vous désinstallez l'application. La mise à jour des frais télécharge seulement un fichier public.",
+  "termsPrivacyContent": "Aucun compte, aucune donnée collectée. Vos grilles et vos calculs restent sur votre téléphone.",
   "termsLiabilityTitle": "Responsabilité",
-  "termsLiabilityContent": "Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais à tout moment, vérifiez-les avant chaque opération. Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais réellement facturés.",
+  "termsLiabilityContent": "Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais. Vérifiez-les avant chaque opération.",
   "termsContactTitle": "Contact",
-  "termsContactContent": "Une question ? Écrivez-nous depuis Aide et support, ou à elsy.s.charles@gmail.com.",
   "@fee": {
     "description": "Fee column header"
   },
@@ -226,7 +225,7 @@
     "description": "Titre de l'onglet Questions fréquemment posées"
   },
   "faqExportData": "Comment sauvegarder mes grilles ?",
-  "faqExportDataAnswer": "Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le sur un autre téléphone ou après une réinstallation.",
+  "faqExportDataAnswer": "Dans Paramètres › Import / export, exportez-les en fichier CSV, puis importez-le sur un autre téléphone.",
   "website": "Site web",
   "@website": {
     "description": "Méthode de contact site web"
@@ -291,7 +290,7 @@
   "feesUpdatedSuccessfully": "Frais mis à jour",
   "replayIntroduction": "Revoir la présentation",
   "faqFeeUpdate": "D'où viennent les frais ?",
-  "faqFeeUpdateAnswer": "Des tarifs officiels des opérateurs : les grilles MVola et Orange Money sont lues chaque jour sur mvola.mg et orange.mg ; celle d'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » dans l'onglet Opérateurs pour avoir les dernières ; les grilles que vous avez ajoutées ne changent pas.",
+  "faqFeeUpdateAnswer": "Des tarifs officiels de MVola, Orange Money et Airtel Money. Touchez « Mettre à jour » pour avoir les derniers.",
   "ok": "OK",
   "pasteCsv": "Coller du texte CSV",
   "chooseCsvFile": "Choisir un fichier CSV",
@@ -360,12 +359,17 @@
   "roundToHundred": "Arrondir à la centaine",
   "roundToHundredOff": "Montants exacts",
   "faqHowItWorks": "Comment ça marche ?",
-  "faqHowItWorksAnswer": "Choisissez l'opérateur, l'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.",
-  "faqRounding": "Pourquoi des montants arrondis à la centaine ?",
-  "faqRoundingAnswer": "Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Avec « Arrondir à la centaine », chaque montant du plan est un multiple de 100. C'est activé par défaut pour les retraits ; désactivez-le pour des montants exacts.",
-  "faqPrivacy": "Faut-il internet ? Mes données sont-elles partagées ?",
-  "faqPrivacyAnswer": "Non. Les calculs se font sur votre téléphone, sans compte, et rien n'est envoyé. Internet sert seulement à mettre à jour les frais (un fichier public).",
+  "faqHowItWorksAnswer": "Choisissez l'opérateur, l'opération et le montant disponible. Feezer trouve le découpage qui coûte le moins de frais.",
+  "faqRounding": "Pourquoi arrondir à la centaine ?",
+  "faqRoundingAnswer": "Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Vous pouvez désactiver l'arrondi à tout moment.",
+  "faqPrivacy": "Mes données sont-elles partagées ?",
+  "faqPrivacyAnswer": "Non. Feezer ne demande aucun compte et rien ne quitte votre téléphone.",
   "roundToHundredOn": "{example}, jamais {wrong}",
   "vsUsualWay": "Par rapport à la méthode habituelle",
-  "csvFormatRows": "Une ligne par palier ; virgule ou point-virgule."
+  "csvFormatRows": "Une ligne par palier ; virgule ou point-virgule.",
+  "faqInternet": "Faut-il internet ?",
+  "faqInternetAnswer": "Non. Les calculs se font sur votre téléphone ; internet sert seulement à mettre à jour les frais.",
+  "termsIndependenceTitle": "Indépendance",
+  "termsIndependenceContent": "Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais facturés.",
+  "termsAcceptance": "En utilisant Feezer, vous acceptez ces conditions."
 }

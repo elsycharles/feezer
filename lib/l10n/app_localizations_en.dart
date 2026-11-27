@@ -97,28 +97,24 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get termsServiceContent =>
-      'From the operators\' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.';
+      'Feezer works out how to split a withdrawal or a transfer to pay the least fees, from the operators\' fee grids.';
 
   @override
   String get termsPrivacyTitle => 'Your data';
 
   @override
   String get termsPrivacyContent =>
-      'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.';
+      'No account, no data collected. Your grids and calculations stay on your phone.';
 
   @override
   String get termsLiabilityTitle => 'Liability';
 
   @override
   String get termsLiabilityContent =>
-      'Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.';
+      'Results are indicative: operators can change their fees. Check them before each transaction.';
 
   @override
   String get termsContactTitle => 'Contact';
-
-  @override
-  String get termsContactContent =>
-      'A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.';
 
   @override
   String get noFeeIntervalsFound => 'This grid has no tier';
@@ -297,7 +293,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqExportDataAnswer =>
-      'Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.';
+      'In Settings › Import / export, export them to a CSV file, then import it on another phone.';
 
   @override
   String get website => 'Website';
@@ -515,7 +511,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'From the operators\' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.';
+      'From the official rates of MVola, Orange Money and Airtel Money. Tap “Update” to get the latest.';
 
   @override
   String get ok => 'OK';
@@ -760,21 +756,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get faqHowItWorksAnswer =>
-      'Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.';
+      'Pick the operator, the operation and the amount available. Feezer finds the split that costs the least in fees.';
 
   @override
-  String get faqRounding => 'Why are the amounts rounded to the hundred?';
+  String get faqRounding => 'Why round to the hundred?';
 
   @override
   String get faqRoundingAnswer =>
-      'Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.';
+      'Cash points only hand out notes: you can\'t withdraw 10 040. You can turn rounding off at any time.';
 
   @override
-  String get faqPrivacy => 'Do I need internet? Is my data shared?';
+  String get faqPrivacy => 'Is my data shared?';
 
   @override
   String get faqPrivacyAnswer =>
-      'No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file).';
+      'No. Feezer needs no account and nothing leaves your phone.';
 
   @override
   String roundToHundredOn(String example, String wrong) {
@@ -786,4 +782,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get csvFormatRows => 'One row per tier; commas or semicolons.';
+
+  @override
+  String get faqInternet => 'Do I need internet?';
+
+  @override
+  String get faqInternetAnswer =>
+      'No. Calculations run on your phone; internet is only used to update the fees.';
+
+  @override
+  String get termsIndependenceTitle => 'Independence';
+
+  @override
+  String get termsIndependenceContent =>
+      'Feezer is not affiliated with any operator and is not responsible for the fees charged.';
+
+  @override
+  String get termsAcceptance => 'By using Feezer, you accept these terms.';
 }
