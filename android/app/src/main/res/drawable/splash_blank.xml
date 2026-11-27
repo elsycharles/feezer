@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Empty icon of the Android 12+ launch screen: the app draws the logo
+     itself, animated, right after (lib/screen/splash/launch_splash.dart). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@android:color/transparent" />
+</shape>
