@@ -12,28 +12,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get onboardingTitle1 => 'Payez moins de frais';
 
   @override
-  String get onboardingDescription1 =>
-      'Entrez un montant : Feezer le découpe en opérations qui coûtent le moins de frais possible.';
-
-  @override
-  String get onboardingTitle2 => 'Les vrais frais des opérateurs';
-
-  @override
-  String get onboardingDescription2 =>
-      'MVola, Orange Money, Airtel Money : les grilles viennent des tarifs officiels des opérateurs et se mettent à jour en un geste.';
-
-  @override
-  String get onboardingTitle3 => 'Retraits et transferts';
-
-  @override
-  String get onboardingDescription3 =>
-      'Choisissez l\'opérateur et l\'opération. Vos données restent sur votre téléphone, même sans internet.';
+  String get onboardingTitle2 => 'En 3 étapes';
 
   @override
   String get next => 'Suivant';
-
-  @override
-  String get skip => 'Passer';
 
   @override
   String get getStarted => 'Commencer';
@@ -54,7 +36,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get optimize => 'Optimiser';
 
   @override
-  String get pleaseEnterValidAmount => 'Veuillez saisir un montant valide';
+  String get pleaseEnterValidAmount => 'Montant invalide';
 
   @override
   String get pleaseSelectProvider => 'Choisissez un opérateur';
@@ -78,21 +60,16 @@ class AppLocalizationsFr extends AppLocalizations {
   String get newFeeInterval => 'Nouveau palier';
 
   @override
-  String get maxAmountMustBeGreaterThanMinAmount =>
-      'Le montant maximum doit être supérieur au montant minimum';
+  String get maxAmountMustBeGreaterThanMinAmount => 'Doit dépasser le minimum';
 
   @override
   String get fee => 'Frais';
 
   @override
-  String get noOptimizationResultsFound =>
-      'Aucun résultat. Vérifiez le montant et la grille choisie.';
+  String get noOptimizationResultsFound => 'Aucun résultat';
 
   @override
   String get about => 'À propos';
-
-  @override
-  String get faqAndContact => 'FAQ et contact';
 
   @override
   String get termsOfUse => 'Conditions d\'utilisation';
@@ -102,32 +79,27 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get termsServiceContent =>
-      'À partir des grilles de frais des opérateurs, Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais. En utilisant Feezer, vous acceptez ces conditions.';
+      'Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais, d\'après les grilles des opérateurs.';
 
   @override
   String get termsPrivacyTitle => 'Vos données';
 
   @override
   String get termsPrivacyContent =>
-      'Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone et sont effacés si vous désinstallez l\'application. La mise à jour des frais télécharge seulement un fichier public.';
+      'Aucun compte, aucune donnée collectée. Vos grilles et vos calculs restent sur votre téléphone.';
 
   @override
   String get termsLiabilityTitle => 'Responsabilité';
 
   @override
   String get termsLiabilityContent =>
-      'Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais à tout moment, vérifiez-les avant chaque opération. Feezer n\'est affilié à aucun opérateur et n\'est pas responsable des frais réellement facturés.';
+      'Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais. Vérifiez-les avant chaque opération.';
 
   @override
   String get termsContactTitle => 'Contact';
 
   @override
-  String get termsContactContent =>
-      'Une question ? Écrivez-nous depuis Aide et support, ou à elsy.s.charles@gmail.com.';
-
-  @override
-  String get noFeeIntervalsFound =>
-      'Cette grille n\'a encore aucun palier. Ajoutez-les dans l\'onglet Opérateurs.';
+  String get noFeeIntervalsFound => 'Cette grille n\'a aucun palier';
 
   @override
   String get addFeeInterval => 'Ajouter un palier';
@@ -142,7 +114,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get icon => 'Icône';
 
   @override
-  String get thisFieldIsRequired => 'Ce champ est obligatoire';
+  String get thisFieldIsRequired => 'Obligatoire';
 
   @override
   String get feeIntervalUpdatedSuccessfully => 'Palier modifié';
@@ -162,17 +134,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get editFeeInterval => 'Modifier le palier';
 
   @override
-  String get minTransactionsCannotBeGreaterThanMax =>
-      'Le minimum de transactions ne peut pas être supérieur au maximum';
+  String get minTransactionsCannotBeGreaterThanMax => 'Minimum > maximum';
 
   @override
-  String get pleaseEnterValidFee => 'Veuillez saisir des frais valides';
-
-  @override
-  String get minimumAmount => 'Montant minimum';
-
-  @override
-  String get maximumAmount => 'Montant maximum';
+  String get pleaseEnterValidFee => 'Frais invalides';
 
   @override
   String get helpAndSupport => 'Aide et support';
@@ -195,8 +160,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get failedToCalculateOptimization =>
-      'Échec du calcul de l\'optimisation';
+  String get failedToCalculateOptimization => 'Échec du calcul';
 
   @override
   String get importExportData => 'Import / export';
@@ -212,68 +176,50 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String importFailed(String error) {
-    return 'Échec de l\'importation : $error';
+    return 'Échec de l\'import : $error';
   }
 
   @override
   String exportFailed(String error) {
-    return 'Échec de l\'exportation : $error';
-  }
-
-  @override
-  String providersImported(int count) {
-    return '$count grille(s) importée(s)';
-  }
-
-  @override
-  String feeIntervalsImported(int count) {
-    return '$count palier(s) importé(s)';
+    return 'Échec de l\'export : $error';
   }
 
   @override
   String errorsEncountered(int count) {
-    return '$count erreur(s) rencontrée(s)';
+    return '$count erreur(s)';
   }
 
   @override
-  String get importDataDescription =>
-      'Ajoutez des grilles depuis un fichier CSV (une ligne par palier).';
+  String get csvContentCannotBeEmpty => 'Texte vide';
 
   @override
-  String get exportDataDescription =>
-      'Enregistrez toutes vos grilles et leurs paliers dans un fichier CSV.';
+  String get chooseWhereToSave => 'Enregistrer le fichier';
 
   @override
-  String get csvContentCannotBeEmpty => 'Le contenu CSV ne peut pas être vide';
+  String get fileSavedSuccessfully => 'Fichier enregistré';
 
   @override
-  String get chooseWhereToSave => 'Choisir où enregistrer le fichier';
+  String get failedToSaveFile => 'Échec de l\'enregistrement';
 
   @override
-  String get fileSavedSuccessfully => 'Fichier enregistré avec succès';
+  String get csvFileIsEmpty => 'Fichier vide';
 
   @override
-  String get failedToSaveFile => 'Échec de l\'enregistrement du fichier';
-
-  @override
-  String get csvFileIsEmpty => 'Le fichier CSV est vide';
-
-  @override
-  String get noDataRowsFound => 'Aucune ligne de données trouvée';
+  String get noDataRowsFound => 'Aucune ligne trouvée';
 
   @override
   String rowProviderNameRequired(int rowNumber) {
-    return 'Ligne $rowNumber : le nom de l\'opérateur est obligatoire';
+    return 'Ligne $rowNumber : opérateur manquant';
   }
 
   @override
   String rowProviderAlreadyExists(int rowNumber, String name) {
-    return 'Ligne $rowNumber : la grille « $name » existe déjà';
+    return 'Ligne $rowNumber : « $name » existe déjà';
   }
 
   @override
   String rowIntervalOverlaps(int rowNumber, String overlap) {
-    return 'Ligne $rowNumber : ce palier chevauche un palier existant ($overlap)';
+    return 'Ligne $rowNumber : chevauche $overlap';
   }
 
   @override
@@ -283,35 +229,34 @@ class AppLocalizationsFr extends AppLocalizations {
     String maxStr,
     String feeStr,
   ) {
-    return 'Ligne $rowNumber : Montants invalides (min : $minStr, max : $maxStr, frais : $feeStr)';
+    return 'Ligne $rowNumber : montants invalides ($minStr, $maxStr, $feeStr)';
   }
 
   @override
   String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
-    return 'Ligne $rowNumber : Le montant min ($min) doit être inférieur au montant max ($max)';
+    return 'Ligne $rowNumber : min $min > max $max';
   }
 
   @override
   String rowFeeMustBePositive(int rowNumber) {
-    return 'Ligne $rowNumber : Les frais doivent être positifs';
+    return 'Ligne $rowNumber : frais négatifs';
   }
 
   @override
   String rowFeePercentageInvalid(int rowNumber, String fee) {
-    return 'Ligne $rowNumber : Les frais en pourcentage doivent être entre 0 et 100 ($fee%)';
+    return 'Ligne $rowNumber : pourcentage hors de 0–100 ($fee)';
   }
 
   @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
-    return '$providersCount grille(s) et $feesCount palier(s) importés';
+    return '$providersCount grille(s), $feesCount palier(s)';
   }
 
   @override
-  String get noDataToExport => 'Aucune donnée à exporter';
+  String get noDataToExport => 'Aucune grille à exporter';
 
   @override
-  String get providerNameColumnNotFound =>
-      'Colonne du nom de l\'opérateur introuvable';
+  String get providerNameColumnNotFound => 'Colonne opérateur introuvable';
 
   @override
   String get fixedAmount => 'Montant fixe';
@@ -320,8 +265,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get percentage => 'Pourcentage';
 
   @override
-  String get percentageMustBeBetween0And100 =>
-      'Le pourcentage doit être entre 0 et 100';
+  String get percentageMustBeBetween0And100 => 'Entre 0 et 100';
 
   @override
   String get faq => 'FAQ';
@@ -331,7 +275,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqExportDataAnswer =>
-      'Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le sur un autre téléphone ou après une réinstallation.';
+      'Dans Paramètres › Import / export, exportez-les en fichier CSV, puis importez-le sur un autre téléphone.';
 
   @override
   String get website => 'Site web';
@@ -343,41 +287,26 @@ class AppLocalizationsFr extends AppLocalizations {
   String get email => 'Email';
 
   @override
-  String get exceedsEnteredAmount => 'Dépasse le montant saisi';
-
-  @override
   String get optimizationBudgetTooSmall =>
-      'Le montant est trop faible pour une opération avec cette grille.';
+      'Montant trop faible pour cette grille';
 
   @override
   String get optimizationConstraintsUnsatisfiable =>
-      'Aucun découpage ne respecte ce nombre d\'opérations pour ce montant.';
-
-  @override
-  String get optimizationNotProven =>
-      'Recherche très longue : ce découpage est excellent, mais n\'a pas pu être prouvé comme le meilleur.';
+      'Impossible avec cette limite';
 
   @override
   String feeIntervalOverlaps(String range) {
-    return 'Ce palier chevauche un palier existant ($range).';
+    return 'Chevauche le palier $range';
   }
 
   @override
-  String get failedToDeleteFeeIntervals => 'Impossible de supprimer le palier';
+  String get failedToDeleteFeeIntervals => 'Suppression impossible';
 
   @override
-  String get failedToSaveChanges =>
-      'Échec de l\'enregistrement des modifications';
+  String get failedToSaveChanges => 'Échec de l\'enregistrement';
 
   @override
   String get tabOptimize => 'Optimiser';
-
-  @override
-  String get optimizeTitle => 'Payez moins de frais';
-
-  @override
-  String get optimizeSubtitle =>
-      'Feezer découpe votre montant en opérations qui coûtent le moins de frais.';
 
   @override
   String get add => 'Ajouter';
@@ -386,15 +315,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get amountAvailable => 'Montant disponible';
 
   @override
-  String get amountHelper =>
-      'Frais compris : le total qui sortira de votre compte.';
+  String get amountHelper => 'Frais compris';
 
   @override
   String get transferCount => 'Nombre d\'envois';
-
-  @override
-  String get transferCountHelp =>
-      'Facultatif. Limitez le nombre d\'envois que le plan peut utiliser.';
 
   @override
   String get transferCountFree => 'Sans limite';
@@ -463,39 +387,20 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get gainVsClassic =>
-      'Par rapport à l\'envoi du plus gros montant possible à chaque fois.';
-
-  @override
   String feesSavedTitle(String amount) {
     return '$amount de frais économisés';
   }
 
   @override
-  String get feesSavedVsClassic =>
-      'La méthode habituelle coûterait plus cher pour le même montant.';
-
-  @override
-  String get alreadyOptimalTitle =>
-      'La méthode habituelle est déjà la meilleure';
-
-  @override
-  String get alreadyOptimalMessage =>
-      'Pour ce montant, découper n\'apporte rien de plus.';
+  String get alreadyOptimalTitle => 'Méthode habituelle déjà optimale';
 
   @override
   String limitCost(String amount) {
-    return 'Sans cette limite, $amount de plus seraient reçus.';
+    return 'Votre limite coûte $amount';
   }
 
   @override
-  String get limitFree => 'Cette limite ne vous coûte rien ici.';
-
-  @override
-  String get nearOptimalTitle => 'Montant très élevé';
-
-  @override
-  String get planTitle => 'Votre plan d\'envoi';
+  String get planTitle => 'Plan d\'envoi';
 
   @override
   String sendAmount(String amount) {
@@ -524,19 +429,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get classicExplanation =>
-      'Méthode habituelle : envoyer le plus gros montant possible, puis le reste.';
-
-  @override
-  String get sameAmountByHand => 'Même montant reçu, méthode habituelle';
-
-  @override
-  String sameAmountByHandDetail(String net, String fees, String total) {
-    return 'Pour obtenir $net, la méthode habituelle coûte $fees de frais, soit $total débités.';
-  }
-
-  @override
-  String get cannotSplitByHand =>
-      'La méthode habituelle ne permet pas d\'obtenir ce montant.';
+      'Habituel : envoyer le maximum, puis le reste';
 
   @override
   String get classicPlan => 'Plan habituel';
@@ -548,11 +441,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get showLess => 'Masquer le détail';
 
   @override
-  String get noProvidersYet => 'Aucune grille pour l\'instant';
-
-  @override
-  String get noProvidersMessage =>
-      'Mettez à jour les frais officiels ou ajoutez votre propre grille.';
+  String get noProvidersYet => 'Aucune grille';
 
   @override
   String tierCount(int count) {
@@ -572,7 +461,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get providerNameHint => 'ex. MVola, Orange Money, ma banque';
+  String get providerNameHint => 'ex. MVola, ma banque';
 
   @override
   String get descriptionOptional => 'Description (facultatif)';
@@ -584,37 +473,19 @@ class AppLocalizationsFr extends AppLocalizations {
   String get amountRange => 'Montant envoyé';
 
   @override
-  String get noIntervalsMessage =>
-      'Ajoutez les paliers de cette grille pour optimiser vos opérations.';
+  String get downloadingFees => 'Téléchargement…';
 
   @override
-  String get gridHint => 'Touchez un palier pour le modifier ou le supprimer.';
-
-  @override
-  String get intervalFormHelp =>
-      'Les frais s\'appliquent quand le montant envoyé est entre le minimum et le maximum (inclus).';
-
-  @override
-  String get downloadingFees => 'Lecture des grilles publiées…';
-
-  @override
-  String get feesDownloadFailed => 'Vérifiez votre connexion puis réessayez.';
+  String get feesDownloadFailed => 'Vérifiez votre connexion';
 
   @override
   String get feesAlreadyUpToDate => 'Vos frais sont à jour';
-
-  @override
-  String get gridsOthersUnchanged => 'Vos autres grilles ne changent pas.';
 
   @override
   String get updateAction => 'Mettre à jour';
 
   @override
   String get feesUpdatedSuccessfully => 'Frais mis à jour';
-
-  @override
-  String get importExportSubtitle =>
-      'Sauvegarder ou partager vos grilles (CSV)';
 
   @override
   String get replayIntroduction => 'Revoir la présentation';
@@ -624,7 +495,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'Des tarifs officiels des opérateurs : les grilles MVola et Orange Money sont lues chaque jour sur mvola.mg et orange.mg ; celle d\'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » dans l\'onglet Opérateurs pour avoir les dernières ; les grilles que vous avez ajoutées ne changent pas.';
+      'Des tarifs officiels de MVola, Orange Money et Airtel Money. Touchez « Mettre à jour » pour avoir les derniers.';
 
   @override
   String get ok => 'OK';
@@ -639,18 +510,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get csvTemplate => 'Modèle';
 
   @override
-  String get csvTemplateDescription =>
-      'Partez d\'un fichier prêt avec les colonnes attendues.';
-
-  @override
   String get downloadTemplate => 'Télécharger le modèle';
 
   @override
   String get csvFormat => 'Format du fichier';
-
-  @override
-  String get csvFormatHelp =>
-      'Une ligne par palier. Les lignes ayant le même nom_fournisseur et le même type_operation forment une grille. type_operation vaut withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance ou transfer_unregistered (facultatif) ; type_frais vaut fixed ou percentage. Virgules ou points-virgules acceptés.';
 
   @override
   String get opWithdrawal => 'Retrait';
@@ -675,10 +538,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get operators => 'Opérateurs';
-
-  @override
-  String get operatorsSubtitle =>
-      'Les grilles de frais utilisées pour vos calculs.';
 
   @override
   String get operatorLabel => 'Opérateur';
@@ -726,7 +585,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String gridAlreadyExists(String name) {
-    return 'La grille $name existe déjà.';
+    return '$name existe déjà';
   }
 
   @override
@@ -734,7 +593,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String deleteGridMessage(String name) {
-    return 'La grille $name et ses paliers seront supprimés.';
+    return '$name et ses paliers seront supprimés.';
   }
 
   @override
@@ -748,12 +607,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String feesCheckedOn(String date) {
-    return 'Vérifiés sur les sites des opérateurs le $date';
+    return 'Vérifiés le $date';
   }
 
   @override
-  String get feesNeverChecked =>
-      'Téléchargez les derniers frais publiés par les opérateurs.';
+  String get feesNeverChecked => 'Pas encore vérifiés';
 
   @override
   String sourceOfficial(String host) {
@@ -766,22 +624,19 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get sourceManual => 'Grille recopiée des tarifs de l\'opérateur';
+  String get sourceManual => 'Tarifs de l\'opérateur';
 
   @override
   String sourceManualDated(String date) {
-    return 'Grille recopiée des tarifs de l\'opérateur · $date';
+    return 'Tarifs de l\'opérateur · $date';
   }
 
   @override
-  String get sourceEdited => 'Grille modifiée par vous';
-
-  @override
-  String get openSource => 'Voir la page officielle';
+  String get sourceEdited => 'Modifiée par vous';
 
   @override
   String get editPublishedGridWarning =>
-      'Cette grille vient des tarifs de l\'opérateur. Si vous mettez à jour les frais plus tard, votre modification sera remplacée.';
+      'Une mise à jour des frais annulera ce changement.';
 
   @override
   String get feesSection => 'Frais';
@@ -793,12 +648,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get feesDownloadFailedTitle => 'Téléchargement impossible';
 
   @override
-  String get updateReviewIntro =>
-      'Les opérateurs ont publié de nouveaux frais. Voici ce qui change :';
+  String get updateReviewIntro => 'Nouveaux frais publiés :';
 
   @override
   String effectiveSince(String date) {
-    return 'en vigueur depuis le $date';
+    return 'depuis le $date';
   }
 
   @override
@@ -815,10 +669,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get withdrawalCount => 'Nombre de retraits';
-
-  @override
-  String get withdrawalCountHelp =>
-      'Facultatif. Limitez le nombre de retraits que le plan peut utiliser.';
 
   @override
   String get cashYouReceive => 'Vous recevez en espèces';
@@ -848,25 +698,17 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get planTitleWithdrawal => 'Votre plan de retrait';
-
-  @override
-  String get gainVsClassicWithdrawal =>
-      'Par rapport au retrait du plus gros montant possible à chaque fois.';
+  String get planTitleWithdrawal => 'Plan de retrait';
 
   @override
   String get classicExplanationWithdrawal =>
-      'Méthode habituelle : retirer le plus gros montant possible, puis le reste.';
+      'Habituel : retirer le maximum, puis le reste';
 
   @override
   String get amountWithdrawn => 'Montant retiré';
 
   @override
-  String get noTiersYet => 'Aucun palier pour l\'instant';
-
-  @override
-  String get intervalFormHelpWithdrawal =>
-      'Les frais s\'appliquent quand le montant retiré est entre le minimum et le maximum (inclus).';
+  String get noTiersYet => 'Aucun palier';
 
   @override
   String versionLabel(String version) {
@@ -877,7 +719,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get free => 'Gratuit';
 
   @override
-  String get failedToLoadData => 'Impossible de charger les données';
+  String get failedToLoadData => 'Chargement impossible';
 
   @override
   String get failedToOpenLink => 'Impossible d\'ouvrir le lien';
@@ -886,55 +728,86 @@ class AppLocalizationsFr extends AppLocalizations {
   String get pressAgainToExit => 'Appuyez encore pour quitter';
 
   @override
-  String onlyOperation(String operation, String operator) {
-    return 'Seule l\'opération « $operation » est disponible pour $operator.';
-  }
-
-  @override
-  String amountStepMultiples(String amount) {
-    return 'Multiples de $amount';
-  }
-
-  @override
-  String optimizationStepTooLarge(String amount) {
-    return 'Aucun palier de cette grille n\'accepte des montants multiples de $amount. Désactivez l\'arrondi.';
-  }
+  String get optimizationStepTooLarge =>
+      'Désactivez l\'arrondi pour cette grille';
 
   @override
   String get roundToHundred => 'Arrondir à la centaine';
 
   @override
-  String roundToHundredOnWithdrawal(String example, String wrong) {
-    return 'Chaque retrait est un multiple de 100 : $example, jamais $wrong.';
-  }
-
-  @override
-  String roundToHundredOnTransfer(String example, String wrong) {
-    return 'Chaque envoi est un multiple de 100 : $example, jamais $wrong.';
-  }
-
-  @override
-  String get roundToHundredOff => 'Montants exacts, sans arrondi.';
+  String get roundToHundredOff => 'Montants exacts';
 
   @override
   String get faqHowItWorks => 'Comment ça marche ?';
 
   @override
   String get faqHowItWorksAnswer =>
-      'Choisissez l\'opérateur, l\'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.';
+      'Choisissez l\'opérateur, l\'opération et le montant disponible. Feezer trouve le découpage qui coûte le moins de frais.';
 
   @override
-  String get faqRounding => 'Pourquoi des montants arrondis à la centaine ?';
+  String get faqRounding => 'Pourquoi arrondir à la centaine ?';
 
   @override
   String get faqRoundingAnswer =>
-      'Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Avec « Arrondir à la centaine », chaque montant du plan est un multiple de 100. C\'est activé par défaut pour les retraits ; désactivez-le pour des montants exacts.';
+      'Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Vous pouvez désactiver l\'arrondi à tout moment.';
 
   @override
-  String get faqPrivacy =>
-      'Faut-il internet ? Mes données sont-elles partagées ?';
+  String get faqPrivacy => 'Mes données sont-elles partagées ?';
 
   @override
   String get faqPrivacyAnswer =>
-      'Non. Les calculs se font sur votre téléphone, sans compte, et rien n\'est envoyé. Internet sert seulement à mettre à jour les frais (un fichier public).';
+      'Non. Feezer ne demande aucun compte et rien ne quitte votre téléphone.';
+
+  @override
+  String get onboardingText1 => 'Feezer découpe vos retraits et transferts.';
+
+  @override
+  String onboardingExample(String amount) {
+    return 'Exemple : $amount sur votre compte';
+  }
+
+  @override
+  String get onboardingOneGo => 'En une fois';
+
+  @override
+  String get onboardingWithFeezer => 'Avec Feezer';
+
+  @override
+  String get onboardingStep1 => 'Choisissez l\'opérateur';
+
+  @override
+  String get onboardingStep2 => 'Entrez le montant';
+
+  @override
+  String get onboardingStep3 => 'Suivez le plan';
+
+  @override
+  String roundToHundredOn(String example, String wrong) {
+    return '$example, jamais $wrong';
+  }
+
+  @override
+  String get vsUsualWay => 'Par rapport à la méthode habituelle';
+
+  @override
+  String get csvFormatRows =>
+      'Une ligne par palier ; virgule ou point-virgule.';
+
+  @override
+  String get faqInternet => 'Faut-il internet ?';
+
+  @override
+  String get faqInternetAnswer =>
+      'Non. Les calculs se font sur votre téléphone ; internet sert seulement à mettre à jour les frais.';
+
+  @override
+  String get termsIndependenceTitle => 'Indépendance';
+
+  @override
+  String get termsIndependenceContent =>
+      'Feezer n\'est affilié à aucun opérateur et n\'est pas responsable des frais facturés.';
+
+  @override
+  String get termsAcceptance =>
+      'En utilisant Feezer, vous acceptez ces conditions.';
 }

@@ -13,6 +13,8 @@ import 'package:feezer/data/default_data.dart';
 import 'package:feezer/main.dart';
 import 'package:feezer/provider/locale_provider.dart';
 import 'package:feezer/provider/theme_provider.dart';
+import 'package:feezer/screen/splash/launch_splash.dart';
+import 'package:feezer/theme/app_theme.dart';
 import 'package:feezer/util/navigation_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -22,8 +24,11 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-const _materialIcons =
-    '/opt/homebrew/share/flutter/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf';
+/// Icons font of the Flutter SDK running the test (FLUTTER_ROOT is set by
+/// `flutter test`), wherever it is installed.
+String get _materialIcons =>
+    '${Platform.environment['FLUTTER_ROOT']}/bin/cache/artifacts/'
+    'material_fonts/MaterialIcons-Regular.otf';
 
 Future<void> _loadFonts() async {
   Future<ByteData> read(String path) async =>
@@ -184,9 +189,6 @@ void main() {
       await tester.tap(find.text('Suivant'));
       await _settle(tester);
       await _shot(tester, '13_onboarding2_$suffix');
-      await tester.tap(find.text('Suivant'));
-      await _settle(tester);
-      await _shot(tester, '14_onboarding3_$suffix');
 
       await tester.runAsync(() async {
         await (await AppDatabase.instance.database).close();
@@ -194,4 +196,28 @@ void main() {
       });
     });
   }
+
+  // Frames of the launch animation, every 120 ms.
+  testWidgets('launch splash frames', (tester) async {
+    tester.view.physicalSize = const Size(412, 915);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.runAsync(_loadFonts);
+    await tester.pumpWidget(
+      RepaintBoundary(
+        key: _boundary,
+        child: LaunchSplash<int>(
+          ready: Future.value(1),
+          builder: (context, _) => MaterialApp(
+            theme: AppTheme.light,
+            home: const Scaffold(body: Center(child: Text('Feezer app'))),
+          ),
+        ),
+      ),
+    );
+    for (var i = 0; i <= 14; i++) {
+      await _shot(tester, 'splash_${(i * 120).toString().padLeft(4, '0')}');
+      await tester.pump(const Duration(milliseconds: 120));
+    }
+  });
 }

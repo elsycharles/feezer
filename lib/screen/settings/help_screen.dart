@@ -9,7 +9,7 @@ import '../../widget/common.dart';
 class HelpScreen extends StatelessWidget {
   const HelpScreen({super.key});
 
-  static const _email = 'elsy.s.charles@gmail.com';
+  static const email = 'elsy.s.charles@gmail.com';
   static const _whatsapp = 'https://wa.me/261348421634';
   static const _website = 'https://elsycharles.github.io/';
 
@@ -20,6 +20,7 @@ class HelpScreen extends StatelessWidget {
       (l10n.faqHowItWorks, l10n.faqHowItWorksAnswer),
       (l10n.faqFeeUpdate, l10n.faqFeeUpdateAnswer),
       (l10n.faqRounding, l10n.faqRoundingAnswer),
+      (l10n.faqInternet, l10n.faqInternetAnswer),
       (l10n.faqPrivacy, l10n.faqPrivacyAnswer),
       (l10n.faqExportData, l10n.faqExportDataAnswer),
     ];
@@ -78,10 +79,10 @@ class HelpScreen extends StatelessWidget {
               MenuRow(
                 icon: Icons.mail_outline_rounded,
                 title: l10n.email,
-                subtitle: _email,
+                subtitle: email,
                 trailing: const SizedBox.shrink(),
                 onTap: () =>
-                    LinkUtil.open(context, Uri(scheme: 'mailto', path: _email)),
+                    LinkUtil.open(context, Uri(scheme: 'mailto', path: email)),
               ),
               MenuRow(
                 icon: Icons.chat_outlined,

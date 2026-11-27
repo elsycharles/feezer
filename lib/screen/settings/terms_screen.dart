@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../theme/app_theme.dart';
+import '../../util/link_util.dart';
+import 'help_screen.dart';
 
-/// Terms of use and privacy policy.
+/// Terms of use, one line per point.
 class TermsScreen extends StatelessWidget {
   const TermsScreen({super.key});
 
@@ -14,35 +16,50 @@ class TermsScreen extends StatelessWidget {
       (l10n.termsServiceTitle, l10n.termsServiceContent),
       (l10n.termsPrivacyTitle, l10n.termsPrivacyContent),
       (l10n.termsLiabilityTitle, l10n.termsLiabilityContent),
-      (l10n.termsContactTitle, l10n.termsContactContent),
+      (l10n.termsIndependenceTitle, l10n.termsIndependenceContent),
     ];
+    final body = context.text.bodyMedium?.copyWith(
+      color: context.colors.onSurfaceVariant,
+    );
+    Widget section(int number, String title, Widget content) => Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('$number. $title', style: context.text.titleMedium),
+        Space.gapXs,
+        content,
+      ],
+    );
     return Scaffold(
       appBar: AppBar(title: Text(l10n.termsOfUse)),
-      body: ListView.separated(
+      body: ListView(
         padding: const EdgeInsets.fromLTRB(
           Space.page,
           Space.sm,
           Space.page,
           Space.xxl,
         ),
-        itemCount: sections.length,
-        separatorBuilder: (_, _) => Space.gapXl,
-        itemBuilder: (context, index) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${index + 1}. ${sections[index].$1}',
-              style: context.text.titleMedium,
-            ),
-            Space.gapSm,
-            Text(
-              sections[index].$2,
-              style: context.text.bodyMedium?.copyWith(
-                color: context.colors.onSurfaceVariant,
+        children: [
+          for (final (i, (title, content)) in sections.indexed) ...[
+            section(i + 1, title, Text(content, style: body)),
+            Space.gapXl,
+          ],
+          section(
+            sections.length + 1,
+            l10n.termsContactTitle,
+            GestureDetector(
+              onTap: () => LinkUtil.open(
+                context,
+                Uri(scheme: 'mailto', path: HelpScreen.email),
+              ),
+              child: Text(
+                HelpScreen.email,
+                style: body?.copyWith(color: context.colors.primary),
               ),
             ),
-          ],
-        ),
+          ),
+          Space.gapXxl,
+          Text(l10n.termsAcceptance, style: context.text.bodySmall),
+        ],
       ),
     );
   }

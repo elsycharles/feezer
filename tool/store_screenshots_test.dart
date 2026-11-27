@@ -23,8 +23,11 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-const _materialIcons =
-    '/opt/homebrew/share/flutter/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf';
+/// Icons font of the Flutter SDK running the test (FLUTTER_ROOT is set by
+/// `flutter test`), wherever it is installed.
+String get _materialIcons =>
+    '${Platform.environment['FLUTTER_ROOT']}/bin/cache/artifacts/'
+    'material_fonts/MaterialIcons-Regular.otf';
 
 /// 1080 x 1920 pixels, like a 411 dp wide phone.
 const _ratio = 2.625;
@@ -73,6 +76,8 @@ class _Words {
     this.cash,
     this.recipient,
     this.transferPlan,
+    this.showDetails,
+    this.transferGain,
   );
   final String withdrawal;
   final String transfer;
@@ -81,6 +86,8 @@ class _Words {
   final String cash;
   final String recipient;
   final String transferPlan;
+  final String showDetails;
+  final String transferGain;
 }
 
 const _words = {
@@ -91,7 +98,9 @@ const _words = {
     'Opérateurs',
     'Vous recevez en espèces',
     'Le destinataire reçoit',
-    "Votre plan d'envoi",
+    "Plan d'envoi",
+    'Voir le détail',
+    '+1\u00A0200 reçus en plus',
   ),
   'en': _Words(
     'Withdrawal',
@@ -100,7 +109,9 @@ const _words = {
     'Operators',
     'You receive in cash',
     'The recipient receives',
-    'Your transfer plan',
+    'Transfer plan',
+    'Show details',
+    '+1\u00A0200 more received',
   ),
 };
 
@@ -215,7 +226,7 @@ void main() {
       await _alignTop(tester, w.cash, 44);
       await _shot(tester, locale, '2_withdrawal');
 
-      // 3. Transfer that beats the usual way: 1 230 more received.
+      // 3. Transfer that beats the usual way: 1 200 more received.
       await _scrollTo(tester, 0);
       await tester.tap(find.text(w.transfer).first);
       await _settle(tester, 5);
@@ -224,8 +235,15 @@ void main() {
       await _alignTop(tester, w.recipient, 44);
       await _shot(tester, locale, '3_transfer');
 
-      // 4. Comparison with the usual way.
-      await _alignTop(tester, w.transferPlan, 16);
+      // 4. Comparison with the usual way, with its detail.
+      final details = find.text(w.showDetails);
+      await tester.scrollUntilVisible(details, 300, scrollable: _scrollable);
+      await tester.ensureVisible(details);
+      await _settle(tester, 5);
+      await tester.tap(details);
+      await _settle(tester, 10);
+      // From the gain note (its card starts 12 above its title).
+      await _alignTop(tester, w.transferGain, 16);
       await _shot(tester, locale, '4_compare');
 
       // 5. Operators and their official grids.

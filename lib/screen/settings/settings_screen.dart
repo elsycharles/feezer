@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import '../../data/app_database.dart';
 import '../../data/fee_table_service.dart';
 import '../../l10n/app_localizations.dart';
-import '../../model/locale_model.dart';
 import '../../provider/locale_provider.dart';
 import '../../provider/theme_provider.dart';
 import '../../theme/app_theme.dart';
@@ -13,7 +12,9 @@ import '../../util/date_label.dart';
 import '../../util/navigation_util.dart';
 import '../../util/preference_util.dart';
 import '../../widget/common.dart';
+import '../../widget/feezer_logo.dart';
 import '../providers/fee_update_flow.dart';
+import 'language_picker.dart';
 
 /// Settings tab.
 class SettingsScreen extends StatefulWidget {
@@ -109,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   icon: Icons.translate_rounded,
                   title: l10n.language,
                   subtitle: current?.nativeName ?? l10n.system,
-                  onTap: () => _pickLanguage(context, localeProvider),
+                  onTap: () => showLanguagePicker(context),
                 ),
               ],
             ),
@@ -131,7 +132,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 MenuRow(
                   icon: Icons.import_export_rounded,
                   title: l10n.importExportData,
-                  subtitle: l10n.importExportSubtitle,
                   onTap: () => _push(NavigationUtil.dataRoute),
                 ),
               ],
@@ -143,7 +143,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 MenuRow(
                   icon: Icons.help_outline_rounded,
                   title: l10n.helpAndSupport,
-                  subtitle: l10n.faqAndContact,
                   onTap: () => _push(NavigationUtil.helpRoute),
                 ),
                 MenuRow(
@@ -161,7 +160,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Space.gapXxl,
             Column(
               children: [
-                Image.asset('assets/images/logo.png', width: 36, height: 36),
+                // Tap the logo to watch it assemble again.
+                const AnimatedFeezerMark(size: 36),
                 Space.gapSm,
                 Text('Feezer', style: context.text.titleSmall),
                 Text(
@@ -173,44 +173,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Future<void> _pickLanguage(
-    BuildContext context,
-    LocaleProvider provider,
-  ) async {
-    final l10n = AppLocalizations.of(context);
-    final selected = provider.locale?.languageCode;
-    await showAppSheet<void>(
-      context,
-      title: l10n.language,
-      builder: (sheetContext) {
-        Widget option(String label, String? code, VoidCallback onTap) =>
-            MenuRow(
-              icon: selected == code
-                  ? Icons.radio_button_checked_rounded
-                  : Icons.radio_button_unchecked_rounded,
-              color: selected == code ? sheetContext.colors.primary : null,
-              title: label,
-              trailing: const SizedBox.shrink(),
-              onTap: () {
-                onTap();
-                Navigator.of(sheetContext).pop();
-              },
-            );
-        return MenuGroup(
-          children: [
-            option(l10n.system, null, provider.clearLocale),
-            for (final locale in SupportedLocale.supportedLocales)
-              option(
-                locale.nativeName,
-                locale.locale.languageCode,
-                () => provider.setLocale(locale.locale),
-              ),
-          ],
-        );
-      },
     );
   }
 }

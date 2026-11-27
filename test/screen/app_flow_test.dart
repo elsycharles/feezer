@@ -75,6 +75,8 @@ void main() {
         'first_launch': false,
         'theme_mode': mode.index,
         'selected_locale': 'en',
+        // Exact transfer amounts here; rounding is the default (see below).
+        'amount_step_transfer': 0,
       });
 
       late Directory dir;
@@ -150,10 +152,7 @@ void main() {
       await tester.tap(optimize);
       await settle(tester, rounds: 40);
       expect(find.text('10${nbsp}000'), findsWidgets);
-      expect(
-        find.text('Without this limit, 50 more would be received.'),
-        findsOneWidget,
-      );
+      expect(find.text('Your limit costs 50'), findsOneWidget);
 
       // Withdrawals use their own wording.
       await tester.scrollUntilVisible(
@@ -177,9 +176,8 @@ void main() {
       await tester.tap(optimize);
       await settle(tester, rounds: 40);
       expect(find.text('You receive in cash'), findsOneWidget);
-      expect(find.text('Your withdrawal plan'), findsOneWidget);
+      expect(find.text('Withdrawal plan'), findsOneWidget);
       // Withdrawals default to notes of 100.
-      expect(find.text('Multiples of 100'), findsOneWidget);
       expect(find.text('10${nbsp}100'), findsWidgets);
 
       // Exact amounts: 10 125.
@@ -187,20 +185,13 @@ void main() {
       await tester.scrollUntilVisible(rounding, -300, scrollable: scrollable);
       await tester.ensureVisible(rounding);
       await tester.pumpAndSettle();
-      expect(
-        find.text(
-          'Every withdrawal is a multiple of 100: 10${nbsp}000, '
-          'never 10${nbsp}040.',
-        ),
-        findsOneWidget,
-      );
+      expect(find.text('10${nbsp}000, never 10${nbsp}040'), findsOneWidget);
       await tester.tap(rounding);
       await tester.pumpAndSettle();
-      expect(find.text('Exact amounts, not rounded.'), findsOneWidget);
+      expect(find.text('Exact amounts'), findsOneWidget);
       await tester.ensureVisible(optimize);
       await tester.tap(optimize);
       await settle(tester, rounds: 40);
-      expect(find.text('Multiples of 100'), findsNothing);
       expect(find.text('10${nbsp}125'), findsWidgets);
       expect(tester.takeException(), isNull);
 
@@ -212,7 +203,7 @@ void main() {
       await tester.tap(find.text('Transfer'));
       await settle(tester);
       expect(find.text('Fee grid'), findsOneWidget);
-      expect(find.text('See the official page'), findsOneWidget);
+      expect(find.byIcon(Icons.open_in_new_rounded), findsOneWidget);
       expect(tester.takeException(), isNull);
       await tester.pageBack();
       await settle(tester);
@@ -221,10 +212,7 @@ void main() {
       await tester.tap(tab('Settings'));
       await settle(tester);
       expect(find.text('Update the fees'), findsOneWidget);
-      expect(
-        find.text('Download the latest fees published by the operators.'),
-        findsOneWidget,
-      );
+      expect(find.text('Not checked yet'), findsOneWidget);
       expect(tester.takeException(), isNull);
 
       await tester.runAsync(() async {

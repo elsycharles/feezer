@@ -12,28 +12,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get onboardingTitle1 => 'Mandoava sarany kely kokoa';
 
   @override
-  String get onboardingDescription1 =>
-      'Ampidiro ny vola: zarain\'i Feezer ho fifanakalozana mora indrindra izany.';
-
-  @override
-  String get onboardingTitle2 => 'Ny tena saran\'ny mpandraharaha';
-
-  @override
-  String get onboardingDescription2 =>
-      'MVola, Orange Money, Airtel Money: avy amin\'ny saran\'ny mpandraharaha ofisialy ny tabilao ary havaozina amin\'ny tsindry iray.';
-
-  @override
-  String get onboardingTitle3 => 'Fisintonana sy famindrana';
-
-  @override
-  String get onboardingDescription3 =>
-      'Fidio ny mpandraharaha sy ny fifanakalozana. Mijanona ao amin\'ny findainao ny angon-drakitrao, na tsy misy aterineto aza.';
+  String get onboardingTitle2 => 'Amin\'ny dingana 3';
 
   @override
   String get next => 'Manaraka';
-
-  @override
-  String get skip => 'Handingana';
 
   @override
   String get getStarted => 'Hanomboka';
@@ -54,7 +36,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get optimize => 'Atsikafo';
 
   @override
-  String get pleaseEnterValidAmount => 'Ampidiro ny vola manan-kery azafady';
+  String get pleaseEnterValidAmount => 'Vola tsy mety';
 
   @override
   String get pleaseSelectProvider => 'Misafidiana mpandraharaha';
@@ -79,20 +61,16 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get maxAmountMustBeGreaterThanMinAmount =>
-      'Ny vola be dia tsy maintsy mihoatra ny vola kely';
+      'Tsy maintsy mihoatra ny farafahakeliny';
 
   @override
   String get fee => 'Sara';
 
   @override
-  String get noOptimizationResultsFound =>
-      'Tsy misy valiny. Hamarino ny vola sy ny tabilao nofidina.';
+  String get noOptimizationResultsFound => 'Tsy misy valiny';
 
   @override
   String get about => 'Momba';
-
-  @override
-  String get faqAndContact => 'Fanontaniana sy fifandraisana';
 
   @override
   String get termsOfUse => 'Fepetra fampiasana';
@@ -102,32 +80,27 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get termsServiceContent =>
-      'Avy amin\'ny tabilaon\'ny saran\'ny mpandraharaha, manisa ny fomba hizarana fisintonana na famindrana i Feezer mba handoavana sarany kely indrindra. Raha mampiasa an\'i Feezer ianao dia manaiky ireo fepetra ireo.';
+      'Kajian\'i Feezer ny fomba hizarana fisintonana na famindrana mba handoavana sarany kely indrindra, araka ny tabilaon\'ny mpandraharaha.';
 
   @override
   String get termsPrivacyTitle => 'Ny angon-drakitrao';
 
   @override
   String get termsPrivacyContent =>
-      'Tsy mila kaonty i Feezer ary tsy manangona angon-drakitra manokana. Mijanona ao amin\'ny findainao ny tabilao sy ny kajinao, ary voafafa raha esorinao ilay fampiharana. Rakitra ho an\'ny besinimaro ihany no alain\'ny fanavaozana ny sarany.';
+      'Tsy misy kaonty, tsy misy angona angonina. Mijanona ao amin\'ny findainao ny tabilao sy ny kajinao.';
 
   @override
   String get termsLiabilityTitle => 'Andraikitra';
 
   @override
   String get termsLiabilityContent =>
-      'Ho fampahafantarana fotsiny ny valiny: mety hanova ny sarany na oviana na oviana ny mpandraharaha, koa hamarino alohan\'ny fifanakalozana tsirairay. Tsy mifandray amin\'ny mpandraharaha na iray aza i Feezer ary tsy tompon\'andraikitra amin\'ny sarany tena aloa.';
+      'Fampahafantarana fotsiny ny valiny: mety hanova ny sarany ny mpandraharaha. Hamarino alohan\'ny fifanakalozana tsirairay.';
 
   @override
   String get termsContactTitle => 'Fifandraisana';
 
   @override
-  String get termsContactContent =>
-      'Manana fanontaniana? Manorata aminay avy amin\'ny Fanampiana, na amin\'ny elsy.s.charles@gmail.com.';
-
-  @override
-  String get noFeeIntervalsFound =>
-      'Mbola tsy misy ambaratonga ity tabilao ity. Ampio ao amin\'ny Mpandraharaha.';
+  String get noFeeIntervalsFound => 'Tsy misy ambaratonga ity tabilao ity';
 
   @override
   String get addFeeInterval => 'Hanampy ambaratonga';
@@ -142,7 +115,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get icon => 'Sary famantarana';
 
   @override
-  String get thisFieldIsRequired => 'Ilaina ity saha ity';
+  String get thisFieldIsRequired => 'Ilaina';
 
   @override
   String get feeIntervalUpdatedSuccessfully => 'Voaova ny ambaratonga';
@@ -163,16 +136,10 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get minTransactionsCannotBeGreaterThanMax =>
-      'Ny fampiasana kely indrindra dia tsy afaka mihoatra ny be indrindra';
+      'Farafahakeliny > farafahabetsany';
 
   @override
-  String get pleaseEnterValidFee => 'Ampidiro ny sara manan-kery azafady';
-
-  @override
-  String get minimumAmount => 'Vola faran\'izay kely';
-
-  @override
-  String get maximumAmount => 'Vola faran\'izay lehibe';
+  String get pleaseEnterValidFee => 'Sarany tsy mety';
 
   @override
   String get helpAndSupport => 'Fanampiana';
@@ -195,8 +162,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get failedToCalculateOptimization =>
-      'Tsy nahomby ny fanisana ny fanatsarana';
+  String get failedToCalculateOptimization => 'Tsy nahomby ny kajy';
 
   @override
   String get importExportData => 'Hampiditra / hamoaka';
@@ -212,69 +178,50 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String importFailed(String error) {
-    return 'Tsy nahomby ny fanafarana : $error';
+    return 'Tsy nahomby ny fampidirana: $error';
   }
 
   @override
   String exportFailed(String error) {
-    return 'Tsy nahomby ny fanavoahana : $error';
-  }
-
-  @override
-  String providersImported(int count) {
-    return 'Tabilao $count nampidirina';
-  }
-
-  @override
-  String feeIntervalsImported(int count) {
-    return 'Ambaratonga $count nampidirina';
+    return 'Tsy nahomby ny famoahana: $error';
   }
 
   @override
   String errorsEncountered(int count) {
-    return '$count tsy fetezana hita';
+    return 'Hadisoana $count';
   }
 
   @override
-  String get importDataDescription =>
-      'Hanampy tabilao avy amin\'ny rakitra CSV (andalana iray isaky ny ambaratonga).';
+  String get csvContentCannotBeEmpty => 'Foana ny lahatsoratra';
 
   @override
-  String get exportDataDescription =>
-      'Tehirizo ao anaty rakitra CSV ny tabilaonao rehetra sy ny ambaratongany.';
+  String get chooseWhereToSave => 'Tehirizo ny rakitra';
 
   @override
-  String get csvContentCannotBeEmpty =>
-      'Tsy azo atao ho foana ny votoatin\'ny CSV';
+  String get fileSavedSuccessfully => 'Voatahiry ny rakitra';
 
   @override
-  String get chooseWhereToSave => 'Misafidy toerana hitehirizana ny rakitra';
+  String get failedToSaveFile => 'Tsy voatahiry ny rakitra';
 
   @override
-  String get fileSavedSuccessfully => 'Voatahiry soa aman-tsara ny rakitra';
+  String get csvFileIsEmpty => 'Foana ny rakitra';
 
   @override
-  String get failedToSaveFile => 'Tsy nahomby ny fitahirizana rakitra';
-
-  @override
-  String get csvFileIsEmpty => 'Foana ny rakitra CSV';
-
-  @override
-  String get noDataRowsFound => 'Tsy misy andalana angona hita';
+  String get noDataRowsFound => 'Tsy misy andalana';
 
   @override
   String rowProviderNameRequired(int rowNumber) {
-    return 'Andalana $rowNumber: ilaina ny anaran\'ny mpandraharaha';
+    return 'Andalana $rowNumber: tsy misy mpandraharaha';
   }
 
   @override
   String rowProviderAlreadyExists(int rowNumber, String name) {
-    return 'Andalana $rowNumber: efa misy ny tabilao « $name »';
+    return 'Andalana $rowNumber: efa misy « $name »';
   }
 
   @override
   String rowIntervalOverlaps(int rowNumber, String overlap) {
-    return 'Andalana $rowNumber: mifanindry amin\'ny ambaratonga efa misy ($overlap)';
+    return 'Andalana $rowNumber: mifanindry amin\'ny $overlap';
   }
 
   @override
@@ -284,35 +231,35 @@ class AppLocalizationsMg extends AppLocalizations {
     String maxStr,
     String feeStr,
   ) {
-    return 'Andalana $rowNumber : Tsy mety ny vola (kely : $minStr, lehibe : $maxStr, sara : $feeStr)';
+    return 'Andalana $rowNumber: vola tsy mety ($minStr, $maxStr, $feeStr)';
   }
 
   @override
   String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
-    return 'Andalana $rowNumber : Ny vola kely ($min) tsy maintsy ambany noho ny vola lehibe ($max)';
+    return 'Andalana $rowNumber: min $min > max $max';
   }
 
   @override
   String rowFeeMustBePositive(int rowNumber) {
-    return 'Andalana $rowNumber : Tsy maintsy positif ny sara';
+    return 'Andalana $rowNumber: sarany latsaky ny 0';
   }
 
   @override
   String rowFeePercentageInvalid(int rowNumber, String fee) {
-    return 'Andalana $rowNumber : Tsy maintsy eo anelanelan\'ny 0 sy 100 ny sara isaky ny 100 ($fee%)';
+    return 'Andalana $rowNumber: isan-jato ivelan\'ny 0–100 ($fee)';
   }
 
   @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
-    return 'Tabilao $providersCount sy ambaratonga $feesCount nampidirina';
+    return 'Tabilao $providersCount, ambaratonga $feesCount';
   }
 
   @override
-  String get noDataToExport => 'Tsy misy angona havoaka';
+  String get noDataToExport => 'Tsy misy tabilao havoaka';
 
   @override
   String get providerNameColumnNotFound =>
-      'Tsy hita ny tsanganana misy ny anaran\'ny mpandraharaha';
+      'Tsy hita ny tsanganana mpandraharaha';
 
   @override
   String get fixedAmount => 'Vola raikitra';
@@ -321,8 +268,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get percentage => 'Isan-jato';
 
   @override
-  String get percentageMustBeBetween0And100 =>
-      'Ny isan-jato dia tsy maintsy eo anelanelan\'ny 0 sy 100';
+  String get percentageMustBeBetween0And100 => 'Eo anelanelan\'ny 0 sy 100';
 
   @override
   String get faq => 'Fanontaniana matetika';
@@ -332,7 +278,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqExportDataAnswer =>
-      'Fandrindrana › Hampiditra / hamoaka: avoahy ho rakitra CSV ny tabilaonao, dia ampidiro amin\'ny finday hafa na rehefa avy namerina nametraka ny fampiharana.';
+      'Ao amin\'ny Fandrindrana › Hampiditra / hamoaka, avoahy ho rakitra CSV izy ireo, dia ampidiro amin\'ny finday hafa.';
 
   @override
   String get website => 'Tranonkala';
@@ -344,40 +290,26 @@ class AppLocalizationsMg extends AppLocalizations {
   String get email => 'Email';
 
   @override
-  String get exceedsEnteredAmount => 'Mihoatra ny vola nampidirina';
-
-  @override
   String get optimizationBudgetTooSmall =>
-      'Kely loatra ny vola hanaovana fifanakalozana amin\'ity tabilao ity.';
+      'Kely loatra ny vola ho an\'ity tabilao ity';
 
   @override
   String get optimizationConstraintsUnsatisfiable =>
-      'Tsy misy fizarana mifanaraka amin\'io isa io ho an\'ity vola ity.';
-
-  @override
-  String get optimizationNotProven =>
-      'Fikarohana lava be: tsara ity fizarana ity, saingy tsy voaporofo fa izy no tsara indrindra.';
+      'Tsy azo atao amin\'io fetra io';
 
   @override
   String feeIntervalOverlaps(String range) {
-    return 'Mifanindry amin\'ny ambaratonga efa misy ($range) ity ambaratonga ity.';
+    return 'Mifanindry amin\'ny ambaratonga $range';
   }
 
   @override
-  String get failedToDeleteFeeIntervals => 'Tsy voafafa ny ambaratonga';
+  String get failedToDeleteFeeIntervals => 'Tsy voafafa';
 
   @override
-  String get failedToSaveChanges => 'Tsy nahomby ny fitehirizana ny fanovana';
+  String get failedToSaveChanges => 'Tsy voatahiry';
 
   @override
   String get tabOptimize => 'Hanatsara';
-
-  @override
-  String get optimizeTitle => 'Mandoava sarany kely kokoa';
-
-  @override
-  String get optimizeSubtitle =>
-      'Zarain\'i Feezer ho fifanakalozana mora indrindra ny volanao.';
 
   @override
   String get add => 'Hanampy';
@@ -386,15 +318,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get amountAvailable => 'Vola azo ampiasaina';
 
   @override
-  String get amountHelper =>
-      'Tafiditra ny sarany: ny vola rehetra hivoaka amin\'ny kaontinao.';
+  String get amountHelper => 'Tafiditra ny sarany';
 
   @override
   String get transferCount => 'Isan\'ny fandefasana';
-
-  @override
-  String get transferCountHelp =>
-      'Tsy voatery. Fetero ny isan\'ny fandefasana azo ampiasain\'ny drafitra.';
 
   @override
   String get transferCountFree => 'Tsy voafetra';
@@ -463,39 +390,20 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get gainVsClassic =>
-      'Raha ampitahaina amin\'ny fandefasana ny vola betsaka indrindra isaky ny mandefa.';
-
-  @override
   String feesSavedTitle(String amount) {
     return '$amount sarany voatsitsy';
   }
 
   @override
-  String get feesSavedVsClassic =>
-      'Lafo kokoa ny fomba mahazatra ho an\'io vola io ihany.';
-
-  @override
-  String get alreadyOptimalTitle => 'Ny fomba mahazatra no efa tsara indrindra';
-
-  @override
-  String get alreadyOptimalMessage =>
-      'Ho an\'ity vola ity, tsy misy tombony ny fizarana.';
+  String get alreadyOptimalTitle => 'Efa tsara indrindra ny fomba mahazatra';
 
   @override
   String limitCost(String amount) {
-    return 'Raha tsy misy io fetra io, $amount fanampiny no ho voaray.';
+    return 'Mandany $amount ny fetranao';
   }
 
   @override
-  String get limitFree =>
-      'Tsy mampandany anao na inona na inona io fetra io eto.';
-
-  @override
-  String get nearOptimalTitle => 'Vola be dia be';
-
-  @override
-  String get planTitle => 'Ny drafitra fandefasanao';
+  String get planTitle => 'Drafitra fandefasana';
 
   @override
   String sendAmount(String amount) {
@@ -524,18 +432,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get classicExplanation =>
-      'Fomba mahazatra: alefa ny vola betsaka indrindra azo atao, avy eo ny sisa.';
-
-  @override
-  String get sameAmountByHand => 'Vola mitovy voaray, fomba mahazatra';
-
-  @override
-  String sameAmountByHandDetail(String net, String fees, String total) {
-    return 'Mba hahazoana $net, $fees ny sarany amin\'ny fomba mahazatra, izany hoe $total nesorina.';
-  }
-
-  @override
-  String get cannotSplitByHand => 'Tsy tratran\'ny fomba mahazatra io vola io.';
+      'Mahazatra: alefa ny be indrindra, avy eo ny sisa';
 
   @override
   String get classicPlan => 'Drafitra mahazatra';
@@ -547,11 +444,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get showLess => 'Hanafina ny antsipiriany';
 
   @override
-  String get noProvidersYet => 'Mbola tsy misy tabilao';
-
-  @override
-  String get noProvidersMessage =>
-      'Havaozy ny sarany ofisialy, na ampio ny tabilaonao manokana.';
+  String get noProvidersYet => 'Tsy misy tabilao';
 
   @override
   String tierCount(int count) {
@@ -571,7 +464,7 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get providerNameHint => 'oh. MVola, Orange Money, ny bankiko';
+  String get providerNameHint => 'oh. MVola, ny bankiko';
 
   @override
   String get descriptionOptional => 'Famaritana (tsy voatery)';
@@ -583,38 +476,19 @@ class AppLocalizationsMg extends AppLocalizations {
   String get amountRange => 'Vola alefa';
 
   @override
-  String get noIntervalsMessage =>
-      'Ampio ny ambaratongan\'ity tabilao ity mba hanatsarana ny fifanakalozanao.';
+  String get downloadingFees => 'Eo am-pakana…';
 
   @override
-  String get gridHint =>
-      'Tsindrio ny ambaratonga iray raha hanova na hamafa azy.';
-
-  @override
-  String get intervalFormHelp =>
-      'Ampiharina ny sarany rehefa eo anelanelan\'ny farafahakeliny sy ny farafahabetsany ny vola alefa.';
-
-  @override
-  String get downloadingFees => 'Mamaky ny tabilao navoaka…';
-
-  @override
-  String get feesDownloadFailed =>
-      'Hamarino ny fifandraisanao dia andramo indray.';
+  String get feesDownloadFailed => 'Hamarino ny fifandraisanao';
 
   @override
   String get feesAlreadyUpToDate => 'Efa vaovao ny saranao';
-
-  @override
-  String get gridsOthersUnchanged => 'Tsy miova ireo tabilao hafa anananao.';
 
   @override
   String get updateAction => 'Havaozina';
 
   @override
   String get feesUpdatedSuccessfully => 'Voavao ny sarany';
-
-  @override
-  String get importExportSubtitle => 'Hitahiry na hizara ny tabilaonao (CSV)';
 
   @override
   String get replayIntroduction => 'Hijery indray ny fampidirana';
@@ -624,7 +498,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get faqFeeUpdateAnswer =>
-      'Avy amin\'ny saran\'ny mpandraharaha ofisialy: vakiana isan\'andro ao amin\'ny mvola.mg sy orange.mg ny tabilaon\'i MVola sy Orange Money; nadika avy amin\'ny sarany navoaka ny an\'i Airtel Money. Tsindrio « Havaozina » ao amin\'ny Mpandraharaha mba hahazoana ny farany; tsy miova ireo tabilao nampidirinao.';
+      'Avy amin\'ny sarany ofisialy an\'i MVola, Orange Money ary Airtel Money. Tsindrio « Havaozina » hahazoana ny farany.';
 
   @override
   String get ok => 'Eny';
@@ -639,18 +513,10 @@ class AppLocalizationsMg extends AppLocalizations {
   String get csvTemplate => 'Modely';
 
   @override
-  String get csvTemplateDescription =>
-      'Manomboha amin\'ny rakitra efa misy ireo tsanganana ilaina.';
-
-  @override
   String get downloadTemplate => 'Haka ny modely';
 
   @override
   String get csvFormat => 'Endriky ny rakitra';
-
-  @override
-  String get csvFormatHelp =>
-      'Andalana iray isaky ny ambaratonga. Tabilao iray ireo andalana manana anarany_mpanome sy karazana_fifanakalozana mitovy. withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance na transfer_unregistered ny karazana_fifanakalozana (tsy voatery); fixed na percentage ny karazany_sara. Ekena ny faingo na ny teboka sy faingo.';
 
   @override
   String get opWithdrawal => 'Fisintonana';
@@ -675,10 +541,6 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get operators => 'Mpandraharaha';
-
-  @override
-  String get operatorsSubtitle =>
-      'Ireo tabilaon\'ny sarany ampiasaina amin\'ny kajinao.';
 
   @override
   String get operatorLabel => 'Mpandraharaha';
@@ -726,7 +588,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String gridAlreadyExists(String name) {
-    return 'Efa misy ny tabilao $name.';
+    return 'Efa misy $name';
   }
 
   @override
@@ -734,7 +596,7 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String deleteGridMessage(String name) {
-    return 'Ho voafafa ny tabilao $name sy ny ambaratongany.';
+    return 'Ho voafafa $name sy ny ambaratongany.';
   }
 
   @override
@@ -748,12 +610,11 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String feesCheckedOn(String date) {
-    return 'Nohamarinina tamin\'ny tranokalan\'ny mpandraharaha ny $date';
+    return 'Nohamarinina ny $date';
   }
 
   @override
-  String get feesNeverChecked =>
-      'Alaivo ny sarany farany navoakan\'ny mpandraharaha.';
+  String get feesNeverChecked => 'Mbola tsy nohamarinina';
 
   @override
   String sourceOfficial(String host) {
@@ -766,23 +627,19 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get sourceManual =>
-      'Tabilao nadika avy amin\'ny saran\'ny mpandraharaha';
+  String get sourceManual => 'Saran\'ny mpandraharaha';
 
   @override
   String sourceManualDated(String date) {
-    return 'Tabilao nadika avy amin\'ny saran\'ny mpandraharaha · $date';
+    return 'Saran\'ny mpandraharaha · $date';
   }
 
   @override
-  String get sourceEdited => 'Tabilao novainao';
-
-  @override
-  String get openSource => 'Hijery ny pejy ofisialy';
+  String get sourceEdited => 'Novainao';
 
   @override
   String get editPublishedGridWarning =>
-      'Avy amin\'ny saran\'ny mpandraharaha ity tabilao ity. Raha havaozinao ny sarany any aoriana, hosoloina ny fanovanao.';
+      'Hofafan\'ny fanavaozana ny sarany ity fanovana ity.';
 
   @override
   String get feesSection => 'Sarany';
@@ -794,12 +651,11 @@ class AppLocalizationsMg extends AppLocalizations {
   String get feesDownloadFailedTitle => 'Tsy nahomby ny fakana';
 
   @override
-  String get updateReviewIntro =>
-      'Namoaka sarany vaovao ireo mpandraharaha. Ireto ny miova:';
+  String get updateReviewIntro => 'Sarany vaovao navoaka:';
 
   @override
   String effectiveSince(String date) {
-    return 'manan-kery hatramin\'ny $date';
+    return 'hatramin\'ny $date';
   }
 
   @override
@@ -816,10 +672,6 @@ class AppLocalizationsMg extends AppLocalizations {
 
   @override
   String get withdrawalCount => 'Isan\'ny fisintonana';
-
-  @override
-  String get withdrawalCountHelp =>
-      'Tsy voatery. Fetero ny isan\'ny fisintonana azo ampiasain\'ny drafitra.';
 
   @override
   String get cashYouReceive => 'Vola raisinao an-tanana';
@@ -849,25 +701,17 @@ class AppLocalizationsMg extends AppLocalizations {
   }
 
   @override
-  String get planTitleWithdrawal => 'Ny drafitra fisintonanao';
-
-  @override
-  String get gainVsClassicWithdrawal =>
-      'Raha ampitahaina amin\'ny fisintonana ny vola betsaka indrindra isaky ny misintona.';
+  String get planTitleWithdrawal => 'Drafitra fisintonana';
 
   @override
   String get classicExplanationWithdrawal =>
-      'Fomba mahazatra: sintonina ny vola betsaka indrindra azo atao, avy eo ny sisa.';
+      'Mahazatra: sintonina ny be indrindra, avy eo ny sisa';
 
   @override
   String get amountWithdrawn => 'Vola sintonina';
 
   @override
-  String get noTiersYet => 'Mbola tsy misy ambaratonga';
-
-  @override
-  String get intervalFormHelpWithdrawal =>
-      'Ampiharina ny sarany rehefa eo anelanelan\'ny farafahakeliny sy ny farafahabetsany ny vola sintonina.';
+  String get noTiersYet => 'Tsy misy ambaratonga';
 
   @override
   String versionLabel(String version) {
@@ -878,7 +722,7 @@ class AppLocalizationsMg extends AppLocalizations {
   String get free => 'Maimaim-poana';
 
   @override
-  String get failedToLoadData => 'Tsy voaray ny angon-drakitra';
+  String get failedToLoadData => 'Tsy voaray ny angona';
 
   @override
   String get failedToOpenLink => 'Tsy nety nisokatra ny rohy';
@@ -887,54 +731,87 @@ class AppLocalizationsMg extends AppLocalizations {
   String get pressAgainToExit => 'Tsindrio indray mba hivoaka';
 
   @override
-  String onlyOperation(String operation, String operator) {
-    return '« $operation » ihany no misy ho an\'i $operator.';
-  }
-
-  @override
-  String amountStepMultiples(String amount) {
-    return 'Isaky ny $amount';
-  }
-
-  @override
-  String optimizationStepTooLarge(String amount) {
-    return 'Tsy misy ambaratonga amin\'ity tabilao ity manaiky vola isaky ny $amount. Esory ny boribory.';
-  }
+  String get optimizationStepTooLarge =>
+      'Esory ny boribory ho an\'ity tabilao ity';
 
   @override
   String get roundToHundred => 'Boribory amin\'ny zato';
 
   @override
-  String roundToHundredOnWithdrawal(String example, String wrong) {
-    return 'Isaky ny 100 ny fisintonana tsirairay: $example, fa tsy $wrong mihitsy.';
-  }
-
-  @override
-  String roundToHundredOnTransfer(String example, String wrong) {
-    return 'Isaky ny 100 ny fandefasana tsirairay: $example, fa tsy $wrong mihitsy.';
-  }
-
-  @override
-  String get roundToHundredOff => 'Vola marina, tsy boribory.';
+  String get roundToHundredOff => 'Vola marina';
 
   @override
   String get faqHowItWorks => 'Ahoana no fiasany?';
 
   @override
   String get faqHowItWorksAnswer =>
-      'Fidio ny mpandraharaha, ny fifanakalozana (fisintonana, famindrana…) ary ny vola azo ampiasaina, tafiditra ny sarany. Tadiavin\'i Feezer ny fizarana mahazo vola betsaka indrindra amin\'ny sarany kely indrindra, ary ampitahainy amin\'ny fomba mahazatra: misintona na mandefa ny vola betsaka indrindra azo atao isaky ny mandeha.';
+      'Fidio ny mpandraharaha, ny fifanakalozana ary ny vola azo ampiasaina. Tadiavin\'i Feezer ny fizarana mora sarany indrindra.';
 
   @override
-  String get faqRounding => 'Nahoana no boribory amin\'ny zato ny vola?';
+  String get faqRounding => 'Nahoana no boribory amin\'ny zato?';
 
   @override
   String get faqRoundingAnswer =>
-      'Taratasim-bola ihany no omena any amin\'ny toeram-pisintonana: tsy azo sintonina ny 10 040. Miaraka amin\'ny « Boribory amin\'ny zato », isaky ny 100 ny vola rehetra ao amin\'ny drafitra. Mandeha ho azy izy ho an\'ny fisintonana; esory raha mila vola marina ianao.';
+      'Taratasim-bola ihany no omena rehefa misintona: tsy azo sintonina ny 10 040. Azonao esorina amin\'ny fotoana rehetra ny boribory.';
 
   @override
-  String get faqPrivacy => 'Mila aterineto ve? Zaraina ve ny angon-drakitro?';
+  String get faqPrivacy => 'Zaraina ve ny angon-drakitro?';
 
   @override
   String get faqPrivacyAnswer =>
-      'Tsia. Ao amin\'ny findainao no anaovana ny kajy, tsy misy kaonty, ary tsy misy alefa. Ny fanavaozana ny sarany ihany no mila aterineto (rakitra ho an\'ny besinimaro).';
+      'Tsia. Tsy mila kaonty i Feezer ary tsy misy miala amin\'ny findainao.';
+
+  @override
+  String get onboardingText1 =>
+      'Zarain\'i Feezer ny fisintonana sy famindranao.';
+
+  @override
+  String onboardingExample(String amount) {
+    return 'Ohatra: $amount ao amin\'ny kaontinao';
+  }
+
+  @override
+  String get onboardingOneGo => 'Indray mandeha';
+
+  @override
+  String get onboardingWithFeezer => 'Amin\'i Feezer';
+
+  @override
+  String get onboardingStep1 => 'Fidio ny mpandraharaha';
+
+  @override
+  String get onboardingStep2 => 'Ampidiro ny vola';
+
+  @override
+  String get onboardingStep3 => 'Araho ny drafitra';
+
+  @override
+  String roundToHundredOn(String example, String wrong) {
+    return '$example, fa tsy $wrong';
+  }
+
+  @override
+  String get vsUsualWay => 'Raha oharina amin\'ny fomba mahazatra';
+
+  @override
+  String get csvFormatRows =>
+      'Andalana iray isaky ny ambaratonga; faingo na teboka sy faingo.';
+
+  @override
+  String get faqInternet => 'Mila aterineto ve?';
+
+  @override
+  String get faqInternetAnswer =>
+      'Tsia. Ao amin\'ny findainao no anaovana ny kajy; ny fanavaozana ny sarany ihany no mila aterineto.';
+
+  @override
+  String get termsIndependenceTitle => 'Fahaleovan-tena';
+
+  @override
+  String get termsIndependenceContent =>
+      'Tsy mifandray amin\'ny mpandraharaha i Feezer ary tsy tompon\'andraikitra amin\'ny sarany aloa.';
+
+  @override
+  String get termsAcceptance =>
+      'Raha mampiasa an\'i Feezer ianao dia manaiky ireo fepetra ireo.';
 }

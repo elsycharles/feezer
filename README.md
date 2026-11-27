@@ -26,8 +26,10 @@ lib/
   model/            immutable models (grid, tier, operation, results)
   provider/         app state (ChangeNotifier): locale, theme
   theme/            design tokens: colors, typography, spacing, motion
-  screen/           home (tabs), optimize, operators, settings, onboarding
-  widget/           shared components (buttons, cards, pills, skeletons…)
+  screen/           launch splash, onboarding, home (tabs), optimize,
+                    operators, settings
+  widget/           shared components (buttons, cards, pills, skeletons…),
+                    the animated logo
   util/             money and date labels, CSV import/export, navigation
 tool/
   brand/            the logo, drawn from exact geometry, and launcher icons
@@ -63,8 +65,12 @@ which publishes them as `fees.json`:
 Flat surfaces, no gradients, Inter, one blue taken from the logo. Every
 tappable surface shrinks slightly when pressed and shows a calm ripple and a
 hover tint; tabs fade through, results count up and appear section by
-section, sheets and expanding cards animate their size. Tokens live in
-`lib/theme/app_theme.dart`, components in `lib/widget/common.dart`.
+section, sheets and expanding cards animate their size. Texts are kept to
+one line. At launch the logo assembles itself (the two bars slide in, the leg
+unfolds) while the app reads its preferences and fee grids, then fades into
+the first screen; the system launch screen is plain so the animation starts
+from an empty screen, and reduced motion skips it. Tokens live in `lib/theme/app_theme.dart`, components in
+`lib/widget/common.dart`.
 
 ## Optimization algorithm
 
@@ -118,7 +124,7 @@ with `flutter gen-l10n`.
 Tools:
 
 ```sh
-python3 tool/brand/make_logo.py            # logo, launcher and splash images
+python3 tool/brand/make_logo.py            # logo, launcher icons, logo paths
 dart run flutter_launcher_icons            # Android / iOS launcher icons
 flutter test tool/screenshots_test.dart    # every screen, light and dark
 flutter test tool/store_screenshots_test.dart && \
@@ -132,7 +138,8 @@ The privacy policy is [`PRIVACY.md`](PRIVACY.md).
 
 The logo is the original artwork (`tool/brand/logo_original.png`) redrawn
 from measured geometry: 60° slants, one radius for the soft corners, flat
-colors. `make_logo.py` needs Pillow and NumPy.
+colors. `make_logo.py` needs Pillow and NumPy; it also writes the same shapes
+as Flutter paths (`lib/widget/logo_geometry.dart`) for the animated logo.
 
 ## License
 

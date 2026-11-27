@@ -1,16 +1,11 @@
 {
   "@@locale": "mg",
   "onboardingTitle1": "Mandoava sarany kely kokoa",
-  "onboardingDescription1": "Ampidiro ny vola: zarain'i Feezer ho fifanakalozana mora indrindra izany.",
-  "onboardingTitle2": "Ny tena saran'ny mpandraharaha",
-  "onboardingDescription2": "MVola, Orange Money, Airtel Money: avy amin'ny saran'ny mpandraharaha ofisialy ny tabilao ary havaozina amin'ny tsindry iray.",
-  "onboardingTitle3": "Fisintonana sy famindrana",
-  "onboardingDescription3": "Fidio ny mpandraharaha sy ny fifanakalozana. Mijanona ao amin'ny findainao ny angon-drakitrao, na tsy misy aterineto aza.",
+  "onboardingTitle2": "Amin'ny dingana 3",
   "next": "Manaraka",
   "@next": {
     "description": "Next button text"
   },
-  "skip": "Handingana",
   "getStarted": "Hanomboka",
   "cancel": "Aoka ihany",
   "@cancel": {
@@ -20,22 +15,22 @@
   "feeIntervalUpdatedSuccessfully": "Voaova ny ambaratonga",
   "feeIntervalDeletedSuccessfully": "{count, plural, =1{Voafafa ny ambaratonga} other{Voafafa ny ambaratonga {count}}}",
   "editFeeInterval": "Hanova ny ambaratonga",
-  "minTransactionsCannotBeGreaterThanMax": "Ny fampiasana kely indrindra dia tsy afaka mihoatra ny be indrindra",
+  "minTransactionsCannotBeGreaterThanMax": "Farafahakeliny > farafahabetsany",
   "@minTransactionsCannotBeGreaterThanMax": {
     "description": "Validation error for transaction range"
   },
-  "pleaseEnterValidFee": "Ampidiro ny sara manan-kery azafady",
+  "pleaseEnterValidFee": "Sarany tsy mety",
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
   },
-  "maxAmountMustBeGreaterThanMinAmount": "Ny vola be dia tsy maintsy mihoatra ny vola kely",
+  "maxAmountMustBeGreaterThanMinAmount": "Tsy maintsy mihoatra ny farafahakeliny",
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
   },
   "settings": "Fandrindrana",
   "createInterval": "Hanampy ny ambaratonga",
   "optimize": "Atsikafo",
-  "pleaseEnterValidAmount": "Ampidiro ny vola manan-kery azafady",
+  "pleaseEnterValidAmount": "Vola tsy mety",
   "pleaseSelectProvider": "Misafidiana mpandraharaha",
   "appearance": "Fisehoana",
   "language": "Fiteny",
@@ -44,31 +39,26 @@
   "dark": "Maizina",
   "newFeeInterval": "Ambaratonga vaovao",
   "fee": "Sara",
-  "noOptimizationResultsFound": "Tsy misy valiny. Hamarino ny vola sy ny tabilao nofidina.",
+  "noOptimizationResultsFound": "Tsy misy valiny",
   "about": "Momba",
   "@about": {
     "description": "About section"
-  },
-  "faqAndContact": "Fanontaniana sy fifandraisana",
-  "@faqAndContact": {
-    "description": "FAQ and contact option"
   },
   "termsOfUse": "Fepetra fampiasana",
   "@termsOfUse": {
     "description": "Terms of use option"
   },
   "termsServiceTitle": "Ny tolotra",
-  "termsServiceContent": "Avy amin'ny tabilaon'ny saran'ny mpandraharaha, manisa ny fomba hizarana fisintonana na famindrana i Feezer mba handoavana sarany kely indrindra. Raha mampiasa an'i Feezer ianao dia manaiky ireo fepetra ireo.",
+  "termsServiceContent": "Kajian'i Feezer ny fomba hizarana fisintonana na famindrana mba handoavana sarany kely indrindra, araka ny tabilaon'ny mpandraharaha.",
   "termsPrivacyTitle": "Ny angon-drakitrao",
-  "termsPrivacyContent": "Tsy mila kaonty i Feezer ary tsy manangona angon-drakitra manokana. Mijanona ao amin'ny findainao ny tabilao sy ny kajinao, ary voafafa raha esorinao ilay fampiharana. Rakitra ho an'ny besinimaro ihany no alain'ny fanavaozana ny sarany.",
+  "termsPrivacyContent": "Tsy misy kaonty, tsy misy angona angonina. Mijanona ao amin'ny findainao ny tabilao sy ny kajinao.",
   "termsLiabilityTitle": "Andraikitra",
-  "termsLiabilityContent": "Ho fampahafantarana fotsiny ny valiny: mety hanova ny sarany na oviana na oviana ny mpandraharaha, koa hamarino alohan'ny fifanakalozana tsirairay. Tsy mifandray amin'ny mpandraharaha na iray aza i Feezer ary tsy tompon'andraikitra amin'ny sarany tena aloa.",
+  "termsLiabilityContent": "Fampahafantarana fotsiny ny valiny: mety hanova ny sarany ny mpandraharaha. Hamarino alohan'ny fifanakalozana tsirairay.",
   "termsContactTitle": "Fifandraisana",
-  "termsContactContent": "Manana fanontaniana? Manorata aminay avy amin'ny Fanampiana, na amin'ny elsy.s.charles@gmail.com.",
   "@fee": {
     "description": "Fee column header"
   },
-  "noFeeIntervalsFound": "Mbola tsy misy ambaratonga ity tabilao ity. Ampio ao amin'ny Mpandraharaha.",
+  "noFeeIntervalsFound": "Tsy misy ambaratonga ity tabilao ity",
   "addFeeInterval": "Hanampy ambaratonga",
   "deleteFeeIntervals": "Hamafa ny ambaratonga",
   "feeIntervalCreatedSuccessfully": "Tafiditra ny ambaratonga",
@@ -76,17 +66,9 @@
   "@icon": {
     "description": "Icon label"
   },
-  "thisFieldIsRequired": "Ilaina ity saha ity",
+  "thisFieldIsRequired": "Ilaina",
   "@thisFieldIsRequired": {
     "description": "Required field validation message"
-  },
-  "minimumAmount": "Vola faran'izay kely",
-  "@minimumAmount": {
-    "description": "Minimum amount validation field name"
-  },
-  "maximumAmount": "Vola faran'izay lehibe",
-  "@maximumAmount": {
-    "description": "Maximum amount validation field name"
   },
   "helpAndSupport": "Fanampiana",
   "addNewProvider": "Hanampy mpandraharaha",
@@ -95,7 +77,7 @@
   },
   "saveChanges": "Tehirizina",
   "confirmDeleteIntervals": "{count, plural, =1{Hesorina amin'ny tabilao ity ambaratonga ity.} other{Hesorina amin'ny tabilao ireo ambaratonga {count} ireo.}}",
-  "failedToCalculateOptimization": "Tsy nahomby ny fanisana ny fanatsarana",
+  "failedToCalculateOptimization": "Tsy nahomby ny kajy",
   "@failedToCalculateOptimization": {
     "description": "Message d'erreur générique lorsque le calcul d'optimisation échoue"
   },
@@ -107,7 +89,7 @@
     "description": "Download template button text"
   },
   "importSuccessful": "Vita ny fampidirana",
-  "importFailed": "Tsy nahomby ny fanafarana : {error}",
+  "importFailed": "Tsy nahomby ny fampidirana: {error}",
   "@importFailed": {
     "description": "Message d'échec d'importation générique",
     "placeholders": {
@@ -117,7 +99,7 @@
       }
     }
   },
-  "exportFailed": "Tsy nahomby ny fanavoahana : {error}",
+  "exportFailed": "Tsy nahomby ny famoahana: {error}",
   "@exportFailed": {
     "description": "Message d'échec d'exportation générique",
     "placeholders": {
@@ -127,40 +109,38 @@
       }
     }
   },
-  "noDataToExport": "Tsy misy angona havoaka",
+  "noDataToExport": "Tsy misy tabilao havoaka",
   "@noDataToExport": {
     "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
   },
-  "importDataDescription": "Hanampy tabilao avy amin'ny rakitra CSV (andalana iray isaky ny ambaratonga).",
-  "exportDataDescription": "Tehirizo ao anaty rakitra CSV ny tabilaonao rehetra sy ny ambaratongany.",
-  "csvContentCannotBeEmpty": "Tsy azo atao ho foana ny votoatin'ny CSV",
+  "csvContentCannotBeEmpty": "Foana ny lahatsoratra",
   "@csvContentCannotBeEmpty": {
     "description": "Message d'erreur lorsque le texte CSV saisi est vide"
   },
-  "chooseWhereToSave": "Misafidy toerana hitehirizana ny rakitra",
+  "chooseWhereToSave": "Tehirizo ny rakitra",
   "@chooseWhereToSave": {
     "description": "Titre de la boîte de dialogue pour la sélection de l'emplacement de sauvegarde"
   },
-  "fileSavedSuccessfully": "Voatahiry soa aman-tsara ny rakitra",
+  "fileSavedSuccessfully": "Voatahiry ny rakitra",
   "@fileSavedSuccessfully": {
     "description": "Message de succès lorsque le fichier est enregistré"
   },
-  "failedToSaveFile": "Tsy nahomby ny fitahirizana rakitra",
+  "failedToSaveFile": "Tsy voatahiry ny rakitra",
   "@failedToSaveFile": {
     "description": "Message d'erreur lorsque l'enregistrement du fichier échoue"
   },
-  "csvFileIsEmpty": "Foana ny rakitra CSV",
+  "csvFileIsEmpty": "Foana ny rakitra",
   "@csvFileIsEmpty": {
     "description": "Message d'erreur lorsque le fichier CSV ne contient aucune donnée"
   },
-  "noDataRowsFound": "Tsy misy andalana angona hita",
+  "noDataRowsFound": "Tsy misy andalana",
   "@noDataRowsFound": {
     "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
   },
-  "rowProviderNameRequired": "Andalana {rowNumber}: ilaina ny anaran'ny mpandraharaha",
-  "rowProviderAlreadyExists": "Andalana {rowNumber}: efa misy ny tabilao « {name} »",
-  "rowIntervalOverlaps": "Andalana {rowNumber}: mifanindry amin'ny ambaratonga efa misy ({overlap})",
-  "rowInvalidAmounts": "Andalana {rowNumber} : Tsy mety ny vola (kely : {minStr}, lehibe : {maxStr}, sara : {feeStr})",
+  "rowProviderNameRequired": "Andalana {rowNumber}: tsy misy mpandraharaha",
+  "rowProviderAlreadyExists": "Andalana {rowNumber}: efa misy « {name} »",
+  "rowIntervalOverlaps": "Andalana {rowNumber}: mifanindry amin'ny {overlap}",
+  "rowInvalidAmounts": "Andalana {rowNumber}: vola tsy mety ({minStr}, {maxStr}, {feeStr})",
   "@rowInvalidAmounts": {
     "description": "Message d'erreur lorsque les montants dans la ligne CSV sont invalides",
     "placeholders": {
@@ -182,7 +162,7 @@
       }
     }
   },
-  "rowMinAmountGreaterThanMax": "Andalana {rowNumber} : Ny vola kely ({min}) tsy maintsy ambany noho ny vola lehibe ({max})",
+  "rowMinAmountGreaterThanMax": "Andalana {rowNumber}: min {min} > max {max}",
   "@rowMinAmountGreaterThanMax": {
     "description": "Message d'erreur lorsque le montant minimum est supérieur au montant maximum",
     "placeholders": {
@@ -200,7 +180,7 @@
       }
     }
   },
-  "rowFeeMustBePositive": "Andalana {rowNumber} : Tsy maintsy positif ny sara",
+  "rowFeeMustBePositive": "Andalana {rowNumber}: sarany latsaky ny 0",
   "@rowFeeMustBePositive": {
     "description": "Message d'erreur lorsque le montant des frais n'est pas positif",
     "placeholders": {
@@ -210,7 +190,7 @@
       }
     }
   },
-  "rowFeePercentageInvalid": "Andalana {rowNumber} : Tsy maintsy eo anelanelan'ny 0 sy 100 ny sara isaky ny 100 ({fee}%)",
+  "rowFeePercentageInvalid": "Andalana {rowNumber}: isan-jato ivelan'ny 0–100 ({fee})",
   "@rowFeePercentageInvalid": {
     "description": "Message d'erreur lorsque les frais en pourcentage sont invalides (pas entre 0 et 100)",
     "placeholders": {
@@ -224,11 +204,9 @@
       }
     }
   },
-  "importedProvidersAndFees": "Tabilao {providersCount} sy ambaratonga {feesCount} nampidirina",
-  "providerNameColumnNotFound": "Tsy hita ny tsanganana misy ny anaran'ny mpandraharaha",
-  "providersImported": "Tabilao {count} nampidirina",
-  "feeIntervalsImported": "Ambaratonga {count} nampidirina",
-  "errorsEncountered": "{count} tsy fetezana hita",
+  "importedProvidersAndFees": "Tabilao {providersCount}, ambaratonga {feesCount}",
+  "providerNameColumnNotFound": "Tsy hita ny tsanganana mpandraharaha",
+  "errorsEncountered": "Hadisoana {count}",
   "@errorsEncountered": {
     "description": "Message indiquant le nombre d'erreurs rencontrées",
     "placeholders": {
@@ -243,7 +221,7 @@
   "@percentage": {
     "description": "Percentage option"
   },
-  "percentageMustBeBetween0And100": "Ny isan-jato dia tsy maintsy eo anelanelan'ny 0 sy 100",
+  "percentageMustBeBetween0And100": "Eo anelanelan'ny 0 sy 100",
   "@percentageMustBeBetween0And100": {
     "description": "Validation error for percentage input"
   },
@@ -252,7 +230,7 @@
     "description": "Frequently Asked Questions tab title"
   },
   "faqExportData": "Ahoana no hitahirizana ny tabilaoko?",
-  "faqExportDataAnswer": "Fandrindrana › Hampiditra / hamoaka: avoahy ho rakitra CSV ny tabilaonao, dia ampidiro amin'ny finday hafa na rehefa avy namerina nametraka ny fampiharana.",
+  "faqExportDataAnswer": "Ao amin'ny Fandrindrana › Hampiditra / hamoaka, avoahy ho rakitra CSV izy ireo, dia ampidiro amin'ny finday hafa.",
   "website": "Tranonkala",
   "@website": {
     "description": "Website contact method"
@@ -262,21 +240,16 @@
   "@email": {
     "description": "Email contact method"
   },
-  "exceedsEnteredAmount": "Mihoatra ny vola nampidirina",
-  "optimizationBudgetTooSmall": "Kely loatra ny vola hanaovana fifanakalozana amin'ity tabilao ity.",
-  "optimizationConstraintsUnsatisfiable": "Tsy misy fizarana mifanaraka amin'io isa io ho an'ity vola ity.",
-  "optimizationNotProven": "Fikarohana lava be: tsara ity fizarana ity, saingy tsy voaporofo fa izy no tsara indrindra.",
-  "feeIntervalOverlaps": "Mifanindry amin'ny ambaratonga efa misy ({range}) ity ambaratonga ity.",
-  "failedToDeleteFeeIntervals": "Tsy voafafa ny ambaratonga",
-  "failedToSaveChanges": "Tsy nahomby ny fitehirizana ny fanovana",
+  "optimizationBudgetTooSmall": "Kely loatra ny vola ho an'ity tabilao ity",
+  "optimizationConstraintsUnsatisfiable": "Tsy azo atao amin'io fetra io",
+  "feeIntervalOverlaps": "Mifanindry amin'ny ambaratonga {range}",
+  "failedToDeleteFeeIntervals": "Tsy voafafa",
+  "failedToSaveChanges": "Tsy voatahiry",
   "tabOptimize": "Hanatsara",
-  "optimizeTitle": "Mandoava sarany kely kokoa",
-  "optimizeSubtitle": "Zarain'i Feezer ho fifanakalozana mora indrindra ny volanao.",
   "add": "Hanampy",
   "amountAvailable": "Vola azo ampiasaina",
-  "amountHelper": "Tafiditra ny sarany: ny vola rehetra hivoaka amin'ny kaontinao.",
+  "amountHelper": "Tafiditra ny sarany",
   "transferCount": "Isan'ny fandefasana",
-  "transferCountHelp": "Tsy voatery. Fetero ny isan'ny fandefasana azo ampiasain'ny drafitra.",
   "transferCountFree": "Tsy voafetra",
   "transferCountExactly": "{count} marina",
   "transferCountRange": "Eo anelanelan'ny {min} sy {max}",
@@ -293,15 +266,10 @@
   "debitedLabel": "Nesorina",
   "leftLabel": "Sisa",
   "gainTitle": "+{amount} fanampiny voaray",
-  "gainVsClassic": "Raha ampitahaina amin'ny fandefasana ny vola betsaka indrindra isaky ny mandefa.",
   "feesSavedTitle": "{amount} sarany voatsitsy",
-  "feesSavedVsClassic": "Lafo kokoa ny fomba mahazatra ho an'io vola io ihany.",
-  "alreadyOptimalTitle": "Ny fomba mahazatra no efa tsara indrindra",
-  "alreadyOptimalMessage": "Ho an'ity vola ity, tsy misy tombony ny fizarana.",
-  "limitCost": "Raha tsy misy io fetra io, {amount} fanampiny no ho voaray.",
-  "limitFree": "Tsy mampandany anao na inona na inona io fetra io eto.",
-  "nearOptimalTitle": "Vola be dia be",
-  "planTitle": "Ny drafitra fandefasanao",
+  "alreadyOptimalTitle": "Efa tsara indrindra ny fomba mahazatra",
+  "limitCost": "Mandany {amount} ny fetranao",
+  "planTitle": "Drafitra fandefasana",
   "sendAmount": "Alefaso {amount}",
   "feePerTransfer": "sarany {amount} isaky ny fandefasana",
   "compareTitle": "Fampitahana",
@@ -309,41 +277,30 @@
   "classicColumn": "Mahazatra",
   "receivedLabel": "Voaray",
   "transfersLabel": "Fandefasana",
-  "classicExplanation": "Fomba mahazatra: alefa ny vola betsaka indrindra azo atao, avy eo ny sisa.",
-  "sameAmountByHand": "Vola mitovy voaray, fomba mahazatra",
-  "sameAmountByHandDetail": "Mba hahazoana {net}, {fees} ny sarany amin'ny fomba mahazatra, izany hoe {total} nesorina.",
-  "cannotSplitByHand": "Tsy tratran'ny fomba mahazatra io vola io.",
+  "classicExplanation": "Mahazatra: alefa ny be indrindra, avy eo ny sisa",
   "classicPlan": "Drafitra mahazatra",
   "showDetails": "Hijery ny antsipiriany",
   "showLess": "Hanafina ny antsipiriany",
-  "noProvidersYet": "Mbola tsy misy tabilao",
-  "noProvidersMessage": "Havaozy ny sarany ofisialy, na ampio ny tabilaonao manokana.",
+  "noProvidersYet": "Tsy misy tabilao",
   "tierCount": "{count, plural, =0{Tsy misy ambaratonga} =1{Ambaratonga 1} other{Ambaratonga {count}}}",
   "feesFrom": "sarany manomboka amin'ny {amount}",
-  "providerNameHint": "oh. MVola, Orange Money, ny bankiko",
+  "providerNameHint": "oh. MVola, ny bankiko",
   "descriptionOptional": "Famaritana (tsy voatery)",
   "feeGrid": "Tabilaon'ny sarany",
   "amountRange": "Vola alefa",
-  "noIntervalsMessage": "Ampio ny ambaratongan'ity tabilao ity mba hanatsarana ny fifanakalozanao.",
-  "gridHint": "Tsindrio ny ambaratonga iray raha hanova na hamafa azy.",
-  "intervalFormHelp": "Ampiharina ny sarany rehefa eo anelanelan'ny farafahakeliny sy ny farafahabetsany ny vola alefa.",
-  "downloadingFees": "Mamaky ny tabilao navoaka…",
-  "feesDownloadFailed": "Hamarino ny fifandraisanao dia andramo indray.",
+  "downloadingFees": "Eo am-pakana…",
+  "feesDownloadFailed": "Hamarino ny fifandraisanao",
   "feesAlreadyUpToDate": "Efa vaovao ny saranao",
-  "gridsOthersUnchanged": "Tsy miova ireo tabilao hafa anananao.",
   "updateAction": "Havaozina",
   "feesUpdatedSuccessfully": "Voavao ny sarany",
-  "importExportSubtitle": "Hitahiry na hizara ny tabilaonao (CSV)",
   "replayIntroduction": "Hijery indray ny fampidirana",
   "faqFeeUpdate": "Avy aiza ny sarany?",
-  "faqFeeUpdateAnswer": "Avy amin'ny saran'ny mpandraharaha ofisialy: vakiana isan'andro ao amin'ny mvola.mg sy orange.mg ny tabilaon'i MVola sy Orange Money; nadika avy amin'ny sarany navoaka ny an'i Airtel Money. Tsindrio « Havaozina » ao amin'ny Mpandraharaha mba hahazoana ny farany; tsy miova ireo tabilao nampidirinao.",
+  "faqFeeUpdateAnswer": "Avy amin'ny sarany ofisialy an'i MVola, Orange Money ary Airtel Money. Tsindrio « Havaozina » hahazoana ny farany.",
   "ok": "Eny",
   "pasteCsv": "Hametaka lahatsoratra CSV",
   "chooseCsvFile": "Hisafidy rakitra CSV",
   "csvTemplate": "Modely",
-  "csvTemplateDescription": "Manomboha amin'ny rakitra efa misy ireo tsanganana ilaina.",
   "csvFormat": "Endriky ny rakitra",
-  "csvFormatHelp": "Andalana iray isaky ny ambaratonga. Tabilao iray ireo andalana manana anarany_mpanome sy karazana_fifanakalozana mitovy. withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance na transfer_unregistered ny karazana_fifanakalozana (tsy voatery); fixed na percentage ny karazany_sara. Ekena ny faingo na ny teboka sy faingo.",
   "opWithdrawal": "Fisintonana",
   "opTransferSame": "Famindrana",
   "opTransferSameApp": "Famindrana amin'ny appli",
@@ -352,7 +309,6 @@
   "opTransferUnregistered": "Mankany amin'ny tsy mpanjifa",
   "opCustom": "Hafa",
   "operators": "Mpandraharaha",
-  "operatorsSubtitle": "Ireo tabilaon'ny sarany ampiasaina amin'ny kajinao.",
   "operatorLabel": "Mpandraharaha",
   "operationLabel": "Fifanakalozana",
   "operatorName": "Anaran'ny mpandraharaha",
@@ -365,59 +321,66 @@
   "gridCreated": "Voaforona ny tabilao",
   "gridUpdated": "Voaova ny tabilao",
   "gridDeleted": "Voafafa ny tabilao",
-  "gridAlreadyExists": "Efa misy ny tabilao {name}.",
+  "gridAlreadyExists": "Efa misy {name}",
   "deleteGridTitle": "Hamafa ny tabilao",
-  "deleteGridMessage": "Ho voafafa ny tabilao {name} sy ny ambaratongany.",
+  "deleteGridMessage": "Ho voafafa {name} sy ny ambaratongany.",
   "optimizeWithGrid": "Hanatsara amin'ity tabilao ity",
   "moreOptions": "Safidy hafa",
   "officialFees": "Sarany ofisialy",
-  "feesCheckedOn": "Nohamarinina tamin'ny tranokalan'ny mpandraharaha ny {date}",
-  "feesNeverChecked": "Alaivo ny sarany farany navoakan'ny mpandraharaha.",
+  "feesCheckedOn": "Nohamarinina ny {date}",
+  "feesNeverChecked": "Mbola tsy nohamarinina",
   "sourceOfficial": "Tabilao ofisialy · {host}",
   "sourceOfficialDated": "Tabilao ofisialy · {host} · {date}",
-  "sourceManual": "Tabilao nadika avy amin'ny saran'ny mpandraharaha",
-  "sourceManualDated": "Tabilao nadika avy amin'ny saran'ny mpandraharaha · {date}",
-  "sourceEdited": "Tabilao novainao",
-  "openSource": "Hijery ny pejy ofisialy",
-  "editPublishedGridWarning": "Avy amin'ny saran'ny mpandraharaha ity tabilao ity. Raha havaozinao ny sarany any aoriana, hosoloina ny fanovanao.",
+  "sourceManual": "Saran'ny mpandraharaha",
+  "sourceManualDated": "Saran'ny mpandraharaha · {date}",
+  "sourceEdited": "Novainao",
+  "editPublishedGridWarning": "Hofafan'ny fanavaozana ny sarany ity fanovana ity.",
   "feesSection": "Sarany",
   "updateFeesTitle": "Havaozina ny sarany",
   "feesDownloadFailedTitle": "Tsy nahomby ny fakana",
-  "updateReviewIntro": "Namoaka sarany vaovao ireo mpandraharaha. Ireto ny miova:",
-  "effectiveSince": "manan-kery hatramin'ny {date}",
+  "updateReviewIntro": "Sarany vaovao navoaka:",
+  "effectiveSince": "hatramin'ny {date}",
   "newTag": "Vaovao",
   "updatedTag": "Novaina",
   "later": "Any aoriana",
   "retry": "Andramo indray",
   "withdrawalCount": "Isan'ny fisintonana",
-  "withdrawalCountHelp": "Tsy voatery. Fetero ny isan'ny fisintonana azo ampiasain'ny drafitra.",
   "cashYouReceive": "Vola raisinao an-tanana",
   "withdrawalCountLabel": "{count, plural, =1{fisintonana 1} other{fisintonana {count}}}",
   "withdrawalsLabel": "Fisintonana",
   "withdrawAmount": "Misintona {amount}",
   "feePerWithdrawal": "sarany {amount} isaky ny fisintonana",
-  "planTitleWithdrawal": "Ny drafitra fisintonanao",
-  "gainVsClassicWithdrawal": "Raha ampitahaina amin'ny fisintonana ny vola betsaka indrindra isaky ny misintona.",
-  "classicExplanationWithdrawal": "Fomba mahazatra: sintonina ny vola betsaka indrindra azo atao, avy eo ny sisa.",
+  "planTitleWithdrawal": "Drafitra fisintonana",
+  "classicExplanationWithdrawal": "Mahazatra: sintonina ny be indrindra, avy eo ny sisa",
   "amountWithdrawn": "Vola sintonina",
-  "noTiersYet": "Mbola tsy misy ambaratonga",
-  "intervalFormHelpWithdrawal": "Ampiharina ny sarany rehefa eo anelanelan'ny farafahakeliny sy ny farafahabetsany ny vola sintonina.",
+  "noTiersYet": "Tsy misy ambaratonga",
   "versionLabel": "Dikan-teny {version}",
   "free": "Maimaim-poana",
-  "failedToLoadData": "Tsy voaray ny angon-drakitra",
+  "failedToLoadData": "Tsy voaray ny angona",
   "failedToOpenLink": "Tsy nety nisokatra ny rohy",
   "pressAgainToExit": "Tsindrio indray mba hivoaka",
-  "onlyOperation": "« {operation} » ihany no misy ho an'i {operator}.",
-  "amountStepMultiples": "Isaky ny {amount}",
-  "optimizationStepTooLarge": "Tsy misy ambaratonga amin'ity tabilao ity manaiky vola isaky ny {amount}. Esory ny boribory.",
+  "optimizationStepTooLarge": "Esory ny boribory ho an'ity tabilao ity",
   "roundToHundred": "Boribory amin'ny zato",
-  "roundToHundredOnWithdrawal": "Isaky ny 100 ny fisintonana tsirairay: {example}, fa tsy {wrong} mihitsy.",
-  "roundToHundredOnTransfer": "Isaky ny 100 ny fandefasana tsirairay: {example}, fa tsy {wrong} mihitsy.",
-  "roundToHundredOff": "Vola marina, tsy boribory.",
+  "roundToHundredOff": "Vola marina",
   "faqHowItWorks": "Ahoana no fiasany?",
-  "faqHowItWorksAnswer": "Fidio ny mpandraharaha, ny fifanakalozana (fisintonana, famindrana…) ary ny vola azo ampiasaina, tafiditra ny sarany. Tadiavin'i Feezer ny fizarana mahazo vola betsaka indrindra amin'ny sarany kely indrindra, ary ampitahainy amin'ny fomba mahazatra: misintona na mandefa ny vola betsaka indrindra azo atao isaky ny mandeha.",
-  "faqRounding": "Nahoana no boribory amin'ny zato ny vola?",
-  "faqRoundingAnswer": "Taratasim-bola ihany no omena any amin'ny toeram-pisintonana: tsy azo sintonina ny 10 040. Miaraka amin'ny « Boribory amin'ny zato », isaky ny 100 ny vola rehetra ao amin'ny drafitra. Mandeha ho azy izy ho an'ny fisintonana; esory raha mila vola marina ianao.",
-  "faqPrivacy": "Mila aterineto ve? Zaraina ve ny angon-drakitro?",
-  "faqPrivacyAnswer": "Tsia. Ao amin'ny findainao no anaovana ny kajy, tsy misy kaonty, ary tsy misy alefa. Ny fanavaozana ny sarany ihany no mila aterineto (rakitra ho an'ny besinimaro)."
+  "faqHowItWorksAnswer": "Fidio ny mpandraharaha, ny fifanakalozana ary ny vola azo ampiasaina. Tadiavin'i Feezer ny fizarana mora sarany indrindra.",
+  "faqRounding": "Nahoana no boribory amin'ny zato?",
+  "faqRoundingAnswer": "Taratasim-bola ihany no omena rehefa misintona: tsy azo sintonina ny 10 040. Azonao esorina amin'ny fotoana rehetra ny boribory.",
+  "faqPrivacy": "Zaraina ve ny angon-drakitro?",
+  "faqPrivacyAnswer": "Tsia. Tsy mila kaonty i Feezer ary tsy misy miala amin'ny findainao.",
+  "onboardingText1": "Zarain'i Feezer ny fisintonana sy famindranao.",
+  "onboardingExample": "Ohatra: {amount} ao amin'ny kaontinao",
+  "onboardingOneGo": "Indray mandeha",
+  "onboardingWithFeezer": "Amin'i Feezer",
+  "onboardingStep1": "Fidio ny mpandraharaha",
+  "onboardingStep2": "Ampidiro ny vola",
+  "onboardingStep3": "Araho ny drafitra",
+  "roundToHundredOn": "{example}, fa tsy {wrong}",
+  "vsUsualWay": "Raha oharina amin'ny fomba mahazatra",
+  "csvFormatRows": "Andalana iray isaky ny ambaratonga; faingo na teboka sy faingo.",
+  "faqInternet": "Mila aterineto ve?",
+  "faqInternetAnswer": "Tsia. Ao amin'ny findainao no anaovana ny kajy; ny fanavaozana ny sarany ihany no mila aterineto.",
+  "termsIndependenceTitle": "Fahaleovan-tena",
+  "termsIndependenceContent": "Tsy mifandray amin'ny mpandraharaha i Feezer ary tsy tompon'andraikitra amin'ny sarany aloa.",
+  "termsAcceptance": "Raha mampiasa an'i Feezer ianao dia manaiky ireo fepetra ireo."
 }

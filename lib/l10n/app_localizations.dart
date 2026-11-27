@@ -106,47 +106,17 @@ abstract class AppLocalizations {
   /// **'Pay less in fees'**
   String get onboardingTitle1;
 
-  /// First onboarding screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Enter an amount: Feezer splits it into the transactions that cost the least in fees.'**
-  String get onboardingDescription1;
-
   /// Second onboarding screen title
   ///
   /// In en, this message translates to:
-  /// **'Real operator fees'**
+  /// **'In 3 steps'**
   String get onboardingTitle2;
-
-  /// Second onboarding screen description
-  ///
-  /// In en, this message translates to:
-  /// **'MVola, Orange Money, Airtel Money: the grids come from the operators\' official rates and update in one tap.'**
-  String get onboardingDescription2;
-
-  /// Third onboarding screen title
-  ///
-  /// In en, this message translates to:
-  /// **'Withdrawals and transfers'**
-  String get onboardingTitle3;
-
-  /// Third onboarding screen description
-  ///
-  /// In en, this message translates to:
-  /// **'Choose the operator and the operation. Your data stays on your phone, even offline.'**
-  String get onboardingDescription3;
 
   /// Next button text
   ///
   /// In en, this message translates to:
   /// **'Next'**
   String get next;
-
-  /// Skip button text
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get skip;
 
   /// Get started button text
   ///
@@ -187,7 +157,7 @@ abstract class AppLocalizations {
   /// Error message for invalid amount
   ///
   /// In en, this message translates to:
-  /// **'Please enter a valid amount'**
+  /// **'Invalid amount'**
   String get pleaseEnterValidAmount;
 
   /// Error message when no provider is selected
@@ -235,7 +205,7 @@ abstract class AppLocalizations {
   /// Validation error for amount range
   ///
   /// In en, this message translates to:
-  /// **'Max amount must be greater than min amount'**
+  /// **'Must exceed the minimum'**
   String get maxAmountMustBeGreaterThanMinAmount;
 
   /// Fee column header
@@ -247,7 +217,7 @@ abstract class AppLocalizations {
   /// Message when no optimization results are found for the given parameters
   ///
   /// In en, this message translates to:
-  /// **'No result. Check the amount and the chosen grid.'**
+  /// **'No result'**
   String get noOptimizationResultsFound;
 
   /// About section
@@ -255,12 +225,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'About'**
   String get about;
-
-  /// FAQ and contact option
-  ///
-  /// In en, this message translates to:
-  /// **'FAQ and contact'**
-  String get faqAndContact;
 
   /// Terms of use option
   ///
@@ -277,7 +241,7 @@ abstract class AppLocalizations {
   /// Terms of use service description section content
   ///
   /// In en, this message translates to:
-  /// **'From the operators\' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.'**
+  /// **'Feezer works out how to split a withdrawal or a transfer to pay the least fees, from the operators\' fee grids.'**
   String get termsServiceContent;
 
   /// Terms of use privacy section title
@@ -289,7 +253,7 @@ abstract class AppLocalizations {
   /// Terms of use privacy section content
   ///
   /// In en, this message translates to:
-  /// **'Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.'**
+  /// **'No account, no data collected. Your grids and calculations stay on your phone.'**
   String get termsPrivacyContent;
 
   /// Terms of use liability section title
@@ -301,7 +265,7 @@ abstract class AppLocalizations {
   /// Terms of use liability section content
   ///
   /// In en, this message translates to:
-  /// **'Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.'**
+  /// **'Results are indicative: operators can change their fees. Check them before each transaction.'**
   String get termsLiabilityContent;
 
   /// Terms of use contact section title
@@ -310,16 +274,10 @@ abstract class AppLocalizations {
   /// **'Contact'**
   String get termsContactTitle;
 
-  /// Terms of use contact section content
-  ///
-  /// In en, this message translates to:
-  /// **'A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.'**
-  String get termsContactContent;
-
   /// Message when no fee intervals exist
   ///
   /// In en, this message translates to:
-  /// **'This grid has no tier yet. Add them in the Operators tab.'**
+  /// **'This grid has no tier'**
   String get noFeeIntervalsFound;
 
   /// Add fee interval button
@@ -349,7 +307,7 @@ abstract class AppLocalizations {
   /// Required field validation message
   ///
   /// In en, this message translates to:
-  /// **'This field is required'**
+  /// **'Required'**
   String get thisFieldIsRequired;
 
   /// Fee interval update success message
@@ -373,26 +331,14 @@ abstract class AppLocalizations {
   /// Validation error for transaction range
   ///
   /// In en, this message translates to:
-  /// **'Min transactions cannot be greater than max'**
+  /// **'Minimum > maximum'**
   String get minTransactionsCannotBeGreaterThanMax;
 
   /// Validation error for fee field
   ///
   /// In en, this message translates to:
-  /// **'Please enter a valid fee'**
+  /// **'Invalid fee'**
   String get pleaseEnterValidFee;
-
-  /// Minimum amount validation field name
-  ///
-  /// In en, this message translates to:
-  /// **'Minimum amount'**
-  String get minimumAmount;
-
-  /// Maximum amount validation field name
-  ///
-  /// In en, this message translates to:
-  /// **'Maximum amount'**
-  String get maximumAmount;
 
   /// Help and support menu item
   ///
@@ -421,7 +367,7 @@ abstract class AppLocalizations {
   /// Generic error message when optimization calculation fails
   ///
   /// In en, this message translates to:
-  /// **'Failed to calculate optimization'**
+  /// **'Calculation failed'**
   String get failedToCalculateOptimization;
 
   /// Import/Export data menu title
@@ -460,94 +406,70 @@ abstract class AppLocalizations {
   /// **'Export failed: {error}'**
   String exportFailed(String error);
 
-  /// Message showing number of providers imported
-  ///
-  /// In en, this message translates to:
-  /// **'{count} grid(s) imported'**
-  String providersImported(int count);
-
-  /// Message showing number of fee intervals imported
-  ///
-  /// In en, this message translates to:
-  /// **'{count} tier(s) imported'**
-  String feeIntervalsImported(int count);
-
   /// Message showing number of errors encountered
   ///
   /// In en, this message translates to:
-  /// **'{count} error(s) encountered'**
+  /// **'{count} error(s)'**
   String errorsEncountered(int count);
-
-  /// Description for import data action
-  ///
-  /// In en, this message translates to:
-  /// **'Add grids from a CSV file (one row per tier).'**
-  String get importDataDescription;
-
-  /// Description for export data action
-  ///
-  /// In en, this message translates to:
-  /// **'Save all your grids and their tiers in a CSV file.'**
-  String get exportDataDescription;
 
   /// Error message when CSV text input is empty
   ///
   /// In en, this message translates to:
-  /// **'CSV content cannot be empty'**
+  /// **'Empty text'**
   String get csvContentCannotBeEmpty;
 
   /// Dialog title for file save location selection
   ///
   /// In en, this message translates to:
-  /// **'Choose where to save the file'**
+  /// **'Save the file'**
   String get chooseWhereToSave;
 
   /// Success message when file is saved
   ///
   /// In en, this message translates to:
-  /// **'File saved successfully'**
+  /// **'File saved'**
   String get fileSavedSuccessfully;
 
   /// Error message when file save fails
   ///
   /// In en, this message translates to:
-  /// **'Failed to save file'**
+  /// **'Could not save the file'**
   String get failedToSaveFile;
 
   /// Error message when CSV file contains no data
   ///
   /// In en, this message translates to:
-  /// **'CSV file is empty'**
+  /// **'Empty file'**
   String get csvFileIsEmpty;
 
   /// Error message when CSV file has no valid data rows
   ///
   /// In en, this message translates to:
-  /// **'No data rows found'**
+  /// **'No rows found'**
   String get noDataRowsFound;
 
   /// Error message when provider name is missing in CSV row
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: the operator name is required'**
+  /// **'Row {rowNumber}: operator missing'**
   String rowProviderNameRequired(int rowNumber);
 
   /// Error message when provider already exists in database
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: the grid \"{name}\" already exists'**
+  /// **'Row {rowNumber}: \"{name}\" already exists'**
   String rowProviderAlreadyExists(int rowNumber, String name);
 
   /// Error message when fee interval overlaps with existing interval
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: this tier overlaps an existing tier ({overlap})'**
+  /// **'Row {rowNumber}: overlaps {overlap}'**
   String rowIntervalOverlaps(int rowNumber, String overlap);
 
   /// Error message when amounts in CSV row are invalid
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: Invalid amounts (min: {minStr}, max: {maxStr}, fee: {feeStr})'**
+  /// **'Row {rowNumber}: invalid amounts ({minStr}, {maxStr}, {feeStr})'**
   String rowInvalidAmounts(
     int rowNumber,
     String minStr,
@@ -558,37 +480,37 @@ abstract class AppLocalizations {
   /// Error message when minimum amount is greater than maximum amount
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: Min amount ({min}) must be less than max amount ({max})'**
+  /// **'Row {rowNumber}: min {min} > max {max}'**
   String rowMinAmountGreaterThanMax(int rowNumber, String min, String max);
 
   /// Error message when fee amount is not positive
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: Fee must be positive'**
+  /// **'Row {rowNumber}: negative fee'**
   String rowFeeMustBePositive(int rowNumber);
 
   /// Error message when percentage fee is invalid (not between 0 and 100)
   ///
   /// In en, this message translates to:
-  /// **'Row {rowNumber}: Percentage fee must be between 0 and 100 ({fee}%)'**
+  /// **'Row {rowNumber}: percentage outside 0–100 ({fee})'**
   String rowFeePercentageInvalid(int rowNumber, String fee);
 
   /// Success message showing number of imported providers and fee intervals
   ///
   /// In en, this message translates to:
-  /// **'Imported {providersCount} grid(s) and {feesCount} tier(s)'**
+  /// **'{providersCount} grid(s), {feesCount} tier(s)'**
   String importedProvidersAndFees(int providersCount, int feesCount);
 
   /// Error message when there is no data available for export
   ///
   /// In en, this message translates to:
-  /// **'No data to export'**
+  /// **'No grid to export'**
   String get noDataToExport;
 
   /// Error message when provider name column is missing in CSV
   ///
   /// In en, this message translates to:
-  /// **'Operator name column not found'**
+  /// **'Operator column missing'**
   String get providerNameColumnNotFound;
 
   /// Option for fixed fee amount
@@ -606,7 +528,7 @@ abstract class AppLocalizations {
   /// Validation error for percentage input
   ///
   /// In en, this message translates to:
-  /// **'Percentage must be between 0 and 100'**
+  /// **'Between 0 and 100'**
   String get percentageMustBeBetween0And100;
 
   /// Frequently Asked Questions tab title
@@ -624,7 +546,7 @@ abstract class AppLocalizations {
   /// FAQ answer
   ///
   /// In en, this message translates to:
-  /// **'Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.'**
+  /// **'In Settings › Import / export, export them to a CSV file, then import it on another phone.'**
   String get faqExportDataAnswer;
 
   /// Website contact method
@@ -645,46 +567,34 @@ abstract class AppLocalizations {
   /// **'Email'**
   String get email;
 
-  /// No description provided for @exceedsEnteredAmount.
-  ///
-  /// In en, this message translates to:
-  /// **'Exceeds entered amount'**
-  String get exceedsEnteredAmount;
-
   /// Optimizer / data validation message
   ///
   /// In en, this message translates to:
-  /// **'The amount is too small for a transaction with this grid.'**
+  /// **'Amount too small for this grid'**
   String get optimizationBudgetTooSmall;
 
   /// Optimizer / data validation message
   ///
   /// In en, this message translates to:
-  /// **'No split respects this number of transactions for this amount.'**
+  /// **'Not possible with this limit'**
   String get optimizationConstraintsUnsatisfiable;
 
   /// Optimizer / data validation message
   ///
   /// In en, this message translates to:
-  /// **'Very long search: this split is excellent but could not be proven to be the best.'**
-  String get optimizationNotProven;
-
-  /// Optimizer / data validation message
-  ///
-  /// In en, this message translates to:
-  /// **'This tier overlaps an existing tier ({range}).'**
+  /// **'Overlaps the tier {range}'**
   String feeIntervalOverlaps(String range);
 
   /// Optimizer / data validation message
   ///
   /// In en, this message translates to:
-  /// **'Could not delete the tier'**
+  /// **'Could not delete'**
   String get failedToDeleteFeeIntervals;
 
   /// Optimizer / data validation message
   ///
   /// In en, this message translates to:
-  /// **'Failed to save changes'**
+  /// **'Could not save'**
   String get failedToSaveChanges;
 
   /// UI redesign
@@ -692,18 +602,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Optimize'**
   String get tabOptimize;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Pay less in fees'**
-  String get optimizeTitle;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Feezer splits your amount into the transactions that cost the least.'**
-  String get optimizeSubtitle;
 
   /// UI redesign
   ///
@@ -720,7 +618,7 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Fees included: the total that will leave your account.'**
+  /// **'Fees included'**
   String get amountHelper;
 
   /// UI redesign
@@ -728,12 +626,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Number of transfers'**
   String get transferCount;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Optional. Limit how many transfers the plan may use.'**
-  String get transferCountHelp;
 
   /// UI redesign
   ///
@@ -834,55 +726,25 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Compared to sending the largest possible amount each time.'**
-  String get gainVsClassic;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
   /// **'{amount} of fees saved'**
   String feesSavedTitle(String amount);
 
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'The usual way would cost more for the same amount.'**
-  String get feesSavedVsClassic;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'The usual way is already the best'**
+  /// **'The usual way is already optimal'**
   String get alreadyOptimalTitle;
 
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'For this amount, splitting brings nothing more.'**
-  String get alreadyOptimalMessage;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Without this limit, {amount} more would be received.'**
+  /// **'Your limit costs {amount}'**
   String limitCost(String amount);
 
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'This limit costs you nothing here.'**
-  String get limitFree;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Very large amount'**
-  String get nearOptimalTitle;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Your transfer plan'**
+  /// **'Transfer plan'**
   String get planTitle;
 
   /// UI redesign
@@ -930,26 +792,8 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Usual way: send the largest possible amount, then the rest.'**
+  /// **'Usual: send the most, then the rest'**
   String get classicExplanation;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Same amount received, usual way'**
-  String get sameAmountByHand;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'To get {net}, the usual way costs {fees} in fees, i.e. {total} debited.'**
-  String sameAmountByHandDetail(String net, String fees, String total);
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'The usual way cannot reach this amount.'**
-  String get cannotSplitByHand;
 
   /// UI redesign
   ///
@@ -978,12 +822,6 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Update the official fees, or add your own grid.'**
-  String get noProvidersMessage;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
   /// **'{count, plural, =0{No tier} =1{1 tier} other{{count} tiers}}'**
   String tierCount(int count);
 
@@ -996,7 +834,7 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'e.g. MVola, Orange Money, my bank'**
+  /// **'e.g. MVola, my bank'**
   String get providerNameHint;
 
   /// UI redesign
@@ -1020,31 +858,13 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Add the tiers of this grid to optimize your transactions.'**
-  String get noIntervalsMessage;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Tap a tier to edit or delete it.'**
-  String get gridHint;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'The fee applies when the amount sent is between the minimum and the maximum (included).'**
-  String get intervalFormHelp;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Reading the published fee grids…'**
+  /// **'Downloading…'**
   String get downloadingFees;
 
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Check your connection and try again.'**
+  /// **'Check your connection'**
   String get feesDownloadFailed;
 
   /// UI redesign
@@ -1052,12 +872,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your fees are up to date'**
   String get feesAlreadyUpToDate;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'Your other grids do not change.'**
-  String get gridsOthersUnchanged;
 
   /// UI redesign
   ///
@@ -1074,12 +888,6 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Back up or share your grids (CSV)'**
-  String get importExportSubtitle;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
   /// **'Replay the introduction'**
   String get replayIntroduction;
 
@@ -1092,7 +900,7 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'From the operators\' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.'**
+  /// **'From the official rates of MVola, Orange Money and Airtel Money. Tap “Update” to get the latest.'**
   String get faqFeeUpdateAnswer;
 
   /// UI redesign
@@ -1122,12 +930,6 @@ abstract class AppLocalizations {
   /// UI redesign
   ///
   /// In en, this message translates to:
-  /// **'Start from a ready-made file with the expected columns.'**
-  String get csvTemplateDescription;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
   /// **'Download the template'**
   String get downloadTemplate;
 
@@ -1136,12 +938,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'File format'**
   String get csvFormat;
-
-  /// UI redesign
-  ///
-  /// In en, this message translates to:
-  /// **'One row per tier. Rows with the same provider_name and operation form one grid. operation is withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance or transfer_unregistered (optional); fee_type is fixed or percentage. Commas or semicolons are accepted.'**
-  String get csvFormatHelp;
 
   /// No description provided for @opWithdrawal.
   ///
@@ -1190,12 +986,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Operators'**
   String get operators;
-
-  /// No description provided for @operatorsSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'The fee grids used for your calculations.'**
-  String get operatorsSubtitle;
 
   /// No description provided for @operatorLabel.
   ///
@@ -1272,7 +1062,7 @@ abstract class AppLocalizations {
   /// No description provided for @gridAlreadyExists.
   ///
   /// In en, this message translates to:
-  /// **'The grid {name} already exists.'**
+  /// **'{name} already exists'**
   String gridAlreadyExists(String name);
 
   /// No description provided for @deleteGridTitle.
@@ -1284,7 +1074,7 @@ abstract class AppLocalizations {
   /// No description provided for @deleteGridMessage.
   ///
   /// In en, this message translates to:
-  /// **'The grid {name} and its tiers will be deleted.'**
+  /// **'{name} and its tiers will be deleted.'**
   String deleteGridMessage(String name);
 
   /// No description provided for @optimizeWithGrid.
@@ -1308,13 +1098,13 @@ abstract class AppLocalizations {
   /// No description provided for @feesCheckedOn.
   ///
   /// In en, this message translates to:
-  /// **'Checked on the operators\' websites on {date}'**
+  /// **'Checked on {date}'**
   String feesCheckedOn(String date);
 
   /// No description provided for @feesNeverChecked.
   ///
   /// In en, this message translates to:
-  /// **'Download the latest fees published by the operators.'**
+  /// **'Not checked yet'**
   String get feesNeverChecked;
 
   /// No description provided for @sourceOfficial.
@@ -1332,31 +1122,25 @@ abstract class AppLocalizations {
   /// No description provided for @sourceManual.
   ///
   /// In en, this message translates to:
-  /// **'Grid copied from the operator\'s rates'**
+  /// **'Operator\'s rates'**
   String get sourceManual;
 
   /// No description provided for @sourceManualDated.
   ///
   /// In en, this message translates to:
-  /// **'Grid copied from the operator\'s rates · {date}'**
+  /// **'Operator\'s rates · {date}'**
   String sourceManualDated(String date);
 
   /// No description provided for @sourceEdited.
   ///
   /// In en, this message translates to:
-  /// **'Grid edited by you'**
+  /// **'Edited by you'**
   String get sourceEdited;
-
-  /// No description provided for @openSource.
-  ///
-  /// In en, this message translates to:
-  /// **'See the official page'**
-  String get openSource;
 
   /// No description provided for @editPublishedGridWarning.
   ///
   /// In en, this message translates to:
-  /// **'This grid comes from the operator\'s rates. If you update the fees later, your change will be replaced.'**
+  /// **'A fee update will undo this change.'**
   String get editPublishedGridWarning;
 
   /// No description provided for @feesSection.
@@ -1380,13 +1164,13 @@ abstract class AppLocalizations {
   /// No description provided for @updateReviewIntro.
   ///
   /// In en, this message translates to:
-  /// **'The operators published new fees. Here is what changes:'**
+  /// **'New fees published:'**
   String get updateReviewIntro;
 
   /// No description provided for @effectiveSince.
   ///
   /// In en, this message translates to:
-  /// **'in force since {date}'**
+  /// **'since {date}'**
   String effectiveSince(String date);
 
   /// No description provided for @newTag.
@@ -1418,12 +1202,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Number of withdrawals'**
   String get withdrawalCount;
-
-  /// No description provided for @withdrawalCountHelp.
-  ///
-  /// In en, this message translates to:
-  /// **'Optional. Limit how many withdrawals the plan may use.'**
-  String get withdrawalCountHelp;
 
   /// No description provided for @cashYouReceive.
   ///
@@ -1458,19 +1236,13 @@ abstract class AppLocalizations {
   /// No description provided for @planTitleWithdrawal.
   ///
   /// In en, this message translates to:
-  /// **'Your withdrawal plan'**
+  /// **'Withdrawal plan'**
   String get planTitleWithdrawal;
-
-  /// No description provided for @gainVsClassicWithdrawal.
-  ///
-  /// In en, this message translates to:
-  /// **'Compared to withdrawing the largest possible amount each time.'**
-  String get gainVsClassicWithdrawal;
 
   /// No description provided for @classicExplanationWithdrawal.
   ///
   /// In en, this message translates to:
-  /// **'Usual way: withdraw the largest possible amount, then the rest.'**
+  /// **'Usual: withdraw the most, then the rest'**
   String get classicExplanationWithdrawal;
 
   /// No description provided for @amountWithdrawn.
@@ -1484,12 +1256,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No tier yet'**
   String get noTiersYet;
-
-  /// No description provided for @intervalFormHelpWithdrawal.
-  ///
-  /// In en, this message translates to:
-  /// **'The fee applies when the amount withdrawn is between the minimum and the maximum (included).'**
-  String get intervalFormHelpWithdrawal;
 
   /// No description provided for @versionLabel.
   ///
@@ -1506,7 +1272,7 @@ abstract class AppLocalizations {
   /// No description provided for @failedToLoadData.
   ///
   /// In en, this message translates to:
-  /// **'Could not load the data'**
+  /// **'Could not load'**
   String get failedToLoadData;
 
   /// No description provided for @failedToOpenLink.
@@ -1521,23 +1287,11 @@ abstract class AppLocalizations {
   /// **'Press again to exit'**
   String get pressAgainToExit;
 
-  /// No description provided for @onlyOperation.
-  ///
-  /// In en, this message translates to:
-  /// **'Only “{operation}” is available for {operator}.'**
-  String onlyOperation(String operation, String operator);
-
-  /// No description provided for @amountStepMultiples.
-  ///
-  /// In en, this message translates to:
-  /// **'Multiples of {amount}'**
-  String amountStepMultiples(String amount);
-
   /// No description provided for @optimizationStepTooLarge.
   ///
   /// In en, this message translates to:
-  /// **'No tier of this grid accepts amounts in multiples of {amount}. Turn off rounding.'**
-  String optimizationStepTooLarge(String amount);
+  /// **'Turn off rounding for this grid'**
+  String get optimizationStepTooLarge;
 
   /// No description provided for @roundToHundred.
   ///
@@ -1545,22 +1299,10 @@ abstract class AppLocalizations {
   /// **'Round to the hundred'**
   String get roundToHundred;
 
-  /// No description provided for @roundToHundredOnWithdrawal.
-  ///
-  /// In en, this message translates to:
-  /// **'Every withdrawal is a multiple of 100: {example}, never {wrong}.'**
-  String roundToHundredOnWithdrawal(String example, String wrong);
-
-  /// No description provided for @roundToHundredOnTransfer.
-  ///
-  /// In en, this message translates to:
-  /// **'Every transfer is a multiple of 100: {example}, never {wrong}.'**
-  String roundToHundredOnTransfer(String example, String wrong);
-
   /// No description provided for @roundToHundredOff.
   ///
   /// In en, this message translates to:
-  /// **'Exact amounts, not rounded.'**
+  /// **'Exact amounts'**
   String get roundToHundredOff;
 
   /// No description provided for @faqHowItWorks.
@@ -1572,32 +1314,122 @@ abstract class AppLocalizations {
   /// No description provided for @faqHowItWorksAnswer.
   ///
   /// In en, this message translates to:
-  /// **'Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.'**
+  /// **'Pick the operator, the operation and the amount available. Feezer finds the split that costs the least in fees.'**
   String get faqHowItWorksAnswer;
 
   /// No description provided for @faqRounding.
   ///
   /// In en, this message translates to:
-  /// **'Why are the amounts rounded to the hundred?'**
+  /// **'Why round to the hundred?'**
   String get faqRounding;
 
   /// No description provided for @faqRoundingAnswer.
   ///
   /// In en, this message translates to:
-  /// **'Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.'**
+  /// **'Cash points only hand out notes: you can\'t withdraw 10 040. You can turn rounding off at any time.'**
   String get faqRoundingAnswer;
 
   /// No description provided for @faqPrivacy.
   ///
   /// In en, this message translates to:
-  /// **'Do I need internet? Is my data shared?'**
+  /// **'Is my data shared?'**
   String get faqPrivacy;
 
   /// No description provided for @faqPrivacyAnswer.
   ///
   /// In en, this message translates to:
-  /// **'No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file).'**
+  /// **'No. Feezer needs no account and nothing leaves your phone.'**
   String get faqPrivacyAnswer;
+
+  /// No description provided for @onboardingText1.
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer splits your withdrawals and transfers.'**
+  String get onboardingText1;
+
+  /// No description provided for @onboardingExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Example: {amount} in your account'**
+  String onboardingExample(String amount);
+
+  /// No description provided for @onboardingOneGo.
+  ///
+  /// In en, this message translates to:
+  /// **'In one go'**
+  String get onboardingOneGo;
+
+  /// No description provided for @onboardingWithFeezer.
+  ///
+  /// In en, this message translates to:
+  /// **'With Feezer'**
+  String get onboardingWithFeezer;
+
+  /// No description provided for @onboardingStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick the operator'**
+  String get onboardingStep1;
+
+  /// No description provided for @onboardingStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the amount'**
+  String get onboardingStep2;
+
+  /// No description provided for @onboardingStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow the plan'**
+  String get onboardingStep3;
+
+  /// No description provided for @roundToHundredOn.
+  ///
+  /// In en, this message translates to:
+  /// **'{example}, never {wrong}'**
+  String roundToHundredOn(String example, String wrong);
+
+  /// No description provided for @vsUsualWay.
+  ///
+  /// In en, this message translates to:
+  /// **'Compared with the usual way'**
+  String get vsUsualWay;
+
+  /// No description provided for @csvFormatRows.
+  ///
+  /// In en, this message translates to:
+  /// **'One row per tier; commas or semicolons.'**
+  String get csvFormatRows;
+
+  /// No description provided for @faqInternet.
+  ///
+  /// In en, this message translates to:
+  /// **'Do I need internet?'**
+  String get faqInternet;
+
+  /// No description provided for @faqInternetAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No. Calculations run on your phone; internet is only used to update the fees.'**
+  String get faqInternetAnswer;
+
+  /// No description provided for @termsIndependenceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Independence'**
+  String get termsIndependenceTitle;
+
+  /// No description provided for @termsIndependenceContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Feezer is not affiliated with any operator and is not responsible for the fees charged.'**
+  String get termsIndependenceContent;
+
+  /// No description provided for @termsAcceptance.
+  ///
+  /// In en, this message translates to:
+  /// **'By using Feezer, you accept these terms.'**
+  String get termsAcceptance;
 }
 
 class _AppLocalizationsDelegate

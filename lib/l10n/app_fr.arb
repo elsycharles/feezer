@@ -1,20 +1,15 @@
 {
   "@@locale": "fr",
   "onboardingTitle1": "Payez moins de frais",
-  "onboardingDescription1": "Entrez un montant : Feezer le découpe en opérations qui coûtent le moins de frais possible.",
-  "onboardingTitle2": "Les vrais frais des opérateurs",
-  "onboardingDescription2": "MVola, Orange Money, Airtel Money : les grilles viennent des tarifs officiels des opérateurs et se mettent à jour en un geste.",
-  "onboardingTitle3": "Retraits et transferts",
-  "onboardingDescription3": "Choisissez l'opérateur et l'opération. Vos données restent sur votre téléphone, même sans internet.",
+  "onboardingTitle2": "En 3 étapes",
   "next": "Suivant",
-  "skip": "Passer",
   "getStarted": "Commencer",
   "cancel": "Annuler",
   "delete": "Supprimer",
   "settings": "Paramètres",
   "createInterval": "Ajouter le palier",
   "optimize": "Optimiser",
-  "pleaseEnterValidAmount": "Veuillez saisir un montant valide",
+  "pleaseEnterValidAmount": "Montant invalide",
   "pleaseSelectProvider": "Choisissez un opérateur",
   "appearance": "Apparence",
   "language": "Langue",
@@ -22,33 +17,28 @@
   "light": "Clair",
   "dark": "Sombre",
   "newFeeInterval": "Nouveau palier",
-  "maxAmountMustBeGreaterThanMinAmount": "Le montant maximum doit être supérieur au montant minimum",
+  "maxAmountMustBeGreaterThanMinAmount": "Doit dépasser le minimum",
   "fee": "Frais",
-  "noOptimizationResultsFound": "Aucun résultat. Vérifiez le montant et la grille choisie.",
+  "noOptimizationResultsFound": "Aucun résultat",
   "about": "À propos",
   "@about": {
     "description": "About section"
-  },
-  "faqAndContact": "FAQ et contact",
-  "@faqAndContact": {
-    "description": "FAQ and contact option"
   },
   "termsOfUse": "Conditions d'utilisation",
   "@termsOfUse": {
     "description": "Terms of use option"
   },
   "termsServiceTitle": "Le service",
-  "termsServiceContent": "À partir des grilles de frais des opérateurs, Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais. En utilisant Feezer, vous acceptez ces conditions.",
+  "termsServiceContent": "Feezer calcule comment découper un retrait ou un transfert pour payer le moins de frais, d'après les grilles des opérateurs.",
   "termsPrivacyTitle": "Vos données",
-  "termsPrivacyContent": "Feezer ne demande aucun compte et ne collecte aucune donnée personnelle. Vos grilles et vos calculs restent sur votre téléphone et sont effacés si vous désinstallez l'application. La mise à jour des frais télécharge seulement un fichier public.",
+  "termsPrivacyContent": "Aucun compte, aucune donnée collectée. Vos grilles et vos calculs restent sur votre téléphone.",
   "termsLiabilityTitle": "Responsabilité",
-  "termsLiabilityContent": "Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais à tout moment, vérifiez-les avant chaque opération. Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais réellement facturés.",
+  "termsLiabilityContent": "Les résultats sont indicatifs : les opérateurs peuvent changer leurs frais. Vérifiez-les avant chaque opération.",
   "termsContactTitle": "Contact",
-  "termsContactContent": "Une question ? Écrivez-nous depuis Aide et support, ou à elsy.s.charles@gmail.com.",
   "@fee": {
     "description": "Fee column header"
   },
-  "noFeeIntervalsFound": "Cette grille n'a encore aucun palier. Ajoutez-les dans l'onglet Opérateurs.",
+  "noFeeIntervalsFound": "Cette grille n'a aucun palier",
   "addFeeInterval": "Ajouter un palier",
   "deleteFeeIntervals": "Supprimer le palier",
   "feeIntervalCreatedSuccessfully": "Palier ajouté",
@@ -56,31 +46,23 @@
   "@icon": {
     "description": "Icon label"
   },
-  "thisFieldIsRequired": "Ce champ est obligatoire",
+  "thisFieldIsRequired": "Obligatoire",
   "@thisFieldIsRequired": {
     "description": "Required field validation message"
   },
   "feeIntervalUpdatedSuccessfully": "Palier modifié",
   "feeIntervalDeletedSuccessfully": "{count, plural, =1{Palier supprimé} other{{count} paliers supprimés}}",
   "editFeeInterval": "Modifier le palier",
-  "minTransactionsCannotBeGreaterThanMax": "Le minimum de transactions ne peut pas être supérieur au maximum",
+  "minTransactionsCannotBeGreaterThanMax": "Minimum > maximum",
   "@minTransactionsCannotBeGreaterThanMax": {
     "description": "Validation error for transaction range"
   },
-  "pleaseEnterValidFee": "Veuillez saisir des frais valides",
+  "pleaseEnterValidFee": "Frais invalides",
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
   },
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
-  },
-  "minimumAmount": "Montant minimum",
-  "@minimumAmount": {
-    "description": "Minimum amount validation field name"
-  },
-  "maximumAmount": "Montant maximum",
-  "@maximumAmount": {
-    "description": "Maximum amount validation field name"
   },
   "helpAndSupport": "Aide et support",
   "addNewProvider": "Ajouter un opérateur",
@@ -89,7 +71,7 @@
   },
   "saveChanges": "Enregistrer",
   "confirmDeleteIntervals": "{count, plural, =1{Ce palier sera retiré de la grille.} other{Ces {count} paliers seront retirés de la grille.}}",
-  "failedToCalculateOptimization": "Échec du calcul de l'optimisation",
+  "failedToCalculateOptimization": "Échec du calcul",
   "@failedToCalculateOptimization": {
     "description": "Message d'erreur générique lorsque le calcul d'optimisation échoue"
   },
@@ -97,7 +79,7 @@
   "importData": "Importer",
   "exportData": "Exporter",
   "importSuccessful": "Import terminé",
-  "importFailed": "Échec de l'importation : {error}",
+  "importFailed": "Échec de l'import : {error}",
   "@importFailed": {
     "description": "Message d'échec d'importation générique",
     "placeholders": {
@@ -107,7 +89,7 @@
       }
     }
   },
-  "exportFailed": "Échec de l'exportation : {error}",
+  "exportFailed": "Échec de l'export : {error}",
   "@exportFailed": {
     "description": "Message d'échec d'exportation générique",
     "placeholders": {
@@ -117,9 +99,7 @@
       }
     }
   },
-  "providersImported": "{count} grille(s) importée(s)",
-  "feeIntervalsImported": "{count} palier(s) importé(s)",
-  "errorsEncountered": "{count} erreur(s) rencontrée(s)",
+  "errorsEncountered": "{count} erreur(s)",
   "@errorsEncountered": {
     "description": "Message indiquant le nombre d'erreurs rencontrées",
     "placeholders": {
@@ -129,36 +109,34 @@
       }
     }
   },
-  "importDataDescription": "Ajoutez des grilles depuis un fichier CSV (une ligne par palier).",
-  "exportDataDescription": "Enregistrez toutes vos grilles et leurs paliers dans un fichier CSV.",
-  "csvContentCannotBeEmpty": "Le contenu CSV ne peut pas être vide",
+  "csvContentCannotBeEmpty": "Texte vide",
   "@csvContentCannotBeEmpty": {
     "description": "Message d'erreur lorsque le texte CSV saisi est vide"
   },
-  "chooseWhereToSave": "Choisir où enregistrer le fichier",
+  "chooseWhereToSave": "Enregistrer le fichier",
   "@chooseWhereToSave": {
     "description": "Titre de la boîte de dialogue pour la sélection de l'emplacement de sauvegarde"
   },
-  "fileSavedSuccessfully": "Fichier enregistré avec succès",
+  "fileSavedSuccessfully": "Fichier enregistré",
   "@fileSavedSuccessfully": {
     "description": "Message de succès lorsque le fichier est enregistré"
   },
-  "failedToSaveFile": "Échec de l'enregistrement du fichier",
+  "failedToSaveFile": "Échec de l'enregistrement",
   "@failedToSaveFile": {
     "description": "Message d'erreur lorsque l'enregistrement du fichier échoue"
   },
-  "csvFileIsEmpty": "Le fichier CSV est vide",
+  "csvFileIsEmpty": "Fichier vide",
   "@csvFileIsEmpty": {
     "description": "Message d'erreur lorsque le fichier CSV ne contient aucune donnée"
   },
-  "noDataRowsFound": "Aucune ligne de données trouvée",
+  "noDataRowsFound": "Aucune ligne trouvée",
   "@noDataRowsFound": {
     "description": "Message d'erreur lorsque le fichier CSV n'a pas de lignes de données valides"
   },
-  "rowProviderNameRequired": "Ligne {rowNumber} : le nom de l'opérateur est obligatoire",
-  "rowProviderAlreadyExists": "Ligne {rowNumber} : la grille « {name} » existe déjà",
-  "rowIntervalOverlaps": "Ligne {rowNumber} : ce palier chevauche un palier existant ({overlap})",
-  "rowInvalidAmounts": "Ligne {rowNumber} : Montants invalides (min : {minStr}, max : {maxStr}, frais : {feeStr})",
+  "rowProviderNameRequired": "Ligne {rowNumber} : opérateur manquant",
+  "rowProviderAlreadyExists": "Ligne {rowNumber} : « {name} » existe déjà",
+  "rowIntervalOverlaps": "Ligne {rowNumber} : chevauche {overlap}",
+  "rowInvalidAmounts": "Ligne {rowNumber} : montants invalides ({minStr}, {maxStr}, {feeStr})",
   "@rowInvalidAmounts": {
     "description": "Message d'erreur lorsque les montants dans la ligne CSV sont invalides",
     "placeholders": {
@@ -180,7 +158,7 @@
       }
     }
   },
-  "rowMinAmountGreaterThanMax": "Ligne {rowNumber} : Le montant min ({min}) doit être inférieur au montant max ({max})",
+  "rowMinAmountGreaterThanMax": "Ligne {rowNumber} : min {min} > max {max}",
   "@rowMinAmountGreaterThanMax": {
     "description": "Message d'erreur lorsque le montant minimum est supérieur au montant maximum",
     "placeholders": {
@@ -198,7 +176,7 @@
       }
     }
   },
-  "rowFeeMustBePositive": "Ligne {rowNumber} : Les frais doivent être positifs",
+  "rowFeeMustBePositive": "Ligne {rowNumber} : frais négatifs",
   "@rowFeeMustBePositive": {
     "description": "Message d'erreur lorsque le montant des frais n'est pas positif",
     "placeholders": {
@@ -208,7 +186,7 @@
       }
     }
   },
-  "rowFeePercentageInvalid": "Ligne {rowNumber} : Les frais en pourcentage doivent être entre 0 et 100 ({fee}%)",
+  "rowFeePercentageInvalid": "Ligne {rowNumber} : pourcentage hors de 0–100 ({fee})",
   "@rowFeePercentageInvalid": {
     "description": "Message d'erreur lorsque les frais en pourcentage sont invalides (pas entre 0 et 100)",
     "placeholders": {
@@ -222,18 +200,18 @@
       }
     }
   },
-  "importedProvidersAndFees": "{providersCount} grille(s) et {feesCount} palier(s) importés",
-  "noDataToExport": "Aucune donnée à exporter",
+  "importedProvidersAndFees": "{providersCount} grille(s), {feesCount} palier(s)",
+  "noDataToExport": "Aucune grille à exporter",
   "@noDataToExport": {
     "description": "Message d'erreur lorsqu'il n'y a aucune donnée disponible pour l'exportation"
   },
-  "providerNameColumnNotFound": "Colonne du nom de l'opérateur introuvable",
+  "providerNameColumnNotFound": "Colonne opérateur introuvable",
   "fixedAmount": "Montant fixe",
   "percentage": "Pourcentage",
   "@percentage": {
     "description": "Option pour frais basé sur pourcentage"
   },
-  "percentageMustBeBetween0And100": "Le pourcentage doit être entre 0 et 100",
+  "percentageMustBeBetween0And100": "Entre 0 et 100",
   "@percentageMustBeBetween0And100": {
     "description": "Erreur de validation pour la saisie de pourcentage"
   },
@@ -242,7 +220,7 @@
     "description": "Titre de l'onglet Questions fréquemment posées"
   },
   "faqExportData": "Comment sauvegarder mes grilles ?",
-  "faqExportDataAnswer": "Paramètres › Import / export : exportez vos grilles dans un fichier CSV, puis importez-le sur un autre téléphone ou après une réinstallation.",
+  "faqExportDataAnswer": "Dans Paramètres › Import / export, exportez-les en fichier CSV, puis importez-le sur un autre téléphone.",
   "website": "Site web",
   "@website": {
     "description": "Méthode de contact site web"
@@ -252,21 +230,16 @@
   "@email": {
     "description": "Méthode de contact email"
   },
-  "exceedsEnteredAmount": "Dépasse le montant saisi",
-  "optimizationBudgetTooSmall": "Le montant est trop faible pour une opération avec cette grille.",
-  "optimizationConstraintsUnsatisfiable": "Aucun découpage ne respecte ce nombre d'opérations pour ce montant.",
-  "optimizationNotProven": "Recherche très longue : ce découpage est excellent, mais n'a pas pu être prouvé comme le meilleur.",
-  "feeIntervalOverlaps": "Ce palier chevauche un palier existant ({range}).",
-  "failedToDeleteFeeIntervals": "Impossible de supprimer le palier",
-  "failedToSaveChanges": "Échec de l'enregistrement des modifications",
+  "optimizationBudgetTooSmall": "Montant trop faible pour cette grille",
+  "optimizationConstraintsUnsatisfiable": "Impossible avec cette limite",
+  "feeIntervalOverlaps": "Chevauche le palier {range}",
+  "failedToDeleteFeeIntervals": "Suppression impossible",
+  "failedToSaveChanges": "Échec de l'enregistrement",
   "tabOptimize": "Optimiser",
-  "optimizeTitle": "Payez moins de frais",
-  "optimizeSubtitle": "Feezer découpe votre montant en opérations qui coûtent le moins de frais.",
   "add": "Ajouter",
   "amountAvailable": "Montant disponible",
-  "amountHelper": "Frais compris : le total qui sortira de votre compte.",
+  "amountHelper": "Frais compris",
   "transferCount": "Nombre d'envois",
-  "transferCountHelp": "Facultatif. Limitez le nombre d'envois que le plan peut utiliser.",
   "transferCountFree": "Sans limite",
   "transferCountExactly": "Exactement {count}",
   "transferCountRange": "Entre {min} et {max}",
@@ -283,15 +256,10 @@
   "debitedLabel": "Débité",
   "leftLabel": "Reste",
   "gainTitle": "+{amount} reçus en plus",
-  "gainVsClassic": "Par rapport à l'envoi du plus gros montant possible à chaque fois.",
   "feesSavedTitle": "{amount} de frais économisés",
-  "feesSavedVsClassic": "La méthode habituelle coûterait plus cher pour le même montant.",
-  "alreadyOptimalTitle": "La méthode habituelle est déjà la meilleure",
-  "alreadyOptimalMessage": "Pour ce montant, découper n'apporte rien de plus.",
-  "limitCost": "Sans cette limite, {amount} de plus seraient reçus.",
-  "limitFree": "Cette limite ne vous coûte rien ici.",
-  "nearOptimalTitle": "Montant très élevé",
-  "planTitle": "Votre plan d'envoi",
+  "alreadyOptimalTitle": "Méthode habituelle déjà optimale",
+  "limitCost": "Votre limite coûte {amount}",
+  "planTitle": "Plan d'envoi",
   "sendAmount": "Envoyer {amount}",
   "feePerTransfer": "frais {amount} par envoi",
   "compareTitle": "Comparaison",
@@ -299,42 +267,31 @@
   "classicColumn": "Habituel",
   "receivedLabel": "Reçu",
   "transfersLabel": "Envois",
-  "classicExplanation": "Méthode habituelle : envoyer le plus gros montant possible, puis le reste.",
-  "sameAmountByHand": "Même montant reçu, méthode habituelle",
-  "sameAmountByHandDetail": "Pour obtenir {net}, la méthode habituelle coûte {fees} de frais, soit {total} débités.",
-  "cannotSplitByHand": "La méthode habituelle ne permet pas d'obtenir ce montant.",
+  "classicExplanation": "Habituel : envoyer le maximum, puis le reste",
   "classicPlan": "Plan habituel",
   "showDetails": "Voir le détail",
   "showLess": "Masquer le détail",
-  "noProvidersYet": "Aucune grille pour l'instant",
-  "noProvidersMessage": "Mettez à jour les frais officiels ou ajoutez votre propre grille.",
+  "noProvidersYet": "Aucune grille",
   "tierCount": "{count, plural, =0{Aucun palier} =1{1 palier} other{{count} paliers}}",
   "feesFrom": "frais dès {amount}",
-  "providerNameHint": "ex. MVola, Orange Money, ma banque",
+  "providerNameHint": "ex. MVola, ma banque",
   "descriptionOptional": "Description (facultatif)",
   "feeGrid": "Grille de frais",
   "amountRange": "Montant envoyé",
-  "noIntervalsMessage": "Ajoutez les paliers de cette grille pour optimiser vos opérations.",
-  "gridHint": "Touchez un palier pour le modifier ou le supprimer.",
-  "intervalFormHelp": "Les frais s'appliquent quand le montant envoyé est entre le minimum et le maximum (inclus).",
-  "downloadingFees": "Lecture des grilles publiées…",
-  "feesDownloadFailed": "Vérifiez votre connexion puis réessayez.",
+  "downloadingFees": "Téléchargement…",
+  "feesDownloadFailed": "Vérifiez votre connexion",
   "feesAlreadyUpToDate": "Vos frais sont à jour",
-  "gridsOthersUnchanged": "Vos autres grilles ne changent pas.",
   "updateAction": "Mettre à jour",
   "feesUpdatedSuccessfully": "Frais mis à jour",
-  "importExportSubtitle": "Sauvegarder ou partager vos grilles (CSV)",
   "replayIntroduction": "Revoir la présentation",
   "faqFeeUpdate": "D'où viennent les frais ?",
-  "faqFeeUpdateAnswer": "Des tarifs officiels des opérateurs : les grilles MVola et Orange Money sont lues chaque jour sur mvola.mg et orange.mg ; celle d'Airtel Money est recopiée de ses tarifs publiés. Touchez « Mettre à jour » dans l'onglet Opérateurs pour avoir les dernières ; les grilles que vous avez ajoutées ne changent pas.",
+  "faqFeeUpdateAnswer": "Des tarifs officiels de MVola, Orange Money et Airtel Money. Touchez « Mettre à jour » pour avoir les derniers.",
   "ok": "OK",
   "pasteCsv": "Coller du texte CSV",
   "chooseCsvFile": "Choisir un fichier CSV",
   "csvTemplate": "Modèle",
-  "csvTemplateDescription": "Partez d'un fichier prêt avec les colonnes attendues.",
   "downloadTemplate": "Télécharger le modèle",
   "csvFormat": "Format du fichier",
-  "csvFormatHelp": "Une ligne par palier. Les lignes ayant le même nom_fournisseur et le même type_operation forment une grille. type_operation vaut withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance ou transfer_unregistered (facultatif) ; type_frais vaut fixed ou percentage. Virgules ou points-virgules acceptés.",
   "opWithdrawal": "Retrait",
   "opTransferSame": "Transfert",
   "opTransferSameApp": "Transfert via l'appli",
@@ -343,7 +300,6 @@
   "opTransferUnregistered": "Vers un non-abonné",
   "opCustom": "Autre",
   "operators": "Opérateurs",
-  "operatorsSubtitle": "Les grilles de frais utilisées pour vos calculs.",
   "operatorLabel": "Opérateur",
   "operationLabel": "Opération",
   "operatorName": "Nom de l'opérateur",
@@ -356,59 +312,66 @@
   "gridCreated": "Grille créée",
   "gridUpdated": "Grille modifiée",
   "gridDeleted": "Grille supprimée",
-  "gridAlreadyExists": "La grille {name} existe déjà.",
+  "gridAlreadyExists": "{name} existe déjà",
   "deleteGridTitle": "Supprimer la grille",
-  "deleteGridMessage": "La grille {name} et ses paliers seront supprimés.",
+  "deleteGridMessage": "{name} et ses paliers seront supprimés.",
   "optimizeWithGrid": "Optimiser avec cette grille",
   "moreOptions": "Plus d'options",
   "officialFees": "Frais officiels",
-  "feesCheckedOn": "Vérifiés sur les sites des opérateurs le {date}",
-  "feesNeverChecked": "Téléchargez les derniers frais publiés par les opérateurs.",
+  "feesCheckedOn": "Vérifiés le {date}",
+  "feesNeverChecked": "Pas encore vérifiés",
   "sourceOfficial": "Grille officielle · {host}",
   "sourceOfficialDated": "Grille officielle · {host} · {date}",
-  "sourceManual": "Grille recopiée des tarifs de l'opérateur",
-  "sourceManualDated": "Grille recopiée des tarifs de l'opérateur · {date}",
-  "sourceEdited": "Grille modifiée par vous",
-  "openSource": "Voir la page officielle",
-  "editPublishedGridWarning": "Cette grille vient des tarifs de l'opérateur. Si vous mettez à jour les frais plus tard, votre modification sera remplacée.",
+  "sourceManual": "Tarifs de l'opérateur",
+  "sourceManualDated": "Tarifs de l'opérateur · {date}",
+  "sourceEdited": "Modifiée par vous",
+  "editPublishedGridWarning": "Une mise à jour des frais annulera ce changement.",
   "feesSection": "Frais",
   "updateFeesTitle": "Mettre à jour les frais",
   "feesDownloadFailedTitle": "Téléchargement impossible",
-  "updateReviewIntro": "Les opérateurs ont publié de nouveaux frais. Voici ce qui change :",
-  "effectiveSince": "en vigueur depuis le {date}",
+  "updateReviewIntro": "Nouveaux frais publiés :",
+  "effectiveSince": "depuis le {date}",
   "newTag": "Nouvelle",
   "updatedTag": "Mise à jour",
   "later": "Plus tard",
   "retry": "Réessayer",
   "withdrawalCount": "Nombre de retraits",
-  "withdrawalCountHelp": "Facultatif. Limitez le nombre de retraits que le plan peut utiliser.",
   "cashYouReceive": "Vous recevez en espèces",
   "withdrawalCountLabel": "{count, plural, =1{1 retrait} other{{count} retraits}}",
   "withdrawalsLabel": "Retraits",
   "withdrawAmount": "Retirer {amount}",
   "feePerWithdrawal": "frais {amount} par retrait",
-  "planTitleWithdrawal": "Votre plan de retrait",
-  "gainVsClassicWithdrawal": "Par rapport au retrait du plus gros montant possible à chaque fois.",
-  "classicExplanationWithdrawal": "Méthode habituelle : retirer le plus gros montant possible, puis le reste.",
+  "planTitleWithdrawal": "Plan de retrait",
+  "classicExplanationWithdrawal": "Habituel : retirer le maximum, puis le reste",
   "amountWithdrawn": "Montant retiré",
-  "noTiersYet": "Aucun palier pour l'instant",
-  "intervalFormHelpWithdrawal": "Les frais s'appliquent quand le montant retiré est entre le minimum et le maximum (inclus).",
+  "noTiersYet": "Aucun palier",
   "versionLabel": "Version {version}",
   "free": "Gratuit",
-  "failedToLoadData": "Impossible de charger les données",
+  "failedToLoadData": "Chargement impossible",
   "failedToOpenLink": "Impossible d'ouvrir le lien",
   "pressAgainToExit": "Appuyez encore pour quitter",
-  "onlyOperation": "Seule l'opération « {operation} » est disponible pour {operator}.",
-  "amountStepMultiples": "Multiples de {amount}",
-  "optimizationStepTooLarge": "Aucun palier de cette grille n'accepte des montants multiples de {amount}. Désactivez l'arrondi.",
+  "optimizationStepTooLarge": "Désactivez l'arrondi pour cette grille",
   "roundToHundred": "Arrondir à la centaine",
-  "roundToHundredOnWithdrawal": "Chaque retrait est un multiple de 100 : {example}, jamais {wrong}.",
-  "roundToHundredOnTransfer": "Chaque envoi est un multiple de 100 : {example}, jamais {wrong}.",
-  "roundToHundredOff": "Montants exacts, sans arrondi.",
+  "roundToHundredOff": "Montants exacts",
   "faqHowItWorks": "Comment ça marche ?",
-  "faqHowItWorksAnswer": "Choisissez l'opérateur, l'opération (retrait, transfert…) et le montant disponible, frais compris. Feezer trouve le découpage qui vous fait recevoir le plus avec le moins de frais, et le compare à la méthode habituelle : retirer ou envoyer le plus gros montant possible à chaque fois.",
-  "faqRounding": "Pourquoi des montants arrondis à la centaine ?",
-  "faqRoundingAnswer": "Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Avec « Arrondir à la centaine », chaque montant du plan est un multiple de 100. C'est activé par défaut pour les retraits ; désactivez-le pour des montants exacts.",
-  "faqPrivacy": "Faut-il internet ? Mes données sont-elles partagées ?",
-  "faqPrivacyAnswer": "Non. Les calculs se font sur votre téléphone, sans compte, et rien n'est envoyé. Internet sert seulement à mettre à jour les frais (un fichier public)."
+  "faqHowItWorksAnswer": "Choisissez l'opérateur, l'opération et le montant disponible. Feezer trouve le découpage qui coûte le moins de frais.",
+  "faqRounding": "Pourquoi arrondir à la centaine ?",
+  "faqRoundingAnswer": "Les points de retrait ne donnent que des billets : impossible de retirer 10 040. Vous pouvez désactiver l'arrondi à tout moment.",
+  "faqPrivacy": "Mes données sont-elles partagées ?",
+  "faqPrivacyAnswer": "Non. Feezer ne demande aucun compte et rien ne quitte votre téléphone.",
+  "onboardingText1": "Feezer découpe vos retraits et transferts.",
+  "onboardingExample": "Exemple : {amount} sur votre compte",
+  "onboardingOneGo": "En une fois",
+  "onboardingWithFeezer": "Avec Feezer",
+  "onboardingStep1": "Choisissez l'opérateur",
+  "onboardingStep2": "Entrez le montant",
+  "onboardingStep3": "Suivez le plan",
+  "roundToHundredOn": "{example}, jamais {wrong}",
+  "vsUsualWay": "Par rapport à la méthode habituelle",
+  "csvFormatRows": "Une ligne par palier ; virgule ou point-virgule.",
+  "faqInternet": "Faut-il internet ?",
+  "faqInternetAnswer": "Non. Les calculs se font sur votre téléphone ; internet sert seulement à mettre à jour les frais.",
+  "termsIndependenceTitle": "Indépendance",
+  "termsIndependenceContent": "Feezer n'est affilié à aucun opérateur et n'est pas responsable des frais facturés.",
+  "termsAcceptance": "En utilisant Feezer, vous acceptez ces conditions."
 }

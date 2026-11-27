@@ -4,33 +4,13 @@
   "@onboardingTitle1": {
     "description": "First onboarding screen title"
   },
-  "onboardingDescription1": "Enter an amount: Feezer splits it into the transactions that cost the least in fees.",
-  "@onboardingDescription1": {
-    "description": "First onboarding screen description"
-  },
-  "onboardingTitle2": "Real operator fees",
+  "onboardingTitle2": "In 3 steps",
   "@onboardingTitle2": {
     "description": "Second onboarding screen title"
-  },
-  "onboardingDescription2": "MVola, Orange Money, Airtel Money: the grids come from the operators' official rates and update in one tap.",
-  "@onboardingDescription2": {
-    "description": "Second onboarding screen description"
-  },
-  "onboardingTitle3": "Withdrawals and transfers",
-  "@onboardingTitle3": {
-    "description": "Third onboarding screen title"
-  },
-  "onboardingDescription3": "Choose the operator and the operation. Your data stays on your phone, even offline.",
-  "@onboardingDescription3": {
-    "description": "Third onboarding screen description"
   },
   "next": "Next",
   "@next": {
     "description": "Next button text"
-  },
-  "skip": "Skip",
-  "@skip": {
-    "description": "Skip button text"
   },
   "getStarted": "Get started",
   "@getStarted": {
@@ -56,7 +36,7 @@
   "@optimize": {
     "description": "Optimize button text"
   },
-  "pleaseEnterValidAmount": "Please enter a valid amount",
+  "pleaseEnterValidAmount": "Invalid amount",
   "@pleaseEnterValidAmount": {
     "description": "Error message for invalid amount"
   },
@@ -88,7 +68,7 @@
   "@newFeeInterval": {
     "description": "New fee interval screen title"
   },
-  "maxAmountMustBeGreaterThanMinAmount": "Max amount must be greater than min amount",
+  "maxAmountMustBeGreaterThanMinAmount": "Must exceed the minimum",
   "@maxAmountMustBeGreaterThanMinAmount": {
     "description": "Validation error for amount range"
   },
@@ -96,17 +76,13 @@
   "@fee": {
     "description": "Fee column header"
   },
-  "noOptimizationResultsFound": "No result. Check the amount and the chosen grid.",
+  "noOptimizationResultsFound": "No result",
   "@noOptimizationResultsFound": {
     "description": "Message when no optimization results are found for the given parameters"
   },
   "about": "About",
   "@about": {
     "description": "About section"
-  },
-  "faqAndContact": "FAQ and contact",
-  "@faqAndContact": {
-    "description": "FAQ and contact option"
   },
   "termsOfUse": "Terms of Use",
   "@termsOfUse": {
@@ -116,7 +92,7 @@
   "@termsServiceTitle": {
     "description": "Terms of use service description section title"
   },
-  "termsServiceContent": "From the operators' fee grids, Feezer calculates how to split a withdrawal or a transfer to pay the least fees. By using Feezer, you accept these terms.",
+  "termsServiceContent": "Feezer works out how to split a withdrawal or a transfer to pay the least fees, from the operators' fee grids.",
   "@termsServiceContent": {
     "description": "Terms of use service description section content"
   },
@@ -124,7 +100,7 @@
   "@termsPrivacyTitle": {
     "description": "Terms of use privacy section title"
   },
-  "termsPrivacyContent": "Feezer requires no account and collects no personal data. Your grids and calculations stay on your phone and are erased if you uninstall the app. Updating the fees only downloads a public file.",
+  "termsPrivacyContent": "No account, no data collected. Your grids and calculations stay on your phone.",
   "@termsPrivacyContent": {
     "description": "Terms of use privacy section content"
   },
@@ -132,7 +108,7 @@
   "@termsLiabilityTitle": {
     "description": "Terms of use liability section title"
   },
-  "termsLiabilityContent": "Results are for information only: operators can change their fees at any time, so check them before each transaction. Feezer is not affiliated with any operator and is not responsible for the fees actually charged.",
+  "termsLiabilityContent": "Results are indicative: operators can change their fees. Check them before each transaction.",
   "@termsLiabilityContent": {
     "description": "Terms of use liability section content"
   },
@@ -140,11 +116,7 @@
   "@termsContactTitle": {
     "description": "Terms of use contact section title"
   },
-  "termsContactContent": "A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.",
-  "@termsContactContent": {
-    "description": "Terms of use contact section content"
-  },
-  "noFeeIntervalsFound": "This grid has no tier yet. Add them in the Operators tab.",
+  "noFeeIntervalsFound": "This grid has no tier",
   "@noFeeIntervalsFound": {
     "description": "Message when no fee intervals exist"
   },
@@ -164,7 +136,7 @@
   "@icon": {
     "description": "UI redesign"
   },
-  "thisFieldIsRequired": "This field is required",
+  "thisFieldIsRequired": "Required",
   "@thisFieldIsRequired": {
     "description": "Required field validation message"
   },
@@ -185,21 +157,13 @@
   "@editFeeInterval": {
     "description": "Edit fee interval dialog title"
   },
-  "minTransactionsCannotBeGreaterThanMax": "Min transactions cannot be greater than max",
+  "minTransactionsCannotBeGreaterThanMax": "Minimum > maximum",
   "@minTransactionsCannotBeGreaterThanMax": {
     "description": "Validation error for transaction range"
   },
-  "pleaseEnterValidFee": "Please enter a valid fee",
+  "pleaseEnterValidFee": "Invalid fee",
   "@pleaseEnterValidFee": {
     "description": "Validation error for fee field"
-  },
-  "minimumAmount": "Minimum amount",
-  "@minimumAmount": {
-    "description": "Minimum amount validation field name"
-  },
-  "maximumAmount": "Maximum amount",
-  "@maximumAmount": {
-    "description": "Maximum amount validation field name"
   },
   "helpAndSupport": "Help & support",
   "@helpAndSupport": {
@@ -222,7 +186,7 @@
       }
     }
   },
-  "failedToCalculateOptimization": "Failed to calculate optimization",
+  "failedToCalculateOptimization": "Calculation failed",
   "@failedToCalculateOptimization": {
     "description": "Generic error message when optimization calculation fails"
   },
@@ -262,25 +226,7 @@
       }
     }
   },
-  "providersImported": "{count} grid(s) imported",
-  "@providersImported": {
-    "description": "Message showing number of providers imported",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "feeIntervalsImported": "{count} tier(s) imported",
-  "@feeIntervalsImported": {
-    "description": "Message showing number of fee intervals imported",
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "errorsEncountered": "{count} error(s) encountered",
+  "errorsEncountered": "{count} error(s)",
   "@errorsEncountered": {
     "description": "Message showing number of errors encountered",
     "placeholders": {
@@ -290,39 +236,31 @@
       }
     }
   },
-  "importDataDescription": "Add grids from a CSV file (one row per tier).",
-  "@importDataDescription": {
-    "description": "Description for import data action"
-  },
-  "exportDataDescription": "Save all your grids and their tiers in a CSV file.",
-  "@exportDataDescription": {
-    "description": "Description for export data action"
-  },
-  "csvContentCannotBeEmpty": "CSV content cannot be empty",
+  "csvContentCannotBeEmpty": "Empty text",
   "@csvContentCannotBeEmpty": {
     "description": "Error message when CSV text input is empty"
   },
-  "chooseWhereToSave": "Choose where to save the file",
+  "chooseWhereToSave": "Save the file",
   "@chooseWhereToSave": {
     "description": "Dialog title for file save location selection"
   },
-  "fileSavedSuccessfully": "File saved successfully",
+  "fileSavedSuccessfully": "File saved",
   "@fileSavedSuccessfully": {
     "description": "Success message when file is saved"
   },
-  "failedToSaveFile": "Failed to save file",
+  "failedToSaveFile": "Could not save the file",
   "@failedToSaveFile": {
     "description": "Error message when file save fails"
   },
-  "csvFileIsEmpty": "CSV file is empty",
+  "csvFileIsEmpty": "Empty file",
   "@csvFileIsEmpty": {
     "description": "Error message when CSV file contains no data"
   },
-  "noDataRowsFound": "No data rows found",
+  "noDataRowsFound": "No rows found",
   "@noDataRowsFound": {
     "description": "Error message when CSV file has no valid data rows"
   },
-  "rowProviderNameRequired": "Row {rowNumber}: the operator name is required",
+  "rowProviderNameRequired": "Row {rowNumber}: operator missing",
   "@rowProviderNameRequired": {
     "description": "Error message when provider name is missing in CSV row",
     "placeholders": {
@@ -331,7 +269,7 @@
       }
     }
   },
-  "rowProviderAlreadyExists": "Row {rowNumber}: the grid \"{name}\" already exists",
+  "rowProviderAlreadyExists": "Row {rowNumber}: \"{name}\" already exists",
   "@rowProviderAlreadyExists": {
     "description": "Error message when provider already exists in database",
     "placeholders": {
@@ -343,7 +281,7 @@
       }
     }
   },
-  "rowIntervalOverlaps": "Row {rowNumber}: this tier overlaps an existing tier ({overlap})",
+  "rowIntervalOverlaps": "Row {rowNumber}: overlaps {overlap}",
   "@rowIntervalOverlaps": {
     "description": "Error message when fee interval overlaps with existing interval",
     "placeholders": {
@@ -355,7 +293,7 @@
       }
     }
   },
-  "rowInvalidAmounts": "Row {rowNumber}: Invalid amounts (min: {minStr}, max: {maxStr}, fee: {feeStr})",
+  "rowInvalidAmounts": "Row {rowNumber}: invalid amounts ({minStr}, {maxStr}, {feeStr})",
   "@rowInvalidAmounts": {
     "description": "Error message when amounts in CSV row are invalid",
     "placeholders": {
@@ -377,7 +315,7 @@
       }
     }
   },
-  "rowMinAmountGreaterThanMax": "Row {rowNumber}: Min amount ({min}) must be less than max amount ({max})",
+  "rowMinAmountGreaterThanMax": "Row {rowNumber}: min {min} > max {max}",
   "@rowMinAmountGreaterThanMax": {
     "description": "Error message when minimum amount is greater than maximum amount",
     "placeholders": {
@@ -395,7 +333,7 @@
       }
     }
   },
-  "rowFeeMustBePositive": "Row {rowNumber}: Fee must be positive",
+  "rowFeeMustBePositive": "Row {rowNumber}: negative fee",
   "@rowFeeMustBePositive": {
     "description": "Error message when fee amount is not positive",
     "placeholders": {
@@ -405,7 +343,7 @@
       }
     }
   },
-  "rowFeePercentageInvalid": "Row {rowNumber}: Percentage fee must be between 0 and 100 ({fee}%)",
+  "rowFeePercentageInvalid": "Row {rowNumber}: percentage outside 0–100 ({fee})",
   "@rowFeePercentageInvalid": {
     "description": "Error message when percentage fee is invalid (not between 0 and 100)",
     "placeholders": {
@@ -419,7 +357,7 @@
       }
     }
   },
-  "importedProvidersAndFees": "Imported {providersCount} grid(s) and {feesCount} tier(s)",
+  "importedProvidersAndFees": "{providersCount} grid(s), {feesCount} tier(s)",
   "@importedProvidersAndFees": {
     "description": "Success message showing number of imported providers and fee intervals",
     "placeholders": {
@@ -431,11 +369,11 @@
       }
     }
   },
-  "noDataToExport": "No data to export",
+  "noDataToExport": "No grid to export",
   "@noDataToExport": {
     "description": "Error message when there is no data available for export"
   },
-  "providerNameColumnNotFound": "Operator name column not found",
+  "providerNameColumnNotFound": "Operator column missing",
   "@providerNameColumnNotFound": {
     "description": "Error message when provider name column is missing in CSV"
   },
@@ -447,7 +385,7 @@
   "@percentage": {
     "description": "Option for percentage-based fee"
   },
-  "percentageMustBeBetween0And100": "Percentage must be between 0 and 100",
+  "percentageMustBeBetween0And100": "Between 0 and 100",
   "@percentageMustBeBetween0And100": {
     "description": "Validation error for percentage input"
   },
@@ -459,7 +397,7 @@
   "@faqExportData": {
     "description": "FAQ question"
   },
-  "faqExportDataAnswer": "Settings › Import / export: export your grids to a CSV file, then import it on another phone or after reinstalling the app.",
+  "faqExportDataAnswer": "In Settings › Import / export, export them to a CSV file, then import it on another phone.",
   "@faqExportDataAnswer": {
     "description": "FAQ answer"
   },
@@ -475,20 +413,15 @@
   "@email": {
     "description": "Email contact method"
   },
-  "exceedsEnteredAmount": "Exceeds entered amount",
-  "optimizationBudgetTooSmall": "The amount is too small for a transaction with this grid.",
+  "optimizationBudgetTooSmall": "Amount too small for this grid",
   "@optimizationBudgetTooSmall": {
     "description": "Optimizer / data validation message"
   },
-  "optimizationConstraintsUnsatisfiable": "No split respects this number of transactions for this amount.",
+  "optimizationConstraintsUnsatisfiable": "Not possible with this limit",
   "@optimizationConstraintsUnsatisfiable": {
     "description": "Optimizer / data validation message"
   },
-  "optimizationNotProven": "Very long search: this split is excellent but could not be proven to be the best.",
-  "@optimizationNotProven": {
-    "description": "Optimizer / data validation message"
-  },
-  "feeIntervalOverlaps": "This tier overlaps an existing tier ({range}).",
+  "feeIntervalOverlaps": "Overlaps the tier {range}",
   "@feeIntervalOverlaps": {
     "description": "Optimizer / data validation message",
     "placeholders": {
@@ -497,24 +430,16 @@
       }
     }
   },
-  "failedToDeleteFeeIntervals": "Could not delete the tier",
+  "failedToDeleteFeeIntervals": "Could not delete",
   "@failedToDeleteFeeIntervals": {
     "description": "Optimizer / data validation message"
   },
-  "failedToSaveChanges": "Failed to save changes",
+  "failedToSaveChanges": "Could not save",
   "@failedToSaveChanges": {
     "description": "Optimizer / data validation message"
   },
   "tabOptimize": "Optimize",
   "@tabOptimize": {
-    "description": "UI redesign"
-  },
-  "optimizeTitle": "Pay less in fees",
-  "@optimizeTitle": {
-    "description": "UI redesign"
-  },
-  "optimizeSubtitle": "Feezer splits your amount into the transactions that cost the least.",
-  "@optimizeSubtitle": {
     "description": "UI redesign"
   },
   "add": "Add",
@@ -525,16 +450,12 @@
   "@amountAvailable": {
     "description": "UI redesign"
   },
-  "amountHelper": "Fees included: the total that will leave your account.",
+  "amountHelper": "Fees included",
   "@amountHelper": {
     "description": "UI redesign"
   },
   "transferCount": "Number of transfers",
   "@transferCount": {
-    "description": "UI redesign"
-  },
-  "transferCountHelp": "Optional. Limit how many transfers the plan may use.",
-  "@transferCountHelp": {
     "description": "UI redesign"
   },
   "transferCountFree": "No limit",
@@ -634,10 +555,6 @@
       }
     }
   },
-  "gainVsClassic": "Compared to sending the largest possible amount each time.",
-  "@gainVsClassic": {
-    "description": "UI redesign"
-  },
   "feesSavedTitle": "{amount} of fees saved",
   "@feesSavedTitle": {
     "description": "UI redesign",
@@ -647,19 +564,11 @@
       }
     }
   },
-  "feesSavedVsClassic": "The usual way would cost more for the same amount.",
-  "@feesSavedVsClassic": {
-    "description": "UI redesign"
-  },
-  "alreadyOptimalTitle": "The usual way is already the best",
+  "alreadyOptimalTitle": "The usual way is already optimal",
   "@alreadyOptimalTitle": {
     "description": "UI redesign"
   },
-  "alreadyOptimalMessage": "For this amount, splitting brings nothing more.",
-  "@alreadyOptimalMessage": {
-    "description": "UI redesign"
-  },
-  "limitCost": "Without this limit, {amount} more would be received.",
+  "limitCost": "Your limit costs {amount}",
   "@limitCost": {
     "description": "UI redesign",
     "placeholders": {
@@ -668,15 +577,7 @@
       }
     }
   },
-  "limitFree": "This limit costs you nothing here.",
-  "@limitFree": {
-    "description": "UI redesign"
-  },
-  "nearOptimalTitle": "Very large amount",
-  "@nearOptimalTitle": {
-    "description": "UI redesign"
-  },
-  "planTitle": "Your transfer plan",
+  "planTitle": "Transfer plan",
   "@planTitle": {
     "description": "UI redesign"
   },
@@ -718,31 +619,8 @@
   "@transfersLabel": {
     "description": "UI redesign"
   },
-  "classicExplanation": "Usual way: send the largest possible amount, then the rest.",
+  "classicExplanation": "Usual: send the most, then the rest",
   "@classicExplanation": {
-    "description": "UI redesign"
-  },
-  "sameAmountByHand": "Same amount received, usual way",
-  "@sameAmountByHand": {
-    "description": "UI redesign"
-  },
-  "sameAmountByHandDetail": "To get {net}, the usual way costs {fees} in fees, i.e. {total} debited.",
-  "@sameAmountByHandDetail": {
-    "description": "UI redesign",
-    "placeholders": {
-      "net": {
-        "type": "String"
-      },
-      "fees": {
-        "type": "String"
-      },
-      "total": {
-        "type": "String"
-      }
-    }
-  },
-  "cannotSplitByHand": "The usual way cannot reach this amount.",
-  "@cannotSplitByHand": {
     "description": "UI redesign"
   },
   "classicPlan": "Usual plan",
@@ -759,10 +637,6 @@
   },
   "noProvidersYet": "No grid yet",
   "@noProvidersYet": {
-    "description": "UI redesign"
-  },
-  "noProvidersMessage": "Update the official fees, or add your own grid.",
-  "@noProvidersMessage": {
     "description": "UI redesign"
   },
   "tierCount": "{count, plural, =0{No tier} =1{1 tier} other{{count} tiers}}",
@@ -783,7 +657,7 @@
       }
     }
   },
-  "providerNameHint": "e.g. MVola, Orange Money, my bank",
+  "providerNameHint": "e.g. MVola, my bank",
   "@providerNameHint": {
     "description": "UI redesign"
   },
@@ -799,32 +673,16 @@
   "@amountRange": {
     "description": "UI redesign"
   },
-  "noIntervalsMessage": "Add the tiers of this grid to optimize your transactions.",
-  "@noIntervalsMessage": {
-    "description": "UI redesign"
-  },
-  "gridHint": "Tap a tier to edit or delete it.",
-  "@gridHint": {
-    "description": "UI redesign"
-  },
-  "intervalFormHelp": "The fee applies when the amount sent is between the minimum and the maximum (included).",
-  "@intervalFormHelp": {
-    "description": "UI redesign"
-  },
-  "downloadingFees": "Reading the published fee grids…",
+  "downloadingFees": "Downloading…",
   "@downloadingFees": {
     "description": "UI redesign"
   },
-  "feesDownloadFailed": "Check your connection and try again.",
+  "feesDownloadFailed": "Check your connection",
   "@feesDownloadFailed": {
     "description": "UI redesign"
   },
   "feesAlreadyUpToDate": "Your fees are up to date",
   "@feesAlreadyUpToDate": {
-    "description": "UI redesign"
-  },
-  "gridsOthersUnchanged": "Your other grids do not change.",
-  "@gridsOthersUnchanged": {
     "description": "UI redesign"
   },
   "updateAction": "Update",
@@ -835,10 +693,6 @@
   "@feesUpdatedSuccessfully": {
     "description": "UI redesign"
   },
-  "importExportSubtitle": "Back up or share your grids (CSV)",
-  "@importExportSubtitle": {
-    "description": "UI redesign"
-  },
   "replayIntroduction": "Replay the introduction",
   "@replayIntroduction": {
     "description": "UI redesign"
@@ -847,7 +701,7 @@
   "@faqFeeUpdate": {
     "description": "UI redesign"
   },
-  "faqFeeUpdateAnswer": "From the operators' official rates: MVola and Orange Money grids are read every day on mvola.mg and orange.mg; the Airtel Money grid is copied from its published rates. Tap “Update” in the Operators tab to get the latest ones; the grids you added yourself do not change.",
+  "faqFeeUpdateAnswer": "From the official rates of MVola, Orange Money and Airtel Money. Tap “Update” to get the latest.",
   "@faqFeeUpdateAnswer": {
     "description": "UI redesign"
   },
@@ -867,20 +721,12 @@
   "@csvTemplate": {
     "description": "UI redesign"
   },
-  "csvTemplateDescription": "Start from a ready-made file with the expected columns.",
-  "@csvTemplateDescription": {
-    "description": "UI redesign"
-  },
   "downloadTemplate": "Download the template",
   "@downloadTemplate": {
     "description": "UI redesign"
   },
   "csvFormat": "File format",
   "@csvFormat": {
-    "description": "UI redesign"
-  },
-  "csvFormatHelp": "One row per tier. Rows with the same provider_name and operation form one grid. operation is withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance or transfer_unregistered (optional); fee_type is fixed or percentage. Commas or semicolons are accepted.",
-  "@csvFormatHelp": {
     "description": "UI redesign"
   },
   "opWithdrawal": "Withdrawal",
@@ -891,7 +737,6 @@
   "opTransferUnregistered": "To a non-subscriber",
   "opCustom": "Other",
   "operators": "Operators",
-  "operatorsSubtitle": "The fee grids used for your calculations.",
   "operatorLabel": "Operator",
   "operationLabel": "Operation",
   "operatorName": "Operator name",
@@ -911,7 +756,7 @@
   "gridCreated": "Grid created",
   "gridUpdated": "Grid updated",
   "gridDeleted": "Grid deleted",
-  "gridAlreadyExists": "The grid {name} already exists.",
+  "gridAlreadyExists": "{name} already exists",
   "@gridAlreadyExists": {
     "placeholders": {
       "name": {
@@ -920,7 +765,7 @@
     }
   },
   "deleteGridTitle": "Delete the grid",
-  "deleteGridMessage": "The grid {name} and its tiers will be deleted.",
+  "deleteGridMessage": "{name} and its tiers will be deleted.",
   "@deleteGridMessage": {
     "placeholders": {
       "name": {
@@ -931,7 +776,7 @@
   "optimizeWithGrid": "Optimize with this grid",
   "moreOptions": "More options",
   "officialFees": "Official fees",
-  "feesCheckedOn": "Checked on the operators' websites on {date}",
+  "feesCheckedOn": "Checked on {date}",
   "@feesCheckedOn": {
     "placeholders": {
       "date": {
@@ -939,7 +784,7 @@
       }
     }
   },
-  "feesNeverChecked": "Download the latest fees published by the operators.",
+  "feesNeverChecked": "Not checked yet",
   "sourceOfficial": "Official grid · {host}",
   "@sourceOfficial": {
     "placeholders": {
@@ -959,8 +804,8 @@
       }
     }
   },
-  "sourceManual": "Grid copied from the operator's rates",
-  "sourceManualDated": "Grid copied from the operator's rates · {date}",
+  "sourceManual": "Operator's rates",
+  "sourceManualDated": "Operator's rates · {date}",
   "@sourceManualDated": {
     "placeholders": {
       "date": {
@@ -968,14 +813,13 @@
       }
     }
   },
-  "sourceEdited": "Grid edited by you",
-  "openSource": "See the official page",
-  "editPublishedGridWarning": "This grid comes from the operator's rates. If you update the fees later, your change will be replaced.",
+  "sourceEdited": "Edited by you",
+  "editPublishedGridWarning": "A fee update will undo this change.",
   "feesSection": "Fees",
   "updateFeesTitle": "Update the fees",
   "feesDownloadFailedTitle": "Download failed",
-  "updateReviewIntro": "The operators published new fees. Here is what changes:",
-  "effectiveSince": "in force since {date}",
+  "updateReviewIntro": "New fees published:",
+  "effectiveSince": "since {date}",
   "@effectiveSince": {
     "placeholders": {
       "date": {
@@ -988,7 +832,6 @@
   "later": "Later",
   "retry": "Try again",
   "withdrawalCount": "Number of withdrawals",
-  "withdrawalCountHelp": "Optional. Limit how many withdrawals the plan may use.",
   "cashYouReceive": "You receive in cash",
   "withdrawalCountLabel": "{count, plural, =1{1 withdrawal} other{{count} withdrawals}}",
   "@withdrawalCountLabel": {
@@ -1015,12 +858,10 @@
       }
     }
   },
-  "planTitleWithdrawal": "Your withdrawal plan",
-  "gainVsClassicWithdrawal": "Compared to withdrawing the largest possible amount each time.",
-  "classicExplanationWithdrawal": "Usual way: withdraw the largest possible amount, then the rest.",
+  "planTitleWithdrawal": "Withdrawal plan",
+  "classicExplanationWithdrawal": "Usual: withdraw the most, then the rest",
   "amountWithdrawn": "Amount withdrawn",
   "noTiersYet": "No tier yet",
-  "intervalFormHelpWithdrawal": "The fee applies when the amount withdrawn is between the minimum and the maximum (included).",
   "versionLabel": "Version {version}",
   "@versionLabel": {
     "placeholders": {
@@ -1030,64 +871,48 @@
     }
   },
   "free": "Free",
-  "failedToLoadData": "Could not load the data",
+  "failedToLoadData": "Could not load",
   "failedToOpenLink": "Could not open the link",
   "pressAgainToExit": "Press again to exit",
-  "onlyOperation": "Only “{operation}” is available for {operator}.",
-  "@onlyOperation": {
-    "placeholders": {
-      "operation": {
-        "type": "String"
-      },
-      "operator": {
-        "type": "String"
-      }
-    }
-  },
-  "amountStepMultiples": "Multiples of {amount}",
-  "@amountStepMultiples": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
-  "optimizationStepTooLarge": "No tier of this grid accepts amounts in multiples of {amount}. Turn off rounding.",
-  "@optimizationStepTooLarge": {
-    "placeholders": {
-      "amount": {
-        "type": "String"
-      }
-    }
-  },
+  "optimizationStepTooLarge": "Turn off rounding for this grid",
   "roundToHundred": "Round to the hundred",
-  "roundToHundredOnWithdrawal": "Every withdrawal is a multiple of 100: {example}, never {wrong}.",
-  "@roundToHundredOnWithdrawal": {
-    "placeholders": {
-      "example": {
-        "type": "String"
-      },
-      "wrong": {
-        "type": "String"
-      }
-    }
-  },
-  "roundToHundredOnTransfer": "Every transfer is a multiple of 100: {example}, never {wrong}.",
-  "@roundToHundredOnTransfer": {
-    "placeholders": {
-      "example": {
-        "type": "String"
-      },
-      "wrong": {
-        "type": "String"
-      }
-    }
-  },
-  "roundToHundredOff": "Exact amounts, not rounded.",
+  "roundToHundredOff": "Exact amounts",
   "faqHowItWorks": "How does it work?",
-  "faqHowItWorksAnswer": "Choose the operator, the operation (withdrawal, transfer…) and the amount available, fees included. Feezer finds the split that gets you the most money with the least fees, and compares it with the usual way: withdrawing or sending the largest possible amount each time.",
-  "faqRounding": "Why are the amounts rounded to the hundred?",
-  "faqRoundingAnswer": "Cash points only hand out notes: you cannot withdraw 10 040. With “Round to the hundred”, every amount of the plan is a multiple of 100. It is on by default for withdrawals; turn it off for exact amounts.",
-  "faqPrivacy": "Do I need internet? Is my data shared?",
-  "faqPrivacyAnswer": "No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file)."
+  "faqHowItWorksAnswer": "Pick the operator, the operation and the amount available. Feezer finds the split that costs the least in fees.",
+  "faqRounding": "Why round to the hundred?",
+  "faqRoundingAnswer": "Cash points only hand out notes: you can't withdraw 10 040. You can turn rounding off at any time.",
+  "faqPrivacy": "Is my data shared?",
+  "faqPrivacyAnswer": "No. Feezer needs no account and nothing leaves your phone.",
+  "onboardingText1": "Feezer splits your withdrawals and transfers.",
+  "onboardingExample": "Example: {amount} in your account",
+  "onboardingOneGo": "In one go",
+  "onboardingWithFeezer": "With Feezer",
+  "onboardingStep1": "Pick the operator",
+  "onboardingStep2": "Enter the amount",
+  "onboardingStep3": "Follow the plan",
+  "roundToHundredOn": "{example}, never {wrong}",
+  "vsUsualWay": "Compared with the usual way",
+  "csvFormatRows": "One row per tier; commas or semicolons.",
+  "faqInternet": "Do I need internet?",
+  "faqInternetAnswer": "No. Calculations run on your phone; internet is only used to update the fees.",
+  "termsIndependenceTitle": "Independence",
+  "termsIndependenceContent": "Feezer is not affiliated with any operator and is not responsible for the fees charged.",
+  "termsAcceptance": "By using Feezer, you accept these terms.",
+  "@onboardingExample": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "@roundToHundredOn": {
+    "placeholders": {
+      "example": {
+        "type": "String"
+      },
+      "wrong": {
+        "type": "String"
+      }
+    }
+  }
 }

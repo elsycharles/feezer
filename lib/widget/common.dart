@@ -423,28 +423,22 @@ class FadeSlideIn extends StatefulWidget {
 
 class _FadeSlideInState extends State<FadeSlideIn>
     with SingleTickerProviderStateMixin {
+  // The wait is part of the animation: while tickers are paused (under the
+  // launch splash), the whole sequence waits, and the stagger is kept.
+  late final Duration _wait =
+      widget.delay + Duration(milliseconds: 45 * widget.index.clamp(0, 8));
   late final AnimationController _controller = AnimationController(
     vsync: this,
-    duration: Motion.slow,
-  );
+    duration: _wait + Motion.slow,
+  )..forward();
   late final Animation<double> _curve = CurvedAnimation(
     parent: _controller,
-    curve: Motion.curve,
+    curve: Interval(
+      _wait.inMicroseconds / (_wait + Motion.slow).inMicroseconds,
+      1,
+      curve: Motion.curve,
+    ),
   );
-
-  @override
-  void initState() {
-    super.initState();
-    final stagger = Duration(milliseconds: 45 * widget.index.clamp(0, 8));
-    final wait = widget.delay + stagger;
-    if (wait == Duration.zero) {
-      _controller.forward();
-    } else {
-      Future.delayed(wait, () {
-        if (mounted) _controller.forward();
-      });
-    }
-  }
 
   @override
   void dispose() {

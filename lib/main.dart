@@ -15,36 +15,66 @@ import 'screen/providers/provider_detail_screen.dart';
 import 'screen/settings/data_screen.dart';
 import 'screen/settings/help_screen.dart';
 import 'screen/settings/terms_screen.dart';
+import 'screen/splash/launch_splash.dart';
 import 'theme/app_theme.dart';
 import 'util/constant_util.dart';
 import 'util/navigation_util.dart';
 import 'util/preference_util.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  final themeProvider = ThemeProvider();
-  final localeProvider = LocaleProvider();
-  await Future.wait([
-    themeProvider.initializeTheme(),
-    localeProvider.initializeLocale(),
-    DefaultData.ensureSeeded(),
-  ]);
-  final isFirstLaunch = await PreferenceUtil.isFirstLaunch();
-
+  // The launch animation shows from the first frame; the app gets ready
+  // meanwhile, then appears below it.
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: themeProvider),
-        ChangeNotifierProvider.value(value: localeProvider),
-      ],
-      child: FeezerApp(
-        initialRoute: isFirstLaunch
-            ? NavigationUtil.onboardingRoute
-            : NavigationUtil.homeRoute,
+    LaunchSplash<Startup>(
+      ready: Startup.load(),
+      builder: (context, startup) => MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: startup.theme),
+          ChangeNotifierProvider.value(value: startup.locale),
+        ],
+        child: FeezerApp(initialRoute: startup.initialRoute),
       ),
     ),
   );
+}
+
+/// What the app needs before its first screen.
+class Startup {
+  const Startup(this.theme, this.locale, this.initialRoute);
+
+  final ThemeProvider theme;
+  final LocaleProvider locale;
+  final String initialRoute;
+
+  /// Reads the preferences and installs the bundled fee grids. A failure
+  /// never blocks the launch: the app opens with what it has.
+  static Future<Startup> load() async {
+    final theme = ThemeProvider();
+    final locale = LocaleProvider();
+    Future<void> safely(Future<void> Function() task, String what) async {
+      try {
+        await task();
+      } catch (e) {
+        debugPrint('Startup: $what failed: $e');
+      }
+    }
+
+    await Future.wait([
+      safely(theme.initializeTheme, 'theme'),
+      safely(locale.initializeLocale, 'language'),
+      safely(DefaultData.ensureSeeded, 'fee grids'),
+    ]);
+    var firstLaunch = false;
+    await safely(() async {
+      firstLaunch = await PreferenceUtil.isFirstLaunch();
+    }, 'first launch');
+    return Startup(
+      theme,
+      locale,
+      firstLaunch ? NavigationUtil.onboardingRoute : NavigationUtil.homeRoute,
+    );
+  }
 }
 
 class FeezerApp extends StatelessWidget {
