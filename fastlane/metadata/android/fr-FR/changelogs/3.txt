@@ -1,0 +1,5 @@
+• Nouvelle animation du logo au démarrage
+• Présentation plus claire : un exemple réel et 3 étapes
+• Choix de la langue dès la présentation
+• Textes plus courts et plus simples
+• Montants arrondis à la centaine par défaut, retraits et transferts

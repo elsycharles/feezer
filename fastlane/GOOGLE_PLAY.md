@@ -7,7 +7,7 @@ et [`metadata/android/en-US`](metadata/android/en-US) (anglais).
 
 | Élément | Valeur |
 | --- | --- |
-| Application | Feezer 1.1.0 (code de version 2) |
+| Application | Feezer 1.1.1 (code de version 3) |
 | Nom du package | `com.feezer` (définitif une fois l'app créée) |
 | Fichier à envoyer | `build/app/outputs/bundle/release/app-release.aab` |
 | Clé d'envoi | `~/.android/keystores/feezer-release.jks` (alias `feezer`) |
@@ -155,9 +155,9 @@ Google exige d'abord un **test fermé** :
 2. **Testeurs** : crée une liste d'au moins **12 adresses Gmail**, puis
    enregistre.
 3. **Créer une version** : accepte la **signature d'application par Google
-   Play**, envoie `app-release.aab`, nom de version `1.1.0 (2)`, notes de version
-   : [`changelogs/2.txt`](metadata/android/fr-FR/changelogs/2.txt) (fr-FR) et
-   [`changelogs/2.txt`](metadata/android/en-US/changelogs/2.txt) (en-US).
+   Play**, envoie `app-release.aab`, nom de version `1.1.1 (3)`, notes de version
+   : [`changelogs/3.txt`](metadata/android/fr-FR/changelogs/3.txt) (fr-FR) et
+   [`changelogs/3.txt`](metadata/android/en-US/changelogs/3.txt) (en-US).
 4. **Examiner la version › Lancer le déploiement**, puis envoie le lien
    d'inscription aux testeurs : ils doivent l'accepter et installer l'app.
 5. Attends que **12 testeurs** soient inscrits **pendant 14 jours d'affilée**,
