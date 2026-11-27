@@ -175,15 +175,8 @@ class _IntervalFormState extends State<_IntervalForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            widget.provider.operation?.isWithdrawal == true
-                ? l10n.intervalFormHelpWithdrawal
-                : l10n.intervalFormHelp,
-            style: context.text.bodySmall,
-          ),
           if (widget.provider.isPublished &&
               widget.provider.sourceType != Provider.editedSource) ...[
-            Space.gapMd,
             Container(
               padding: const EdgeInsets.all(Space.md),
               decoration: BoxDecoration(
@@ -197,8 +190,8 @@ class _IntervalFormState extends State<_IntervalForm> {
                 ),
               ),
             ),
+            Space.gapLg,
           ],
-          Space.gapLg,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -214,7 +207,7 @@ class _IntervalFormState extends State<_IntervalForm> {
                       decimalSeparator: decimal,
                     ),
                   ],
-                  decoration: decoration(l10n.minimumAmount),
+                  decoration: decoration(l10n.minimumShort),
                   validator: amountValidator,
                 ),
               ),
@@ -231,7 +224,7 @@ class _IntervalFormState extends State<_IntervalForm> {
                       decimalSeparator: decimal,
                     ),
                   ],
-                  decoration: decoration(l10n.maximumAmount),
+                  decoration: decoration(l10n.maximumShort),
                   validator: (v) => amountValidator(v, isMax: true),
                 ),
               ),

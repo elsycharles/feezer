@@ -221,7 +221,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                     child: EmptyState(
                       icon: Icons.table_rows_outlined,
                       title: l10n.noTiersYet,
-                      message: l10n.noIntervalsMessage,
                     ),
                   )
                 : _GridCard(
@@ -231,10 +230,6 @@ class _ProviderDetailScreenState extends State<ProviderDetailScreen> {
                     onTap: _editInterval,
                   ),
           ),
-          if (intervals != null && intervals.isNotEmpty) ...[
-            Space.gapMd,
-            Text(l10n.gridHint, style: context.text.bodySmall),
-          ],
         ],
       ),
     );
@@ -250,7 +245,6 @@ class _SourceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
     final url = Uri.tryParse(provider.sourceUrl ?? '');
     final edited = provider.sourceType == Provider.editedSource;
     final hasLink = url != null && url.hasScheme;
@@ -270,16 +264,7 @@ class _SourceCard extends StatelessWidget {
             color: context.colors.onSurfaceVariant,
           ),
           Space.gapMd,
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(label, style: context.text.titleSmall),
-                if (hasLink)
-                  Text(l10n.openSource, style: context.text.bodySmall),
-              ],
-            ),
-          ),
+          Expanded(child: Text(label, style: context.text.titleSmall)),
           if (hasLink)
             Icon(
               Icons.open_in_new_rounded,

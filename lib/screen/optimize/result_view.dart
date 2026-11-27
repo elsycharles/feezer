@@ -42,13 +42,9 @@ class _Words {
       withdrawal ? l10n.withdrawAmount(amount) : l10n.sendAmount(amount);
   String fee(String amount) =>
       withdrawal ? l10n.feePerWithdrawal(amount) : l10n.feePerTransfer(amount);
-  String get gainDetail =>
-      withdrawal ? l10n.gainVsClassicWithdrawal : l10n.gainVsClassic;
   String get classic =>
       withdrawal ? l10n.classicExplanationWithdrawal : l10n.classicExplanation;
   String get plan => withdrawal ? l10n.planTitleWithdrawal : l10n.planTitle;
-  String limits(int minOps, int maxOps) =>
-      transferLimitSummary(l10n, minOps, maxOps);
 }
 
 /// Result of an optimization.
@@ -68,9 +64,7 @@ class ResultView extends StatelessWidget {
         OptimizationStatus.budgetTooSmall => l10n.optimizationBudgetTooSmall,
         OptimizationStatus.constraintsUnsatisfiable =>
           l10n.optimizationConstraintsUnsatisfiable,
-        OptimizationStatus.stepTooLarge => l10n.optimizationStepTooLarge(
-          context.money(outcome.step),
-        ),
+        OptimizationStatus.stepTooLarge => l10n.optimizationStepTooLarge,
         OptimizationStatus.success => l10n.noOptimizationResultsFound,
       };
       return FadeSlideIn(
@@ -90,33 +84,20 @@ class ResultView extends StatelessWidget {
         _Note(
           tone: _Tone.success,
           title: l10n.gainTitle(context.money(extra)),
-          message: words.gainDetail,
+          message: l10n.vsUsualWay,
         )
       else if (saved > tolerance)
         _Note(
           tone: _Tone.success,
           title: l10n.feesSavedTitle(context.money(saved)),
-          message: l10n.feesSavedVsClassic,
+          message: l10n.vsUsualWay,
         )
       else if (extra >= -tolerance)
+        _Note(tone: _Tone.neutral, title: l10n.alreadyOptimalTitle),
+      if (outcome.limitCost > 0)
         _Note(
-          tone: _Tone.neutral,
-          title: l10n.alreadyOptimalTitle,
-          message: l10n.alreadyOptimalMessage,
-        ),
-      if (outcome.hasLimits)
-        _Note(
-          tone: outcome.limitCost > 0 ? _Tone.warning : _Tone.neutral,
-          title: words.limits(outcome.minOps, outcome.maxOps),
-          message: outcome.limitCost > 0
-              ? l10n.limitCost(context.money(outcome.limitCost))
-              : l10n.limitFree,
-        ),
-      if (!result.isProvenOptimal)
-        _Note(
-          tone: _Tone.neutral,
-          title: l10n.nearOptimalTitle,
-          message: l10n.optimizationNotProven,
+          tone: _Tone.warning,
+          title: l10n.limitCost(context.money(outcome.limitCost)),
         ),
     ];
 
@@ -134,17 +115,7 @@ class ResultView extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SectionLabel(
-                words.plan,
-                trailing: outcome.step > 0
-                    ? Text(
-                        l10n.amountStepMultiples(context.money(outcome.step)),
-                        style: context.text.labelSmall?.copyWith(
-                          color: context.colors.onSurfaceVariant,
-                        ),
-                      )
-                    : null,
-              ),
+              SectionLabel(words.plan),
               _PlanCard(result: result, words: words),
             ],
           ),
@@ -266,11 +237,11 @@ enum _Tone { success, warning, neutral }
 
 /// Short message with a colored edge.
 class _Note extends StatelessWidget {
-  const _Note({required this.tone, required this.title, required this.message});
+  const _Note({required this.tone, required this.title, this.message});
 
   final _Tone tone;
   final String title;
-  final String message;
+  final String? message;
 
   @override
   Widget build(BuildContext context) {
@@ -321,13 +292,15 @@ class _Note extends StatelessWidget {
                         color: foreground,
                       ),
                     ),
-                    const SizedBox(height: 2),
-                    Text(
-                      message,
-                      style: context.text.bodySmall?.copyWith(
-                        color: foreground.withValues(alpha: 0.82),
+                    if (message != null) ...[
+                      const SizedBox(height: 2),
+                      Text(
+                        message!,
+                        style: context.text.bodySmall?.copyWith(
+                          color: foreground.withValues(alpha: 0.82),
+                        ),
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ),
@@ -473,7 +446,6 @@ class _ComparisonCardState extends State<_ComparisonCard> {
     final comparison = widget.outcome.comparison;
     final optimized = comparison.optimized;
     final classic = comparison.withoutOptimization;
-    final sameNet = comparison.sameNetWithoutOptimization;
 
     TableRow row(String label, String a, String b, {bool header = false}) {
       final style = header
@@ -502,30 +474,6 @@ class _ComparisonCardState extends State<_ComparisonCard> {
       children: [
         Space.gapLg,
         const Divider(),
-        Space.gapLg,
-        Text(l10n.sameAmountByHand, style: context.text.titleSmall),
-        Space.gapSm,
-        if (sameNet == null)
-          Text(l10n.cannotSplitByHand, style: context.text.bodySmall)
-        else ...[
-          Text(
-            l10n.sameAmountByHandDetail(
-              context.money(sameNet.netAmount),
-              context.money(sameNet.totalFees),
-              context.money(sameNet.totalSpent),
-            ),
-            style: context.text.bodyMedium,
-          ),
-          if (comparison.sameNetExceedsBudget) ...[
-            Space.gapSm,
-            Text(
-              l10n.exceedsEnteredAmount,
-              style: context.text.labelMedium?.copyWith(
-                color: context.colors.error,
-              ),
-            ),
-          ],
-        ],
         Space.gapLg,
         Text(l10n.classicPlan, style: context.text.titleSmall),
         Space.gapSm,

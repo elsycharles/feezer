@@ -54,7 +54,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get optimize => 'Optimize';
 
   @override
-  String get pleaseEnterValidAmount => 'Please enter a valid amount';
+  String get pleaseEnterValidAmount => 'Invalid amount';
 
   @override
   String get pleaseSelectProvider => 'Choose an operator';
@@ -78,21 +78,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get newFeeInterval => 'New tier';
 
   @override
-  String get maxAmountMustBeGreaterThanMinAmount =>
-      'Max amount must be greater than min amount';
+  String get maxAmountMustBeGreaterThanMinAmount => 'Must exceed the minimum';
 
   @override
   String get fee => 'Fee';
 
   @override
-  String get noOptimizationResultsFound =>
-      'No result. Check the amount and the chosen grid.';
+  String get noOptimizationResultsFound => 'No result';
 
   @override
   String get about => 'About';
-
-  @override
-  String get faqAndContact => 'FAQ and contact';
 
   @override
   String get termsOfUse => 'Terms of Use';
@@ -126,8 +121,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'A question? Write to us from Help & support, or at elsy.s.charles@gmail.com.';
 
   @override
-  String get noFeeIntervalsFound =>
-      'This grid has no tier yet. Add them in the Operators tab.';
+  String get noFeeIntervalsFound => 'This grid has no tier';
 
   @override
   String get addFeeInterval => 'Add a tier';
@@ -142,7 +136,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get icon => 'Icon';
 
   @override
-  String get thisFieldIsRequired => 'This field is required';
+  String get thisFieldIsRequired => 'Required';
 
   @override
   String get feeIntervalUpdatedSuccessfully => 'Tier updated';
@@ -162,17 +156,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editFeeInterval => 'Edit the tier';
 
   @override
-  String get minTransactionsCannotBeGreaterThanMax =>
-      'Min transactions cannot be greater than max';
+  String get minTransactionsCannotBeGreaterThanMax => 'Minimum > maximum';
 
   @override
-  String get pleaseEnterValidFee => 'Please enter a valid fee';
-
-  @override
-  String get minimumAmount => 'Minimum amount';
-
-  @override
-  String get maximumAmount => 'Maximum amount';
+  String get pleaseEnterValidFee => 'Invalid fee';
 
   @override
   String get helpAndSupport => 'Help & support';
@@ -195,8 +182,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get failedToCalculateOptimization =>
-      'Failed to calculate optimization';
+  String get failedToCalculateOptimization => 'Calculation failed';
 
   @override
   String get importExportData => 'Import / export';
@@ -221,59 +207,41 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String providersImported(int count) {
-    return '$count grid(s) imported';
-  }
-
-  @override
-  String feeIntervalsImported(int count) {
-    return '$count tier(s) imported';
-  }
-
-  @override
   String errorsEncountered(int count) {
-    return '$count error(s) encountered';
+    return '$count error(s)';
   }
 
   @override
-  String get importDataDescription =>
-      'Add grids from a CSV file (one row per tier).';
+  String get csvContentCannotBeEmpty => 'Empty text';
 
   @override
-  String get exportDataDescription =>
-      'Save all your grids and their tiers in a CSV file.';
+  String get chooseWhereToSave => 'Save the file';
 
   @override
-  String get csvContentCannotBeEmpty => 'CSV content cannot be empty';
+  String get fileSavedSuccessfully => 'File saved';
 
   @override
-  String get chooseWhereToSave => 'Choose where to save the file';
+  String get failedToSaveFile => 'Could not save the file';
 
   @override
-  String get fileSavedSuccessfully => 'File saved successfully';
+  String get csvFileIsEmpty => 'Empty file';
 
   @override
-  String get failedToSaveFile => 'Failed to save file';
-
-  @override
-  String get csvFileIsEmpty => 'CSV file is empty';
-
-  @override
-  String get noDataRowsFound => 'No data rows found';
+  String get noDataRowsFound => 'No rows found';
 
   @override
   String rowProviderNameRequired(int rowNumber) {
-    return 'Row $rowNumber: the operator name is required';
+    return 'Row $rowNumber: operator missing';
   }
 
   @override
   String rowProviderAlreadyExists(int rowNumber, String name) {
-    return 'Row $rowNumber: the grid \"$name\" already exists';
+    return 'Row $rowNumber: \"$name\" already exists';
   }
 
   @override
   String rowIntervalOverlaps(int rowNumber, String overlap) {
-    return 'Row $rowNumber: this tier overlaps an existing tier ($overlap)';
+    return 'Row $rowNumber: overlaps $overlap';
   }
 
   @override
@@ -283,34 +251,34 @@ class AppLocalizationsEn extends AppLocalizations {
     String maxStr,
     String feeStr,
   ) {
-    return 'Row $rowNumber: Invalid amounts (min: $minStr, max: $maxStr, fee: $feeStr)';
+    return 'Row $rowNumber: invalid amounts ($minStr, $maxStr, $feeStr)';
   }
 
   @override
   String rowMinAmountGreaterThanMax(int rowNumber, String min, String max) {
-    return 'Row $rowNumber: Min amount ($min) must be less than max amount ($max)';
+    return 'Row $rowNumber: min $min > max $max';
   }
 
   @override
   String rowFeeMustBePositive(int rowNumber) {
-    return 'Row $rowNumber: Fee must be positive';
+    return 'Row $rowNumber: negative fee';
   }
 
   @override
   String rowFeePercentageInvalid(int rowNumber, String fee) {
-    return 'Row $rowNumber: Percentage fee must be between 0 and 100 ($fee%)';
+    return 'Row $rowNumber: percentage outside 0–100 ($fee)';
   }
 
   @override
   String importedProvidersAndFees(int providersCount, int feesCount) {
-    return 'Imported $providersCount grid(s) and $feesCount tier(s)';
+    return '$providersCount grid(s), $feesCount tier(s)';
   }
 
   @override
-  String get noDataToExport => 'No data to export';
+  String get noDataToExport => 'No grid to export';
 
   @override
-  String get providerNameColumnNotFound => 'Operator name column not found';
+  String get providerNameColumnNotFound => 'Operator column missing';
 
   @override
   String get fixedAmount => 'Fixed amount';
@@ -319,8 +287,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get percentage => 'Percentage';
 
   @override
-  String get percentageMustBeBetween0And100 =>
-      'Percentage must be between 0 and 100';
+  String get percentageMustBeBetween0And100 => 'Between 0 and 100';
 
   @override
   String get faq => 'FAQ';
@@ -342,40 +309,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get email => 'Email';
 
   @override
-  String get exceedsEnteredAmount => 'Exceeds entered amount';
-
-  @override
-  String get optimizationBudgetTooSmall =>
-      'The amount is too small for a transaction with this grid.';
+  String get optimizationBudgetTooSmall => 'Amount too small for this grid';
 
   @override
   String get optimizationConstraintsUnsatisfiable =>
-      'No split respects this number of transactions for this amount.';
-
-  @override
-  String get optimizationNotProven =>
-      'Very long search: this split is excellent but could not be proven to be the best.';
+      'Not possible with this limit';
 
   @override
   String feeIntervalOverlaps(String range) {
-    return 'This tier overlaps an existing tier ($range).';
+    return 'Overlaps the tier $range';
   }
 
   @override
-  String get failedToDeleteFeeIntervals => 'Could not delete the tier';
+  String get failedToDeleteFeeIntervals => 'Could not delete';
 
   @override
-  String get failedToSaveChanges => 'Failed to save changes';
+  String get failedToSaveChanges => 'Could not save';
 
   @override
   String get tabOptimize => 'Optimize';
-
-  @override
-  String get optimizeTitle => 'Pay less in fees';
-
-  @override
-  String get optimizeSubtitle =>
-      'Feezer splits your amount into the transactions that cost the least.';
 
   @override
   String get add => 'Add';
@@ -384,15 +336,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get amountAvailable => 'Amount available';
 
   @override
-  String get amountHelper =>
-      'Fees included: the total that will leave your account.';
+  String get amountHelper => 'Fees included';
 
   @override
   String get transferCount => 'Number of transfers';
-
-  @override
-  String get transferCountHelp =>
-      'Optional. Limit how many transfers the plan may use.';
 
   @override
   String get transferCountFree => 'No limit';
@@ -461,38 +408,20 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get gainVsClassic =>
-      'Compared to sending the largest possible amount each time.';
-
-  @override
   String feesSavedTitle(String amount) {
     return '$amount of fees saved';
   }
 
   @override
-  String get feesSavedVsClassic =>
-      'The usual way would cost more for the same amount.';
-
-  @override
-  String get alreadyOptimalTitle => 'The usual way is already the best';
-
-  @override
-  String get alreadyOptimalMessage =>
-      'For this amount, splitting brings nothing more.';
+  String get alreadyOptimalTitle => 'The usual way is already optimal';
 
   @override
   String limitCost(String amount) {
-    return 'Without this limit, $amount more would be received.';
+    return 'Your limit costs $amount';
   }
 
   @override
-  String get limitFree => 'This limit costs you nothing here.';
-
-  @override
-  String get nearOptimalTitle => 'Very large amount';
-
-  @override
-  String get planTitle => 'Your transfer plan';
+  String get planTitle => 'Transfer plan';
 
   @override
   String sendAmount(String amount) {
@@ -520,19 +449,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get transfersLabel => 'Transfers';
 
   @override
-  String get classicExplanation =>
-      'Usual way: send the largest possible amount, then the rest.';
-
-  @override
-  String get sameAmountByHand => 'Same amount received, usual way';
-
-  @override
-  String sameAmountByHandDetail(String net, String fees, String total) {
-    return 'To get $net, the usual way costs $fees in fees, i.e. $total debited.';
-  }
-
-  @override
-  String get cannotSplitByHand => 'The usual way cannot reach this amount.';
+  String get classicExplanation => 'Usual: send the most, then the rest';
 
   @override
   String get classicPlan => 'Usual plan';
@@ -545,10 +462,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noProvidersYet => 'No grid yet';
-
-  @override
-  String get noProvidersMessage =>
-      'Update the official fees, or add your own grid.';
 
   @override
   String tierCount(int count) {
@@ -568,7 +481,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get providerNameHint => 'e.g. MVola, Orange Money, my bank';
+  String get providerNameHint => 'e.g. MVola, my bank';
 
   @override
   String get descriptionOptional => 'Description (optional)';
@@ -580,36 +493,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get amountRange => 'Amount sent';
 
   @override
-  String get noIntervalsMessage =>
-      'Add the tiers of this grid to optimize your transactions.';
+  String get downloadingFees => 'Downloading…';
 
   @override
-  String get gridHint => 'Tap a tier to edit or delete it.';
-
-  @override
-  String get intervalFormHelp =>
-      'The fee applies when the amount sent is between the minimum and the maximum (included).';
-
-  @override
-  String get downloadingFees => 'Reading the published fee grids…';
-
-  @override
-  String get feesDownloadFailed => 'Check your connection and try again.';
+  String get feesDownloadFailed => 'Check your connection';
 
   @override
   String get feesAlreadyUpToDate => 'Your fees are up to date';
-
-  @override
-  String get gridsOthersUnchanged => 'Your other grids do not change.';
 
   @override
   String get updateAction => 'Update';
 
   @override
   String get feesUpdatedSuccessfully => 'Fees updated';
-
-  @override
-  String get importExportSubtitle => 'Back up or share your grids (CSV)';
 
   @override
   String get replayIntroduction => 'Replay the introduction';
@@ -634,18 +530,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get csvTemplate => 'Template';
 
   @override
-  String get csvTemplateDescription =>
-      'Start from a ready-made file with the expected columns.';
-
-  @override
   String get downloadTemplate => 'Download the template';
 
   @override
   String get csvFormat => 'File format';
-
-  @override
-  String get csvFormatHelp =>
-      'One row per tier. Rows with the same provider_name and operation form one grid. operation is withdrawal, transfer_same, transfer_same_app, transfer_other, transfer_microfinance or transfer_unregistered (optional); fee_type is fixed or percentage. Commas or semicolons are accepted.';
 
   @override
   String get opWithdrawal => 'Withdrawal';
@@ -670,9 +558,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get operators => 'Operators';
-
-  @override
-  String get operatorsSubtitle => 'The fee grids used for your calculations.';
 
   @override
   String get operatorLabel => 'Operator';
@@ -720,7 +605,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String gridAlreadyExists(String name) {
-    return 'The grid $name already exists.';
+    return '$name already exists';
   }
 
   @override
@@ -728,7 +613,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String deleteGridMessage(String name) {
-    return 'The grid $name and its tiers will be deleted.';
+    return '$name and its tiers will be deleted.';
   }
 
   @override
@@ -742,12 +627,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String feesCheckedOn(String date) {
-    return 'Checked on the operators\' websites on $date';
+    return 'Checked on $date';
   }
 
   @override
-  String get feesNeverChecked =>
-      'Download the latest fees published by the operators.';
+  String get feesNeverChecked => 'Not checked yet';
 
   @override
   String sourceOfficial(String host) {
@@ -760,22 +644,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get sourceManual => 'Grid copied from the operator\'s rates';
+  String get sourceManual => 'Operator\'s rates';
 
   @override
   String sourceManualDated(String date) {
-    return 'Grid copied from the operator\'s rates · $date';
+    return 'Operator\'s rates · $date';
   }
 
   @override
-  String get sourceEdited => 'Grid edited by you';
+  String get sourceEdited => 'Edited by you';
 
   @override
-  String get openSource => 'See the official page';
-
-  @override
-  String get editPublishedGridWarning =>
-      'This grid comes from the operator\'s rates. If you update the fees later, your change will be replaced.';
+  String get editPublishedGridWarning => 'A fee update will undo this change.';
 
   @override
   String get feesSection => 'Fees';
@@ -787,12 +667,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get feesDownloadFailedTitle => 'Download failed';
 
   @override
-  String get updateReviewIntro =>
-      'The operators published new fees. Here is what changes:';
+  String get updateReviewIntro => 'New fees published:';
 
   @override
   String effectiveSince(String date) {
-    return 'in force since $date';
+    return 'since $date';
   }
 
   @override
@@ -809,10 +688,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get withdrawalCount => 'Number of withdrawals';
-
-  @override
-  String get withdrawalCountHelp =>
-      'Optional. Limit how many withdrawals the plan may use.';
 
   @override
   String get cashYouReceive => 'You receive in cash';
@@ -842,25 +717,17 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get planTitleWithdrawal => 'Your withdrawal plan';
-
-  @override
-  String get gainVsClassicWithdrawal =>
-      'Compared to withdrawing the largest possible amount each time.';
+  String get planTitleWithdrawal => 'Withdrawal plan';
 
   @override
   String get classicExplanationWithdrawal =>
-      'Usual way: withdraw the largest possible amount, then the rest.';
+      'Usual: withdraw the most, then the rest';
 
   @override
   String get amountWithdrawn => 'Amount withdrawn';
 
   @override
   String get noTiersYet => 'No tier yet';
-
-  @override
-  String get intervalFormHelpWithdrawal =>
-      'The fee applies when the amount withdrawn is between the minimum and the maximum (included).';
 
   @override
   String versionLabel(String version) {
@@ -871,7 +738,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get free => 'Free';
 
   @override
-  String get failedToLoadData => 'Could not load the data';
+  String get failedToLoadData => 'Could not load';
 
   @override
   String get failedToOpenLink => 'Could not open the link';
@@ -880,35 +747,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pressAgainToExit => 'Press again to exit';
 
   @override
-  String onlyOperation(String operation, String operator) {
-    return 'Only “$operation” is available for $operator.';
-  }
-
-  @override
-  String amountStepMultiples(String amount) {
-    return 'Multiples of $amount';
-  }
-
-  @override
-  String optimizationStepTooLarge(String amount) {
-    return 'No tier of this grid accepts amounts in multiples of $amount. Turn off rounding.';
-  }
+  String get optimizationStepTooLarge => 'Turn off rounding for this grid';
 
   @override
   String get roundToHundred => 'Round to the hundred';
 
   @override
-  String roundToHundredOnWithdrawal(String example, String wrong) {
-    return 'Every withdrawal is a multiple of 100: $example, never $wrong.';
-  }
-
-  @override
-  String roundToHundredOnTransfer(String example, String wrong) {
-    return 'Every transfer is a multiple of 100: $example, never $wrong.';
-  }
-
-  @override
-  String get roundToHundredOff => 'Exact amounts, not rounded.';
+  String get roundToHundredOff => 'Exact amounts';
 
   @override
   String get faqHowItWorks => 'How does it work?';
@@ -930,4 +775,15 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get faqPrivacyAnswer =>
       'No. Calculations run on your phone, without an account, and nothing is sent. Internet is only used to update the fees (a public file).';
+
+  @override
+  String roundToHundredOn(String example, String wrong) {
+    return '$example, never $wrong';
+  }
+
+  @override
+  String get vsUsualWay => 'Compared with the usual way';
+
+  @override
+  String get csvFormatRows => 'One row per tier; commas or semicolons.';
 }

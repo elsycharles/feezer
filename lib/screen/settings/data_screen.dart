@@ -5,8 +5,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../model/fee_operation.dart';
 import '../../theme/app_theme.dart';
 import '../../util/csv_util.dart';
+import '../../util/grid_labels.dart';
 import '../../widget/app_toast.dart';
 import '../../widget/common.dart';
 
@@ -148,8 +150,12 @@ class _DataScreenState extends State<DataScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(l10n.providersImported(result.providersCount)),
-              Text(l10n.feeIntervalsImported(result.feeIntervalsCount)),
+              Text(
+                l10n.importedProvidersAndFees(
+                  result.providersCount,
+                  result.feeIntervalsCount,
+                ),
+              ),
               if (result.errors.isNotEmpty) ...[
                 Space.gapMd,
                 Text(
@@ -189,59 +195,65 @@ class _DataScreenState extends State<DataScreen> {
 
   void _showFormat() {
     final l10n = AppLocalizations.of(context);
+    final columns = CsvUtil.headers(_locale);
     showAppSheet<void>(
       context,
       title: l10n.csvFormat,
-      builder: (sheetContext) => Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(l10n.csvFormatHelp, style: sheetContext.text.bodyMedium),
-          Space.gapLg,
-          Container(
-            padding: const EdgeInsets.all(Space.md),
-            decoration: BoxDecoration(
-              color: sheetContext.colors.surfaceContainer,
-              borderRadius: BorderRadius.circular(Space.radiusSm),
-            ),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Text(
-                CsvUtil.getImportTemplate(_locale),
-                style: const TextStyle(fontFamily: 'monospace', fontSize: 12.5),
+      builder: (sheetContext) {
+        const mono = TextStyle(fontFamily: 'monospace', fontSize: 13);
+        Widget value(String key, String label) => Padding(
+          padding: const EdgeInsets.symmetric(vertical: 3),
+          child: Row(
+            children: [
+              Expanded(child: Text(key, style: mono)),
+              Text(label, style: sheetContext.text.bodySmall),
+            ],
+          ),
+        );
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l10n.csvFormatRows, style: sheetContext.text.bodyMedium),
+            Space.gapLg,
+            // Values of the operation and fee type columns.
+            SectionLabel(columns[7]),
+            for (final operation in FeeOperation.values)
+              value(operation.key, GridLabels.operation(l10n, operation)),
+            Space.gapLg,
+            SectionLabel(columns[6]),
+            value('fixed', l10n.fixedAmount),
+            value('percentage', l10n.percentage),
+            Space.gapLg,
+            Container(
+              padding: const EdgeInsets.all(Space.md),
+              decoration: BoxDecoration(
+                color: sheetContext.colors.surfaceContainer,
+                borderRadius: BorderRadius.circular(Space.radiusSm),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  CsvUtil.getImportTemplate(_locale),
+                  style: mono.copyWith(fontSize: 12.5),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    Widget block({
-      required IconData icon,
-      required String title,
-      required String body,
-      required List<Widget> actions,
-    }) => SectionCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              Icon(icon, color: context.colors.onSurfaceVariant),
-              Space.gapMd,
-              Expanded(child: Text(title, style: context.text.titleMedium)),
-            ],
-          ),
-          Space.gapSm,
-          Text(body, style: context.text.bodySmall),
-          Space.gapLg,
-          ...actions,
-        ],
-      ),
-    );
+    // Actions show a spinner while they run.
+    Widget status(_Busy kind) => _busy == kind
+        ? const SizedBox.square(
+            dimension: 20,
+            child: CircularProgressIndicator(strokeWidth: 2.2),
+          )
+        : const SizedBox.shrink();
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.importExportData)),
@@ -253,60 +265,49 @@ class _DataScreenState extends State<DataScreen> {
           Space.xxl,
         ),
         children: [
-          block(
-            icon: Icons.download_rounded,
-            title: l10n.exportData,
-            body: l10n.exportDataDescription,
-            actions: [
-              AppButton(
-                label: l10n.exportData,
+          MenuGroup(
+            children: [
+              MenuRow(
                 icon: Icons.save_alt_rounded,
-                loading: _busy == _Busy.export,
-                onPressed: _export,
+                title: l10n.exportData,
+                trailing: status(_Busy.export),
+                onTap: _export,
               ),
             ],
           ),
-          Space.gapLg,
-          block(
-            icon: Icons.upload_rounded,
-            title: l10n.importData,
-            body: l10n.importDataDescription,
-            actions: [
-              AppButton(
-                label: l10n.chooseCsvFile,
+          Space.gapXl,
+          SectionLabel(l10n.importData),
+          MenuGroup(
+            children: [
+              MenuRow(
                 icon: Icons.folder_open_rounded,
-                loading: _busy == _Busy.importFile,
-                onPressed: _importFile,
+                title: l10n.chooseCsvFile,
+                trailing: status(_Busy.importFile),
+                onTap: _importFile,
               ),
-              Space.gapSm,
-              AppButton(
-                label: l10n.pasteCsv,
+              MenuRow(
                 icon: Icons.content_paste_rounded,
-                style: AppButtonStyle.outlined,
-                loading: _busy == _Busy.importText,
-                onPressed: _importText,
+                title: l10n.pasteCsv,
+                trailing: status(_Busy.importText),
+                onTap: _importText,
               ),
             ],
           ),
-          Space.gapLg,
-          block(
-            icon: Icons.table_chart_outlined,
-            title: l10n.csvTemplate,
-            body: l10n.csvTemplateDescription,
-            actions: [
-              AppButton(
-                label: l10n.downloadTemplate,
+          Space.gapXl,
+          SectionLabel(l10n.csvTemplate),
+          MenuGroup(
+            children: [
+              MenuRow(
                 icon: Icons.file_download_outlined,
-                style: AppButtonStyle.tonal,
-                loading: _busy == _Busy.template,
-                onPressed: _template,
+                title: l10n.downloadTemplate,
+                trailing: status(_Busy.template),
+                onTap: _template,
               ),
-              Space.gapSm,
-              AppButton(
-                label: l10n.csvFormat,
-                icon: Icons.visibility_outlined,
-                style: AppButtonStyle.text,
-                onPressed: _showFormat,
+              MenuRow(
+                icon: Icons.table_chart_outlined,
+                title: l10n.csvFormat,
+                trailing: const SizedBox.shrink(),
+                onTap: _showFormat,
               ),
             ],
           ),

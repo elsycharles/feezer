@@ -132,7 +132,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 MenuRow(
                   icon: Icons.import_export_rounded,
                   title: l10n.importExportData,
-                  subtitle: l10n.importExportSubtitle,
                   onTap: () => _push(NavigationUtil.dataRoute),
                 ),
               ],
@@ -144,7 +143,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 MenuRow(
                   icon: Icons.help_outline_rounded,
                   title: l10n.helpAndSupport,
-                  subtitle: l10n.faqAndContact,
                   onTap: () => _push(NavigationUtil.helpRoute),
                 ),
                 MenuRow(

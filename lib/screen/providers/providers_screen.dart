@@ -111,13 +111,6 @@ class _ProvidersScreenState extends State<ProvidersScreen> {
               sliver: SliverList.list(
                 children: [
                   Text(l10n.operators, style: context.text.headlineMedium),
-                  Space.gapXs,
-                  Text(
-                    l10n.operatorsSubtitle,
-                    style: context.text.bodyMedium?.copyWith(
-                      color: context.colors.onSurfaceVariant,
-                    ),
-                  ),
                   Space.gapXl,
                   _FeeStatusCard(lastCheck: _lastCheck, onUpdate: _update),
                   Space.gapXl,
@@ -136,7 +129,6 @@ class _ProvidersScreenState extends State<ProvidersScreen> {
                 child: EmptyState(
                   icon: Icons.account_balance_wallet_outlined,
                   title: l10n.noProvidersYet,
-                  message: l10n.noProvidersMessage,
                 ),
               )
             else

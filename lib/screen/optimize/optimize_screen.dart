@@ -363,24 +363,12 @@ class OptimizeScreenState extends State<OptimizeScreen> {
                       children: [
                         Image.asset(
                           'assets/images/logo.png',
-                          width: 28,
-                          height: 28,
+                          width: 30,
+                          height: 30,
                         ),
                         Space.gapSm,
-                        Text('Feezer', style: context.text.titleLarge),
+                        Text('Feezer', style: context.text.headlineSmall),
                       ],
-                    ),
-                    Space.gapXl,
-                    Text(
-                      l10n.optimizeTitle,
-                      style: context.text.headlineMedium,
-                    ),
-                    Space.gapXs,
-                    Text(
-                      l10n.optimizeSubtitle,
-                      style: context.text.bodyMedium?.copyWith(
-                        color: context.colors.onSurfaceVariant,
-                      ),
                     ),
                     Space.gapXl,
                     SectionLabel(l10n.operatorLabel),
@@ -418,24 +406,6 @@ class OptimizeScreenState extends State<OptimizeScreen> {
                                         ),
                                     ],
                                   ),
-                                  if (operatorGrids.length == 1) ...[
-                                    Space.gapSm,
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: Space.xs,
-                                      ),
-                                      child: Text(
-                                        l10n.onlyOperation(
-                                          GridLabels.operation(
-                                            l10n,
-                                            operatorGrids.single.operation,
-                                          ),
-                                          operatorGrids.single.name,
-                                        ),
-                                        style: context.text.bodySmall,
-                                      ),
-                                    ),
-                                  ],
                                 ],
                               ),
                             )
@@ -481,11 +451,7 @@ class OptimizeScreenState extends State<OptimizeScreen> {
                       onMaxChanged: (v) => _invalidate(() => _maxOps = v),
                     ),
                     Space.gapMd,
-                    _RoundingCard(
-                      withdrawal: _isWithdrawal,
-                      rounded: _step > 0,
-                      onChanged: _setRounded,
-                    ),
+                    _RoundingCard(rounded: _step > 0, onChanged: _setRounded),
                     Space.gapXl,
                     AppButton(
                       label: l10n.optimize,
@@ -786,11 +752,6 @@ class _LimitsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            withdrawal ? l10n.withdrawalCountHelp : l10n.transferCountHelp,
-            style: context.text.bodySmall,
-          ),
-          Space.gapMd,
           Row(
             children: [
               Expanded(
@@ -832,13 +793,8 @@ class _LimitsCard extends StatelessWidget {
 /// Switch rounding every amount to the hundred (cash points only hand out
 /// notes: 10 000, never 10 040).
 class _RoundingCard extends StatelessWidget {
-  const _RoundingCard({
-    required this.withdrawal,
-    required this.rounded,
-    required this.onChanged,
-  });
+  const _RoundingCard({required this.rounded, required this.onChanged});
 
-  final bool withdrawal;
   final bool rounded;
   final ValueChanged<bool> onChanged;
 
@@ -850,13 +806,9 @@ class _RoundingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final example = context.money(10000);
-    final wrong = context.money(10040);
-    final summary = !rounded
-        ? l10n.roundToHundredOff
-        : withdrawal
-        ? l10n.roundToHundredOnWithdrawal(example, wrong)
-        : l10n.roundToHundredOnTransfer(example, wrong);
+    final summary = rounded
+        ? l10n.roundToHundredOn(context.money(10000), context.money(10040))
+        : l10n.roundToHundredOff;
     return Pressable(
       onTap: () => _toggle(!rounded),
       color: context.colors.surfaceContainerLow,

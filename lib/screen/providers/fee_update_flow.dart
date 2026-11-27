@@ -181,8 +181,6 @@ class _FeeUpdateSheetState extends State<_FeeUpdateSheet> {
             ],
           ),
         ),
-        Space.gapMd,
-        Text(l10n.gridsOthersUnchanged, style: context.text.bodySmall),
         Space.gapXl,
         AppButton(
           label: l10n.updateAction,
